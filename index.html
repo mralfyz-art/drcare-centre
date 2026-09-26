@@ -144,7 +144,7 @@
     <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-18 sm:h-20 flex items-center justify-between gap-2">
       
       <!-- Brand Logo -->
-      <div class="flex items-center gap-2.5 sm:gap-3.5 cursor-pointer group" onclick="navigateToWelcome()">
+      <div class="flex items-center gap-2.5 sm:gap-3.5 cursor-pointer group" onclick="window.navigateToWelcome()">
         <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl gold-leather-badge flex items-center justify-center p-1.5 transition-all group-hover:scale-105">
           <svg viewBox="0 0 100 115" class="w-7 h-7 sm:w-9 sm:h-9" style="filter: url(#drCare3dEmboss)">
             <use href="#drCareEmblem" />
@@ -164,45 +164,45 @@
         
         <!-- Bilingual Toggle -->
         <div class="flex items-center bg-bay-950 border border-slate-800 rounded-xl p-0.5">
-          <button onclick="setAppLanguage('en')" id="langBtnEn" class="px-2 py-1 rounded-lg text-xs font-bold bg-gold-500 text-slate-950 transition">EN</button>
-          <button onclick="setAppLanguage('ar')" id="langBtnAr" class="px-2 py-1 rounded-lg text-xs font-bold text-slate-400 hover:text-white transition">عربي</button>
+          <button onclick="window.setAppLanguage('en')" id="langBtnEn" class="px-2 py-1 rounded-lg text-xs font-bold bg-gold-500 text-slate-950 transition">EN</button>
+          <button onclick="window.setAppLanguage('ar')" id="langBtnAr" class="px-2 py-1 rounded-lg text-xs font-bold text-slate-400 hover:text-white transition">عربي</button>
         </div>
 
         <!-- Staff Navigation Tabs -->
         <nav id="staffNavTabs" class="hidden items-center gap-1 overflow-x-auto max-w-[45vw] sm:max-w-none py-1">
-          <button onclick="openNewBookingModal()" id="navBtnNewBooking" class="hidden px-3 py-1.5 rounded-xl text-xs font-black transition text-slate-950 bg-gradient-to-r from-amber-400 to-gold-500 hover:from-gold-400 hover:to-amber-500 shadow-md flex items-center gap-1 whitespace-nowrap">
+          <button onclick="window.openNewBookingModal()" id="navBtnNewBooking" class="hidden px-3 py-1.5 rounded-xl text-xs font-black transition text-slate-950 bg-gradient-to-r from-amber-400 to-gold-500 hover:from-gold-400 hover:to-amber-500 shadow-md flex items-center gap-1 whitespace-nowrap">
             <i class="ph-bold ph-plus-circle text-sm"></i>
             <span data-i18n="newBooking">+ New Booking</span>
           </button>
 
-          <button onclick="switchStaffTab('bookings')" id="tabBtnBookings" class="px-3 py-1.5 rounded-xl text-xs font-bold transition text-gold-400 bg-gold-500/10 border border-gold-500/30 whitespace-nowrap" data-i18n="intakeBay">
+          <button onclick="window.switchStaffTab('bookings')" id="tabBtnBookings" class="px-3 py-1.5 rounded-xl text-xs font-bold transition text-gold-400 bg-gold-500/10 border border-gold-500/30 whitespace-nowrap" data-i18n="intakeBay">
             Intake Bay
           </button>
           
-          <button onclick="switchStaffTab('calendar')" id="tabBtnCalendar" class="px-3 py-1.5 rounded-xl text-xs font-bold transition text-slate-400 hover:text-white whitespace-nowrap" data-i18n="calendar">
+          <button onclick="window.switchStaffTab('calendar')" id="tabBtnCalendar" class="px-3 py-1.5 rounded-xl text-xs font-bold transition text-slate-400 hover:text-white whitespace-nowrap" data-i18n="calendar">
             5-Year Calendar
           </button>
           
-          <button onclick="switchStaffTab('funds')" id="tabBtnFunds" class="px-3 py-1.5 rounded-xl text-xs font-bold transition text-slate-400 hover:text-white whitespace-nowrap" data-i18n="fundsCircuit">
+          <button onclick="window.switchStaffTab('funds')" id="tabBtnFunds" class="px-3 py-1.5 rounded-xl text-xs font-bold transition text-slate-400 hover:text-white whitespace-nowrap" data-i18n="fundsCircuit">
             Funds Circuit
           </button>
 
-          <button onclick="switchStaffTab('analytics')" id="tabBtnAnalytics" class="px-3 py-1.5 rounded-xl text-xs font-bold transition text-slate-400 hover:text-white whitespace-nowrap" data-i18n="yearlyAnalysis">
+          <button onclick="window.switchStaffTab('analytics')" id="tabBtnAnalytics" class="px-3 py-1.5 rounded-xl text-xs font-bold transition text-slate-400 hover:text-white whitespace-nowrap" data-i18n="yearlyAnalysis">
             Yearly Analysis
           </button>
           
-          <button onclick="switchStaffTab('accounts')" id="tabBtnAccounts" class="px-3 py-1.5 rounded-xl text-xs font-bold transition text-slate-400 hover:text-white whitespace-nowrap" data-i18n="accountsAccess">
+          <button onclick="window.switchStaffTab('accounts')" id="tabBtnAccounts" class="px-3 py-1.5 rounded-xl text-xs font-bold transition text-slate-400 hover:text-white whitespace-nowrap" data-i18n="accountsAccess">
             Accounts & Access
           </button>
         </nav>
 
         <!-- Auth Header Buttons -->
         <div id="authHeaderContainer" class="flex items-center gap-2">
-          <button onclick="navigateToCustomerPortalGateway()" class="hidden sm:flex px-3 py-2 rounded-xl bg-bay-850 hover:bg-bay-800 text-gold-400 border border-gold-500/30 font-bold text-xs items-center gap-1.5 shadow-sm">
+          <button onclick="window.navigateToCustomerPortalGateway()" class="hidden sm:flex px-3 py-2 rounded-xl bg-bay-850 hover:bg-bay-800 text-gold-400 border border-gold-500/30 font-bold text-xs items-center gap-1.5 shadow-sm">
             <i class="ph-bold ph-car"></i>
             <span data-i18n="customerTracking">Customer Tracking</span>
           </button>
-          <button onclick="openStaffLoginModal()" id="btnStaffLoginNav" class="px-3.5 sm:px-4 py-2 rounded-xl bg-gold-500 hover:bg-gold-400 text-slate-950 font-black text-xs uppercase tracking-wider transition shadow-lg flex items-center gap-1.5">
+          <button onclick="window.openStaffLoginModal()" id="btnStaffLoginNav" class="px-3.5 sm:px-4 py-2 rounded-xl bg-gold-500 hover:bg-gold-400 text-slate-950 font-black text-xs uppercase tracking-wider transition shadow-lg flex items-center gap-1.5">
             <i class="ph-bold ph-shield-check"></i>
             <span data-i18n="staffLogin">Staff Login</span>
           </button>
@@ -215,7 +215,7 @@
   <!-- Main Viewport -->
   <main class="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-6">
 
-    <!-- 1. WELCOME GATEWAY (Strict Customer vs Staff Only) -->
+    <!-- 1. WELCOME GATEWAY -->
     <div id="viewWelcomeGateway" class="space-y-8 animate-fadeIn">
       <div class="relative overflow-hidden rounded-3xl bg-gradient-to-b from-bay-850 via-bay-900 to-bay-950 border border-gold-500/30 p-6 sm:p-14 text-center shadow-2xl">
         <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,_var(--tw-gradient-stops))] from-gold-500/10 via-transparent to-transparent pointer-events-none"></div>
@@ -246,7 +246,7 @@
 
         <div class="relative z-10 mt-8 sm:mt-10 grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 max-w-3xl mx-auto">
           
-          <div onclick="navigateToCustomerPortalGateway()" class="group bg-bay-900/90 border border-gold-500/30 hover:border-gold-500 rounded-3xl p-6 sm:p-8 cursor-pointer transition-all shadow-2xl hover:-translate-y-1 flex flex-col justify-between text-left space-y-5">
+          <div onclick="window.navigateToCustomerPortalGateway()" class="group bg-bay-900/90 border border-gold-500/30 hover:border-gold-500 rounded-3xl p-6 sm:p-8 cursor-pointer transition-all shadow-2xl hover:-translate-y-1 flex flex-col justify-between text-left space-y-5">
             <div class="space-y-3">
               <div class="w-14 h-14 rounded-2xl bg-gold-500/10 border border-gold-500/30 flex items-center justify-center text-gold-400 group-hover:scale-110 transition-transform">
                 <i class="ph-bold ph-car text-3xl"></i>
@@ -265,7 +265,7 @@
             </div>
           </div>
 
-          <div onclick="openStaffLoginModal()" class="group bg-bay-900/90 border border-slate-800 hover:border-slate-600 rounded-3xl p-6 sm:p-8 cursor-pointer transition-all shadow-2xl hover:-translate-y-1 flex flex-col justify-between text-left space-y-5">
+          <div onclick="window.openStaffLoginModal()" class="group bg-bay-900/90 border border-slate-800 hover:border-slate-600 rounded-3xl p-6 sm:p-8 cursor-pointer transition-all shadow-2xl hover:-translate-y-1 flex flex-col justify-between text-left space-y-5">
             <div class="space-y-3">
               <div class="w-14 h-14 rounded-2xl bg-bay-800 border border-slate-700 flex items-center justify-center text-slate-300 group-hover:scale-110 transition-transform">
                 <i class="ph-bold ph-shield-check text-3xl text-gold-400"></i>
@@ -302,21 +302,21 @@
               <p class="text-[11px] text-slate-400" data-i18n="customerLoginSub">Inspect your personal vehicle's restoration progress and verified deposit.</p>
             </div>
           </div>
-          <button onclick="navigateToWelcome()" class="text-xs text-slate-400 hover:text-white flex items-center gap-1 font-bold">
+          <button onclick="window.navigateToWelcome()" class="text-xs text-slate-400 hover:text-white flex items-center gap-1 font-bold">
             <i class="ph-bold ph-arrow-left"></i> <span data-i18n="back">Back</span>
           </button>
         </div>
 
         <div class="flex items-center justify-center p-1 rounded-2xl bg-bay-950 border border-slate-800 mb-6">
-          <button onclick="switchCustomerLookupMode('phone')" id="btnLookupModePhone" class="flex-1 py-2 text-xs font-bold rounded-xl bg-gold-500 text-slate-950 transition" data-i18n="phonePlateTab">
+          <button onclick="window.switchCustomerLookupMode('phone')" id="btnLookupModePhone" class="flex-1 py-2 text-xs font-bold rounded-xl bg-gold-500 text-slate-950 transition" data-i18n="phonePlateTab">
             Phone & Car Plate
           </button>
-          <button onclick="switchCustomerLookupMode('credentials')" id="btnLookupModeCreds" class="flex-1 py-2 text-xs font-bold rounded-xl text-slate-400 hover:text-white transition" data-i18n="usernamePassTab">
+          <button onclick="window.switchCustomerLookupMode('credentials')" id="btnLookupModeCreds" class="flex-1 py-2 text-xs font-bold rounded-xl text-slate-400 hover:text-white transition" data-i18n="usernamePassTab">
             Username & Password
           </button>
         </div>
 
-        <form id="formCustomerPhoneLookup" onsubmit="handleCustomerPhoneLookup(event)" class="space-y-4">
+        <form id="formCustomerPhoneLookup" onsubmit="window.handleCustomerPhoneLookup(event)" class="space-y-4">
           <div>
             <label class="block text-xs font-bold text-white mb-1.5 flex items-center gap-1.5">
               <i class="ph-bold ph-phone text-gold-400"></i> <span data-i18n="mobileLabel">Customer Mobile Phone Number *</span>
@@ -339,7 +339,7 @@
           </button>
         </form>
 
-        <form id="formCustomerCredsLookup" onsubmit="handleCustomerCredsLookup(event)" class="space-y-4 hidden">
+        <form id="formCustomerCredsLookup" onsubmit="window.handleCustomerCredsLookup(event)" class="space-y-4 hidden">
           <div>
             <label class="block text-xs font-bold text-white mb-1.5 flex items-center gap-1.5">
               <i class="ph-bold ph-user text-gold-400"></i> <span data-i18n="usernameLabel">Customer Assigned Username *</span>
@@ -365,10 +365,8 @@
       </div>
     </div>
 
-    <!-- 3. CUSTOMER DASHBOARD (Single-Vehicle Privacy) -->
-    <div id="viewCustomerDashboard" class="hidden max-w-4xl mx-auto space-y-6 animate-fadeIn">
-      <!-- Dynamically populated -->
-    </div>
+    <!-- 3. CUSTOMER DASHBOARD -->
+    <div id="viewCustomerDashboard" class="hidden max-w-4xl mx-auto space-y-6 animate-fadeIn"></div>
 
     <!-- 4. STAFF WORKSPACE BACK-OFFICE -->
     <div id="viewStaffBackOffice" class="hidden space-y-6 animate-fadeIn">
@@ -389,7 +387,7 @@
         </div>
 
         <div class="flex items-center gap-2.5 w-full sm:w-auto overflow-x-auto py-1">
-          <button onclick="exportDatabaseBackup()" id="btnOwnerExportDb" class="px-3 py-2 rounded-xl bg-bay-850 hover:bg-bay-800 text-slate-300 hover:text-white border border-slate-700 text-xs font-bold transition flex items-center gap-1.5 whitespace-nowrap" title="Backup all records">
+          <button onclick="window.exportDatabaseBackup()" id="btnOwnerExportDb" class="px-3 py-2 rounded-xl bg-bay-850 hover:bg-bay-800 text-slate-300 hover:text-white border border-slate-700 text-xs font-bold transition flex items-center gap-1.5 whitespace-nowrap" title="Backup all records">
             <i class="ph-bold ph-download-simple"></i>
             <span class="hidden sm:inline" data-i18n="exportJson">Export JSON</span>
           </button>
@@ -397,10 +395,10 @@
           <label id="btnOwnerImportDbLabel" class="px-3 py-2 rounded-xl bg-bay-850 hover:bg-bay-800 text-slate-300 hover:text-white border border-slate-700 text-xs font-bold transition flex items-center gap-1.5 cursor-pointer whitespace-nowrap" title="Import backup">
             <i class="ph-bold ph-upload-simple"></i>
             <span class="hidden sm:inline" data-i18n="import">Import</span>
-            <input type="file" id="fileDbImport" accept=".json" class="hidden" onchange="importDatabaseBackup(event)">
+            <input type="file" id="fileDbImport" accept=".json" class="hidden" onchange="window.importDatabaseBackup(event)">
           </label>
 
-          <button onclick="openNewBookingModal()" id="btnOpenNewBooking" class="flex-1 sm:flex-initial px-4 py-2 rounded-2xl bg-gold-500 hover:bg-gold-400 text-slate-950 font-black text-xs uppercase tracking-wider transition shadow-lg flex items-center justify-center gap-1.5 whitespace-nowrap">
+          <button onclick="window.openNewBookingModal()" id="btnOpenNewBooking" class="flex-1 sm:flex-initial px-4 py-2 rounded-2xl bg-gold-500 hover:bg-gold-400 text-slate-950 font-black text-xs uppercase tracking-wider transition shadow-lg flex items-center justify-center gap-1.5 whitespace-nowrap">
             <i class="ph-bold ph-plus-circle text-base"></i>
             <span data-i18n="newBookingSheet">+ New Booking Sheet</span>
           </button>
@@ -435,12 +433,12 @@
         <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 bg-bay-900 p-3 rounded-2xl border border-slate-800">
           <div class="relative flex-1">
             <i class="ph-bold ph-magnifying-glass absolute left-3.5 top-3 text-slate-400"></i>
-            <input type="text" id="inputSearchJobs" oninput="debounceSearchBookings()" placeholder="Search customer name, car model, plate, PIN, or mobile..."
+            <input type="text" id="inputSearchJobs" oninput="window.debounceSearchBookings()" placeholder="Search customer name, car model, plate, PIN, or mobile..."
               class="w-full pl-10 pr-4 py-2 border border-slate-700 rounded-xl text-xs focus:outline-none focus:border-gold-500">
           </div>
 
           <div class="flex items-center gap-2">
-            <select id="selectStageFilter" onchange="filterBookingsGrid()" class="border border-slate-700 rounded-xl px-3 py-2 text-xs text-white w-full sm:w-auto">
+            <select id="selectStageFilter" onchange="window.filterBookingsGrid()" class="border border-slate-700 rounded-xl px-3 py-2 text-xs text-white w-full sm:w-auto">
               <option value="ALL" data-i18n="filterAll">All Restoration Stages</option>
               <option value="IN_PROGRESS" data-i18n="filterActive">Active In-Bay (Under 100%)</option>
               <option value="COMPLETED" data-i18n="filterReady">100% Ready for Handover</option>
@@ -449,9 +447,7 @@
           </div>
         </div>
 
-        <div id="gridBookingsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          <!-- Dynamically populated -->
-        </div>
+        <div id="gridBookingsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"></div>
 
         <div id="bookingsEmptyState" class="hidden py-16 text-center space-y-3 bg-bay-900/50 rounded-3xl border border-slate-800">
           <i class="ph-bold ph-car text-4xl text-slate-600 mx-auto"></i>
@@ -460,7 +456,7 @@
         </div>
       </div>
 
-      <!-- SUB-VIEW: CALENDAR (5-Year Master Calendar) -->
+      <!-- SUB-VIEW: CALENDAR -->
       <div id="subViewCalendar" class="space-y-6 hidden">
         <div class="bg-bay-900 border border-slate-800 rounded-3xl p-5 sm:p-8 space-y-6 shadow-2xl">
           
@@ -476,11 +472,11 @@
             </div>
 
             <div class="flex items-center gap-2 flex-wrap">
-              <button onclick="navigateCalendarMonth(-1)" class="w-9 h-9 rounded-xl bg-bay-800 hover:bg-bay-750 text-slate-300 flex items-center justify-center border border-slate-700 transition">
+              <button onclick="window.navigateCalendarMonth(-1)" class="w-9 h-9 rounded-xl bg-bay-800 hover:bg-bay-750 text-slate-300 flex items-center justify-center border border-slate-700 transition">
                 <i class="ph-bold ph-caret-left"></i>
               </button>
               
-              <select id="calYearSelect" onchange="handleCalendarYearJump(this.value)" class="border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-white font-mono font-bold">
+              <select id="calYearSelect" onchange="window.handleCalendarYearJump(this.value)" class="border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-white font-mono font-bold">
                 <option value="2026">2026</option>
                 <option value="2027">2027</option>
                 <option value="2028">2028</option>
@@ -489,17 +485,13 @@
                 <option value="2031">2031</option>
               </select>
 
-              <span id="calCurrentMonthLabel" class="text-xs font-black text-gold-400 uppercase tracking-wider px-1 text-center min-w-[100px]">
-                September 2026
-              </span>
+              <span id="calCurrentMonthLabel" class="text-xs font-black text-gold-400 uppercase tracking-wider px-1 text-center min-w-[100px]">September 2026</span>
 
-              <button onclick="navigateCalendarMonth(1)" class="w-9 h-9 rounded-xl bg-bay-800 hover:bg-bay-750 text-slate-300 flex items-center justify-center border border-slate-700 transition">
+              <button onclick="window.navigateCalendarMonth(1)" class="w-9 h-9 rounded-xl bg-bay-800 hover:bg-bay-750 text-slate-300 flex items-center justify-center border border-slate-700 transition">
                 <i class="ph-bold ph-caret-right"></i>
               </button>
 
-              <button onclick="resetCalendarToToday()" class="px-3 py-1.5 rounded-xl bg-bay-800 text-slate-300 text-xs font-bold border border-slate-700 transition" data-i18n="today">
-                Today
-              </button>
+              <button onclick="window.resetCalendarToToday()" class="px-3 py-1.5 rounded-xl bg-bay-800 text-slate-300 text-xs font-bold border border-slate-700 transition" data-i18n="today">Today</button>
             </div>
           </div>
 
@@ -507,27 +499,21 @@
             <span data-i18n="sun">Sun</span><span data-i18n="mon">Mon</span><span data-i18n="tue">Tue</span><span data-i18n="wed">Wed</span><span data-i18n="thu">Thu</span><span data-i18n="fri">Fri</span><span data-i18n="sat">Sat</span>
           </div>
 
-          <div id="calDaysGridMatrix" class="grid grid-cols-7 gap-1.5 sm:gap-2">
-            <!-- Dynamically generated days -->
-          </div>
+          <div id="calDaysGridMatrix" class="grid grid-cols-7 gap-1.5 sm:gap-2"></div>
 
           <div id="calDayInspectorBox" class="mt-6 p-4 sm:p-5 rounded-2xl bg-bay-850 border border-slate-800 space-y-3 hidden">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-              <span id="calSelectedDayTitle" class="text-xs font-black text-gold-400 uppercase tracking-wider">
-                Vehicles Booked on Selected Date
-              </span>
-              <button onclick="quickBookForSelectedDate()" class="px-3 py-1.5 rounded-xl bg-gold-500 hover:bg-gold-400 text-slate-950 font-black text-[11px] uppercase tracking-wider transition" data-i18n="bookForDate">
+              <span id="calSelectedDayTitle" class="text-xs font-black text-gold-400 uppercase tracking-wider">Vehicles Booked on Selected Date</span>
+              <button onclick="window.quickBookForSelectedDate()" class="px-3 py-1.5 rounded-xl bg-gold-500 hover:bg-gold-400 text-slate-950 font-black text-[11px] uppercase tracking-wider transition" data-i18n="bookForDate">
                 + Book Car for This Date
               </button>
             </div>
-            <div id="calSelectedDayCarsList" class="space-y-2">
-              <!-- Dynamically populated list -->
-            </div>
+            <div id="calSelectedDayCarsList" class="space-y-2"></div>
           </div>
         </div>
       </div>
 
-      <!-- SUB-VIEW: FUNDS CIRCUIT (Owner & Manager Only) -->
+      <!-- SUB-VIEW: FUNDS CIRCUIT -->
       <div id="subViewFunds" class="space-y-6 hidden">
         <div class="bg-bay-900 border border-slate-800 rounded-3xl p-5 sm:p-8 space-y-6 shadow-2xl">
           <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-slate-800">
@@ -536,13 +522,11 @@
                 <span data-i18n="fundsTitle">Funds Circuit & Payment Channels</span>
                 <span class="text-xs font-mono px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">L.E CASH FLOW</span>
               </h3>
-              <p class="text-xs text-slate-400 mt-0.5" data-i18n="fundsSub">
-                Real-time tracking of secured deposits across Cash, InstaPay, Mobile Wallets, and Card/POS.
-              </p>
+              <p class="text-xs text-slate-400 mt-0.5" data-i18n="fundsSub">Real-time tracking of secured deposits across Cash, InstaPay, Mobile Wallets, and Card/POS.</p>
             </div>
 
             <div class="flex items-center gap-2">
-              <select id="fundsPeriodSelect" onchange="renderFundsCircuit()" class="border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-white font-mono font-bold">
+              <select id="fundsPeriodSelect" onchange="window.renderFundsCircuit()" class="border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-white font-mono font-bold">
                 <option value="this_month" data-i18n="thisMonth">This Month</option>
                 <option value="this_week" data-i18n="thisWeek">This Week</option>
                 <option value="all_time" data-i18n="allTime">All Time</option>
@@ -557,7 +541,6 @@
                 <span id="fundsCashCount" class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-bay-900 text-slate-400">0 tx</span>
               </div>
               <div id="fundsCashTotal" class="text-2xl font-black text-white font-mono">0 L.E</div>
-              <p class="text-[10px] text-slate-500" data-i18n="cashDesc">Physical drawer cash verified</p>
             </div>
 
             <div class="bg-bay-850 border border-slate-800 p-5 rounded-2xl space-y-2">
@@ -566,7 +549,6 @@
                 <span id="fundsInstaCount" class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-bay-900 text-slate-400">0 tx</span>
               </div>
               <div id="fundsInstaTotal" class="text-2xl font-black text-cyan-400 font-mono">0 L.E</div>
-              <p class="text-[10px] text-slate-500" data-i18n="instaDesc">Instant bank transfers verified</p>
             </div>
 
             <div class="bg-bay-850 border border-slate-800 p-5 rounded-2xl space-y-2">
@@ -575,7 +557,6 @@
                 <span id="fundsWalletCount" class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-bay-900 text-slate-400">0 tx</span>
               </div>
               <div id="fundsWalletTotal" class="text-2xl font-black text-rose-400 font-mono">0 L.E</div>
-              <p class="text-[10px] text-slate-500" data-i18n="walletDesc">Vodafone / Orange / Etisalat Cash</p>
             </div>
 
             <div class="bg-bay-850 border border-slate-800 p-5 rounded-2xl space-y-2">
@@ -584,7 +565,6 @@
                 <span id="fundsCardCount" class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-bay-900 text-slate-400">0 tx</span>
               </div>
               <div id="fundsCardTotal" class="text-2xl font-black text-emerald-400 font-mono">0 L.E</div>
-              <p class="text-[10px] text-slate-500" data-i18n="cardDesc">Terminal card payments</p>
             </div>
           </div>
 
@@ -593,15 +573,10 @@
               <span class="text-[10px] font-mono font-bold text-gold-400 uppercase tracking-wider block" data-i18n="totalDepositsPeriod">Total Deposits in Selected Period</span>
               <div id="fundsGrandTotal" class="text-3xl font-black text-white font-mono mt-0.5">0 L.E</div>
             </div>
-            <div class="text-xs text-slate-400 text-right">
-              <span data-i18n="auditedLE">All 4 payment channels audited in Egyptian Pounds</span>
-            </div>
           </div>
 
           <div class="space-y-3">
-            <span class="text-xs font-black text-white uppercase tracking-wider block" data-i18n="recentDepositsLedger">
-              Recent Deposits & Payment Channel Ledger
-            </span>
+            <span class="text-xs font-black text-white uppercase tracking-wider block" data-i18n="recentDepositsLedger">Recent Deposits & Payment Channel Ledger</span>
             <div class="overflow-x-auto rounded-2xl border border-slate-800">
               <table class="w-full text-left text-xs min-w-[600px]">
                 <thead class="bg-bay-850 text-slate-400 uppercase font-mono text-[10px]">
@@ -614,9 +589,7 @@
                     <th class="p-3" data-i18n="thStatus">Status</th>
                   </tr>
                 </thead>
-                <tbody id="fundsLedgerTableBody" class="divide-y divide-slate-800/80 bg-bay-900/60">
-                  <!-- Dynamically populated -->
-                </tbody>
+                <tbody id="fundsLedgerTableBody" class="divide-y divide-slate-800/80 bg-bay-900/60"></tbody>
               </table>
             </div>
           </div>
@@ -627,75 +600,52 @@
       <!-- SUB-VIEW: YEARLY ANALYSIS -->
       <div id="subViewAnalytics" class="space-y-6 hidden">
         <div class="bg-bay-900 border border-slate-800 rounded-3xl p-5 sm:p-8 space-y-6 shadow-2xl">
-          
           <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-slate-800">
             <div>
               <h3 class="text-lg font-black text-white uppercase tracking-wider flex items-center gap-2">
                 <span data-i18n="analyticsTitle">Yearly Deposit & Revenue Analysis</span>
                 <span class="text-xs font-mono px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">EGYPTIAN POUNDS (L.E)</span>
               </h3>
-              <p class="text-xs text-slate-400 mt-0.5" data-i18n="analyticsSub">
-                Financial performance, collection ratio, and average job deposit analysis.
-              </p>
             </div>
-
-            <div class="flex items-center gap-2">
-              <select id="analyticsYearSelect" onchange="renderYearlyAnalytics()" class="border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-white font-mono font-bold">
-                <option value="2026">Fiscal Year 2026</option>
-                <option value="2027">Fiscal Year 2027</option>
-                <option value="2028">Fiscal Year 2028</option>
-              </select>
-            </div>
+            <select id="analyticsYearSelect" onchange="window.renderYearlyAnalytics()" class="border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-white font-mono font-bold">
+              <option value="2026">Fiscal Year 2026</option>
+              <option value="2027">Fiscal Year 2027</option>
+              <option value="2028">Fiscal Year 2028</option>
+            </select>
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div class="bg-bay-850 border border-slate-800 p-5 rounded-2xl space-y-1">
               <span class="text-xs text-slate-400 font-bold uppercase tracking-wider" data-i18n="grossDeposits">Gross Deposits Recorded</span>
               <div id="anaStatGrossDeposits" class="text-2xl font-black text-emerald-400 font-mono">0 L.E</div>
-              <span class="text-[10px] text-slate-500" data-i18n="paidAdvance">Paid advance across active restoration jobs</span>
             </div>
-
             <div class="bg-bay-850 border border-slate-800 p-5 rounded-2xl space-y-1">
               <span class="text-xs text-slate-400 font-bold uppercase tracking-wider" data-i18n="avgDeposit">Average Deposit / Vehicle</span>
               <div id="anaStatAvgDeposit" class="text-2xl font-black text-gold-400 font-mono">0 L.E</div>
-              <span class="text-[10px] text-slate-500" data-i18n="perIntake">Per intake contract</span>
             </div>
-
             <div class="bg-bay-850 border border-slate-800 p-5 rounded-2xl space-y-1">
               <span class="text-xs text-slate-400 font-bold uppercase tracking-wider" data-i18n="settledRatio">Settled & Verified Ratio</span>
               <div id="anaStatVerifiedRatio" class="text-2xl font-black text-white font-mono">100%</div>
-              <span class="text-[10px] text-slate-500" data-i18n="managerVerified">Manager verified advance funds</span>
             </div>
           </div>
 
           <div class="bg-bay-850 border border-slate-800 p-5 sm:p-6 rounded-2xl space-y-4">
-            <span class="text-xs font-black text-white uppercase tracking-wider block" data-i18n="monthlyVelocity">
-              Monthly Intake Velocity & Deposit Collection (L.E)
-            </span>
-            <div id="anaMonthlyBarsContainer" class="space-y-3">
-              <!-- Dynamically generated bars for 12 months -->
-            </div>
+            <span class="text-xs font-black text-white uppercase tracking-wider block" data-i18n="monthlyVelocity">Monthly Intake Velocity & Deposit Collection (L.E)</span>
+            <div id="anaMonthlyBarsContainer" class="space-y-3"></div>
           </div>
-
         </div>
       </div>
 
-      <!-- SUB-VIEW: ACCOUNTS & ACCESS (Owner Staff Provisioning & Credential Hub) -->
+      <!-- SUB-VIEW: ACCOUNTS & ACCESS (Strict Level 1 Owner Visibility) -->
       <div id="subViewAccounts" class="space-y-6 hidden">
         <div class="bg-bay-900 border border-slate-800 rounded-3xl p-5 sm:p-8 space-y-6 shadow-2xl">
-          
-          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-slate-800">
+          <div class="flex items-center justify-between pb-4 border-b border-slate-800">
             <div>
-              <h3 class="text-lg font-black text-white uppercase tracking-wider flex items-center gap-2">
-                <span data-i18n="accountsTitle">Workshop Team & Customer Access Management</span>
-              </h3>
-              <p class="text-xs text-slate-400 mt-0.5" data-i18n="accountsSub">
-                Owner controls credentials for Owners, Managers, Master Detailers, and private Customer passes.
-              </p>
+              <h3 class="text-lg font-black text-white uppercase tracking-wider" data-i18n="accountsTitle">Workshop Team & Customer Access Management</h3>
+              <p class="text-xs text-slate-400 mt-0.5" data-i18n="accountsSub">Owner controls credentials for Owners, Managers, Master Detailers, and private Customer passes.</p>
             </div>
           </div>
 
-          <!-- OWNER-ONLY STAFF PROVISIONING BAR -->
           <div id="ownerStaffProvisioningBar" class="p-4 sm:p-5 rounded-3xl bg-bay-850 border-2 border-gold-500/40 shadow-xl space-y-3">
             <div class="flex items-center justify-between pb-2 border-b border-slate-800">
               <div class="flex items-center gap-2">
@@ -707,30 +657,22 @@
                   <p class="text-[10px] text-slate-400" data-i18n="ownerConsoleSub">Add workshop managers & technicians directly to your team roster.</p>
                 </div>
               </div>
-              <span class="text-[9px] font-mono font-bold px-2 py-0.5 rounded bg-gold-500/10 text-gold-400 border border-gold-500/30">
-                MR. ALFY EXCLUSIVE
-              </span>
+              <span class="text-[9px] font-mono font-bold px-2 py-0.5 rounded bg-gold-500/10 text-gold-400 border border-gold-500/30">MR. ALFY EXCLUSIVE</span>
             </div>
 
-            <form id="formOwnerQuickAddStaff" onsubmit="handleOwnerQuickAddStaff(event)" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-3 pt-1">
+            <form id="formOwnerQuickAddStaff" onsubmit="window.handleOwnerQuickAddStaff(event)" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-3 pt-1">
               <div>
                 <label class="block text-[10px] font-bold text-slate-300 mb-1" data-i18n="staffNameLabel">Staff Full Name *</label>
-                <input type="text" id="barStaffName" required placeholder="e.g. Kareem Adel"
-                  class="w-full border border-slate-700 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-gold-500">
+                <input type="text" id="barStaffName" required placeholder="e.g. Kareem Adel" class="w-full border border-slate-700 rounded-xl px-3 py-2 text-xs">
               </div>
-
               <div>
                 <label class="block text-[10px] font-bold text-slate-300 mb-1" data-i18n="usernameLabel">Username *</label>
-                <input type="text" id="barStaffUsername" required placeholder="e.g. kareem.adel"
-                  class="w-full border border-slate-700 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-gold-500">
+                <input type="text" id="barStaffUsername" required placeholder="e.g. kareem.adel" class="w-full border border-slate-700 rounded-xl px-3 py-2 text-xs">
               </div>
-
               <div>
                 <label class="block text-[10px] font-bold text-slate-300 mb-1" data-i18n="passwordLabel">Password *</label>
-                <input type="text" id="barStaffPassword" required placeholder="Create password"
-                  class="w-full border border-slate-700 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-gold-500 font-mono">
+                <input type="text" id="barStaffPassword" required placeholder="Create password" class="w-full border border-slate-700 rounded-xl px-3 py-2 text-xs font-mono">
               </div>
-
               <div>
                 <label class="block text-[10px] font-bold text-slate-300 mb-1" data-i18n="authorityTier">Authority Tier *</label>
                 <select id="barStaffRole" class="w-full border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
@@ -739,7 +681,6 @@
                   <option value="owner" data-i18n="tierOwner">Level 1: Co-Director</option>
                 </select>
               </div>
-
               <div class="flex items-end">
                 <button type="submit" class="w-full py-2 rounded-xl bg-gold-500 hover:bg-gold-400 text-slate-950 font-black text-xs uppercase tracking-wider transition shadow-lg flex items-center justify-center gap-1.5">
                   <i class="ph-bold ph-user-plus text-sm"></i>
@@ -753,9 +694,7 @@
             <span class="text-xs font-black text-gold-400 uppercase tracking-wider flex items-center gap-2">
               <i class="ph-bold ph-shield-check"></i> <span data-i18n="workshopTeamTitle">Workshop Management & Staff Team</span>
             </span>
-            <div id="listStaffAccountsContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              <!-- Dynamically populated -->
-            </div>
+            <div id="listStaffAccountsContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
           </div>
 
           <div class="pt-6 border-t border-slate-800 space-y-3">
@@ -766,14 +705,12 @@
                 </span>
                 <p class="text-[11px] text-slate-400" data-i18n="customerLoginsSub">Assigned customer accounts for direct username and password access.</p>
               </div>
-              <button onclick="openCreateCustomerModal()" class="px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs uppercase tracking-wider transition shadow-lg flex items-center gap-1.5">
+              <button onclick="window.openCreateCustomerModal()" class="px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs uppercase tracking-wider transition shadow-lg flex items-center gap-1.5">
                 <i class="ph-bold ph-plus-circle"></i>
                 <span data-i18n="customerLoginBtn">+ Customer Login</span>
               </button>
             </div>
-            <div id="listCustomerAccountsContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              <!-- Dynamically populated -->
-            </div>
+            <div id="listCustomerAccountsContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
           </div>
 
         </div>
@@ -782,15 +719,13 @@
     </div>
 
     <!-- 5. VEHICLE DETAIL SHEET VIEW -->
-    <div id="viewSheetDetail" class="hidden space-y-6 animate-fadeIn">
-      <!-- Injected dynamically via openVehicleDetailSheet() -->
-    </div>
+    <div id="viewSheetDetail" class="hidden space-y-6 animate-fadeIn"></div>
 
   </main>
 
   <!-- MODALS -->
 
-  <!-- Staff Login Modal (Confidential Sign-in Only) -->
+  <!-- Staff Login Modal -->
   <div id="modalStaffAuth" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4 hidden">
     <div class="bg-bay-900 border border-gold-500/40 rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl space-y-5">
       <div class="flex items-center justify-between pb-3 border-b border-slate-800">
@@ -803,39 +738,26 @@
             <p class="text-xs text-slate-400" data-i18n="staffModalSub">Authorized workshop team management</p>
           </div>
         </div>
-        <button onclick="closeStaffLoginModal()" class="w-8 h-8 rounded-xl bg-bay-800 text-slate-400 hover:text-white flex items-center justify-center transition">
+        <button onclick="window.closeStaffLoginModal()" class="w-8 h-8 rounded-xl bg-bay-800 text-slate-400 hover:text-white flex items-center justify-center">
           <i class="ph-bold ph-x"></i>
         </button>
       </div>
 
-      <form id="formStaffLogin" onsubmit="handleStaffLoginForm(event)" class="space-y-4">
+      <form id="formStaffLogin" onsubmit="window.handleStaffLoginForm(event)" class="space-y-4">
         <div>
-          <label class="block text-xs font-bold text-white mb-1.5 flex items-center gap-1.5">
-            <i class="ph-bold ph-user text-gold-400"></i> <span data-i18n="usernameLabel">Authorized Username *</span>
-          </label>
-          <input type="text" id="staffInputUsername" required placeholder="Enter username"
-            class="w-full border border-slate-700 rounded-2xl px-4 py-3 text-sm focus:outline-none focus:border-gold-500">
+          <label class="block text-xs font-bold text-white mb-1.5" data-i18n="usernameLabel">Authorized Username *</label>
+          <input type="text" id="staffInputUsername" required placeholder="Enter username" class="w-full border border-slate-700 rounded-2xl px-4 py-3 text-sm">
         </div>
-
         <div>
-          <label class="block text-xs font-bold text-white mb-1.5 flex items-center gap-1.5">
-            <i class="ph-bold ph-lock text-gold-400"></i> <span data-i18n="passwordLabel">Password *</span>
-          </label>
-          <input type="password" id="staffInputPassword" required placeholder="••••••••"
-            class="w-full border border-slate-700 rounded-2xl px-4 py-3 text-sm focus:outline-none focus:border-gold-500">
+          <label class="block text-xs font-bold text-white mb-1.5" data-i18n="passwordLabel">Password *</label>
+          <input type="password" id="staffInputPassword" required placeholder="••••••••" class="w-full border border-slate-700 rounded-2xl px-4 py-3 text-sm">
         </div>
-
         <div id="staffLoginErrorMsg" class="hidden p-3 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-400 text-xs font-bold text-center" data-i18n="loginError">
           Invalid username or password.
         </div>
-
-        <div class="pt-2 flex items-center justify-between gap-2">
-          <button type="button" onclick="closeStaffLoginModal()" class="px-4 py-2.5 text-xs font-bold text-slate-400 hover:text-white" data-i18n="cancel">
-            Cancel
-          </button>
-          <button type="submit" class="px-6 py-2.5 rounded-xl bg-gold-500 hover:bg-gold-400 text-slate-950 font-black text-xs uppercase tracking-wider transition shadow-lg" data-i18n="signInBackOffice">
-            Sign In to Back-Office
-          </button>
+        <div class="pt-2 flex justify-end gap-2">
+          <button type="button" onclick="window.closeStaffLoginModal()" class="px-4 py-2 text-xs font-bold text-slate-400 hover:text-white" data-i18n="cancel">Cancel</button>
+          <button type="submit" class="px-6 py-2 rounded-xl bg-gold-500 hover:bg-gold-400 text-slate-950 font-black text-xs uppercase tracking-wider transition" data-i18n="signInBackOffice">Sign In</button>
         </div>
       </form>
     </div>
@@ -845,34 +767,22 @@
   <div id="modalNewBooking" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4 hidden">
     <div class="bg-bay-900 border border-gold-500/40 rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl overflow-y-auto max-h-[90vh] space-y-5">
       <div class="flex items-center justify-between pb-4 border-b border-slate-800">
-        <div class="flex items-center gap-2.5">
-          <div class="w-10 h-10 rounded-2xl bg-gold-500/10 border border-gold-500/40 flex items-center justify-center text-gold-400">
-            <i class="ph-bold ph-plus-circle text-xl"></i>
-          </div>
-          <div>
-            <h3 class="text-base font-black text-white uppercase tracking-wider" data-i18n="newBookingModalHeader">New Vehicle Booking Sheet</h3>
-            <p class="text-xs text-slate-400" data-i18n="newBookingModalSub">Customer intake, defect assessment, mileage (KM), and deposit in L.E.</p>
-          </div>
-        </div>
-        <button onclick="closeNewBookingModal()" class="w-8 h-8 rounded-xl bg-bay-800 text-slate-400 hover:text-white flex items-center justify-center transition">
+        <h3 class="text-base font-black text-white uppercase tracking-wider" data-i18n="newBookingModalHeader">New Vehicle Booking Sheet</h3>
+        <button onclick="window.closeNewBookingModal()" class="w-8 h-8 rounded-xl bg-bay-800 text-slate-400 hover:text-white flex items-center justify-center">
           <i class="ph-bold ph-x"></i>
         </button>
       </div>
 
-      <form onsubmit="handleNewBookingForm(event)" class="space-y-4">
+      <form onsubmit="window.handleNewBookingForm(event)" class="space-y-4">
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label class="block text-xs font-bold text-white mb-1.5" data-i18n="custNameLabel">Customer Full Name *</label>
-            <input type="text" id="newCustName" required placeholder="e.g. Tarek Mansour"
-              class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs focus:outline-none focus:border-gold-500">
+            <input type="text" id="newCustName" required placeholder="e.g. Tarek Mansour" class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs">
           </div>
-
           <div>
             <label class="block text-xs font-bold text-white mb-1.5" data-i18n="custPhoneLabel">Customer Mobile Phone *</label>
-            <input type="text" id="newCustPhone" required placeholder="e.g. 01098765432"
-              class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs focus:outline-none focus:border-gold-500">
+            <input type="text" id="newCustPhone" required placeholder="e.g. 01098765432" class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs">
           </div>
-
           <div>
             <label class="block text-xs font-bold text-white mb-1.5" data-i18n="provinceLabel">Egyptian Province / Governorate *</label>
             <select id="newProvince" required class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs text-white">
@@ -889,62 +799,42 @@
               <option value="Other">Other Governorate</option>
             </select>
           </div>
-
           <div>
             <label class="block text-xs font-bold text-white mb-1.5" data-i18n="carTypeLabel">Car Type / Model *</label>
-            <input type="text" id="newCarType" required placeholder="e.g. Mercedes-Benz C200"
-              class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs focus:outline-none focus:border-gold-500">
+            <input type="text" id="newCarType" required placeholder="e.g. Mercedes-Benz C200" class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs">
           </div>
-
           <div>
             <label class="block text-xs font-bold text-white mb-1.5" data-i18n="carPlateLabel">Car License Plate *</label>
-            <input type="text" id="newCarPlate" required placeholder="e.g. ط ر ب 1234 or ABC 123"
-              class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs focus:outline-none focus:border-gold-500 uppercase">
+            <input type="text" id="newCarPlate" required placeholder="e.g. ط ر ب 1234" class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs uppercase">
           </div>
-
           <div>
             <label class="block text-xs font-bold text-white mb-1.5" data-i18n="carColorLabel">Paint Color & Clearcoat *</label>
-            <input type="text" id="newCarColor" required placeholder="e.g. Obsidian Black Metallic"
-              class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs focus:outline-none focus:border-gold-500">
+            <input type="text" id="newCarColor" required placeholder="e.g. Obsidian Black Metallic" class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs">
           </div>
-
           <div>
             <label class="block text-xs font-bold text-white mb-1.5" data-i18n="mileageLabel">Current Odometer Mileage (KM) *</label>
-            <input type="number" id="newCarMileage" required min="0" placeholder="e.g. 45200"
-              class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs focus:outline-none focus:border-gold-500 font-mono">
+            <input type="number" id="newCarMileage" required min="0" placeholder="e.g. 45200" class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs font-mono">
           </div>
-
           <div>
             <label class="block text-xs font-bold text-white mb-1.5" data-i18n="bookingDateLabel">Booking Date *</label>
-            <input type="date" id="newBookingDate" required
-              class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs focus:outline-none focus:border-gold-500">
+            <input type="date" id="newBookingDate" required class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs">
           </div>
-
           <div>
             <label class="block text-xs font-bold text-white mb-1.5" data-i18n="estCompletionLabel">Estimated Delivery Date & Time *</label>
-            <input type="datetime-local" id="newEstCompletion" required
-              class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs focus:outline-none focus:border-gold-500">
+            <input type="datetime-local" id="newEstCompletion" required class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs">
           </div>
-
           <div>
             <label class="block text-xs font-bold text-white mb-1.5" data-i18n="assignDetailerLabel">Assign Professional Master Detailer *</label>
-            <select id="newAssignedDetailer" required class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs text-white">
-              <!-- Populated dynamically -->
-            </select>
+            <select id="newAssignedDetailer" required class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs text-white"></select>
           </div>
-
           <div>
             <label class="block text-xs font-bold text-white mb-1.5" data-i18n="totalPriceLabel">Total Service Estimation (L.E) *</label>
-            <input type="number" id="newTotalPrice" required min="0" step="100" placeholder="e.g. 12000"
-              class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs focus:outline-none focus:border-gold-500 font-mono">
+            <input type="number" id="newTotalPrice" required min="0" step="100" placeholder="e.g. 12000" class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs font-mono">
           </div>
-
           <div>
             <label class="block text-xs font-bold text-white mb-1.5" data-i18n="depositLabel">Advance Deposit Paid (L.E) *</label>
-            <input type="number" id="newDeposit" required min="0" step="100" placeholder="e.g. 4000"
-              class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs focus:outline-none focus:border-gold-500 font-mono">
+            <input type="number" id="newDeposit" required min="0" step="100" placeholder="e.g. 4000" class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs font-mono">
           </div>
-
           <div>
             <label class="block text-xs font-bold text-white mb-1.5" data-i18n="paymentMethodLabel">Payment Method Channel *</label>
             <select id="newPaymentMethod" required class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs text-white">
@@ -959,22 +849,16 @@
         <div>
           <label class="block text-xs font-bold text-white mb-1.5" data-i18n="carIssueLabel">Customer Issue & Defect Assessment *</label>
           <div class="relative">
-            <textarea id="newCarIssue" rows="3" required placeholder="Describe scratches, swirls, water spots, or required ceramic package..."
-              class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs focus:outline-none focus:border-gold-500"></textarea>
-            <button type="button" onclick="runAiDefectSuggestions('new')" class="absolute right-2.5 bottom-2.5 px-3 py-1 rounded-xl bg-gold-500/20 text-gold-400 border border-gold-500/40 text-[10px] font-black uppercase tracking-wider flex items-center gap-1.5 transition">
-              <i class="ph-bold ph-sparkle"></i>
-              <span data-i18n="aiPolishPlan">AI Polish Plan</span>
+            <textarea id="newCarIssue" rows="3" required placeholder="Describe scratches, swirls, water spots, or required ceramic package..." class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs"></textarea>
+            <button type="button" onclick="window.runAiDefectSuggestions('new')" class="absolute right-2.5 bottom-2.5 px-3 py-1 rounded-xl bg-gold-500/20 text-gold-400 border border-gold-500/40 text-[10px] font-black uppercase tracking-wider flex items-center gap-1.5 transition">
+              <i class="ph-bold ph-sparkle"></i> <span data-i18n="aiPolishPlan">AI Polish Plan</span>
             </button>
           </div>
         </div>
 
         <div class="pt-4 border-t border-slate-800 flex justify-end gap-3">
-          <button type="button" onclick="closeNewBookingModal()" class="px-4 py-2.5 text-xs font-bold text-slate-400 hover:text-white" data-i18n="cancel">
-            Cancel
-          </button>
-          <button type="submit" class="px-6 py-2.5 rounded-xl bg-gold-500 hover:bg-gold-400 text-slate-950 font-black text-xs uppercase tracking-wider transition shadow-lg" data-i18n="createScheduleBtn">
-            Create Booking & Auto-Schedule
-          </button>
+          <button type="button" onclick="window.closeNewBookingModal()" class="px-4 py-2.5 text-xs font-bold text-slate-400 hover:text-white" data-i18n="cancel">Cancel</button>
+          <button type="submit" class="px-6 py-2.5 rounded-xl bg-gold-500 hover:bg-gold-400 text-slate-950 font-black text-xs uppercase tracking-wider transition shadow-lg" data-i18n="createScheduleBtn">Create Booking & Auto-Schedule</button>
         </div>
       </form>
     </div>
@@ -984,33 +868,23 @@
   <div id="modalEditBooking" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4 hidden">
     <div class="bg-bay-900 border border-cyan-500/40 rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl overflow-y-auto max-h-[90vh] space-y-5">
       <div class="flex items-center justify-between pb-4 border-b border-slate-800">
-        <div class="flex items-center gap-2.5">
-          <div class="w-10 h-10 rounded-2xl bg-cyan-500/10 border border-cyan-500/40 flex items-center justify-center text-cyan-400">
-            <i class="ph-bold ph-pencil-simple text-xl"></i>
-          </div>
-          <div>
-            <h3 class="text-base font-black text-white uppercase tracking-wider" data-i18n="editModalHeader">Edit Vehicle Booking</h3>
-            <p class="text-xs text-slate-400" data-i18n="editModalSub">Update customer details, paint specifications, mileage, or advance deposit.</p>
-          </div>
-        </div>
-        <button onclick="closeEditBookingModal()" class="w-8 h-8 rounded-xl bg-bay-800 text-slate-400 hover:text-white flex items-center justify-center transition">
+        <h3 class="text-base font-black text-white uppercase tracking-wider" data-i18n="editModalHeader">Edit Vehicle Booking</h3>
+        <button onclick="window.closeEditBookingModal()" class="w-8 h-8 rounded-xl bg-bay-800 text-slate-400 hover:text-white flex items-center justify-center">
           <i class="ph-bold ph-x"></i>
         </button>
       </div>
 
-      <form onsubmit="handleEditBookingForm(event)" class="space-y-4">
+      <form onsubmit="window.handleEditBookingForm(event)" class="space-y-4">
         <input type="hidden" id="editJobId">
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label class="block text-xs font-bold text-white mb-1.5" data-i18n="custNameLabel">Customer Full Name *</label>
-            <input type="text" id="editCustName" required class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs focus:outline-none focus:border-cyan-500">
+            <input type="text" id="editCustName" required class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs">
           </div>
-
           <div>
             <label class="block text-xs font-bold text-white mb-1.5" data-i18n="custPhoneLabel">Customer Mobile Phone *</label>
-            <input type="text" id="editCustPhone" required class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs focus:outline-none focus:border-cyan-500">
+            <input type="text" id="editCustPhone" required class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs">
           </div>
-
           <div>
             <label class="block text-xs font-bold text-white mb-1.5" data-i18n="provinceLabel">Egyptian Province / Governorate *</label>
             <select id="editProvince" required class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs text-white">
@@ -1027,54 +901,42 @@
               <option value="Other">Other Governorate</option>
             </select>
           </div>
-
           <div>
             <label class="block text-xs font-bold text-white mb-1.5" data-i18n="carTypeLabel">Car Type / Model *</label>
-            <input type="text" id="editCarType" required class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs focus:outline-none focus:border-cyan-500">
+            <input type="text" id="editCarType" required class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs">
           </div>
-
           <div>
             <label class="block text-xs font-bold text-white mb-1.5" data-i18n="carPlateLabel">Car License Plate *</label>
-            <input type="text" id="editCarPlate" required class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs focus:outline-none focus:border-cyan-500 uppercase">
+            <input type="text" id="editCarPlate" required class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs uppercase">
           </div>
-
           <div>
             <label class="block text-xs font-bold text-white mb-1.5" data-i18n="carColorLabel">Paint Color & Clearcoat *</label>
-            <input type="text" id="editCarColor" required class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs focus:outline-none focus:border-cyan-500">
+            <input type="text" id="editCarColor" required class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs">
           </div>
-
           <div>
             <label class="block text-xs font-bold text-white mb-1.5" data-i18n="mileageLabel">Current Odometer Mileage (KM) *</label>
-            <input type="number" id="editCarMileage" required min="0" class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs focus:outline-none focus:border-cyan-500 font-mono">
+            <input type="number" id="editCarMileage" required min="0" class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs font-mono">
           </div>
-
           <div>
             <label class="block text-xs font-bold text-white mb-1.5" data-i18n="bookingDateLabel">Booking Date *</label>
-            <input type="date" id="editBookingDate" required class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs focus:outline-none focus:border-cyan-500">
+            <input type="date" id="editBookingDate" required class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs">
           </div>
-
           <div>
             <label class="block text-xs font-bold text-white mb-1.5" data-i18n="estCompletionLabel">Estimated Delivery Date & Time *</label>
-            <input type="datetime-local" id="editEstCompletion" required class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs focus:outline-none focus:border-cyan-500">
+            <input type="datetime-local" id="editEstCompletion" required class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs">
           </div>
-
           <div>
             <label class="block text-xs font-bold text-white mb-1.5" data-i18n="assignDetailerLabel">Assigned Master Detailer *</label>
-            <select id="editAssignedDetailer" required class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs text-white">
-              <!-- Populated dynamically -->
-            </select>
+            <select id="editAssignedDetailer" required class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs text-white"></select>
           </div>
-
           <div>
             <label class="block text-xs font-bold text-white mb-1.5" data-i18n="totalPriceLabel">Total Service Estimation (L.E) *</label>
-            <input type="number" id="editTotalPrice" required min="0" step="100" class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs focus:outline-none focus:border-cyan-500 font-mono">
+            <input type="number" id="editTotalPrice" required min="0" step="100" class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs font-mono">
           </div>
-
           <div>
             <label class="block text-xs font-bold text-white mb-1.5" data-i18n="depositLabel">Advance Deposit (L.E) *</label>
-            <input type="number" id="editDeposit" required min="0" step="100" class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs focus:outline-none focus:border-cyan-500 font-mono">
+            <input type="number" id="editDeposit" required min="0" step="100" class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs font-mono">
           </div>
-
           <div>
             <label class="block text-xs font-bold text-white mb-1.5" data-i18n="paymentMethodLabel">Payment Method Channel *</label>
             <select id="editPaymentMethod" required class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs text-white">
@@ -1089,21 +951,16 @@
         <div>
           <label class="block text-xs font-bold text-white mb-1.5" data-i18n="carIssueLabel">Customer Issue & Defect Assessment *</label>
           <div class="relative">
-            <textarea id="editCarIssue" rows="3" required class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs focus:outline-none focus:border-cyan-500"></textarea>
-            <button type="button" onclick="runAiDefectSuggestions('edit')" class="absolute right-2.5 bottom-2.5 px-3 py-1 rounded-xl bg-cyan-500/20 text-cyan-400 border border-cyan-500/40 text-[10px] font-black uppercase tracking-wider flex items-center gap-1.5 transition">
-              <i class="ph-bold ph-sparkle"></i>
-              <span data-i18n="aiPolishPlan">AI Polish Plan</span>
+            <textarea id="editCarIssue" rows="3" required class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs"></textarea>
+            <button type="button" onclick="window.runAiDefectSuggestions('edit')" class="absolute right-2.5 bottom-2.5 px-3 py-1 rounded-xl bg-cyan-500/20 text-cyan-400 border border-cyan-500/40 text-[10px] font-black uppercase tracking-wider flex items-center gap-1.5 transition">
+              <i class="ph-bold ph-sparkle"></i> <span data-i18n="aiPolishPlan">AI Polish Plan</span>
             </button>
           </div>
         </div>
 
         <div class="pt-4 border-t border-slate-800 flex justify-end gap-3">
-          <button type="button" onclick="closeEditBookingModal()" class="px-4 py-2.5 text-xs font-bold text-slate-400 hover:text-white" data-i18n="cancel">
-            Cancel
-          </button>
-          <button type="submit" class="px-6 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-black text-xs uppercase tracking-wider transition shadow-lg" data-i18n="saveModifications">
-            Save Modifications
-          </button>
+          <button type="button" onclick="window.closeEditBookingModal()" class="px-4 py-2.5 text-xs font-bold text-slate-400 hover:text-white" data-i18n="cancel">Cancel</button>
+          <button type="submit" class="px-6 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-black text-xs uppercase tracking-wider transition shadow-lg" data-i18n="saveModifications">Save Modifications</button>
         </div>
       </form>
     </div>
@@ -1113,38 +970,28 @@
   <div id="modalCreateCustomer" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4 hidden">
     <div class="bg-bay-900 border border-emerald-500/40 rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl space-y-5">
       <div class="flex items-center justify-between pb-3 border-b border-slate-800">
-        <h3 class="text-sm font-black text-white uppercase tracking-wider flex items-center gap-2">
-          <i class="ph-bold ph-user-circle text-emerald-400 text-base"></i>
-          <span data-i18n="createCustLoginHeader">Create Customer Portal Login</span>
-        </h3>
-        <button onclick="closeCreateCustomerModal()" class="w-8 h-8 rounded-xl bg-bay-800 text-slate-400 hover:text-white flex items-center justify-center">
+        <h3 class="text-sm font-black text-white uppercase tracking-wider" data-i18n="createCustLoginHeader">Create Customer Portal Login</h3>
+        <button onclick="window.closeCreateCustomerModal()" class="w-8 h-8 rounded-xl bg-bay-800 text-slate-400 hover:text-white flex items-center justify-center">
           <i class="ph-bold ph-x"></i>
         </button>
       </div>
 
-      <form onsubmit="handleCreateCustomerForm(event)" class="space-y-4">
+      <form onsubmit="window.handleCreateCustomerForm(event)" class="space-y-4">
         <div>
           <label class="block text-xs font-bold text-white mb-1.5" data-i18n="linkBookingLabel">Link to Active Vehicle Booking *</label>
-          <select id="custLinkJobSelect" required class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs text-white">
-            <!-- Populated dynamically -->
-          </select>
+          <select id="custLinkJobSelect" required class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs text-white"></select>
         </div>
-
         <div>
           <label class="block text-xs font-bold text-white mb-1.5" data-i18n="custUsernameLabel">Customer Username *</label>
           <input type="text" id="newCustUsername" required placeholder="e.g. tarek.m" class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs">
         </div>
-
         <div>
           <label class="block text-xs font-bold text-white mb-1.5" data-i18n="passwordLabel">Password *</label>
           <input type="text" id="newCustPassword" required placeholder="e.g. pass123" class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs font-mono">
         </div>
-
         <div class="pt-2 flex justify-end gap-2">
-          <button type="button" onclick="closeCreateCustomerModal()" class="px-4 py-2 text-xs font-bold text-slate-400 hover:text-white" data-i18n="cancel">Cancel</button>
-          <button type="submit" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs uppercase tracking-wider transition" data-i18n="assignPassBtn">
-            Assign Customer Pass
-          </button>
+          <button type="button" onclick="window.closeCreateCustomerModal()" class="px-4 py-2 text-xs font-bold text-slate-400 hover:text-white" data-i18n="cancel">Cancel</button>
+          <button type="submit" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs uppercase tracking-wider transition" data-i18n="assignPassBtn">Assign Customer Pass</button>
         </div>
       </form>
     </div>
@@ -1154,26 +1001,12 @@
   <div id="modalAiDiagnostic" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4 hidden">
     <div class="bg-bay-900 border border-gold-500/40 rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl overflow-y-auto max-h-[90vh] space-y-4">
       <div class="flex items-center justify-between pb-4 border-b border-slate-800">
-        <div class="flex items-center gap-2.5">
-          <div class="w-10 h-10 rounded-2xl bg-gold-500/10 border border-gold-500/40 flex items-center justify-center text-gold-400">
-            <i class="ph-bold ph-sparkle text-xl"></i>
-          </div>
-          <div>
-            <h3 class="text-base font-black text-white uppercase tracking-wider flex items-center gap-2">
-              <span data-i18n="aiDiagnosticHeader">Dr.Care Gemini Paint Diagnostics</span>
-              <span class="text-[10px] font-mono bg-gold-500/20 text-gold-400 px-2 py-0.5 rounded-full border border-gold-500/40">AI POWERED</span>
-            </h3>
-            <p class="text-xs text-slate-400" data-i18n="aiDiagnosticSub">Compound abrasive mapping, rotary/DA machine steps, and Cairo/Port Said market price estimate.</p>
-          </div>
-        </div>
-        <button onclick="closeAiDiagnosticModal()" class="w-8 h-8 rounded-xl bg-bay-800 text-slate-400 hover:text-white flex items-center justify-center transition">
+        <h3 class="text-base font-black text-white uppercase tracking-wider" data-i18n="aiDiagnosticHeader">Dr.Care Gemini Paint Diagnostics</h3>
+        <button onclick="window.closeAiDiagnosticModal()" class="w-8 h-8 rounded-xl bg-bay-800 text-slate-400 hover:text-white flex items-center justify-center">
           <i class="ph-bold ph-x"></i>
         </button>
       </div>
-
-      <div id="aiDiagnosticBody" class="space-y-4 text-xs text-slate-200">
-        <!-- Dynamically injected -->
-      </div>
+      <div id="aiDiagnosticBody" class="space-y-4 text-xs text-slate-200"></div>
     </div>
   </div>
 
@@ -1181,38 +1014,27 @@
   <div id="modalAiWhatsApp" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4 hidden">
     <div class="bg-bay-900 border border-emerald-500/40 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl space-y-4">
       <div class="flex items-center justify-between pb-4 border-b border-slate-800">
-        <div class="flex items-center gap-2.5">
-          <div class="w-10 h-10 rounded-2xl bg-emerald-500/10 border border-emerald-500/40 flex items-center justify-center text-emerald-400">
-            <i class="ph-bold ph-whatsapp-logo text-xl"></i>
-          </div>
-          <div>
-            <h3 class="text-base font-black text-white uppercase tracking-wider" data-i18n="aiWhatsAppHeader">AI WhatsApp Progress Dispatch</h3>
-            <p class="text-xs text-slate-400" data-i18n="aiWhatsAppSub">Generate personalized luxury updates for this client.</p>
-          </div>
-        </div>
-        <button onclick="closeAiWhatsAppModal()" class="w-8 h-8 rounded-xl bg-bay-800 text-slate-400 hover:text-white flex items-center justify-center transition">
+        <h3 class="text-base font-black text-white uppercase tracking-wider" data-i18n="aiWhatsAppHeader">AI WhatsApp Progress Dispatch</h3>
+        <button onclick="window.closeAiWhatsAppModal()" class="w-8 h-8 rounded-xl bg-bay-800 text-slate-400 hover:text-white flex items-center justify-center">
           <i class="ph-bold ph-x"></i>
         </button>
       </div>
 
       <div class="flex items-center gap-2">
         <label class="text-xs font-bold text-white" data-i18n="toneLabel">Tone / Language:</label>
-        <select id="aiLangSelect" onchange="generateAiCustomerUpdateMessage()" class="flex-1 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-white">
+        <select id="aiLangSelect" onchange="window.generateAiCustomerUpdateMessage()" class="flex-1 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-white">
           <option value="ar">Egyptian Arabic (ترحيب احترافي باللهجة المصرية)</option>
           <option value="en" selected>Executive English (Luxury Detailing Tone)</option>
           <option value="franco">Franco-Arab (Egyptian Slang & Latin script)</option>
         </select>
       </div>
 
-      <div id="aiWhatsAppContentArea" class="bg-bay-850 p-4 rounded-2xl border border-slate-800 space-y-2">
-        <!-- Content injected dynamically -->
-      </div>
+      <div id="aiWhatsAppContentArea" class="bg-bay-850 p-4 rounded-2xl border border-slate-800 space-y-2"></div>
 
       <div class="flex items-center justify-end gap-2 pt-2">
-        <button onclick="closeAiWhatsAppModal()" class="px-4 py-2 text-xs font-bold text-slate-400 hover:text-white" data-i18n="close">Close</button>
-        <button id="btnCopyAiWhatsApp" onclick="copyAiWhatsAppText()" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs uppercase tracking-wider transition shadow-lg flex items-center gap-1.5">
-          <i class="ph-bold ph-copy"></i>
-          <span data-i18n="copyClipboard">Copy to Clipboard</span>
+        <button onclick="window.closeAiWhatsAppModal()" class="px-4 py-2 text-xs font-bold text-slate-400 hover:text-white" data-i18n="close">Close</button>
+        <button onclick="window.copyAiWhatsAppText()" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs uppercase tracking-wider transition shadow-lg flex items-center gap-1.5">
+          <i class="ph-bold ph-copy"></i> <span data-i18n="copyClipboard">Copy to Clipboard</span>
         </button>
       </div>
     </div>
@@ -1222,29 +1044,17 @@
   <div id="modalCustomerAiConcierge" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4 hidden">
     <div class="bg-bay-900 border border-gold-500/40 rounded-3xl max-w-lg w-full p-6 sm:p-7 shadow-2xl space-y-4">
       <div class="flex items-center justify-between pb-3 border-b border-slate-800">
-        <div class="flex items-center gap-2.5">
-          <div class="w-9 h-9 rounded-2xl bg-gold-500/10 border border-gold-500/40 flex items-center justify-center text-gold-400">
-            <i class="ph-bold ph-sparkle text-lg"></i>
-          </div>
-          <div>
-            <h3 class="text-sm font-black text-white uppercase tracking-wider" data-i18n="aiConciergeHeader">Dr.Care Paint AI Concierge</h3>
-            <p class="text-[11px] text-slate-400" data-i18n="aiConciergeSub">Ask any question regarding scratch maintenance, ceramic wash care & clearcoat safety.</p>
-          </div>
-        </div>
-        <button onclick="closeCustomerAiAdvisorModal()" class="w-8 h-8 rounded-xl bg-bay-800 text-slate-400 hover:text-white flex items-center justify-center">
+        <h3 class="text-sm font-black text-white uppercase tracking-wider" data-i18n="aiConciergeHeader">Dr.Care Paint AI Concierge</h3>
+        <button onclick="window.closeCustomerAiAdvisorModal()" class="w-8 h-8 rounded-xl bg-bay-800 text-slate-400 hover:text-white flex items-center justify-center">
           <i class="ph-bold ph-x"></i>
         </button>
       </div>
 
       <div class="space-y-3">
         <div class="flex gap-2">
-          <input type="text" id="custAiQueryInput" placeholder="e.g. How do I wash my ceramic coated car?" 
-            class="flex-1 border border-slate-700 rounded-2xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-gold-500">
-          <button onclick="askCustomerAiConcierge()" id="btnSubmitCustAi" class="px-4 py-2.5 rounded-2xl bg-gold-500 hover:bg-gold-400 text-slate-950 font-black text-xs uppercase tracking-wider transition" data-i18n="askAiBtn">
-            Ask AI
-          </button>
+          <input type="text" id="custAiQueryInput" placeholder="e.g. How do I wash my ceramic coated car?" class="flex-1 border border-slate-700 rounded-2xl px-4 py-2.5 text-xs text-white">
+          <button onclick="window.askCustomerAiConcierge()" class="px-4 py-2.5 rounded-2xl bg-gold-500 hover:bg-gold-400 text-slate-950 font-black text-xs uppercase tracking-wider transition" data-i18n="askAiBtn">Ask AI</button>
         </div>
-
         <div id="custAiResponseArea" class="bg-bay-850 p-4 rounded-2xl border border-slate-800 min-h-[120px] max-h-[250px] overflow-y-auto text-xs text-slate-300 leading-relaxed" data-i18n="aiDefaultPrompt">
           💡 Ask about microfiber towels, two-bucket washes, pH neutral shampoos, or water spot removal in Egyptian weather.
         </div>
@@ -1260,23 +1070,20 @@
       </div>
       <div>
         <h4 class="text-sm font-black text-white uppercase tracking-wider" data-i18n="confirmDeleteHeader">Confirm Deletion</h4>
-        <p id="deleteConfirmPromptText" class="text-xs text-slate-400 mt-1" data-i18n="confirmDeleteSub">Are you sure you want to permanently delete this record?</p>
+        <p class="text-xs text-slate-400 mt-1" data-i18n="confirmDeleteSub">Are you sure you want to permanently delete this record?</p>
       </div>
       <div class="flex items-center justify-center gap-3 pt-2">
-        <button onclick="closeDeleteConfirmModal()" class="px-4 py-2 text-xs font-bold text-slate-400 hover:text-white" data-i18n="cancel">Cancel</button>
-        <button id="btnExecuteDeleteConfirm" class="px-5 py-2 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-black text-xs uppercase tracking-wider transition" data-i18n="deletePermBtn">
-          Delete Permanently
-        </button>
+        <button onclick="window.closeDeleteConfirmModal()" class="px-4 py-2 text-xs font-bold text-slate-400 hover:text-white" data-i18n="cancel">Cancel</button>
+        <button id="btnExecuteDeleteConfirm" class="px-5 py-2 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-black text-xs uppercase tracking-wider transition" data-i18n="deletePermBtn">Delete Permanently</button>
       </div>
     </div>
   </div>
 
-  <!-- Toast Notifications Container -->
+  <!-- Toast Container -->
   <div id="toastContainer" class="fixed bottom-6 right-6 z-50 space-y-2 pointer-events-none"></div>
 
-  <!-- JavaScript Application Engine -->
+  <!-- JavaScript Engine with Bulletproof Global Binding -->
   <script>
-
     let currentStaffUser = null;
     let activeCustomerJob = null;
     let activeStaffTab = 'bookings';
@@ -1540,26 +1347,24 @@
       { id: 'cacc-1', jobId: 'job-101', customerName: 'Tarek Mansour', username: 'tarek.m', pass: 'pass123' }
     ];
 
-    // Bulletproof Persistent State Engine with Hydration Fallback
     let staffUsers = [];
     let bookings = [];
     let customerAccounts = [];
 
     function hydrateState() {
       try {
-        const storedStaff = localStorage.getItem('drcare_staff_v2');
+        const storedStaff = localStorage.getItem('drcare_staff_v3');
         staffUsers = storedStaff ? JSON.parse(storedStaff) : DEFAULT_STAFF_USERS;
         if (!staffUsers.some(u => u.username.toLowerCase() === 'mr.alfy')) {
           staffUsers = DEFAULT_STAFF_USERS;
         }
 
-        const storedBookings = localStorage.getItem('drcare_bookings_v2');
+        const storedBookings = localStorage.getItem('drcare_bookings_v3');
         bookings = storedBookings ? JSON.parse(storedBookings) : DEFAULT_SAMPLE_BOOKINGS;
 
-        const storedCust = localStorage.getItem('drcare_cust_v2');
+        const storedCust = localStorage.getItem('drcare_cust_v3');
         customerAccounts = storedCust ? JSON.parse(storedCust) : DEFAULT_CUSTOMER_ACCOUNTS;
       } catch (e) {
-        console.warn('Hydration warning, resetting to defaults:', e);
         staffUsers = DEFAULT_STAFF_USERS;
         bookings = DEFAULT_SAMPLE_BOOKINGS;
         customerAccounts = DEFAULT_CUSTOMER_ACCOUNTS;
@@ -1568,12 +1373,11 @@
 
     function saveState() {
       try {
-        localStorage.setItem('drcare_staff_v2', JSON.stringify(staffUsers));
-        localStorage.setItem('drcare_bookings_v2', JSON.stringify(bookings));
-        localStorage.setItem('drcare_cust_v2', JSON.stringify(customerAccounts));
+        localStorage.setItem('drcare_staff_v3', JSON.stringify(staffUsers));
+        localStorage.setItem('drcare_bookings_v3', JSON.stringify(bookings));
+        localStorage.setItem('drcare_cust_v3', JSON.stringify(customerAccounts));
       } catch (err) {
-        console.error('Storage save error:', err);
-        showToast('Storage quota warning! Export your JSON backup.', 'rose');
+        showToast('Storage error! Export your JSON backup.', 'rose');
       }
     }
 
@@ -1584,24 +1388,14 @@
       if (systemInstruction) payload.systemInstruction = { parts: [{ text: systemInstruction }] };
       if (schema) payload.generationConfig = { responseMimeType: "application/json", responseSchema: schema };
 
-      const delays = [1000, 2000, 4000];
-      for (let attempt = 0; attempt <= delays.length; attempt++) {
-        try {
-          const response = await fetch(apiUrl, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-          });
-          if (!response.ok) throw new Error(`HTTP ${response.status}`);
-          const result = await response.json();
-          const candidateText = result?.candidates?.[0]?.content?.parts?.[0]?.text;
-          if (candidateText) return candidateText;
-          throw new Error("Empty candidate");
-        } catch (err) {
-          if (attempt === delays.length) throw err;
-          await new Promise(r => setTimeout(r, delays[attempt]));
-        }
-      }
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      const result = await response.json();
+      return result?.candidates?.[0]?.content?.parts?.[0]?.text || '';
     }
 
     function setAppLanguage(lang) {
@@ -1713,11 +1507,11 @@
       const headerAuth = document.getElementById('authHeaderContainer');
       if (headerAuth) {
         headerAuth.innerHTML = `
-          <button onclick="navigateToCustomerPortalGateway()" class="hidden sm:flex px-3 py-2 rounded-xl bg-bay-850 hover:bg-bay-800 text-gold-400 border border-gold-500/30 font-bold text-xs items-center gap-1.5 shadow-sm">
+          <button onclick="window.navigateToCustomerPortalGateway()" class="hidden sm:flex px-3 py-2 rounded-xl bg-bay-850 hover:bg-bay-800 text-gold-400 border border-gold-500/30 font-bold text-xs items-center gap-1.5 shadow-sm">
             <i class="ph-bold ph-car"></i>
             <span data-i18n="customerTracking">Customer Tracking</span>
           </button>
-          <button onclick="openStaffLoginModal()" id="btnStaffLoginNav" class="px-3.5 sm:px-4 py-2 rounded-xl bg-gold-500 hover:bg-gold-400 text-slate-950 font-black text-xs uppercase tracking-wider transition shadow-lg flex items-center gap-1.5">
+          <button onclick="window.openStaffLoginModal()" id="btnStaffLoginNav" class="px-3.5 sm:px-4 py-2 rounded-xl bg-gold-500 hover:bg-gold-400 text-slate-950 font-black text-xs uppercase tracking-wider transition shadow-lg flex items-center gap-1.5">
             <i class="ph-bold ph-shield-check"></i>
             <span data-i18n="staffLogin">Staff Login</span>
           </button>
@@ -1750,7 +1544,7 @@
               <span class="text-xs font-black text-white block">${escapeHtml(currentStaffUser.name)}</span>
               <span class="text-[10px] font-mono text-gold-400 uppercase">${escapeHtml(currentStaffUser.title)}</span>
             </div>
-            <button onclick="logoutStaff()" class="px-3 py-1.5 rounded-xl bg-bay-800 hover:bg-rose-500/20 hover:text-rose-400 text-slate-300 text-xs font-bold border border-slate-700 transition flex items-center gap-1.5">
+            <button onclick="window.logoutStaff()" class="px-3 py-1.5 rounded-xl bg-bay-800 hover:bg-rose-500/20 hover:text-rose-400 text-slate-300 text-xs font-bold border border-slate-700 transition flex items-center gap-1.5">
               <i class="ph-bold ph-sign-out"></i>
               <span class="hidden sm:inline">Sign Out</span>
             </button>
@@ -1795,22 +1589,6 @@
       if (cardDeposits) cardDeposits.style.display = isDetailer ? 'none' : 'block';
 
       switchStaffTab('bookings');
-      checkUpcomingDeliveriesReminder();
-    }
-
-    function checkUpcomingDeliveriesReminder() {
-      if (!currentStaffUser || currentStaffUser.role === 'detailer') return;
-      const now = new Date();
-      const urgentJobs = bookings.filter(b => {
-        if (!b.estimatedCompletion || (b.progressPercent || 0) >= 100) return false;
-        const due = new Date(b.estimatedCompletion);
-        const diffHours = (due - now) / (1000 * 60 * 60);
-        return diffHours >= 0 && diffHours <= 48;
-      });
-
-      if (urgentJobs.length > 0) {
-        showToast(`⚠️ Attention: ${urgentJobs.length} vehicle(s) due for handover within 48 hours!`, 'rose');
-      }
     }
 
     function switchStaffTab(tabName) {
@@ -1842,9 +1620,7 @@
 
     function debounceSearchBookings() {
       clearTimeout(searchDebounceTimer);
-      searchDebounceTimer = setTimeout(() => {
-        filterBookingsGrid();
-      }, 150);
+      searchDebounceTimer = setTimeout(() => filterBookingsGrid(), 150);
     }
 
     function updateDashboardMetrics() {
@@ -1858,15 +1634,11 @@
       const totalDeposits = relevantBookings.reduce((sum, b) => sum + (Number(b.depositLE) || 0), 0);
       const readyHandover = relevantBookings.filter(b => (b.progressPercent || 0) >= 100).length;
 
-      const mActive = document.getElementById('metricTotalActive');
-      const mCoating = document.getElementById('metricInCoating');
-      const mDeposits = document.getElementById('metricTotalDeposits');
-      const mReady = document.getElementById('metricReadyHandover');
-
-      if (mActive) mActive.textContent = totalActive;
-      if (mCoating) mCoating.textContent = inCoating;
-      if (mDeposits) mDeposits.textContent = `${totalDeposits.toLocaleString()} L.E`;
-      if (mReady) mReady.textContent = readyHandover;
+      const setVal = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+      setVal('metricTotalActive', totalActive);
+      setVal('metricInCoating', inCoating);
+      setVal('metricTotalDeposits', `${totalDeposits.toLocaleString()} L.E`);
+      setVal('metricReadyHandover', readyHandover);
     }
 
     function filterBookingsGrid() {
@@ -1886,8 +1658,7 @@
           b.carType.toLowerCase().includes(q) || 
           b.carPlate.toLowerCase().includes(q) || 
           (b.customerPhone && b.customerPhone.includes(q)) ||
-          (b.pin && b.pin.toLowerCase().includes(q)) ||
-          (b.carColor && b.carColor.toLowerCase().includes(q));
+          (b.pin && b.pin.toLowerCase().includes(q));
 
         let matchesStage = true;
         if (filter === 'IN_PROGRESS') matchesStage = (b.progressPercent || 0) < 100;
@@ -1911,11 +1682,7 @@
         if (emptyState) {
           emptyState.classList.remove('hidden');
           const p = emptyState.querySelector('p');
-          if (p) {
-            p.textContent = isDetailer 
-              ? 'No assigned tasks currently in your bay.' 
-              : 'No vehicle booking sheets found.';
-          }
+          if (p) p.textContent = isDetailer ? 'No assigned tasks currently in your bay.' : 'No vehicle booking sheets found.';
         }
         return;
       }
@@ -1925,13 +1692,12 @@
         container.innerHTML = items.map(job => {
           const isFinished = (job.progressPercent || 0) >= 100;
           return `
-            <div onclick="openVehicleDetailSheet('${job.id}')" class="group bg-bay-900 border border-slate-800 hover:border-gold-500/50 p-5 rounded-3xl transition-all cursor-pointer shadow-xl hover:shadow-gold-500/10 space-y-4">
+            <div onclick="window.openVehicleDetailSheet('${job.id}')" class="group bg-bay-900 border border-slate-800 hover:border-gold-500/50 p-5 rounded-3xl transition-all cursor-pointer shadow-xl space-y-4">
               <div class="flex items-start justify-between gap-2">
                 <div>
                   <span class="text-[10px] font-mono font-bold text-gold-400 bg-gold-500/10 px-2 py-0.5 rounded border border-gold-500/30">PIN: ${escapeHtml(job.pin)}</span>
                   <h3 class="text-base font-black text-white mt-1 group-hover:text-gold-300 transition">${escapeHtml(job.carType)}</h3>
                   <p class="text-xs text-slate-400">${escapeHtml(job.customerName)} • <span class="text-slate-300 font-mono font-bold">${escapeHtml(job.carPlate)}</span></p>
-                  <span class="text-[10px] text-slate-500 font-mono">📍 ${escapeHtml(job.province || 'Port Said')}</span>
                 </div>
                 <div class="text-right">
                   ${!isDetailer ? `<span class="text-[11px] font-mono font-black ${job.depositVerified ? 'text-emerald-400' : 'text-amber-400'} block">${(job.depositLE || 0).toLocaleString()} L.E</span>` : ''}
@@ -1983,26 +1749,23 @@
       const canEdit = isOwner || isManager;
       const totalVal = job.totalPriceLE || ((job.depositLE || 0) * 2.5);
       const remBal = Math.max(0, totalVal - (job.depositLE || 0));
-
       const customerAcc = customerAccounts.find(ca => ca.jobId === job.id);
 
       if (view) {
         view.innerHTML = `
           <div class="bg-bay-900 border border-gold-500/40 rounded-3xl p-5 sm:p-10 space-y-8 shadow-2xl">
             <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-slate-800">
-              <button onclick="switchStaffTab('bookings')" class="px-3.5 py-1.5 rounded-xl bg-bay-850 hover:bg-bay-800 text-slate-300 hover:text-white text-xs font-bold border border-slate-700 transition flex items-center gap-1.5">
+              <button onclick="window.switchStaffTab('bookings')" class="px-3.5 py-1.5 rounded-xl bg-bay-850 hover:bg-bay-800 text-slate-300 hover:text-white text-xs font-bold border border-slate-700 transition flex items-center gap-1.5">
                 <i class="ph-bold ph-arrow-left"></i><span>Back to Tasks</span>
               </button>
               
               <div class="flex flex-wrap items-center gap-2">
-                <button onclick="window.print()" class="px-3 py-1.5 rounded-xl bg-bay-850 hover:bg-bay-800 text-slate-300 text-xs font-bold border border-slate-700 transition flex items-center gap-1.5">
-                  <i class="ph-bold ph-printer"></i> Print Sheet
-                </button>
-                ${canEdit ? `<button onclick="openEditBookingModal('${job.id}')" class="px-3 py-1.5 rounded-xl bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 text-xs font-bold transition flex items-center gap-1.5"><i class="ph-bold ph-pencil-simple"></i> Edit</button>` : ''}
-                ${isOwner ? `<button onclick="confirmDeleteJob('${job.id}')" class="px-3 py-1.5 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/30 text-xs font-bold transition flex items-center gap-1.5"><i class="ph-bold ph-trash"></i> Delete</button>` : ''}
-                ${canEdit ? `<button onclick="openCreateCustomerModal('${job.id}')" class="px-3 py-1.5 rounded-xl bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-xs font-bold transition flex items-center gap-1.5"><i class="ph-bold ph-user-plus"></i> + Client Pass</button>` : ''}
-                ${!isDetailer ? `<button onclick="runAiDiagnosticForCurrentSheet('${job.id}')" class="px-3 py-1.5 rounded-xl bg-gold-500/20 hover:bg-gold-500/30 text-gold-300 border border-gold-500/40 text-xs font-bold transition flex items-center gap-1.5"><i class="ph-bold ph-sparkle text-gold-400"></i> AI Polish Plan</button>` : ''}
-                ${!isDetailer ? `<button onclick="openAiWhatsAppModal('${job.id}')" class="px-3 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white border border-emerald-500/40 text-xs font-bold transition flex items-center gap-1.5"><i class="ph-bold ph-whatsapp-logo"></i> AI Updates</button>` : ''}
+                <button onclick="window.print()" class="px-3 py-1.5 rounded-xl bg-bay-850 text-slate-300 text-xs font-bold border border-slate-700 flex items-center gap-1.5"><i class="ph-bold ph-printer"></i> Print Sheet</button>
+                ${canEdit ? `<button onclick="window.openEditBookingModal('${job.id}')" class="px-3 py-1.5 rounded-xl bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 text-xs font-bold flex items-center gap-1.5"><i class="ph-bold ph-pencil-simple"></i> Edit</button>` : ''}
+                ${isOwner ? `<button onclick="window.confirmDeleteJob('${job.id}')" class="px-3 py-1.5 rounded-xl bg-rose-500/10 text-rose-400 border border-rose-500/30 text-xs font-bold flex items-center gap-1.5"><i class="ph-bold ph-trash"></i> Delete</button>` : ''}
+                ${canEdit ? `<button onclick="window.openCreateCustomerModal('${job.id}')" class="px-3 py-1.5 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 text-xs font-bold flex items-center gap-1.5"><i class="ph-bold ph-user-plus"></i> + Client Pass</button>` : ''}
+                ${!isDetailer ? `<button onclick="window.runAiDiagnosticForCurrentSheet('${job.id}')" class="px-3 py-1.5 rounded-xl bg-gold-500/20 text-gold-300 border border-gold-500/40 text-xs font-bold flex items-center gap-1.5"><i class="ph-bold ph-sparkle text-gold-400"></i> AI Polish Plan</button>` : ''}
+                ${!isDetailer ? `<button onclick="window.openAiWhatsAppModal('${job.id}')" class="px-3 py-1.5 rounded-xl bg-emerald-600 text-white border border-emerald-500/40 text-xs font-bold flex items-center gap-1.5"><i class="ph-bold ph-whatsapp-logo"></i> AI Updates</button>` : ''}
               </div>
             </div>
 
@@ -2025,26 +1788,12 @@
                   <div class="bg-bay-850 border border-slate-800 p-5 rounded-2xl space-y-3">
                     <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">Financial Audit (L.E)</span>
                     <div class="space-y-1 text-xs">
-                      <div class="flex items-center justify-between">
-                        <span class="text-slate-400">Advance Deposit:</span>
-                        <span class="font-mono font-black text-emerald-400 text-sm">${(job.depositLE || 0).toLocaleString()} L.E</span>
-                      </div>
-                      <div class="flex items-center justify-between text-[11px]">
-                        <span class="text-slate-400">Channel:</span>
-                        <span class="font-mono font-bold text-slate-200 uppercase">${escapeHtml(job.paymentMethod || 'Cash')}</span>
-                      </div>
+                      <div class="flex items-center justify-between"><span class="text-slate-400">Advance Deposit:</span><span class="font-mono font-black text-emerald-400 text-sm">${(job.depositLE || 0).toLocaleString()} L.E</span></div>
+                      <div class="flex items-center justify-between text-[11px]"><span class="text-slate-400">Channel:</span><span class="font-mono font-bold text-slate-200 uppercase">${escapeHtml(job.paymentMethod || 'Cash')}</span></div>
                       <div class="flex items-center justify-between text-[11px]">
                         <span class="text-slate-400">Status:</span>
-                        ${canEdit ? `
-                          <button onclick="toggleDepositVerification('${job.id}')" class="font-bold font-mono px-2 py-0.5 rounded ${job.depositVerified ? 'bg-emerald-500/20 text-emerald-400' : 'bg-amber-500/20 text-amber-400'} transition">
-                            ${job.depositVerified ? '✓ Verified' : '⏳ Pending Verify'}
-                          </button>
-                        ` : `<span class="font-bold font-mono ${job.depositVerified ? 'text-emerald-400' : 'text-amber-400'}">${job.depositVerified ? '✓ Verified' : '⏳ Pending'}</span>`}
+                        ${canEdit ? `<button onclick="window.toggleDepositVerification('${job.id}')" class="font-bold font-mono px-2 py-0.5 rounded ${job.depositVerified ? 'bg-emerald-500/20 text-emerald-400' : 'bg-amber-500/20 text-amber-400'}">${job.depositVerified ? '✓ Verified' : '⏳ Pending Verify'}</button>` : `<span class="font-bold font-mono ${job.depositVerified ? 'text-emerald-400' : 'text-amber-400'}">${job.depositVerified ? '✓ Verified' : '⏳ Pending'}</span>`}
                       </div>
-                    </div>
-                    <div class="pt-2 border-t border-slate-800 space-y-1 text-xs">
-                      <div class="flex items-center justify-between"><span class="text-slate-400">Total Estimation:</span><span class="font-mono font-bold text-white">${totalVal.toLocaleString()} L.E</span></div>
-                      <div class="flex items-center justify-between"><span class="text-slate-400">Handover Balance:</span><span class="font-mono font-bold text-amber-400">${remBal.toLocaleString()} L.E</span></div>
                     </div>
                   </div>
                 ` : `
@@ -2058,9 +1807,7 @@
                   <div class="bg-bay-850 border border-emerald-500/30 p-4 rounded-2xl space-y-2">
                     <div class="flex items-center justify-between">
                       <span class="text-[10px] font-mono font-bold text-emerald-400 uppercase">Customer Portal Pass (Owner View)</span>
-                      <button onclick="copyCustomerWhatsAppInvite('${job.id}')" class="px-2 py-1 rounded bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 text-[10px] font-bold flex items-center gap-1 transition">
-                        <i class="ph-bold ph-whatsapp-logo"></i> WhatsApp
-                      </button>
+                      <button onclick="window.copyCustomerWhatsAppInvite('${job.id}')" class="px-2 py-1 rounded bg-emerald-600/20 text-emerald-300 text-[10px] font-bold flex items-center gap-1"><i class="ph-bold ph-whatsapp-logo"></i> WhatsApp</button>
                     </div>
                     <div class="text-[11px] font-mono bg-bay-900 p-2 rounded-xl border border-slate-800 space-y-0.5 text-slate-300">
                       <div>User: <strong class="text-white">${escapeHtml(customerAcc.username)}</strong></div>
@@ -2070,16 +1817,6 @@
                 ` : ''}
               </div>
             </div>
-
-            ${job.customerNotes ? `
-              <div class="bg-gold-500/10 border border-gold-500/30 p-4 rounded-2xl flex items-start gap-3">
-                <i class="ph-bold ph-chat-circle-dots text-gold-400 text-xl mt-0.5"></i>
-                <div>
-                  <span class="text-[10px] font-bold text-gold-400 uppercase tracking-wider block mb-1">Customer Special Request</span>
-                  <p class="text-xs text-gold-200 leading-relaxed italic">"${escapeHtml(job.customerNotes)}"</p>
-                </div>
-              </div>
-            ` : ''}
 
             <div class="bg-bay-850 p-6 rounded-3xl border border-slate-800 space-y-5">
               <div class="flex items-center justify-between">
@@ -2093,15 +1830,10 @@
               <div class="space-y-3 bg-bay-900/60 p-4 rounded-2xl border border-slate-800">
                 <label class="block text-[11px] font-bold text-slate-300">Precision Manual Achievement % Input</label>
                 <div class="flex items-center gap-4">
-                  <input type="range" id="detailPercentSlider" min="0" max="100" value="${job.progressPercent}" class="flex-1" 
-                    oninput="document.getElementById('detailPercentText').textContent = this.value + '%'; document.getElementById('detailPercentInput').value = this.value;">
+                  <input type="range" id="detailPercentSlider" min="0" max="100" value="${job.progressPercent}" class="flex-1" oninput="document.getElementById('detailPercentText').textContent=this.value+'%'; document.getElementById('detailPercentInput').value=this.value;">
                   <div class="flex items-center gap-2">
-                    <input type="number" id="detailPercentInput" min="0" max="100" value="${job.progressPercent}" 
-                      class="w-20 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-center focus:outline-none focus:border-gold-500 font-mono"
-                      oninput="document.getElementById('detailPercentSlider').value = this.value; document.getElementById('detailPercentText').textContent = this.value + '%';">
-                    <button onclick="updateJobProgress('${job.id}')" class="px-4 py-2 rounded-xl bg-gold-500 hover:bg-gold-400 text-slate-950 font-black text-xs uppercase tracking-wider transition shadow-md">
-                      Apply %
-                    </button>
+                    <input type="number" id="detailPercentInput" min="0" max="100" value="${job.progressPercent}" class="w-20 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-center font-mono" oninput="document.getElementById('detailPercentSlider').value=this.value; document.getElementById('detailPercentText').textContent=this.value+'%';">
+                    <button onclick="window.updateJobProgress('${job.id}')" class="px-4 py-2 rounded-xl bg-gold-500 hover:bg-gold-400 text-slate-950 font-black text-xs uppercase transition">Apply %</button>
                   </div>
                 </div>
               </div>
@@ -2110,8 +1842,7 @@
                 <span class="text-xs font-bold text-slate-400 block uppercase tracking-wider">Jump to Detailing Phase Milestone:</span>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 text-[11px]">
                   ${RESTORATION_PHASES.map(p => `
-                    <button onclick="setJobPhase('${job.id}', ${p.percent}, '${p.label.replace(/'/g, "\\'")}')" 
-                      class="p-3 rounded-xl border text-left transition-all ${job.progressPercent >= p.percent ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-400 font-bold' : 'bg-bay-900 border-slate-800 text-slate-400 hover:border-gold-500/50 hover:text-white'}">
+                    <button onclick="window.setJobPhase('${job.id}', ${p.percent}, '${p.label.replace(/'/g, "\\'")}')" class="p-3 rounded-xl border text-left transition-all ${job.progressPercent >= p.percent ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-400 font-bold' : 'bg-bay-900 border-slate-800 text-slate-400 hover:text-white'}">
                       <div class="flex items-center justify-between">
                         <span class="truncate pr-2">${escapeHtml(p.label)}</span>
                         <span class="font-mono font-bold">${p.percent}%</span>
@@ -2123,11 +1854,9 @@
 
               <div class="space-y-2 pt-4 border-t border-slate-800">
                 <label class="block text-xs font-bold text-white">Technician / Master Detailer Inspection Notes</label>
-                <textarea id="detailNotesInput" rows="2" class="w-full border border-slate-700 rounded-xl px-4 py-2.5 text-xs focus:outline-none focus:border-gold-500" placeholder="Write progress notes or compound used...">${escapeHtml(job.detailerNotes || '')}</textarea>
+                <textarea id="detailNotesInput" rows="2" class="w-full border border-slate-700 rounded-xl px-4 py-2.5 text-xs" placeholder="Write progress notes or compound used...">${escapeHtml(job.detailerNotes || '')}</textarea>
                 <div class="flex justify-end">
-                  <button onclick="saveDetailerNotes('${job.id}')" class="px-4 py-2 rounded-xl bg-bay-800 hover:bg-bay-750 text-white font-bold text-xs border border-slate-700 transition">
-                    Save Technician Notes
-                  </button>
+                  <button onclick="window.saveDetailerNotes('${job.id}')" class="px-4 py-2 rounded-xl bg-bay-800 text-white font-bold text-xs border border-slate-700">Save Technician Notes</button>
                 </div>
               </div>
             </div>
@@ -2151,9 +1880,6 @@
         }
       }
       job.progressStageLabel = stageLabel;
-      if (!job.auditLog) job.auditLog = [];
-      job.auditLog.push(`Progress set to ${val}% by ${currentStaffUser?.name || 'Staff'}`);
-      
       saveState();
       openVehicleDetailSheet(jobId);
       showToast(`Progress updated to ${val}%`, 'emerald');
@@ -2164,9 +1890,6 @@
       if (!job) return;
       job.progressPercent = percent;
       job.progressStageLabel = label;
-      if (!job.auditLog) job.auditLog = [];
-      job.auditLog.push(`Stage moved to ${label} by ${currentStaffUser?.name || 'Staff'}`);
-      
       saveState();
       openVehicleDetailSheet(jobId);
       showToast(`Phase advanced: ${label}`, 'emerald');
@@ -2187,19 +1910,10 @@
 
     function navigateCalendarMonth(direction) {
       calCurrentMonth += direction;
-      if (calCurrentMonth > 11) {
-        calCurrentMonth = 0;
-        calCurrentYear += 1;
-      } else if (calCurrentMonth < 0) {
-        calCurrentMonth = 11;
-        calCurrentYear -= 1;
-      }
+      if (calCurrentMonth > 11) { calCurrentMonth = 0; calCurrentYear += 1; }
+      else if (calCurrentMonth < 0) { calCurrentMonth = 11; calCurrentYear -= 1; }
       if (calCurrentYear < 2026) calCurrentYear = 2026;
       if (calCurrentYear > 2031) calCurrentYear = 2031;
-
-      const yearSelect = document.getElementById('calYearSelect');
-      if (yearSelect) yearSelect.value = calCurrentYear.toString();
-
       renderCalendar();
     }
 
@@ -2209,10 +1923,6 @@
       if (calCurrentYear < 2026) calCurrentYear = 2026;
       if (calCurrentYear > 2031) calCurrentYear = 2031;
       calCurrentMonth = today.getMonth();
-
-      const yearSelect = document.getElementById('calYearSelect');
-      if (yearSelect) yearSelect.value = calCurrentYear.toString();
-
       renderCalendar();
     }
 
@@ -2220,7 +1930,6 @@
       const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
       const label = document.getElementById('calCurrentMonthLabel');
       if (label) label.textContent = `${monthNames[calCurrentMonth]} ${calCurrentYear}`;
-
       const yearSelect = document.getElementById('calYearSelect');
       if (yearSelect) yearSelect.value = calCurrentYear.toString();
 
@@ -2248,40 +1957,26 @@
         const isSelected = calSelectedDateStr === dateStr;
 
         const cell = document.createElement('div');
-        cell.className = `h-20 sm:h-28 p-2 rounded-2xl border transition-all cursor-pointer flex flex-col justify-between ${
-          isSelected 
-            ? 'border-gold-500 bg-gold-500/10 shadow-lg' 
-            : 'border-slate-800 bg-bay-850 hover:border-slate-600'
-        }`;
-
-        cell.onclick = () => selectCalendarDate(dateStr, dayBookings);
+        cell.className = `h-20 sm:h-28 p-2 rounded-2xl border transition-all cursor-pointer flex flex-col justify-between ${isSelected ? 'border-gold-500 bg-gold-500/10 shadow-lg' : 'border-slate-800 bg-bay-850 hover:border-slate-600'}`;
+        cell.onclick = () => window.selectCalendarDate(dateStr, dayBookings);
 
         cell.innerHTML = `
           <div class="flex items-center justify-between">
             <span class="text-xs font-mono font-bold ${count > 0 ? 'text-white' : 'text-slate-400'}">${day}</span>
-            ${count > 0 ? `
-              <span class="text-[9px] font-mono font-black px-1.5 py-0.5 rounded ${isFull ? 'bg-rose-500/20 text-rose-400 border border-rose-500/40' : 'bg-gold-500/20 text-gold-400 border border-gold-500/30'}">
-                ${count}/12
-              </span>
-            ` : '<span class="text-[9px] text-slate-600 font-mono">0/12</span>'}
+            ${count > 0 ? `<span class="text-[9px] font-mono font-black px-1.5 py-0.5 rounded ${isFull ? 'bg-rose-500/20 text-rose-400 border border-rose-500/40' : 'bg-gold-500/20 text-gold-400 border border-gold-500/30'}">${count}/12</span>` : '<span class="text-[9px] text-slate-600 font-mono">0/12</span>'}
           </div>
-
           <div class="space-y-1">
             <div class="w-full h-1.5 bg-bay-950 rounded-full overflow-hidden border border-slate-800">
               <div class="h-full rounded-full transition-all ${isFull ? 'bg-rose-500' : (count > 6 ? 'bg-amber-400' : 'bg-emerald-500')}" style="width: ${Math.min(100, (count / 12) * 100)}%"></div>
             </div>
-            ${count > 0 ? `
-              <p class="text-[9px] font-mono text-slate-300 truncate">${escapeHtml(dayBookings[0].carType)}</p>
-            ` : ''}
+            ${count > 0 ? `<p class="text-[9px] font-mono text-slate-300 truncate">${escapeHtml(dayBookings[0].carType)}</p>` : ''}
           </div>
         `;
-
         container.appendChild(cell);
       }
 
       if (calSelectedDateStr.startsWith(`${calCurrentYear}-${String(calCurrentMonth + 1).padStart(2, '0')}`)) {
-        const dayBookings = bookings.filter(b => b.bookingDate === calSelectedDateStr);
-        selectCalendarDate(calSelectedDateStr, dayBookings, false);
+        selectCalendarDate(calSelectedDateStr, bookings.filter(b => b.bookingDate === calSelectedDateStr), false);
       }
     }
 
@@ -2294,21 +1989,19 @@
 
       box.classList.remove('hidden');
       title.textContent = `Reservations on ${dateStr} (${dayBookings.length}/12 Slots Filled)`;
-
       const isDetailer = currentStaffUser?.role === 'detailer';
 
       if (dayBookings.length === 0) {
         list.innerHTML = `<p class="text-xs text-slate-400 py-3 text-center bg-bay-900 rounded-xl border border-slate-800">No vehicles booked on this date. All 12 workshop bay slots available.</p>`;
       } else {
         list.innerHTML = dayBookings.map(b => `
-          <div onclick="openVehicleDetailSheet('${b.id}')" class="p-3.5 rounded-2xl bg-bay-900 border border-slate-800 hover:border-gold-500 flex items-center justify-between cursor-pointer transition shadow-md">
+          <div onclick="window.openVehicleDetailSheet('${b.id}')" class="p-3.5 rounded-2xl bg-bay-900 border border-slate-800 hover:border-gold-500 flex items-center justify-between cursor-pointer transition shadow-md">
             <div class="space-y-0.5">
               <div class="flex items-center gap-2">
                 <span class="text-xs font-mono font-bold text-gold-400">${escapeHtml(b.pin)}</span>
                 <span class="text-xs font-black text-white">${escapeHtml(b.carType)} (${escapeHtml(b.carPlate)})</span>
               </div>
               <p class="text-[11px] text-slate-400">Client: <strong class="text-slate-300">${escapeHtml(b.customerName)}</strong> • Stage: <span class="text-gold-300 font-bold">${b.progressPercent}%</span></p>
-              ${b.estimatedCompletion ? `<p class="text-[10px] text-amber-400 font-mono">⏰ Delivery: ${escapeHtml(b.estimatedCompletion.replace('T', ' '))}</p>` : ''}
             </div>
             <div class="text-right">
               ${!isDetailer ? `<span class="text-xs font-mono font-black text-emerald-400">${(b.depositLE || 0).toLocaleString()} L.E</span>` : ''}
@@ -2317,10 +2010,7 @@
           </div>
         `).join('');
       }
-
-      if (shouldScroll) {
-        box.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      }
+      if (shouldScroll) box.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
 
     function quickBookForSelectedDate() {
@@ -2336,12 +2026,9 @@
       const filteredBookings = bookings.filter(b => {
         if (period === 'all_time') return true;
         if (!b.bookingDate) return true;
-        if (period === 'this_month') {
-          return b.bookingDate.startsWith(`${currentYear}-${currentMonthStr}`);
-        }
+        if (period === 'this_month') return b.bookingDate.startsWith(`${currentYear}-${currentMonthStr}`);
         if (period === 'this_week') {
-          const jobDate = new Date(b.bookingDate);
-          const diffDays = (now - jobDate) / (1000 * 60 * 60 * 24);
+          const diffDays = (now - new Date(b.bookingDate)) / (1000 * 60 * 60 * 24);
           return diffDays >= 0 && diffDays <= 7;
         }
         return true;
@@ -2355,13 +2042,8 @@
         const ch = (b.paymentMethod || 'cash').toLowerCase();
         const amt = Number(b.depositLE) || 0;
         grandTotal += amt;
-        if (channels[ch] !== undefined) {
-          channels[ch] += amt;
-          counts[ch] += 1;
-        } else {
-          channels.cash += amt;
-          counts.cash += 1;
-        }
+        if (channels[ch] !== undefined) { channels[ch] += amt; counts[ch] += 1; }
+        else { channels.cash += amt; counts.cash += 1; }
       });
 
       const setVal = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
@@ -2379,16 +2061,12 @@
       if (tbody) {
         tbody.innerHTML = filteredBookings.slice(0, 10).map(b => `
           <tr class="hover:bg-bay-850/60 transition">
-            <td class="p-3 font-mono text-slate-400">${escapeHtml(b.bookingDate || '2026-09-26')}</td>
+            <td class="p-3 font-mono text-slate-400">${escapeHtml(b.bookingDate)}</td>
             <td class="p-3 font-bold text-white">${escapeHtml(b.customerName)}</td>
             <td class="p-3 text-slate-300">${escapeHtml(b.carType)}</td>
             <td class="p-3 font-mono uppercase text-gold-400 font-bold">${escapeHtml(b.paymentMethod || 'Cash')}</td>
             <td class="p-3 font-mono font-black text-emerald-400">${(b.depositLE || 0).toLocaleString()} L.E</td>
-            <td class="p-3 font-mono">
-              <span class="px-2 py-0.5 rounded text-[10px] font-bold ${b.depositVerified ? 'bg-emerald-500/20 text-emerald-400' : 'bg-amber-500/20 text-amber-400'}">
-                ${b.depositVerified ? 'VERIFIED' : 'PENDING'}
-              </span>
-            </td>
+            <td class="p-3 font-mono"><span class="px-2 py-0.5 rounded text-[10px] font-bold ${b.depositVerified ? 'bg-emerald-500/20 text-emerald-400' : 'bg-amber-500/20 text-amber-400'}">${b.depositVerified ? 'VERIFIED' : 'PENDING'}</span></td>
           </tr>
         `).join('');
       }
@@ -2397,7 +2075,6 @@
     function renderYearlyAnalytics() {
       const year = document.getElementById('analyticsYearSelect')?.value || '2026';
       const yearBookings = bookings.filter(b => b.bookingDate && b.bookingDate.startsWith(year));
-
       const totalGross = yearBookings.reduce((sum, b) => sum + (Number(b.depositLE) || 0), 0);
       const avgDeposit = yearBookings.length > 0 ? Math.round(totalGross / yearBookings.length) : 0;
       const verifiedCount = yearBookings.filter(b => b.depositVerified).length;
@@ -2417,59 +2094,43 @@
         const parts = b.bookingDate.split('-');
         if (parts.length >= 2) {
           const m = parseInt(parts[1], 10) - 1;
-          if (m >= 0 && m < 12) {
-            monthlyTotals[m] += Number(b.depositLE) || 0;
-          }
+          if (m >= 0 && m < 12) monthlyTotals[m] += Number(b.depositLE) || 0;
         }
       });
-
       const maxMonth = Math.max(...monthlyTotals, 1000);
 
-      container.innerHTML = monthlyTotals.map((tot, idx) => {
-        const pct = Math.round((tot / maxMonth) * 100);
-        return `
-          <div class="flex items-center gap-3 text-xs">
-            <span class="w-10 font-mono font-bold text-slate-400">${monthNames[idx]}</span>
-            <div class="flex-1 h-3 bg-bay-950 rounded-full overflow-hidden border border-slate-800">
-              <div class="h-full rounded-full bg-gradient-to-r from-gold-500 to-amber-400 transition-all" style="width: ${pct}%"></div>
-            </div>
-            <span class="w-24 text-right font-mono font-bold text-emerald-400">${tot.toLocaleString()} L.E</span>
+      container.innerHTML = monthlyTotals.map((tot, idx) => `
+        <div class="flex items-center gap-3 text-xs">
+          <span class="w-10 font-mono font-bold text-slate-400">${monthNames[idx]}</span>
+          <div class="flex-1 h-3 bg-bay-950 rounded-full overflow-hidden border border-slate-800">
+            <div class="h-full rounded-full bg-gradient-to-r from-gold-500 to-amber-400" style="width: ${Math.round((tot / maxMonth) * 100)}%"></div>
           </div>
-        `;
-      }).join('');
+          <span class="w-24 text-right font-mono font-bold text-emerald-400">${tot.toLocaleString()} L.E</span>
+        </div>
+      `).join('');
     }
 
     function renderAccountsLists() {
       const isOwner = currentStaffUser?.role === 'owner';
       const ownerBar = document.getElementById('ownerStaffProvisioningBar');
-      if (ownerBar) {
-        ownerBar.style.display = isOwner ? 'block' : 'none';
-      }
+      if (ownerBar) ownerBar.style.display = isOwner ? 'block' : 'none';
 
       const staffBox = document.getElementById('listStaffAccountsContainer');
       if (staffBox) {
         if (!isOwner) {
-          staffBox.innerHTML = `<p class="text-xs text-rose-400 bg-bay-850 p-4 rounded-xl border border-rose-500/30">🔒 Access Restricted: Staff credentials and passwords are visible exclusively to the Workshop Owner (Level 1).</p>`;
+          staffBox.innerHTML = `<p class="text-xs text-rose-400 bg-bay-850 p-4 rounded-xl border border-rose-500/30">🔒 Access Restricted: Staff credentials are visible exclusively to Level 1 Owner.</p>`;
         } else {
           staffBox.innerHTML = staffUsers.map(u => `
             <div class="bg-bay-850 border border-slate-800 p-4 rounded-2xl space-y-2">
               <div class="flex items-center justify-between">
                 <span class="text-xs font-black text-white">${escapeHtml(u.name)}</span>
-                <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded ${u.role === 'owner' ? 'bg-gold-500/20 text-gold-400 border border-gold-500/40' : (u.role === 'manager' ? 'bg-cyan-500/20 text-cyan-400 border border-cyan-500/40' : 'bg-slate-500/20 text-slate-300 border border-slate-500/40')}">
-                  ${u.role.toUpperCase()}
-                </span>
+                <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded ${u.role === 'owner' ? 'bg-gold-500/20 text-gold-400' : 'bg-cyan-500/20 text-cyan-400'}">${u.role.toUpperCase()}</span>
               </div>
               <div class="text-[11px] font-mono text-slate-400 space-y-0.5">
                 <div>User: <strong class="text-slate-200">${escapeHtml(u.username)}</strong></div>
                 <div>Pass: <strong class="text-slate-200">${escapeHtml(u.pass)}</strong></div>
               </div>
-              ${u.role !== 'owner' ? `
-                <div class="pt-2 border-t border-slate-800 flex justify-end">
-                  <button onclick="removeStaffUser('${u.id}')" class="text-[10px] text-rose-400 hover:text-rose-300 font-bold transition">
-                    Revoke Staff Member
-                  </button>
-                </div>
-              ` : ''}
+              ${u.role !== 'owner' ? `<div class="pt-2 border-t border-slate-800 flex justify-end"><button onclick="window.removeStaffUser('${u.id}')" class="text-[10px] text-rose-400 hover:text-rose-300 font-bold">Revoke</button></div>` : ''}
             </div>
           `).join('');
         }
@@ -2478,7 +2139,7 @@
       const custBox = document.getElementById('listCustomerAccountsContainer');
       if (custBox) {
         if (!isOwner) {
-          custBox.innerHTML = `<p class="text-xs text-rose-400 bg-bay-850 p-4 rounded-xl border border-rose-500/30">🔒 Access Restricted: Customer portal passwords are visible exclusively to the Workshop Owner (Level 1).</p>`;
+          custBox.innerHTML = `<p class="text-xs text-rose-400 bg-bay-850 p-4 rounded-xl border border-rose-500/30">🔒 Access Restricted: Customer passwords are visible exclusively to Level 1 Owner.</p>`;
         } else {
           custBox.innerHTML = customerAccounts.map(ca => {
             const job = bookings.find(b => b.id === ca.jobId);
@@ -2493,12 +2154,8 @@
                   <div>Pass: <strong class="text-white">${escapeHtml(ca.pass)}</strong></div>
                 </div>
                 <div class="flex items-center justify-between pt-1">
-                  <button onclick="copyCustomerWhatsAppInvite('${ca.jobId}')" class="px-2.5 py-1 rounded-lg bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 border border-emerald-500/40 text-[10px] font-bold flex items-center gap-1 transition">
-                    <i class="ph-bold ph-whatsapp-logo"></i><span>WhatsApp Details</span>
-                  </button>
-                  <button onclick="removeCustomerAccount('${ca.id}')" class="text-[10px] text-rose-400 hover:text-rose-300 font-bold transition">
-                    Revoke Pass
-                  </button>
+                  <button onclick="window.copyCustomerWhatsAppInvite('${ca.jobId}')" class="px-2.5 py-1 rounded-lg bg-emerald-600/20 text-emerald-300 text-[10px] font-bold flex items-center gap-1"><i class="ph-bold ph-whatsapp-logo"><span>WhatsApp</span></button>
+                  <button onclick="window.removeCustomerAccount('${ca.id}')" class="text-[10px] text-rose-400 font-bold">Revoke</button>
                 </div>
               </div>
             `;
@@ -2525,17 +2182,9 @@
 
     function handleCustomerPhoneLookup(e) {
       e.preventDefault();
-      const phone = (document.getElementById('custSearchPhone')?.value || '').trim();
-      const plate = (document.getElementById('custSearchPlate')?.value || '').trim().toLowerCase();
-      
-      const cleanPhone = phone.replace(/\s+/g, '');
-      const cleanPlate = plate.replace(/\s+/g, '');
-
-      const job = bookings.find(b => 
-        (b.customerPhone && b.customerPhone.replace(/\s+/g, '') === cleanPhone) && 
-        (b.carPlate && b.carPlate.toLowerCase().replace(/\s+/g, '') === cleanPlate)
-      );
-
+      const phone = (document.getElementById('custSearchPhone')?.value || '').trim().replace(/\s+/g, '');
+      const plate = (document.getElementById('custSearchPlate')?.value || '').trim().toLowerCase().replace(/\s+/g, '');
+      const job = bookings.find(b => (b.customerPhone && b.customerPhone.replace(/\s+/g, '') === phone) && (b.carPlate && b.carPlate.toLowerCase().replace(/\s+/g, '') === plate));
       if (job) {
         activeCustomerJob = job;
         renderCustomerSingleDashboard(job);
@@ -2549,7 +2198,6 @@
       e.preventDefault();
       const u = (document.getElementById('custSearchUsername')?.value || '').trim().toLowerCase();
       const p = (document.getElementById('custSearchPass')?.value || '').trim();
-
       const acc = customerAccounts.find(ca => ca.username.toLowerCase() === u && ca.pass === p);
       if (acc) {
         const job = bookings.find(b => b.id === acc.jobId);
@@ -2558,7 +2206,7 @@
           renderCustomerSingleDashboard(job);
           showToast(`Welcome back, ${acc.customerName}!`, 'emerald');
         } else {
-          showToast('Vehicle restoration record could not be found.', 'amber');
+          showToast('Vehicle restoration record not found.', 'amber');
         }
       } else {
         showToast('Invalid customer username or password.', 'rose');
@@ -2578,12 +2226,8 @@
       container.innerHTML = `
         <div class="bg-bay-900 border border-gold-500/40 rounded-3xl p-5 sm:p-10 space-y-8 shadow-2xl">
           <div class="flex items-center justify-between pb-4 border-b border-slate-800">
-            <button onclick="navigateToWelcome()" class="px-3.5 py-1.5 rounded-xl bg-bay-850 hover:bg-bay-800 text-slate-300 hover:text-white text-xs font-bold border border-slate-700 transition flex items-center gap-1.5">
-              <i class="ph-bold ph-arrow-left"></i><span>Exit to Home</span>
-            </button>
-            <button onclick="openCustomerAiAdvisorModal()" class="px-3 py-1.5 rounded-xl bg-gold-500/20 text-gold-300 hover:bg-gold-500/30 text-xs font-bold border border-gold-500/40 flex items-center gap-1.5 transition">
-              <i class="ph-bold ph-sparkle text-gold-400"></i><span>Ask Dr.Care AI Concierge</span>
-            </button>
+            <button onclick="window.navigateToWelcome()" class="px-3.5 py-1.5 rounded-xl bg-bay-850 text-slate-300 text-xs font-bold border border-slate-700 flex items-center gap-1.5"><i class="ph-bold ph-arrow-left"></i><span>Exit</span></button>
+            <button onclick="window.openCustomerAiAdvisorModal()" class="px-3 py-1.5 rounded-xl bg-gold-500/20 text-gold-300 border border-gold-500/40 text-xs font-bold flex items-center gap-1.5"><i class="ph-bold ph-sparkle text-gold-400"></i><span>Ask AI Concierge</span></button>
           </div>
 
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -2592,10 +2236,10 @@
               <h1 class="text-2xl sm:text-3xl font-black text-white">${escapeHtml(job.carType)}</h1>
               <p class="text-xs text-slate-400">Client: <strong class="text-white">${escapeHtml(job.customerName)}</strong> • Plate: <strong class="text-gold-400 font-mono text-sm">${escapeHtml(job.carPlate)}</strong></p>
               <div class="flex items-center gap-3 text-xs pt-1 flex-wrap">
-                <span class="px-2.5 py-1 rounded-xl bg-bay-850 border border-slate-800 text-slate-300 font-medium">🎨 ${escapeHtml(job.carColor)}</span>
-                <span class="px-2.5 py-1 rounded-xl bg-bay-850 border border-slate-800 text-slate-300 font-mono font-medium">🛣️ ${(job.carMileage || 0).toLocaleString()} KM</span>
-                <span class="px-2.5 py-1 rounded-xl bg-bay-850 border border-slate-800 text-slate-300 font-medium">📍 ${escapeHtml(job.province || 'Port Said')}</span>
-                ${job.estimatedCompletion ? `<span class="px-2.5 py-1 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-400 font-mono font-bold">⏰ Est. Delivery: ${escapeHtml(job.estimatedCompletion.replace('T', ' '))}</span>` : ''}
+                <span class="px-2.5 py-1 rounded-xl bg-bay-850 border border-slate-800 text-slate-300">🎨 ${escapeHtml(job.carColor)}</span>
+                <span class="px-2.5 py-1 rounded-xl bg-bay-850 border border-slate-800 text-slate-300 font-mono">🛣️ ${(job.carMileage || 0).toLocaleString()} KM</span>
+                <span class="px-2.5 py-1 rounded-xl bg-bay-850 border border-slate-800 text-slate-300">📍 ${escapeHtml(job.province || 'Port Said')}</span>
+                ${job.estimatedCompletion ? `<span class="px-2.5 py-1 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-400 font-mono font-bold">⏰ Delivery: ${escapeHtml(job.estimatedCompletion.replace('T', ' '))}</span>` : ''}
               </div>
             </div>
 
@@ -2603,7 +2247,7 @@
               <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">Financial Audit (L.E)</span>
               <div class="space-y-1 text-xs">
                 <div class="flex justify-between items-center"><span class="text-slate-400">Advance Deposit:</span><span class="font-mono font-black text-emerald-400 text-sm">${(job.depositLE || 0).toLocaleString()} L.E</span></div>
-                <div class="flex justify-between items-center text-[11px]"><span class="text-slate-400">Deposit Status:</span><span class="font-bold font-mono ${job.depositVerified ? 'text-emerald-400' : 'text-amber-400'}">${job.depositVerified ? '✓ Verified in Account' : '⏳ Pending Audit'}</span></div>
+                <div class="flex justify-between items-center text-[11px]"><span class="text-slate-400">Deposit Status:</span><span class="font-bold font-mono ${job.depositVerified ? 'text-emerald-400' : 'text-amber-400'}">${job.depositVerified ? '✓ Verified' : '⏳ Pending'}</span></div>
               </div>
               <div class="pt-2 border-t border-slate-800 space-y-1 text-xs">
                 <div class="flex justify-between items-center"><span class="text-slate-400">Total Estimation:</span><span class="font-mono font-bold text-white">${totalVal.toLocaleString()} L.E</span></div>
@@ -2613,32 +2257,21 @@
           </div>
 
           <div class="space-y-3 bg-bay-850 p-6 rounded-3xl border border-slate-800">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs">
-              <span class="font-black text-gold-400 uppercase tracking-wider flex items-center gap-2">
-                <i class="ph-bold ph-gear-six animate-spin text-base"></i>
-                <span>${escapeHtml(job.progressStageLabel)}</span>
-              </span>
-              <span class="font-mono font-black text-2xl text-white">${job.progressPercent}% Completed</span>
+            <div class="flex justify-between items-center text-xs">
+              <span class="font-black text-gold-400 uppercase tracking-wider flex items-center gap-2"><i class="ph-bold ph-gear-six animate-spin"></i><span>${escapeHtml(job.progressStageLabel)}</span></span>
+              <span class="font-mono font-black text-2xl text-white">${job.progressPercent}%</span>
             </div>
             <div class="w-full h-4 bg-bay-950 rounded-full overflow-hidden border border-slate-800 p-0.5">
-              <div class="h-full rounded-full bg-gradient-to-r from-amber-500 via-gold-500 to-emerald-400 transition-all shadow-lg shadow-gold-500/30" style="width: ${job.progressPercent}%"></div>
+              <div class="h-full rounded-full bg-gradient-to-r from-amber-500 via-gold-500 to-emerald-400" style="width: ${job.progressPercent}%"></div>
             </div>
-            ${job.detailerNotes ? `
-              <div class="mt-2 p-3 bg-bay-900 rounded-xl border border-slate-800 text-xs text-slate-300">
-                <strong class="text-gold-400 block font-bold mb-0.5">Technician Live Bay Note:</strong>
-                "${escapeHtml(job.detailerNotes)}"
-              </div>
-            ` : ''}
+            ${job.detailerNotes ? `<div class="mt-2 p-3 bg-bay-900 rounded-xl border border-slate-800 text-xs text-slate-300"><strong class="text-gold-400 block font-bold mb-0.5">Technician Note:</strong> "${escapeHtml(job.detailerNotes)}"</div>` : ''}
           </div>
 
           <div class="bg-bay-850 p-5 rounded-2xl border border-slate-800 space-y-3">
             <span class="text-xs font-black text-gold-400 uppercase tracking-wider block">Special Instructions to Detailer</span>
             <div class="flex flex-col sm:flex-row gap-2">
-              <input type="text" id="inputCustomerCommentNote" value="${escapeHtml(job.customerNotes || '')}" placeholder="Write any specific request (e.g. please clean exhaust tips)..." 
-                class="flex-1 border border-slate-700 rounded-xl px-4 py-2.5 text-xs focus:outline-none focus:border-gold-500">
-              <button onclick="handleCustomerSubmitNote('${job.id}')" class="px-5 py-2.5 rounded-xl bg-gold-500 hover:bg-gold-400 text-slate-950 font-black text-xs uppercase tracking-wider transition">
-                Save Request
-              </button>
+              <input type="text" id="inputCustomerCommentNote" value="${escapeHtml(job.customerNotes || '')}" placeholder="Write specific request..." class="flex-1 border border-slate-700 rounded-xl px-4 py-2.5 text-xs">
+              <button onclick="window.handleCustomerSubmitNote('${job.id}')" class="px-5 py-2.5 rounded-xl bg-gold-500 text-slate-950 font-black text-xs uppercase">Save Request</button>
             </div>
           </div>
         </div>
@@ -2648,43 +2281,27 @@
     function handleCustomerSubmitNote(jobId) {
       const job = bookings.find(b => b.id === jobId);
       if (!job) return;
-      const note = document.getElementById('inputCustomerCommentNote')?.value.trim() || '';
-      job.customerNotes = note;
-      if (!job.auditLog) job.auditLog = [];
-      job.auditLog.push(`Customer submitted note: "${note}"`);
+      job.customerNotes = document.getElementById('inputCustomerCommentNote')?.value.trim() || '';
       saveState();
-      showToast('Special request submitted to workshop bay.', 'gold');
+      showToast('Special request submitted.', 'gold');
     }
 
     function populateDetailerSelectors() {
       const detailers = staffUsers.filter(u => u.role === 'detailer' || u.role === 'manager' || u.role === 'owner');
       ['newAssignedDetailer', 'editAssignedDetailer'].forEach(id => {
         const el = document.getElementById(id);
-        if (el) {
-          el.innerHTML = detailers.map(d => `
-            <option value="${d.id}">${escapeHtml(d.name)} (${d.role.toUpperCase()})</option>
-          `).join('');
-        }
+        if (el) el.innerHTML = detailers.map(d => `<option value="${d.id}">${escapeHtml(d.name)} (${d.role.toUpperCase()})</option>`).join('');
       });
     }
 
     function openNewBookingModal(preDate = null) {
       populateDetailerSelectors();
-      const modal = document.getElementById('modalNewBooking');
-      if (modal) modal.classList.remove('hidden');
+      document.getElementById('modalNewBooking')?.classList.remove('hidden');
       const dateInput = document.getElementById('newBookingDate');
-      if (dateInput) {
-        if (preDate) {
-          dateInput.value = preDate;
-        } else if (!dateInput.value) {
-          dateInput.value = new Date().toISOString().split('T')[0];
-        }
-      }
+      if (dateInput) dateInput.value = preDate || new Date().toISOString().split('T')[0];
     }
 
-    function closeNewBookingModal() {
-      document.getElementById('modalNewBooking')?.classList.add('hidden');
-    }
+    function closeNewBookingModal() { document.getElementById('modalNewBooking')?.classList.add('hidden'); }
 
     function handleNewBookingForm(e) {
       e.preventDefault();
@@ -2722,21 +2339,17 @@
       saveState();
       closeNewBookingModal();
       e.target.reset();
-
       filterBookingsGrid();
       if (activeStaffTab === 'calendar') renderCalendar();
       if (activeStaffTab === 'funds') renderFundsCircuit();
-      showToast('Booking Scheduled & Synced with Calendar!', 'gold');
+      showToast('Booking Scheduled Successfully!', 'gold');
     }
 
     function openEditBookingModal(jobId) {
       const job = bookings.find(b => b.id === jobId);
       if (!job) return;
       populateDetailerSelectors();
-
-      const editId = document.getElementById('editJobId');
-      if (editId) editId.value = job.id;
-
+      document.getElementById('editJobId').value = job.id;
       const setVal = (id, v) => { const el = document.getElementById(id); if (el) el.value = v; };
       setVal('editCustName', job.customerName);
       setVal('editCustPhone', job.customerPhone);
@@ -2752,13 +2365,10 @@
       setVal('editDeposit', job.depositLE || 0);
       setVal('editPaymentMethod', job.paymentMethod || 'cash');
       setVal('editCarIssue', job.carIssue);
-
       document.getElementById('modalEditBooking')?.classList.remove('hidden');
     }
 
-    function closeEditBookingModal() {
-      document.getElementById('modalEditBooking')?.classList.add('hidden');
-    }
+    function closeEditBookingModal() { document.getElementById('modalEditBooking')?.classList.add('hidden'); }
 
     function handleEditBookingForm(e) {
       e.preventDefault();
@@ -2783,7 +2393,6 @@
         job.assignedDetailerId = selDet.value;
         job.assignedDetailerName = selDet.options[selDet.selectedIndex]?.text || job.assignedDetailerName;
       }
-
       job.depositLE = Number(document.getElementById('editDeposit')?.value) || 0;
       job.totalPriceLE = Number(document.getElementById('editTotalPrice')?.value) || 0;
 
@@ -2810,33 +2419,22 @@
         saveState();
         closeDeleteConfirmModal();
         switchStaffTab('bookings');
-        showToast('Vehicle booking permanently deleted.', 'rose');
+        showToast('Booking permanently deleted.', 'rose');
       };
       document.getElementById('modalDeleteConfirm')?.classList.remove('hidden');
     }
 
-    function closeDeleteConfirmModal() {
-      pendingDeleteAction = null;
-      document.getElementById('modalDeleteConfirm')?.classList.add('hidden');
-    }
-
-    document.getElementById('btnExecuteDeleteConfirm')?.addEventListener('click', () => {
-      if (pendingDeleteAction) pendingDeleteAction();
-    });
+    function closeDeleteConfirmModal() { pendingDeleteAction = null; document.getElementById('modalDeleteConfirm')?.classList.add('hidden'); }
+    document.getElementById('btnExecuteDeleteConfirm')?.addEventListener('click', () => { if (pendingDeleteAction) pendingDeleteAction(); });
 
     function openCreateCustomerModal(preJob = null) {
       const sel = document.getElementById('custLinkJobSelect');
       if (sel) {
-        sel.innerHTML = bookings.map(b => `
-          <option value="${b.id}" ${b.id === preJob ? 'selected' : ''}>${escapeHtml(b.customerName)} - ${escapeHtml(b.carType)} (${escapeHtml(b.carPlate)})</option>
-        `).join('');
+        sel.innerHTML = bookings.map(b => `<option value="${b.id}" ${b.id === preJob ? 'selected' : ''}>${escapeHtml(b.customerName)} - ${escapeHtml(b.carType)} (${escapeHtml(b.carPlate)})</option>`).join('');
       }
       document.getElementById('modalCreateCustomer')?.classList.remove('hidden');
     }
-
-    function closeCreateCustomerModal() {
-      document.getElementById('modalCreateCustomer')?.classList.add('hidden');
-    }
+    function closeCreateCustomerModal() { document.getElementById('modalCreateCustomer')?.classList.add('hidden'); }
 
     function handleCreateCustomerForm(e) {
       e.preventDefault();
@@ -2847,14 +2445,7 @@
       if (!job || !username || !pass) return;
 
       customerAccounts = customerAccounts.filter(ca => ca.jobId !== jobId);
-      customerAccounts.push({
-        id: 'cacc-' + Date.now(),
-        jobId,
-        customerName: job.customerName,
-        username,
-        pass
-      });
-
+      customerAccounts.push({ id: 'cacc-' + Date.now(), jobId, customerName: job.customerName, username, pass });
       saveState();
       closeCreateCustomerModal();
       e.target.reset();
@@ -2862,32 +2453,15 @@
       showToast('Client Access Pass Generated!', 'emerald');
     }
 
-    function removeCustomerAccount(id) {
-      customerAccounts = customerAccounts.filter(ca => ca.id !== id);
-      saveState();
-      renderAccountsLists();
-      showToast('Customer pass revoked.', 'slate');
-    }
+    function removeCustomerAccount(id) { customerAccounts = customerAccounts.filter(ca => ca.id !== id); saveState(); renderAccountsLists(); showToast('Pass revoked.', 'slate'); }
+    function removeStaffUser(id) { staffUsers = staffUsers.filter(u => u.id !== id); saveState(); renderAccountsLists(); populateDetailerSelectors(); showToast('Staff revoked.', 'slate'); }
 
-    function removeStaffUser(id) {
-      staffUsers = staffUsers.filter(u => u.id !== id);
-      saveState();
-      renderAccountsLists();
-      populateDetailerSelectors();
-      showToast('Staff member revoked.', 'slate');
-    }
-
-    function copyToClipboard(text, successToast = 'Copied to clipboard!') {
+    function copyToClipboard(text, successToast = 'Copied!') {
       const temp = document.createElement('textarea');
       temp.value = text;
       document.body.appendChild(temp);
       temp.select();
-      try {
-        document.execCommand('copy');
-        showToast(successToast, 'emerald');
-      } catch (e) {
-        showToast('Unable to copy text.', 'rose');
-      }
+      try { document.execCommand('copy'); showToast(successToast, 'emerald'); } catch (e) { showToast('Unable to copy.', 'rose'); }
       document.body.removeChild(temp);
     }
 
@@ -2895,18 +2469,12 @@
       const job = bookings.find(b => b.id === jobId);
       const acc = customerAccounts.find(ca => ca.jobId === jobId);
       if (job && acc) {
-        const msg = `السلام عليكم ${job.customerName}،\nرابط متابعة سيارتك ${job.carType} (${job.carPlate}) في مركز Dr.Care:\n${window.location.href.split('#')[0]}\nاسم المستخدم: ${acc.username}\nكلمة السر: ${acc.pass}`;
-        copyToClipboard(msg, 'WhatsApp credentials copied!');
+        copyToClipboard(`مرحباً ${job.customerName}،\nرابط متابعة سيارتك ${job.carType} (${job.carPlate}) في مركز Dr.Care:\n${window.location.href.split('#')[0]}\nاسم المستخدم: ${acc.username}\nكلمة السر: ${acc.pass}`, 'WhatsApp credentials copied!');
       }
     }
 
     function exportDatabaseBackup() {
-      const payload = {
-        meta: { app: "Dr.Care Paint Restoration Centre", timestamp: new Date().toISOString() },
-        staff: staffUsers,
-        bookings: bookings,
-        customerAccounts: customerAccounts
-      };
+      const payload = { meta: { app: "Dr.Care", timestamp: new Date().toISOString() }, staff: staffUsers, bookings: bookings, customerAccounts: customerAccounts };
       const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(payload, null, 2));
       const downloadAnchor = document.createElement('a');
       downloadAnchor.setAttribute("href", dataStr);
@@ -2914,7 +2482,7 @@
       document.body.appendChild(downloadAnchor);
       downloadAnchor.click();
       downloadAnchor.remove();
-      showToast('Complete Database Exported (JSON)!', 'gold');
+      showToast('Database Exported (JSON)!', 'gold');
     }
 
     function importDatabaseBackup(e) {
@@ -2935,12 +2503,8 @@
             renderAccountsLists();
             populateDetailerSelectors();
             showToast(`Database Restored Successfully! (${bookings.length} Vehicles)`, 'emerald');
-          } else {
-            showToast('Invalid backup file format.', 'rose');
-          }
-        } catch (err) {
-          showToast('Failed to parse backup JSON file.', 'rose');
-        }
+          } else { showToast('Invalid file format.', 'rose'); }
+        } catch (err) { showToast('Failed to parse JSON.', 'rose'); }
       };
       reader.readAsText(file);
       e.target.value = '';
@@ -2954,46 +2518,31 @@
 
       openAiDiagnosticModal();
       const body = document.getElementById('aiDiagnosticBody');
-      if (body) {
-        body.innerHTML = `
-          <div class="py-8 text-center space-y-3">
-            <i class="ph-bold ph-sparkle text-3xl text-gold-400 animate-spin mx-auto block"></i>
-            <p class="text-xs font-bold text-gold-300">Dr.Care Gemini AI analyzing paint hardness...</p>
-          </div>
-        `;
-      }
+      if (body) body.innerHTML = `<div class="py-8 text-center text-xs text-gold-400"><i class="ph-bold ph-sparkle animate-spin mr-1"></i> Analyzing paint hardness...</div>`;
 
-      const prompt = `Vehicle: ${carType}, Paint: ${carColor}, Issue: ${issue}. Provide paint restoration plan: compound abrasives, rotary/DA machine steps, estimated bay hours, and fair Egyptian market price estimate in L.E.`;
       try {
-        const reply = await callGemini(prompt, `You are the master technical paint director at Dr.Care Paint Restoration Centre in Egypt.`);
+        const reply = await callGemini(`Vehicle: ${carType}, Paint: ${carColor}, Issue: ${issue}. Provide paint restoration plan: compound abrasives, rotary/DA machine steps, and Egyptian market price in L.E.`);
         if (body) {
           body.innerHTML = `
             <div class="p-4 rounded-2xl bg-bay-850 border border-slate-800 space-y-3">
-              <div class="flex items-center justify-between pb-2 border-b border-slate-800">
-                <span class="font-black text-gold-400 uppercase tracking-wider">${escapeHtml(carType)} - Paint Protocol</span>
-                <span class="text-[10px] font-mono text-slate-400">${escapeHtml(carColor)}</span>
-              </div>
-              <div class="text-xs text-slate-200 leading-relaxed whitespace-pre-wrap">${escapeHtml(reply)}</div>
+              <span class="font-black text-gold-400 uppercase tracking-wider">${escapeHtml(carType)} - Protocol</span>
+              <div class="text-xs text-slate-200 whitespace-pre-wrap leading-relaxed">${escapeHtml(reply)}</div>
               <div class="pt-3 border-t border-slate-800 flex justify-end">
-                <button onclick="appendAiPlanToIssue('${mode}', \`${escapeHtml(reply).replace(/`/g, "\\`")}\`)" class="px-3.5 py-1.5 rounded-xl bg-gold-500 hover:bg-gold-400 text-slate-950 font-bold text-xs">
-                  Append to Defect Notes
-                </button>
+                <button onclick="window.appendAiPlanToIssue('${mode}', \`${escapeHtml(reply).replace(/`/g, "\\`")}\`)" class="px-3 py-1.5 rounded-xl bg-gold-500 text-slate-950 font-bold text-xs">Append Plan</button>
               </div>
             </div>
           `;
         }
-      } catch (err) {
-        if (body) {
-          body.innerHTML = `<p class="text-xs text-slate-300 p-4">Standard Protocol: 1. Decontaminate. 2. Wet sand. 3. Rotary compounding. 4. DA polish. 5. 9H Ceramic coat & IR cure.</p>`;
-        }
+      } catch (e) {
+        if (body) body.innerHTML = `<p class="text-xs text-slate-300 p-4">Standard Protocol: Decontaminate, wet sand, rotary compound, DA polish, 9H ceramic coat.</p>`;
       }
     }
 
     function appendAiPlanToIssue(mode, text) {
       const textarea = document.getElementById(mode === 'edit' ? 'editCarIssue' : 'newCarIssue');
-      if (textarea) textarea.value = (textarea.value.trim() + '\n\n[AI Restoration Plan]:\n' + text).trim();
+      if (textarea) textarea.value = (textarea.value.trim() + '\n\n[AI Plan]:\n' + text).trim();
       closeAiDiagnosticModal();
-      showToast('Plan appended to defect intake.', 'emerald');
+      showToast('Plan appended.', 'emerald');
     }
 
     async function runAiDiagnosticForCurrentSheet(jobId) {
@@ -3001,30 +2550,12 @@
       if (!job) return;
       openAiDiagnosticModal();
       const body = document.getElementById('aiDiagnosticBody');
-      if (body) {
-        body.innerHTML = `
-          <div class="py-8 text-center space-y-3">
-            <i class="ph-bold ph-sparkle text-3xl text-gold-400 animate-spin mx-auto block"></i>
-            <p class="text-xs font-bold text-gold-300">Analyzing ${escapeHtml(job.carType)} paint condition...</p>
-          </div>
-        `;
-      }
-      const prompt = `Vehicle: ${job.carType}, Paint: ${job.carColor}, Current Stage: ${job.progressStageLabel} (${job.progressPercent}%). Defect: ${job.carIssue}.`;
+      if (body) body.innerHTML = `<div class="py-8 text-center text-xs text-gold-400"><i class="ph-bold ph-sparkle animate-spin mr-1"></i> Analyzing...</div>`;
       try {
-        const reply = await callGemini(prompt, `You are the chief detailing inspector at Dr.Care Centre.`);
-        if (body) {
-          body.innerHTML = `
-            <div class="p-4 rounded-2xl bg-bay-850 border border-slate-800 space-y-3">
-              <div class="flex items-center justify-between pb-2 border-b border-slate-800">
-                <span class="font-bold text-gold-400">${escapeHtml(job.carType)} - Quality Assessment</span>
-                <span class="text-[10px] font-mono text-emerald-400">${job.progressPercent}% Active</span>
-              </div>
-              <div class="text-xs text-slate-200 leading-relaxed whitespace-pre-wrap">${escapeHtml(reply)}</div>
-            </div>
-          `;
-        }
+        const reply = await callGemini(`Vehicle: ${job.carType}, Paint: ${job.carColor}, Stage: ${job.progressStageLabel}. Defect: ${job.carIssue}.`);
+        if (body) body.innerHTML = `<div class="p-4 rounded-2xl bg-bay-850 border border-slate-800 text-xs text-slate-200 whitespace-pre-wrap leading-relaxed">${escapeHtml(reply)}</div>`;
       } catch (e) {
-        if (body) body.innerHTML = `<p class="text-xs text-slate-400 p-4">Phase: ${escapeHtml(job.progressStageLabel)}. Recommended: Complete current stage and verify clearcoat thickness.</p>`;
+        if (body) body.innerHTML = `<p class="text-xs text-slate-400 p-4">Phase: ${escapeHtml(job.progressStageLabel)}</p>`;
       }
     }
 
@@ -3044,24 +2575,19 @@
       const lang = document.getElementById('aiLangSelect')?.value || 'en';
       if (!job || !area) return;
 
-      area.innerHTML = `<div class="py-6 text-center text-xs text-gold-400"><i class="ph-bold ph-sparkle animate-spin mr-1"></i> Generating dispatch...</div>`;
-
-      const prompt = `Write a luxury WhatsApp progress dispatch for client ${job.customerName} regarding their ${job.carType} (${job.carPlate}). Progress: ${job.progressPercent}% (${job.progressStageLabel}). Language requested: ${lang}.`;
+      area.innerHTML = `<div class="py-6 text-center text-xs text-gold-400"><i class="ph-bold ph-sparkle animate-spin mr-1"></i> Generating...</div>`;
       try {
-        const reply = await callGemini(prompt, `You represent Dr.Care Paint Restoration Centre in Egypt.`);
+        const reply = await callGemini(`Write a luxury WhatsApp progress dispatch for client ${job.customerName} regarding their ${job.carType} (${job.carPlate}). Progress: ${job.progressPercent}% (${job.progressStageLabel}). Language: ${lang}.`);
         generatedAiWhatsAppMessage = reply.trim();
         area.innerHTML = `<div class="text-xs text-slate-200 whitespace-pre-wrap leading-relaxed">${escapeHtml(generatedAiWhatsAppMessage)}</div>`;
       } catch (e) {
-        generatedAiWhatsAppMessage = `عزيزي ${job.customerName}،\nنود إعلامك أن سيارتك ${job.carType} (${job.carPlate}) وصلت إلى نسبة إنجاز ${job.progressPercent}% (${job.progressStageLabel}) في مركز Dr.Care.`;
+        generatedAiWhatsAppMessage = `عزيزي ${job.customerName}، سيارتك ${job.carType} وصلت لنسبة ${job.progressPercent}% في مركز Dr.Care.`;
         area.innerHTML = `<div class="text-xs text-slate-200 whitespace-pre-wrap leading-relaxed">${escapeHtml(generatedAiWhatsAppMessage)}</div>`;
       }
     }
 
     function copyAiWhatsAppText() {
-      if (generatedAiWhatsAppMessage) {
-        copyToClipboard(generatedAiWhatsAppMessage, 'WhatsApp Dispatch Copied!');
-        closeAiWhatsAppModal();
-      }
+      if (generatedAiWhatsAppMessage) { copyToClipboard(generatedAiWhatsAppMessage, 'WhatsApp Copied!'); closeAiWhatsAppModal(); }
     }
 
     function openCustomerAiAdvisorModal() { document.getElementById('modalCustomerAiConcierge')?.classList.remove('hidden'); }
@@ -3072,15 +2598,12 @@
       const respBox = document.getElementById('custAiResponseArea');
       if (!q || !respBox) return;
 
-      respBox.innerHTML = `<div class="py-4 text-center text-xs text-gold-400"><i class="ph-bold ph-sparkle animate-spin mr-1"></i> Formulating preservation advice...</div>`;
-      const carInfo = activeCustomerJob ? `${activeCustomerJob.carType} (${activeCustomerJob.carColor})` : 'automotive paint';
-
-      const prompt = `Client question: "${q}". Context: Vehicle is ${carInfo}. Explain proper paint maintenance under Egyptian weather conditions.`;
+      respBox.innerHTML = `<div class="py-4 text-center text-xs text-gold-400"><i class="ph-bold ph-sparkle animate-spin mr-1"></i> Formulating advice...</div>`;
       try {
-        const reply = await callGemini(prompt, `You are the luxury concierge at Dr.Care Paint Restoration Centre.`);
-        respBox.innerHTML = `<div class="text-xs text-slate-200 leading-relaxed whitespace-pre-wrap">${escapeHtml(reply)}</div>`;
+        const reply = await callGemini(`Client question: "${q}". Explain proper paint maintenance under Egyptian weather.`);
+        respBox.innerHTML = `<div class="text-xs text-slate-200 whitespace-pre-wrap leading-relaxed">${escapeHtml(reply)}</div>`;
       } catch (e) {
-        respBox.innerHTML = `<div class="text-xs text-slate-300">Always use a two-bucket wash with grit guards, high-GSM microfiber towels, and pH-neutral shampoo to protect your clearcoat.</div>`;
+        respBox.innerHTML = `<div class="text-xs text-slate-300">Always use two-bucket washes with pH-neutral shampoo.</div>`;
       }
     }
 
@@ -3088,25 +2611,74 @@
       const container = document.getElementById('toastContainer');
       if (!container) return;
       const t = document.createElement('div');
-      const colors = {
-        gold: 'bg-bay-900 border-gold-500/50 text-gold-300',
-        emerald: 'bg-bay-900 border-emerald-500/50 text-emerald-300',
-        cyan: 'bg-bay-900 border-cyan-500/50 text-cyan-300',
-        rose: 'bg-bay-900 border-rose-500/50 text-rose-300',
-        slate: 'bg-bay-900 border-slate-700 text-slate-300'
-      };
-      t.className = `p-4 rounded-2xl border shadow-2xl text-xs font-bold flex items-center gap-2.5 transition-all transform duration-300 pointer-events-auto ${colors[color] || colors.gold}`;
+      const colors = { gold: 'bg-bay-900 border-gold-500/50 text-gold-300', emerald: 'bg-bay-900 border-emerald-500/50 text-emerald-300', cyan: 'bg-bay-900 border-cyan-500/50 text-cyan-300', rose: 'bg-bay-900 border-rose-500/50 text-rose-300', slate: 'bg-bay-900 border-slate-700 text-slate-300' };
+      t.className = `p-4 rounded-2xl border shadow-2xl text-xs font-bold flex items-center gap-2.5 transition-all ${colors[color] || colors.gold}`;
       t.innerHTML = `<i class="ph-bold ph-info text-base"></i><span>${escapeHtml(message)}</span>`;
       container.appendChild(t);
-      setTimeout(() => {
-        t.style.opacity = '0';
-        setTimeout(() => t.remove(), 300);
-      }, 3500);
+      setTimeout(() => { t.style.opacity = '0'; setTimeout(() => t.remove(), 300); }, 3500);
     }
 
     function escapeHtml(str) {
       return String(str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
     }
+
+    // Explicit Global Window Bindings
+    window.navigateToWelcome = navigateToWelcome;
+    window.navigateToCustomerPortalGateway = navigateToCustomerPortalGateway;
+    window.switchCustomerLookupMode = switchCustomerLookupMode;
+    window.openStaffLoginModal = openStaffLoginModal;
+    window.closeStaffLoginModal = closeStaffLoginModal;
+    window.handleStaffLoginForm = handleStaffLoginForm;
+    window.logoutStaff = logoutStaff;
+    window.switchStaffTab = switchStaffTab;
+    window.debounceSearchBookings = debounceSearchBookings;
+    window.filterBookingsGrid = filterBookingsGrid;
+    window.openVehicleDetailSheet = openVehicleDetailSheet;
+    window.updateJobProgress = updateJobProgress;
+    window.setJobPhase = setJobPhase;
+    window.saveDetailerNotes = saveDetailerNotes;
+    window.handleCalendarYearJump = handleCalendarYearJump;
+    window.navigateCalendarMonth = navigateCalendarMonth;
+    window.resetCalendarToToday = resetCalendarToToday;
+    window.selectCalendarDate = selectCalendarDate;
+    window.quickBookForSelectedDate = quickBookForSelectedDate;
+    window.renderFundsCircuit = renderFundsCircuit;
+    window.renderYearlyAnalytics = renderYearlyAnalytics;
+    window.renderAccountsLists = renderAccountsLists;
+    window.handleOwnerQuickAddStaff = handleOwnerQuickAddStaff;
+    window.handleCustomerPhoneLookup = handleCustomerPhoneLookup;
+    window.handleCustomerCredsLookup = handleCustomerCredsLookup;
+    window.handleCustomerSubmitNote = handleCustomerSubmitNote;
+    window.openNewBookingModal = openNewBookingModal;
+    window.closeNewBookingModal = closeNewBookingModal;
+    window.handleNewBookingForm = handleNewBookingForm;
+    window.openEditBookingModal = openEditBookingModal;
+    window.closeEditBookingModal = closeEditBookingModal;
+    window.handleEditBookingForm = handleEditBookingForm;
+    window.toggleDepositVerification = toggleDepositVerification;
+    window.confirmDeleteJob = confirmDeleteJob;
+    window.closeDeleteConfirmModal = closeDeleteConfirmModal;
+    window.openCreateCustomerModal = openCreateCustomerModal;
+    window.closeCreateCustomerModal = closeCreateCustomerModal;
+    window.handleCreateCustomerForm = handleCreateCustomerForm;
+    window.removeCustomerAccount = removeCustomerAccount;
+    window.removeStaffUser = removeStaffUser;
+    window.copyCustomerWhatsAppInvite = copyCustomerWhatsAppInvite;
+    window.exportDatabaseBackup = exportDatabaseBackup;
+    window.importDatabaseBackup = importDatabaseBackup;
+    window.runAiDefectSuggestions = runAiDefectSuggestions;
+    window.appendAiPlanToIssue = appendAiPlanToIssue;
+    window.runAiDiagnosticForCurrentSheet = runAiDiagnosticForCurrentSheet;
+    window.openAiDiagnosticModal = openAiDiagnosticModal;
+    window.closeAiDiagnosticModal = closeAiDiagnosticModal;
+    window.openAiWhatsAppModal = openAiWhatsAppModal;
+    window.closeAiWhatsAppModal = closeAiWhatsAppModal;
+    window.generateAiCustomerUpdateMessage = generateAiCustomerUpdateMessage;
+    window.copyAiWhatsAppText = copyAiWhatsAppText;
+    window.openCustomerAiAdvisorModal = openCustomerAiAdvisorModal;
+    window.closeCustomerAiAdvisorModal = closeCustomerAiAdvisorModal;
+    window.askCustomerAiConcierge = askCustomerAiConcierge;
+    window.setAppLanguage = setAppLanguage;
 
     window.addEventListener('DOMContentLoaded', () => {
       hydrateState();
