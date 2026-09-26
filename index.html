@@ -1,0 +1,3170 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dr.Care Paint Restoration Centre — Portal & Back-Office</title>
+  
+  <!-- Typography: Cinzel (Luxury Roman Brand), Inter (Clean UI), JetBrains Mono (Financials & Codes) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Phosphor Icons Library -->
+  <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+  
+  <!-- Tailwind CSS Framework -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            brand: ['Cinzel', 'serif'],
+            mono: ['"JetBrains Mono"', 'monospace']
+          },
+          colors: {
+            gold: {
+              300: '#FDE68A',
+              400: '#F59E0B',
+              500: '#D97706',
+              600: '#B45309',
+              metallic: '#D4AF37'
+            },
+            bay: {
+              950: '#06080D',
+              900: '#0B0F19',
+              850: '#111726',
+              800: '#1A2338',
+              750: '#232E4A'
+            }
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    body {
+      background-color: #06080D;
+      color: #E2E8F0;
+      font-family: 'Inter', sans-serif;
+    }
+    
+    /* Pitch-Black Input Fields with Crisp Pure White Text */
+    input, textarea, select {
+      background-color: #000000 !important;
+      color: #ffffff !important;
+      -webkit-text-fill-color: #ffffff !important;
+      font-weight: 600 !important;
+    }
+
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover, 
+    input:-webkit-autofill:focus,
+    textarea:-webkit-autofill,
+    textarea:-webkit-autofill:hover,
+    textarea:-webkit-autofill:focus,
+    select:-webkit-autofill {
+      -webkit-box-shadow: 0 0 0px 1000px #000000 inset !important;
+      -webkit-text-fill-color: #ffffff !important;
+      color: #ffffff !important;
+      caret-color: #ffffff !important;
+    }
+
+    input::placeholder, textarea::placeholder {
+      color: #64748B !important;
+      -webkit-text-fill-color: #64748B !important;
+      font-weight: 400 !important;
+    }
+
+    /* Range Slider Styling */
+    input[type=range] {
+      -webkit-appearance: none;
+      background: #1E293B;
+      border-radius: 9999px;
+      height: 8px;
+    }
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      height: 22px;
+      width: 22px;
+      border-radius: 50%;
+      background: #F59E0B;
+      cursor: pointer;
+      box-shadow: 0 0 12px rgba(245, 158, 11, 0.85);
+      border: 2px solid #000000;
+    }
+
+    /* 3D Gold Leather Badge & Metallic Bevel Effects */
+    .gold-leather-badge {
+      background: radial-gradient(circle at 35% 30%, #1e283d 0%, #0d1320 65%, #05070c 100%);
+      border: 1.5px solid rgba(212, 175, 55, 0.45);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.85), inset 0 2px 4px rgba(255, 251, 235, 0.2), inset 0 -3px 8px rgba(0, 0, 0, 0.8), 0 0 25px rgba(212, 175, 55, 0.2);
+    }
+
+    .gold-leather-hero {
+      background: radial-gradient(circle at 50% 35%, #1c263c 0%, #0e1526 55%, #05080f 100%);
+      box-shadow: inset 0 0 80px rgba(0, 0, 0, 0.95), 0 25px 60px -15px rgba(0, 0, 0, 0.9), 0 0 45px rgba(212, 175, 55, 0.15);
+    }
+
+    .gold-chiseled-title {
+      font-family: 'Cinzel', serif;
+      background: linear-gradient(180deg, #FFFFFF 0%, #FFF3B0 20%, #F5C542 45%, #D4AF37 60%, #996515 85%, #664104 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 3px 6px rgba(0,0,0,0.95)) drop-shadow(0 -1px 1px rgba(255,255,255,0.4));
+    }
+
+    ::-webkit-scrollbar {
+      width: 7px;
+      height: 7px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0B0F19;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #232E4A;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #D4AF37;
+    }
+
+    @media print {
+      body { background: #ffffff !important; color: #000000 !important; }
+      .no-print { display: none !important; }
+      .print-only { display: block !important; }
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col bg-bay-950 text-slate-100 antialiased selection:bg-gold-500/30 selection:text-gold-300">
+
+  <!-- Master SVG Definitions for 3D Chiseled Gold Fingerprint Logo -->
+  <svg style="position: absolute; width: 0; height: 0; overflow: hidden;" aria-hidden="true">
+    <defs>
+      <linearGradient id="drCareGoldGradient" x1="15%" y1="0%" x2="85%" y2="100%">
+        <stop offset="0%" stop-color="#FFFFFF" />
+        <stop offset="14%" stop-color="#FFF6C7" />
+        <stop offset="30%" stop-color="#FCD34D" />
+        <stop offset="52%" stop-color="#D4AF37" />
+        <stop offset="72%" stop-color="#AA7A1E" />
+        <stop offset="88%" stop-color="#784E0F" />
+        <stop offset="100%" stop-color="#452603" />
+      </linearGradient>
+
+      <filter id="drCare3dEmboss" x="-30%" y="-30%" width="160%" height="160%">
+        <feDropShadow dx="2" dy="3" stdDeviation="2.5" flood-color="#000000" flood-opacity="0.95" />
+        <feDropShadow dx="-1" dy="-1.5" stdDeviation="1.2" flood-color="#FFFDF0" flood-opacity="0.65" />
+      </filter>
+
+      <!-- Master Fingerprint Logo Paths -->
+      <g id="drCareEmblem">
+        <path d="M 45 68 C 45 57, 55 57, 55 68 V 74" fill="none" stroke="url(#drCareGoldGradient)" stroke-width="2.8" stroke-linecap="round" />
+        <path d="M 50 64 V 60" fill="none" stroke="url(#drCareGoldGradient)" stroke-width="2.6" stroke-linecap="round" />
+        <path d="M 40 76 V 67 C 40 50, 60 50, 60 67 V 76" fill="none" stroke="url(#drCareGoldGradient)" stroke-width="2.8" stroke-linecap="round" />
+        <path d="M 35 77 V 64 C 35 44, 65 44, 65 64 V 78" fill="none" stroke="url(#drCareGoldGradient)" stroke-width="2.8" stroke-linecap="round" />
+        <path d="M 30 76 V 61 C 30 38, 70 38, 70 61 V 77" fill="none" stroke="url(#drCareGoldGradient)" stroke-width="2.8" stroke-linecap="round" />
+        <path d="M 25 74 V 58 C 25 32, 75 32, 75 58 V 73" fill="none" stroke="url(#drCareGoldGradient)" stroke-width="2.8" stroke-linecap="round" />
+        <path d="M 22 65 C 21 48, 30 26, 50 26 C 70 26, 79 48, 78 66" fill="none" stroke="url(#drCareGoldGradient)" stroke-width="2.8" stroke-linecap="round" />
+        <path d="M 26 43 C 32 25, 45 20, 50 20 C 56 20, 68 25, 74 43" fill="none" stroke="url(#drCareGoldGradient)" stroke-width="2.8" stroke-linecap="round" />
+        <path d="M 38 17 C 44 15, 56 15, 62 17" fill="none" stroke="url(#drCareGoldGradient)" stroke-width="2.8" stroke-linecap="round" />
+        <path d="M 18 70 C 17 62, 18 54, 20 48" fill="none" stroke="url(#drCareGoldGradient)" stroke-width="2.8" stroke-linecap="round" />
+        <path d="M 80 50 C 82 56, 83 63, 82 71" fill="none" stroke="url(#drCareGoldGradient)" stroke-width="2.8" stroke-linecap="round" />
+        <path d="M 19 78 C 20 83, 23 87, 27 90" fill="none" stroke="url(#drCareGoldGradient)" stroke-width="2.8" stroke-linecap="round" />
+        <path d="M 81 78 C 80 83, 77 87, 73 90" fill="none" stroke="url(#drCareGoldGradient)" stroke-width="2.8" stroke-linecap="round" />
+        <path d="M 33 86 L 50 78 L 67 86" fill="none" stroke="url(#drCareGoldGradient)" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M 38 93 L 50 86 L 62 93" fill="none" stroke="url(#drCareGoldGradient)" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M 43 99 L 50 94 L 57 99" fill="none" stroke="url(#drCareGoldGradient)" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" />
+      </g>
+    </defs>
+  </svg>
+
+  <header class="no-print sticky top-0 z-40 bg-bay-900/90 backdrop-blur-md border-b border-slate-800/80 shadow-2xl">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <div class="flex items-center gap-3.5 cursor-pointer group" onclick="navigateToWelcome()">
+        <div class="w-12 h-12 rounded-2xl gold-leather-badge flex items-center justify-center p-1.5 transition-all duration-300 group-hover:scale-105 group-hover:border-gold-400">
+          <svg viewBox="0 0 100 115" class="w-9 h-9" style="filter: url(#drCare3dEmboss)">
+            <use href="#drCareEmblem" />
+          </svg>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="font-brand text-lg sm:text-xl font-black tracking-wider gold-chiseled-title">DR.CARE</span>
+            <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-gold-500/20 text-gold-400 border border-gold-500/30">CENTRE</span>
+          </div>
+          <p class="text-[8.5px] tracking-[0.25em] font-extrabold text-gold-400 uppercase hidden sm:block" data-i18n="revivingSoul">REVIVING THE AUTOMOTIVE SOUL</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2 sm:gap-4">
+        
+        <!-- BILINGUAL LANGUAGE SELECTOR (AR / EN) -->
+        <div class="flex items-center bg-bay-950 border border-slate-800 rounded-xl p-0.5">
+          <button onclick="setAppLanguage('en')" id="langBtnEn" class="px-2.5 py-1 rounded-lg text-xs font-bold bg-gold-500 text-slate-950 transition">EN</button>
+          <button onclick="setAppLanguage('ar')" id="langBtnAr" class="px-2.5 py-1 rounded-lg text-xs font-bold text-slate-400 hover:text-white transition">عربي</button>
+        </div>
+
+        <nav id="staffNavTabs" class="hidden items-center gap-1 sm:gap-2 mr-2">
+          <!-- + New Booking Tab: STRICTLY VISIBLE ONLY TO LEVEL 1 OWNER & LEVEL 2 MANAGERS -->
+          <button onclick="openNewBookingModal()" id="navBtnNewBooking" class="px-3.5 py-1.5 rounded-xl text-xs font-black transition text-slate-950 bg-gradient-to-r from-amber-400 to-gold-500 hover:from-gold-400 hover:to-amber-500 shadow-md shadow-gold-500/20 flex items-center gap-1.5">
+            <i class="ph-bold ph-plus-circle text-sm"></i>
+            <span data-i18n="newBooking">+ New Booking</span>
+          </button>
+
+          <button onclick="switchStaffTab('bookings')" id="tabBtnBookings" class="px-3 py-1.5 rounded-xl text-xs font-bold transition text-gold-400 bg-gold-500/10 border border-gold-500/30" data-i18n="intakeBay">
+            Intake Bay
+          </button>
+          
+          <button onclick="switchStaffTab('calendar')" id="tabBtnCalendar" class="px-3 py-1.5 rounded-xl text-xs font-bold transition text-slate-400 hover:text-white" data-i18n="calendar">
+            5-Year Calendar
+          </button>
+          
+          <button onclick="switchStaffTab('funds')" id="tabBtnFunds" class="px-3 py-1.5 rounded-xl text-xs font-bold transition text-slate-400 hover:text-white" data-i18n="fundsCircuit">
+            Funds Circuit
+          </button>
+
+          <button onclick="switchStaffTab('analytics')" id="tabBtnAnalytics" class="px-3 py-1.5 rounded-xl text-xs font-bold transition text-slate-400 hover:text-white" data-i18n="yearlyAnalysis">
+            Yearly Analysis
+          </button>
+          
+          <button onclick="switchStaffTab('accounts')" id="tabBtnAccounts" class="px-3 py-1.5 rounded-xl text-xs font-bold transition text-slate-400 hover:text-white" data-i18n="accountsAccess">
+            Accounts & Access
+          </button>
+        </nav>
+
+        <div id="authHeaderContainer" class="flex items-center gap-2 sm:gap-2.5">
+          <button onclick="navigateToCustomerPortalGateway()" class="px-3.5 py-2 rounded-xl bg-bay-850 hover:bg-bay-800 text-gold-400 border border-gold-500/30 font-bold text-xs transition flex items-center gap-1.5 shadow-sm">
+            <i class="ph-bold ph-car"></i>
+            <span data-i18n="customerTracking">Customer Tracking</span>
+          </button>
+          <button onclick="openStaffLoginModal()" id="btnStaffLoginNav" class="px-4 py-2 rounded-xl bg-gold-500 hover:bg-gold-400 text-slate-950 font-black text-xs uppercase tracking-wider transition shadow-lg shadow-gold-500/20 flex items-center gap-2">
+            <i class="ph-bold ph-shield-check"></i>
+            <span data-i18n="staffLogin">Staff Login</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+
+    <!-- WELCOME GATEWAY: CHOOSE CUSTOMER OR STAFF -->
+    <div id="viewWelcomeGateway" class="space-y-8 animate-fadeIn">
+      <div class="relative overflow-hidden rounded-3xl bg-gradient-to-b from-bay-850 via-bay-900 to-bay-950 border border-gold-500/30 p-8 sm:p-14 text-center shadow-2xl">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,_var(--tw-gradient-stops))] from-gold-500/10 via-transparent to-transparent pointer-events-none"></div>
+        
+        <div class="relative z-10 max-w-2xl mx-auto space-y-4">
+          <div class="w-24 h-24 sm:w-28 sm:h-28 mx-auto rounded-3xl gold-leather-hero border-2 border-gold-500/50 flex items-center justify-center p-3 shadow-2xl transition-all duration-500 hover:scale-105 hover:border-gold-400">
+            <svg viewBox="0 0 100 115" class="w-20 h-20 sm:w-24 sm:h-24" style="filter: url(#drCare3dEmboss)">
+              <use href="#drCareEmblem" />
+            </svg>
+          </div>
+
+          <div class="space-y-1">
+            <h1 class="font-brand text-3xl sm:text-5xl font-black tracking-wider gold-chiseled-title uppercase">
+              DR.CARE
+            </h1>
+            <div class="flex items-center justify-center gap-3 pt-1">
+              <span class="h-[1px] w-8 sm:w-16 bg-gradient-to-r from-transparent via-gold-500 to-gold-400"></span>
+              <p class="text-[10px] sm:text-xs text-gold-400 tracking-[0.3em] font-extrabold uppercase" data-i18n="revivingSoul">
+                REVIVING THE AUTOMOTIVE SOUL
+              </p>
+              <span class="h-[1px] w-8 sm:w-16 bg-gradient-to-l from-transparent via-gold-500 to-gold-400"></span>
+            </div>
+          </div>
+          <p class="text-xs text-slate-400 max-w-lg mx-auto leading-relaxed pt-1" data-i18n="welcomeSub">
+            Welcome to Dr.Care Paint Restoration Centre in Port Said, Egypt. Select your portal below to track your ongoing restoration or access internal workshop management.
+          </p>
+        </div>
+
+        <div class="relative z-10 mt-10 grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
+          
+          <div onclick="navigateToCustomerPortalGateway()" class="group bg-bay-900/90 border border-gold-500/30 hover:border-gold-500 rounded-3xl p-8 cursor-pointer transition-all duration-300 shadow-2xl hover:shadow-gold-500/10 hover:-translate-y-1 flex flex-col justify-between text-left space-y-5">
+            <div class="space-y-3">
+              <div class="w-14 h-14 rounded-2xl bg-gold-500/10 border border-gold-500/30 flex items-center justify-center text-gold-400 group-hover:scale-110 transition-transform">
+                <i class="ph-bold ph-car text-3xl"></i>
+              </div>
+              <div>
+                <span class="text-[10px] font-mono font-bold text-gold-400 uppercase tracking-widest block" data-i18n="clientPortal">Client Portal</span>
+                <h3 class="text-xl font-black text-white group-hover:text-gold-300 transition" data-i18n="customerTracking">Customer Vehicle Tracking</h3>
+              </div>
+              <p class="text-xs text-slate-400 leading-relaxed" data-i18n="customerPortalDesc">
+                Track your vehicle's live detailing progress, paint thickness readings, 50% rotary cut, 9H ceramic coating cure, deposit balance in L.E, and send special instructions.
+              </p>
+            </div>
+
+            <div class="pt-4 border-t border-slate-800 flex items-center justify-between text-xs font-bold text-gold-400">
+              <span data-i18n="trackMyCar">Track My Car Live</span>
+              <i class="ph-bold ph-arrow-right text-base group-hover:translate-x-1.5 transition-transform"></i>
+            </div>
+          </div>
+
+          <div onclick="openStaffLoginModal()" class="group bg-bay-900/90 border border-slate-800 hover:border-slate-600 rounded-3xl p-8 cursor-pointer transition-all duration-300 shadow-2xl hover:-translate-y-1 flex flex-col justify-between text-left space-y-5">
+            <div class="space-y-3">
+              <div class="w-14 h-14 rounded-2xl bg-bay-800 border border-slate-700 flex items-center justify-center text-slate-300 group-hover:scale-110 transition-transform">
+                <i class="ph-bold ph-shield-check text-3xl text-gold-400"></i>
+              </div>
+              <div>
+                <span class="text-[10px] font-mono font-bold text-slate-400 uppercase tracking-widest block" data-i18n="internalAccess">Internal Access</span>
+                <h3 class="text-xl font-black text-white group-hover:text-gold-300 transition" data-i18n="staffLoginTitle">Authorized Workshop Staff</h3>
+              </div>
+              <p class="text-xs text-slate-400 leading-relaxed" data-i18n="staffPortalDesc">
+                Dedicated terminal for Owner (Mr. Alfy), Shop Managers, and Master Detailer bays. Manage vehicle intakes, Funds Circuit, 5-year master calendar, and accounts.
+              </p>
+            </div>
+
+            <div class="pt-4 border-t border-slate-800 flex items-center justify-between text-xs font-bold text-slate-300 group-hover:text-white">
+              <span data-i18n="staffLoginBtnText">Staff Login & Workspace</span>
+              <i class="ph-bold ph-lock-key text-base group-hover:translate-x-1.5 transition-transform"></i>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- CUSTOMER LOGIN GATEWAY -->
+    <div id="viewCustomerLogin" class="hidden space-y-8 animate-fadeIn">
+      <div class="max-w-xl mx-auto bg-bay-900/95 backdrop-blur-xl border border-gold-500/30 rounded-3xl p-6 sm:p-8 shadow-2xl">
+        
+        <div class="flex items-center justify-between pb-4 border-b border-slate-800 mb-6">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-2xl bg-gold-500/10 border border-gold-500/30 flex items-center justify-center text-gold-400">
+              <i class="ph-bold ph-car text-xl"></i>
+            </div>
+            <div>
+              <h2 class="text-base font-black text-white uppercase tracking-wider" data-i18n="customerLoginHeader">Customer Live Bay Tracking</h2>
+              <p class="text-[11px] text-slate-400" data-i18n="customerLoginSub">Inspect your personal vehicle's restoration progress and verified deposit.</p>
+            </div>
+          </div>
+          <button onclick="navigateToWelcome()" class="text-xs text-slate-400 hover:text-white flex items-center gap-1 font-bold">
+            <i class="ph-bold ph-arrow-left"></i> <span data-i18n="back">Back</span>
+          </button>
+        </div>
+
+        <div class="flex items-center justify-center p-1 rounded-2xl bg-bay-950 border border-slate-800 mb-6">
+          <button onclick="switchCustomerLookupMode('phone')" id="btnLookupModePhone" class="flex-1 py-2 text-xs font-bold rounded-xl bg-gold-500 text-slate-950 transition" data-i18n="phonePlateTab">
+            Phone & Car Plate
+          </button>
+          <button onclick="switchCustomerLookupMode('credentials')" id="btnLookupModeCreds" class="flex-1 py-2 text-xs font-bold rounded-xl text-slate-400 hover:text-white transition" data-i18n="usernamePassTab">
+            Username & Password
+          </button>
+        </div>
+
+        <form id="formCustomerPhoneLookup" onsubmit="handleCustomerPhoneLookup(event)" class="space-y-4">
+          <div>
+            <label class="block text-xs font-bold text-white mb-1.5 flex items-center gap-1.5">
+              <i class="ph-bold ph-phone text-gold-400"></i> <span data-i18n="mobileLabel">Customer Mobile Phone Number *</span>
+            </label>
+            <input type="text" id="custSearchPhone" required placeholder="e.g. 01012345678"
+              class="w-full border border-slate-700 rounded-2xl px-4 py-3 text-sm focus:outline-none focus:border-gold-500 transition">
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-white mb-1.5 flex items-center gap-1.5">
+              <i class="ph-bold ph-car text-gold-400"></i> <span data-i18n="plateLabel">Car License Plate *</span>
+            </label>
+            <input type="text" id="custSearchPlate" required placeholder="e.g. ط ر ب 1234 or ABC 123"
+              class="w-full border border-slate-700 rounded-2xl px-4 py-3 text-sm focus:outline-none focus:border-gold-500 transition uppercase">
+          </div>
+
+          <button type="submit" class="w-full py-3.5 rounded-2xl bg-gold-500 hover:bg-gold-400 text-slate-950 font-black text-xs uppercase tracking-wider transition shadow-xl shadow-gold-500/20 flex items-center justify-center gap-2">
+            <i class="ph-bold ph-magnifying-glass text-base"></i>
+            <span data-i18n="trackButton">Track My Car's Restoration Live</span>
+          </button>
+        </form>
+
+        <form id="formCustomerCredsLookup" onsubmit="handleCustomerCredsLookup(event)" class="space-y-4 hidden">
+          <div>
+            <label class="block text-xs font-bold text-white mb-1.5 flex items-center gap-1.5">
+              <i class="ph-bold ph-user text-gold-400"></i> <span data-i18n="usernameLabel">Customer Assigned Username *</span>
+            </label>
+            <input type="text" id="custSearchUsername" required placeholder="e.g. robert.h"
+              class="w-full border border-slate-700 rounded-2xl px-4 py-3 text-sm focus:outline-none focus:border-gold-500 transition">
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-white mb-1.5 flex items-center gap-1.5">
+              <i class="ph-bold ph-lock text-gold-400"></i> <span data-i18n="passwordLabel">Password *</span>
+            </label>
+            <input type="password" id="custSearchPass" required placeholder="••••••••"
+              class="w-full border border-slate-700 rounded-2xl px-4 py-3 text-sm focus:outline-none focus:border-gold-500 transition">
+          </div>
+
+          <button type="submit" class="w-full py-3.5 rounded-2xl bg-gold-500 hover:bg-gold-400 text-slate-950 font-black text-xs uppercase tracking-wider transition shadow-xl shadow-gold-500/20 flex items-center justify-center gap-2">
+            <i class="ph-bold ph-sign-in text-base"></i>
+            <span data-i18n="signInButton">Sign In to My Vehicle Dashboard</span>
+          </button>
+        </form>
+
+      </div>
+    </div>
+
+    <!-- CUSTOMER ISOLATED DASHBOARD -->
+    <div id="viewCustomerDashboard" class="hidden max-w-4xl mx-auto space-y-6 animate-fadeIn">
+      <!-- Populated dynamically -->
+    </div>
+
+    <!-- STAFF WORKSPACE BACK-OFFICE -->
+    <div id="viewStaffBackOffice" class="hidden space-y-6 animate-fadeIn">
+      
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-slate-800">
+        <div>
+          <div class="flex items-center gap-2.5">
+            <h2 id="staffRoleHeaderTitle" class="text-xl sm:text-2xl font-black text-white uppercase tracking-wider">
+              Vehicle Booking & Intake Bay
+            </h2>
+            <span id="badgeActiveStaffRole" class="text-[11px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-gold-500/20 text-gold-400 border border-gold-500/40">
+              OWNER (LEVEL 1)
+            </span>
+          </div>
+          <p class="text-xs text-slate-400 mt-1" data-i18n="backofficeSub">
+            Real-time paint restoration workflow, deposit auditing in Egyptian Pounds (L.E), and multi-stage bay tracking.
+          </p>
+        </div>
+
+        <div class="flex items-center gap-2.5 w-full sm:w-auto">
+          <button onclick="exportDatabaseBackup()" id="btnOwnerExportDb" class="px-3 py-2 rounded-xl bg-bay-850 hover:bg-bay-800 text-slate-300 hover:text-white border border-slate-700 text-xs font-bold transition flex items-center gap-1.5" title="Backup all records to JSON file">
+            <i class="ph-bold ph-download-simple"></i>
+            <span class="hidden sm:inline" data-i18n="exportJson">Export JSON</span>
+          </button>
+
+          <label id="btnOwnerImportDbLabel" class="px-3 py-2 rounded-xl bg-bay-850 hover:bg-bay-800 text-slate-300 hover:text-white border border-slate-700 text-xs font-bold transition flex items-center gap-1.5 cursor-pointer" title="Import JSON backup file">
+            <i class="ph-bold ph-upload-simple"></i>
+            <span class="hidden sm:inline" data-i18n="import">Import</span>
+            <input type="file" id="fileDbImport" accept=".json" class="hidden" onchange="importDatabaseBackup(event)">
+          </label>
+
+          <button onclick="openNewBookingModal()" id="btnOpenNewBooking" class="flex-1 sm:flex-initial px-4 py-2.5 rounded-2xl bg-gold-500 hover:bg-gold-400 text-slate-950 font-black text-xs uppercase tracking-wider transition shadow-lg shadow-gold-500/20 flex items-center justify-center gap-2">
+            <i class="ph-bold ph-plus-circle text-base"></i>
+            <span data-i18n="newBookingSheet">+ New Booking Sheet</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- SUB-VIEW 1: BOOKINGS LIST -->
+      <div id="subViewBookings" class="space-y-6">
+        
+        <div id="metricsBarContainer" class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div class="bg-bay-900 border border-slate-800 p-4 rounded-2xl">
+            <span class="text-[11px] text-slate-400 font-bold uppercase tracking-wider block" data-i18n="activeVehicles">Active Vehicles</span>
+            <span id="metricTotalActive" class="text-2xl font-black text-white font-mono mt-1 block">0</span>
+          </div>
+          
+          <div class="bg-bay-900 border border-slate-800 p-4 rounded-2xl">
+            <span class="text-[11px] text-slate-400 font-bold uppercase tracking-wider block" data-i18n="inCoating">In Coating & Curing</span>
+            <span id="metricInCoating" class="text-2xl font-black text-amber-400 font-mono mt-1 block">0</span>
+          </div>
+
+          <div id="metricCardDeposits" class="bg-bay-900 border border-slate-800 p-4 rounded-2xl">
+            <span class="text-[11px] text-slate-400 font-bold uppercase tracking-wider block" data-i18n="securedDeposits">Secured Deposits (L.E)</span>
+            <span id="metricTotalDeposits" class="text-2xl font-black text-emerald-400 font-mono mt-1 block">0 L.E</span>
+          </div>
+
+          <div class="bg-bay-900 border border-slate-800 p-4 rounded-2xl">
+            <span class="text-[11px] text-slate-400 font-bold uppercase tracking-wider block" data-i18n="handoverReady">Handover Ready</span>
+            <span id="metricReadyHandover" class="text-2xl font-black text-gold-400 font-mono mt-1 block">0</span>
+          </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 bg-bay-900 p-3 rounded-2xl border border-slate-800">
+          <div class="relative flex-1">
+            <i class="ph-bold ph-magnifying-glass absolute left-3.5 top-3 text-slate-400"></i>
+            <input type="text" id="inputSearchJobs" oninput="debounceSearchBookings()" placeholder="Quick search customer name, car model, plate, PIN, or mobile phone..."
+              class="w-full pl-10 pr-4 py-2 border border-slate-700 rounded-xl text-xs focus:outline-none focus:border-gold-500 transition">
+          </div>
+
+          <div class="flex items-center gap-2">
+            <select id="selectStageFilter" onchange="filterBookingsGrid()" class="border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
+              <option value="ALL" data-i18n="filterAll">All Restoration Stages</option>
+              <option value="IN_PROGRESS" data-i18n="filterActive">Active In-Bay (Under 100%)</option>
+              <option value="COMPLETED" data-i18n="filterReady">100% Ready for Handover</option>
+              <option value="CERAMIC" data-i18n="filterCeramic">Ceramic & Curing (90%+)</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="gridBookingsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <!-- Dynamically populated -->
+        </div>
+
+        <div id="bookingsEmptyState" class="hidden py-16 text-center space-y-3 bg-bay-900/50 rounded-3xl border border-slate-800/80">
+          <i class="ph-bold ph-car text-4xl text-slate-600 mx-auto"></i>
+          <p class="text-sm font-bold text-slate-300" data-i18n="noJobsFound">No vehicle booking sheets found matching your search.</p>
+          <p class="text-xs text-slate-500" data-i18n="clickNewBooking">Click "+ New Booking" to intake an incoming vehicle.</p>
+        </div>
+      </div>
+
+      <!-- SUB-VIEW 2: 5-YEAR CALENDAR -->
+      <div id="subViewCalendar" class="space-y-6 hidden">
+        <div class="bg-bay-900 border border-slate-800 rounded-3xl p-6 sm:p-8 space-y-6 shadow-2xl">
+          
+          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-slate-800">
+            <div>
+              <h3 class="text-lg font-black text-white uppercase tracking-wider flex items-center gap-2">
+                <span data-i18n="calendarTitle">5-Year Workshop Master Calendar</span>
+                <span class="text-xs font-mono px-2 py-0.5 rounded bg-gold-500/20 text-gold-400 border border-gold-500/30">2026 – 2031</span>
+              </h3>
+              <p class="text-xs text-slate-400 mt-0.5" data-i18n="calendarSub">
+                Maximum capacity: <strong class="text-amber-400 font-mono">12 bookings per day</strong>. Monitored for Level 1 Owner and Level 2 Managers.
+              </p>
+            </div>
+
+            <div class="flex items-center gap-2">
+              <button onclick="navigateCalendarMonth(-1)" class="w-9 h-9 rounded-xl bg-bay-800 hover:bg-bay-750 text-slate-300 hover:text-white flex items-center justify-center border border-slate-700 transition">
+                <i class="ph-bold ph-caret-left"></i>
+              </button>
+              
+              <select id="calYearSelect" onchange="handleCalendarYearJump(this.value)" class="border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-white font-mono font-bold">
+                <option value="2026">2026</option>
+                <option value="2027">2027</option>
+                <option value="2028">2028</option>
+                <option value="2029">2029</option>
+                <option value="2030">2030</option>
+                <option value="2031">2031</option>
+              </select>
+
+              <span id="calCurrentMonthLabel" class="text-xs font-black text-gold-400 uppercase tracking-wider px-2 min-w-[110px] text-center">
+                September 2026
+              </span>
+
+              <button onclick="navigateCalendarMonth(1)" class="w-9 h-9 rounded-xl bg-bay-800 hover:bg-bay-750 text-slate-300 hover:text-white flex items-center justify-center border border-slate-700 transition">
+                <i class="ph-bold ph-caret-right"></i>
+              </button>
+
+              <button onclick="resetCalendarToToday()" class="px-3 py-1.5 rounded-xl bg-bay-800 hover:bg-bay-750 text-slate-300 text-xs font-bold border border-slate-700 transition" data-i18n="today">
+                Today
+              </button>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-7 gap-2 text-center text-xs font-black text-slate-400 uppercase tracking-wider pb-2">
+            <span data-i18n="sun">Sun</span><span data-i18n="mon">Mon</span><span data-i18n="tue">Tue</span><span data-i18n="wed">Wed</span><span data-i18n="thu">Thu</span><span data-i18n="fri">Fri</span><span data-i18n="sat">Sat</span>
+          </div>
+
+          <div id="calDaysGridMatrix" class="grid grid-cols-7 gap-2">
+            <!-- Dynamically generated days -->
+          </div>
+
+          <div id="calDayInspectorBox" class="mt-6 p-5 rounded-2xl bg-bay-850 border border-slate-800 space-y-3 hidden">
+            <div class="flex items-center justify-between">
+              <span id="calSelectedDayTitle" class="text-xs font-black text-gold-400 uppercase tracking-wider">
+                Vehicles Booked on Selected Date
+              </span>
+              <button onclick="quickBookForSelectedDate()" class="px-3 py-1.5 rounded-xl bg-gold-500 hover:bg-gold-400 text-slate-950 font-black text-[11px] uppercase tracking-wider transition" data-i18n="bookForDate">
+                + Book Car for This Date
+              </button>
+            </div>
+            <div id="calSelectedDayCarsList" class="space-y-2">
+              <!-- Dynamically populated list -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SUB-VIEW 3: FUNDS CIRCUIT -->
+      <div id="subViewFunds" class="space-y-6 hidden">
+        <div class="bg-bay-900 border border-slate-800 rounded-3xl p-6 sm:p-8 space-y-6 shadow-2xl">
+          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-slate-800">
+            <div>
+              <h3 class="text-lg font-black text-white uppercase tracking-wider flex items-center gap-2">
+                <span data-i18n="fundsTitle">Funds Circuit & Payment Channels</span>
+                <span class="text-xs font-mono px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">L.E CASH FLOW</span>
+              </h3>
+              <p class="text-xs text-slate-400 mt-0.5" data-i18n="fundsSub">
+                Real-time tracking of secured deposits across Cash, InstaPay, Mobile Wallets, and Card/POS.
+              </p>
+            </div>
+
+            <div class="flex items-center gap-2">
+              <select id="fundsPeriodSelect" onchange="renderFundsCircuit()" class="border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-white font-mono font-bold">
+                <option value="this_month" data-i18n="thisMonth">This Month</option>
+                <option value="this_week" data-i18n="thisWeek">This Week</option>
+                <option value="all_time" data-i18n="allTime">All Time</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="bg-bay-850 border border-slate-800 p-5 rounded-2xl space-y-2">
+              <div class="flex items-center justify-between text-xs">
+                <span class="font-bold text-amber-400 flex items-center gap-1.5"><i class="ph-bold ph-money text-base"></i> <span data-i18n="cashHand">Cash in Hand</span></span>
+                <span id="fundsCashCount" class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-bay-900 text-slate-400">0 tx</span>
+              </div>
+              <div id="fundsCashTotal" class="text-2xl font-black text-white font-mono">0 L.E</div>
+              <p class="text-[10px] text-slate-500" data-i18n="cashDesc">Physical drawer cash verified</p>
+            </div>
+
+            <div class="bg-bay-850 border border-slate-800 p-5 rounded-2xl space-y-2">
+              <div class="flex items-center justify-between text-xs">
+                <span class="font-bold text-cyan-400 flex items-center gap-1.5"><i class="ph-bold ph-lightning text-base"></i> InstaPay</span>
+                <span id="fundsInstaCount" class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-bay-900 text-slate-400">0 tx</span>
+              </div>
+              <div id="fundsInstaTotal" class="text-2xl font-black text-cyan-400 font-mono">0 L.E</div>
+              <p class="text-[10px] text-slate-500" data-i18n="instaDesc">Instant bank transfers verified</p>
+            </div>
+
+            <div class="bg-bay-850 border border-slate-800 p-5 rounded-2xl space-y-2">
+              <div class="flex items-center justify-between text-xs">
+                <span class="font-bold text-rose-400 flex items-center gap-1.5"><i class="ph-bold ph-device-mobile text-base"></i> <span data-i18n="mobileWallet">Mobile Wallet</span></span>
+                <span id="fundsWalletCount" class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-bay-900 text-slate-400">0 tx</span>
+              </div>
+              <div id="fundsWalletTotal" class="text-2xl font-black text-rose-400 font-mono">0 L.E</div>
+              <p class="text-[10px] text-slate-500" data-i18n="walletDesc">Vodafone / Orange / Etisalat Cash</p>
+            </div>
+
+            <div class="bg-bay-850 border border-slate-800 p-5 rounded-2xl space-y-2">
+              <div class="flex items-center justify-between text-xs">
+                <span class="font-bold text-emerald-400 flex items-center gap-1.5"><i class="ph-bold ph-credit-card text-base"></i> <span data-i18n="visaCard">Visa / POS Card</span></span>
+                <span id="fundsCardCount" class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-bay-900 text-slate-400">0 tx</span>
+              </div>
+              <div id="fundsCardTotal" class="text-2xl font-black text-emerald-400 font-mono">0 L.E</div>
+              <p class="text-[10px] text-slate-500" data-i18n="cardDesc">Terminal card payments</p>
+            </div>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-bay-850 border border-gold-500/30 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+            <div>
+              <span class="text-[10px] font-mono font-bold text-gold-400 uppercase tracking-wider block" data-i18n="totalDepositsPeriod">Total Deposits in Selected Period</span>
+              <div id="fundsGrandTotal" class="text-3xl font-black text-white font-mono mt-0.5">0 L.E</div>
+            </div>
+            <div class="text-xs text-slate-400 text-right">
+              <span data-i18n="auditedLE">All 4 payment channels audited in Egyptian Pounds</span>
+            </div>
+          </div>
+
+          <div class="space-y-3">
+            <span class="text-xs font-black text-white uppercase tracking-wider block" data-i18n="recentDepositsLedger">
+              Recent Deposits & Payment Channel Ledger
+            </span>
+            <div class="overflow-x-auto rounded-2xl border border-slate-800">
+              <table class="w-full text-left text-xs">
+                <thead class="bg-bay-850 text-slate-400 uppercase font-mono text-[10px]">
+                  <tr>
+                    <th class="p-3" data-i18n="thDate">Date</th>
+                    <th class="p-3" data-i18n="thCustomer">Customer</th>
+                    <th class="p-3" data-i18n="thVehicle">Vehicle</th>
+                    <th class="p-3" data-i18n="thChannel">Channel</th>
+                    <th class="p-3" data-i18n="thDeposit">Deposit (L.E)</th>
+                    <th class="p-3" data-i18n="thStatus">Status</th>
+                  </tr>
+                </thead>
+                <tbody id="fundsLedgerTableBody" class="divide-y divide-slate-800/80 bg-bay-900/60">
+                  <!-- Dynamically populated -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- SUB-VIEW 4: YEARLY ANALYSIS -->
+      <div id="subViewAnalytics" class="space-y-6 hidden">
+        <div class="bg-bay-900 border border-slate-800 rounded-3xl p-6 sm:p-8 space-y-6 shadow-2xl">
+          
+          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-slate-800">
+            <div>
+              <h3 class="text-lg font-black text-white uppercase tracking-wider flex items-center gap-2">
+                <span data-i18n="analyticsTitle">Yearly Deposit & Revenue Analysis</span>
+                <span class="text-xs font-mono px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">EGYPTIAN POUNDS (L.E)</span>
+              </h3>
+              <p class="text-xs text-slate-400 mt-0.5" data-i18n="analyticsSub">
+                Financial performance, collection ratio, and average job deposit analysis. (Owner & Manager exclusive).
+              </p>
+            </div>
+
+            <div class="flex items-center gap-2">
+              <select id="analyticsYearSelect" onchange="renderYearlyAnalytics()" class="border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-white font-mono font-bold">
+                <option value="2026">Fiscal Year 2026</option>
+                <option value="2027">Fiscal Year 2027</option>
+                <option value="2028">Fiscal Year 2028</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div class="bg-bay-850 border border-slate-800 p-5 rounded-2xl space-y-1">
+              <span class="text-xs text-slate-400 font-bold uppercase tracking-wider" data-i18n="grossDeposits">Gross Deposits Recorded</span>
+              <div id="anaStatGrossDeposits" class="text-2xl font-black text-emerald-400 font-mono">0 L.E</div>
+              <span class="text-[10px] text-slate-500" data-i18n="paidAdvance">Paid advance across active restoration jobs</span>
+            </div>
+
+            <div class="bg-bay-850 border border-slate-800 p-5 rounded-2xl space-y-1">
+              <span class="text-xs text-slate-400 font-bold uppercase tracking-wider" data-i18n="avgDeposit">Average Deposit / Vehicle</span>
+              <div id="anaStatAvgDeposit" class="text-2xl font-black text-gold-400 font-mono">0 L.E</div>
+              <span class="text-[10px] text-slate-500" data-i18n="perIntake">Per intake contract</span>
+            </div>
+
+            <div class="bg-bay-850 border border-slate-800 p-5 rounded-2xl space-y-1">
+              <span class="text-xs text-slate-400 font-bold uppercase tracking-wider" data-i18n="settledRatio">Settled & Verified Ratio</span>
+              <div id="anaStatVerifiedRatio" class="text-2xl font-black text-white font-mono">100%</div>
+              <span class="text-[10px] text-slate-500" data-i18n="managerVerified">Manager verified advance funds</span>
+            </div>
+          </div>
+
+          <div class="bg-bay-850 border border-slate-800 p-6 rounded-2xl space-y-4">
+            <span class="text-xs font-black text-white uppercase tracking-wider block" data-i18n="monthlyVelocity">
+              Monthly Intake Velocity & Deposit Collection (L.E)
+            </span>
+            <div id="anaMonthlyBarsContainer" class="space-y-3">
+              <!-- Dynamically generated bars for 12 months -->
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- SUB-VIEW 5: ACCOUNTS & ACCESS (STRICTLY OWNER LEVEL 1 CAN SEE CREDS/PASSWORDS) -->
+      <div id="subViewAccounts" class="space-y-6 hidden">
+        <div class="bg-bay-900 border border-slate-800 rounded-3xl p-6 sm:p-8 space-y-6 shadow-2xl">
+          
+          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-slate-800">
+            <div>
+              <h3 class="text-lg font-black text-white uppercase tracking-wider flex items-center gap-2">
+                <span data-i18n="accountsTitle">Workshop Team & Customer Access Management</span>
+              </h3>
+              <p class="text-xs text-slate-400 mt-0.5" data-i18n="accountsSub">
+                Owner controls credentials for Owners, Managers, Master Detailers, and private Customer passes.
+              </p>
+            </div>
+          </div>
+
+          <!-- OWNER-ONLY STAFF PROVISIONING BAR -->
+          <div id="ownerStaffProvisioningBar" class="p-5 rounded-3xl bg-bay-850 border-2 border-gold-500/40 shadow-xl space-y-3">
+            <div class="flex items-center justify-between pb-2 border-b border-slate-800/80">
+              <div class="flex items-center gap-2">
+                <span class="w-8 h-8 rounded-xl bg-gold-500/20 text-gold-400 flex items-center justify-center text-base border border-gold-500/30">
+                  <i class="ph-bold ph-shield-star"></i>
+                </span>
+                <div>
+                  <h4 class="text-xs font-black text-white uppercase tracking-wider" data-i18n="ownerConsole">Owner Staff Provisioning Console</h4>
+                  <p class="text-[10px] text-slate-400" data-i18n="ownerConsoleSub">Add workshop managers & technicians directly to your team roster.</p>
+                </div>
+              </div>
+              <span class="text-[9px] font-mono font-bold px-2 py-0.5 rounded bg-gold-500/10 text-gold-400 border border-gold-500/30">
+                MR. ALFY EXCLUSIVE
+              </span>
+            </div>
+
+            <form id="formOwnerQuickAddStaff" onsubmit="handleOwnerQuickAddStaff(event)" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-3 pt-1">
+              <div>
+                <label class="block text-[10px] font-bold text-slate-300 mb-1" data-i18n="staffNameLabel">Staff Full Name *</label>
+                <input type="text" id="barStaffName" required placeholder="e.g. Kareem Adel"
+                  class="w-full border border-slate-700 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-gold-500">
+              </div>
+
+              <div>
+                <label class="block text-[10px] font-bold text-slate-300 mb-1" data-i18n="usernameLabel">Username *</label>
+                <input type="text" id="barStaffUsername" required placeholder="e.g. kareem.adel"
+                  class="w-full border border-slate-700 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-gold-500">
+              </div>
+
+              <div>
+                <label class="block text-[10px] font-bold text-slate-300 mb-1" data-i18n="passwordLabel">Password *</label>
+                <input type="text" id="barStaffPassword" required placeholder="Create password"
+                  class="w-full border border-slate-700 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-gold-500 font-mono">
+              </div>
+
+              <div>
+                <label class="block text-[10px] font-bold text-slate-300 mb-1" data-i18n="authorityTier">Authority Tier *</label>
+                <select id="barStaffRole" class="w-full border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
+                  <option value="manager" data-i18n="tierManager">Level 2: Shop Manager</option>
+                  <option value="detailer" selected data-i18n="tierDetailer">Level 3: Master Detailer</option>
+                  <option value="owner" data-i18n="tierOwner">Level 1: Co-Director</option>
+                </select>
+              </div>
+
+              <div class="flex items-end">
+                <button type="submit" class="w-full py-2 rounded-xl bg-gold-500 hover:bg-gold-400 text-slate-950 font-black text-xs uppercase tracking-wider transition shadow-lg shadow-gold-500/20 flex items-center justify-center gap-1.5">
+                  <i class="ph-bold ph-user-plus text-sm"></i>
+                  <span data-i18n="createStaffBtn">+ Create Staff</span>
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <div class="space-y-3">
+            <span class="text-xs font-black text-gold-400 uppercase tracking-wider flex items-center gap-2">
+              <i class="ph-bold ph-shield-check"></i> <span data-i18n="workshopTeamTitle">Workshop Management & Staff Team</span>
+            </span>
+            <div id="listStaffAccountsContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+
+          <div class="pt-6 border-t border-slate-800 space-y-3">
+            <div class="flex items-center justify-between">
+              <div>
+                <span class="text-xs font-black text-emerald-400 uppercase tracking-wider flex items-center gap-2">
+                  <i class="ph-bold ph-user-circle"></i> <span data-i18n="customerLoginsTitle">Customer Dedicated Portal Logins</span>
+                </span>
+                <p class="text-[11px] text-slate-400" data-i18n="customerLoginsSub">Assigned customer accounts for direct username and password access.</p>
+              </div>
+              <button onclick="openCreateCustomerModal()" class="px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs uppercase tracking-wider transition shadow-lg shadow-emerald-600/20 flex items-center gap-1.5">
+                <i class="ph-bold ph-plus-circle"></i>
+                <span data-i18n="customerLoginBtn">+ Customer Login</span>
+              </button>
+            </div>
+            <div id="listCustomerAccountsContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <!-- VEHICLE DETAIL SHEET VIEW -->
+    <div id="viewSheetDetail" class="hidden space-y-6 animate-fadeIn">
+      <!-- Injected dynamically via openVehicleDetailSheet() -->
+    </div>
+
+  </main>
+
+  <!-- STAFF LOGIN MODAL (STRICTLY SIGN-IN ONLY) -->
+  <div id="modalStaffAuth" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+    <div class="bg-bay-900 border border-gold-500/40 rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl space-y-5">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+        <div class="flex items-center gap-2.5">
+          <div class="w-10 h-10 rounded-2xl gold-leather-badge flex items-center justify-center text-gold-400">
+            <i class="ph-bold ph-shield-check text-xl"></i>
+          </div>
+          <div>
+            <h3 class="text-base font-black text-white uppercase tracking-wider" data-i18n="staffModalHeader">Dr.Care Staff Portal</h3>
+            <p class="text-xs text-slate-400" data-i18n="staffModalSub">Authorized workshop team management</p>
+          </div>
+        </div>
+        <button onclick="closeStaffLoginModal()" class="w-8 h-8 rounded-xl bg-bay-800 hover:bg-bay-750 text-slate-400 hover:text-white flex items-center justify-center transition">
+          <i class="ph-bold ph-x"></i>
+        </button>
+      </div>
+
+      <form id="formStaffLogin" onsubmit="handleStaffLoginForm(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs font-bold text-white mb-1.5 flex items-center gap-1.5">
+            <i class="ph-bold ph-user text-gold-400"></i> <span data-i18n="usernameLabel">Authorized Username *</span>
+          </label>
+          <input type="text" id="staffInputUsername" required placeholder="Enter username"
+            class="w-full border border-slate-700 rounded-2xl px-4 py-3 text-sm focus:outline-none focus:border-gold-500">
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-white mb-1.5 flex items-center gap-1.5">
+            <i class="ph-bold ph-lock text-gold-400"></i> <span data-i18n="passwordLabel">Password *</span>
+          </label>
+          <input type="password" id="staffInputPassword" required placeholder="••••••••"
+            class="w-full border border-slate-700 rounded-2xl px-4 py-3 text-sm focus:outline-none focus:border-gold-500">
+        </div>
+
+        <div id="staffLoginErrorMsg" class="hidden p-3 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-400 text-xs font-bold text-center" data-i18n="loginError">
+          Invalid username or password.
+        </div>
+
+        <div class="pt-2 flex items-center justify-between gap-2">
+          <button type="button" onclick="closeStaffLoginModal()" class="px-4 py-2.5 text-xs font-bold text-slate-400 hover:text-white" data-i18n="cancel">
+            Cancel
+          </button>
+          <button type="submit" class="px-6 py-2.5 rounded-xl bg-gold-500 hover:bg-gold-400 text-slate-950 font-black text-xs uppercase tracking-wider transition shadow-lg shadow-gold-500/20" data-i18n="signInBackOffice">
+            Sign In to Back-Office
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- NEW BOOKING MODAL -->
+  <div id="modalNewBooking" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+    <div class="bg-bay-900 border border-gold-500/40 rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl overflow-y-auto max-h-[90vh] space-y-5">
+      <div class="flex items-center justify-between pb-4 border-b border-slate-800">
+        <div class="flex items-center gap-2.5">
+          <div class="w-10 h-10 rounded-2xl bg-gold-500/10 border border-gold-500/40 flex items-center justify-center text-gold-400">
+            <i class="ph-bold ph-plus-circle text-xl"></i>
+          </div>
+          <div>
+            <h3 class="text-base font-black text-white uppercase tracking-wider" data-i18n="newBookingModalHeader">New Vehicle Booking Sheet</h3>
+            <p class="text-xs text-slate-400" data-i18n="newBookingModalSub">Customer intake, defect assessment, mileage (KM), and deposit in L.E.</p>
+          </div>
+        </div>
+        <button onclick="closeNewBookingModal()" class="w-8 h-8 rounded-xl bg-bay-800 hover:bg-bay-750 text-slate-400 hover:text-white flex items-center justify-center transition">
+          <i class="ph-bold ph-x"></i>
+        </button>
+      </div>
+
+      <form onsubmit="handleNewBookingForm(event)" class="space-y-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-bold text-white mb-1.5" data-i18n="custNameLabel">Customer Full Name *</label>
+            <input type="text" id="newCustName" required placeholder="e.g. Tarek Mansour"
+              class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs focus:outline-none focus:border-gold-500">
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-white mb-1.5" data-i18n="custPhoneLabel">Customer Mobile Phone *</label>
+            <input type="text" id="newCustPhone" required placeholder="e.g. 01098765432"
+              class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs focus:outline-none focus:border-gold-500">
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-white mb-1.5" data-i18n="provinceLabel">Egyptian Province / Governorate *</label>
+            <select id="newProvince" required class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs text-white">
+              <option value="Port Said" selected>Port Said (بورسعيد)</option>
+              <option value="Cairo">Cairo (القاهرة)</option>
+              <option value="Giza">Giza (الجيزة)</option>
+              <option value="Alexandria">Alexandria (الإسكندرية)</option>
+              <option value="Ismailia">Ismailia (الإسماعيلية)</option>
+              <option value="Suez">Suez (السويس)</option>
+              <option value="Sharqia">Sharqia (الشرقية)</option>
+              <option value="Dakahlia">Dakahlia (الدقهلية)</option>
+              <option value="Gharbia">Gharbia (الغربية)</option>
+              <option value="Red Sea">Red Sea (البحر الأحمر)</option>
+              <option value="Other">Other Governorate</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-white mb-1.5" data-i18n="carTypeLabel">Car Type / Model *</label>
+            <input type="text" id="newCarType" required placeholder="e.g. Mercedes-Benz C200"
+              class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs focus:outline-none focus:border-gold-500">
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-white mb-1.5" data-i18n="carPlateLabel">Car License Plate *</label>
+            <input type="text" id="newCarPlate" required placeholder="e.g. ط ر ب 1234 or ABC 123"
+              class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs focus:outline-none focus:border-gold-500 uppercase">
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-white mb-1.5" data-i18n="carColorLabel">Paint Color & Clearcoat *</label>
+            <input type="text" id="newCarColor" required placeholder="e.g. Obsidian Black Metallic"
+              class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs focus:outline-none focus:border-gold-500">
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-white mb-1.5" data-i18n="mileageLabel">Current Odometer Mileage (KM) *</label>
+            <input type="number" id="newCarMileage" required min="0" placeholder="e.g. 45200"
+              class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs focus:outline-none focus:border-gold-500 font-mono">
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-white mb-1.5" data-i18n="bookingDateLabel">Booking Date *</label>
+            <input type="date" id="newBookingDate" required
+              class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs focus:outline-none focus:border-gold-500">
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-white mb-1.5" data-i18n="estCompletionLabel">Estimated Delivery Date & Time *</label>
+            <input type="datetime-local" id="newEstCompletion" required
+              class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs focus:outline-none focus:border-gold-500">
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-white mb-1.5" data-i18n="assignDetailerLabel">Assign Professional Master Detailer *</label>
+            <select id="newAssignedDetailer" required class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs text-white">
+              <!-- Populated dynamically -->
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-white mb-1.5" data-i18n="totalPriceLabel">Total Service Estimation (L.E) *</label>
+            <input type="number" id="newTotalPrice" required min="0" step="100" placeholder="e.g. 12000"
+              class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs focus:outline-none focus:border-gold-500 font-mono">
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-white mb-1.5" data-i18n="depositLabel">Advance Deposit Paid (L.E) *</label>
+            <input type="number" id="newDeposit" required min="0" step="100" placeholder="e.g. 4000"
+              class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs focus:outline-none focus:border-gold-500 font-mono">
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-white mb-1.5" data-i18n="paymentMethodLabel">Payment Method Channel *</label>
+            <select id="newPaymentMethod" required class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs text-white">
+              <option value="cash" data-i18n="cashOption">💵 Cash in Hand</option>
+              <option value="instapay" data-i18n="instaOption">⚡ InstaPay Transfer</option>
+              <option value="wallet" data-i18n="walletOption">📱 Mobile Wallet (Vodafone/Orange Cash)</option>
+              <option value="visa" data-i18n="visaOption">💳 Visa / POS Card</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-white mb-1.5" data-i18n="carIssueLabel">Customer Issue & Defect Assessment *</label>
+          <div class="relative">
+            <textarea id="newCarIssue" rows="3" required placeholder="Describe scratches, heavy swirls, orange peel, water spots, or required ceramic package..."
+              class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs focus:outline-none focus:border-gold-500"></textarea>
+            <button type="button" onclick="runAiDefectSuggestions('new')" class="absolute right-2.5 bottom-2.5 px-3 py-1 rounded-xl bg-gold-500/20 hover:bg-gold-500/30 text-gold-400 border border-gold-500/40 text-[10px] font-black uppercase tracking-wider flex items-center gap-1.5 transition">
+              <i class="ph-bold ph-sparkle"></i>
+              <span data-i18n="aiPolishPlan">AI Polish Plan</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="pt-4 border-t border-slate-800 flex justify-end gap-3">
+          <button type="button" onclick="closeNewBookingModal()" class="px-4 py-2.5 text-xs font-bold text-slate-400 hover:text-white" data-i18n="cancel">
+            Cancel
+          </button>
+          <button type="submit" class="px-6 py-2.5 rounded-xl bg-gold-500 hover:bg-gold-400 text-slate-950 font-black text-xs uppercase tracking-wider transition shadow-lg shadow-gold-500/20" data-i18n="createScheduleBtn">
+            Create Booking & Auto-Schedule
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- EDIT BOOKING MODAL -->
+  <div id="modalEditBooking" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+    <div class="bg-bay-900 border border-cyan-500/40 rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl overflow-y-auto max-h-[90vh] space-y-5">
+      <div class="flex items-center justify-between pb-4 border-b border-slate-800">
+        <div class="flex items-center gap-2.5">
+          <div class="w-10 h-10 rounded-2xl bg-cyan-500/10 border border-cyan-500/40 flex items-center justify-center text-cyan-400">
+            <i class="ph-bold ph-pencil-simple text-xl"></i>
+          </div>
+          <div>
+            <h3 class="text-base font-black text-white uppercase tracking-wider" data-i18n="editModalHeader">Edit Vehicle Booking</h3>
+            <p class="text-xs text-slate-400" data-i18n="editModalSub">Update customer details, paint specifications, mileage, or advance deposit.</p>
+          </div>
+        </div>
+        <button onclick="closeEditBookingModal()" class="w-8 h-8 rounded-xl bg-bay-800 hover:bg-bay-750 text-slate-400 hover:text-white flex items-center justify-center transition">
+          <i class="ph-bold ph-x"></i>
+        </button>
+      </div>
+
+      <form onsubmit="handleEditBookingForm(event)" class="space-y-4">
+        <input type="hidden" id="editJobId">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-bold text-white mb-1.5" data-i18n="custNameLabel">Customer Full Name *</label>
+            <input type="text" id="editCustName" required class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs focus:outline-none focus:border-cyan-500">
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-white mb-1.5" data-i18n="custPhoneLabel">Customer Mobile Phone *</label>
+            <input type="text" id="editCustPhone" required class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs focus:outline-none focus:border-cyan-500">
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-white mb-1.5" data-i18n="provinceLabel">Egyptian Province / Governorate *</label>
+            <select id="editProvince" required class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs text-white">
+              <option value="Port Said">Port Said (بورسعيد)</option>
+              <option value="Cairo">Cairo (القاهرة)</option>
+              <option value="Giza">Giza (الجيزة)</option>
+              <option value="Alexandria">Alexandria (الإسكندرية)</option>
+              <option value="Ismailia">Ismailia (الإسماعيلية)</option>
+              <option value="Suez">Suez (السويس)</option>
+              <option value="Sharqia">Sharqia (الشرقية)</option>
+              <option value="Dakahlia">Dakahlia (الدقهلية)</option>
+              <option value="Gharbia">Gharbia (الغربية)</option>
+              <option value="Red Sea">Red Sea (البحر الأحمر)</option>
+              <option value="Other">Other Governorate</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-white mb-1.5" data-i18n="carTypeLabel">Car Type / Model *</label>
+            <input type="text" id="editCarType" required class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs focus:outline-none focus:border-cyan-500">
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-white mb-1.5" data-i18n="carPlateLabel">Car License Plate *</label>
+            <input type="text" id="editCarPlate" required class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs focus:outline-none focus:border-cyan-500 uppercase">
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-white mb-1.5" data-i18n="carColorLabel">Paint Color & Clearcoat *</label>
+            <input type="text" id="editCarColor" required class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs focus:outline-none focus:border-cyan-500">
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-white mb-1.5" data-i18n="mileageLabel">Current Odometer Mileage (KM) *</label>
+            <input type="number" id="editCarMileage" required min="0" class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs focus:outline-none focus:border-cyan-500 font-mono">
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-white mb-1.5" data-i18n="bookingDateLabel">Booking Date *</label>
+            <input type="date" id="editBookingDate" required class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs focus:outline-none focus:border-cyan-500">
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-white mb-1.5" data-i18n="estCompletionLabel">Estimated Delivery Date & Time *</label>
+            <input type="datetime-local" id="editEstCompletion" required class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs focus:outline-none focus:border-cyan-500">
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-white mb-1.5" data-i18n="assignDetailerLabel">Assigned Master Detailer *</label>
+            <select id="editAssignedDetailer" required class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs text-white">
+              <!-- Populated dynamically -->
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-white mb-1.5" data-i18n="totalPriceLabel">Total Service Estimation (L.E) *</label>
+            <input type="number" id="editTotalPrice" required min="0" step="100" class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs focus:outline-none focus:border-cyan-500 font-mono">
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-white mb-1.5" data-i18n="depositLabel">Advance Deposit (L.E) *</label>
+            <input type="number" id="editDeposit" required min="0" step="100" class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs focus:outline-none focus:border-cyan-500 font-mono">
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-white mb-1.5" data-i18n="paymentMethodLabel">Payment Method Channel *</label>
+            <select id="editPaymentMethod" required class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs text-white">
+              <option value="cash" data-i18n="cashOption">💵 Cash in Hand</option>
+              <option value="instapay" data-i18n="instaOption">⚡ InstaPay Transfer</option>
+              <option value="wallet" data-i18n="walletOption">📱 Mobile Wallet (Vodafone/Orange Cash)</option>
+              <option value="visa" data-i18n="visaOption">💳 Visa / POS Card</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-white mb-1.5" data-i18n="carIssueLabel">Customer Issue & Defect Assessment *</label>
+          <div class="relative">
+            <textarea id="editCarIssue" rows="3" required class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs focus:outline-none focus:border-cyan-500"></textarea>
+            <button type="button" onclick="runAiDefectSuggestions('edit')" class="absolute right-2.5 bottom-2.5 px-3 py-1 rounded-xl bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-400 border border-cyan-500/40 text-[10px] font-black uppercase tracking-wider flex items-center gap-1.5 transition">
+              <i class="ph-bold ph-sparkle"></i>
+              <span data-i18n="aiPolishPlan">AI Polish Plan</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="pt-4 border-t border-slate-800 flex justify-end gap-3">
+          <button type="button" onclick="closeEditBookingModal()" class="px-4 py-2.5 text-xs font-bold text-slate-400 hover:text-white" data-i18n="cancel">
+            Cancel
+          </button>
+          <button type="submit" class="px-6 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-black text-xs uppercase tracking-wider transition shadow-lg shadow-cyan-500/20" data-i18n="saveModifications">
+            Save Modifications
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- CREATE CUSTOMER LOGIN MODAL -->
+  <div id="modalCreateCustomer" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+    <div class="bg-bay-900 border border-emerald-500/40 rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl space-y-5">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+        <h3 class="text-sm font-black text-white uppercase tracking-wider flex items-center gap-2">
+          <i class="ph-bold ph-user-circle text-emerald-400 text-base"></i>
+          <span data-i18n="createCustLoginHeader">Create Customer Portal Login</span>
+        </h3>
+        <button onclick="closeCreateCustomerModal()" class="w-8 h-8 rounded-xl bg-bay-800 text-slate-400 hover:text-white flex items-center justify-center">
+          <i class="ph-bold ph-x"></i>
+        </button>
+      </div>
+
+      <form onsubmit="handleCreateCustomerForm(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs font-bold text-white mb-1.5" data-i18n="linkBookingLabel">Link to Active Vehicle Booking *</label>
+          <select id="custLinkJobSelect" required class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs text-white">
+            <!-- Populated dynamically -->
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-white mb-1.5" data-i18n="custUsernameLabel">Customer Username *</label>
+          <input type="text" id="newCustUsername" required placeholder="e.g. tarek.m" class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs">
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-white mb-1.5" data-i18n="passwordLabel">Password *</label>
+          <input type="text" id="newCustPassword" required placeholder="e.g. pass123" class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs font-mono">
+        </div>
+
+        <div class="pt-2 flex justify-end gap-2">
+          <button type="button" onclick="closeCreateCustomerModal()" class="px-4 py-2 text-xs font-bold text-slate-400 hover:text-white" data-i18n="cancel">Cancel</button>
+          <button type="submit" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs uppercase tracking-wider transition" data-i18n="assignPassBtn">
+            Assign Customer Pass
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- AI DIAGNOSTIC MODAL -->
+  <div id="modalAiDiagnostic" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+    <div class="bg-bay-900 border border-gold-500/40 rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl overflow-y-auto max-h-[90vh] space-y-4">
+      <div class="flex items-center justify-between pb-4 border-b border-slate-800">
+        <div class="flex items-center gap-2.5">
+          <div class="w-10 h-10 rounded-2xl bg-gold-500/10 border border-gold-500/40 flex items-center justify-center text-gold-400">
+            <i class="ph-bold ph-sparkle text-xl"></i>
+          </div>
+          <div>
+            <h3 class="text-base font-black text-white uppercase tracking-wider flex items-center gap-2">
+              <span data-i18n="aiDiagnosticHeader">Dr.Care Gemini Paint Diagnostics</span>
+              <span class="text-[10px] font-mono bg-gold-500/20 text-gold-400 px-2 py-0.5 rounded-full border border-gold-500/40">AI POWERED</span>
+            </h3>
+            <p class="text-xs text-slate-400" data-i18n="aiDiagnosticSub">Compound abrasive mapping, rotary/DA machine steps, and Cairo/Port Said market price estimate.</p>
+          </div>
+        </div>
+        <button onclick="closeAiDiagnosticModal()" class="w-8 h-8 rounded-xl bg-bay-800 hover:bg-bay-750 text-slate-400 hover:text-white flex items-center justify-center transition">
+          <i class="ph-bold ph-x"></i>
+        </button>
+      </div>
+
+      <div id="aiDiagnosticBody" class="space-y-4 text-xs text-slate-200">
+        <!-- Dynamically injected -->
+      </div>
+    </div>
+  </div>
+
+  <!-- AI WHATSAPP MODAL -->
+  <div id="modalAiWhatsApp" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+    <div class="bg-bay-900 border border-emerald-500/40 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl space-y-4">
+      <div class="flex items-center justify-between pb-4 border-b border-slate-800">
+        <div class="flex items-center gap-2.5">
+          <div class="w-10 h-10 rounded-2xl bg-emerald-500/10 border border-emerald-500/40 flex items-center justify-center text-emerald-400">
+            <i class="ph-bold ph-whatsapp-logo text-xl"></i>
+          </div>
+          <div>
+            <h3 class="text-base font-black text-white uppercase tracking-wider" data-i18n="aiWhatsAppHeader">AI WhatsApp Progress Dispatch</h3>
+            <p class="text-xs text-slate-400" data-i18n="aiWhatsAppSub">Generate personalized luxury updates for this client.</p>
+          </div>
+        </div>
+        <button onclick="closeAiWhatsAppModal()" class="w-8 h-8 rounded-xl bg-bay-800 hover:bg-bay-750 text-slate-400 hover:text-white flex items-center justify-center transition">
+          <i class="ph-bold ph-x"></i>
+        </button>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <label class="text-xs font-bold text-white" data-i18n="toneLabel">Tone / Language:</label>
+        <select id="aiLangSelect" onchange="generateAiCustomerUpdateMessage()" class="flex-1 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-white">
+          <option value="ar">Egyptian Arabic (ترحيب احترافي باللهجة المصرية)</option>
+          <option value="en" selected>Executive English (Luxury Detailing Tone)</option>
+          <option value="franco">Franco-Arab (Egyptian Slang & Latin script)</option>
+        </select>
+      </div>
+
+      <div id="aiWhatsAppContentArea" class="bg-bay-850 p-4 rounded-2xl border border-slate-800 space-y-2">
+        <!-- Content injected dynamically -->
+      </div>
+
+      <div class="flex items-center justify-end gap-2 pt-2">
+        <button onclick="closeAiWhatsAppModal()" class="px-4 py-2 text-xs font-bold text-slate-400 hover:text-white" data-i18n="close">Close</button>
+        <button id="btnCopyAiWhatsApp" onclick="copyAiWhatsAppText()" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs uppercase tracking-wider transition shadow-lg shadow-emerald-600/20 flex items-center gap-1.5">
+          <i class="ph-bold ph-copy"></i>
+          <span data-i18n="copyClipboard">Copy to Clipboard</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CUSTOMER AI CONCIERGE MODAL -->
+  <div id="modalCustomerAiConcierge" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+    <div class="bg-bay-900 border border-gold-500/40 rounded-3xl max-w-lg w-full p-6 sm:p-7 shadow-2xl space-y-4">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+        <div class="flex items-center gap-2.5">
+          <div class="w-9 h-9 rounded-2xl bg-gold-500/10 border border-gold-500/40 flex items-center justify-center text-gold-400">
+            <i class="ph-bold ph-sparkle text-lg"></i>
+          </div>
+          <div>
+            <h3 class="text-sm font-black text-white uppercase tracking-wider" data-i18n="aiConciergeHeader">Dr.Care Paint AI Concierge</h3>
+            <p class="text-[11px] text-slate-400" data-i18n="aiConciergeSub">Ask any question regarding scratch maintenance, ceramic wash care & clearcoat safety.</p>
+          </div>
+        </div>
+        <button onclick="closeCustomerAiAdvisorModal()" class="w-8 h-8 rounded-xl bg-bay-800 text-slate-400 hover:text-white flex items-center justify-center">
+          <i class="ph-bold ph-x"></i>
+        </button>
+      </div>
+
+      <div class="space-y-3">
+        <div class="flex gap-2">
+          <input type="text" id="custAiQueryInput" placeholder="e.g. How do I wash my ceramic coated car without causing swirls?" 
+            class="flex-1 border border-slate-700 rounded-2xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-gold-500">
+          <button onclick="askCustomerAiConcierge()" id="btnSubmitCustAi" class="px-4 py-2.5 rounded-2xl bg-gold-500 hover:bg-gold-400 text-slate-950 font-black text-xs uppercase tracking-wider transition" data-i18n="askAiBtn">
+            Ask AI
+          </button>
+        </div>
+
+        <div id="custAiResponseArea" class="bg-bay-850 p-4 rounded-2xl border border-slate-800 min-h-[120px] max-h-[250px] overflow-y-auto text-xs text-slate-300 leading-relaxed" data-i18n="aiDefaultPrompt">
+          💡 Ask about microfiber towels, two-bucket washes, pH neutral shampoos, or water spot removal in Egyptian weather.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DELETE CONFIRMATION MODAL -->
+  <div id="modalDeleteConfirm" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+    <div class="bg-bay-900 border border-rose-500/40 rounded-3xl max-w-sm w-full p-6 text-center space-y-4 shadow-2xl">
+      <div class="w-12 h-12 rounded-2xl bg-rose-500/10 border border-rose-500/30 text-rose-400 flex items-center justify-center mx-auto text-2xl">
+        <i class="ph-bold ph-trash"></i>
+      </div>
+      <div>
+        <h4 class="text-sm font-black text-white uppercase tracking-wider" data-i18n="confirmDeleteHeader">Confirm Deletion</h4>
+        <p id="deleteConfirmPromptText" class="text-xs text-slate-400 mt-1" data-i18n="confirmDeleteSub">Are you sure you want to permanently delete this record?</p>
+      </div>
+      <div class="flex items-center justify-center gap-3 pt-2">
+        <button onclick="closeDeleteConfirmModal()" class="px-4 py-2 text-xs font-bold text-slate-400 hover:text-white" data-i18n="cancel">Cancel</button>
+        <button id="btnExecuteDeleteConfirm" class="px-5 py-2 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-black text-xs uppercase tracking-wider transition" data-i18n="deletePermBtn">
+          Delete Permanently
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toastContainer" class="fixed bottom-6 right-6 z-50 space-y-2 pointer-events-none"></div>
+
+  <script>
+    let currentStaffUser = null;
+    let activeCustomerJob = null;
+    let activeStaffTab = 'bookings';
+    let currentLookupMode = 'phone';
+    let activeDetailJobId = null;
+    let pendingDeleteAction = null;
+    let activeAiJobId = null;
+    let generatedAiWhatsAppMessage = '';
+    let searchDebounceTimer = null;
+    let currentAppLang = 'en';
+    
+    let calCurrentYear = 2026;
+    let calCurrentMonth = 8; // September
+    let calSelectedDateStr = '2026-09-26';
+
+    const TRANSLATIONS = {
+      en: {
+        newBooking: "+ New Booking",
+        intakeBay: "Intake Bay",
+        calendar: "5-Year Calendar",
+        fundsCircuit: "Funds Circuit",
+        yearlyAnalysis: "Yearly Analysis",
+        accountsAccess: "Accounts & Access",
+        customerTracking: "Customer Tracking",
+        staffLogin: "Staff Login",
+        revivingSoul: "REVIVING THE AUTOMOTIVE SOUL",
+        welcomeSub: "Welcome to Dr.Care Paint Restoration Centre in Port Said, Egypt. Select your portal below to track your ongoing restoration or access internal workshop management.",
+        clientPortal: "Client Portal",
+        customerPortalDesc: "Track your vehicle's live detailing progress, paint thickness readings, 50% rotary cut, 9H ceramic coating cure, deposit balance in L.E, and send special instructions.",
+        trackMyCar: "Track My Car Live",
+        internalAccess: "Internal Access",
+        staffLoginTitle: "Authorized Workshop Staff",
+        staffPortalDesc: "Dedicated terminal for Owner (Mr. Alfy), Shop Managers, and Master Detailer bays. Manage vehicle intakes, Funds Circuit, 5-year master calendar, and accounts.",
+        staffLoginBtnText: "Staff Login & Workspace",
+        customerLoginHeader: "Customer Live Bay Tracking",
+        customerLoginSub: "Inspect your personal vehicle's restoration progress and verified deposit.",
+        back: "Back",
+        phonePlateTab: "Phone & Car Plate",
+        usernamePassTab: "Username & Password",
+        mobileLabel: "Customer Mobile Phone Number *",
+        plateLabel: "Car License Plate *",
+        trackButton: "Track My Car's Restoration Live",
+        usernameLabel: "Customer Assigned Username *",
+        passwordLabel: "Password *",
+        signInButton: "Sign In to My Vehicle Dashboard",
+        backofficeSub: "Real-time paint restoration workflow, deposit auditing in Egyptian Pounds (L.E), and multi-stage bay tracking.",
+        exportJson: "Export JSON",
+        import: "Import",
+        newBookingSheet: "+ New Booking Sheet",
+        activeVehicles: "Active Vehicles",
+        inCoating: "In Coating & Curing",
+        securedDeposits: "Secured Deposits (L.E)",
+        handoverReady: "Handover Ready",
+        filterAll: "All Restoration Stages",
+        filterActive: "Active In-Bay (Under 100%)",
+        filterReady: "100% Ready for Handover",
+        filterCeramic: "Ceramic & Curing (90%+)",
+        noJobsFound: "No vehicle booking sheets found matching your search.",
+        clickNewBooking: "Click \"+ New Booking\" to intake an incoming vehicle.",
+        calendarTitle: "5-Year Workshop Master Calendar",
+        calendarSub: "Maximum capacity: 12 bookings per day. Monitored for Level 1 Owner and Level 2 Managers.",
+        today: "Today",
+        sun: "Sun", mon: "Mon", tue: "Tue", wed: "Wed", thu: "Thu", fri: "Fri", sat: "Sat",
+        bookForDate: "+ Book Car for This Date",
+        fundsTitle: "Funds Circuit & Payment Channels",
+        fundsSub: "Real-time tracking of secured deposits across Cash, InstaPay, Mobile Wallets, and Card/POS.",
+        thisMonth: "This Month", thisWeek: "This Week", allTime: "All Time",
+        cashHand: "Cash in Hand", cashDesc: "Physical drawer cash verified",
+        instaDesc: "Instant bank transfers verified",
+        mobileWallet: "Mobile Wallet", walletDesc: "Vodafone / Orange / Etisalat Cash",
+        visaCard: "Visa / POS Card", cardDesc: "Terminal card payments",
+        totalDepositsPeriod: "Total Deposits in Selected Period",
+        auditedLE: "All 4 payment channels audited in Egyptian Pounds",
+        recentDepositsLedger: "Recent Deposits & Payment Channel Ledger",
+        thDate: "Date", thCustomer: "Customer", thVehicle: "Vehicle", thChannel: "Channel", thDeposit: "Deposit (L.E)", thStatus: "Status",
+        analyticsTitle: "Yearly Deposit & Revenue Analysis",
+        analyticsSub: "Financial performance, collection ratio, and average job deposit analysis. (Owner & Manager exclusive).",
+        grossDeposits: "Gross Deposits Recorded", paidAdvance: "Paid advance across active restoration jobs",
+        avgDeposit: "Average Deposit / Vehicle", perIntake: "Per intake contract",
+        settledRatio: "Settled & Verified Ratio", managerVerified: "Manager verified advance funds",
+        monthlyVelocity: "Monthly Intake Velocity & Deposit Collection (L.E)",
+        accountsTitle: "Workshop Team & Customer Access Management",
+        accountsSub: "Owner controls credentials for Owners, Managers, Master Detailers, and private Customer passes.",
+        ownerConsole: "Owner Staff Provisioning Console", ownerConsoleSub: "Add workshop managers & technicians directly to your team roster.",
+        staffNameLabel: "Staff Full Name *", authorityTier: "Authority Tier *",
+        tierManager: "Level 2: Shop Manager", tierDetailer: "Level 3: Master Detailer", tierOwner: "Level 1: Co-Director",
+        createStaffBtn: "+ Create Staff",
+        workshopTeamTitle: "Workshop Management & Staff Team",
+        customerLoginsTitle: "Customer Dedicated Portal Logins",
+        customerLoginsSub: "Assigned customer accounts for direct username and password access.",
+        customerLoginBtn: "+ Customer Login",
+        staffModalHeader: "Dr.Care Staff Portal", staffModalSub: "Authorized workshop team management",
+        loginError: "Invalid username or password.", cancel: "Cancel", signInBackOffice: "Sign In to Back-Office",
+        newBookingModalHeader: "New Vehicle Booking Sheet", newBookingModalSub: "Customer intake, defect assessment, mileage (KM), and deposit in L.E.",
+        custNameLabel: "Customer Full Name *", custPhoneLabel: "Customer Mobile Phone *", provinceLabel: "Egyptian Province / Governorate *",
+        carTypeLabel: "Car Type / Model *", carPlateLabel: "Car License Plate *", carColorLabel: "Paint Color & Clearcoat *",
+        mileageLabel: "Current Odometer Mileage (KM) *", bookingDateLabel: "Booking Date *", estCompletionLabel: "Estimated Delivery Date & Time *",
+        assignDetailerLabel: "Assign Professional Master Detailer *", totalPriceLabel: "Total Service Estimation (L.E) *",
+        depositLabel: "Advance Deposit Paid (L.E) *", paymentMethodLabel: "Payment Method Channel *",
+        cashOption: "💵 Cash in Hand", instaOption: "⚡ InstaPay Transfer", walletOption: "📱 Mobile Wallet (Vodafone/Orange Cash)", visaOption: "💳 Visa / POS Card",
+        carIssueLabel: "Customer Issue & Defect Assessment *", aiPolishPlan: "AI Polish Plan", createScheduleBtn: "Create Booking & Auto-Schedule",
+        editModalHeader: "Edit Vehicle Booking", editModalSub: "Update customer details, paint specifications, mileage, or advance deposit.",
+        saveModifications: "Save Modifications",
+        createCustLoginHeader: "Create Customer Portal Login", linkBookingLabel: "Link to Active Vehicle Booking *", custUsernameLabel: "Customer Username *",
+        assignPassBtn: "Assign Customer Pass",
+        aiDiagnosticHeader: "Dr.Care Gemini Paint Diagnostics", aiDiagnosticSub: "Compound abrasive mapping, rotary/DA machine steps, and Cairo/Port Said market price estimate.",
+        aiWhatsAppHeader: "AI WhatsApp Progress Dispatch", aiWhatsAppSub: "Generate personalized luxury updates for this client.",
+        toneLabel: "Tone / Language:", close: "Close", copyClipboard: "Copy to Clipboard",
+        aiConciergeHeader: "Dr.Care Paint AI Concierge", aiConciergeSub: "Ask any question regarding scratch maintenance, ceramic wash care & clearcoat safety.",
+        askAiBtn: "Ask AI", aiDefaultPrompt: "💡 Ask about microfiber towels, two-bucket washes, pH neutral shampoos, or water spot removal in Egyptian weather.",
+        confirmDeleteHeader: "Confirm Deletion", confirmDeleteSub: "Are you sure you want to permanently delete this record?", deletePermBtn: "Delete Permanently"
+      },
+      ar: {
+        newBooking: "+ حجز جديد",
+        intakeBay: "ساحة الاستقبال",
+        calendar: "التقويم (5 سنوات)",
+        fundsCircuit: "دورة الأموال",
+        yearlyAnalysis: "التحليل السنوي",
+        accountsAccess: "الحسابات والصلاحيات",
+        customerTracking: "متابعة العميل",
+        staffLogin: "تسجيل موظف",
+        revivingSoul: "إحياء الروح الرياضية للسيارات",
+        welcomeSub: "مرحباً بكم في مركز Dr.Care لإصلاح ودهان السيارات في بورسعيد، مصر. اختر بوابتك أدناه لمتابعة صيانة سيارتك أو إدارة الورشة.",
+        clientPortal: "بوابة العملاء",
+        customerPortalDesc: "تابع تقدم أعمال طلاء سيارتك، قياسات السمك، مرحلة الخدوش، طلاء النانو سيراميك، والرصيد المتبقي.",
+        trackMyCar: "تابع سيارتي مباشرة",
+        internalAccess: "الوصول الداخلي",
+        staffLoginTitle: "طاقم العمل المصرح له",
+        staffPortalDesc: "محطة مخصصة للمالك (أسترالفي)، ومديري الصالة، وفنيي الطلاء. إدارة الحجوزات، دورة الأموال، التقويم، والحسابات.",
+        staffLoginBtnText: "تسجيل دخول الموظفين",
+        customerLoginHeader: "تتبع ساحة العميل المباشرة",
+        customerLoginSub: "تحقق من تقدم أعمال صيانة سيارتك ومبلغ العربون المسجل.",
+        back: "رجوع",
+        phonePlateTab: "الهاتف ورقم اللوحة",
+        usernamePassTab: "اسم المستخدم وكلمة السر",
+        mobileLabel: "رقم موبايل العميل *",
+        plateLabel: "رقم لوحة السيارة *",
+        trackButton: "تتبع استعادة سيارتي مباشرة",
+        usernameLabel: "اسم المستخدم المخصص للعميل *",
+        passwordLabel: "كلمة المرور *",
+        signInButton: "تسجيل الدخول إلى لوحة سيارتي",
+        backofficeSub: "تدفق أعمال دهان السيارات الفوري، مراجعة العربونات بالجنية المصري، ومتابعة المراحل.",
+        exportJson: "تصدير JSON",
+        import: "استيراد",
+        newBookingSheet: "+ ورقة حجز جديدة",
+        activeVehicles: "السيارات النشطة",
+        inCoating: "في مرحلة الطلاء والعلاج",
+        securedDeposits: "العربونات المؤكدة (ج.م)",
+        handoverReady: "جاهزة للتسليم",
+        filterAll: "جميع مراحل الاستعادة",
+        filterActive: "نشطة في الساحة (أقل من 100%)",
+        filterReady: "جاهزة للتسليم (100%)",
+        filterCeramic: "سيراميك ومعالجة (90%+)",
+        noJobsFound: "لا توجد أوراق حجز مطابقة لبحثك.",
+        clickNewBooking: "اضغط على \"+ حجز جديد\" لاستقبال سيارة جديدة.",
+        calendarTitle: "تقويم ورشة العمل الرئيسي (5 سنوات)",
+        calendarSub: "القدرة الاستيعابية القصوى: 12 حجز يومياً. لمتابعة مالك المستوى 1 ومديري المستوى 2.",
+        today: "اليوم",
+        sun: "أحد", mon: "إثنين", tue: "ثلاثاء", wed: "أربعاء", thu: "خميس", fri: "جمعة", sat: "سبت",
+        bookForDate: "+ احجز سيارة لهذا التاريخ",
+        fundsTitle: "دورة الأموال وقنوات الدفع",
+        fundsSub: "تتبع فوري للعربونات المؤكدة عبر الكاش، انستا باي، المحافظ الإلكترونية، وبطاقات الدفع.",
+        thisMonth: "هذا الشهر", thisWeek: "هذا الأسبوع", allTime: "كل الوقت",
+        cashHand: "النقد بالدرج", cashDesc: "النقد اليدوي المؤكد",
+        instaDesc: "تحويلات بنكية فورية مؤكدة",
+        mobileWallet: "محفظة ذكية", walletDesc: "فودافون / أورانج / اتصالات كاش",
+        visaCard: "فيزا / نقاط بيع POS", cardDesc: "مدفوعات البطاقات البنكية",
+        totalDepositsPeriod: "إجمالي العربونات في الفترة المختارة",
+        auditedLE: "تم تدقيق جميع قنوات الدفع بالجنية المصري",
+        recentDepositsLedger: "سجل العربونات وقنوات الدفع الحديثة",
+        thDate: "التاريخ", thCustomer: "العميل", thVehicle: "السيارة", thChannel: "القناة", thDeposit: "العربون (ج.م)", thStatus: "الحالة",
+        analyticsTitle: "تحليل العربونات والإيرادات السنوية",
+        analyticsSub: "الأداء المالي، نسبة التحصيل، وتحليل متوسط عربون الوظيفة (حصري للمالك والمدير).",
+        grossDeposits: "إجمالي العربونات المسجلة", paidAdvance: "مقدم مدفوع عبر وظائف الاستعادة النشطة",
+        avgDeposit: "متوسط العربون / السيارة", perIntake: "لكل عقد استلام",
+        settledRatio: "نسبة التسوية والتحقق", managerVerified: "الأموال المتقدمة المدققة من المدير",
+        monthlyVelocity: "سرعة الاستقبال الشهرية وتحصيل العربونات (ج.م)",
+        accountsTitle: "إدارة فريق الورشة وصلاحيات العملاء",
+        accountsSub: "المالك يتحكم باعتمادات المالكين، المديرين، وفنيي الطلاء ومرور العملاء الخاص.",
+        ownerConsole: "لوحة تحكم إعداد موظفي المالك", ownerConsoleSub: "أضف مديري الورشة والفنيين مباشرة إلى جدول فريقك.",
+        staffNameLabel: "اسم الموظف بالكامل *", authorityTier: "مستوى الصلاحية *",
+        tierManager: "المستوى 2: مدير الصالة", tierDetailer: "المستوى 3: فني طلاء أول", tierOwner: "المستوى 1: شريك مدير",
+        createStaffBtn: "+ إنشاء موظف",
+        workshopTeamTitle: "إدارة الورشة وفريق العمل",
+        customerLoginsTitle: "حسابات دخول عملاء ورشة العمل",
+        customerLoginsSub: "حسابات العملاء المخصصة للدخول المباشر باسم المستخدم وكلمة المرور.",
+        customerLoginBtn: "+ دخول العميل",
+        staffModalHeader: "بوابة موظفي Dr.Care", staffModalSub: "إدارة فريق العمل المصرح له",
+        loginError: "اسم المستخدم أو كلمة المرور غير صحيحة.", cancel: "إلغاء", signInBackOffice: "تسجيل الدخول للإدارة الخلفية",
+        newBookingModalHeader: "ورقة حجز مركبة جديدة", newBookingModalSub: "استقبال العميل، تقييم العيوب، عداد الكيلومترات، والعربون بالجنية المصري.",
+        custNameLabel: "اسم العميل بالكامل *", custPhoneLabel: "موبايل العميل *", provinceLabel: "المحافظة / الإقليم *",
+        carTypeLabel: "نوع وطراز السيارة *", carPlateLabel: "رقم لوحة السيارة *", carColorLabel: "لون الطلاء والطبقة الشفافة *",
+        mileageLabel: "عداد الكيلومترات الحالي (KM) *", bookingDateLabel: "تاريخ الحجز *", estCompletionLabel: "وقت وتاريخ التسليم المتوقع *",
+        assignDetailerLabel: "تعيين فني طلاء معتمد *", totalPriceLabel: "تقدير الخدمة الإجمالي (ج.م) *",
+        depositLabel: "العربون المدفوع مقدماً (ج.م) *", paymentMethodLabel: "قناة طريقة الدفع *",
+        cashOption: "💵 نقداً باليد", instaOption: "⚡ تحويل انستا باي", walletOption: "📱 محفظة ذكية (فودافون/أورانج كاش)", visaOption: "💳 فيزا / بطاقة POS",
+        carIssueLabel: "مشكلة العميل وتقييم العيوب *", aiPolishPlan: "خطة تلميع الذكاء الاصطناعي", createScheduleBtn: "إنشاء الحجز والجدولة التلقائية",
+        editModalHeader: "تعديل حجز السيارة", editModalSub: "تحديث بيانات العميل، مواصفات الطلاء، العداد، أو العربون المقدم.",
+        saveModifications: "حفظ التعديلات",
+        createCustLoginHeader: "إنشاء دخول بوابة العميل", linkBookingLabel: "الربط بحجز سيارة نشط *", custUsernameLabel: "اسم مستخدم العميل *",
+        assignPassBtn: "تعيين تصريح العميل",
+        aiDiagnosticHeader: "تشخيص طلاء Dr.Care بالذكاء الاصطناعي", aiDiagnosticSub: "خريطة المواد الكاشطة، خطوات ماكينات التلميع، وتقدير السعر في بورسعيد/القاهرة.",
+        aiWhatsAppHeader: "إرسال تحديث التقدم عبر واتساب الذكي", aiWhatsAppSub: "إنشاء تحديثات فاخرة مخصصة لهذا العميل.",
+        toneLabel: "النبرة / اللغة:", close: "إغلاق", copyClipboard: "نسخ إلى الحافظة",
+        aiConciergeHeader: "مساعد الطلاء الذكي Dr.Care", aiConciergeSub: "اسأل عن صيانة الخدوش، غسيل النانو سيراميك وسلامة الطبقة الشفافة.",
+        aiDefaultPrompt: "💡 اسأل عن مناشف المايكروفايبر، غسيل الدلوين، شامبو متعادل الحموضة، أو إزالة بقع الماء.",
+        askAiBtn: "اسأل الذكاء الاصطناعي",
+        confirmDeleteHeader: "تأكيد الحذف", confirmDeleteSub: "هل أنت متأكد من رغبتك في حذف هذا السجل نهائياً؟", deletePermBtn: "حذف نهائي"
+      }
+    };
+
+    function setAppLanguage(lang) {
+      currentAppLang = lang;
+      const btnEn = document.getElementById('langBtnEn');
+      const btnAr = document.getElementById('langBtnAr');
+      if (lang === 'ar') {
+        if (btnEn) btnEn.className = 'px-2.5 py-1 rounded-lg text-xs font-bold text-slate-400 hover:text-white transition';
+        if (btnAr) btnAr.className = 'px-2.5 py-1 rounded-lg text-xs font-bold bg-gold-500 text-slate-950 transition';
+        document.documentElement.setAttribute('dir', 'rtl');
+      } else {
+        if (btnEn) btnEn.className = 'px-2.5 py-1 rounded-lg text-xs font-bold bg-gold-500 text-slate-950 transition';
+        if (btnAr) btnAr.className = 'px-2.5 py-1 rounded-lg text-xs font-bold text-slate-400 hover:text-white transition';
+        document.documentElement.setAttribute('dir', 'ltr');
+      }
+      applyTranslations();
+    }
+
+    function applyTranslations() {
+      const dict = TRANSLATIONS[currentAppLang] || TRANSLATIONS.en;
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (dict[key]) {
+          el.textContent = dict[key];
+        }
+      });
+    }
+
+    const RESTORATION_PHASES = [
+      { percent: 10, label: "Phase 1: Paint Depth Gauge & Defect Mapping" },
+      { percent: 20, label: "Phase 2: Iron Falloff & Clay Bar Decon" },
+      { percent: 35, label: "Phase 3: Wet Sanding 2000/3000 Grit Scratch Leveling" },
+      { percent: 50, label: "Phase 4: 50% Heavy Scratch Rotary Cut" },
+      { percent: 65, label: "Phase 5: Dual-Action Swirl Mark Refining" },
+      { percent: 75, label: "Phase 6: Mirror Gloss Jeweling Polish" },
+      { percent: 82, label: "Phase 7: IPA Surface Wipe Prep" },
+      { percent: 90, label: "Phase 8: 9H Ceramic Base Coat Application" },
+      { percent: 94, label: "Phase 9: Hydrophobic Top Coat Application" },
+      { percent: 97, label: "Phase 10: Infrared (IR) Lamp Heat Curing" },
+      { percent: 100, label: "Phase 11: Final Inspection & Customer Handover" }
+    ];
+
+    const DEFAULT_STAFF_USERS = [
+      { id: 'usr-1', username: 'Mr.Alfy', pass: 'Mr.1000y', name: 'Mr. Alfy', role: 'owner', title: 'Workshop Owner & Director' },
+      { id: 'usr-2', username: 'ahmed.mohsen', pass: '123456', name: 'Ahmed Mohsen', role: 'manager', title: 'Senior Shop Manager' },
+      { id: 'usr-3', username: 'mahmoud.detail', pass: '123456', name: 'Mahmoud Sayed', role: 'detailer', title: 'Master Paint Detailer' }
+    ];
+
+    const DEFAULT_SAMPLE_BOOKINGS = [
+      {
+        id: 'job-101',
+        pin: 'DR-7821',
+        customerName: 'Tarek Mansour',
+        customerPhone: '01012345678',
+        province: 'Port Said',
+        carType: 'Mercedes-Benz C200',
+        carPlate: 'ط ر ب 1234',
+        carColor: 'Obsidian Black Metallic',
+        carMileage: 46200,
+        bookingDate: '2026-09-26',
+        estimatedCompletion: '2026-09-30T18:00',
+        assignedDetailerId: 'usr-3',
+        assignedDetailerName: 'Mahmoud Sayed',
+        totalPriceLE: 16500,
+        depositLE: 6000,
+        paymentMethod: 'instapay',
+        depositVerified: true,
+        carIssue: 'Heavy car-wash swirl marks, bird-dropping acid etching on bonnet, requires full multi-stage correction & 9H ceramic coating.',
+        customerNotes: 'Please pay extra attention to front bumper stone chips and piano black B-pillars.',
+        progressPercent: 50,
+        progressStageLabel: 'Phase 4: 50% Heavy Scratch Rotary Cut',
+        detailerNotes: 'Bonnet clearcoat reading 118 microns. Performed heavy rotary cut with wool pad and Menzerna 400. 85% of swirls eliminated cleanly.',
+        auditLog: ['Intake registered by Ahmed Mohsen', 'Deposit verified via InstaPay', 'Assigned to Mahmoud Sayed']
+      }
+    ];
+
+    const DEFAULT_CUSTOMER_ACCOUNTS = [
+      { id: 'cacc-1', jobId: 'job-101', customerName: 'Tarek Mansour', username: 'tarek.m', pass: 'pass123' }
+    ];
+
+    let staffUsers = JSON.parse(localStorage.getItem('drcare_staff') || 'null');
+    if (!staffUsers || !staffUsers.some(u => u.username.toLowerCase() === 'mr.alfy')) {
+      staffUsers = DEFAULT_STAFF_USERS;
+      localStorage.setItem('drcare_staff', JSON.stringify(staffUsers));
+    }
+
+    let bookings = JSON.parse(localStorage.getItem('drcare_bookings') || 'null');
+    if (!bookings || bookings.length === 0) {
+      bookings = DEFAULT_SAMPLE_BOOKINGS;
+      localStorage.setItem('drcare_bookings', JSON.stringify(bookings));
+    }
+
+    let customerAccounts = JSON.parse(localStorage.getItem('drcare_cust_accounts') || 'null');
+    if (!customerAccounts) {
+      customerAccounts = DEFAULT_CUSTOMER_ACCOUNTS;
+      localStorage.setItem('drcare_cust_accounts', JSON.stringify(customerAccounts));
+    }
+
+    function saveState() {
+      try {
+        localStorage.setItem('drcare_staff', JSON.stringify(staffUsers));
+        localStorage.setItem('drcare_bookings', JSON.stringify(bookings));
+        localStorage.setItem('drcare_cust_accounts', JSON.stringify(customerAccounts));
+      } catch (err) {
+        console.warn('Storage quota warning:', err);
+      }
+    }
+
+    async function callGemini(prompt, systemInstruction = '', schema = null) {
+      const apiKey = "";
+      const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+      const payload = { contents: [{ parts: [{ text: prompt }] }] };
+      if (systemInstruction) payload.systemInstruction = { parts: [{ text: systemInstruction }] };
+      if (schema) payload.generationConfig = { responseMimeType: "application/json", responseSchema: schema };
+
+      const delays = [1000, 2000, 4000];
+      for (let attempt = 0; attempt <= delays.length; attempt++) {
+        try {
+          const response = await fetch(apiUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
+          const result = await response.json();
+          const candidateText = result?.candidates?.[0]?.content?.parts?.[0]?.text;
+          if (candidateText) return candidateText;
+          throw new Error("Empty candidate");
+        } catch (err) {
+          if (attempt === delays.length) throw err;
+          await new Promise(r => setTimeout(r, delays[attempt]));
+        }
+      }
+    }
+
+    function hideAllMainViews() {
+      ['viewWelcomeGateway', 'viewCustomerLogin', 'viewCustomerDashboard', 'viewStaffBackOffice', 'viewSheetDetail'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.classList.add('hidden');
+      });
+    }
+
+    function navigateToWelcome() {
+      hideAllMainViews();
+      activeCustomerJob = null;
+      activeDetailJobId = null;
+      if (currentStaffUser) {
+        document.getElementById('viewStaffBackOffice')?.classList.remove('hidden');
+        switchStaffTab('bookings');
+      } else {
+        document.getElementById('viewWelcomeGateway')?.classList.remove('hidden');
+      }
+    }
+
+    function navigateToCustomerPortalGateway() {
+      hideAllMainViews();
+      activeCustomerJob = null;
+      document.getElementById('viewCustomerLogin')?.classList.remove('hidden');
+    }
+
+    function switchCustomerLookupMode(mode) {
+      currentLookupMode = mode;
+      const btnPhone = document.getElementById('btnLookupModePhone');
+      const btnCreds = document.getElementById('btnLookupModeCreds');
+      const formPhone = document.getElementById('formCustomerPhoneLookup');
+      const formCreds = document.getElementById('formCustomerCredsLookup');
+      if (mode === 'phone') {
+        if (btnPhone) btnPhone.className = 'flex-1 py-2 text-xs font-bold rounded-xl bg-gold-500 text-slate-950 transition';
+        if (btnCreds) btnCreds.className = 'flex-1 py-2 text-xs font-bold rounded-xl text-slate-400 hover:text-white transition';
+        formPhone?.classList.remove('hidden');
+        formCreds?.classList.add('hidden');
+      } else {
+        if (btnPhone) btnPhone.className = 'flex-1 py-2 text-xs font-bold rounded-xl text-slate-400 hover:text-white transition';
+        if (btnCreds) btnCreds.className = 'flex-1 py-2 text-xs font-bold rounded-xl bg-gold-500 text-slate-950 transition';
+        formPhone?.classList.add('hidden');
+        formCreds?.classList.remove('hidden');
+      }
+    }
+
+    function openStaffLoginModal() {
+      const err = document.getElementById('staffLoginErrorMsg');
+      if (err) err.classList.add('hidden');
+      document.getElementById('modalStaffAuth')?.classList.remove('hidden');
+    }
+
+    function closeStaffLoginModal() {
+      document.getElementById('modalStaffAuth')?.classList.add('hidden');
+    }
+
+    function handleStaffLoginForm(e) {
+      e.preventDefault();
+      const u = (document.getElementById('staffInputUsername')?.value || '').trim().toLowerCase();
+      const p = (document.getElementById('staffInputPassword')?.value || '').trim();
+      const err = document.getElementById('staffLoginErrorMsg');
+      
+      const staff = staffUsers.find(s => s.username.toLowerCase() === u && s.pass === p);
+      if (staff) {
+        currentStaffUser = staff;
+        closeStaffLoginModal();
+        if (err) err.classList.add('hidden');
+        applyStaffSessionUI();
+        showToast(`Welcome back, ${staff.name}!`, 'gold');
+      } else {
+        if (err) err.classList.remove('hidden');
+      }
+    }
+
+    function logoutStaff() {
+      currentStaffUser = null;
+      const navTabs = document.getElementById('staffNavTabs');
+      if (navTabs) {
+        navTabs.classList.add('hidden');
+        navTabs.classList.remove('flex');
+      }
+      const headerAuth = document.getElementById('authHeaderContainer');
+      if (headerAuth) {
+        headerAuth.innerHTML = `
+          <button onclick="navigateToCustomerPortalGateway()" class="px-3.5 py-2 rounded-xl bg-bay-850 hover:bg-bay-800 text-gold-400 border border-gold-500/30 font-bold text-xs transition flex items-center gap-1.5 shadow-sm">
+            <i class="ph-bold ph-car"></i>
+            <span data-i18n="customerTracking">Customer Tracking</span>
+          </button>
+          <button onclick="openStaffLoginModal()" id="btnStaffLoginNav" class="px-4 py-2 rounded-xl bg-gold-500 hover:bg-gold-400 text-slate-950 font-black text-xs uppercase tracking-wider transition shadow-lg shadow-gold-500/20 flex items-center gap-2">
+            <i class="ph-bold ph-shield-check"></i>
+            <span data-i18n="staffLogin">Staff Login</span>
+          </button>
+        `;
+        applyTranslations();
+      }
+      navigateToWelcome();
+      showToast('Signed out successfully.', 'slate');
+    }
+
+    function applyStaffSessionUI() {
+      hideAllMainViews();
+      document.getElementById('viewStaffBackOffice')?.classList.remove('hidden');
+      
+      const navTabs = document.getElementById('staffNavTabs');
+      if (navTabs) {
+        navTabs.classList.remove('hidden');
+        navTabs.classList.add('flex');
+      }
+
+      const isOwner = currentStaffUser?.role === 'owner';
+      const isManager = currentStaffUser?.role === 'manager';
+      const isDetailer = currentStaffUser?.role === 'detailer';
+
+      const headerAuth = document.getElementById('authHeaderContainer');
+      if (headerAuth) {
+        headerAuth.innerHTML = `
+          <div class="flex items-center gap-2">
+            <div class="text-right hidden sm:block">
+              <span class="text-xs font-black text-white block">${escapeHtml(currentStaffUser.name)}</span>
+              <span class="text-[10px] font-mono text-gold-400 uppercase">${escapeHtml(currentStaffUser.title)}</span>
+            </div>
+            <button onclick="logoutStaff()" class="px-3 py-1.5 rounded-xl bg-bay-800 hover:bg-rose-500/20 hover:text-rose-400 text-slate-300 text-xs font-bold border border-slate-700 transition flex items-center gap-1.5">
+              <i class="ph-bold ph-sign-out"></i>
+              <span class="hidden sm:inline">Sign Out</span>
+            </button>
+          </div>
+        `;
+      }
+
+      const roleBadge = document.getElementById('badgeActiveStaffRole');
+      const headerTitle = document.getElementById('staffRoleHeaderTitle');
+      if (roleBadge) {
+        if (isOwner) {
+          roleBadge.className = 'text-[11px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-gold-500/20 text-gold-400 border border-gold-500/40';
+          roleBadge.textContent = 'OWNER (LEVEL 1)';
+          if (headerTitle) headerTitle.textContent = 'Workshop Director Console';
+        } else if (isManager) {
+          roleBadge.className = 'text-[11px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-cyan-500/20 text-cyan-400 border border-cyan-500/40';
+          roleBadge.textContent = 'SHOP MANAGER (LEVEL 2)';
+          if (headerTitle) headerTitle.textContent = 'Workshop Booking & Bay Operations';
+        } else {
+          roleBadge.className = 'text-[11px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-400 border border-amber-500/40';
+          roleBadge.textContent = 'MASTER DETAILER (LEVEL 3)';
+          if (headerTitle) headerTitle.textContent = 'My Assigned Detailing Bay & Tasks';
+        }
+      }
+
+      // Role permission toggles
+      ['navBtnNewBooking', 'btnOpenNewBooking'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.style.display = isDetailer ? 'none' : 'flex';
+      });
+
+      ['tabBtnAnalytics', 'tabBtnFunds'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.style.display = isDetailer ? 'none' : 'inline-block';
+      });
+
+      const exportBtn = document.getElementById('btnOwnerExportDb');
+      const importBtn = document.getElementById('btnOwnerImportDbLabel');
+      if (exportBtn) exportBtn.style.display = isOwner ? 'flex' : 'none';
+      if (importBtn) importBtn.style.display = isOwner ? 'flex' : 'none';
+
+      // Hide or show metrics card for deposits
+      const cardDeposits = document.getElementById('metricCardDeposits');
+      if (cardDeposits) cardDeposits.style.display = isDetailer ? 'none' : 'block';
+
+      switchStaffTab('bookings');
+      checkUpcomingDeliveriesReminder();
+    }
+
+    function checkUpcomingDeliveriesReminder() {
+      if (!currentStaffUser || currentStaffUser.role === 'detailer') return;
+      const now = new Date();
+      const urgentJobs = bookings.filter(b => {
+        if (!b.estimatedCompletion || (b.progressPercent || 0) >= 100) return false;
+        const due = new Date(b.estimatedCompletion);
+        const diffHours = (due - now) / (1000 * 60 * 60);
+        return diffHours >= 0 && diffHours <= 48;
+      });
+
+      if (urgentJobs.length > 0) {
+        showToast(`⚠️ Attention: ${urgentJobs.length} vehicle(s) due for handover within 48 hours!`, 'rose');
+      }
+    }
+
+    function switchStaffTab(tabName) {
+      activeStaffTab = tabName;
+      activeDetailJobId = null;
+      hideAllMainViews();
+      document.getElementById('viewStaffBackOffice')?.classList.remove('hidden');
+
+      ['bookings', 'calendar', 'funds', 'analytics', 'accounts'].forEach(t => {
+        const btn = document.getElementById(`tabBtn${t.charAt(0).toUpperCase() + t.slice(1)}`);
+        const subView = document.getElementById(`subView${t.charAt(0).toUpperCase() + t.slice(1)}`);
+        if (btn && subView) {
+          if (t === tabName) {
+            btn.className = 'px-3 py-1.5 rounded-xl text-xs font-bold transition text-gold-400 bg-gold-500/10 border border-gold-500/30';
+            subView.classList.remove('hidden');
+          } else {
+            btn.className = 'px-3 py-1.5 rounded-xl text-xs font-bold transition text-slate-400 hover:text-white';
+            subView.classList.add('hidden');
+          }
+        }
+      });
+
+      if (tabName === 'bookings') filterBookingsGrid();
+      if (tabName === 'calendar') renderCalendar();
+      if (tabName === 'funds') renderFundsCircuit();
+      if (tabName === 'analytics') renderYearlyAnalytics();
+      if (tabName === 'accounts') renderAccountsLists();
+    }
+
+    function debounceSearchBookings() {
+      clearTimeout(searchDebounceTimer);
+      searchDebounceTimer = setTimeout(() => {
+        filterBookingsGrid();
+      }, 150);
+    }
+
+    function updateDashboardMetrics() {
+      const isDetailer = currentStaffUser?.role === 'detailer';
+      const relevantBookings = isDetailer 
+        ? bookings.filter(b => b.assignedDetailerId === currentStaffUser.id || (b.assignedDetailerName && b.assignedDetailerName.toLowerCase() === currentStaffUser.name.toLowerCase()))
+        : bookings;
+
+      const totalActive = relevantBookings.filter(b => (b.progressPercent || 0) < 100).length;
+      const inCoating = relevantBookings.filter(b => (b.progressPercent || 0) >= 80 && (b.progressPercent || 0) < 100).length;
+      const totalDeposits = relevantBookings.reduce((sum, b) => sum + (Number(b.depositLE) || 0), 0);
+      const readyHandover = relevantBookings.filter(b => (b.progressPercent || 0) >= 100).length;
+
+      const mActive = document.getElementById('metricTotalActive');
+      const mCoating = document.getElementById('metricInCoating');
+      const mDeposits = document.getElementById('metricTotalDeposits');
+      const mReady = document.getElementById('metricReadyHandover');
+
+      if (mActive) mActive.textContent = totalActive;
+      if (mCoating) mCoating.textContent = inCoating;
+      if (mDeposits) mDeposits.textContent = `${totalDeposits.toLocaleString()} L.E`;
+      if (mReady) mReady.textContent = readyHandover;
+    }
+
+    function filterBookingsGrid() {
+      const q = (document.getElementById('inputSearchJobs')?.value || '').trim().toLowerCase();
+      const filter = document.getElementById('selectStageFilter')?.value || 'ALL';
+      const isDetailer = currentStaffUser?.role === 'detailer';
+
+      const filtered = bookings.filter(b => {
+        if (isDetailer) {
+          const matchId = b.assignedDetailerId === currentStaffUser.id;
+          const matchName = b.assignedDetailerName && b.assignedDetailerName.toLowerCase().includes(currentStaffUser.name.toLowerCase());
+          if (!matchId && !matchName) return false;
+        }
+
+        const matchesQuery = !q || 
+          b.customerName.toLowerCase().includes(q) || 
+          b.carType.toLowerCase().includes(q) || 
+          b.carPlate.toLowerCase().includes(q) || 
+          (b.customerPhone && b.customerPhone.includes(q)) ||
+          (b.pin && b.pin.toLowerCase().includes(q)) ||
+          (b.carColor && b.carColor.toLowerCase().includes(q));
+
+        let matchesStage = true;
+        if (filter === 'IN_PROGRESS') matchesStage = (b.progressPercent || 0) < 100;
+        if (filter === 'COMPLETED') matchesStage = (b.progressPercent || 0) >= 100;
+        if (filter === 'CERAMIC') matchesStage = (b.progressPercent || 0) >= 90;
+
+        return matchesQuery && matchesStage;
+      });
+
+      renderBookingsGrid(filtered);
+      updateDashboardMetrics();
+    }
+
+    function renderBookingsGrid(items) {
+      const container = document.getElementById('gridBookingsContainer');
+      const emptyState = document.getElementById('bookingsEmptyState');
+      const isDetailer = currentStaffUser?.role === 'detailer';
+
+      if (!items || items.length === 0) {
+        if (container) container.innerHTML = '';
+        if (emptyState) {
+          emptyState.classList.remove('hidden');
+          const p = emptyState.querySelector('p');
+          if (p) {
+            p.textContent = isDetailer 
+              ? 'No assigned tasks currently in your bay. You will see vehicles here once management assigns them to you.' 
+              : 'No vehicle booking sheets found.';
+          }
+        }
+        return;
+      }
+
+      if (emptyState) emptyState.classList.add('hidden');
+      if (container) {
+        container.innerHTML = items.map(job => {
+          const isFinished = (job.progressPercent || 0) >= 100;
+          return `
+            <div onclick="openVehicleDetailSheet('${job.id}')" class="group bg-bay-900 border border-slate-800 hover:border-gold-500/50 p-5 rounded-3xl transition-all duration-300 cursor-pointer shadow-xl hover:shadow-2xl hover:shadow-gold-500/10 space-y-4">
+              <div class="flex items-start justify-between gap-2">
+                <div>
+                  <span class="text-[10px] font-mono font-bold text-gold-400 bg-gold-500/10 px-2 py-0.5 rounded border border-gold-500/30">PIN: ${escapeHtml(job.pin)}</span>
+                  <h3 class="text-base font-black text-white mt-1 group-hover:text-gold-300 transition">${escapeHtml(job.carType)}</h3>
+                  <p class="text-xs text-slate-400">${escapeHtml(job.customerName)} • <span class="text-slate-300 font-mono font-bold">${escapeHtml(job.carPlate)}</span></p>
+                  <span class="text-[10px] text-slate-500 font-mono">📍 ${escapeHtml(job.province || 'Port Said')}</span>
+                </div>
+                <div class="text-right">
+                  ${!isDetailer ? `<span class="text-[11px] font-mono font-black ${job.depositVerified ? 'text-emerald-400' : 'text-amber-400'} block">${(job.depositLE || 0).toLocaleString()} L.E</span>` : ''}
+                  <span class="text-[10px] text-slate-500 font-mono">${(job.carMileage || 0).toLocaleString()} KM</span>
+                  <span class="text-[9px] font-bold text-gold-400/80 block mt-1">👨‍🔧 ${escapeHtml(job.assignedDetailerName || 'Assigned')}</span>
+                </div>
+              </div>
+
+              <div class="bg-bay-850 p-3 rounded-2xl border border-slate-800 text-xs text-slate-300 line-clamp-2 leading-relaxed">
+                <strong class="text-slate-400 font-bold">Defect / Task:</strong> ${escapeHtml(job.carIssue)}
+              </div>
+
+              ${job.estimatedCompletion ? `
+                <div class="bg-amber-500/10 border border-amber-500/30 p-2.5 rounded-xl text-[11px] text-amber-400 flex items-center gap-1.5 font-mono">
+                  <i class="ph-bold ph-clock text-sm"></i>
+                  <span><strong>Est. Completion:</strong> ${escapeHtml(job.estimatedCompletion.replace('T', ' '))}</span>
+                </div>
+              ` : ''}
+
+              <div class="space-y-1.5">
+                <div class="flex justify-between items-center text-[11px]">
+                  <span class="text-slate-400 truncate max-w-[210px]">${escapeHtml(job.progressStageLabel)}</span>
+                  <span class="font-mono font-bold text-white">${job.progressPercent}%</span>
+                </div>
+                <div class="w-full h-2 bg-bay-950 rounded-full overflow-hidden border border-slate-800">
+                  <div class="h-full rounded-full transition-all duration-500 ${isFinished ? 'bg-emerald-500' : 'bg-gold-500'}" style="width: ${job.progressPercent}%"></div>
+                </div>
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+    }
+
+    function openVehicleDetailSheet(jobId) {
+      const job = bookings.find(b => b.id === jobId);
+      if (!job) return;
+      activeDetailJobId = jobId;
+      hideAllMainViews();
+      const view = document.getElementById('viewSheetDetail');
+      if (view) {
+        view.classList.remove('hidden');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      const isOwner = currentStaffUser?.role === 'owner';
+      const isManager = currentStaffUser?.role === 'manager';
+      const isDetailer = currentStaffUser?.role === 'detailer';
+      const canEdit = isOwner || isManager;
+      const totalVal = job.totalPriceLE || ((job.depositLE || 0) * 2.5);
+      const remBal = Math.max(0, totalVal - (job.depositLE || 0));
+
+      const customerAcc = customerAccounts.find(ca => ca.jobId === job.id);
+
+      if (view) {
+        view.innerHTML = `
+          <div class="bg-bay-900 border border-gold-500/40 rounded-3xl p-6 sm:p-10 space-y-8 shadow-2xl">
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-slate-800">
+              <button onclick="switchStaffTab('bookings')" class="px-3.5 py-1.5 rounded-xl bg-bay-850 hover:bg-bay-800 text-slate-300 hover:text-white text-xs font-bold border border-slate-700 transition flex items-center gap-1.5">
+                <i class="ph-bold ph-arrow-left"></i><span>Back to Tasks</span>
+              </button>
+              
+              <div class="flex flex-wrap items-center gap-2">
+                <button onclick="window.print()" class="px-3 py-1.5 rounded-xl bg-bay-850 hover:bg-bay-800 text-slate-300 text-xs font-bold border border-slate-700 transition flex items-center gap-1.5">
+                  <i class="ph-bold ph-printer"></i> Print Task Sheet
+                </button>
+                ${canEdit ? `<button onclick="openEditBookingModal('${job.id}')" class="px-3 py-1.5 rounded-xl bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 text-xs font-bold transition flex items-center gap-1.5"><i class="ph-bold ph-pencil-simple"></i> Edit</button>` : ''}
+                ${isOwner ? `<button onclick="confirmDeleteJob('${job.id}')" class="px-3 py-1.5 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/30 text-xs font-bold transition flex items-center gap-1.5"><i class="ph-bold ph-trash"></i> Delete</button>` : ''}
+                ${canEdit ? `<button onclick="openCreateCustomerModal('${job.id}')" class="px-3 py-1.5 rounded-xl bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-xs font-bold transition flex items-center gap-1.5"><i class="ph-bold ph-user-plus"></i> + Client Pass</button>` : ''}
+                ${!isDetailer ? `<button onclick="runAiDiagnosticForCurrentSheet('${job.id}')" class="px-3 py-1.5 rounded-xl bg-gold-500/20 hover:bg-gold-500/30 text-gold-300 border border-gold-500/40 text-xs font-bold transition flex items-center gap-1.5"><i class="ph-bold ph-sparkle text-gold-400"></i> AI Polish Plan</button>` : ''}
+                ${!isDetailer ? `<button onclick="openAiWhatsAppModal('${job.id}')" class="px-3 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white border border-emerald-500/40 text-xs font-bold transition flex items-center gap-1.5"><i class="ph-bold ph-whatsapp-logo"></i> AI Updates</button>` : ''}
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div class="md:col-span-2 space-y-2">
+                <span class="text-[11px] font-mono font-bold text-gold-400 uppercase tracking-widest block">TASK PIN: ${escapeHtml(job.pin)}</span>
+                <h1 class="text-2xl sm:text-3xl font-black text-white">${escapeHtml(job.carType)}</h1>
+                <p class="text-xs text-slate-400">Client: <strong class="text-white">${escapeHtml(job.customerName)}</strong> (${escapeHtml(job.customerPhone)}) • Plate: <strong class="text-gold-400 font-mono text-sm">${escapeHtml(job.carPlate)}</strong></p>
+                <div class="flex items-center gap-2.5 text-xs pt-1 flex-wrap">
+                  <span class="px-2.5 py-1 rounded-xl bg-bay-850 border border-slate-800 text-slate-300 font-medium">🎨 ${escapeHtml(job.carColor)}</span>
+                  <span class="px-2.5 py-1 rounded-xl bg-bay-850 border border-slate-800 text-slate-300 font-mono font-medium">🛣️ ${(job.carMileage || 0).toLocaleString()} KM</span>
+                  <span class="px-2.5 py-1 rounded-xl bg-bay-850 border border-slate-800 text-slate-300 font-medium">📍 ${escapeHtml(job.province || 'Port Said')}</span>
+                  <span class="px-2.5 py-1 rounded-xl bg-gold-500/20 border border-gold-500/40 text-gold-300 font-bold">👨‍🔧 Assigned To: ${escapeHtml(job.assignedDetailerName || 'Detailer')}</span>
+                  ${job.estimatedCompletion ? `<span class="px-2.5 py-1 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-400 font-mono font-bold">⏰ Est. Delivery: ${escapeHtml(job.estimatedCompletion.replace('T', ' '))}</span>` : ''}
+                </div>
+              </div>
+
+              <div class="space-y-4">
+                ${!isDetailer ? `
+                  <div class="bg-bay-850 border border-slate-800 p-5 rounded-2xl space-y-3">
+                    <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">Financial Audit (L.E)</span>
+                    <div class="space-y-1 text-xs">
+                      <div class="flex items-center justify-between">
+                        <span class="text-slate-400">Advance Deposit:</span>
+                        <span class="font-mono font-black text-emerald-400 text-sm">${(job.depositLE || 0).toLocaleString()} L.E</span>
+                      </div>
+                      <div class="flex items-center justify-between text-[11px]">
+                        <span class="text-slate-400">Channel:</span>
+                        <span class="font-mono font-bold text-slate-200 uppercase">${escapeHtml(job.paymentMethod || 'Cash')}</span>
+                      </div>
+                      <div class="flex items-center justify-between text-[11px]">
+                        <span class="text-slate-400">Status:</span>
+                        ${canEdit ? `
+                          <button onclick="toggleDepositVerification('${job.id}')" class="font-bold font-mono px-2 py-0.5 rounded ${job.depositVerified ? 'bg-emerald-500/20 text-emerald-400' : 'bg-amber-500/20 text-amber-400'} transition">
+                            ${job.depositVerified ? '✓ Verified' : '⏳ Pending Verify'}
+                          </button>
+                        ` : `<span class="font-bold font-mono ${job.depositVerified ? 'text-emerald-400' : 'text-amber-400'}">${job.depositVerified ? '✓ Verified' : '⏳ Pending'}</span>`}
+                      </div>
+                    </div>
+                    <div class="pt-2 border-t border-slate-800 space-y-1 text-xs">
+                      <div class="flex items-center justify-between"><span class="text-slate-400">Total Estimation:</span><span class="font-mono font-bold text-white">${totalVal.toLocaleString()} L.E</span></div>
+                      <div class="flex items-center justify-between"><span class="text-slate-400">Handover Balance:</span><span class="font-mono font-bold text-amber-400">${remBal.toLocaleString()} L.E</span></div>
+                    </div>
+                  </div>
+                ` : `
+                  <div class="bg-bay-850 border border-slate-800 p-5 rounded-2xl space-y-3 flex flex-col justify-center">
+                    <span class="text-[11px] font-bold text-gold-400 uppercase tracking-wider block">Bay Task Directives</span>
+                    <p class="text-xs text-slate-300">Execute the 11 paint restoration phases meticulously. Update your technical inspection notes below for management review.</p>
+                  </div>
+                `}
+
+                <!-- ONLY LEVEL 1 OWNER SEES CUSTOMER CREDENTIALS & PASSES -->
+                ${isOwner && customerAcc ? `
+                  <div class="bg-bay-850 border border-emerald-500/30 p-4 rounded-2xl space-y-2">
+                    <div class="flex items-center justify-between">
+                      <span class="text-[10px] font-mono font-bold text-emerald-400 uppercase">Customer Portal Pass (Owner View)</span>
+                      <button onclick="copyCustomerWhatsAppInvite('${job.id}')" class="px-2 py-1 rounded bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 text-[10px] font-bold flex items-center gap-1 transition">
+                        <i class="ph-bold ph-whatsapp-logo"></i> WhatsApp
+                      </button>
+                    </div>
+                    <div class="text-[11px] font-mono bg-bay-900 p-2 rounded-xl border border-slate-800 space-y-0.5 text-slate-300">
+                      <div>User: <strong class="text-white">${escapeHtml(customerAcc.username)}</strong></div>
+                      <div>Pass: <strong class="text-white">${escapeHtml(customerAcc.pass)}</strong></div>
+                    </div>
+                  </div>
+                ` : ''}
+              </div>
+            </div>
+
+            ${job.customerNotes ? `
+              <div class="bg-gold-500/10 border border-gold-500/30 p-4 rounded-2xl flex items-start gap-3">
+                <i class="ph-bold ph-chat-circle-dots text-gold-400 text-xl mt-0.5"></i>
+                <div>
+                  <span class="text-[10px] font-bold text-gold-400 uppercase tracking-wider block mb-1">Customer Special Request</span>
+                  <p class="text-xs text-gold-200 leading-relaxed italic">"${escapeHtml(job.customerNotes)}"</p>
+                </div>
+              </div>
+            ` : ''}
+
+            <!-- RESTORATION STAGE CONTROLLER (Manual % and 11 Phases) -->
+            <div class="bg-bay-850 p-6 rounded-3xl border border-slate-800 space-y-5">
+              <div class="flex items-center justify-between">
+                <div>
+                  <span class="text-sm font-black text-white uppercase tracking-wider block">Workshop Bay Detailing Phases & Task Progress</span>
+                  <p class="text-xs text-slate-400">${escapeHtml(job.progressStageLabel)}</p>
+                </div>
+                <span class="font-mono font-black text-3xl text-gold-400" id="detailPercentText">${job.progressPercent}%</span>
+              </div>
+
+              <div class="space-y-3 bg-bay-900/60 p-4 rounded-2xl border border-slate-800">
+                <label class="block text-[11px] font-bold text-slate-300">Precision Manual Achievement % Input (Appears directly to managers)</label>
+                <div class="flex items-center gap-4">
+                  <input type="range" id="detailPercentSlider" min="0" max="100" value="${job.progressPercent}" class="flex-1" 
+                    oninput="document.getElementById('detailPercentText').textContent = this.value + '%'; document.getElementById('detailPercentInput').value = this.value;">
+                  <div class="flex items-center gap-2">
+                    <input type="number" id="detailPercentInput" min="0" max="100" value="${job.progressPercent}" 
+                      class="w-20 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-center focus:outline-none focus:border-gold-500 font-mono"
+                      oninput="document.getElementById('detailPercentSlider').value = this.value; document.getElementById('detailPercentText').textContent = this.value + '%';">
+                    <button onclick="updateJobProgress('${job.id}')" class="px-4 py-2 rounded-xl bg-gold-500 hover:bg-gold-400 text-slate-950 font-black text-xs uppercase tracking-wider transition shadow-md shadow-gold-500/20">
+                      Apply %
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="space-y-2">
+                <span class="text-xs font-bold text-slate-400 block uppercase tracking-wider">Jump to Detailing Phase Milestone:</span>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 text-[11px]">
+                  ${RESTORATION_PHASES.map(p => `
+                    <button onclick="setJobPhase('${job.id}', ${p.percent}, '${p.label.replace(/'/g, "\\'")}')" 
+                      class="p-3 rounded-xl border text-left transition-all ${job.progressPercent >= p.percent ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-400 font-bold' : 'bg-bay-900 border-slate-800 text-slate-400 hover:border-gold-500/50 hover:text-white'}">
+                      <div class="flex items-center justify-between">
+                        <span class="truncate pr-2">${escapeHtml(p.label)}</span>
+                        <span class="font-mono font-bold">${p.percent}%</span>
+                      </div>
+                    </button>
+                  `).join('')}
+                </div>
+              </div>
+
+              <div class="space-y-2 pt-4 border-t border-slate-800">
+                <label class="block text-xs font-bold text-white">Technician / Master Detailer Inspection Notes (Visible to Management)</label>
+                <textarea id="detailNotesInput" rows="2" class="w-full border border-slate-700 rounded-xl px-4 py-2.5 text-xs focus:outline-none focus:border-gold-500" placeholder="Write progress notes, paint thickness readings, or compound used...">${escapeHtml(job.detailerNotes || '')}</textarea>
+                <div class="flex justify-end">
+                  <button onclick="saveDetailerNotes('${job.id}')" class="px-4 py-2 rounded-xl bg-bay-800 hover:bg-bay-750 text-white font-bold text-xs border border-slate-700 transition">
+                    Save Technician Notes for Management
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    function updateJobProgress(jobId) {
+      const job = bookings.find(b => b.id === jobId);
+      if (!job) return;
+      const val = parseInt(document.getElementById('detailPercentInput')?.value || "0", 10);
+      if (isNaN(val) || val < 0 || val > 100) return;
+      
+      job.progressPercent = val;
+      let stageLabel = RESTORATION_PHASES[0].label;
+      for (let i = RESTORATION_PHASES.length - 1; i >= 0; i--) {
+        if (val >= RESTORATION_PHASES[i].percent) {
+          stageLabel = RESTORATION_PHASES[i].label;
+          break;
+        }
+      }
+      job.progressStageLabel = stageLabel;
+      if (!job.auditLog) job.auditLog = [];
+      job.auditLog.push(`Progress set to ${val}% by ${currentStaffUser?.name || 'Staff'}`);
+      
+      saveState();
+      openVehicleDetailSheet(jobId);
+      showToast(`Progress updated to ${val}% (Synced with Management)`, 'emerald');
+    }
+
+    function setJobPhase(jobId, percent, label) {
+      const job = bookings.find(b => b.id === jobId);
+      if (!job) return;
+      job.progressPercent = percent;
+      job.progressStageLabel = label;
+      if (!job.auditLog) job.auditLog = [];
+      job.auditLog.push(`Stage moved to ${label} by ${currentStaffUser?.name || 'Staff'}`);
+      
+      saveState();
+      openVehicleDetailSheet(jobId);
+      showToast(`Phase advanced: ${label}`, 'emerald');
+    }
+
+    function saveDetailerNotes(jobId) {
+      const job = bookings.find(b => b.id === jobId);
+      if (!job) return;
+      job.detailerNotes = document.getElementById('detailNotesInput')?.value.trim() || '';
+      saveState();
+      showToast('Technician notes successfully sent to management.', 'cyan');
+    }
+
+    function handleCalendarYearJump(yearVal) {
+      calCurrentYear = parseInt(yearVal, 10);
+      renderCalendar();
+    }
+
+    function navigateCalendarMonth(direction) {
+      calCurrentMonth += direction;
+      if (calCurrentMonth > 11) {
+        calCurrentMonth = 0;
+        calCurrentYear += 1;
+      } else if (calCurrentMonth < 0) {
+        calCurrentMonth = 11;
+        calCurrentYear -= 1;
+      }
+      
+      if (calCurrentYear < 2026) calCurrentYear = 2026;
+      if (calCurrentYear > 2031) calCurrentYear = 2031;
+
+      const yearSelect = document.getElementById('calYearSelect');
+      if (yearSelect) yearSelect.value = calCurrentYear.toString();
+
+      renderCalendar();
+    }
+
+    function resetCalendarToToday() {
+      const today = new Date();
+      calCurrentYear = today.getFullYear();
+      if (calCurrentYear < 2026) calCurrentYear = 2026;
+      if (calCurrentYear > 2031) calCurrentYear = 2031;
+      calCurrentMonth = today.getMonth();
+
+      const yearSelect = document.getElementById('calYearSelect');
+      if (yearSelect) yearSelect.value = calCurrentYear.toString();
+
+      renderCalendar();
+    }
+
+    function renderCalendar() {
+      const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+      const label = document.getElementById('calCurrentMonthLabel');
+      if (label) label.textContent = `${monthNames[calCurrentMonth]} ${calCurrentYear}`;
+
+      const yearSelect = document.getElementById('calYearSelect');
+      if (yearSelect) yearSelect.value = calCurrentYear.toString();
+
+      const container = document.getElementById('calDaysGridMatrix');
+      if (!container) return;
+      container.innerHTML = '';
+
+      const firstDayIndex = new Date(calCurrentYear, calCurrentMonth, 1).getDay();
+      const daysInMonth = new Date(calCurrentYear, calCurrentMonth + 1, 0).getDate();
+
+      for (let i = 0; i < firstDayIndex; i++) {
+        const emptyCell = document.createElement('div');
+        emptyCell.className = 'h-24 sm:h-28 rounded-2xl bg-bay-950/40 border border-slate-900/60 opacity-40';
+        container.appendChild(emptyCell);
+      }
+
+      for (let day = 1; day <= daysInMonth; day++) {
+        const monthStr = String(calCurrentMonth + 1).padStart(2, '0');
+        const dayStr = String(day).padStart(2, '0');
+        const dateStr = `${calCurrentYear}-${monthStr}-${dayStr}`;
+
+        const dayBookings = bookings.filter(b => b.bookingDate === dateStr);
+        const count = dayBookings.length;
+        const isFull = count >= 12;
+        const isSelected = calSelectedDateStr === dateStr;
+
+        const cell = document.createElement('div');
+        cell.className = `h-24 sm:h-28 p-2.5 rounded-2xl border transition-all cursor-pointer flex flex-col justify-between ${
+          isSelected 
+            ? 'border-gold-500 bg-gold-500/10 shadow-lg shadow-gold-500/10' 
+            : 'border-slate-800 bg-bay-850 hover:border-slate-600'
+        }`;
+
+        cell.onclick = () => selectCalendarDate(dateStr, dayBookings);
+
+        cell.innerHTML = `
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-mono font-bold ${count > 0 ? 'text-white' : 'text-slate-400'}">${day}</span>
+            ${count > 0 ? `
+              <span class="text-[9px] font-mono font-black px-1.5 py-0.5 rounded ${isFull ? 'bg-rose-500/20 text-rose-400 border border-rose-500/40' : 'bg-gold-500/20 text-gold-400 border border-gold-500/30'}">
+                ${count}/12
+              </span>
+            ` : '<span class="text-[9px] text-slate-600 font-mono">0/12</span>'}
+          </div>
+
+          <div class="space-y-1">
+            <div class="w-full h-1.5 bg-bay-950 rounded-full overflow-hidden border border-slate-800">
+              <div class="h-full rounded-full transition-all duration-300 ${isFull ? 'bg-rose-500' : (count > 6 ? 'bg-amber-400' : 'bg-emerald-500')}" style="width: ${Math.min(100, (count / 12) * 100)}%"></div>
+            </div>
+            ${count > 0 ? `
+              <p class="text-[9px] font-mono text-slate-300 truncate">${escapeHtml(dayBookings[0].carType)}</p>
+            ` : ''}
+          </div>
+        `;
+
+        container.appendChild(cell);
+      }
+
+      if (calSelectedDateStr.startsWith(`${calCurrentYear}-${String(calCurrentMonth + 1).padStart(2, '0')}`)) {
+        const dayBookings = bookings.filter(b => b.bookingDate === calSelectedDateStr);
+        selectCalendarDate(calSelectedDateStr, dayBookings, false);
+      }
+    }
+
+    function selectCalendarDate(dateStr, dayBookings, shouldScroll = true) {
+      calSelectedDateStr = dateStr;
+      const box = document.getElementById('calDayInspectorBox');
+      const title = document.getElementById('calSelectedDayTitle');
+      const list = document.getElementById('calSelectedDayCarsList');
+      if (!box || !title || !list) return;
+
+      box.classList.remove('hidden');
+      title.textContent = `Reservations & Bookings on ${dateStr} (${dayBookings.length}/12 Bay Slots Filled)`;
+
+      const isDetailer = currentStaffUser?.role === 'detailer';
+
+      if (dayBookings.length === 0) {
+        list.innerHTML = `<p class="text-xs text-slate-400 py-3 text-center bg-bay-900 rounded-xl border border-slate-800">No vehicles booked on this date. All 12 workshop bay slots are available.</p>`;
+      } else {
+        list.innerHTML = dayBookings.map(b => `
+          <div onclick="openVehicleDetailSheet('${b.id}')" class="p-3.5 rounded-2xl bg-bay-900 border border-slate-800 hover:border-gold-500 flex items-center justify-between cursor-pointer transition shadow-md">
+            <div class="space-y-0.5">
+              <div class="flex items-center gap-2">
+                <span class="text-xs font-mono font-bold text-gold-400">${escapeHtml(b.pin)}</span>
+                <span class="text-xs font-black text-white">${escapeHtml(b.carType)} (${escapeHtml(b.carPlate)})</span>
+              </div>
+              <p class="text-[11px] text-slate-400">Client: <strong class="text-slate-300">${escapeHtml(b.customerName)}</strong> • Stage: <span class="text-gold-300 font-bold">${b.progressPercent}%</span> (${escapeHtml(b.progressStageLabel)})</p>
+              ${b.estimatedCompletion ? `<p class="text-[10px] text-amber-400 font-mono">⏰ Delivery: ${escapeHtml(b.estimatedCompletion.replace('T', ' '))}</p>` : ''}
+            </div>
+            <div class="text-right">
+              ${!isDetailer ? `<span class="text-xs font-mono font-black text-emerald-400">${(b.depositLE || 0).toLocaleString()} L.E</span>` : ''}
+              <span class="text-[10px] text-slate-400 block mt-0.5">👨‍🔧 ${escapeHtml(b.assignedDetailerName || 'Detailer')}</span>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      if (shouldScroll) {
+        box.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    }
+
+    function quickBookForSelectedDate() {
+      openNewBookingModal(calSelectedDateStr);
+    }
+
+    function renderFundsCircuit() {
+      const period = document.getElementById('fundsPeriodSelect')?.value || 'this_month';
+      const now = new Date();
+      const currentYear = now.getFullYear();
+      const currentMonthStr = String(now.getMonth() + 1).padStart(2, '0');
+
+      const filteredBookings = bookings.filter(b => {
+        if (period === 'all_time') return true;
+        if (!b.bookingDate) return true;
+        if (period === 'this_month') {
+          return b.bookingDate.startsWith(`${currentYear}-${currentMonthStr}`);
+        }
+        if (period === 'this_week') {
+          const jobDate = new Date(b.bookingDate);
+          const diffDays = (now - jobDate) / (1000 * 60 * 60 * 24);
+          return diffDays >= 0 && diffDays <= 7;
+        }
+        return true;
+      });
+
+      const channels = { cash: 0, instapay: 0, wallet: 0, visa: 0 };
+      const counts = { cash: 0, instapay: 0, wallet: 0, visa: 0 };
+      let grandTotal = 0;
+
+      filteredBookings.forEach(b => {
+        const ch = (b.paymentMethod || 'cash').toLowerCase();
+        const amt = Number(b.depositLE) || 0;
+        grandTotal += amt;
+        if (channels[ch] !== undefined) {
+          channels[ch] += amt;
+          counts[ch] += 1;
+        } else {
+          channels.cash += amt;
+          counts.cash += 1;
+        }
+      });
+
+      const setVal = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+      setVal('fundsCashTotal', `${channels.cash.toLocaleString()} L.E`);
+      setVal('fundsCashCount', `${counts.cash} tx`);
+      setVal('fundsInstaTotal', `${channels.instapay.toLocaleString()} L.E`);
+      setVal('fundsInstaCount', `${counts.instapay} tx`);
+      setVal('fundsWalletTotal', `${channels.wallet.toLocaleString()} L.E`);
+      setVal('fundsWalletCount', `${counts.wallet} tx`);
+      setVal('fundsCardTotal', `${channels.visa.toLocaleString()} L.E`);
+      setVal('fundsCardCount', `${counts.visa} tx`);
+      setVal('fundsGrandTotal', `${grandTotal.toLocaleString()} L.E`);
+
+      const tbody = document.getElementById('fundsLedgerTableBody');
+      if (tbody) {
+        tbody.innerHTML = filteredBookings.slice(0, 10).map(b => `
+          <tr class="hover:bg-bay-850/60 transition">
+            <td class="p-3 font-mono text-slate-400">${escapeHtml(b.bookingDate || '2026-09-26')}</td>
+            <td class="p-3 font-bold text-white">${escapeHtml(b.customerName)}</td>
+            <td class="p-3 text-slate-300">${escapeHtml(b.carType)}</td>
+            <td class="p-3 font-mono uppercase text-gold-400 font-bold">${escapeHtml(b.paymentMethod || 'Cash')}</td>
+            <td class="p-3 font-mono font-black text-emerald-400">${(b.depositLE || 0).toLocaleString()} L.E</td>
+            <td class="p-3 font-mono">
+              <span class="px-2 py-0.5 rounded text-[10px] font-bold ${b.depositVerified ? 'bg-emerald-500/20 text-emerald-400' : 'bg-amber-500/20 text-amber-400'}">
+                ${b.depositVerified ? 'VERIFIED' : 'PENDING'}
+              </span>
+            </td>
+          </tr>
+        `).join('');
+      }
+    }
+
+    function renderYearlyAnalytics() {
+      const year = document.getElementById('analyticsYearSelect')?.value || '2026';
+      const yearBookings = bookings.filter(b => b.bookingDate && b.bookingDate.startsWith(year));
+
+      const totalGross = yearBookings.reduce((sum, b) => sum + (Number(b.depositLE) || 0), 0);
+      const avgDeposit = yearBookings.length > 0 ? Math.round(totalGross / yearBookings.length) : 0;
+      const verifiedCount = yearBookings.filter(b => b.depositVerified).length;
+      const ratio = yearBookings.length > 0 ? Math.round((verifiedCount / yearBookings.length) * 100) : 100;
+
+      const setVal = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+      setVal('anaStatGrossDeposits', `${totalGross.toLocaleString()} L.E`);
+      setVal('anaStatAvgDeposit', `${avgDeposit.toLocaleString()} L.E`);
+      setVal('anaStatVerifiedRatio', `${ratio}%`);
+
+      const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+      const container = document.getElementById('anaMonthlyBarsContainer');
+      if (!container) return;
+
+      const monthlyTotals = new Array(12).fill(0);
+      yearBookings.forEach(b => {
+        const parts = b.bookingDate.split('-');
+        if (parts.length >= 2) {
+          const m = parseInt(parts[1], 10) - 1;
+          if (m >= 0 && m < 12) {
+            monthlyTotals[m] += Number(b.depositLE) || 0;
+          }
+        }
+      });
+
+      const maxMonth = Math.max(...monthlyTotals, 1000);
+
+      container.innerHTML = monthlyTotals.map((tot, idx) => {
+        const pct = Math.round((tot / maxMonth) * 100);
+        return `
+          <div class="flex items-center gap-3 text-xs">
+            <span class="w-10 font-mono font-bold text-slate-400">${monthNames[idx]}</span>
+            <div class="flex-1 h-3 bg-bay-950 rounded-full overflow-hidden border border-slate-800">
+              <div class="h-full rounded-full bg-gradient-to-r from-gold-500 to-amber-400 transition-all duration-500" style="width: ${pct}%"></div>
+            </div>
+            <span class="w-24 text-right font-mono font-bold text-emerald-400">${tot.toLocaleString()} L.E</span>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderAccountsLists() {
+      const isOwner = currentStaffUser?.role === 'owner';
+      const ownerBar = document.getElementById('ownerStaffProvisioningBar');
+      if (ownerBar) {
+        ownerBar.style.display = isOwner ? 'block' : 'none';
+      }
+
+      // STRICT SECURITY RULE: ONLY LEVEL 1 OWNER CAN SEE STAFF & CUSTOMER PASSWORDS/CREDENTIALS
+      const staffBox = document.getElementById('listStaffAccountsContainer');
+      if (staffBox) {
+        if (!isOwner) {
+          staffBox.innerHTML = `<p class="text-xs text-rose-400 bg-bay-850 p-4 rounded-xl border border-rose-500/30">🔒 Access Restricted: Staff credentials and passwords are visible exclusively to the Workshop Owner (Level 1).</p>`;
+        } else {
+          staffBox.innerHTML = staffUsers.map(u => `
+            <div class="bg-bay-850 border border-slate-800 p-4 rounded-2xl space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-black text-white">${escapeHtml(u.name)}</span>
+                <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded ${u.role === 'owner' ? 'bg-gold-500/20 text-gold-400 border border-gold-500/40' : (u.role === 'manager' ? 'bg-cyan-500/20 text-cyan-400 border border-cyan-500/40' : 'bg-slate-500/20 text-slate-300 border border-slate-500/40')}">
+                  ${u.role.toUpperCase()}
+                </span>
+              </div>
+              <div class="text-[11px] font-mono text-slate-400 space-y-0.5">
+                <div>User: <strong class="text-slate-200">${escapeHtml(u.username)}</strong></div>
+                <div>Pass: <strong class="text-slate-200">${escapeHtml(u.pass)}</strong></div>
+              </div>
+              ${u.role !== 'owner' ? `
+                <div class="pt-2 border-t border-slate-800 flex justify-end">
+                  <button onclick="removeStaffUser('${u.id}')" class="text-[10px] text-rose-400 hover:text-rose-300 font-bold transition">
+                    Revoke Staff Member
+                  </button>
+                </div>
+              ` : ''}
+            </div>
+          `).join('');
+        }
+      }
+
+      const custBox = document.getElementById('listCustomerAccountsContainer');
+      if (custBox) {
+        if (!isOwner) {
+          custBox.innerHTML = `<p class="text-xs text-rose-400 bg-bay-850 p-4 rounded-xl border border-rose-500/30">🔒 Access Restricted: Customer portal logins and passwords are visible exclusively to the Workshop Owner (Level 1).</p>`;
+        } else {
+          custBox.innerHTML = customerAccounts.map(ca => {
+            const job = bookings.find(b => b.id === ca.jobId);
+            return `
+              <div class="bg-bay-850 border border-slate-800 p-4 rounded-2xl space-y-2.5">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-black text-white">${escapeHtml(ca.customerName)}</span>
+                  <span class="text-[10px] font-mono text-emerald-400 font-bold">${job ? escapeHtml(job.carPlate) : 'N/A'}</span>
+                </div>
+                <div class="text-[11px] font-mono text-slate-400 space-y-0.5 bg-bay-900 p-2.5 rounded-xl border border-slate-800">
+                  <div>User: <strong class="text-white">${escapeHtml(ca.username)}</strong></div>
+                  <div>Pass: <strong class="text-white">${escapeHtml(ca.pass)}</strong></div>
+                </div>
+                <div class="flex items-center justify-between pt-1">
+                  <button onclick="copyCustomerWhatsAppInvite('${ca.jobId}')" class="px-2.5 py-1 rounded-lg bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 border border-emerald-500/40 text-[10px] font-bold flex items-center gap-1 transition">
+                    <i class="ph-bold ph-whatsapp-logo"></i><span>Copy WhatsApp Details</span>
+                  </button>
+                  <button onclick="removeCustomerAccount('${ca.id}')" class="text-[10px] text-rose-400 hover:text-rose-300 font-bold transition">
+                    Revoke Pass
+                  </button>
+                </div>
+              </div>
+            `;
+          }).join('');
+        }
+      }
+    }
+
+    function handleOwnerQuickAddStaff(e) {
+      e.preventDefault();
+      const role = document.getElementById('barStaffRole')?.value || 'detailer';
+      const name = document.getElementById('barStaffName')?.value.trim();
+      const username = document.getElementById('barStaffUsername')?.value.trim();
+      const pass = document.getElementById('barStaffPassword')?.value.trim();
+      if (!name || !username || !pass) return;
+
+      const titleMap = { owner: 'Co-Director', manager: 'Shop Manager', detailer: 'Master Detailer' };
+      staffUsers.push({ id: 'usr-' + Date.now(), name, username, pass, role, title: titleMap[role] });
+      saveState();
+      e.target.reset();
+      renderAccountsLists();
+      populateDetailerSelectors();
+      showToast(`Account created for ${name}`, 'gold');
+    }
+
+    function handleCustomerPhoneLookup(e) {
+      e.preventDefault();
+      const phone = (document.getElementById('custSearchPhone')?.value || '').trim();
+      const plate = (document.getElementById('custSearchPlate')?.value || '').trim().toLowerCase();
+      
+      const cleanPhone = phone.replace(/\s+/g, '');
+      const cleanPlate = plate.replace(/\s+/g, '');
+
+      const job = bookings.find(b => 
+        (b.customerPhone && b.customerPhone.replace(/\s+/g, '') === cleanPhone) && 
+        (b.carPlate && b.carPlate.toLowerCase().replace(/\s+/g, '') === cleanPlate)
+      );
+
+      if (job) {
+        activeCustomerJob = job;
+        renderCustomerSingleDashboard(job);
+        showToast(`Vehicle Found: ${job.carType}`, 'emerald');
+      } else {
+        showToast('No active vehicle record matching this phone and license plate.', 'rose');
+      }
+    }
+
+    function handleCustomerCredsLookup(e) {
+      e.preventDefault();
+      const u = (document.getElementById('custSearchUsername')?.value || '').trim().toLowerCase();
+      const p = (document.getElementById('custSearchPass')?.value || '').trim();
+
+      const acc = customerAccounts.find(ca => ca.username.toLowerCase() === u && ca.pass === p);
+      if (acc) {
+        const job = bookings.find(b => b.id === acc.jobId);
+        if (job) {
+          activeCustomerJob = job;
+          renderCustomerSingleDashboard(job);
+          showToast(`Welcome back, ${acc.customerName}!`, 'emerald');
+        } else {
+          showToast('Vehicle restoration record could not be found.', 'amber');
+        }
+      } else {
+        showToast('Invalid customer username or password.', 'rose');
+      }
+    }
+
+    function renderCustomerSingleDashboard(job) {
+      hideAllMainViews();
+      const container = document.getElementById('viewCustomerDashboard');
+      if (!container) return;
+      container.classList.remove('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      const totalVal = job.totalPriceLE || ((job.depositLE || 0) * 2.5);
+      const remBal = Math.max(0, totalVal - (job.depositLE || 0));
+
+      container.innerHTML = `
+        <div class="bg-bay-900 border border-gold-500/40 rounded-3xl p-6 sm:p-10 space-y-8 shadow-2xl">
+          <div class="flex items-center justify-between pb-4 border-b border-slate-800">
+            <button onclick="navigateToWelcome()" class="px-3.5 py-1.5 rounded-xl bg-bay-850 hover:bg-bay-800 text-slate-300 hover:text-white text-xs font-bold border border-slate-700 transition flex items-center gap-1.5">
+              <i class="ph-bold ph-arrow-left"></i><span>Exit to Home</span>
+            </button>
+            <button onclick="openCustomerAiAdvisorModal()" class="px-3 py-1.5 rounded-xl bg-gold-500/20 text-gold-300 hover:bg-gold-500/30 text-xs font-bold border border-gold-500/40 flex items-center gap-1.5 transition">
+              <i class="ph-bold ph-sparkle text-gold-400"></i><span>Ask Dr.Care AI Concierge</span>
+            </button>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="md:col-span-2 space-y-2">
+              <span class="text-[11px] font-mono font-bold text-gold-400 uppercase tracking-widest block">Restoration In Active Bay</span>
+              <h1 class="text-2xl sm:text-3xl font-black text-white">${escapeHtml(job.carType)}</h1>
+              <p class="text-xs text-slate-400">Client: <strong class="text-white">${escapeHtml(job.customerName)}</strong> • Plate: <strong class="text-gold-400 font-mono text-sm">${escapeHtml(job.carPlate)}</strong></p>
+              <div class="flex items-center gap-3 text-xs pt-1 flex-wrap">
+                <span class="px-2.5 py-1 rounded-xl bg-bay-850 border border-slate-800 text-slate-300 font-medium">🎨 ${escapeHtml(job.carColor)}</span>
+                <span class="px-2.5 py-1 rounded-xl bg-bay-850 border border-slate-800 text-slate-300 font-mono font-medium">🛣️ ${(job.carMileage || 0).toLocaleString()} KM</span>
+                <span class="px-2.5 py-1 rounded-xl bg-bay-850 border border-slate-800 text-slate-300 font-medium">📍 ${escapeHtml(job.province || 'Port Said')}</span>
+                ${job.estimatedCompletion ? `<span class="px-2.5 py-1 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-400 font-mono font-bold">⏰ Est. Delivery: ${escapeHtml(job.estimatedCompletion.replace('T', ' '))}</span>` : ''}
+              </div>
+            </div>
+
+            <div class="bg-bay-850 border border-slate-800 p-5 rounded-2xl space-y-3">
+              <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">Financial Audit (L.E)</span>
+              <div class="space-y-1 text-xs">
+                <div class="flex justify-between items-center"><span class="text-slate-400">Advance Deposit:</span><span class="font-mono font-black text-emerald-400 text-sm">${(job.depositLE || 0).toLocaleString()} L.E</span></div>
+                <div class="flex justify-between items-center text-[11px]"><span class="text-slate-400">Deposit Status:</span><span class="font-bold font-mono ${job.depositVerified ? 'text-emerald-400' : 'text-amber-400'}">${job.depositVerified ? '✓ Verified in Account' : '⏳ Pending Audit'}</span></div>
+              </div>
+              <div class="pt-2 border-t border-slate-800 space-y-1 text-xs">
+                <div class="flex justify-between items-center"><span class="text-slate-400">Total Estimation:</span><span class="font-mono font-bold text-white">${totalVal.toLocaleString()} L.E</span></div>
+                <div class="flex justify-between items-center"><span class="text-slate-400">Handover Balance:</span><span class="font-mono font-bold text-amber-400">${remBal.toLocaleString()} L.E</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-3 bg-bay-850 p-6 rounded-3xl border border-slate-800">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs">
+              <span class="font-black text-gold-400 uppercase tracking-wider flex items-center gap-2">
+                <i class="ph-bold ph-gear-six animate-spin text-base"></i>
+                <span>${escapeHtml(job.progressStageLabel)}</span>
+              </span>
+              <span class="font-mono font-black text-2xl text-white">${job.progressPercent}% Completed</span>
+            </div>
+            <div class="w-full h-4 bg-bay-950 rounded-full overflow-hidden border border-slate-800 p-0.5">
+              <div class="h-full rounded-full bg-gradient-to-r from-amber-500 via-gold-500 to-emerald-400 transition-all duration-700 shadow-lg shadow-gold-500/30" style="width: ${job.progressPercent}%"></div>
+            </div>
+            ${job.detailerNotes ? `
+              <div class="mt-2 p-3 bg-bay-900 rounded-xl border border-slate-800 text-xs text-slate-300">
+                <strong class="text-gold-400 block font-bold mb-0.5">Technician Live Bay Note:</strong>
+                "${escapeHtml(job.detailerNotes)}"
+              </div>
+            ` : ''}
+          </div>
+
+          <div class="bg-bay-850 p-5 rounded-2xl border border-slate-800 space-y-3">
+            <span class="text-xs font-black text-gold-400 uppercase tracking-wider block">Special Instructions to Detailer (Arabic/English)</span>
+            <div class="flex gap-2">
+              <input type="text" id="inputCustomerCommentNote" value="${escapeHtml(job.customerNotes || '')}" placeholder="Write any specific request (e.g. please clean exhaust tips or pay extra care to mirrors)..." 
+                class="flex-1 border border-slate-700 rounded-xl px-4 py-2.5 text-xs focus:outline-none focus:border-gold-500">
+              <button onclick="handleCustomerSubmitNote('${job.id}')" class="px-5 py-2.5 rounded-xl bg-gold-500 hover:bg-gold-400 text-slate-950 font-black text-xs uppercase tracking-wider transition">
+                Save Request
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function handleCustomerSubmitNote(jobId) {
+      const job = bookings.find(b => b.id === jobId);
+      if (!job) return;
+      const note = document.getElementById('inputCustomerCommentNote')?.value.trim() || '';
+      job.customerNotes = note;
+      if (!job.auditLog) job.auditLog = [];
+      job.auditLog.push(`Customer submitted note: "${note}"`);
+      saveState();
+      showToast('Special request submitted to workshop bay.', 'gold');
+    }
+
+    function populateDetailerSelectors() {
+      const detailers = staffUsers.filter(u => u.role === 'detailer' || u.role === 'manager' || u.role === 'owner');
+      ['newAssignedDetailer', 'editAssignedDetailer'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.innerHTML = detailers.map(d => `
+            <option value="${d.id}">${escapeHtml(d.name)} (${d.role.toUpperCase()})</option>
+          `).join('');
+        }
+      });
+    }
+
+    function openNewBookingModal(preDate = null) {
+      populateDetailerSelectors();
+      const modal = document.getElementById('modalNewBooking');
+      if (modal) modal.classList.remove('hidden');
+      const dateInput = document.getElementById('newBookingDate');
+      if (dateInput) {
+        if (preDate) {
+          dateInput.value = preDate;
+        } else if (!dateInput.value) {
+          dateInput.value = new Date().toISOString().split('T')[0];
+        }
+      }
+    }
+
+    function closeNewBookingModal() {
+      document.getElementById('modalNewBooking')?.classList.add('hidden');
+    }
+
+    function handleNewBookingForm(e) {
+      e.preventDefault();
+      const depositVal = Number(document.getElementById('newDeposit')?.value) || 0;
+      const totalVal = Number(document.getElementById('newTotalPrice')?.value) || (depositVal * 2.5);
+      const selDet = document.getElementById('newAssignedDetailer');
+
+      const newJob = {
+        id: 'job-' + Date.now(),
+        pin: 'DR-' + Math.floor(1000 + Math.random() * 9000),
+        customerName: document.getElementById('newCustName')?.value.trim() || 'Client',
+        customerPhone: document.getElementById('newCustPhone')?.value.trim() || '',
+        province: document.getElementById('newProvince')?.value || 'Port Said',
+        carType: document.getElementById('newCarType')?.value.trim() || 'Vehicle',
+        carPlate: document.getElementById('newCarPlate')?.value.trim().toUpperCase() || 'ABC 123',
+        carColor: document.getElementById('newCarColor')?.value.trim() || 'Black',
+        carMileage: Number(document.getElementById('newCarMileage')?.value) || 0,
+        bookingDate: document.getElementById('newBookingDate')?.value || new Date().toISOString().split('T')[0],
+        estimatedCompletion: document.getElementById('newEstCompletion')?.value || '',
+        totalPriceLE: totalVal,
+        depositLE: depositVal,
+        paymentMethod: document.getElementById('newPaymentMethod')?.value || 'cash',
+        depositVerified: false,
+        assignedDetailerId: selDet?.value || 'usr-3',
+        assignedDetailerName: selDet?.options[selDet.selectedIndex]?.text || 'Mahmoud Sayed',
+        carIssue: document.getElementById('newCarIssue')?.value.trim() || 'Paint restoration',
+        customerNotes: '',
+        progressPercent: 10,
+        progressStageLabel: 'Phase 1: Paint Depth Gauge & Defect Mapping',
+        detailerNotes: '',
+        auditLog: [`Created by ${currentStaffUser?.name || 'Staff'}`]
+      };
+
+      bookings.unshift(newJob);
+      saveState();
+      closeNewBookingModal();
+      e.target.reset();
+
+      filterBookingsGrid();
+      if (activeStaffTab === 'calendar') renderCalendar();
+      if (activeStaffTab === 'funds') renderFundsCircuit();
+      showToast('Booking Scheduled & Synced with Calendar!', 'gold');
+    }
+
+    function openEditBookingModal(jobId) {
+      const job = bookings.find(b => b.id === jobId);
+      if (!job) return;
+      populateDetailerSelectors();
+
+      const editId = document.getElementById('editJobId');
+      if (editId) editId.value = job.id;
+
+      const setVal = (id, v) => { const el = document.getElementById(id); if (el) el.value = v; };
+      setVal('editCustName', job.customerName);
+      setVal('editCustPhone', job.customerPhone);
+      setVal('editProvince', job.province || 'Port Said');
+      setVal('editCarType', job.carType);
+      setVal('editCarPlate', job.carPlate);
+      setVal('editCarColor', job.carColor);
+      setVal('editCarMileage', job.carMileage || 0);
+      setVal('editBookingDate', job.bookingDate);
+      setVal('editEstCompletion', job.estimatedCompletion || '');
+      setVal('editAssignedDetailer', job.assignedDetailerId || '');
+      setVal('editTotalPrice', job.totalPriceLE || 0);
+      setVal('editDeposit', job.depositLE || 0);
+      setVal('editPaymentMethod', job.paymentMethod || 'cash');
+      setVal('editCarIssue', job.carIssue);
+
+      document.getElementById('modalEditBooking')?.classList.remove('hidden');
+    }
+
+    function closeEditBookingModal() {
+      document.getElementById('modalEditBooking')?.classList.add('hidden');
+    }
+
+    function handleEditBookingForm(e) {
+      e.preventDefault();
+      const jobId = document.getElementById('editJobId')?.value;
+      const job = bookings.find(b => b.id === jobId);
+      if (!job) return;
+
+      job.customerName = document.getElementById('editCustName')?.value.trim() || job.customerName;
+      job.customerPhone = document.getElementById('editCustPhone')?.value.trim() || job.customerPhone;
+      job.province = document.getElementById('editProvince')?.value || job.province;
+      job.carType = document.getElementById('editCarType')?.value.trim() || job.carType;
+      job.carPlate = document.getElementById('editCarPlate')?.value.trim().toUpperCase() || job.carPlate;
+      job.carColor = document.getElementById('editCarColor')?.value.trim() || job.carColor;
+      job.carMileage = Number(document.getElementById('editCarMileage')?.value) || job.carMileage;
+      job.bookingDate = document.getElementById('editBookingDate')?.value || job.bookingDate;
+      job.estimatedCompletion = document.getElementById('editEstCompletion')?.value || '';
+      job.carIssue = document.getElementById('editCarIssue')?.value.trim() || job.carIssue;
+      job.paymentMethod = document.getElementById('editPaymentMethod')?.value || 'cash';
+      
+      const selDet = document.getElementById('editAssignedDetailer');
+      if (selDet) {
+        job.assignedDetailerId = selDet.value;
+        job.assignedDetailerName = selDet.options[selDet.selectedIndex]?.text || job.assignedDetailerName;
+      }
+
+      job.depositLE = Number(document.getElementById('editDeposit')?.value) || 0;
+      job.totalPriceLE = Number(document.getElementById('editTotalPrice')?.value) || 0;
+
+      saveState();
+      closeEditBookingModal();
+      openVehicleDetailSheet(job.id);
+      showToast('Booking updated successfully.', 'cyan');
+    }
+
+    function toggleDepositVerification(jobId) {
+      const job = bookings.find(b => b.id === jobId);
+      if (job) {
+        job.depositVerified = !job.depositVerified;
+        saveState();
+        openVehicleDetailSheet(job.id);
+        showToast(`Deposit marked as ${job.depositVerified ? 'Verified' : 'Pending'}.`, 'emerald');
+      }
+    }
+
+    function confirmDeleteJob(jobId) {
+      pendingDeleteAction = () => {
+        bookings = bookings.filter(b => b.id !== jobId);
+        customerAccounts = customerAccounts.filter(ca => ca.jobId !== jobId);
+        saveState();
+        closeDeleteConfirmModal();
+        switchStaffTab('bookings');
+        showToast('Vehicle booking permanently deleted.', 'rose');
+      };
+      document.getElementById('modalDeleteConfirm')?.classList.remove('hidden');
+    }
+
+    function closeDeleteConfirmModal() {
+      pendingDeleteAction = null;
+      document.getElementById('modalDeleteConfirm')?.classList.add('hidden');
+    }
+
+    document.getElementById('btnExecuteDeleteConfirm')?.addEventListener('click', () => {
+      if (pendingDeleteAction) pendingDeleteAction();
+    });
+
+    function openCreateCustomerModal(preJob = null) {
+      const sel = document.getElementById('custLinkJobSelect');
+      if (sel) {
+        sel.innerHTML = bookings.map(b => `
+          <option value="${b.id}" ${b.id === preJob ? 'selected' : ''}>${escapeHtml(b.customerName)} - ${escapeHtml(b.carType)} (${escapeHtml(b.carPlate)})</option>
+        `).join('');
+      }
+      document.getElementById('modalCreateCustomer')?.classList.remove('hidden');
+    }
+
+    function closeCreateCustomerModal() {
+      document.getElementById('modalCreateCustomer')?.classList.add('hidden');
+    }
+
+    function handleCreateCustomerForm(e) {
+      e.preventDefault();
+      const jobId = document.getElementById('custLinkJobSelect')?.value;
+      const job = bookings.find(b => b.id === jobId);
+      const username = document.getElementById('newCustUsername')?.value.trim();
+      const pass = document.getElementById('newCustPassword')?.value.trim();
+      if (!job || !username || !pass) return;
+
+      customerAccounts = customerAccounts.filter(ca => ca.jobId !== jobId);
+      customerAccounts.push({
+        id: 'cacc-' + Date.now(),
+        jobId,
+        customerName: job.customerName,
+        username,
+        pass
+      });
+
+      saveState();
+      closeCreateCustomerModal();
+      e.target.reset();
+      renderAccountsLists();
+      showToast('Client Access Pass Generated!', 'emerald');
+    }
+
+    function removeCustomerAccount(id) {
+      customerAccounts = customerAccounts.filter(ca => ca.id !== id);
+      saveState();
+      renderAccountsLists();
+      showToast('Customer pass revoked.', 'slate');
+    }
+
+    function removeStaffUser(id) {
+      staffUsers = staffUsers.filter(u => u.id !== id);
+      saveState();
+      renderAccountsLists();
+      populateDetailerSelectors();
+      showToast('Staff member revoked.', 'slate');
+    }
+
+    function copyToClipboard(text, successToast = 'Copied to clipboard!') {
+      const temp = document.createElement('textarea');
+      temp.value = text;
+      document.body.appendChild(temp);
+      temp.select();
+      try {
+        document.execCommand('copy');
+        showToast(successToast, 'emerald');
+      } catch (e) {
+        showToast('Unable to copy text automatically.', 'rose');
+      }
+      document.body.removeChild(temp);
+    }
+
+    function copyCustomerWhatsAppInvite(jobId) {
+      const job = bookings.find(b => b.id === jobId);
+      const acc = customerAccounts.find(ca => ca.jobId === jobId);
+      if (job && acc) {
+        const msg = `السلام عليكم ${job.customerName}،\nرابط متابعة سيارتك ${job.carType} (${job.carPlate}) في مركز Dr.Care:\n${window.location.href.split('#')[0]}\nاسم المستخدم: ${acc.username}\nكلمة السر: ${acc.pass}\nأو يمكنك تسجيل الدخول برقم الموبايل ورقم اللوحة.`;
+        copyToClipboard(msg, 'WhatsApp credentials copied!');
+      }
+    }
+
+    function exportDatabaseBackup() {
+      const payload = {
+        meta: {
+          app: "Dr.Care Paint Restoration Centre",
+          timestamp: new Date().toISOString(),
+          version: "2.6.0",
+          owner: "Mr. Alfy"
+        },
+        staff: staffUsers,
+        bookings: bookings,
+        customerAccounts: customerAccounts
+      };
+
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(payload, null, 2));
+      const downloadAnchor = document.createElement('a');
+      downloadAnchor.setAttribute("href", dataStr);
+      downloadAnchor.setAttribute("download", `drcare_backup_${new Date().toISOString().split('T')[0]}.json`);
+      document.body.appendChild(downloadAnchor);
+      downloadAnchor.click();
+      downloadAnchor.remove();
+
+      showToast('Complete Database Exported (JSON)!', 'gold');
+    }
+
+    function importDatabaseBackup(e) {
+      const file = e.target.files?.[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(event) {
+        try {
+          const parsed = JSON.parse(event.target.result);
+          if (parsed && Array.isArray(parsed.bookings)) {
+            bookings = parsed.bookings;
+            if (Array.isArray(parsed.staff)) staffUsers = parsed.staff;
+            if (Array.isArray(parsed.customerAccounts)) customerAccounts = parsed.customerAccounts;
+
+            saveState();
+            filterBookingsGrid();
+            renderCalendar();
+            renderFundsCircuit();
+            renderAccountsLists();
+            populateDetailerSelectors();
+            showToast(`Database Restored Successfully! (${bookings.length} Vehicles)`, 'emerald');
+          } else {
+            showToast('Invalid backup file format.', 'rose');
+          }
+        } catch (err) {
+          showToast('Failed to parse backup JSON file.', 'rose');
+        }
+      };
+      reader.readAsText(file);
+      e.target.value = '';
+    }
+
+    async function runAiDefectSuggestions(mode) {
+      const isEdit = mode === 'edit';
+      const carType = document.getElementById(isEdit ? 'editCarType' : 'newCarType')?.value.trim() || 'Vehicle';
+      const carColor = document.getElementById(isEdit ? 'editCarColor' : 'newCarColor')?.value.trim() || 'Clearcoat';
+      const issue = document.getElementById(isEdit ? 'editCarIssue' : 'newCarIssue')?.value.trim() || 'Paint defect assessment';
+
+      openAiDiagnosticModal();
+      const body = document.getElementById('aiDiagnosticBody');
+      if (body) {
+        body.innerHTML = `
+          <div class="py-8 text-center space-y-3">
+            <i class="ph-bold ph-sparkle text-3xl text-gold-400 animate-spin mx-auto block"></i>
+            <p class="text-xs font-bold text-gold-300">Dr.Care Gemini AI analyzing paint hardness & compound mapping...</p>
+          </div>
+        `;
+      }
+
+      const prompt = `Vehicle: ${carType}, Paint: ${carColor}, Issue: ${issue}. Provide paint restoration plan: compound abrasives, rotary/DA machine steps, estimated bay hours, and fair Egyptian market price estimate in L.E.`;
+      const systemInst = `You are the master technical paint director at Dr.Care Paint Restoration Centre in Egypt. Output clear, concise bullet points for workshop detailers.`;
+
+      try {
+        const reply = await callGemini(prompt, systemInst);
+        if (body) {
+          body.innerHTML = `
+            <div class="p-4 rounded-2xl bg-bay-850 border border-slate-800 space-y-3">
+              <div class="flex items-center justify-between pb-2 border-b border-slate-800">
+                <span class="font-black text-gold-400 uppercase tracking-wider">${escapeHtml(carType)} - Paint Protocol</span>
+                <span class="text-[10px] font-mono text-slate-400">${escapeHtml(carColor)}</span>
+              </div>
+              <div class="text-xs text-slate-200 leading-relaxed whitespace-pre-wrap">${escapeHtml(reply)}</div>
+              <div class="pt-3 border-t border-slate-800 flex justify-end">
+                <button onclick="appendAiPlanToIssue('${mode}', \`${escapeHtml(reply).replace(/`/g, "\\`")}\`)" class="px-3.5 py-1.5 rounded-xl bg-gold-500 hover:bg-gold-400 text-slate-950 font-bold text-xs">
+                  Append to Defect Notes
+                </button>
+              </div>
+            </div>
+          `;
+        }
+      } catch (err) {
+        if (body) {
+          body.innerHTML = `
+            <div class="p-4 rounded-2xl bg-bay-850 border border-slate-800 space-y-2">
+              <span class="font-bold text-amber-400">Dr.Care Standard Protocol:</span>
+              <p class="text-xs text-slate-300">1. Chemical iron fallout & clay bar decontaminate.<br>2. 2000/3000 grit scratch leveling on defect zones.<br>3. Heavy rotary cut with wool pad & aggressive compound.<br>4. Dual-action polishing with medium foam pad.<br>5. 9H ceramic coating layer & IR heat cure.</p>
+            </div>
+          `;
+        }
+      }
+    }
+
+    function appendAiPlanToIssue(mode, text) {
+      const textarea = document.getElementById(mode === 'edit' ? 'editCarIssue' : 'newCarIssue');
+      if (textarea) {
+        textarea.value = (textarea.value.trim() + '\n\n[AI Restoration Plan]:\n' + text).trim();
+      }
+      closeAiDiagnosticModal();
+      showToast('Plan appended to defect intake.', 'emerald');
+    }
+
+    async function runAiDiagnosticForCurrentSheet(jobId) {
+      const job = bookings.find(b => b.id === jobId);
+      if (!job) return;
+      openAiDiagnosticModal();
+      const body = document.getElementById('aiDiagnosticBody');
+      if (body) {
+        body.innerHTML = `
+          <div class="py-8 text-center space-y-3">
+            <i class="ph-bold ph-sparkle text-3xl text-gold-400 animate-spin mx-auto block"></i>
+            <p class="text-xs font-bold text-gold-300">Analyzing ${escapeHtml(job.carType)} paint condition...</p>
+          </div>
+        `;
+      }
+
+      const prompt = `Vehicle: ${job.carType}, Paint: ${job.carColor}, Current Stage: ${job.progressStageLabel} (${job.progressPercent}%). Defect: ${job.carIssue}. Detailer notes: ${job.detailerNotes || 'None'}. Provide quality checklist and compound steps.`;
+      try {
+        const reply = await callGemini(prompt, `You are the chief detailing inspector at Dr.Care Centre.`);
+        if (body) {
+          body.innerHTML = `
+            <div class="p-4 rounded-2xl bg-bay-850 border border-slate-800 space-y-3">
+              <div class="flex items-center justify-between pb-2 border-b border-slate-800">
+                <span class="font-bold text-gold-400">${escapeHtml(job.carType)} - Quality Assessment</span>
+                <span class="text-[10px] font-mono text-emerald-400">${job.progressPercent}% Active</span>
+              </div>
+              <div class="text-xs text-slate-200 leading-relaxed whitespace-pre-wrap">${escapeHtml(reply)}</div>
+            </div>
+          `;
+        }
+      } catch (e) {
+        if (body) {
+          body.innerHTML = `<p class="text-xs text-slate-400 p-4">Phase: ${escapeHtml(job.progressStageLabel)}. Recommended: Complete current stage, perform IPA wipe, and verify clearcoat thickness before proceeding.</p>`;
+        }
+      }
+    }
+
+    function openAiDiagnosticModal() { document.getElementById('modalAiDiagnostic')?.classList.remove('hidden'); }
+    function closeAiDiagnosticModal() { document.getElementById('modalAiDiagnostic')?.classList.add('hidden'); }
+
+    function openAiWhatsAppModal(jobId) {
+      activeAiJobId = jobId;
+      document.getElementById('modalAiWhatsApp')?.classList.remove('hidden');
+      generateAiCustomerUpdateMessage();
+    }
+    function closeAiWhatsAppModal() { document.getElementById('modalAiWhatsApp')?.classList.add('hidden'); }
+
+    async function generateAiCustomerUpdateMessage() {
+      const job = bookings.find(b => b.id === activeAiJobId);
+      const area = document.getElementById('aiWhatsAppContentArea');
+      const lang = document.getElementById('aiLangSelect')?.value || 'en';
+      if (!job || !area) return;
+
+      area.innerHTML = `<div class="py-6 text-center text-xs text-gold-400"><i class="ph-bold ph-sparkle animate-spin mr-1"></i> Generating personalized dispatch...</div>`;
+
+      const prompt = `Write a luxury WhatsApp progress dispatch for client ${job.customerName} regarding their ${job.carType} (${job.carPlate}). Progress: ${job.progressPercent}% (${job.progressStageLabel}). Language requested: ${lang}. Keep it executive, reassuring, and concise.`;
+      try {
+        const reply = await callGemini(prompt, `You represent Dr.Care Paint Restoration Centre in Egypt.`);
+        generatedAiWhatsAppMessage = reply.trim();
+        area.innerHTML = `<div class="text-xs text-slate-200 whitespace-pre-wrap leading-relaxed">${escapeHtml(generatedAiWhatsAppMessage)}</div>`;
+      } catch (e) {
+        generatedAiWhatsAppMessage = `عزيزي ${job.customerName}،\nنود إعلامك أن سيارتك ${job.carType} (${job.carPlate}) وصلت الآن إلى نسبة إنجاز ${job.progressPercent}% (${job.progressStageLabel}) في مركز Dr.Care.\nشكراً لثقتكم بنا!`;
+        area.innerHTML = `<div class="text-xs text-slate-200 whitespace-pre-wrap leading-relaxed">${escapeHtml(generatedAiWhatsAppMessage)}</div>`;
+      }
+    }
+
+    function copyAiWhatsAppText() {
+      if (generatedAiWhatsAppMessage) {
+        copyToClipboard(generatedAiWhatsAppMessage, 'WhatsApp Dispatch Copied!');
+        closeAiWhatsAppModal();
+      }
+    }
+
+    function openCustomerAiAdvisorModal() { document.getElementById('modalCustomerAiConcierge')?.classList.remove('hidden'); }
+    function closeCustomerAiAdvisorModal() { document.getElementById('modalCustomerAiConcierge')?.classList.add('hidden'); }
+
+    async function askCustomerAiConcierge() {
+      const q = document.getElementById('custAiQueryInput')?.value.trim();
+      const respBox = document.getElementById('custAiResponseArea');
+      if (!q || !respBox) return;
+
+      respBox.innerHTML = `<div class="py-4 text-center text-xs text-gold-400"><i class="ph-bold ph-sparkle animate-spin mr-1"></i> Formulating paint preservation advice...</div>`;
+      const carInfo = activeCustomerJob ? `${activeCustomerJob.carType} (${activeCustomerJob.carColor})` : 'automotive paint';
+
+      const prompt = `Client question: "${q}". Context: Vehicle is ${carInfo}. Explain proper paint maintenance, scratch prevention, and ceramic coating care under Egyptian weather conditions.`;
+      try {
+        const reply = await callGemini(prompt, `You are the luxury concierge at Dr.Care Paint Restoration Centre.`);
+        respBox.innerHTML = `<div class="text-xs text-slate-200 leading-relaxed whitespace-pre-wrap">${escapeHtml(reply)}</div>`;
+      } catch (e) {
+        respBox.innerHTML = `<div class="text-xs text-slate-300">Always use a two-bucket wash with grit guards, high-GSM microfiber towels, and pH-neutral shampoo to protect your clearcoat and 9H ceramic coating from swirls and dust.</div>`;
+      }
+    }
+
+    function showToast(message, color = 'gold') {
+      const container = document.getElementById('toastContainer');
+      if (!container) return;
+      const t = document.createElement('div');
+      const colors = {
+        gold: 'bg-bay-900 border-gold-500/50 text-gold-300',
+        emerald: 'bg-bay-900 border-emerald-500/50 text-emerald-300',
+        cyan: 'bg-bay-900 border-cyan-500/50 text-cyan-300',
+        rose: 'bg-bay-900 border-rose-500/50 text-rose-300',
+        slate: 'bg-bay-900 border-slate-700 text-slate-300'
+      };
+      t.className = `p-4 rounded-2xl border shadow-2xl text-xs font-bold flex items-center gap-2.5 transition-all transform duration-300 pointer-events-auto ${colors[color] || colors.gold}`;
+      t.innerHTML = `<i class="ph-bold ph-info text-base"></i><span>${escapeHtml(message)}</span>`;
+      container.appendChild(t);
+      setTimeout(() => {
+        t.style.opacity = '0';
+        setTimeout(() => t.remove(), 300);
+      }, 3500);
+    }
+
+    function escapeHtml(str) {
+      return String(str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      navigateToWelcome();
+      populateDetailerSelectors();
+      setAppLanguage('en');
+    });
+  </script>
+</body>
+</html>
