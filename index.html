@@ -159,7 +159,7 @@
         </div>
       </div>
 
-      <!-- Header Controls: Language Toggle & Auth / Staff Nav -->
+      <!-- Header Controls -->
       <div class="flex items-center gap-2 sm:gap-3">
         
         <!-- Bilingual Toggle -->
@@ -344,16 +344,16 @@
             <label class="block text-xs font-bold text-white mb-1.5 flex items-center gap-1.5">
               <i class="ph-bold ph-user text-gold-400"></i> <span data-i18n="usernameLabel">Customer Assigned Username *</span>
             </label>
-            <input type="text" id="custSearchUsername" required placeholder="e.g. tarek.m"
+            <input type="text" id="custSearchUsername" required placeholder="e.g. 01012345678"
               class="w-full border border-slate-700 rounded-2xl px-4 py-3 text-sm focus:outline-none focus:border-gold-500">
           </div>
 
           <div>
             <label class="block text-xs font-bold text-white mb-1.5 flex items-center gap-1.5">
-              <i class="ph-bold ph-lock text-gold-400"></i> <span data-i18n="passwordLabel">Password *</span>
+              <i class="ph-bold ph-lock text-gold-400"></i> <span data-i18n="passwordLabel">Password (Plate) *</span>
             </label>
-            <input type="password" id="custSearchPass" required placeholder="••••••••"
-              class="w-full border border-slate-700 rounded-2xl px-4 py-3 text-sm focus:outline-none focus:border-gold-500">
+            <input type="text" id="custSearchPass" required placeholder="e.g. ط ر ب 1234"
+              class="w-full border border-slate-700 rounded-2xl px-4 py-3 text-sm focus:outline-none focus:border-gold-500 uppercase">
           </div>
 
           <button type="submit" class="w-full py-3.5 rounded-2xl bg-gold-500 hover:bg-gold-400 text-slate-950 font-black text-xs uppercase tracking-wider transition shadow-xl flex items-center justify-center gap-2">
@@ -400,7 +400,7 @@
 
           <button onclick="window.openNewBookingModal()" id="btnOpenNewBooking" class="flex-1 sm:flex-initial px-4 py-2 rounded-2xl bg-gold-500 hover:bg-gold-400 text-slate-950 font-black text-xs uppercase tracking-wider transition shadow-lg flex items-center justify-center gap-1.5 whitespace-nowrap">
             <i class="ph-bold ph-plus-circle text-base"></i>
-            <span data-i18n="newBookingSheet">+ New Booking Sheet</span>
+            <span data-i18n="newBooking">+ New Booking Sheet</span>
           </button>
         </div>
       </div>
@@ -636,7 +636,7 @@
         </div>
       </div>
 
-      <!-- SUB-VIEW: ACCOUNTS & ACCESS (Strict Level 1 Owner Visibility) -->
+      <!-- SUB-VIEW: ACCOUNTS & ACCESS -->
       <div id="subViewAccounts" class="space-y-6 hidden">
         <div class="bg-bay-900 border border-slate-800 rounded-3xl p-5 sm:p-8 space-y-6 shadow-2xl">
           <div class="flex items-center justify-between pb-4 border-b border-slate-800">
@@ -705,10 +705,6 @@
                 </span>
                 <p class="text-[11px] text-slate-400" data-i18n="customerLoginsSub">Assigned customer accounts for direct username and password access.</p>
               </div>
-              <button onclick="window.openCreateCustomerModal()" class="px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs uppercase tracking-wider transition shadow-lg flex items-center gap-1.5">
-                <i class="ph-bold ph-plus-circle"></i>
-                <span data-i18n="customerLoginBtn">+ Customer Login</span>
-              </button>
             </div>
             <div id="listCustomerAccountsContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
           </div>
@@ -730,425 +726,212 @@
     <div class="bg-bay-900 border border-gold-500/40 rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl space-y-5">
       <div class="flex items-center justify-between pb-3 border-b border-slate-800">
         <div class="flex items-center gap-2.5">
-          <div class="w-10 h-10 rounded-2xl gold-leather-badge flex items-center justify-center text-gold-400">
+          <div class="w-10 h-10 rounded-2xl bg-gold-500/10 border border-gold-500/30 flex items-center justify-center text-gold-400">
             <i class="ph-bold ph-shield-check text-xl"></i>
           </div>
           <div>
-            <h3 class="text-base font-black text-white uppercase tracking-wider" data-i18n="staffModalHeader">Dr.Care Staff Portal</h3>
-            <p class="text-xs text-slate-400" data-i18n="staffModalSub">Authorized workshop team management</p>
+            <h3 class="text-sm font-black text-white uppercase tracking-wider" data-i18n="staffLoginTitleModal">Workshop Staff Portal Login</h3>
+            <p class="text-[11px] text-slate-400" data-i18n="staffLoginSubModal">Enter your authorized credentials for secure back-office access.</p>
           </div>
         </div>
-        <button onclick="window.closeStaffLoginModal()" class="w-8 h-8 rounded-xl bg-bay-800 text-slate-400 hover:text-white flex items-center justify-center">
-          <i class="ph-bold ph-x"></i>
+        <button onclick="window.closeStaffLoginModal()" class="w-8 h-8 rounded-full bg-bay-800 hover:bg-bay-750 text-slate-400 hover:text-white flex items-center justify-center transition">
+          <i class="ph-bold ph-x text-sm"></i>
         </button>
       </div>
 
       <form id="formStaffLogin" onsubmit="window.handleStaffLoginForm(event)" class="space-y-4">
         <div>
-          <label class="block text-xs font-bold text-white mb-1.5" data-i18n="usernameLabel">Authorized Username *</label>
-          <input type="text" id="staffInputUsername" required placeholder="Enter username" class="w-full border border-slate-700 rounded-2xl px-4 py-3 text-sm">
+          <label class="block text-xs font-bold text-white mb-1.5" data-i18n="usernameLabel">Staff Username *</label>
+          <input type="text" id="staffLoginUser" required placeholder="e.g. Mr.Alfy or ahmed.mohsen"
+            class="w-full border border-slate-700 rounded-2xl px-4 py-3 text-xs focus:outline-none focus:border-gold-500">
         </div>
+
         <div>
           <label class="block text-xs font-bold text-white mb-1.5" data-i18n="passwordLabel">Password *</label>
-          <input type="password" id="staffInputPassword" required placeholder="••••••••" class="w-full border border-slate-700 rounded-2xl px-4 py-3 text-sm">
+          <input type="password" id="staffLoginPass" required placeholder="••••••••"
+            class="w-full border border-slate-700 rounded-2xl px-4 py-3 text-xs focus:outline-none focus:border-gold-500 font-mono">
         </div>
-        <div id="staffLoginErrorMsg" class="hidden p-3 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-400 text-xs font-bold text-center" data-i18n="loginError">
-          Invalid username or password.
+
+        <div class="p-3 rounded-xl bg-bay-950 border border-slate-800 text-[11px] text-slate-400 space-y-1">
+          <span class="font-bold text-gold-400 block" data-i18n="demoAccessNote">Quick Demo Test Credentials:</span>
+          <div class="grid grid-cols-1 gap-0.5 font-mono">
+            <div>Owner (Level 1): <strong class="text-white">Mr.Alfy</strong> / <strong class="text-white">Mr.1000y</strong></div>
+            <div>Manager (Level 2): <strong class="text-white">ahmed.mohsen</strong> / <strong class="text-white">123456</strong></div>
+            <div>Detailer (Level 3): <strong class="text-white">mahmoud.detail</strong> / <strong class="text-white">123456</strong></div>
+          </div>
         </div>
-        <div class="pt-2 flex justify-end gap-2">
-          <button type="button" onclick="window.closeStaffLoginModal()" class="px-4 py-2 text-xs font-bold text-slate-400 hover:text-white" data-i18n="cancel">Cancel</button>
-          <button type="submit" class="px-6 py-2 rounded-xl bg-gold-500 hover:bg-gold-400 text-slate-950 font-black text-xs uppercase tracking-wider transition" data-i18n="signInBackOffice">Sign In</button>
-        </div>
+
+        <button type="submit" class="w-full py-3.5 rounded-2xl bg-gold-500 hover:bg-gold-400 text-slate-950 font-black text-xs uppercase tracking-wider transition shadow-xl flex items-center justify-center gap-2">
+          <i class="ph-bold ph-sign-in text-base"></i>
+          <span data-i18n="loginButton">Securely Access Workshop Console</span>
+        </button>
       </form>
     </div>
   </div>
 
   <!-- New Booking Modal -->
-  <div id="modalNewBooking" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4 hidden">
-    <div class="bg-bay-900 border border-gold-500/40 rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl overflow-y-auto max-h-[90vh] space-y-5">
-      <div class="flex items-center justify-between pb-4 border-b border-slate-800">
-        <h3 class="text-base font-black text-white uppercase tracking-wider" data-i18n="newBookingModalHeader">New Vehicle Booking Sheet</h3>
-        <button onclick="window.closeNewBookingModal()" class="w-8 h-8 rounded-xl bg-bay-800 text-slate-400 hover:text-white flex items-center justify-center">
-          <i class="ph-bold ph-x"></i>
+  <div id="modalNewBooking" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4 hidden overflow-y-auto">
+    <div class="bg-bay-900 border border-gold-500/40 rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl space-y-6 my-8">
+      
+      <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+        <div class="flex items-center gap-2.5">
+          <div class="w-10 h-10 rounded-2xl bg-gold-500/10 border border-gold-500/30 flex items-center justify-center text-gold-400">
+            <i class="ph-bold ph-car text-xl"></i>
+          </div>
+          <div>
+            <h3 class="text-base font-black text-white uppercase tracking-wider" data-i18n="newBookingModalTitle">New Vehicle Restoration Booking Sheet</h3>
+            <p class="text-[11px] text-slate-400" data-i18n="newBookingModalSub">Register incoming customer vehicle, assigned detailer bay, and advance deposit in L.E.</p>
+          </div>
+        </div>
+        <button onclick="window.closeNewBookingModal()" class="w-8 h-8 rounded-full bg-bay-800 hover:bg-bay-750 text-slate-400 hover:text-white flex items-center justify-center transition">
+          <i class="ph-bold ph-x text-sm"></i>
         </button>
       </div>
 
-      <form onsubmit="window.handleNewBookingForm(event)" class="space-y-4">
+      <form id="formNewBooking" onsubmit="window.handleSaveNewBooking(event)" class="space-y-4">
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label class="block text-xs font-bold text-white mb-1.5" data-i18n="custNameLabel">Customer Full Name *</label>
-            <input type="text" id="newCustName" required placeholder="e.g. Tarek Mansour" class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs">
+            <input type="text" id="nbCustName" required placeholder="e.g. Mohamed El-Sayed" class="w-full border border-slate-700 rounded-xl px-4 py-2.5 text-xs">
           </div>
           <div>
-            <label class="block text-xs font-bold text-white mb-1.5" data-i18n="custPhoneLabel">Customer Mobile Phone *</label>
-            <input type="text" id="newCustPhone" required placeholder="e.g. 01098765432" class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs">
+            <label class="block text-xs font-bold text-white mb-1.5" data-i18n="mobileLabel">Customer Mobile Phone *</label>
+            <input type="text" id="nbCustPhone" required placeholder="e.g. 01012345678" class="w-full border border-slate-700 rounded-xl px-4 py-2.5 text-xs">
           </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div>
-            <label class="block text-xs font-bold text-white mb-1.5" data-i18n="provinceLabel">Egyptian Province / Governorate *</label>
-            <select id="newProvince" required class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs text-white">
-              <option value="Port Said" selected>Port Said (بورسعيد)</option>
-              <option value="Cairo">Cairo (القاهرة)</option>
-              <option value="Giza">Giza (الجيزة)</option>
-              <option value="Alexandria">Alexandria (الإسكندرية)</option>
-              <option value="Ismailia">Ismailia (الإسماعيلية)</option>
-              <option value="Suez">Suez (السويس)</option>
-              <option value="Sharqia">Sharqia (الشرقية)</option>
-              <option value="Dakahlia">Dakahlia (الدقهلية)</option>
-              <option value="Gharbia">Gharbia (الغربية)</option>
-              <option value="Red Sea">Red Sea (البحر الأحمر)</option>
-              <option value="Other">Other Governorate</option>
-            </select>
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-white mb-1.5" data-i18n="carTypeLabel">Car Type / Model *</label>
-            <input type="text" id="newCarType" required placeholder="e.g. Mercedes-Benz C200" class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs">
+            <label class="block text-xs font-bold text-white mb-1.5" data-i18n="carBrandModel">Car Brand & Model *</label>
+            <input type="text" id="nbCarModel" required placeholder="e.g. BMW 520i 2024" class="w-full border border-slate-700 rounded-xl px-4 py-2.5 text-xs">
           </div>
           <div>
             <label class="block text-xs font-bold text-white mb-1.5" data-i18n="carPlateLabel">Car License Plate *</label>
-            <input type="text" id="newCarPlate" required placeholder="e.g. ط ر ب 1234" class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs uppercase">
+            <input type="text" id="nbCarPlate" required placeholder="e.g. ط ر ب 1234" class="w-full border border-slate-700 rounded-xl px-4 py-2.5 text-xs uppercase">
           </div>
           <div>
-            <label class="block text-xs font-bold text-white mb-1.5" data-i18n="carColorLabel">Paint Color & Clearcoat *</label>
-            <input type="text" id="newCarColor" required placeholder="e.g. Obsidian Black Metallic" class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs">
+            <label class="block text-xs font-bold text-white mb-1.5" data-i18n="carColorLabel">Car Paint Color *</label>
+            <input type="text" id="nbCarColor" required placeholder="e.g. Midnight Black Metallic" class="w-full border border-slate-700 rounded-xl px-4 py-2.5 text-xs">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div>
+            <label class="block text-xs font-bold text-white mb-1.5" data-i18n="odometerLabel">Odometer (KM)</label>
+            <input type="text" id="nbOdometer" placeholder="e.g. 45,000 KM" class="w-full border border-slate-700 rounded-xl px-4 py-2.5 text-xs font-mono">
           </div>
           <div>
-            <label class="block text-xs font-bold text-white mb-1.5" data-i18n="mileageLabel">Current Odometer Mileage (KM) *</label>
-            <input type="number" id="newCarMileage" required min="0" placeholder="e.g. 45200" class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs font-mono">
+            <label class="block text-xs font-bold text-white mb-1.5" data-i18n="entryDateLabel">Entry Date *</label>
+            <input type="date" id="nbEntryDate" required class="w-full border border-slate-700 rounded-xl px-4 py-2.5 text-xs font-mono">
           </div>
           <div>
-            <label class="block text-xs font-bold text-white mb-1.5" data-i18n="bookingDateLabel">Booking Date *</label>
-            <input type="date" id="newBookingDate" required class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs">
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-white mb-1.5" data-i18n="estCompletionLabel">Estimated Delivery Date & Time *</label>
-            <input type="datetime-local" id="newEstCompletion" required class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs">
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-white mb-1.5" data-i18n="assignDetailerLabel">Assign Professional Master Detailer *</label>
-            <select id="newAssignedDetailer" required class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs text-white"></select>
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-white mb-1.5" data-i18n="totalPriceLabel">Total Service Estimation (L.E) *</label>
-            <input type="number" id="newTotalPrice" required min="0" step="100" placeholder="e.g. 12000" class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs font-mono">
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-white mb-1.5" data-i18n="depositLabel">Advance Deposit Paid (L.E) *</label>
-            <input type="number" id="newDeposit" required min="0" step="100" placeholder="e.g. 4000" class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs font-mono">
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-white mb-1.5" data-i18n="paymentMethodLabel">Payment Method Channel *</label>
-            <select id="newPaymentMethod" required class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs text-white">
-              <option value="cash" data-i18n="cashOption">💵 Cash in Hand</option>
-              <option value="instapay" data-i18n="instaOption">⚡ InstaPay Transfer</option>
-              <option value="wallet" data-i18n="walletOption">📱 Mobile Wallet (Vodafone/Orange Cash)</option>
-              <option value="visa" data-i18n="visaOption">💳 Visa / POS Card</option>
+            <label class="block text-xs font-bold text-white mb-1.5" data-i18n="assignedDetailer">Assigned Master Detailer</label>
+            <select id="nbAssignedDetailer" class="w-full border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white">
+              <option value="Mahmoud Detailer">Mahmoud Detailer</option>
+              <option value="Ibrahim Master">Ibrahim Master</option>
+              <option value="Hassan Paint Expert">Hassan Paint Expert</option>
             </select>
           </div>
         </div>
 
-        <div>
-          <label class="block text-xs font-bold text-white mb-1.5" data-i18n="carIssueLabel">Customer Issue & Defect Assessment *</label>
-          <div class="relative">
-            <textarea id="newCarIssue" rows="3" required placeholder="Describe scratches, swirls, water spots, or required ceramic package..." class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs"></textarea>
-            <button type="button" onclick="window.runAiDefectSuggestions('new')" class="absolute right-2.5 bottom-2.5 px-3 py-1 rounded-xl bg-gold-500/20 text-gold-400 border border-gold-500/40 text-[10px] font-black uppercase tracking-wider flex items-center gap-1.5 transition">
-              <i class="ph-bold ph-sparkle"></i> <span data-i18n="aiPolishPlan">AI Polish Plan</span>
-            </button>
-          </div>
-        </div>
-
-        <div class="pt-4 border-t border-slate-800 flex justify-end gap-3">
-          <button type="button" onclick="window.closeNewBookingModal()" class="px-4 py-2.5 text-xs font-bold text-slate-400 hover:text-white" data-i18n="cancel">Cancel</button>
-          <button type="submit" class="px-6 py-2.5 rounded-xl bg-gold-500 hover:bg-gold-400 text-slate-950 font-black text-xs uppercase tracking-wider transition shadow-lg" data-i18n="createScheduleBtn">Create Booking & Auto-Schedule</button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <!-- Edit Booking Modal -->
-  <div id="modalEditBooking" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4 hidden">
-    <div class="bg-bay-900 border border-cyan-500/40 rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl overflow-y-auto max-h-[90vh] space-y-5">
-      <div class="flex items-center justify-between pb-4 border-b border-slate-800">
-        <h3 class="text-base font-black text-white uppercase tracking-wider" data-i18n="editModalHeader">Edit Vehicle Booking</h3>
-        <button onclick="window.closeEditBookingModal()" class="w-8 h-8 rounded-xl bg-bay-800 text-slate-400 hover:text-white flex items-center justify-center">
-          <i class="ph-bold ph-x"></i>
-        </button>
-      </div>
-
-      <form onsubmit="window.handleEditBookingForm(event)" class="space-y-4">
-        <input type="hidden" id="editJobId">
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label class="block text-xs font-bold text-white mb-1.5" data-i18n="custNameLabel">Customer Full Name *</label>
-            <input type="text" id="editCustName" required class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs">
+            <label class="block text-xs font-bold text-white mb-1.5" data-i18n="depositAmountLabel">Advance Deposit Amount (L.E) *</label>
+            <input type="number" id="nbDeposit" required min="0" placeholder="e.g. 5000" class="w-full border border-slate-700 rounded-xl px-4 py-2.5 text-xs font-mono text-emerald-400">
           </div>
           <div>
-            <label class="block text-xs font-bold text-white mb-1.5" data-i18n="custPhoneLabel">Customer Mobile Phone *</label>
-            <input type="text" id="editCustPhone" required class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs">
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-white mb-1.5" data-i18n="provinceLabel">Egyptian Province / Governorate *</label>
-            <select id="editProvince" required class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs text-white">
-              <option value="Port Said">Port Said (بورسعيد)</option>
-              <option value="Cairo">Cairo (القاهرة)</option>
-              <option value="Giza">Giza (الجيزة)</option>
-              <option value="Alexandria">Alexandria (الإسكندرية)</option>
-              <option value="Ismailia">Ismailia (الإسماعيلية)</option>
-              <option value="Suez">Suez (السويس)</option>
-              <option value="Sharqia">Sharqia (الشرقية)</option>
-              <option value="Dakahlia">Dakahlia (الدقهلية)</option>
-              <option value="Gharbia">Gharbia (الغربية)</option>
-              <option value="Red Sea">Red Sea (البحر الأحمر)</option>
-              <option value="Other">Other Governorate</option>
-            </select>
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-white mb-1.5" data-i18n="carTypeLabel">Car Type / Model *</label>
-            <input type="text" id="editCarType" required class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs">
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-white mb-1.5" data-i18n="carPlateLabel">Car License Plate *</label>
-            <input type="text" id="editCarPlate" required class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs uppercase">
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-white mb-1.5" data-i18n="carColorLabel">Paint Color & Clearcoat *</label>
-            <input type="text" id="editCarColor" required class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs">
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-white mb-1.5" data-i18n="mileageLabel">Current Odometer Mileage (KM) *</label>
-            <input type="number" id="editCarMileage" required min="0" class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs font-mono">
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-white mb-1.5" data-i18n="bookingDateLabel">Booking Date *</label>
-            <input type="date" id="editBookingDate" required class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs">
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-white mb-1.5" data-i18n="estCompletionLabel">Estimated Delivery Date & Time *</label>
-            <input type="datetime-local" id="editEstCompletion" required class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs">
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-white mb-1.5" data-i18n="assignDetailerLabel">Assigned Master Detailer *</label>
-            <select id="editAssignedDetailer" required class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs text-white"></select>
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-white mb-1.5" data-i18n="totalPriceLabel">Total Service Estimation (L.E) *</label>
-            <input type="number" id="editTotalPrice" required min="0" step="100" class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs font-mono">
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-white mb-1.5" data-i18n="depositLabel">Advance Deposit (L.E) *</label>
-            <input type="number" id="editDeposit" required min="0" step="100" class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs font-mono">
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-white mb-1.5" data-i18n="paymentMethodLabel">Payment Method Channel *</label>
-            <select id="editPaymentMethod" required class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs text-white">
-              <option value="cash" data-i18n="cashOption">💵 Cash in Hand</option>
-              <option value="instapay" data-i18n="instaOption">⚡ InstaPay Transfer</option>
-              <option value="wallet" data-i18n="walletOption">📱 Mobile Wallet (Vodafone/Orange Cash)</option>
-              <option value="visa" data-i18n="visaOption">💳 Visa / POS Card</option>
+            <label class="block text-xs font-bold text-white mb-1.5" data-i18n="paymentChannelLabel">Payment Channel *</label>
+            <select id="nbPaymentChannel" class="w-full border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white">
+              <option value="Cash">Cash in Hand (نقدي)</option>
+              <option value="InstaPay">InstaPay (انستا باي)</option>
+              <option value="Wallet">Mobile Wallet (محفظة إلكترونية)</option>
+              <option value="Card">Visa / POS Card (بطاقة بنكية)</option>
             </select>
           </div>
         </div>
 
         <div>
-          <label class="block text-xs font-bold text-white mb-1.5" data-i18n="carIssueLabel">Customer Issue & Defect Assessment *</label>
-          <div class="relative">
-            <textarea id="editCarIssue" rows="3" required class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs"></textarea>
-            <button type="button" onclick="window.runAiDefectSuggestions('edit')" class="absolute right-2.5 bottom-2.5 px-3 py-1 rounded-xl bg-cyan-500/20 text-cyan-400 border border-cyan-500/40 text-[10px] font-black uppercase tracking-wider flex items-center gap-1.5 transition">
-              <i class="ph-bold ph-sparkle"></i> <span data-i18n="aiPolishPlan">AI Polish Plan</span>
-            </button>
-          </div>
+          <label class="block text-xs font-bold text-white mb-1.5" data-i18n="scopeOfWorkLabel">Scope of Paint Restoration & Services *</label>
+          <textarea id="nbScope" rows="2" required placeholder="e.g. Full body German paint restoration, scratch removal, 3-layer ceramic coating..."
+            class="w-full border border-slate-700 rounded-xl px-4 py-2 text-xs focus:outline-none focus:border-gold-500"></textarea>
         </div>
 
-        <div class="pt-4 border-t border-slate-800 flex justify-end gap-3">
-          <button type="button" onclick="window.closeEditBookingModal()" class="px-4 py-2.5 text-xs font-bold text-slate-400 hover:text-white" data-i18n="cancel">Cancel</button>
-          <button type="submit" class="px-6 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-black text-xs uppercase tracking-wider transition shadow-lg" data-i18n="saveModifications">Save Modifications</button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <!-- Create Customer Pass Modal -->
-  <div id="modalCreateCustomer" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4 hidden">
-    <div class="bg-bay-900 border border-emerald-500/40 rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl space-y-5">
-      <div class="flex items-center justify-between pb-3 border-b border-slate-800">
-        <h3 class="text-sm font-black text-white uppercase tracking-wider" data-i18n="createCustLoginHeader">Create Customer Portal Login</h3>
-        <button onclick="window.closeCreateCustomerModal()" class="w-8 h-8 rounded-xl bg-bay-800 text-slate-400 hover:text-white flex items-center justify-center">
-          <i class="ph-bold ph-x"></i>
-        </button>
-      </div>
-
-      <form onsubmit="window.handleCreateCustomerForm(event)" class="space-y-4">
-        <div>
-          <label class="block text-xs font-bold text-white mb-1.5" data-i18n="linkBookingLabel">Link to Active Vehicle Booking *</label>
-          <select id="custLinkJobSelect" required class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs text-white"></select>
-        </div>
-        <div>
-          <label class="block text-xs font-bold text-white mb-1.5" data-i18n="custUsernameLabel">Customer Username *</label>
-          <input type="text" id="newCustUsername" required placeholder="e.g. tarek.m" class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs">
-        </div>
-        <div>
-          <label class="block text-xs font-bold text-white mb-1.5" data-i18n="passwordLabel">Password *</label>
-          <input type="text" id="newCustPassword" required placeholder="e.g. pass123" class="w-full border border-slate-700 rounded-2xl px-4 py-2.5 text-xs font-mono">
-        </div>
-        <div class="pt-2 flex justify-end gap-2">
-          <button type="button" onclick="window.closeCreateCustomerModal()" class="px-4 py-2 text-xs font-bold text-slate-400 hover:text-white" data-i18n="cancel">Cancel</button>
-          <button type="submit" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs uppercase tracking-wider transition" data-i18n="assignPassBtn">Assign Customer Pass</button>
+        <div class="pt-3 flex items-center justify-end gap-3">
+          <button type="button" onclick="window.closeNewBookingModal()" class="px-5 py-2.5 rounded-xl bg-bay-800 text-slate-300 hover:text-white text-xs font-bold transition">
+            <span data-i18n="cancel">Cancel</span>
+          </button>
+          <button type="submit" class="px-6 py-2.5 rounded-xl bg-gold-500 hover:bg-gold-400 text-slate-950 font-black text-xs uppercase tracking-wider transition shadow-lg flex items-center gap-1.5">
+            <i class="ph-bold ph-check-circle text-base"></i>
+            <span data-i18n="saveBookingBtn">Save & Open Booking Sheet</span>
+          </button>
         </div>
       </form>
     </div>
   </div>
 
-  <!-- AI Diagnostic Modal -->
-  <div id="modalAiDiagnostic" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4 hidden">
-    <div class="bg-bay-900 border border-gold-500/40 rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl overflow-y-auto max-h-[90vh] space-y-4">
-      <div class="flex items-center justify-between pb-4 border-b border-slate-800">
-        <h3 class="text-base font-black text-white uppercase tracking-wider" data-i18n="aiDiagnosticHeader">Dr.Care Gemini Paint Diagnostics</h3>
-        <button onclick="window.closeAiDiagnosticModal()" class="w-8 h-8 rounded-xl bg-bay-800 text-slate-400 hover:text-white flex items-center justify-center">
-          <i class="ph-bold ph-x"></i>
-        </button>
-      </div>
-      <div id="aiDiagnosticBody" class="space-y-4 text-xs text-slate-200"></div>
-    </div>
-  </div>
+  <!-- Notification Toast Container -->
+  <div id="toastContainer" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 max-w-sm pointer-events-none"></div>
 
-  <!-- AI WhatsApp Modal -->
-  <div id="modalAiWhatsApp" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4 hidden">
-    <div class="bg-bay-900 border border-emerald-500/40 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl space-y-4">
-      <div class="flex items-center justify-between pb-4 border-b border-slate-800">
-        <h3 class="text-base font-black text-white uppercase tracking-wider" data-i18n="aiWhatsAppHeader">AI WhatsApp Progress Dispatch</h3>
-        <button onclick="window.closeAiWhatsAppModal()" class="w-8 h-8 rounded-xl bg-bay-800 text-slate-400 hover:text-white flex items-center justify-center">
-          <i class="ph-bold ph-x"></i>
-        </button>
-      </div>
-
-      <div class="flex items-center gap-2">
-        <label class="text-xs font-bold text-white" data-i18n="toneLabel">Tone / Language:</label>
-        <select id="aiLangSelect" onchange="window.generateAiCustomerUpdateMessage()" class="flex-1 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-white">
-          <option value="ar">Egyptian Arabic (ترحيب احترافي باللهجة المصرية)</option>
-          <option value="en" selected>Executive English (Luxury Detailing Tone)</option>
-          <option value="franco">Franco-Arab (Egyptian Slang & Latin script)</option>
-        </select>
-      </div>
-
-      <div id="aiWhatsAppContentArea" class="bg-bay-850 p-4 rounded-2xl border border-slate-800 space-y-2"></div>
-
-      <div class="flex items-center justify-end gap-2 pt-2">
-        <button onclick="window.closeAiWhatsAppModal()" class="px-4 py-2 text-xs font-bold text-slate-400 hover:text-white" data-i18n="close">Close</button>
-        <button onclick="window.copyAiWhatsAppText()" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs uppercase tracking-wider transition shadow-lg flex items-center gap-1.5">
-          <i class="ph-bold ph-copy"></i> <span data-i18n="copyClipboard">Copy to Clipboard</span>
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Customer AI Concierge Modal -->
-  <div id="modalCustomerAiConcierge" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4 hidden">
-    <div class="bg-bay-900 border border-gold-500/40 rounded-3xl max-w-lg w-full p-6 sm:p-7 shadow-2xl space-y-4">
-      <div class="flex items-center justify-between pb-3 border-b border-slate-800">
-        <h3 class="text-sm font-black text-white uppercase tracking-wider" data-i18n="aiConciergeHeader">Dr.Care Paint AI Concierge</h3>
-        <button onclick="window.closeCustomerAiAdvisorModal()" class="w-8 h-8 rounded-xl bg-bay-800 text-slate-400 hover:text-white flex items-center justify-center">
-          <i class="ph-bold ph-x"></i>
-        </button>
-      </div>
-
-      <div class="space-y-3">
-        <div class="flex gap-2">
-          <input type="text" id="custAiQueryInput" placeholder="e.g. How do I wash my ceramic coated car?" class="flex-1 border border-slate-700 rounded-2xl px-4 py-2.5 text-xs text-white">
-          <button onclick="window.askCustomerAiConcierge()" class="px-4 py-2.5 rounded-2xl bg-gold-500 hover:bg-gold-400 text-slate-950 font-black text-xs uppercase tracking-wider transition" data-i18n="askAiBtn">Ask AI</button>
-        </div>
-        <div id="custAiResponseArea" class="bg-bay-850 p-4 rounded-2xl border border-slate-800 min-h-[120px] max-h-[250px] overflow-y-auto text-xs text-slate-300 leading-relaxed" data-i18n="aiDefaultPrompt">
-          💡 Ask about microfiber towels, two-bucket washes, pH neutral shampoos, or water spot removal in Egyptian weather.
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Delete Confirmation Modal -->
-  <div id="modalDeleteConfirm" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4 hidden">
-    <div class="bg-bay-900 border border-rose-500/40 rounded-3xl max-w-sm w-full p-6 text-center space-y-4 shadow-2xl">
-      <div class="w-12 h-12 rounded-2xl bg-rose-500/10 border border-rose-500/30 text-rose-400 flex items-center justify-center mx-auto text-2xl">
-        <i class="ph-bold ph-trash"></i>
-      </div>
-      <div>
-        <h4 class="text-sm font-black text-white uppercase tracking-wider" data-i18n="confirmDeleteHeader">Confirm Deletion</h4>
-        <p class="text-xs text-slate-400 mt-1" data-i18n="confirmDeleteSub">Are you sure you want to permanently delete this record?</p>
-      </div>
-      <div class="flex items-center justify-center gap-3 pt-2">
-        <button onclick="window.closeDeleteConfirmModal()" class="px-4 py-2 text-xs font-bold text-slate-400 hover:text-white" data-i18n="cancel">Cancel</button>
-        <button id="btnExecuteDeleteConfirm" class="px-5 py-2 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-black text-xs uppercase tracking-wider transition" data-i18n="deletePermBtn">Delete Permanently</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Toast Container -->
-  <div id="toastContainer" class="fixed bottom-6 right-6 z-50 space-y-2 pointer-events-none"></div>
-
-  <!-- Firebase & Real-Time Sync Engine -->
+  <!-- Firebase & App Script -->
   <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-    import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-    import { getFirestore, doc, setDoc, getDoc, collection, onSnapshot, addDoc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+    import { getFirestore, doc, getDoc, setDoc, updateDoc, collection, getDocs } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 
-    const appId = typeof __app_id !== 'undefined' ? __app_id : 'drcare-port-said-v3';
-    const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : { apiKey: "demo", authDomain: "demo.firebaseapp.com", projectId: "demo" };
-    
-    let app, db, auth;
-    try {
-      app = initializeApp(firebaseConfig);
-      db = getFirestore(app);
-      auth = getAuth(app);
-    } catch (e) {
-      console.warn("Firebase offline mode fallback");
-    }
+    // 1. Firebase Initialization
+    const firebaseConfig = typeof window !== 'undefined' && window.__firebase_config ? JSON.parse(window.__firebase_config) : {
+      apiKey: "AIzaSyDummyKeyForLocalTesting12345",
+      authDomain: "drcare-cloud.firebaseapp.com",
+      projectId: "drcare-cloud",
+      storageBucket: "drcare-cloud.appspot.com",
+      messagingSenderId: "123456789",
+      appId: "1:123:web:abc"
+    };
 
-    let currentStaffUser = null;
-    let activeCustomerJob = null;
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const appId = typeof window !== 'undefined' && window.__app_id ? window.__app_id : 'drcare-centre-port-said-v1';
+
+    // Global App State
+    let currentLang = 'en';
+    let currentUser = null; // { username, role, name }
     let activeStaffTab = 'bookings';
-    let currentLookupMode = 'phone';
-    let activeDetailJobId = null;
-    let pendingDeleteAction = null;
-    let activeAiJobId = null;
-    let generatedAiWhatsAppMessage = '';
-    let searchDebounceTimer = null;
-    let currentAppLang = 'en';
-    
-    let calCurrentYear = 2026;
-    let calCurrentMonth = 8;
-    let calSelectedDateStr = '2026-09-26';
+    let currentCustomerLookupMode = 'phone';
+    let calendarCurrentYear = 2026;
+    let calendarCurrentMonth = 8; // September
+    let selectedCalendarDateStr = null;
+    let currentDetailSheetId = null;
 
-    const TRANSLATIONS = {
+    // Bilingual dictionary
+    const dict = {
       en: {
         revivingSoul: "REVIVING THE AUTOMOTIVE SOUL",
+        customerTracking: "Customer Tracking",
+        staffLogin: "Staff Login",
         welcomeSub: "Welcome to Dr.Care Paint Restoration Centre in Port Said, Egypt. Select your portal below to track your ongoing restoration or access internal workshop management.",
         clientPortal: "Client Portal",
-        customerTracking: "Customer Tracking",
         customerPortalDesc: "Track your vehicle's live detailing progress, mileage, verified advance deposit in L.E, and send special instructions directly to your technician.",
         trackMyCar: "Track My Car Live",
         internalAccess: "Internal Access",
         staffLoginTitle: "Authorized Workshop Staff",
         staffPortalDesc: "Dedicated terminal for Owner (Mr. Alfy), Shop Managers, and Master Detailers. Manage intakes, Funds Circuit, 5-year master calendar, and accounts.",
         staffLoginBtnText: "Staff Login & Workspace",
-        staffLogin: "Staff Login",
         customerLoginHeader: "Customer Live Bay Tracking",
         customerLoginSub: "Inspect your personal vehicle's restoration progress and verified deposit.",
-        back: "Back",
         phonePlateTab: "Phone & Car Plate",
         usernamePassTab: "Username & Password",
         mobileLabel: "Customer Mobile Phone Number *",
         plateLabel: "Car License Plate *",
-        trackButton: "Track My Car's Restoration Live",
         usernameLabel: "Customer Assigned Username *",
-        passwordLabel: "Password *",
+        passwordLabel: "Password (Plate) *",
+        trackButton: "Track My Car's Restoration Live",
         signInButton: "Sign In to My Vehicle Dashboard",
-        newBooking: "+ New Booking",
+        back: "Back",
         intakeBay: "Intake Bay",
         calendar: "5-Year Calendar",
         fundsCircuit: "Funds Circuit",
         yearlyAnalysis: "Yearly Analysis",
         accountsAccess: "Accounts & Access",
-        backofficeSub: "Real-time paint restoration workflow, deposit auditing in Egyptian Pounds (L.E), and multi-stage bay tracking.",
-        exportJson: "Export JSON",
-        import: "Import",
-        newBookingSheet: "+ New Booking Sheet",
+        newBooking: "+ New Booking",
         activeVehicles: "Active Vehicles",
         inCoating: "In Coating & Curing",
         securedDeposits: "Secured Deposits (L.E)",
@@ -1167,1624 +950,1122 @@
         fundsTitle: "Funds Circuit & Payment Channels",
         fundsSub: "Real-time tracking of secured deposits across Cash, InstaPay, Mobile Wallets, and Card/POS.",
         thisMonth: "This Month", thisWeek: "This Week", allTime: "All Time",
-        cashHand: "Cash in Hand", cashDesc: "Physical drawer cash verified",
-        instaDesc: "Instant bank transfers verified",
-        mobileWallet: "Mobile Wallet", walletDesc: "Vodafone / Orange / Etisalat Cash",
-        visaCard: "Visa / POS Card", cardDesc: "Terminal card payments",
+        cashHand: "Cash in Hand", mobileWallet: "Mobile Wallet", visaCard: "Visa / POS Card",
         totalDepositsPeriod: "Total Deposits in Selected Period",
-        auditedLE: "All 4 payment channels audited in Egyptian Pounds",
         recentDepositsLedger: "Recent Deposits & Payment Channel Ledger",
         thDate: "Date", thCustomer: "Customer", thVehicle: "Vehicle", thChannel: "Channel", thDeposit: "Deposit (L.E)", thStatus: "Status",
         analyticsTitle: "Yearly Deposit & Revenue Analysis",
-        analyticsSub: "Financial performance, collection ratio, and average job deposit analysis.",
-        grossDeposits: "Gross Deposits Recorded", paidAdvance: "Paid advance across active restoration jobs",
-        avgDeposit: "Average Deposit / Vehicle", perIntake: "Per intake contract",
-        settledRatio: "Settled & Verified Ratio", managerVerified: "Manager verified advance funds",
+        grossDeposits: "Gross Deposits Recorded", avgDeposit: "Average Deposit / Vehicle", settledRatio: "Settled & Verified Ratio",
         monthlyVelocity: "Monthly Intake Velocity & Deposit Collection (L.E)",
         accountsTitle: "Workshop Team & Customer Access Management",
         accountsSub: "Owner controls credentials for Owners, Managers, Master Detailers, and private Customer passes.",
-        ownerConsole: "Owner Staff Provisioning Console", ownerConsoleSub: "Add workshop managers & technicians directly to your team roster.",
-        staffNameLabel: "Staff Full Name *", authorityTier: "Authority Tier *",
+        ownerConsole: "Owner Staff Provisioning Console",
+        ownerConsoleSub: "Add workshop managers & technicians directly to your team roster.",
+        staffNameLabel: "Staff Full Name *", authorityTier: "Authority Tier *", createStaffBtn: "+ Create Staff",
         tierManager: "Level 2: Shop Manager", tierDetailer: "Level 3: Master Detailer", tierOwner: "Level 1: Co-Director",
-        createStaffBtn: "+ Create Staff",
         workshopTeamTitle: "Workshop Management & Staff Team",
         customerLoginsTitle: "Customer Dedicated Portal Logins",
         customerLoginsSub: "Assigned customer accounts for direct username and password access.",
-        customerLoginBtn: "+ Customer Login",
-        staffModalHeader: "Dr.Care Staff Portal", staffModalSub: "Authorized workshop team management",
-        loginError: "Invalid username or password.", cancel: "Cancel", signInBackOffice: "Sign In to Back-Office",
-        newBookingModalHeader: "New Vehicle Booking Sheet", newBookingModalSub: "Customer intake, defect assessment, mileage (KM), and deposit in L.E.",
-        custNameLabel: "Customer Full Name *", custPhoneLabel: "Customer Mobile Phone *", provinceLabel: "Egyptian Province / Governorate *",
-        carTypeLabel: "Car Type / Model *", carPlateLabel: "Car License Plate *", carColorLabel: "Paint Color & Clearcoat *",
-        mileageLabel: "Current Odometer Mileage (KM) *", bookingDateLabel: "Booking Date *", estCompletionLabel: "Estimated Delivery Date & Time *",
-        assignDetailerLabel: "Assign Professional Master Detailer *", totalPriceLabel: "Total Service Estimation (L.E) *",
-        depositLabel: "Advance Deposit Paid (L.E) *", paymentMethodLabel: "Payment Method Channel *",
-        cashOption: "💵 Cash in Hand", instaOption: "⚡ InstaPay Transfer", walletOption: "📱 Mobile Wallet (Vodafone/Orange Cash)", visaOption: "💳 Visa / POS Card",
-        carIssueLabel: "Customer Issue & Defect Assessment *", aiPolishPlan: "AI Polish Plan", createScheduleBtn: "Create Booking & Auto-Schedule",
-        editModalHeader: "Edit Vehicle Booking", editModalSub: "Update customer details, paint specifications, mileage, or advance deposit.",
-        saveModifications: "Save Modifications",
-        createCustLoginHeader: "Create Customer Portal Login", linkBookingLabel: "Link to Active Vehicle Booking *", custUsernameLabel: "Customer Username *",
-        assignPassBtn: "Assign Customer Pass",
-        aiDiagnosticHeader: "Dr.Care Gemini Paint Diagnostics", aiDiagnosticSub: "Compound abrasive mapping, rotary/DA machine steps, and Cairo/Port Said market price estimate.",
-        aiWhatsAppHeader: "AI WhatsApp Progress Dispatch", aiWhatsAppSub: "Generate personalized luxury updates for this client.",
-        toneLabel: "Tone / Language:", close: "Close", copyClipboard: "Copy to Clipboard",
-        aiConciergeHeader: "Dr.Care Paint AI Concierge", aiConciergeSub: "Ask any question regarding scratch maintenance, ceramic wash care & clearcoat safety.",
-        askAiBtn: "Ask AI", aiDefaultPrompt: "💡 Ask about microfiber towels, two-bucket washes, pH neutral shampoos, or water spot removal in Egyptian weather.",
-        confirmDeleteHeader: "Confirm Deletion", confirmDeleteSub: "Are you sure you want to permanently delete this record?", deletePermBtn: "Delete Permanently"
+        staffLoginTitleModal: "Workshop Staff Portal Login",
+        staffLoginSubModal: "Enter your authorized credentials for secure back-office access.",
+        demoAccessNote: "Quick Demo Test Credentials:",
+        loginButton: "Securely Access Workshop Console",
+        newBookingModalTitle: "New Vehicle Restoration Booking Sheet",
+        newBookingModalSub: "Register incoming customer vehicle, assigned detailer bay, and advance deposit in L.E.",
+        custNameLabel: "Customer Full Name *", carBrandModel: "Car Brand & Model *", carPlateLabel: "Car License Plate *",
+        carColorLabel: "Car Paint Color *", odometerLabel: "Odometer (KM)", entryDateLabel: "Entry Date *",
+        assignedDetailer: "Assigned Master Detailer", depositAmountLabel: "Advance Deposit Amount (L.E) *",
+        paymentChannelLabel: "Payment Channel *", scopeOfWorkLabel: "Scope of Paint Restoration & Services *",
+        cancel: "Cancel", saveBookingBtn: "Save & Open Booking Sheet", exportJson: "Export JSON", import: "Import"
       },
       ar: {
-        revivingSoul: "إحياء الروح الرياضية للسيارات",
-        welcomeSub: "مرحباً بكم في مركز Dr.Care لإصلاح ودهان السيارات في بورسعيد، مصر. اختر بوابتك أدناه لمتابعة صيانة سيارتك أو إدارة الورشة.",
+        revivingSoul: "إحياء الروح السيارية",
+        customerTracking: "تتبع العملاء",
+        staffLogin: "دخول الموظفين",
+        welcomeSub: "مرحباً بكم في مركز دكتور كير لترميم الطلاء في بورسعيد، مصر. اختر بوابتك أدناه لمتابعة أعمال ترميم سيارتك أو إدارة الورشة.",
         clientPortal: "بوابة العملاء",
-        customerTracking: "متابعة العميل",
-        customerPortalDesc: "تابع تقدم أعمال طلاء سيارتك، عداد الكيلومترات، العربون المدفوع بالجنية، وأرسل تعليمات خاصة لتقني الطلاء.",
-        trackMyCar: "تابع سيارتي مباشرة",
-        internalAccess: "الوصول الداخلي",
-        staffLoginTitle: "طاقم العمل المصرح له",
-        staffPortalDesc: "محطة مخصصة للمالك (أسترالفي)، ومديري الصالة، وفنيي الطلاء. إدارة الحجوزات، دورة الأموال، التقويم، والحسابات.",
-        staffLoginBtnText: "تسجيل دخول الموظفين",
-        staffLogin: "تسجيل موظف",
-        customerLoginHeader: "تتبع ساحة العميل المباشرة",
-        customerLoginSub: "تحقق من تقدم أعمال صيانة سيارتك ومبلغ العربون المسجل.",
-        back: "رجوع",
+        customerPortalDesc: "تتبع تقدم أعمال طلاء سيارتك مباشرة، العداد، العربون المدفوع بالجنيه المصري، وإرسال تعليمات خاصة للفني.",
+        trackMyCar: "تتبع سيارتي مباشرة",
+        internalAccess: "الدخول الداخلي",
+        staffLoginTitle: "طاقم الورشة المصرح لهم",
+        staffPortalDesc: "محطة مخصصة للمؤسس (مستر ألفي)، مديرو الورشة، وفنيو الطلاء. إدارة الحزامات، دائرة الأموال، التقويم الخماسي، والحسابات.",
+        staffLoginBtnText: "دخول الموظفين ومنطقة العمل",
+        customerLoginHeader: "تتبع العميل المباشر للورشة",
+        customerLoginSub: "افحص تقدم ترميم سيارتك الشخصية والوديعة المؤكدة.",
         phonePlateTab: "الهاتف ورقم اللوحة",
-        usernamePassTab: "اسم المستخدم وكلمة السر",
-        mobileLabel: "رقم موبايل العميل *",
+        usernamePassTab: "اسم المستخدم وكلمة المرور",
+        mobileLabel: "رقم هاتف العميل المحمول *",
         plateLabel: "رقم لوحة السيارة *",
-        trackButton: "تتبع استعادة سيارتي مباشرة",
         usernameLabel: "اسم المستخدم المخصص للعميل *",
-        passwordLabel: "كلمة المرور *",
-        signInButton: "تسجيل الدخول إلى لوحة سيارتي",
-        newBooking: "+ حجز جديد",
+        passwordLabel: "كلمة المرور (رقم اللوحة) *",
+        trackButton: "تتبع ترميم سيارتي مباشرة",
+        signInButton: "تسجيل الدخول إلى لوحة تحكم سيارتي",
+        back: "رجوع",
         intakeBay: "ساحة الاستقبال",
-        calendar: "التقويم (5 سنوات)",
-        fundsCircuit: "دورة الأموال",
+        calendar: "التقويم الخماسي",
+        fundsCircuit: "دائرة الأموال",
         yearlyAnalysis: "التحليل السنوي",
         accountsAccess: "الحسابات والصلاحيات",
-        backofficeSub: "تدفق أعمال دهان السيارات الفوري، مراجعة العربونات بالجنية المصري، ومتابعة المراحل.",
-        exportJson: "تصدير JSON",
-        import: "استيراد",
-        newBookingSheet: "+ ورقة حجز جديدة",
+        newBooking: "+ حجز جديد",
         activeVehicles: "السيارات النشطة",
-        inCoating: "في مرحلة الطلاء والعلاج",
-        securedDeposits: "العربونات المؤكدة (ج.م)",
+        inCoating: "في مرحلة الطلاء والمعالجة",
+        securedDeposits: "الودائع المؤكدة (ج.م)",
         handoverReady: "جاهزة للتسليم",
-        filterAll: "جميع مراحل الاستعادة",
-        filterActive: "نشطة في الساحة (أقل من 100%)",
-        filterReady: "جاهزة للتسليم (100%)",
-        filterCeramic: "سيراميك ومعالجة (90%+)",
-        noJobsFound: "لا توجد أوراق حجز مطابقة لبحثك.",
-        clickNewBooking: "اضغط على \"+ حجز جديد\" لاستقبال سيارة جديدة.",
-        calendarTitle: "تقويم ورشة العمل الرئيسي (5 سنوات)",
-        calendarSub: "القدرة الاستيعابية القصوى: 12 حجز يومياً. لمتابعة مالك المستوى 1 ومديري المستوى 2.",
+        filterAll: "جميع مراحل الترميم",
+        filterActive: "النشطة داخل الورشة (أقل من 100%)",
+        filterReady: "جاهزة 100% للتسليم",
+        filterCeramic: "السيراميك والمعالجة (90%+)",
+        noJobsFound: "لم يتم العثور على حركات سيارات تطابق بحثك.",
+        clickNewBooking: "انقر فوق \"+ حجز جديد\" لاستقبال سيارة جديدة.",
+        calendarTitle: "التقويم الرئيسي للورشة (5 سنوات)",
+        calendarSub: "القدرة الاستيعابية القصوى: 12 سيارة يومياً. مراقب بواسطة المؤسس ومديري الورشة.",
         today: "اليوم",
-        sun: "أحد", mon: "إثنين", tue: "ثلاثاء", wed: "أربعاء", thu: "خميس", fri: "جمعة", sat: "سبت",
-        bookForDate: "+ احجز سيارة لهذا التاريخ",
-        fundsTitle: "دورة الأموال وقنوات الدفع",
-        fundsSub: "تتبع فوري للعربونات المؤكدة عبر الكاش، انستا باي، المحافظ الإلكترونية، وبطاقات الدفع.",
+        sun: "الأحد", mon: "الإثنين", tue: "الثلاثاء", wed: "الأربعاء", thu: "الخميس", fri: "الجمعة", sat: "السبت",
+        bookForDate: "+ حجز سيارة لهذا التاريخ",
+        fundsTitle: "دائرة الأموال وقنوات الدفع",
+        fundsSub: "تتبع حي للودائع المؤكدة عبر النقدي، انستا باي، المحافظ الإلكترونية، وبطاقات الـ POS.",
         thisMonth: "هذا الشهر", thisWeek: "هذا الأسبوع", allTime: "كل الوقت",
-        cashHand: "النقد بالدرج", cashDesc: "النقد اليدوي المؤكد",
-        instaDesc: "تحويلات بنكية فورية مؤكدة",
-        mobileWallet: "محفظة ذكية", walletDesc: "فودافون / أورانج / اتصالات كاش",
-        visaCard: "فيزا / نقاط بيع POS", cardDesc: "مدفوعات البطاقات البنكية",
-        totalDepositsPeriod: "إجمالي العربونات في الفترة المختارة",
-        auditedLE: "تم تدقيق جميع قنوات الدفع بالجنية المصري",
-        recentDepositsLedger: "سجل العربونات وقنوات الدفع الحديثة",
-        thDate: "التاريخ", thCustomer: "العميل", thVehicle: "السيارة", thChannel: "القناة", thDeposit: "العربون (ج.م)", thStatus: "الحالة",
-        analyticsTitle: "تحليل العربونات والإيرادات السنوية",
-        analyticsSub: "الأداء المالي، نسبة التحصيل، وتحليل متوسط عربون الوظيفة.",
-        grossDeposits: "إجمالي العربونات المسجلة", paidAdvance: "مقدم مدفوع عبر وظائف الاستعادة النشطة",
-        avgDeposit: "متوسط العربون / السيارة", perIntake: "لكل عقد استلام",
-        settledRatio: "نسبة التسوية والتحقق", managerVerified: "الأموال المتقدمة المدققة من المدير",
-        monthlyVelocity: "سرعة الاستقبال الشهرية وتحصيل العربونات (ج.م)",
-        accountsTitle: "إدارة فريق الورشة وصلاحيات العملاء",
-        accountsSub: "المالك يتحكم باعتمادات المالكين، المديرين، وفنيي الطلاء ومرور العملاء الخاص.",
-        ownerConsole: "لوحة تحكم إعداد موظفي المالك", ownerConsoleSub: "أضف مديري الورشة والفنيين مباشرة إلى جدول فريقك.",
-        staffNameLabel: "اسم الموظف بالكامل *", authorityTier: "مستوى الصلاحية *",
-        tierManager: "المستوى 2: مدير الصالة", tierDetailer: "المستوى 3: فني طلاء أول", tierOwner: "المستوى 1: شريك مدير",
-        createStaffBtn: "+ إنشاء موظف",
+        cashHand: "النقد اليدوي", mobileWallet: "محفظة محمولة", visaCard: "فيزا / بطاقة بنكية",
+        totalDepositsPeriod: "إجمالي الودائع في الفترة المحددة",
+        recentDepositsLedger: "سجل الودائع وقنوات الدفع الحديثة",
+        thDate: "التاريخ", thCustomer: "العميل", thVehicle: "المركبة", thChannel: "القناة", thDeposit: "الودائع (ج.م)", thStatus: "الحالة",
+        analyticsTitle: "تحليل الودائع والإيرادات السنوية",
+        grossDeposits: "إجمالي الودائع المسجلة", avgDeposit: "متوسط الودائع / سيارة", settledRatio: "نسبة التسوية والتحقق",
+        monthlyVelocity: "سرعة الاستقبال الشهرية وتحصيل الودائع (ج.م)",
+        accountsTitle: "إدارة فريق الورشة وحسابات العملاء",
+        accountsSub: "يتحكم المؤسس في بيانات اعتماد المديرين، وفنيي الطلاء، وحسابات العملاء الخاصة.",
+        ownerConsole: "لوحة تخصيص صلاحيات المؤسس",
+        ownerConsoleSub: "إضافة مديري الورشة والفنيين مباشرة إلى قائمة فريقك.",
+        staffNameLabel: "اسم الموظف بالكامل *", authorityTier: "مستوى الصلاحية *", createStaffBtn: "+ إنشاء موظف",
+        tierManager: "المستوى 2: مدير الورشة", tierDetailer: "المستوى 3: فني طلاء أول", tierOwner: "المستوى 1: شريك مؤسس",
         workshopTeamTitle: "إدارة الورشة وفريق العمل",
-        customerLoginsTitle: "حسابات دخول عملاء ورشة العمل",
-        customerLoginsSub: "حسابات العملاء المخصصة للدخول المباشر باسم المستخدم وكلمة المرور.",
-        customerLoginBtn: "+ دخول العميل",
-        staffModalHeader: "بوابة موظفي Dr.Care", staffModalSub: "إدارة فريق العمل المصرح له",
-        loginError: "اسم المستخدم أو كلمة المرور غير صحيحة.", cancel: "إلغاء", signInBackOffice: "تسجيل الدخول للإدارة الخلفية",
-        newBookingModalHeader: "ورقة حجز مركبة جديدة", newBookingModalSub: "استقبال العميل، تقييم العيوب، عداد الكيلومترات، والعربون بالجنية المصري.",
-        custNameLabel: "اسم العميل بالكامل *", custPhoneLabel: "موبايل العميل *", provinceLabel: "المحافظة / الإقليم *",
-        carTypeLabel: "نوع وطراز السيارة *", carPlateLabel: "رقم لوحة السيارة *", carColorLabel: "لون الطلاء والطبقة الشفافة *",
-        mileageLabel: "عداد الكيلومترات الحالي (KM) *", bookingDateLabel: "تاريخ الحجز *", estCompletionLabel: "وقت وتاريخ التسليم المتوقع *",
-        assignDetailerLabel: "تعيين فني طلاء معتمد *", totalPriceLabel: "تقدير الخدمة الإجمالي (ج.م) *",
-        depositLabel: "العربون المدفوع مقدماً (ج.م) *", paymentMethodLabel: "قناة طريقة الدفع *",
-        cashOption: "💵 نقداً باليد", instaOption: "⚡ تحويل انستا باي", walletOption: "📱 محفظة ذكية (فودافون/أورانج كاش)", visaOption: "💳 فيزا / بطاقة POS",
-        carIssueLabel: "مشكلة العميل وتقييم العيوب *", aiPolishPlan: "خطة تلميع الذكاء الاصطناعي", createScheduleBtn: "إنشاء الحجز والجدولة التلقائية",
-        editModalHeader: "تعديل حجز السيارة", editModalSub: "تحديث بيانات العميل، مواصفات الطلاء، العداد، أو العربون المقدم.",
-        saveModifications: "حفظ التعديلات",
-        createCustLoginHeader: "إنشاء دخول بوابة العميل", linkBookingLabel: "الربط بحجز سيارة نشط *", custUsernameLabel: "اسم مستخدم العميل *",
-        assignPassBtn: "تعيين تصريح العميل",
-        aiDiagnosticHeader: "تشخيص طلاء Dr.Care بالذكاء الاصطناعي", aiDiagnosticSub: "خريطة المواد الكاشطة، خطوات ماكينات التلميع، وتقدير السعر في بورسعيد/القاهرة.",
-        aiWhatsAppHeader: "إرسال تحديث التقدم عبر واتساب الذكي", aiWhatsAppSub: "إنشاء تحديثات فاخرة مخصصة لهذا العميل.",
-        toneLabel: "النبرة / اللغة:", close: "إغلاق", copyClipboard: "نسخ إلى الحافظة",
-        aiConciergeHeader: "مساعد الطلاء الذكي Dr.Care", aiConciergeSub: "اسأل عن صيانة الخدوش، غسيل النانو سيراميك وسلامة الطبقة الشفافة.",
-        aiDefaultPrompt: "💡 اسأل عن مناشف المايكروفايبر، غسيل الدلوين، شامبو متعادل الحموضة، أو إزالة بقع الماء.",
-        askAiBtn: "اسأل الذكاء الاصطناعي",
-        confirmDeleteHeader: "تأكيد الحذف", confirmDeleteSub: "هل أنت متأكد من رغبتك في حذف هذا السجل نهائياً؟", deletePermBtn: "حذف نهائي"
+        customerLoginsTitle: "حسابات بوابة العملاء المخصصة",
+        customerLoginsSub: "حسابات العملاء المعينة للدخول المباشر باسم المستخدم وكلمة المرور.",
+        staffLoginTitleModal: "تسجيل دخول طاقم الورشة",
+        staffLoginSubModal: "أدخل بيانات اعتمادك المصرح بها للوصول الآمن.",
+        demoAccessNote: "بيانات تجريبية سريعة:",
+        loginButton: "الدخول الآمن لوحة التحكم",
+        newBookingModalTitle: "ورقة حجز ترميم سيارة جديد",
+        newBookingModalSub: "تسجيل سيارة العميل القادمة، ساحة فني الطلاء المعين، والعربون المقدم بالجنيه المصري.",
+        custNameLabel: "اسم العميل بالكامل *", carBrandModel: "ماركة وموديل السيارة *", carPlateLabel: "رقم لوحة السيارة *",
+        carColorLabel: "لون طلاء السيارة *", odometerLabel: "عداد الكيلومترات (KM)", entryDateLabel: "تاريخ الدخول *",
+        assignedDetailer: "فني الطلاء المسؤول", depositAmountLabel: "مبلغ العربون المقدم (ج.م) *",
+        paymentChannelLabel: "قناة الدفع *", scopeOfWorkLabel: "نطاق أعمال ترميم الطلاء والخدمات *",
+        cancel: "إلغاء", saveBookingBtn: "حفظ وفتح ورقة الحجز", exportJson: "تصدير JSON", import: "استيراد"
       }
     };
 
-    const RESTORATION_PHASES = [
-      { percent: 10, label: "Phase 1: Paint Depth Gauge & Defect Mapping" },
-      { percent: 20, label: "Phase 2: Iron Falloff & Clay Bar Decon" },
-      { percent: 35, label: "Phase 3: Wet Sanding 2000/3000 Grit Scratch Leveling" },
-      { percent: 50, label: "Phase 4: 50% Heavy Scratch Rotary Cut" },
-      { percent: 65, label: "Phase 5: Dual-Action Swirl Mark Refining" },
-      { percent: 75, label: "Phase 6: Mirror Gloss Jeweling Polish" },
-      { percent: 82, label: "Phase 7: IPA Surface Wipe Prep" },
-      { percent: 90, label: "Phase 8: 9H Ceramic Base Coat Application" },
-      { percent: 94, label: "Phase 9: Hydrophobic Top Coat Application" },
-      { percent: 97, label: "Phase 10: Infrared (IR) Lamp Heat Curing" },
-      { percent: 100, label: "Phase 11: Final Inspection & Customer Handover" }
-    ];
+    // Default Seed Database
+    const defaultState = {
+      staff: [
+        { id: 'usr-1', name: 'Mr. Alfy', username: 'Mr.Alfy', pass: 'Mr.1000y', role: 'owner' },
+        { id: 'usr-2', name: 'Ahmed Mohsen', username: 'ahmed.mohsen', pass: '123456', role: 'manager' },
+        { id: 'usr-3', name: 'Mahmoud Detailer', username: 'mahmoud.detail', pass: '123456', role: 'detailer' },
+        { id: 'usr-4', name: 'Ibrahim Master', username: 'ibrahim.master', pass: '123456', role: 'detailer' }
+      ],
+      customers: [
+        { id: 'cust-1', name: 'Mohamed El-Sayed', phone: '01012345678', plate: 'ط ر ب 1234', username: '01012345678', pass: 'ط ر ب 1234' }
+      ],
+      bookings: [
+        {
+          id: 'job-1700000000001',
+          custName: 'Mohamed El-Sayed',
+          custPhone: '01012345678',
+          carModel: 'BMW 520i 2024',
+          carPlate: 'ط ر ب 1234',
+          carColor: 'Midnight Black Metallic',
+          odometer: '32,000 KM',
+          entryDate: '2026-09-01',
+          assignedDetailer: 'Mahmoud Detailer',
+          deposit: 7500,
+          paymentChannel: 'InstaPay',
+          scope: 'Full body German paint restoration, scratch removal, 3-layer ceramic coating.',
+          progress: 85,
+          stage: 'IN_PROGRESS',
+          notes: [
+            { sender: 'Mr. Alfy', text: 'Ensure extra care on bonnet stone chips.', time: '2026-09-01 10:30' }
+          ]
+        },
+        {
+          id: 'job-1700000000002',
+          custName: 'Khaled Mahmoud',
+          custPhone: '01098765432',
+          carModel: 'Porsche Macan GTS',
+          carPlate: 'س ق و 5678',
+          carColor: 'Carmine Red',
+          odometer: '18,500 KM',
+          entryDate: '2026-09-05',
+          assignedDetailer: 'Ibrahim Master',
+          deposit: 12000,
+          paymentChannel: 'Cash',
+          scope: 'Paint correction, ceramic paint protection film (PPF) front bumper.',
+          progress: 100,
+          stage: 'COMPLETED',
+          notes: []
+        }
+      ]
+    };
 
-    const DEFAULT_STAFF_USERS = [
-      { id: 'usr-1', username: 'Mr.Alfy', pass: 'Mr.1000y', name: 'Mr. Alfy', role: 'owner', title: 'Workshop Owner & Director' },
-      { id: 'usr-2', username: 'ahmed.mohsen', pass: '123456', name: 'Ahmed Mohsen', role: 'manager', title: 'Senior Shop Manager' },
-      { id: 'usr-3', username: 'mahmoud.detail', pass: '123456', name: 'Mahmoud Sayed', role: 'detailer', title: 'Master Paint Detailer' }
-    ];
+    let appState = JSON.parse(JSON.stringify(defaultState));
 
-    const DEFAULT_SAMPLE_BOOKINGS = [
-      {
-        id: 'job-101',
-        pin: 'DR-7821',
-        customerName: 'Tarek Mansour',
-        customerPhone: '01012345678',
-        province: 'Port Said',
-        carType: 'Mercedes-Benz C200',
-        carPlate: 'ط ر ب 1234',
-        carColor: 'Obsidian Black Metallic',
-        carMileage: 46200,
-        bookingDate: '2026-09-26',
-        estimatedCompletion: '2026-09-30T18:00',
-        assignedDetailerId: 'usr-3',
-        assignedDetailerName: 'Mahmoud Sayed',
-        totalPriceLE: 16500,
-        depositLE: 6000,
-        paymentMethod: 'instapay',
-        depositVerified: true,
-        carIssue: 'Heavy car-wash swirl marks, bird-dropping acid etching on bonnet, requires full multi-stage correction & 9H ceramic coating.',
-        customerNotes: 'Please pay extra attention to front bumper stone chips and piano black B-pillars.',
-        progressPercent: 50,
-        progressStageLabel: 'Phase 4: 50% Heavy Scratch Rotary Cut',
-        detailerNotes: 'Bonnet clearcoat reading 118 microns. Performed heavy rotary cut with wool pad and Menzerna 400. 85% of swirls eliminated cleanly.',
-        auditLog: ['Intake registered by Ahmed Mohsen', 'Deposit verified via InstaPay', 'Assigned to Mahmoud Sayed']
-      }
-    ];
+    // Firestore Sync Reference
+    const dbRef = doc(db, 'artifacts', appId, 'public', 'data');
 
-    const DEFAULT_CUSTOMER_ACCOUNTS = [
-      { id: 'cacc-1', jobId: 'job-101', customerName: 'Tarek Mansour', username: 'tarek.m', pass: 'pass123' }
-    ];
-
-    let staffUsers = DEFAULT_STAFF_USERS;
-    let bookings = DEFAULT_SAMPLE_BOOKINGS;
-    let customerAccounts = DEFAULT_CUSTOMER_ACCOUNTS;
-
-    async function initCloudSync() {
-      if (!db || !auth) {
-        hydrateLocalStorageFallback();
-        return;
-      }
+    async function loadCloudState() {
       try {
-        if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-          await signInWithCustomToken(auth, __initial_auth_token);
+        const snap = await getDoc(dbRef);
+        if (snap.exists()) {
+          const cloudData = snap.data();
+          if (cloudData && cloudData.staff && cloudData.bookings) {
+            appState = cloudData;
+          }
         } else {
-          await signInAnonymously(auth);
+          await setDoc(dbRef, defaultState);
         }
-        
-        const bookingsRef = collection(db, 'artifacts', appId, 'public', 'data', 'bookings');
-        onSnapshot(bookingsRef, (snapshot) => {
-          if (!snapshot.empty) {
-            bookings = snapshot.docs.map(docSnap => ({ id: docSnap.id, ...docSnap.data() }));
-          } else if (bookings.length > 0) {
-            bookings.forEach(async b => {
-              await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'bookings', b.id), b);
-            });
-          }
-          refreshActiveView();
-        }, (err) => { console.error("Firestore sync error:", err); });
-
-        const staffRef = collection(db, 'artifacts', appId, 'public', 'data', 'staff');
-        onSnapshot(staffRef, (snapshot) => {
-          if (!snapshot.empty) {
-            staffUsers = snapshot.docs.map(docSnap => ({ id: docSnap.id, ...docSnap.data() }));
-          } else {
-            DEFAULT_STAFF_USERS.forEach(async u => {
-              await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'staff', u.id), u);
-            });
-          }
-          populateDetailerSelectors();
-        }, (err) => { console.error("Staff sync error:", err); });
-
-        const custRef = collection(db, 'artifacts', appId, 'public', 'data', 'customers');
-        onSnapshot(custRef, (snapshot) => {
-          if (!snapshot.empty) {
-            customerAccounts = snapshot.docs.map(docSnap => ({ id: docSnap.id, ...docSnap.data() }));
-          } else {
-            DEFAULT_CUSTOMER_ACCOUNTS.forEach(async c => {
-              await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'customers', c.id), c);
-            });
-          }
-        }, (err) => { console.error("Customer accounts sync error:", err); });
-
-      } catch (e) {
-        console.warn("Cloud sync initialization failed, falling back to localStorage", e);
-        hydrateLocalStorageFallback();
+      } catch (err) {
+        console.warn("Cloud sync fallback to local storage:", err);
+        const local = localStorage.getItem('drcare_cloud_fallback');
+        if (local) {
+          try { appState = JSON.parse(local); } catch(e){}
+        }
       }
+      renderApp();
     }
 
-    function hydrateLocalStorageFallback() {
+    async function saveCloudState() {
       try {
-        const storedStaff = localStorage.getItem('drcare_staff_v3');
-        staffUsers = storedStaff ? JSON.parse(storedStaff) : DEFAULT_STAFF_USERS;
-        const storedBookings = localStorage.getItem('drcare_bookings_v3');
-        bookings = storedBookings ? JSON.parse(storedBookings) : DEFAULT_SAMPLE_BOOKINGS;
-        const storedCust = localStorage.getItem('drcare_cust_v3');
-        customerAccounts = storedCust ? JSON.parse(storedCust) : DEFAULT_CUSTOMER_ACCOUNTS;
-      } catch (e) {
-        staffUsers = DEFAULT_STAFF_USERS;
-        bookings = DEFAULT_SAMPLE_BOOKINGS;
-        customerAccounts = DEFAULT_CUSTOMER_ACCOUNTS;
+        await setDoc(dbRef, appState);
+      } catch (err) {
+        console.warn("Cloud write error:", err);
       }
+      localStorage.setItem('drcare_cloud_fallback', JSON.stringify(appState));
     }
 
-    async function persistRecord(collectionName, recordId, data) {
-      if (db) {
-        try {
-          await setDoc(doc(db, 'artifacts', appId, 'public', 'data', collectionName, recordId), data);
-          return;
-        } catch (e) {
-          console.error("Cloud persist error:", e);
-        }
-      }
-      // LocalStorage fallback sync
-      if (collectionName === 'bookings') localStorage.setItem('drcare_bookings_v3', JSON.stringify(bookings));
-      if (collectionName === 'staff') localStorage.setItem('drcare_staff_v3', JSON.stringify(staffUsers));
-      if (collectionName === 'customers') localStorage.setItem('drcare_cust_v3', JSON.stringify(customerAccounts));
-    }
+    // Toast Notification helper
+    window.showToast = function(message, type = 'success') {
+      const container = document.getElementById('toastContainer');
+      if (!container) return;
+      const t = document.createElement('div');
+      t.className = `pointer-events-auto px-4 py-3 rounded-2xl text-xs font-bold shadow-2xl border flex items-center gap-2.5 transition-all animate-fadeIn ${
+        type === 'success' ? 'bg-bay-900 border-emerald-500/50 text-emerald-400' : 'bg-bay-900 border-rose-500/50 text-rose-400'
+      }`;
+      t.innerHTML = `<i class="ph-bold ${type === 'success' ? 'ph-check-circle' : 'ph-warning-circle'} text-base"></i><span>${message}</span>`;
+      container.appendChild(t);
+      setTimeout(() => {
+        t.style.opacity = '0';
+        setTimeout(() => t.remove(), 400);
+      }, 3500);
+    };
 
-    async function removeRecord(collectionName, recordId) {
-      if (db) {
-        try {
-          await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', collectionName, recordId));
-          return;
-        } catch (e) {
-          console.error("Cloud delete error:", e);
-        }
-      }
-    }
+    // Navigation & Views
+    window.navigateToWelcome = function() {
+      currentUser = null;
+      document.getElementById('viewWelcomeGateway').classList.remove('hidden');
+      document.getElementById('viewCustomerLogin').classList.add('hidden');
+      document.getElementById('viewCustomerDashboard').classList.add('hidden');
+      document.getElementById('viewStaffBackOffice').classList.add('hidden');
+      document.getElementById('viewSheetDetail').classList.add('hidden');
+      document.getElementById('staffNavTabs').classList.add('hidden');
+      document.getElementById('authHeaderContainer').classList.remove('hidden');
+    };
 
-    function refreshActiveView() {
-      if (activeStaffTab === 'bookings') filterBookingsGrid();
-      if (activeStaffTab === 'calendar') renderCalendar();
-      if (activeStaffTab === 'funds') renderFundsCircuit();
-      if (activeStaffTab === 'analytics') renderYearlyAnalytics();
-      if (activeStaffTab === 'accounts') renderAccountsLists();
-      if (activeDetailJobId) openVehicleDetailSheet(activeDetailJobId);
-      updateDashboardMetrics();
-    }
+    window.navigateToCustomerPortalGateway = function() {
+      document.getElementById('viewWelcomeGateway').classList.add('hidden');
+      document.getElementById('viewCustomerLogin').classList.remove('hidden');
+      document.getElementById('viewCustomerDashboard').classList.add('hidden');
+      document.getElementById('viewStaffBackOffice').classList.add('hidden');
+      document.getElementById('viewSheetDetail').classList.add('hidden');
+      document.getElementById('staffNavTabs').classList.add('hidden');
+    };
 
-    async function callGemini(prompt, systemInstruction = '', schema = null) {
-      const apiKey = "";
-      const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
-      const payload = { contents: [{ parts: [{ text: prompt }] }] };
-      if (systemInstruction) payload.systemInstruction = { parts: [{ text: systemInstruction }] };
-      if (schema) payload.generationConfig = { responseMimeType: "application/json", responseSchema: schema };
-
-      const response = await fetch(apiUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-      if (!response.ok) throw new Error(`HTTP ${response.status}`);
-      const result = await response.json();
-      return result?.candidates?.[0]?.content?.parts?.[0]?.text || '';
-    }
-
-    function setAppLanguage(lang) {
-      currentAppLang = lang;
-      const btnEn = document.getElementById('langBtnEn');
-      const btnAr = document.getElementById('langBtnAr');
-      if (lang === 'ar') {
-        if (btnAr) btnAr.className = 'px-2 py-1 rounded-lg text-xs font-bold bg-gold-500 text-slate-950 transition';
-        if (btnEn) btnEn.className = 'px-2 py-1 rounded-lg text-xs font-bold text-slate-400 hover:text-white transition';
-        document.documentElement.setAttribute('dir', 'rtl');
-      } else {
-        if (btnEn) btnEn.className = 'px-2 py-1 rounded-lg text-xs font-bold bg-gold-500 text-slate-950 transition';
-        if (btnAr) btnAr.className = 'px-2 py-1 rounded-lg text-xs font-bold text-slate-400 hover:text-white transition';
-        document.documentElement.setAttribute('dir', 'ltr');
-      }
-      applyTranslations();
-    }
-
-    function applyTranslations() {
-      const dict = TRANSLATIONS[currentAppLang] || TRANSLATIONS.en;
-      document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        if (dict[key]) {
-          if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-            el.placeholder = dict[key];
-          } else {
-            el.textContent = dict[key];
-          }
-        }
-      });
-    }
-
-    function hideAllMainViews() {
-      ['viewWelcomeGateway', 'viewCustomerLogin', 'viewCustomerDashboard', 'viewStaffBackOffice', 'viewSheetDetail'].forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.classList.add('hidden');
-      });
-    }
-
-    function navigateToWelcome() {
-      hideAllMainViews();
-      activeCustomerJob = null;
-      activeDetailJobId = null;
-      if (currentStaffUser) {
-        document.getElementById('viewStaffBackOffice')?.classList.remove('hidden');
-        switchStaffTab('bookings');
-      } else {
-        document.getElementById('viewWelcomeGateway')?.classList.remove('hidden');
-      }
-    }
-
-    function navigateToCustomerPortalGateway() {
-      hideAllMainViews();
-      activeCustomerJob = null;
-      document.getElementById('viewCustomerLogin')?.classList.remove('hidden');
-    }
-
-    function switchCustomerLookupMode(mode) {
-      currentLookupMode = mode;
+    window.switchCustomerLookupMode = function(mode) {
+      currentCustomerLookupMode = mode;
       const btnPhone = document.getElementById('btnLookupModePhone');
       const btnCreds = document.getElementById('btnLookupModeCreds');
-      const formPhone = document.getElementById('formCustomerPhoneLookup');
-      const formCreds = document.getElementById('formCustomerCredsLookup');
+      const fPhone = document.getElementById('formCustomerPhoneLookup');
+      const fCreds = document.getElementById('formCustomerCredsLookup');
       if (mode === 'phone') {
-        if (btnPhone) btnPhone.className = 'flex-1 py-2 text-xs font-bold rounded-xl bg-gold-500 text-slate-950 transition';
-        if (btnCreds) btnCreds.className = 'flex-1 py-2 text-xs font-bold rounded-xl text-slate-400 hover:text-white transition';
-        formPhone?.classList.remove('hidden');
-        formCreds?.classList.add('hidden');
+        btnPhone.className = "flex-1 py-2 text-xs font-bold rounded-xl bg-gold-500 text-slate-950 transition";
+        btnCreds.className = "flex-1 py-2 text-xs font-bold rounded-xl text-slate-400 hover:text-white transition";
+        fPhone.classList.remove('hidden');
+        fCreds.classList.add('hidden');
       } else {
-        if (btnPhone) btnPhone.className = 'flex-1 py-2 text-xs font-bold rounded-xl text-slate-400 hover:text-white transition';
-        if (btnCreds) btnCreds.className = 'flex-1 py-2 text-xs font-bold rounded-xl bg-gold-500 text-slate-950 transition';
-        formPhone?.classList.add('hidden');
-        formCreds?.classList.remove('hidden');
+        btnCreds.className = "flex-1 py-2 text-xs font-bold rounded-xl bg-gold-500 text-slate-950 transition";
+        btnPhone.className = "flex-1 py-2 text-xs font-bold rounded-xl text-slate-400 hover:text-white transition";
+        fCreds.classList.remove('hidden');
+        fPhone.classList.add('hidden');
       }
-    }
+    };
 
-    function openStaffLoginModal() {
-      const err = document.getElementById('staffLoginErrorMsg');
-      if (err) err.classList.add('hidden');
-      document.getElementById('modalStaffAuth')?.classList.remove('hidden');
-    }
-
-    function closeStaffLoginModal() {
-      document.getElementById('modalStaffAuth')?.classList.add('hidden');
-    }
-
-    function handleStaffLoginForm(e) {
+    window.handleCustomerPhoneLookup = function(e) {
       e.preventDefault();
-      const u = (document.getElementById('staffInputUsername')?.value || '').trim().toLowerCase();
-      const p = (document.getElementById('staffInputPassword')?.value || '').trim();
-      const err = document.getElementById('staffLoginErrorMsg');
-      
-      const staff = staffUsers.find(s => s.username.toLowerCase() === u && s.pass === p);
-      if (staff) {
-        currentStaffUser = staff;
-        closeStaffLoginModal();
-        if (err) err.classList.add('hidden');
-        applyStaffSessionUI();
-        showToast(`Welcome back, ${staff.name}!`, 'gold');
-      } else {
-        if (err) err.classList.remove('hidden');
-      }
-    }
-
-    function logoutStaff() {
-      currentStaffUser = null;
-      const navTabs = document.getElementById('staffNavTabs');
-      if (navTabs) navTabs.classList.add('hidden');
-      const headerAuth = document.getElementById('authHeaderContainer');
-      if (headerAuth) {
-        headerAuth.innerHTML = `
-          <button onclick="window.navigateToCustomerPortalGateway()" class="hidden sm:flex px-3 py-2 rounded-xl bg-bay-850 hover:bg-bay-800 text-gold-400 border border-gold-500/30 font-bold text-xs items-center gap-1.5 shadow-sm">
-            <i class="ph-bold ph-car"></i>
-            <span data-i18n="customerTracking">Customer Tracking</span>
-          </button>
-          <button onclick="window.openStaffLoginModal()" id="btnStaffLoginNav" class="px-3.5 sm:px-4 py-2 rounded-xl bg-gold-500 hover:bg-gold-400 text-slate-950 font-black text-xs uppercase tracking-wider transition shadow-lg flex items-center gap-1.5">
-            <i class="ph-bold ph-shield-check"></i>
-            <span data-i18n="staffLogin">Staff Login</span>
-          </button>
-        `;
-        applyTranslations();
-      }
-      navigateToWelcome();
-      showToast('Signed out successfully.', 'slate');
-    }
-
-    function applyStaffSessionUI() {
-      hideAllMainViews();
-      document.getElementById('viewStaffBackOffice')?.classList.remove('hidden');
-      
-      const navTabs = document.getElementById('staffNavTabs');
-      if (navTabs) {
-        navTabs.classList.remove('hidden');
-        navTabs.classList.add('flex');
-      }
-
-      const isOwner = currentStaffUser?.role === 'owner';
-      const isManager = currentStaffUser?.role === 'manager';
-      const isDetailer = currentStaffUser?.role === 'detailer';
-
-      const headerAuth = document.getElementById('authHeaderContainer');
-      if (headerAuth) {
-        headerAuth.innerHTML = `
-          <div class="flex items-center gap-2">
-            <div class="text-right hidden sm:block">
-              <span class="text-xs font-black text-white block">${escapeHtml(currentStaffUser.name)}</span>
-              <span class="text-[10px] font-mono text-gold-400 uppercase">${escapeHtml(currentStaffUser.title)}</span>
-            </div>
-            <button onclick="window.logoutStaff()" class="px-3 py-1.5 rounded-xl bg-bay-800 hover:bg-rose-500/20 hover:text-rose-400 text-slate-300 text-xs font-bold border border-slate-700 transition flex items-center gap-1.5">
-              <i class="ph-bold ph-sign-out"></i>
-              <span class="hidden sm:inline">Sign Out</span>
-            </button>
-          </div>
-        `;
-      }
-
-      const roleBadge = document.getElementById('badgeActiveStaffRole');
-      const headerTitle = document.getElementById('staffRoleHeaderTitle');
-      if (roleBadge) {
-        if (isOwner) {
-          roleBadge.className = 'text-[10px] sm:text-[11px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-gold-500/20 text-gold-400 border border-gold-500/40';
-          roleBadge.textContent = 'OWNER (LEVEL 1)';
-          if (headerTitle) headerTitle.textContent = 'Workshop Director Console';
-        } else if (isManager) {
-          roleBadge.className = 'text-[10px] sm:text-[11px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-cyan-500/20 text-cyan-400 border border-cyan-500/40';
-          roleBadge.textContent = 'SHOP MANAGER (LEVEL 2)';
-          if (headerTitle) headerTitle.textContent = 'Workshop Booking & Bay Operations';
-        } else {
-          roleBadge.className = 'text-[10px] sm:text-[11px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-400 border border-amber-500/40';
-          roleBadge.textContent = 'MASTER DETAILER (LEVEL 3)';
-          if (headerTitle) headerTitle.textContent = 'My Assigned Detailing Bay & Tasks';
-        }
-      }
-
-      ['navBtnNewBooking', 'btnOpenNewBooking'].forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.style.display = isDetailer ? 'none' : 'flex';
-      });
-
-      ['tabBtnAnalytics', 'tabBtnFunds'].forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.style.display = isDetailer ? 'none' : 'inline-block';
-      });
-
-      const exportBtn = document.getElementById('btnOwnerExportDb');
-      const importBtn = document.getElementById('btnOwnerImportDbLabel');
-      if (exportBtn) exportBtn.style.display = isOwner ? 'flex' : 'none';
-      if (importBtn) importBtn.style.display = isOwner ? 'flex' : 'none';
-
-      const cardDeposits = document.getElementById('metricCardDeposits');
-      if (cardDeposits) cardDeposits.style.display = isDetailer ? 'none' : 'block';
-
-      switchStaffTab('bookings');
-    }
-
-    function switchStaffTab(tabName) {
-      activeStaffTab = tabName;
-      activeDetailJobId = null;
-      hideAllMainViews();
-      document.getElementById('viewStaffBackOffice')?.classList.remove('hidden');
-
-      ['bookings', 'calendar', 'funds', 'analytics', 'accounts'].forEach(t => {
-        const btn = document.getElementById(`tabBtn${t.charAt(0).toUpperCase() + t.slice(1)}`);
-        const subView = document.getElementById(`subView${t.charAt(0).toUpperCase() + t.slice(1)}`);
-        if (btn && subView) {
-          if (t === tabName) {
-            btn.className = 'px-3 py-1.5 rounded-xl text-xs font-bold transition text-gold-400 bg-gold-500/10 border border-gold-500/30 whitespace-nowrap';
-            subView.classList.remove('hidden');
-          } else {
-            btn.className = 'px-3 py-1.5 rounded-xl text-xs font-bold transition text-slate-400 hover:text-white whitespace-nowrap';
-            subView.classList.add('hidden');
-          }
-        }
-      });
-
-      refreshActiveView();
-    }
-
-    function debounceSearchBookings() {
-      clearTimeout(searchDebounceTimer);
-      searchDebounceTimer = setTimeout(() => filterBookingsGrid(), 150);
-    }
-
-    function updateDashboardMetrics() {
-      const isDetailer = currentStaffUser?.role === 'detailer';
-      const relevantBookings = isDetailer 
-        ? bookings.filter(b => b.assignedDetailerId === currentStaffUser.id || (b.assignedDetailerName && b.assignedDetailerName.toLowerCase() === currentStaffUser.name.toLowerCase()))
-        : bookings;
-
-      const totalActive = relevantBookings.filter(b => (b.progressPercent || 0) < 100).length;
-      const inCoating = relevantBookings.filter(b => (b.progressPercent || 0) >= 80 && (b.progressPercent || 0) < 100).length;
-      const totalDeposits = relevantBookings.reduce((sum, b) => sum + (Number(b.depositLE) || 0), 0);
-      const readyHandover = relevantBookings.filter(b => (b.progressPercent || 0) >= 100).length;
-
-      const setVal = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
-      setVal('metricTotalActive', totalActive);
-      setVal('metricInCoating', inCoating);
-      setVal('metricTotalDeposits', `${totalDeposits.toLocaleString()} L.E`);
-      setVal('metricReadyHandover', readyHandover);
-    }
-
-    function filterBookingsGrid() {
-      const q = (document.getElementById('inputSearchJobs')?.value || '').trim().toLowerCase();
-      const filter = document.getElementById('selectStageFilter')?.value || 'ALL';
-      const isDetailer = currentStaffUser?.role === 'detailer';
-
-      const filtered = bookings.filter(b => {
-        if (isDetailer) {
-          const matchId = b.assignedDetailerId === currentStaffUser.id;
-          const matchName = b.assignedDetailerName && b.assignedDetailerName.toLowerCase().includes(currentStaffUser.name.toLowerCase());
-          if (!matchId && !matchName) return false;
-        }
-
-        const matchesQuery = !q || 
-          b.customerName.toLowerCase().includes(q) || 
-          b.carType.toLowerCase().includes(q) || 
-          b.carPlate.toLowerCase().includes(q) || 
-          (b.customerPhone && b.customerPhone.includes(q)) ||
-          (b.pin && b.pin.toLowerCase().includes(q));
-
-        let matchesStage = true;
-        if (filter === 'IN_PROGRESS') matchesStage = (b.progressPercent || 0) < 100;
-        if (filter === 'COMPLETED') matchesStage = (b.progressPercent || 0) >= 100;
-        if (filter === 'CERAMIC') matchesStage = (b.progressPercent || 0) >= 90;
-
-        return matchesQuery && matchesStage;
-      });
-
-      renderBookingsGrid(filtered);
-      updateDashboardMetrics();
-    }
-
-    function renderBookingsGrid(items) {
-      const container = document.getElementById('gridBookingsContainer');
-      const emptyState = document.getElementById('bookingsEmptyState');
-      const isDetailer = currentStaffUser?.role === 'detailer';
-
-      if (!items || items.length === 0) {
-        if (container) container.innerHTML = '';
-        if (emptyState) {
-          emptyState.classList.remove('hidden');
-          const p = emptyState.querySelector('p');
-          if (p) p.textContent = isDetailer ? 'No assigned tasks currently in your bay.' : 'No vehicle booking sheets found.';
-        }
+      const phone = document.getElementById('custSearchPhone').value.trim();
+      const plate = document.getElementById('custSearchPlate').value.trim().toUpperCase();
+      const found = appState.bookings.find(b => b.custPhone === phone && b.carPlate.toUpperCase() === plate);
+      if (!found) {
+        showToast("No active restoration booking found matching this phone and plate.", "error");
         return;
       }
+      openCustomerDashboard(found);
+    };
 
-      if (emptyState) emptyState.classList.add('hidden');
-      if (container) {
-        container.innerHTML = items.map(job => {
-          const isFinished = (job.progressPercent || 0) >= 100;
-          return `
-            <div onclick="window.openVehicleDetailSheet('${job.id}')" class="group bg-bay-900 border border-slate-800 hover:border-gold-500/50 p-5 rounded-3xl transition-all cursor-pointer shadow-xl space-y-4">
-              <div class="flex items-start justify-between gap-2">
-                <div>
-                  <span class="text-[10px] font-mono font-bold text-gold-400 bg-gold-500/10 px-2 py-0.5 rounded border border-gold-500/30">PIN: ${escapeHtml(job.pin)}</span>
-                  <h3 class="text-base font-black text-white mt-1 group-hover:text-gold-300 transition">${escapeHtml(job.carType)}</h3>
-                  <p class="text-xs text-slate-400">${escapeHtml(job.customerName)} • <span class="text-slate-300 font-mono font-bold">${escapeHtml(job.carPlate)}</span></p>
-                </div>
-                <div class="text-right">
-                  ${!isDetailer ? `<span class="text-[11px] font-mono font-black ${job.depositVerified ? 'text-emerald-400' : 'text-amber-400'} block">${(job.depositLE || 0).toLocaleString()} L.E</span>` : ''}
-                  <span class="text-[10px] text-slate-500 font-mono">${(job.carMileage || 0).toLocaleString()} KM</span>
-                  <span class="text-[9px] font-bold text-gold-400/80 block mt-1">👨‍🔧 ${escapeHtml(job.assignedDetailerName || 'Assigned')}</span>
-                </div>
+    window.handleCustomerCredsLookup = function(e) {
+      e.preventDefault();
+      const username = document.getElementById('custSearchUsername').value.trim();
+      const pass = document.getElementById('custSearchPass').value.trim().toUpperCase();
+      const foundCust = appState.customers.find(c => c.username === username && c.pass.toUpperCase() === pass);
+      if (!foundCust) {
+        showToast("Invalid customer username or password.", "error");
+        return;
+      }
+      const foundJob = appState.bookings.find(b => b.custPhone === foundCust.phone || b.carPlate.toUpperCase() === foundCust.plate.toUpperCase());
+      if (!foundJob) {
+        showToast("No active vehicle associated with this account.", "error");
+        return;
+      }
+      openCustomerDashboard(foundJob);
+    };
+
+    function openCustomerDashboard(job) {
+      document.getElementById('viewCustomerLogin').classList.add('hidden');
+      const dash = document.getElementById('viewCustomerDashboard');
+      dash.classList.remove('hidden');
+
+      dash.innerHTML = `
+        <div class="bg-bay-900 border border-gold-500/40 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-800">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-2xl bg-gold-500/10 border border-gold-500/30 flex items-center justify-center text-gold-400">
+                <i class="ph-bold ph-car text-2xl"></i>
               </div>
-
-              <div class="bg-bay-850 p-3 rounded-2xl border border-slate-800 text-xs text-slate-300 line-clamp-2 leading-relaxed">
-                <strong class="text-slate-400 font-bold">Defect / Task:</strong> ${escapeHtml(job.carIssue)}
-              </div>
-
-              ${job.estimatedCompletion ? `
-                <div class="bg-amber-500/10 border border-amber-500/30 p-2.5 rounded-xl text-[11px] text-amber-400 flex items-center gap-1.5 font-mono">
-                  <i class="ph-bold ph-clock text-sm"></i>
-                  <span><strong>Est. Delivery:</strong> ${escapeHtml(job.estimatedCompletion.replace('T', ' '))}</span>
-                </div>
-              ` : ''}
-
-              <div class="space-y-1.5">
-                <div class="flex justify-between items-center text-[11px]">
-                  <span class="text-slate-400 truncate max-w-[210px]">${escapeHtml(job.progressStageLabel)}</span>
-                  <span class="font-mono font-bold text-white">${job.progressPercent}%</span>
-                </div>
-                <div class="w-full h-2 bg-bay-950 rounded-full overflow-hidden border border-slate-800">
-                  <div class="h-full rounded-full transition-all ${isFinished ? 'bg-emerald-500' : 'bg-gold-500'}" style="width: ${job.progressPercent}%"></div>
-                </div>
+              <div>
+                <span class="text-[10px] font-mono font-bold text-gold-400 uppercase tracking-widest block">Client Portal Gateway</span>
+                <h2 class="text-xl font-black text-white">${job.carModel} (${job.carPlate})</h2>
               </div>
             </div>
-          `;
-        }).join('');
-      }
-    }
+            <button onclick="window.navigateToCustomerPortalGateway()" class="px-4 py-2 rounded-xl bg-bay-800 text-xs font-bold text-slate-300 hover:text-white flex items-center gap-1.5 transition">
+              <i class="ph-bold ph-arrow-left"></i> Switch Vehicle / Logout
+            </button>
+          </div>
 
-    function openVehicleDetailSheet(jobId) {
-      const job = bookings.find(b => b.id === jobId);
-      if (!job) return;
-      activeDetailJobId = jobId;
-      hideAllMainViews();
-      const view = document.getElementById('viewSheetDetail');
-      if (view) {
-        view.classList.remove('hidden');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div class="bg-bay-850 p-4 rounded-2xl border border-slate-800 space-y-1">
+              <span class="text-[10px] text-slate-400 font-bold uppercase">Customer</span>
+              <span class="text-sm font-black text-white block">${job.custName}</span>
+            </div>
+            <div class="bg-bay-850 p-4 rounded-2xl border border-slate-800 space-y-1">
+              <span class="text-[10px] text-slate-400 font-bold uppercase">Odometer</span>
+              <span class="text-sm font-black text-amber-400 font-mono block">${job.odometer || 'N/A'}</span>
+            </div>
+            <div class="bg-bay-850 p-4 rounded-2xl border border-slate-800 space-y-1">
+              <span class="text-[10px] text-slate-400 font-bold uppercase">Verified Deposit</span>
+              <span class="text-sm font-black text-emerald-400 font-mono block">${job.deposit} L.E (${job.paymentChannel})</span>
+            </div>
+          </div>
 
-      const isOwner = currentStaffUser?.role === 'owner';
-      const isManager = currentStaffUser?.role === 'manager';
-      const isDetailer = currentStaffUser?.role === 'detailer';
-      const canEdit = isOwner || isManager;
-      const totalVal = job.totalPriceLE || ((job.depositLE || 0) * 2.5);
-      const remBal = Math.max(0, totalVal - (job.depositLE || 0));
-      const customerAcc = customerAccounts.find(ca => ca.jobId === job.id);
+          <div class="space-y-2 bg-bay-850 p-5 rounded-2xl border border-slate-800">
+            <div class="flex items-center justify-between text-xs font-bold">
+              <span class="text-slate-300 uppercase tracking-wider">Live Restoration Progress</span>
+              <span class="font-mono text-gold-400 text-sm">${job.progress}% Complete</span>
+            </div>
+            <div class="w-full bg-bay-950 rounded-full h-3 overflow-hidden border border-slate-800">
+              <div class="bg-gradient-to-r from-amber-500 to-gold-400 h-full transition-all duration-500" style="width: ${job.progress}%"></div>
+            </div>
+            <span class="text-[11px] text-slate-400 block pt-1">Assigned Master Detailer: <strong class="text-white">${job.assignedDetailer}</strong></span>
+          </div>
 
-      if (view) {
-        view.innerHTML = `
-          <div class="bg-bay-900 border border-gold-500/40 rounded-3xl p-5 sm:p-10 space-y-8 shadow-2xl">
-            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-slate-800">
-              <button onclick="window.switchStaffTab('bookings')" class="px-3.5 py-1.5 rounded-xl bg-bay-850 hover:bg-bay-800 text-slate-300 hover:text-white text-xs font-bold border border-slate-700 transition flex items-center gap-1.5">
-                <i class="ph-bold ph-arrow-left"></i><span>Back to Tasks</span>
+          <div class="space-y-3">
+            <h3 class="text-xs font-black text-white uppercase tracking-wider flex items-center gap-1.5">
+              <i class="ph-bold ph-chat-text text-gold-400"></i> Workshop Technician & Customer Notes
+            </h3>
+            <div class="space-y-2 max-h-48 overflow-y-auto p-3 rounded-2xl bg-bay-950 border border-slate-800">
+              ${job.notes && job.notes.length > 0 ? job.notes.map(n => `
+                <div class="p-2.5 rounded-xl bg-bay-850 text-xs space-y-1">
+                  <div class="flex items-center justify-between text-[10px] text-slate-400 font-mono">
+                    <span class="font-bold text-gold-400">${n.sender}</span>
+                    <span>${n.time}</span>
+                  </div>
+                  <p class="text-slate-200">${n.text}</p>
+                </div>
+              `).join('') : '<p class="text-xs text-slate-500 text-center py-4">No special notes recorded yet.</p>'}
+            </div>
+
+            <div class="flex gap-2 pt-1">
+              <input type="text" id="inputCustNote" placeholder="Send instruction or inquiry to workshop technician..."
+                class="flex-1 border border-slate-700 rounded-xl px-4 py-2.5 text-xs">
+              <button onclick="window.sendCustomerNote('${job.id}')" class="px-5 py-2.5 rounded-xl bg-gold-500 hover:bg-gold-400 text-slate-950 font-black text-xs uppercase tracking-wider transition">
+                Send Note
               </button>
-              
-              <div class="flex flex-wrap items-center gap-2">
-                <button onclick="window.print()" class="px-3 py-1.5 rounded-xl bg-bay-850 text-slate-300 text-xs font-bold border border-slate-700 flex items-center gap-1.5"><i class="ph-bold ph-printer"></i> Print Sheet</button>
-                ${canEdit ? `<button onclick="window.openEditBookingModal('${job.id}')" class="px-3 py-1.5 rounded-xl bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 text-xs font-bold flex items-center gap-1.5"><i class="ph-bold ph-pencil-simple"></i> Edit</button>` : ''}
-                ${isOwner ? `<button onclick="window.confirmDeleteJob('${job.id}')" class="px-3 py-1.5 rounded-xl bg-rose-500/10 text-rose-400 border border-rose-500/30 text-xs font-bold flex items-center gap-1.5"><i class="ph-bold ph-trash"></i> Delete</button>` : ''}
-                ${canEdit ? `<button onclick="window.openCreateCustomerModal('${job.id}')" class="px-3 py-1.5 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 text-xs font-bold flex items-center gap-1.5"><i class="ph-bold ph-user-plus"></i> + Client Pass</button>` : ''}
-                ${!isDetailer ? `<button onclick="window.runAiDiagnosticForCurrentSheet('${job.id}')" class="px-3 py-1.5 rounded-xl bg-gold-500/20 text-gold-300 border border-gold-500/40 text-xs font-bold flex items-center gap-1.5"><i class="ph-bold ph-sparkle text-gold-400"></i> AI Polish Plan</button>` : ''}
-                ${!isDetailer ? `<button onclick="window.openAiWhatsAppModal('${job.id}')" class="px-3 py-1.5 rounded-xl bg-emerald-600 text-white border border-emerald-500/40 text-xs font-bold flex items-center gap-1.5"><i class="ph-bold ph-whatsapp-logo"></i> AI Updates</button>` : ''}
-              </div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div class="md:col-span-2 space-y-2">
-                <span class="text-[11px] font-mono font-bold text-gold-400 uppercase tracking-widest block">TASK PIN: ${escapeHtml(job.pin)}</span>
-                <h1 class="text-2xl sm:text-3xl font-black text-white">${escapeHtml(job.carType)}</h1>
-                <p class="text-xs text-slate-400">Client: <strong class="text-white">${escapeHtml(job.customerName)}</strong> (${escapeHtml(job.customerPhone)}) • Plate: <strong class="text-gold-400 font-mono text-sm">${escapeHtml(job.carPlate)}</strong></p>
-                <div class="flex items-center gap-2.5 text-xs pt-1 flex-wrap">
-                  <span class="px-2.5 py-1 rounded-xl bg-bay-850 border border-slate-800 text-slate-300 font-medium">🎨 ${escapeHtml(job.carColor)}</span>
-                  <span class="px-2.5 py-1 rounded-xl bg-bay-850 border border-slate-800 text-slate-300 font-mono font-medium">🛣️ ${(job.carMileage || 0).toLocaleString()} KM</span>
-                  <span class="px-2.5 py-1 rounded-xl bg-bay-850 border border-slate-800 text-slate-300 font-medium">📍 ${escapeHtml(job.province || 'Port Said')}</span>
-                  <span class="px-2.5 py-1 rounded-xl bg-gold-500/20 border border-gold-500/40 text-gold-300 font-bold">👨‍🔧 Assigned To: ${escapeHtml(job.assignedDetailerName || 'Detailer')}</span>
-                  ${job.estimatedCompletion ? `<span class="px-2.5 py-1 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-400 font-mono font-bold">⏰ Est. Delivery: ${escapeHtml(job.estimatedCompletion.replace('T', ' '))}</span>` : ''}
-                </div>
-              </div>
-
-              <div class="space-y-4">
-                ${!isDetailer ? `
-                  <div class="bg-bay-850 border border-slate-800 p-5 rounded-2xl space-y-3">
-                    <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">Financial Audit (L.E)</span>
-                    <div class="space-y-1 text-xs">
-                      <div class="flex items-center justify-between"><span class="text-slate-400">Advance Deposit:</span><span class="font-mono font-black text-emerald-400 text-sm">${(job.depositLE || 0).toLocaleString()} L.E</span></div>
-                      <div class="flex items-center justify-between text-[11px]"><span class="text-slate-400">Channel:</span><span class="font-mono font-bold text-slate-200 uppercase">${escapeHtml(job.paymentMethod || 'Cash')}</span></div>
-                      <div class="flex items-center justify-between text-[11px]">
-                        <span class="text-slate-400">Status:</span>
-                        ${canEdit ? `<button onclick="window.toggleDepositVerification('${job.id}')" class="font-bold font-mono px-2 py-0.5 rounded ${job.depositVerified ? 'bg-emerald-500/20 text-emerald-400' : 'bg-amber-500/20 text-amber-400'}">${job.depositVerified ? '✓ Verified' : '⏳ Pending Verify'}</button>` : `<span class="font-bold font-mono ${job.depositVerified ? 'text-emerald-400' : 'text-amber-400'}">${job.depositVerified ? '✓ Verified' : '⏳ Pending'}</span>`}
-                      </div>
-                    </div>
-                  </div>
-                ` : `
-                  <div class="bg-bay-850 border border-slate-800 p-5 rounded-2xl space-y-3 flex flex-col justify-center">
-                    <span class="text-[11px] font-bold text-gold-400 uppercase tracking-wider block">Bay Task Directives</span>
-                    <p class="text-xs text-slate-300">Execute the 11 paint restoration phases meticulously. Update your technical inspection notes below.</p>
-                  </div>
-                `}
-
-                ${isOwner && customerAcc ? `
-                  <div class="bg-bay-850 border border-emerald-500/30 p-4 rounded-2xl space-y-2">
-                    <div class="flex items-center justify-between">
-                      <span class="text-[10px] font-mono font-bold text-emerald-400 uppercase">Customer Portal Pass (Owner View)</span>
-                      <button onclick="window.copyCustomerWhatsAppInvite('${job.id}')" class="px-2 py-1 rounded bg-emerald-600/20 text-emerald-300 text-[10px] font-bold flex items-center gap-1"><i class="ph-bold ph-whatsapp-logo"></i> WhatsApp</button>
-                    </div>
-                    <div class="text-[11px] font-mono bg-bay-900 p-2 rounded-xl border border-slate-800 space-y-0.5 text-slate-300">
-                      <div>User: <strong class="text-white">${escapeHtml(customerAcc.username)}</strong></div>
-                      <div>Pass: <strong class="text-white">${escapeHtml(customerAcc.pass)}</strong></div>
-                    </div>
-                  </div>
-                ` : ''}
-              </div>
-            </div>
-
-            <div class="bg-bay-850 p-6 rounded-3xl border border-slate-800 space-y-5">
-              <div class="flex items-center justify-between">
-                <div>
-                  <span class="text-sm font-black text-white uppercase tracking-wider block">Workshop Bay Detailing Phases & Task Progress</span>
-                  <p class="text-xs text-slate-400">${escapeHtml(job.progressStageLabel)}</p>
-                </div>
-                <span class="font-mono font-black text-3xl text-gold-400" id="detailPercentText">${job.progressPercent}%</span>
-              </div>
-
-              <div class="space-y-3 bg-bay-900/60 p-4 rounded-2xl border border-slate-800">
-                <label class="block text-[11px] font-bold text-slate-300">Precision Manual Achievement % Input</label>
-                <div class="flex items-center gap-4">
-                  <input type="range" id="detailPercentSlider" min="0" max="100" value="${job.progressPercent}" class="flex-1" oninput="document.getElementById('detailPercentText').textContent=this.value+'%'; document.getElementById('detailPercentInput').value=this.value;">
-                  <div class="flex items-center gap-2">
-                    <input type="number" id="detailPercentInput" min="0" max="100" value="${job.progressPercent}" class="w-20 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-center font-mono" oninput="document.getElementById('detailPercentSlider').value=this.value; document.getElementById('detailPercentText').textContent=this.value+'%';">
-                    <button onclick="window.updateJobProgress('${job.id}')" class="px-4 py-2 rounded-xl bg-gold-500 hover:bg-gold-400 text-slate-950 font-black text-xs uppercase transition">Apply %</button>
-                  </div>
-                </div>
-              </div>
-
-              <div class="space-y-2">
-                <span class="text-xs font-bold text-slate-400 block uppercase tracking-wider">Jump to Detailing Phase Milestone:</span>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 text-[11px]">
-                  ${RESTORATION_PHASES.map(p => `
-                    <button onclick="window.setJobPhase('${job.id}', ${p.percent}, '${p.label.replace(/'/g, "\\'")}')" class="p-3 rounded-xl border text-left transition-all ${job.progressPercent >= p.percent ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-400 font-bold' : 'bg-bay-900 border-slate-800 text-slate-400 hover:text-white'}">
-                      <div class="flex items-center justify-between">
-                        <span class="truncate pr-2">${escapeHtml(p.label)}</span>
-                        <span class="font-mono font-bold">${p.percent}%</span>
-                      </div>
-                    </button>
-                  `).join('')}
-                </div>
-              </div>
-
-              <div class="space-y-2 pt-4 border-t border-slate-800">
-                <label class="block text-xs font-bold text-white">Technician / Master Detailer Inspection Notes</label>
-                <textarea id="detailNotesInput" rows="2" class="w-full border border-slate-700 rounded-xl px-4 py-2.5 text-xs" placeholder="Write progress notes or compound used...">${escapeHtml(job.detailerNotes || '')}</textarea>
-                <div class="flex justify-end">
-                  <button onclick="window.saveDetailerNotes('${job.id}')" class="px-4 py-2 rounded-xl bg-bay-800 text-white font-bold text-xs border border-slate-700">Save Technician Notes</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        `;
-      }
-    }
-
-    async function updateJobProgress(jobId) {
-      const job = bookings.find(b => b.id === jobId);
-      if (!job) return;
-      const val = parseInt(document.getElementById('detailPercentInput')?.value || "0", 10);
-      if (isNaN(val) || val < 0 || val > 100) return;
-      
-      job.progressPercent = val;
-      let stageLabel = RESTORATION_PHASES[0].label;
-      for (let i = RESTORATION_PHASES.length - 1; i >= 0; i--) {
-        if (val >= RESTORATION_PHASES[i].percent) {
-          stageLabel = RESTORATION_PHASES[i].label;
-          break;
-        }
-      }
-      job.progressStageLabel = stageLabel;
-      await persistRecord('bookings', job.id, job);
-      openVehicleDetailSheet(jobId);
-      showToast(`Progress updated to ${val}%`, 'emerald');
-    }
-
-    async function setJobPhase(jobId, percent, label) {
-      const job = bookings.find(b => b.id === jobId);
-      if (!job) return;
-      job.progressPercent = percent;
-      job.progressStageLabel = label;
-      await persistRecord('bookings', job.id, job);
-      openVehicleDetailSheet(jobId);
-      showToast(`Phase advanced: ${label}`, 'emerald');
-    }
-
-    async function saveDetailerNotes(jobId) {
-      const job = bookings.find(b => b.id === jobId);
-      if (!job) return;
-      job.detailerNotes = document.getElementById('detailNotesInput')?.value.trim() || '';
-      await persistRecord('bookings', job.id, job);
-      showToast('Technician notes successfully saved.', 'cyan');
-    }
-
-    function handleCalendarYearJump(yearVal) {
-      calCurrentYear = parseInt(yearVal, 10);
-      renderCalendar();
-    }
-
-    function navigateCalendarMonth(direction) {
-      calCurrentMonth += direction;
-      if (calCurrentMonth > 11) { calCurrentMonth = 0; calCurrentYear += 1; }
-      else if (calCurrentMonth < 0) { calCurrentMonth = 11; calCurrentYear -= 1; }
-      if (calCurrentYear < 2026) calCurrentYear = 2026;
-      if (calCurrentYear > 2031) calCurrentYear = 2031;
-      renderCalendar();
-    }
-
-    function resetCalendarToToday() {
-      const today = new Date();
-      calCurrentYear = today.getFullYear();
-      if (calCurrentYear < 2026) calCurrentYear = 2026;
-      if (calCurrentYear > 2031) calCurrentYear = 2031;
-      calCurrentMonth = today.getMonth();
-      renderCalendar();
-    }
-
-    function renderCalendar() {
-      const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-      const label = document.getElementById('calCurrentMonthLabel');
-      if (label) label.textContent = `${monthNames[calCurrentMonth]} ${calCurrentYear}`;
-      const yearSelect = document.getElementById('calYearSelect');
-      if (yearSelect) yearSelect.value = calCurrentYear.toString();
-
-      const container = document.getElementById('calDaysGridMatrix');
-      if (!container) return;
-      container.innerHTML = '';
-
-      const firstDayIndex = new Date(calCurrentYear, calCurrentMonth, 1).getDay();
-      const daysInMonth = new Date(calCurrentYear, calCurrentMonth + 1, 0).getDate();
-
-      for (let i = 0; i < firstDayIndex; i++) {
-        const emptyCell = document.createElement('div');
-        emptyCell.className = 'h-20 sm:h-28 rounded-2xl bg-bay-950/40 border border-slate-900/60 opacity-40';
-        container.appendChild(emptyCell);
-      }
-
-      for (let day = 1; day <= daysInMonth; day++) {
-        const monthStr = String(calCurrentMonth + 1).padStart(2, '0');
-        const dayStr = String(day).padStart(2, '0');
-        const dateStr = `${calCurrentYear}-${monthStr}-${dayStr}`;
-
-        const dayBookings = bookings.filter(b => b.bookingDate === dateStr);
-        const count = dayBookings.length;
-        const isFull = count >= 12;
-        const isSelected = calSelectedDateStr === dateStr;
-
-        const cell = document.createElement('div');
-        cell.className = `h-20 sm:h-28 p-2 rounded-2xl border transition-all cursor-pointer flex flex-col justify-between ${isSelected ? 'border-gold-500 bg-gold-500/10 shadow-lg' : 'border-slate-800 bg-bay-850 hover:border-slate-600'}`;
-        cell.onclick = () => window.selectCalendarDate(dateStr, dayBookings);
-
-        cell.innerHTML = `
-          <div class="flex items-center justify-between">
-            <span class="text-xs font-mono font-bold ${count > 0 ? 'text-white' : 'text-slate-400'}">${day}</span>
-            ${count > 0 ? `<span class="text-[9px] font-mono font-black px-1.5 py-0.5 rounded ${isFull ? 'bg-rose-500/20 text-rose-400 border border-rose-500/40' : 'bg-gold-500/20 text-gold-400 border border-gold-500/30'}">${count}/12</span>` : '<span class="text-[9px] text-slate-600 font-mono">0/12</span>'}
-          </div>
-          <div class="space-y-1">
-            <div class="w-full h-1.5 bg-bay-950 rounded-full overflow-hidden border border-slate-800">
-              <div class="h-full rounded-full transition-all ${isFull ? 'bg-rose-500' : (count > 6 ? 'bg-amber-400' : 'bg-emerald-500')}" style="width: ${Math.min(100, (count / 12) * 100)}%"></div>
-            </div>
-            ${count > 0 ? `<p class="text-[9px] font-mono text-slate-300 truncate">${escapeHtml(dayBookings[0].carType)}</p>` : ''}
-          </div>
-        `;
-        container.appendChild(cell);
-      }
-
-      if (calSelectedDateStr.startsWith(`${calCurrentYear}-${String(calCurrentMonth + 1).padStart(2, '0')}`)) {
-        selectCalendarDate(calSelectedDateStr, bookings.filter(b => b.bookingDate === calSelectedDateStr), false);
-      }
-    }
-
-    function selectCalendarDate(dateStr, dayBookings, shouldScroll = true) {
-      calSelectedDateStr = dateStr;
-      const box = document.getElementById('calDayInspectorBox');
-      const title = document.getElementById('calSelectedDayTitle');
-      const list = document.getElementById('calSelectedDayCarsList');
-      if (!box || !title || !list) return;
-
-      box.classList.remove('hidden');
-      title.textContent = `Reservations on ${dateStr} (${dayBookings.length}/12 Slots Filled)`;
-      const isDetailer = currentStaffUser?.role === 'detailer';
-
-      if (dayBookings.length === 0) {
-        list.innerHTML = `<p class="text-xs text-slate-400 py-3 text-center bg-bay-900 rounded-xl border border-slate-800">No vehicles booked on this date. All 12 workshop bay slots available.</p>`;
-      } else {
-        list.innerHTML = dayBookings.map(b => `
-          <div onclick="window.openVehicleDetailSheet('${b.id}')" class="p-3.5 rounded-2xl bg-bay-900 border border-slate-800 hover:border-gold-500 flex items-center justify-between cursor-pointer transition shadow-md">
-            <div class="space-y-0.5">
-              <div class="flex items-center gap-2">
-                <span class="text-xs font-mono font-bold text-gold-400">${escapeHtml(b.pin)}</span>
-                <span class="text-xs font-black text-white">${escapeHtml(b.carType)} (${escapeHtml(b.carPlate)})</span>
-              </div>
-              <p class="text-[11px] text-slate-400">Client: <strong class="text-slate-300">${escapeHtml(b.customerName)}</strong> • Stage: <span class="text-gold-300 font-bold">${b.progressPercent}%</span></p>
-            </div>
-            <div class="text-right">
-              ${!isDetailer ? `<span class="text-xs font-mono font-black text-emerald-400">${(b.depositLE || 0).toLocaleString()} L.E</span>` : ''}
-              <span class="text-[10px] text-slate-400 block mt-0.5">👨‍🔧 ${escapeHtml(b.assignedDetailerName || 'Detailer')}</span>
-            </div>
-          </div>
-        `).join('');
-      }
-      if (shouldScroll) box.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }
-
-    function quickBookForSelectedDate() {
-      openNewBookingModal(calSelectedDateStr);
-    }
-
-    function renderFundsCircuit() {
-      const period = document.getElementById('fundsPeriodSelect')?.value || 'this_month';
-      const now = new Date();
-      const currentYear = now.getFullYear();
-      const currentMonthStr = String(now.getMonth() + 1).padStart(2, '0');
-
-      const filteredBookings = bookings.filter(b => {
-        if (period === 'all_time') return true;
-        if (!b.bookingDate) return true;
-        if (period === 'this_month') return b.bookingDate.startsWith(`${currentYear}-${currentMonthStr}`);
-        if (period === 'this_week') {
-          const diffDays = (now - new Date(b.bookingDate)) / (1000 * 60 * 60 * 24);
-          return diffDays >= 0 && diffDays <= 7;
-        }
-        return true;
-      });
-
-      const channels = { cash: 0, instapay: 0, wallet: 0, visa: 0 };
-      const counts = { cash: 0, instapay: 0, wallet: 0, visa: 0 };
-      let grandTotal = 0;
-
-      filteredBookings.forEach(b => {
-        const ch = (b.paymentMethod || 'cash').toLowerCase();
-        const amt = Number(b.depositLE) || 0;
-        grandTotal += amt;
-        if (channels[ch] !== undefined) { channels[ch] += amt; counts[ch] += 1; }
-        else { channels.cash += amt; counts.cash += 1; }
-      });
-
-      const setVal = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
-      setVal('fundsCashTotal', `${channels.cash.toLocaleString()} L.E`);
-      setVal('fundsCashCount', `${counts.cash} tx`);
-      setVal('fundsInstaTotal', `${channels.instapay.toLocaleString()} L.E`);
-      setVal('fundsInstaCount', `${counts.instapay} tx`);
-      setVal('fundsWalletTotal', `${channels.wallet.toLocaleString()} L.E`);
-      setVal('fundsWalletCount', `${counts.wallet} tx`);
-      setVal('fundsCardTotal', `${channels.visa.toLocaleString()} L.E`);
-      setVal('fundsCardCount', `${counts.visa} tx`);
-      setVal('fundsGrandTotal', `${grandTotal.toLocaleString()} L.E`);
-
-      const tbody = document.getElementById('fundsLedgerTableBody');
-      if (tbody) {
-        tbody.innerHTML = filteredBookings.slice(0, 10).map(b => `
-          <tr class="hover:bg-bay-850/60 transition">
-            <td class="p-3 font-mono text-slate-400">${escapeHtml(b.bookingDate)}</td>
-            <td class="p-3 font-bold text-white">${escapeHtml(b.customerName)}</td>
-            <td class="p-3 text-slate-300">${escapeHtml(b.carType)}</td>
-            <td class="p-3 font-mono uppercase text-gold-400 font-bold">${escapeHtml(b.paymentMethod || 'Cash')}</td>
-            <td class="p-3 font-mono font-black text-emerald-400">${(b.depositLE || 0).toLocaleString()} L.E</td>
-            <td class="p-3 font-mono"><span class="px-2 py-0.5 rounded text-[10px] font-bold ${b.depositVerified ? 'bg-emerald-500/20 text-emerald-400' : 'bg-amber-500/20 text-amber-400'}">${b.depositVerified ? 'VERIFIED' : 'PENDING'}</span></td>
-          </tr>
-        `).join('');
-      }
-    }
-
-    function renderYearlyAnalytics() {
-      const year = document.getElementById('analyticsYearSelect')?.value || '2026';
-      const yearBookings = bookings.filter(b => b.bookingDate && b.bookingDate.startsWith(year));
-      const totalGross = yearBookings.reduce((sum, b) => sum + (Number(b.depositLE) || 0), 0);
-      const avgDeposit = yearBookings.length > 0 ? Math.round(totalGross / yearBookings.length) : 0;
-      const verifiedCount = yearBookings.filter(b => b.depositVerified).length;
-      const ratio = yearBookings.length > 0 ? Math.round((verifiedCount / yearBookings.length) * 100) : 100;
-
-      const setVal = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
-      setVal('anaStatGrossDeposits', `${totalGross.toLocaleString()} L.E`);
-      setVal('anaStatAvgDeposit', `${avgDeposit.toLocaleString()} L.E`);
-      setVal('anaStatVerifiedRatio', `${ratio}%`);
-
-      const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-      const container = document.getElementById('anaMonthlyBarsContainer');
-      if (!container) return;
-
-      const monthlyTotals = new Array(12).fill(0);
-      yearBookings.forEach(b => {
-        const parts = b.bookingDate.split('-');
-        if (parts.length >= 2) {
-          const m = parseInt(parts[1], 10) - 1;
-          if (m >= 0 && m < 12) monthlyTotals[m] += Number(b.depositLE) || 0;
-        }
-      });
-      const maxMonth = Math.max(...monthlyTotals, 1000);
-
-      container.innerHTML = monthlyTotals.map((tot, idx) => `
-        <div class="flex items-center gap-3 text-xs">
-          <span class="w-10 font-mono font-bold text-slate-400">${monthNames[idx]}</span>
-          <div class="flex-1 h-3 bg-bay-950 rounded-full overflow-hidden border border-slate-800">
-            <div class="h-full rounded-full bg-gradient-to-r from-gold-500 to-amber-400" style="width: ${Math.round((tot / maxMonth) * 100)}%"></div>
-          </div>
-          <span class="w-24 text-right font-mono font-bold text-emerald-400">${tot.toLocaleString()} L.E</span>
-        </div>
-      `).join('');
-    }
-
-    function renderAccountsLists() {
-      const isOwner = currentStaffUser?.role === 'owner';
-      const ownerBar = document.getElementById('ownerStaffProvisioningBar');
-      if (ownerBar) ownerBar.style.display = isOwner ? 'block' : 'none';
-
-      const staffBox = document.getElementById('listStaffAccountsContainer');
-      if (staffBox) {
-        if (!isOwner) {
-          staffBox.innerHTML = `<p class="text-xs text-rose-400 bg-bay-850 p-4 rounded-xl border border-rose-500/30">🔒 Access Restricted: Staff credentials are visible exclusively to Level 1 Owner.</p>`;
-        } else {
-          staffBox.innerHTML = staffUsers.map(u => `
-            <div class="bg-bay-850 border border-slate-800 p-4 rounded-2xl space-y-2">
-              <div class="flex items-center justify-between">
-                <span class="text-xs font-black text-white">${escapeHtml(u.name)}</span>
-                <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded ${u.role === 'owner' ? 'bg-gold-500/20 text-gold-400' : 'bg-cyan-500/20 text-cyan-400'}">${u.role.toUpperCase()}</span>
-              </div>
-              <div class="text-[11px] font-mono text-slate-400 space-y-0.5">
-                <div>User: <strong class="text-slate-200">${escapeHtml(u.username)}</strong></div>
-                <div>Pass: <strong class="text-slate-200">${escapeHtml(u.pass)}</strong></div>
-              </div>
-              ${u.role !== 'owner' ? `<div class="pt-2 border-t border-slate-800 flex justify-end"><button onclick="window.removeStaffUser('${u.id}')" class="text-[10px] text-rose-400 hover:text-rose-300 font-bold">Revoke</button></div>` : ''}
-            </div>
-          `).join('');
-        }
-      }
-
-      const custBox = document.getElementById('listCustomerAccountsContainer');
-      if (custBox) {
-        if (!isOwner) {
-          custBox.innerHTML = `<p class="text-xs text-rose-400 bg-bay-850 p-4 rounded-xl border border-rose-500/30">🔒 Access Restricted: Customer passwords are visible exclusively to Level 1 Owner.</p>`;
-        } else {
-          custBox.innerHTML = customerAccounts.map(ca => {
-            const job = bookings.find(b => b.id === ca.jobId);
-            return `
-              <div class="bg-bay-850 border border-slate-800 p-4 rounded-2xl space-y-2.5">
-                <div class="flex items-center justify-between">
-                  <span class="text-xs font-black text-white">${escapeHtml(ca.customerName)}</span>
-                  <span class="text-[10px] font-mono text-emerald-400 font-bold">${job ? escapeHtml(job.carPlate) : 'N/A'}</span>
-                </div>
-                <div class="text-[11px] font-mono text-slate-400 space-y-0.5 bg-bay-900 p-2.5 rounded-xl border border-slate-800">
-                  <div>User: <strong class="text-white">${escapeHtml(ca.username)}</strong></div>
-                  <div>Pass: <strong class="text-white">${escapeHtml(ca.pass)}</strong></div>
-                </div>
-                <div class="flex items-center justify-between pt-1">
-                  <button onclick="window.copyCustomerWhatsAppInvite('${ca.jobId}')" class="px-2.5 py-1 rounded-lg bg-emerald-600/20 text-emerald-300 text-[10px] font-bold flex items-center gap-1"><i class="ph-bold ph-whatsapp-logo"></i><span>WhatsApp</span></button>
-                  <button onclick="window.removeCustomerAccount('${ca.id}')" class="text-[10px] text-rose-400 font-bold">Revoke</button>
-                </div>
-              </div>
-            `;
-          }).join('');
-        }
-      }
-    }
-
-    async function handleOwnerQuickAddStaff(e) {
-      e.preventDefault();
-      const role = document.getElementById('barStaffRole')?.value || 'detailer';
-      const name = document.getElementById('barStaffName')?.value.trim();
-      const username = document.getElementById('barStaffUsername')?.value.trim();
-      const pass = document.getElementById('barStaffPassword')?.value.trim();
-      if (!name || !username || !pass) return;
-
-      const newStaff = { id: 'usr-' + Date.now(), name, username, pass, role, title: role === 'manager' ? 'Shop Manager' : 'Master Detailer' };
-      staffUsers.push(newStaff);
-      await persistRecord('staff', newStaff.id, newStaff);
-      e.target.reset();
-      renderAccountsLists();
-      populateDetailerSelectors();
-      showToast(`Account created for ${name}`, 'gold');
-    }
-
-    function handleCustomerPhoneLookup(e) {
-      e.preventDefault();
-      const phone = (document.getElementById('custSearchPhone')?.value || '').trim().replace(/\s+/g, '');
-      const plate = (document.getElementById('custSearchPlate')?.value || '').trim().toLowerCase().replace(/\s+/g, '');
-      const job = bookings.find(b => (b.customerPhone && b.customerPhone.replace(/\s+/g, '') === phone) && (b.carPlate && b.carPlate.toLowerCase().replace(/\s+/g, '') === plate));
-      if (job) {
-        activeCustomerJob = job;
-        renderCustomerSingleDashboard(job);
-        showToast(`Vehicle Found: ${job.carType}`, 'emerald');
-      } else {
-        showToast('No active vehicle record matching this phone and license plate.', 'rose');
-      }
-    }
-
-    function handleCustomerCredsLookup(e) {
-      e.preventDefault();
-      const u = (document.getElementById('custSearchUsername')?.value || '').trim().toLowerCase();
-      const p = (document.getElementById('custSearchPass')?.value || '').trim();
-      const acc = customerAccounts.find(ca => ca.username.toLowerCase() === u && ca.pass === p);
-      if (acc) {
-        const job = bookings.find(b => b.id === acc.jobId);
-        if (job) {
-          activeCustomerJob = job;
-          renderCustomerSingleDashboard(job);
-          showToast(`Welcome back, ${acc.customerName}!`, 'emerald');
-        } else {
-          showToast('Vehicle restoration record not found.', 'amber');
-        }
-      } else {
-        showToast('Invalid customer username or password.', 'rose');
-      }
-    }
-
-    function renderCustomerSingleDashboard(job) {
-      hideAllMainViews();
-      const container = document.getElementById('viewCustomerDashboard');
-      if (!container) return;
-      container.classList.remove('hidden');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-
-      const totalVal = job.totalPriceLE || ((job.depositLE || 0) * 2.5);
-      const remBal = Math.max(0, totalVal - (job.depositLE || 0));
-
-      container.innerHTML = `
-        <div class="bg-bay-900 border border-gold-500/40 rounded-3xl p-5 sm:p-10 space-y-8 shadow-2xl">
-          <div class="flex items-center justify-between pb-4 border-b border-slate-800">
-            <button onclick="window.navigateToWelcome()" class="px-3.5 py-1.5 rounded-xl bg-bay-850 text-slate-300 text-xs font-bold border border-slate-700 flex items-center gap-1.5"><i class="ph-bold ph-arrow-left"></i><span>Exit</span></button>
-            <button onclick="window.openCustomerAiAdvisorModal()" class="px-3 py-1.5 rounded-xl bg-gold-500/20 text-gold-300 border border-gold-500/40 text-xs font-bold flex items-center gap-1.5"><i class="ph-bold ph-sparkle text-gold-400"></i><span>Ask AI Concierge</span></button>
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div class="md:col-span-2 space-y-2">
-              <span class="text-[11px] font-mono font-bold text-gold-400 uppercase tracking-widest block">Restoration In Active Bay</span>
-              <h1 class="text-2xl sm:text-3xl font-black text-white">${escapeHtml(job.carType)}</h1>
-              <p class="text-xs text-slate-400">Client: <strong class="text-white">${escapeHtml(job.customerName)}</strong> • Plate: <strong class="text-gold-400 font-mono text-sm">${escapeHtml(job.carPlate)}</strong></p>
-              <div class="flex items-center gap-3 text-xs pt-1 flex-wrap">
-                <span class="px-2.5 py-1 rounded-xl bg-bay-850 border border-slate-800 text-slate-300">🎨 ${escapeHtml(job.carColor)}</span>
-                <span class="px-2.5 py-1 rounded-xl bg-bay-850 border border-slate-800 text-slate-300 font-mono">🛣️ ${(job.carMileage || 0).toLocaleString()} KM</span>
-                <span class="px-2.5 py-1 rounded-xl bg-bay-850 border border-slate-800 text-slate-300">📍 ${escapeHtml(job.province || 'Port Said')}</span>
-                ${job.estimatedCompletion ? `<span class="px-2.5 py-1 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-400 font-mono font-bold">⏰ Delivery: ${escapeHtml(job.estimatedCompletion.replace('T', ' '))}</span>` : ''}
-              </div>
-            </div>
-
-            <div class="bg-bay-850 border border-slate-800 p-5 rounded-2xl space-y-3">
-              <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">Financial Audit (L.E)</span>
-              <div class="space-y-1 text-xs">
-                <div class="flex justify-between items-center"><span class="text-slate-400">Advance Deposit:</span><span class="font-mono font-black text-emerald-400 text-sm">${(job.depositLE || 0).toLocaleString()} L.E</span></div>
-                <div class="flex justify-between items-center text-[11px]"><span class="text-slate-400">Deposit Status:</span><span class="font-bold font-mono ${job.depositVerified ? 'text-emerald-400' : 'text-amber-400'}">${job.depositVerified ? '✓ Verified' : '⏳ Pending'}</span></div>
-              </div>
-              <div class="pt-2 border-t border-slate-800 space-y-1 text-xs">
-                <div class="flex justify-between items-center"><span class="text-slate-400">Total Estimation:</span><span class="font-mono font-bold text-white">${totalVal.toLocaleString()} L.E</span></div>
-                <div class="flex justify-between items-center"><span class="text-slate-400">Handover Balance:</span><span class="font-mono font-bold text-amber-400">${remBal.toLocaleString()} L.E</span></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="space-y-3 bg-bay-850 p-6 rounded-3xl border border-slate-800">
-            <div class="flex justify-between items-center text-xs">
-              <span class="font-black text-gold-400 uppercase tracking-wider flex items-center gap-2"><i class="ph-bold ph-gear-six animate-spin"></i><span>${escapeHtml(job.progressStageLabel)}</span></span>
-              <span class="font-mono font-black text-2xl text-white">${job.progressPercent}%</span>
-            </div>
-            <div class="w-full h-4 bg-bay-950 rounded-full overflow-hidden border border-slate-800 p-0.5">
-              <div class="h-full rounded-full bg-gradient-to-r from-amber-500 via-gold-500 to-emerald-400" style="width: ${job.progressPercent}%"></div>
-            </div>
-            ${job.detailerNotes ? `<div class="mt-2 p-3 bg-bay-900 rounded-xl border border-slate-800 text-xs text-slate-300"><strong class="text-gold-400 block font-bold mb-0.5">Technician Note:</strong> "${escapeHtml(job.detailerNotes)}"</div>` : ''}
-          </div>
-
-          <div class="bg-bay-850 p-5 rounded-2xl border border-slate-800 space-y-3">
-            <span class="text-xs font-black text-gold-400 uppercase tracking-wider block">Special Instructions to Detailer</span>
-            <div class="flex flex-col sm:flex-row gap-2">
-              <input type="text" id="inputCustomerCommentNote" value="${escapeHtml(job.customerNotes || '')}" placeholder="Write specific request..." class="flex-1 border border-slate-700 rounded-xl px-4 py-2.5 text-xs">
-              <button onclick="window.handleCustomerSubmitNote('${job.id}')" class="px-5 py-2.5 rounded-xl bg-gold-500 text-slate-950 font-black text-xs uppercase">Save Request</button>
             </div>
           </div>
         </div>
       `;
     }
 
-    async function handleCustomerSubmitNote(jobId) {
-      const job = bookings.find(b => b.id === jobId);
+    window.sendCustomerNote = function(jobId) {
+      const input = document.getElementById('inputCustNote');
+      const val = input.value.trim();
+      if (!val) return;
+      const job = appState.bookings.find(b => b.id === jobId);
       if (!job) return;
-      job.customerNotes = document.getElementById('inputCustomerCommentNote')?.value.trim() || '';
-      await persistRecord('bookings', job.id, job);
-      showToast('Special request submitted.', 'gold');
-    }
-
-    function populateDetailerSelectors() {
-      const detailers = staffUsers.filter(u => u.role === 'detailer' || u.role === 'manager' || u.role === 'owner');
-      ['newAssignedDetailer', 'editAssignedDetailer'].forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.innerHTML = detailers.map(d => `<option value="${d.id}">${escapeHtml(d.name)} (${d.role.toUpperCase()})</option>`).join('');
+      if (!job.notes) job.notes = [];
+      const nowStr = new Date().toISOString().replace('T', ' ').substring(0, 16);
+      job.notes.push({ sender: job.custName + ' (Client)', text: val, time: nowStr });
+      saveCloudState().then(() => {
+        input.value = '';
+        openCustomerDashboard(job);
+        showToast("Note sent successfully to workshop bay!");
       });
-    }
+    };
 
-    function openNewBookingModal(preDate = null) {
-      populateDetailerSelectors();
-      document.getElementById('modalNewBooking')?.classList.remove('hidden');
-      const dateInput = document.getElementById('newBookingDate');
-      if (dateInput) dateInput.value = preDate || new Date().toISOString().split('T')[0];
-    }
+    // Staff Login Modal
+    window.openStaffLoginModal = function() {
+      document.getElementById('modalStaffAuth').classList.remove('hidden');
+    };
+    window.closeStaffLoginModal = function() {
+      document.getElementById('modalStaffAuth').classList.add('hidden');
+    };
 
-    function closeNewBookingModal() { document.getElementById('modalNewBooking')?.classList.add('hidden'); }
-
-    async function handleNewBookingForm(e) {
+    window.handleStaffLoginForm = function(e) {
       e.preventDefault();
-      const depositVal = Number(document.getElementById('newDeposit')?.value) || 0;
-      const totalVal = Number(document.getElementById('newTotalPrice')?.value) || (depositVal * 2.5);
-      const selDet = document.getElementById('newAssignedDetailer');
+      const u = document.getElementById('staffLoginUser').value.trim();
+      const p = document.getElementById('staffLoginPass').value.trim();
+      const found = appState.staff.find(s => s.username.toLowerCase() === u.toLowerCase() && s.pass === p);
+      if (!found) {
+        showToast("Invalid staff username or password.", "error");
+        return;
+      }
+      currentUser = found;
+      closeStaffLoginModal();
+      document.getElementById('viewWelcomeGateway').classList.add('hidden');
+      document.getElementById('viewCustomerLogin').classList.add('hidden');
+      document.getElementById('viewCustomerDashboard').classList.add('hidden');
+      document.getElementById('authHeaderContainer').classList.add('hidden');
+      document.getElementById('staffNavTabs').classList.remove('hidden');
+      document.getElementById('viewStaffBackOffice').classList.remove('hidden');
+      
+      updateStaffRoleBadge();
+      switchStaffTab('bookings');
+    };
 
+    function updateStaffRoleBadge() {
+      const titleEl = document.getElementById('staffRoleHeaderTitle');
+      const badgeEl = document.getElementById('badgeActiveStaffRole');
+      const newBookBtn = document.getElementById('navBtnNewBooking');
+      const headerNewBookBtn = document.getElementById('btnOpenNewBooking');
+      const ownerExp = document.getElementById('btnOwnerExportDb');
+      const ownerImp = document.getElementById('btnOwnerImportDbLabel');
+      const accTabBtn = document.getElementById('tabBtnAccounts');
+
+      if (currentUser.role === 'owner') {
+        titleEl.innerText = "Vehicle Booking & Intake Bay";
+        badgeEl.innerText = "OWNER (LEVEL 1)";
+        badgeEl.className = "text-[10px] sm:text-[11px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-gold-500/20 text-gold-400 border border-gold-500/40";
+        newBookBtn.classList.remove('hidden');
+        if (headerNewBookBtn) headerNewBookBtn.classList.remove('hidden');
+        if (ownerExp) ownerExp.classList.remove('hidden');
+        if (ownerImp) ownerImp.classList.remove('hidden');
+        if (accTabBtn) accTabBtn.classList.remove('hidden');
+      } else if (currentUser.role === 'manager') {
+        titleEl.innerText = "Manager Restoration & Intake Bay";
+        badgeEl.innerText = "MANAGER (LEVEL 2)";
+        badgeEl.className = "text-[10px] sm:text-[11px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-cyan-500/20 text-cyan-400 border border-cyan-500/40";
+        newBookBtn.classList.remove('hidden');
+        if (headerNewBookBtn) headerNewBookBtn.classList.remove('hidden');
+        if (ownerExp) ownerExp.classList.add('hidden');
+        if (ownerImp) ownerImp.classList.add('hidden');
+        if (accTabBtn) accTabBtn.classList.add('hidden');
+      } else {
+        titleEl.innerText = "Master Detailer Bay Terminal";
+        badgeEl.innerText = "DETAILER (LEVEL 3)";
+        badgeEl.className = "text-[10px] sm:text-[11px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-400 border border-amber-500/40";
+        newBookBtn.classList.add('hidden');
+        if (headerNewBookBtn) headerNewBookBtn.classList.add('hidden');
+        if (ownerExp) ownerExp.classList.add('hidden');
+        if (ownerImp) ownerImp.classList.add('hidden');
+        if (accTabBtn) accTabBtn.classList.add('hidden');
+      }
+    }
+
+    window.switchStaffTab = function(tab) {
+      activeStaffTab = tab;
+      const bBookings = document.getElementById('tabBtnBookings');
+      const bCal = document.getElementById('tabBtnCalendar');
+      const bFunds = document.getElementById('tabBtnFunds');
+      const bAna = document.getElementById('tabBtnAnalytics');
+      const bAcc = document.getElementById('tabBtnAccounts');
+
+      const sBookings = document.getElementById('subViewBookings');
+      const sCal = document.getElementById('subViewCalendar');
+      const sFunds = document.getElementById('subViewFunds');
+      const sAna = document.getElementById('subViewAnalytics');
+      const sAcc = document.getElementById('subViewAccounts');
+
+      [bBookings, bCal, bFunds, bAna, bAcc].forEach(b => {
+        if (b) {
+          b.className = "px-3 py-1.5 rounded-xl text-xs font-bold transition text-slate-400 hover:text-white whitespace-nowrap";
+        }
+      });
+      [sBookings, sCal, sFunds, sAna, sAcc].forEach(s => {
+        if (s) s.classList.add('hidden');
+      });
+
+      if (tab === 'bookings') {
+        if (bBookings) bBookings.className = "px-3 py-1.5 rounded-xl text-xs font-bold transition text-gold-400 bg-gold-500/10 border border-gold-500/30 whitespace-nowrap";
+        if (sBookings) sBookings.classList.remove('hidden');
+        renderBookingsGrid();
+      } else if (tab === 'calendar') {
+        if (bCal) bCal.className = "px-3 py-1.5 rounded-xl text-xs font-bold transition text-gold-400 bg-gold-500/10 border border-gold-500/30 whitespace-nowrap";
+        if (sCal) sCal.classList.remove('hidden');
+        renderCalendar();
+      } else if (tab === 'funds') {
+        if (bFunds) bFunds.className = "px-3 py-1.5 rounded-xl text-xs font-bold transition text-gold-400 bg-gold-500/10 border border-gold-500/30 whitespace-nowrap";
+        if (sFunds) sFunds.classList.remove('hidden');
+        renderFundsCircuit();
+      } else if (tab === 'analytics') {
+        if (bAna) bAna.className = "px-3 py-1.5 rounded-xl text-xs font-bold transition text-gold-400 bg-gold-500/10 border border-gold-500/30 whitespace-nowrap";
+        if (sAna) sAna.classList.remove('hidden');
+        renderYearlyAnalytics();
+      } else if (tab === 'accounts') {
+        if (bAcc) bAcc.className = "px-3 py-1.5 rounded-xl text-xs font-bold transition text-gold-400 bg-gold-500/10 border border-gold-500/30 whitespace-nowrap";
+        if (sAcc) sAcc.classList.remove('hidden');
+        renderAccountsLists();
+      }
+    };
+
+    // Render Bookings & Metrics
+    function renderBookingsGrid() {
+      const container = document.getElementById('gridBookingsContainer');
+      const emptyState = document.getElementById('bookingsEmptyState');
+      if (!container) return;
+
+      let list = appState.bookings;
+      // Detailer restriction: Level 3 detailer sees only assigned jobs
+      if (currentUser && currentUser.role === 'detailer') {
+        list = list.filter(b => b.assignedDetailer && b.assignedDetailer.toLowerCase().includes(currentUser.name.toLowerCase().split(' ')[0]));
+      }
+
+      const searchVal = (document.getElementById('inputSearchJobs')?.value || '').toLowerCase();
+      const stageFilter = document.getElementById('selectStageFilter')?.value || 'ALL';
+
+      if (searchVal) {
+        list = list.filter(b => 
+          b.custName.toLowerCase().includes(searchVal) ||
+          b.carModel.toLowerCase().includes(searchVal) ||
+          b.carPlate.toLowerCase().includes(searchVal) ||
+          b.custPhone.toLowerCase().includes(searchVal)
+        );
+      }
+
+      if (stageFilter === 'IN_PROGRESS') {
+        list = list.filter(b => b.progress < 100);
+      } else if (stageFilter === 'COMPLETED') {
+        list = list.filter(b => b.progress >= 100);
+      } else if (stageFilter === 'CERAMIC') {
+        list = list.filter(b => b.progress >= 90);
+      }
+
+      // Metrics calculation
+      const totalActive = appState.bookings.length;
+      const inCoating = appState.bookings.filter(b => b.progress >= 50 && b.progress < 100).length;
+      const totalDep = appState.bookings.reduce((acc, curr) => acc + (Number(curr.deposit) || 0), 0);
+      const readyHandover = appState.bookings.filter(b => b.progress >= 100).length;
+
+      document.getElementById('metricTotalActive').innerText = totalActive;
+      document.getElementById('metricInCoating').innerText = inCoating;
+      document.getElementById('metricTotalDeposits').innerText = totalDep.toLocaleString() + ' L.E';
+      document.getElementById('metricReadyHandover').innerText = readyHandover;
+
+      if (currentUser && currentUser.role === 'detailer') {
+        const depCard = document.getElementById('metricCardDeposits');
+        if (depCard) depCard.classList.add('hidden');
+      }
+
+      if (list.length === 0) {
+        container.innerHTML = '';
+        emptyState.classList.remove('hidden');
+        return;
+      }
+      emptyState.classList.add('hidden');
+
+      container.innerHTML = list.map(b => `
+        <div onclick="window.openVehicleDetailSheet('${b.id}')" class="bg-bay-900 border border-slate-800 hover:border-gold-500/50 rounded-3xl p-5 cursor-pointer transition-all shadow-xl hover:-translate-y-1 flex flex-col justify-between space-y-4">
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-gold-500/20 text-gold-400 border border-gold-500/30 uppercase font-bold">${b.carPlate}</span>
+              <span class="text-xs font-mono font-bold ${b.progress >= 100 ? 'text-emerald-400' : 'text-amber-400'}">${b.progress}% Complete</span>
+            </div>
+            <h3 class="text-base font-black text-white">${b.carModel}</h3>
+            <p class="text-xs text-slate-400 flex items-center gap-1.5"><i class="ph-bold ph-user text-gold-400"></i> ${b.custName}</p>
+          </div>
+
+          <div class="space-y-2 pt-2 border-t border-slate-800/80">
+            <div class="w-full bg-bay-950 rounded-full h-2 overflow-hidden border border-slate-800">
+              <div class="bg-gradient-to-r from-amber-500 to-gold-400 h-full" style="width: ${b.progress}%"></div>
+            </div>
+            <div class="flex items-center justify-between text-[11px] text-slate-400">
+              <span>Detailer: <strong class="text-white">${b.assignedDetailer}</strong></span>
+              ${currentUser && currentUser.role !== 'detailer' ? `<span class="text-emerald-400 font-mono font-bold">${b.deposit} L.E</span>` : ''}
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    window.debounceSearchBookings = function() {
+      renderBookingsGrid();
+    };
+
+    window.filterBookingsGrid = function() {
+      renderBookingsGrid();
+    };
+
+    // New Booking Modal
+    window.openNewBookingModal = function() {
+      document.getElementById('modalNewBooking').classList.remove('hidden');
+      const today = new Date().toISOString().split('T')[0];
+      document.getElementById('nbEntryDate').value = today;
+    };
+    window.closeNewBookingModal = function() {
+      document.getElementById('modalNewBooking').classList.add('hidden');
+    };
+
+    window.handleSaveNewBooking = function(e) {
+      e.preventDefault();
       const newJob = {
         id: 'job-' + Date.now(),
-        pin: 'DR-' + Math.floor(1000 + Math.random() * 9000),
-        customerName: document.getElementById('newCustName')?.value.trim() || 'Client',
-        customerPhone: document.getElementById('newCustPhone')?.value.trim() || '',
-        province: document.getElementById('newProvince')?.value || 'Port Said',
-        carType: document.getElementById('newCarType')?.value.trim() || 'Vehicle',
-        carPlate: document.getElementById('newCarPlate')?.value.trim().toUpperCase() || 'ABC 123',
-        carColor: document.getElementById('newCarColor')?.value.trim() || 'Black',
-        carMileage: Number(document.getElementById('newCarMileage')?.value) || 0,
-        bookingDate: document.getElementById('newBookingDate')?.value || new Date().toISOString().split('T')[0],
-        estimatedCompletion: document.getElementById('newEstCompletion')?.value || '',
-        totalPriceLE: totalVal,
-        depositLE: depositVal,
-        paymentMethod: document.getElementById('newPaymentMethod')?.value || 'cash',
-        depositVerified: false,
-        assignedDetailerId: selDet?.value || 'usr-3',
-        assignedDetailerName: selDet?.options[selDet.selectedIndex]?.text || 'Mahmoud Sayed',
-        carIssue: document.getElementById('newCarIssue')?.value.trim() || 'Paint restoration',
-        customerNotes: '',
-        progressPercent: 10,
-        progressStageLabel: 'Phase 1: Paint Depth Gauge & Defect Mapping',
-        detailerNotes: '',
-        auditLog: [`Created by ${currentStaffUser?.name || 'Staff'}`]
+        custName: document.getElementById('nbCustName').value.trim(),
+        custPhone: document.getElementById('nbCustPhone').value.trim(),
+        carModel: document.getElementById('nbCarModel').value.trim(),
+        carPlate: document.getElementById('nbCarPlate').value.trim().toUpperCase(),
+        carColor: document.getElementById('nbCarColor').value.trim(),
+        odometer: document.getElementById('nbOdometer').value.trim() || '0 KM',
+        entryDate: document.getElementById('nbEntryDate').value,
+        assignedDetailer: document.getElementById('nbAssignedDetailer').value,
+        deposit: Number(document.getElementById('nbDeposit').value) || 0,
+        paymentChannel: document.getElementById('nbPaymentChannel').value,
+        scope: document.getElementById('nbScope').value.trim(),
+        progress: 10,
+        stage: 'IN_PROGRESS',
+        notes: []
       };
 
-      bookings.unshift(newJob);
-      await persistRecord('bookings', newJob.id, newJob);
-      closeNewBookingModal();
-      e.target.reset();
-      refreshActiveView();
-      showToast('Booking Scheduled Successfully!', 'gold');
-    }
+      // Also ensure customer portal account is automatically linked
+      const existingCust = appState.customers.find(c => c.phone === newJob.custPhone);
+      if (!existingCust) {
+        appState.customers.push({
+          id: 'cust-' + Date.now(),
+          name: newJob.custName,
+          phone: newJob.custPhone,
+          plate: newJob.carPlate,
+          username: newJob.custPhone,
+          pass: newJob.carPlate
+        });
+      }
 
-    function openEditBookingModal(jobId) {
-      const job = bookings.find(b => b.id === jobId);
-      if (!job) return;
-      populateDetailerSelectors();
-      document.getElementById('editJobId').value = job.id;
-      const setVal = (id, v) => { const el = document.getElementById(id); if (el) el.value = v; };
-      setVal('editCustName', job.customerName);
-      setVal('editCustPhone', job.customerPhone);
-      setVal('editProvince', job.province || 'Port Said');
-      setVal('editCarType', job.carType);
-      setVal('editCarPlate', job.carPlate);
-      setVal('editCarColor', job.carColor);
-      setVal('editCarMileage', job.carMileage || 0);
-      setVal('editBookingDate', job.bookingDate);
-      setVal('editEstCompletion', job.estimatedCompletion || '');
-      setVal('editAssignedDetailer', job.assignedDetailerId || '');
-      setVal('editTotalPrice', job.totalPriceLE || 0);
-      setVal('editDeposit', job.depositLE || 0);
-      setVal('editPaymentMethod', job.paymentMethod || 'cash');
-      setVal('editCarIssue', job.carIssue);
-      document.getElementById('modalEditBooking')?.classList.remove('hidden');
-    }
+      appState.bookings.unshift(newJob);
+      saveCloudState().then(() => {
+        closeNewBookingModal();
+        document.getElementById('formNewBooking').reset();
+        renderBookingsGrid();
+        showToast("New vehicle booking sheet successfully registered!");
+        openVehicleDetailSheet(newJob.id);
+      });
+    };
 
-    function closeEditBookingModal() { document.getElementById('modalEditBooking')?.classList.add('hidden'); }
-
-    async function handleEditBookingForm(e) {
-      e.preventDefault();
-      const jobId = document.getElementById('editJobId')?.value;
-      const job = bookings.find(b => b.id === jobId);
+    // Vehicle Detail Sheet View
+    window.openVehicleDetailSheet = function(jobId) {
+      currentDetailSheetId = jobId;
+      const job = appState.bookings.find(b => b.id === jobId);
       if (!job) return;
 
-      job.customerName = document.getElementById('editCustName')?.value.trim() || job.customerName;
-      job.customerPhone = document.getElementById('editCustPhone')?.value.trim() || job.customerPhone;
-      job.province = document.getElementById('editProvince')?.value || job.province;
-      job.carType = document.getElementById('editCarType')?.value.trim() || job.carType;
-      job.carPlate = document.getElementById('editCarPlate')?.value.trim().toUpperCase() || job.carPlate;
-      job.carColor = document.getElementById('editCarColor')?.value.trim() || job.carColor;
-      job.carMileage = Number(document.getElementById('editCarMileage')?.value) || job.carMileage;
-      job.bookingDate = document.getElementById('editBookingDate')?.value || job.bookingDate;
-      job.estimatedCompletion = document.getElementById('editEstCompletion')?.value || '';
-      job.carIssue = document.getElementById('editCarIssue')?.value.trim() || job.carIssue;
-      job.paymentMethod = document.getElementById('editPaymentMethod')?.value || 'cash';
-      
-      const selDet = document.getElementById('editAssignedDetailer');
-      if (selDet) {
-        job.assignedDetailerId = selDet.value;
-        job.assignedDetailerName = selDet.options[selDet.selectedIndex]?.text || job.assignedDetailerName;
-      }
-      job.depositLE = Number(document.getElementById('editDeposit')?.value) || 0;
-      job.totalPriceLE = Number(document.getElementById('editTotalPrice')?.value) || 0;
+      document.getElementById('subViewBookings').classList.add('hidden');
+      document.getElementById('subViewCalendar').classList.add('hidden');
+      document.getElementById('subViewFunds').classList.add('hidden');
+      document.getElementById('subViewAnalytics').classList.add('hidden');
+      document.getElementById('subViewAccounts').classList.add('hidden');
 
-      await persistRecord('bookings', job.id, job);
-      closeEditBookingModal();
-      openVehicleDetailSheet(job.id);
-      showToast('Booking updated successfully.', 'cyan');
-    }
+      const view = document.getElementById('viewSheetDetail');
+      view.classList.remove('hidden');
 
-    async function toggleDepositVerification(jobId) {
-      const job = bookings.find(b => b.id === jobId);
-      if (job) {
-        job.depositVerified = !job.depositVerified;
-        await persistRecord('bookings', job.id, job);
-        openVehicleDetailSheet(job.id);
-        showToast(`Deposit marked as ${job.depositVerified ? 'Verified' : 'Pending'}.`, 'emerald');
-      }
-    }
+      const isDetailer = currentUser && currentUser.role === 'detailer';
 
-    function confirmDeleteJob(jobId) {
-      pendingDeleteAction = async () => {
-        bookings = bookings.filter(b => b.id !== jobId);
-        customerAccounts = customerAccounts.filter(ca => ca.jobId !== jobId);
-        await removeRecord('bookings', jobId);
-        closeDeleteConfirmModal();
-        switchStaffTab('bookings');
-        showToast('Booking permanently deleted.', 'rose');
-      };
-      document.getElementById('modalDeleteConfirm')?.classList.remove('hidden');
-    }
-
-    function closeDeleteConfirmModal() { pendingDeleteAction = null; document.getElementById('modalDeleteConfirm')?.classList.add('hidden'); }
-    document.getElementById('btnExecuteDeleteConfirm')?.addEventListener('click', () => { if (pendingDeleteAction) pendingDeleteAction(); });
-
-    function openCreateCustomerModal(preJob = null) {
-      const sel = document.getElementById('custLinkJobSelect');
-      if (sel) {
-        sel.innerHTML = bookings.map(b => `<option value="${b.id}" ${b.id === preJob ? 'selected' : ''}>${escapeHtml(b.customerName)} - ${escapeHtml(b.carType)} (${escapeHtml(b.carPlate)})</option>`).join('');
-      }
-      document.getElementById('modalCreateCustomer')?.classList.remove('hidden');
-    }
-    function closeCreateCustomerModal() { document.getElementById('modalCreateCustomer')?.classList.add('hidden'); }
-
-    async function handleCreateCustomerForm(e) {
-      e.preventDefault();
-      const jobId = document.getElementById('custLinkJobSelect')?.value;
-      const job = bookings.find(b => b.id === jobId);
-      const username = document.getElementById('newCustUsername')?.value.trim();
-      const pass = document.getElementById('newCustPassword')?.value.trim();
-      if (!job || !username || !pass) return;
-
-      customerAccounts = customerAccounts.filter(ca => ca.jobId !== jobId);
-      const newAcc = { id: 'cacc-' + Date.now(), jobId, customerName: job.customerName, username, pass };
-      customerAccounts.push(newAcc);
-      await persistRecord('customers', newAcc.id, newAcc);
-      closeCreateCustomerModal();
-      e.target.reset();
-      renderAccountsLists();
-      showToast('Client Access Pass Generated!', 'emerald');
-    }
-
-    async function removeCustomerAccount(id) {
-      customerAccounts = customerAccounts.filter(ca => ca.id !== id);
-      await removeRecord('customers', id);
-      renderAccountsLists();
-      showToast('Pass revoked.', 'slate');
-    }
-
-    async function removeStaffUser(id) {
-      staffUsers = staffUsers.filter(u => u.id !== id);
-      await removeRecord('staff', id);
-      renderAccountsLists();
-      populateDetailerSelectors();
-      showToast('Staff revoked.', 'slate');
-    }
-
-    function copyToClipboard(text, successToast = 'Copied!') {
-      const temp = document.createElement('textarea');
-      temp.value = text;
-      document.body.appendChild(temp);
-      temp.select();
-      try { document.execCommand('copy'); showToast(successToast, 'emerald'); } catch (e) { showToast('Unable to copy.', 'rose'); }
-      document.body.removeChild(temp);
-    }
-
-    function copyCustomerWhatsAppInvite(jobId) {
-      const job = bookings.find(b => b.id === jobId);
-      const acc = customerAccounts.find(ca => ca.jobId === jobId);
-      if (job && acc) {
-        copyToClipboard(`مرحباً ${job.customerName}،\nرابط متابعة سيارتك ${job.carType} (${job.carPlate}) في مركز Dr.Care:\n${window.location.href.split('#')[0]}\nاسم المستخدم: ${acc.username}\nكلمة السر: ${acc.pass}`, 'WhatsApp credentials copied!');
-      }
-    }
-
-    function exportDatabaseBackup() {
-      const payload = { meta: { app: "Dr.Care", timestamp: new Date().toISOString() }, staff: staffUsers, bookings: bookings, customerAccounts: customerAccounts };
-      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(payload, null, 2));
-      const downloadAnchor = document.createElement('a');
-      downloadAnchor.setAttribute("href", dataStr);
-      downloadAnchor.setAttribute("download", `drcare_backup_${new Date().toISOString().split('T')[0]}.json`);
-      document.body.appendChild(downloadAnchor);
-      downloadAnchor.click();
-      downloadAnchor.remove();
-      showToast('Database Exported (JSON)!', 'gold');
-    }
-
-    function importDatabaseBackup(e) {
-      const file = e.target.files?.[0];
-      if (!file) return;
-      const reader = new FileReader();
-      reader.onload = async function(event) {
-        try {
-          const parsed = JSON.parse(event.target.result);
-          if (parsed && Array.isArray(parsed.bookings)) {
-            bookings = parsed.bookings;
-            if (Array.isArray(parsed.staff)) staffUsers = parsed.staff;
-            if (Array.isArray(parsed.customerAccounts)) customerAccounts = parsed.customerAccounts;
-            
-            for (const b of bookings) await persistRecord('bookings', b.id, b);
-            for (const s of staffUsers) await persistRecord('staff', s.id, s);
-            for (const c of customerAccounts) await persistRecord('customers', c.id, c);
-
-            refreshActiveView();
-            populateDetailerSelectors();
-            showToast(`Database Restored & Synced! (${bookings.length} Vehicles)`, 'emerald');
-          } else { showToast('Invalid file format.', 'rose'); }
-        } catch (err) { showToast('Failed to parse JSON.', 'rose'); }
-      };
-      reader.readAsText(file);
-      e.target.value = '';
-    }
-
-    async function runAiDefectSuggestions(mode) {
-      const isEdit = mode === 'edit';
-      const carType = document.getElementById(isEdit ? 'editCarType' : 'newCarType')?.value.trim() || 'Vehicle';
-      const carColor = document.getElementById(isEdit ? 'editCarColor' : 'newCarColor')?.value.trim() || 'Clearcoat';
-      const issue = document.getElementById(isEdit ? 'editCarIssue' : 'newCarIssue')?.value.trim() || 'Paint defect assessment';
-
-      openAiDiagnosticModal();
-      const body = document.getElementById('aiDiagnosticBody');
-      if (body) body.innerHTML = `<div class="py-8 text-center text-xs text-gold-400"><i class="ph-bold ph-sparkle animate-spin mr-1"></i> Analyzing paint hardness...</div>`;
-
-      try {
-        const reply = await callGemini(`Vehicle: ${carType}, Paint: ${carColor}, Issue: ${issue}. Provide paint restoration plan: compound abrasives, rotary/DA machine steps, and Egyptian market price in L.E.`);
-        if (body) {
-          body.innerHTML = `
-            <div class="p-4 rounded-2xl bg-bay-850 border border-slate-800 space-y-3">
-              <span class="font-black text-gold-400 uppercase tracking-wider">${escapeHtml(carType)} - Protocol</span>
-              <div class="text-xs text-slate-200 whitespace-pre-wrap leading-relaxed">${escapeHtml(reply)}</div>
-              <div class="pt-3 border-t border-slate-800 flex justify-end">
-                <button onclick="window.appendAiPlanToIssue('${mode}', \`${escapeHtml(reply).replace(/`/g, "\\`")}\`)" class="px-3 py-1.5 rounded-xl bg-gold-500 text-slate-950 font-bold text-xs">Append Plan</button>
+      view.innerHTML = `
+        <div class="bg-bay-900 border border-gold-500/40 rounded-3xl p-6 sm:p-10 shadow-2xl space-y-8">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-800">
+            <div class="flex items-center gap-3">
+              <div class="w-14 h-14 rounded-2xl gold-leather-badge flex items-center justify-center p-2">
+                <svg viewBox="0 0 100 115" class="w-10 h-10" style="filter: url(#drCare3dEmboss)">
+                  <use href="#drCareEmblem" />
+                </svg>
+              </div>
+              <div>
+                <span class="text-[10px] font-mono font-bold text-gold-400 uppercase tracking-widest block">Dr.Care Official Job Card</span>
+                <h2 class="text-2xl font-black text-white">${job.carModel} (${job.carPlate})</h2>
               </div>
             </div>
-          `;
-        }
-      } catch (e) {
-        if (body) body.innerHTML = `<p class="text-xs text-slate-300 p-4">Standard Protocol: Decontaminate, wet sand, rotary compound, DA polish, 9H ceramic coat.</p>`;
-      }
+
+            <div class="flex items-center gap-2">
+              <button onclick="window.closeVehicleDetailSheet()" class="px-4 py-2 rounded-xl bg-bay-800 text-xs font-bold text-slate-300 hover:text-white flex items-center gap-1.5 transition">
+                <i class="ph-bold ph-arrow-left"></i> Back to Intake Bay
+              </button>
+              ${currentUser && currentUser.role === 'owner' ? `
+                <button onclick="window.deleteBooking('${job.id}')" class="px-3 py-2 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/30 text-xs font-bold transition flex items-center gap-1">
+                  <i class="ph-bold ph-trash"></i> Delete
+                </button>
+              ` : ''}
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-4 gap-4">
+            <div class="bg-bay-850 p-4 rounded-2xl border border-slate-800 space-y-1">
+              <span class="text-[10px] text-slate-400 font-bold uppercase">Customer</span>
+              <span class="text-sm font-black text-white block">${job.custName}</span>
+              <span class="text-xs text-gold-400 font-mono block">${job.custPhone}</span>
+            </div>
+            <div class="bg-bay-850 p-4 rounded-2xl border border-slate-800 space-y-1">
+              <span class="text-[10px] text-slate-400 font-bold uppercase">Paint Color & Odometer</span>
+              <span class="text-sm font-black text-white block">${job.carColor}</span>
+              <span class="text-xs text-amber-400 font-mono block">${job.odometer}</span>
+            </div>
+            <div class="bg-bay-850 p-4 rounded-2xl border border-slate-800 space-y-1">
+              <span class="text-[10px] text-slate-400 font-bold uppercase">Assigned Master Detailer</span>
+              <span class="text-sm font-black text-white block">${job.assignedDetailer}</span>
+              <span class="text-xs text-slate-400 block">Entry: ${job.entryDate}</span>
+            </div>
+            ${!isDetailer ? `
+              <div class="bg-bay-850 p-4 rounded-2xl border border-slate-800 space-y-1">
+                <span class="text-[10px] text-slate-400 font-bold uppercase">Secured Advance Deposit</span>
+                <span class="text-lg font-black text-emerald-400 font-mono block">${job.deposit} L.E</span>
+                <span class="text-[11px] text-cyan-400 block">Channel: ${job.paymentChannel}</span>
+              </div>
+            ` : ''}
+          </div>
+
+          <div class="space-y-3 bg-bay-850 p-6 rounded-3xl border border-slate-800">
+            <span class="text-xs font-black text-white uppercase tracking-wider block">Scope of Restoration Services</span>
+            <p class="text-xs text-slate-300 leading-relaxed">${job.scope}</p>
+          </div>
+
+          <div class="space-y-4 bg-bay-850 p-6 rounded-3xl border border-gold-500/30">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-white uppercase tracking-wider">Restoration Stage & Progress Slider</span>
+              <span id="labelDetailProgress" class="text-sm font-mono font-bold text-gold-400">${job.progress}%</span>
+            </div>
+            <input type="range" id="rangeJobProgress" min="0" max="100" value="${job.progress}" oninput="window.updateJobProgressSlider(this.value)"
+              class="w-full">
+            <div class="flex justify-between text-[10px] font-mono text-slate-400">
+              <span>0% Intake</span>
+              <span>25% Prep & Sanding</span>
+              <span>50% Base Coat</span>
+              <span>75% Ceramic/Clear</span>
+              <span>100% Handover</span>
+            </div>
+          </div>
+
+          <div class="space-y-3">
+            <h3 class="text-xs font-black text-white uppercase tracking-wider flex items-center gap-1.5">
+              <i class="ph-bold ph-chat-text text-gold-400"></i> Workshop & Customer Communication Notes
+            </h3>
+            <div class="space-y-2 max-h-56 overflow-y-auto p-4 rounded-3xl bg-bay-950 border border-slate-800">
+              ${job.notes && job.notes.length > 0 ? job.notes.map(n => `
+                <div class="p-3 rounded-2xl bg-bay-850 text-xs space-y-1">
+                  <div class="flex items-center justify-between text-[10px] text-slate-400 font-mono">
+                    <span class="font-bold text-gold-400">${n.sender}</span>
+                    <span>${n.time}</span>
+                  </div>
+                  <p class="text-slate-200">${n.text}</p>
+                </div>
+              `).join('') : '<p class="text-xs text-slate-500 text-center py-4">No notes recorded yet.</p>'}
+            </div>
+
+            <div class="flex gap-2">
+              <input type="text" id="inputStaffNote" placeholder="Type technical note or update for customer..."
+                class="flex-1 border border-slate-700 rounded-2xl px-4 py-3 text-xs">
+              <button onclick="window.sendStaffNote('${job.id}')" class="px-6 py-3 rounded-2xl bg-gold-500 hover:bg-gold-400 text-slate-950 font-black text-xs uppercase tracking-wider transition">
+                Add Note
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
     }
 
-    function appendAiPlanToIssue(mode, text) {
-      const textarea = document.getElementById(mode === 'edit' ? 'editCarIssue' : 'newCarIssue');
-      if (textarea) textarea.value = (textarea.value.trim() + '\n\n[AI Plan]:\n' + text).trim();
-      closeAiDiagnosticModal();
-      showToast('Plan appended.', 'emerald');
-    }
+    window.closeVehicleDetailSheet = function() {
+      document.getElementById('viewSheetDetail').classList.add('hidden');
+      switchStaffTab(activeStaffTab);
+    };
 
-    async function runAiDiagnosticForCurrentSheet(jobId) {
-      const job = bookings.find(b => b.id === jobId);
+    window.updateJobProgressSlider = function(val) {
+      const num = Number(val);
+      document.getElementById('labelDetailProgress').innerText = num + '%';
+      const job = appState.bookings.find(b => b.id === currentDetailSheetId);
       if (!job) return;
-      openAiDiagnosticModal();
-      const body = document.getElementById('aiDiagnosticBody');
-      if (body) body.innerHTML = `<div class="py-8 text-center text-xs text-gold-400"><i class="ph-bold ph-sparkle animate-spin mr-1"></i> Analyzing...</div>`;
-      try {
-        const reply = await callGemini(`Vehicle: ${job.carType}, Paint: ${job.carColor}, Stage: ${job.progressStageLabel}. Defect: ${job.carIssue}.`);
-        if (body) body.innerHTML = `<div class="p-4 rounded-2xl bg-bay-850 border border-slate-800 text-xs text-slate-200 whitespace-pre-wrap leading-relaxed">${escapeHtml(reply)}</div>`;
-      } catch (e) {
-        if (body) body.innerHTML = `<p class="text-xs text-slate-400 p-4">Phase: ${escapeHtml(job.progressStageLabel)}</p>`;
+      job.progress = num;
+      if (num >= 100) job.stage = 'COMPLETED';
+      else job.stage = 'IN_PROGRESS';
+      saveCloudState();
+    };
+
+    window.sendStaffNote = function(jobId) {
+      const input = document.getElementById('inputStaffNote');
+      const val = input.value.trim();
+      if (!val) return;
+      const job = appState.bookings.find(b => b.id === jobId);
+      if (!job) return;
+      if (!job.notes) job.notes = [];
+      const nowStr = new Date().toISOString().replace('T', ' ').substring(0, 16);
+      job.notes.push({ sender: currentUser ? currentUser.name + ' (' + currentUser.role.toUpperCase() + ')' : 'Staff', text: val, time: nowStr });
+      saveCloudState().then(() => {
+        input.value = '';
+        openVehicleDetailSheet(jobId);
+        showToast("Note added successfully!");
+      });
+    };
+
+    window.deleteBooking = function(jobId) {
+      if (!confirm("Are you sure you want to delete this vehicle booking sheet?")) return;
+      appState.bookings = appState.bookings.filter(b => b.id !== jobId);
+      saveCloudState().then(() => {
+        closeVehicleDetailSheet();
+        showToast("Booking sheet deleted successfully.");
+      });
+    };
+
+    // Calendar View
+    function renderCalendar() {
+      const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+      document.getElementById('calCurrentMonthLabel').innerText = `${monthNames[calendarCurrentMonth]} ${calendarCurrentYear}`;
+      document.getElementById('calYearSelect').value = calendarCurrentYear;
+
+      const grid = document.getElementById('calDaysGridMatrix');
+      if (!grid) return;
+
+      const firstDayIndex = new Date(calendarCurrentYear, calendarCurrentMonth, 1).getDay();
+      const totalDays = new Date(calendarCurrentYear, calendarCurrentMonth + 1, 0).getDate();
+
+      let html = '';
+      // Blank offsets for start of week
+      for (let i = 0; i < firstDayIndex; i++) {
+        html += `<div class="h-20 sm:h-24 bg-bay-950/40 rounded-2xl border border-slate-900 opacity-30"></div>`;
       }
-    }
 
-    function openAiDiagnosticModal() { document.getElementById('modalAiDiagnostic')?.classList.remove('hidden'); }
-    function closeAiDiagnosticModal() { document.getElementById('modalAiDiagnostic')?.classList.add('hidden'); }
+      for (let day = 1; day <= totalDays; day++) {
+        const mStr = String(calendarCurrentMonth + 1).padStart(2, '0');
+        const dStr = String(day).padStart(2, '0');
+        const dateKey = `${calendarCurrentYear}-${mStr}-${dStr}`;
+        const dayBookings = appState.bookings.filter(b => b.entryDate === dateKey);
+        const count = dayBookings.length;
+        const isFull = count >= 12;
 
-    function openAiWhatsAppModal(jobId) {
-      activeAiJobId = jobId;
-      document.getElementById('modalAiWhatsApp')?.classList.remove('hidden');
-      generateAiCustomerUpdateMessage();
-    }
-    function closeAiWhatsAppModal() { document.getElementById('modalAiWhatsApp')?.classList.add('hidden'); }
-
-    async function generateAiCustomerUpdateMessage() {
-      const job = bookings.find(b => b.id === activeAiJobId);
-      const area = document.getElementById('aiWhatsAppContentArea');
-      const lang = document.getElementById('aiLangSelect')?.value || 'en';
-      if (!job || !area) return;
-
-      area.innerHTML = `<div class="py-6 text-center text-xs text-gold-400"><i class="ph-bold ph-sparkle animate-spin mr-1"></i> Generating...</div>`;
-      try {
-        const reply = await callGemini(`Write a luxury WhatsApp progress dispatch for client ${job.customerName} regarding their ${job.carType} (${job.carPlate}). Progress: ${job.progressPercent}% (${job.progressStageLabel}). Language: ${lang}.`);
-        generatedAiWhatsAppMessage = reply.trim();
-        area.innerHTML = `<div class="text-xs text-slate-200 whitespace-pre-wrap leading-relaxed">${escapeHtml(generatedAiWhatsAppMessage)}</div>`;
-      } catch (e) {
-        generatedAiWhatsAppMessage = `عزيزي ${job.customerName}، سيارتك ${job.carType} وصلت لنسبة ${job.progressPercent}% في مركز Dr.Care.`;
-        area.innerHTML = `<div class="text-xs text-slate-200 whitespace-pre-wrap leading-relaxed">${escapeHtml(generatedAiWhatsAppMessage)}</div>`;
+        html += `
+          <div onclick="window.inspectCalendarDate('${dateKey}')" class="h-20 sm:h-24 p-2 rounded-2xl bg-bay-850 hover:bg-bay-850/80 border ${selectedCalendarDateStr === dateKey ? 'border-gold-500' : 'border-slate-800'} cursor-pointer flex flex-col justify-between transition group">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold text-white">${day}</span>
+              <span class="text-[9px] font-mono px-1.5 py-0.5 rounded ${isFull ? 'bg-rose-500/20 text-rose-400 border border-rose-500/30' : count > 0 ? 'bg-gold-500/20 text-gold-400 border border-gold-500/30' : 'bg-bay-900 text-slate-500'}">
+                ${count}/12
+              </span>
+            </div>
+            <div class="space-y-0.5 overflow-hidden">
+              ${dayBookings.slice(0, 2).map(b => `<div class="text-[9px] truncate bg-bay-900 text-slate-300 px-1 rounded">${b.carPlate}</div>`).join('')}
+              ${count > 2 ? `<div class="text-[8px] text-gold-400">+${count - 2} more</div>` : ''}
+            </div>
+          </div>
+        `;
       }
+
+      grid.innerHTML = html;
     }
 
-    function copyAiWhatsAppText() {
-      if (generatedAiWhatsAppMessage) { copyToClipboard(generatedAiWhatsAppMessage, 'WhatsApp Copied!'); closeAiWhatsAppModal(); }
-    }
-
-    function openCustomerAiAdvisorModal() { document.getElementById('modalCustomerAiConcierge')?.classList.remove('hidden'); }
-    function closeCustomerAiAdvisorModal() { document.getElementById('modalCustomerAiConcierge')?.classList.add('hidden'); }
-
-    async function askCustomerAiConcierge() {
-      const q = document.getElementById('custAiQueryInput')?.value.trim();
-      const respBox = document.getElementById('custAiResponseArea');
-      if (!q || !respBox) return;
-
-      respBox.innerHTML = `<div class="py-4 text-center text-xs text-gold-400"><i class="ph-bold ph-sparkle animate-spin mr-1"></i> Formulating advice...</div>`;
-      try {
-        const reply = await callGemini(`Client question: "${q}". Explain proper paint maintenance under Egyptian weather.`);
-        respBox.innerHTML = `<div class="text-xs text-slate-200 whitespace-pre-wrap leading-relaxed">${escapeHtml(reply)}</div>`;
-      } catch (e) {
-        respBox.innerHTML = `<div class="text-xs text-slate-300">Always use two-bucket washes with pH-neutral shampoo.</div>`;
+    window.navigateCalendarMonth = function(dir) {
+      calendarCurrentMonth += dir;
+      if (calendarCurrentMonth > 11) {
+        calendarCurrentMonth = 0;
+        calendarCurrentYear++;
+      } else if (calendarCurrentMonth < 0) {
+        calendarCurrentMonth = 11;
+        calendarCurrentYear--;
       }
+      renderCalendar();
+    };
+
+    window.handleCalendarYearJump = function(yr) {
+      calendarCurrentYear = Number(yr);
+      renderCalendar();
+    };
+
+    window.resetCalendarToToday = function() {
+      const now = new Date();
+      calendarCurrentYear = now.getFullYear();
+      calendarCurrentMonth = now.getMonth();
+      renderCalendar();
+    };
+
+    window.inspectCalendarDate = function(dateStr) {
+      selectedCalendarDateStr = dateStr;
+      renderCalendar();
+      const box = document.getElementById('calDayInspectorBox');
+      const title = document.getElementById('calSelectedDayTitle');
+      const listEl = document.getElementById('calSelectedDayCarsList');
+      box.classList.remove('hidden');
+      title.innerText = `Vehicles Booked on ${dateStr}`;
+
+      const dayBookings = appState.bookings.filter(b => b.entryDate === dateStr);
+      if (dayBookings.length === 0) {
+        listEl.innerHTML = `<p class="text-xs text-slate-400 italic">No vehicle intake scheduled for this date. (Capacity: ${dayBookings.length}/12)</p>`;
+        return;
+      }
+
+      listEl.innerHTML = dayBookings.map(b => `
+        <div onclick="window.openVehicleDetailSheet('${b.id}')" class="p-3 rounded-xl bg-bay-900 hover:bg-bay-800 border border-slate-800 cursor-pointer flex items-center justify-between text-xs transition">
+          <div class="flex items-center gap-2.5">
+            <span class="font-mono px-2 py-0.5 rounded bg-gold-500/20 text-gold-400 border border-gold-500/30 font-bold">${b.carPlate}</span>
+            <span class="font-bold text-white">${b.carModel}</span>
+            <span class="text-slate-400">(${b.custName})</span>
+          </div>
+          <span class="font-mono text-gold-400">${b.progress}%</span>
+        </div>
+      `).join('');
+    };
+
+    window.quickBookForSelectedDate = function() {
+      if (!selectedCalendarDateStr) return;
+      openNewBookingModal();
+      document.getElementById('nbEntryDate').value = selectedCalendarDateStr;
+    };
+
+    // Funds Circuit View
+    function renderFundsCircuit() {
+      const period = document.getElementById('fundsPeriodSelect')?.value || 'this_month';
+      let list = appState.bookings;
+
+      // Filter by period if needed
+      const now = new Date();
+      if (period === 'this_month') {
+        const m = now.getMonth();
+        const y = now.getFullYear();
+        list = list.filter(b => {
+          const d = new Date(b.entryDate);
+          return d.getMonth() === m && d.getFullYear() === y;
+        });
+      }
+
+      let cashTot = 0, cashCnt = 0;
+      let instaTot = 0, instaCnt = 0;
+      let walletTot = 0, walletCnt = 0;
+      let cardTot = 0, cardCnt = 0;
+
+      list.forEach(b => {
+        const dep = Number(b.deposit) || 0;
+        const ch = (b.paymentChannel || 'Cash').toLowerCase();
+        if (ch.includes('cash')) { cashTot += dep; cashCnt++; }
+        else if (ch.includes('instapay')) { instaTot += dep; instaCnt++; }
+        else if (ch.includes('wallet')) { walletTot += dep; walletCnt++; }
+        else { cardTot += dep; cardCnt++; }
+      });
+
+      const grand = cashTot + instaTot + walletTot + cardTot;
+
+      document.getElementById('fundsCashTotal').innerText = cashTot.toLocaleString() + ' L.E';
+      document.getElementById('fundsCashCount').innerText = cashCnt + ' tx';
+      document.getElementById('fundsInstaTotal').innerText = instaTot.toLocaleString() + ' L.E';
+      document.getElementById('fundsInstaCount').innerText = instaCnt + ' tx';
+      document.getElementById('fundsWalletTotal').innerText = walletTot.toLocaleString() + ' L.E';
+      document.getElementById('fundsWalletCount').innerText = walletCnt + ' tx';
+      document.getElementById('fundsCardTotal').innerText = cardTot.toLocaleString() + ' L.E';
+      document.getElementById('fundsCardCount').innerText = cardCnt + ' tx';
+      document.getElementById('fundsGrandTotal').innerText = grand.toLocaleString() + ' L.E';
+
+      const tbody = document.getElementById('fundsLedgerTableBody');
+      if (!tbody) return;
+
+      tbody.innerHTML = list.map(b => `
+        <tr class="hover:bg-bay-800/50 transition">
+          <td class="p-3 font-mono text-slate-300">${b.entryDate}</td>
+          <td class="p-3 font-bold text-white">${b.custName}</td>
+          <td class="p-3 text-slate-300">${b.carModel} <span class="font-mono text-gold-400">(${b.carPlate})</span></td>
+          <td class="p-3"><span class="px-2 py-0.5 rounded bg-bay-800 text-gold-400 font-mono text-[10px]">${b.paymentChannel}</span></td>
+          <td class="p-3 font-mono font-bold text-emerald-400">+${b.deposit} L.E</td>
+          <td class="p-3"><span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 text-[10px] font-bold">Verified</span></td>
+        </tr>
+      `).join('');
     }
 
-    function showToast(message, color = 'gold') {
-      const container = document.getElementById('toastContainer');
+    // Yearly Analysis View
+    function renderYearlyAnalytics() {
+      const yr = Number(document.getElementById('analyticsYearSelect')?.value || 2026);
+      const list = appState.bookings.filter(b => new Date(b.entryDate).getFullYear() === yr);
+
+      const gross = list.reduce((a, c) => a + (Number(c.deposit) || 0), 0);
+      const avg = list.length > 0 ? Math.round(gross / list.length) : 0;
+
+      document.getElementById('anaStatGrossDeposits').innerText = gross.toLocaleString() + ' L.E';
+      document.getElementById('anaStatAvgDeposit').innerText = avg.toLocaleString() + ' L.E';
+      document.getElementById('anaStatVerifiedRatio').innerText = "100%";
+
+      const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+      const container = document.getElementById('anaMonthlyBarsContainer');
       if (!container) return;
-      const t = document.createElement('div');
-      const colors = { gold: 'bg-bay-900 border-gold-500/50 text-gold-300', emerald: 'bg-bay-900 border-emerald-500/50 text-emerald-300', cyan: 'bg-bay-900 border-cyan-500/50 text-cyan-300', rose: 'bg-bay-900 border-rose-500/50 text-rose-300', slate: 'bg-bay-900 border-slate-700 text-slate-300' };
-      t.className = `p-4 rounded-2xl border shadow-2xl text-xs font-bold flex items-center gap-2.5 transition-all ${colors[color] || colors.gold}`;
-      t.innerHTML = `<i class="ph-bold ph-info text-base"></i><span>${escapeHtml(message)}</span>`;
-      container.appendChild(t);
-      setTimeout(() => { t.style.opacity = '0'; setTimeout(() => t.remove(), 300); }, 3500);
+
+      container.innerHTML = months.map((mName, mIdx) => {
+        const mList = list.filter(b => new Date(b.entryDate).getMonth() === mIdx);
+        const mSum = mList.reduce((a, c) => a + (Number(c.deposit) || 0), 0);
+        const maxVal = Math.max(gross, 50000);
+        const pct = Math.min(100, Math.round((mSum / maxVal) * 100));
+
+        return `
+          <div class="space-y-1">
+            <div class="flex items-center justify-between text-xs">
+              <span class="font-bold text-slate-300">${mName} ${yr} (${mList.length} cars)</span>
+              <span class="font-mono font-bold text-emerald-400">${mSum.toLocaleString()} L.E</span>
+            </div>
+            <div class="w-full bg-bay-950 rounded-full h-2.5 overflow-hidden border border-slate-800">
+              <div class="bg-gradient-to-r from-amber-500 to-gold-400 h-full" style="width: ${pct}%"></div>
+            </div>
+          </div>
+        `;
+      }).join('');
     }
 
-    function escapeHtml(str) {
-      return String(str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+    // Accounts & Access Management View
+    function renderAccountsLists() {
+      const staffContainer = document.getElementById('listStaffAccountsContainer');
+      const custContainer = document.getElementById('listCustomerAccountsContainer');
+      const ownerBar = document.getElementById('ownerStaffProvisioningBar');
+
+      if (currentUser && currentUser.role !== 'owner') {
+        if (ownerBar) ownerBar.classList.add('hidden');
+      } else {
+        if (ownerBar) ownerBar.classList.remove('hidden');
+      }
+
+      if (staffContainer) {
+        staffContainer.innerHTML = appState.staff.map(s => `
+          <div class="bg-bay-850 border border-slate-800 p-4 rounded-2xl space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono px-2 py-0.5 rounded bg-gold-500/20 text-gold-400 border border-gold-500/30 uppercase font-bold">${s.role}</span>
+              ${currentUser && currentUser.role === 'owner' && s.username !== 'Mr.Alfy' ? `
+                <button onclick="window.deleteStaffAccount('${s.id}')" class="text-rose-400 hover:text-rose-300 text-xs"><i class="ph-bold ph-trash"></i></button>
+              ` : ''}
+            </div>
+            <div>
+              <h4 class="text-sm font-black text-white">${s.name}</h4>
+              <p class="text-xs text-slate-400 font-mono">User: ${s.username}</p>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      if (custContainer) {
+        custContainer.innerHTML = appState.customers.map(c => `
+          <div class="bg-bay-850 border border-slate-800 p-4 rounded-2xl space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 uppercase font-bold">Plate: ${c.plate}</span>
+            </div>
+            <div>
+              <h4 class="text-sm font-black text-white">${c.name}</h4>
+              <p class="text-xs text-slate-400 font-mono">Mobile: ${c.phone}</p>
+            </div>
+          </div>
+        `).join('');
+      }
     }
 
-    // Explicit Global Window Bindings
-    window.navigateToWelcome = navigateToWelcome;
-    window.navigateToCustomerPortalGateway = navigateToCustomerPortalGateway;
-    window.switchCustomerLookupMode = switchCustomerLookupMode;
-    window.openStaffLoginModal = openStaffLoginModal;
-    window.closeStaffLoginModal = closeStaffLoginModal;
-    window.handleStaffLoginForm = handleStaffLoginForm;
-    window.logoutStaff = logoutStaff;
-    window.switchStaffTab = switchStaffTab;
-    window.debounceSearchBookings = debounceSearchBookings;
-    window.filterBookingsGrid = filterBookingsGrid;
-    window.openVehicleDetailSheet = openVehicleDetailSheet;
-    window.updateJobProgress = updateJobProgress;
-    window.setJobPhase = setJobPhase;
-    window.saveDetailerNotes = saveDetailerNotes;
-    window.handleCalendarYearJump = handleCalendarYearJump;
-    window.navigateCalendarMonth = navigateCalendarMonth;
-    window.resetCalendarToToday = resetCalendarToToday;
-    window.selectCalendarDate = selectCalendarDate;
-    window.quickBookForSelectedDate = quickBookForSelectedDate;
-    window.renderFundsCircuit = renderFundsCircuit;
-    window.renderYearlyAnalytics = renderYearlyAnalytics;
-    window.renderAccountsLists = renderAccountsLists;
-    window.handleOwnerQuickAddStaff = handleOwnerQuickAddStaff;
-    window.handleCustomerPhoneLookup = handleCustomerPhoneLookup;
-    window.handleCustomerCredsLookup = handleCustomerCredsLookup;
-    window.handleCustomerSubmitNote = handleCustomerSubmitNote;
-    window.openNewBookingModal = openNewBookingModal;
-    window.closeNewBookingModal = closeNewBookingModal;
-    window.handleNewBookingForm = handleNewBookingForm;
-    window.openEditBookingModal = openEditBookingModal;
-    window.closeEditBookingModal = closeEditBookingModal;
-    window.handleEditBookingForm = handleEditBookingForm;
-    window.toggleDepositVerification = toggleDepositVerification;
-    window.confirmDeleteJob = confirmDeleteJob;
-    window.closeDeleteConfirmModal = closeDeleteConfirmModal;
-    window.openCreateCustomerModal = openCreateCustomerModal;
-    window.closeCreateCustomerModal = closeCreateCustomerModal;
-    window.handleCreateCustomerForm = handleCreateCustomerForm;
-    window.removeCustomerAccount = removeCustomerAccount;
-    window.removeStaffUser = removeStaffUser;
-    window.copyCustomerWhatsAppInvite = copyCustomerWhatsAppInvite;
-    window.exportDatabaseBackup = exportDatabaseBackup;
-    window.importDatabaseBackup = importDatabaseBackup;
-    window.runAiDefectSuggestions = runAiDefectSuggestions;
-    window.appendAiPlanToIssue = appendAiPlanToIssue;
-    window.runAiDiagnosticForCurrentSheet = runAiDiagnosticForCurrentSheet;
-    window.openAiDiagnosticModal = openAiDiagnosticModal;
-    window.closeAiDiagnosticModal = closeAiDiagnosticModal;
-    window.openAiWhatsAppModal = openAiWhatsAppModal;
-    window.closeAiWhatsAppModal = closeAiWhatsAppModal;
-    window.generateAiCustomerUpdateMessage = generateAiCustomerUpdateMessage;
-    window.copyAiWhatsAppText = copyAiWhatsAppText;
-    window.openCustomerAiAdvisorModal = openCustomerAiAdvisorModal;
-    window.closeCustomerAiAdvisorModal = closeCustomerAiAdvisorModal;
-    window.askCustomerAiConcierge = askCustomerAiConcierge;
-    window.setAppLanguage = setAppLanguage;
+    window.handleOwnerQuickAddStaff = function(e) {
+      e.preventDefault();
+      const name = document.getElementById('barStaffName').value.trim();
+      const username = document.getElementById('barStaffUsername').value.trim();
+      const pass = document.getElementById('barStaffPassword').value.trim();
+      const role = document.getElementById('barStaffRole').value;
 
-    window.addEventListener('DOMContentLoaded', () => {
-      initCloudSync();
-      navigateToWelcome();
-      populateDetailerSelectors();
-      setAppLanguage('en');
-    });
+      appState.staff.push({ id: 'usr-' + Date.now(), name, username, pass, role });
+      saveCloudState().then(() => {
+        document.getElementById('formOwnerQuickAddStaff').reset();
+        renderAccountsLists();
+        showToast("New staff account created successfully!");
+      });
+    };
+
+    window.deleteStaffAccount = function(id) {
+      if (!confirm("Are you sure you want to remove this staff account?")) return;
+      appState.staff = appState.staff.filter(s => s.id !== id);
+      saveCloudState().then(() => {
+        renderAccountsLists();
+        showToast("Staff account removed.");
+      });
+    };
+
+    // Export / Import Backup
+    window.exportDatabaseBackup = function() {
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(appState, null, 2));
+      const dlAnchor = document.createElement('a');
+      dlAnchor.setAttribute("href", dataStr);
+      dlAnchor.setAttribute("download", `drcare_backup_${new Date().toISOString().split('T')[0]}.json`);
+      document.body.appendChild(dlAnchor);
+      dlAnchor.click();
+      dlAnchor.remove();
+      showToast("Database backup JSON exported successfully!");
+    };
+
+    window.importDatabaseBackup = function(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        try {
+          const parsed = JSON.parse(evt.target.result);
+          if (parsed && parsed.staff && parsed.bookings) {
+            appState = parsed;
+            saveCloudState().then(() => {
+              renderApp();
+              showToast("Database successfully restored from backup!");
+            });
+          } else {
+            showToast("Invalid backup file structure.", "error");
+          }
+        } catch(err) {
+          showToast("Failed to parse JSON file.", "error");
+        }
+      };
+      reader.readAsText(file);
+    };
+
+    // Bilingual translation engine
+    window.setAppLanguage = function(lang) {
+      currentLang = lang;
+      const bEn = document.getElementById('langBtnEn');
+      const bAr = document.getElementById('langBtnAr');
+      if (lang === 'en') {
+        bEn.className = "px-2 py-1 rounded-lg text-xs font-bold bg-gold-500 text-slate-950 transition";
+        bAr.className = "px-2 py-1 rounded-lg text-xs font-bold text-slate-400 hover:text-white transition";
+        document.documentElement.dir = 'ltr';
+      } else {
+        bAr.className = "px-2 py-1 rounded-lg text-xs font-bold bg-gold-500 text-slate-950 transition";
+        bEn.className = "px-2 py-1 rounded-lg text-xs font-bold text-slate-400 hover:text-white transition";
+        document.documentElement.dir = 'rtl';
+      }
+
+      const elements = document.querySelectorAll('[data-i18n]');
+      elements.forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (dict[lang][key]) {
+          el.innerText = dict[lang][key];
+        }
+      });
+    };
+
+    function renderApp() {
+      if (currentUser) {
+        updateStaffRoleBadge();
+        switchStaffTab(activeStaffTab);
+      }
+    }
+
+    // Initialize on load
+    window.onload = function() {
+      loadCloudState();
+    };
   </script>
+
 </body>
 </html>
