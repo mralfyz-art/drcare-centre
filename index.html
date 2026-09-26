@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dr.Care Paint Restoration Centre — Cloud Real-Time Portal</title>
   
-  <!-- Typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -102,7 +101,6 @@
 
 <body class="min-h-screen flex flex-col bg-bay-950 text-slate-100 antialiased selection:bg-gold-500/30 selection:text-gold-300">
 
-  <!-- SVG Master Emblem Defs -->
   <svg style="position: absolute; width: 0; height: 0; overflow: hidden;" aria-hidden="true">
     <defs>
       <linearGradient id="drCareGoldGradient" x1="15%" y1="0%" x2="85%" y2="100%">
@@ -275,7 +273,7 @@
                 <h3 class="text-xl font-black text-white group-hover:text-gold-300 transition" data-i18n="staffLoginTitle">Authorized Workshop Staff</h3>
               </div>
               <p class="text-xs text-slate-400 leading-relaxed" data-i18n="staffPortalDesc">
-                Dedicated terminal for Owner (Mr. Alfy), Shop Managers, and Master Detailers. Manage intakes, Funds Circuit, 5-year master calendar, and accounts.
+                Dedicated terminal for Owner, Shop Managers, and Master Detailers. Manage intakes, Funds Circuit, 5-year master calendar, and accounts.
               </p>
             </div>
             <div class="pt-4 border-t border-slate-800 flex items-center justify-between text-xs font-bold text-slate-300 group-hover:text-white">
@@ -671,7 +669,7 @@
               </div>
               <div>
                 <label class="block text-[10px] font-bold text-slate-300 mb-1" data-i18n="passwordLabel">Password *</label>
-                <input type="text" id="barStaffPassword" required placeholder="Create password" class="w-full border border-slate-700 rounded-xl px-3 py-2 text-xs font-mono">
+                <input type="password" id="barStaffPassword" required placeholder="Create password" class="w-full border border-slate-700 rounded-xl px-3 py-2 text-xs font-mono">
               </div>
               <div>
                 <label class="block text-[10px] font-bold text-slate-300 mb-1" data-i18n="authorityTier">Authority Tier *</label>
@@ -742,7 +740,7 @@
       <form id="formStaffLogin" onsubmit="window.handleStaffLoginForm(event)" class="space-y-4">
         <div>
           <label class="block text-xs font-bold text-white mb-1.5" data-i18n="usernameLabel">Staff Username *</label>
-          <input type="text" id="staffLoginUser" required placeholder="e.g. Mr.Alfy or ahmed.mohsen"
+          <input type="text" id="staffLoginUser" required placeholder="Enter your staff username"
             class="w-full border border-slate-700 rounded-2xl px-4 py-3 text-xs focus:outline-none focus:border-gold-500">
         </div>
 
@@ -750,15 +748,6 @@
           <label class="block text-xs font-bold text-white mb-1.5" data-i18n="passwordLabel">Password *</label>
           <input type="password" id="staffLoginPass" required placeholder="••••••••"
             class="w-full border border-slate-700 rounded-2xl px-4 py-3 text-xs focus:outline-none focus:border-gold-500 font-mono">
-        </div>
-
-        <div class="p-3 rounded-xl bg-bay-950 border border-slate-800 text-[11px] text-slate-400 space-y-1">
-          <span class="font-bold text-gold-400 block" data-i18n="demoAccessNote">Quick Demo Test Credentials:</span>
-          <div class="grid grid-cols-1 gap-0.5 font-mono">
-            <div>Owner (Level 1): <strong class="text-white">Mr.Alfy</strong> / <strong class="text-white">Mr.1000y</strong></div>
-            <div>Manager (Level 2): <strong class="text-white">ahmed.mohsen</strong> / <strong class="text-white">123456</strong></div>
-            <div>Detailer (Level 3): <strong class="text-white">mahmoud.detail</strong> / <strong class="text-white">123456</strong></div>
-          </div>
         </div>
 
         <button type="submit" class="w-full py-3.5 rounded-2xl bg-gold-500 hover:bg-gold-400 text-slate-950 font-black text-xs uppercase tracking-wider transition shadow-xl flex items-center justify-center gap-2">
@@ -872,12 +861,10 @@
   <!-- Notification Toast Container -->
   <div id="toastContainer" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 max-w-sm pointer-events-none"></div>
 
-  <!-- Firebase & App Script -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
-    import { getFirestore, doc, getDoc, setDoc, updateDoc, collection, getDocs } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+    import { getFirestore, doc, getDoc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 
-    // 1. Firebase Initialization
     const firebaseConfig = typeof window !== 'undefined' && window.__firebase_config ? JSON.parse(window.__firebase_config) : {
       apiKey: "AIzaSyDummyKeyForLocalTesting12345",
       authDomain: "drcare-cloud.firebaseapp.com",
@@ -891,17 +878,15 @@
     const db = getFirestore(app);
     const appId = typeof window !== 'undefined' && window.__app_id ? window.__app_id : 'drcare-centre-port-said-v1';
 
-    // Global App State
     let currentLang = 'en';
-    let currentUser = null; // { username, role, name }
+    let currentUser = null;
     let activeStaffTab = 'bookings';
     let currentCustomerLookupMode = 'phone';
     let calendarCurrentYear = 2026;
-    let calendarCurrentMonth = 8; // September
+    let calendarCurrentMonth = 8;
     let selectedCalendarDateStr = null;
     let currentDetailSheetId = null;
 
-    // Bilingual dictionary
     const dict = {
       en: {
         revivingSoul: "REVIVING THE AUTOMOTIVE SOUL",
@@ -913,7 +898,7 @@
         trackMyCar: "Track My Car Live",
         internalAccess: "Internal Access",
         staffLoginTitle: "Authorized Workshop Staff",
-        staffPortalDesc: "Dedicated terminal for Owner (Mr. Alfy), Shop Managers, and Master Detailers. Manage intakes, Funds Circuit, 5-year master calendar, and accounts.",
+        staffPortalDesc: "Dedicated terminal for Owner, Shop Managers, and Master Detailers. Manage intakes, Funds Circuit, 5-year master calendar, and accounts.",
         staffLoginBtnText: "Staff Login & Workspace",
         customerLoginHeader: "Customer Live Bay Tracking",
         customerLoginSub: "Inspect your personal vehicle's restoration progress and verified deposit.",
@@ -968,7 +953,6 @@
         customerLoginsSub: "Assigned customer accounts for direct username and password access.",
         staffLoginTitleModal: "Workshop Staff Portal Login",
         staffLoginSubModal: "Enter your authorized credentials for secure back-office access.",
-        demoAccessNote: "Quick Demo Test Credentials:",
         loginButton: "Securely Access Workshop Console",
         newBookingModalTitle: "New Vehicle Restoration Booking Sheet",
         newBookingModalSub: "Register incoming customer vehicle, assigned detailer bay, and advance deposit in L.E.",
@@ -988,7 +972,7 @@
         trackMyCar: "تتبع سيارتي مباشرة",
         internalAccess: "الدخول الداخلي",
         staffLoginTitle: "طاقم الورشة المصرح لهم",
-        staffPortalDesc: "محطة مخصصة للمؤسس (مستر ألفي)، مديرو الورشة، وفنيو الطلاء. إدارة الحزامات، دائرة الأموال، التقويم الخماسي، والحسابات.",
+        staffPortalDesc: "محطة مخصصة للمؤسس، مديري الورشة، وفنيو الطلاء. إدارة الحزامات، دائرة الأموال، التقويم الخماسي، والحسابات.",
         staffLoginBtnText: "دخول الموظفين ومنطقة العمل",
         customerLoginHeader: "تتبع العميل المباشر للورشة",
         customerLoginSub: "افحص تقدم ترميم سيارتك الشخصية والوديعة المؤكدة.",
@@ -1043,7 +1027,6 @@
         customerLoginsSub: "حسابات العملاء المعينة للدخول المباشر باسم المستخدم وكلمة المرور.",
         staffLoginTitleModal: "تسجيل دخول طاقم الورشة",
         staffLoginSubModal: "أدخل بيانات اعتمادك المصرح بها للوصول الآمن.",
-        demoAccessNote: "بيانات تجريبية سريعة:",
         loginButton: "الدخول الآمن لوحة التحكم",
         newBookingModalTitle: "ورقة حجز ترميم سيارة جديد",
         newBookingModalSub: "تسجيل سيارة العميل القادمة، ساحة فني الطلاء المعين، والعربون المقدم بالجنيه المصري.",
@@ -1055,13 +1038,11 @@
       }
     };
 
-    // Default Seed Database
     const defaultState = {
       staff: [
         { id: 'usr-1', name: 'Mr. Alfy', username: 'Mr.Alfy', pass: 'Mr.1000y', role: 'owner' },
         { id: 'usr-2', name: 'Ahmed Mohsen', username: 'ahmed.mohsen', pass: '123456', role: 'manager' },
-        { id: 'usr-3', name: 'Mahmoud Detailer', username: 'mahmoud.detail', pass: '123456', role: 'detailer' },
-        { id: 'usr-4', name: 'Ibrahim Master', username: 'ibrahim.master', pass: '123456', role: 'detailer' }
+        { id: 'usr-3', name: 'Mahmoud Detailer', username: 'mahmoud.detail', pass: '123456', role: 'detailer' }
       ],
       customers: [
         { id: 'cust-1', name: 'Mohamed El-Sayed', phone: '01012345678', plate: 'ط ر ب 1234', username: '01012345678', pass: 'ط ر ب 1234' }
@@ -1085,33 +1066,14 @@
           notes: [
             { sender: 'Mr. Alfy', text: 'Ensure extra care on bonnet stone chips.', time: '2026-09-01 10:30' }
           ]
-        },
-        {
-          id: 'job-1700000000002',
-          custName: 'Khaled Mahmoud',
-          custPhone: '01098765432',
-          carModel: 'Porsche Macan GTS',
-          carPlate: 'س ق و 5678',
-          carColor: 'Carmine Red',
-          odometer: '18,500 KM',
-          entryDate: '2026-09-05',
-          assignedDetailer: 'Ibrahim Master',
-          deposit: 12000,
-          paymentChannel: 'Cash',
-          scope: 'Paint correction, ceramic paint protection film (PPF) front bumper.',
-          progress: 100,
-          stage: 'COMPLETED',
-          notes: []
         }
       ]
     };
 
     let appState = JSON.parse(JSON.stringify(defaultState));
-
-    // Firestore Sync Reference
     const dbRef = doc(db, 'artifacts', appId, 'public', 'data');
 
-    async function loadCloudState() {
+    async function initCloudSync() {
       try {
         const snap = await getDoc(dbRef);
         if (snap.exists()) {
@@ -1122,6 +1084,19 @@
         } else {
           await setDoc(dbRef, defaultState);
         }
+
+        onSnapshot(dbRef, (docSnap) => {
+          if (docSnap.exists()) {
+            const cloudData = docSnap.data();
+            if (cloudData && cloudData.staff && cloudData.bookings) {
+              appState = cloudData;
+              renderApp();
+            }
+          }
+        }, (err) => {
+          console.warn("Snapshot listener notice:", err);
+        });
+
       } catch (err) {
         console.warn("Cloud sync fallback to local storage:", err);
         const local = localStorage.getItem('drcare_cloud_fallback');
@@ -1141,7 +1116,6 @@
       localStorage.setItem('drcare_cloud_fallback', JSON.stringify(appState));
     }
 
-    // Toast Notification helper
     window.showToast = function(message, type = 'success') {
       const container = document.getElementById('toastContainer');
       if (!container) return;
@@ -1157,7 +1131,6 @@
       }, 3500);
     };
 
-    // Navigation & Views
     window.navigateToWelcome = function() {
       currentUser = null;
       document.getElementById('viewWelcomeGateway').classList.remove('hidden');
@@ -1318,7 +1291,6 @@
       });
     };
 
-    // Staff Login Modal
     window.openStaffLoginModal = function() {
       document.getElementById('modalStaffAuth').classList.remove('hidden');
     };
@@ -1433,14 +1405,12 @@
       }
     };
 
-    // Render Bookings & Metrics
     function renderBookingsGrid() {
       const container = document.getElementById('gridBookingsContainer');
       const emptyState = document.getElementById('bookingsEmptyState');
       if (!container) return;
 
       let list = appState.bookings;
-      // Detailer restriction: Level 3 detailer sees only assigned jobs
       if (currentUser && currentUser.role === 'detailer') {
         list = list.filter(b => b.assignedDetailer && b.assignedDetailer.toLowerCase().includes(currentUser.name.toLowerCase().split(' ')[0]));
       }
@@ -1465,7 +1435,6 @@
         list = list.filter(b => b.progress >= 90);
       }
 
-      // Metrics calculation
       const totalActive = appState.bookings.length;
       const inCoating = appState.bookings.filter(b => b.progress >= 50 && b.progress < 100).length;
       const totalDep = appState.bookings.reduce((acc, curr) => acc + (Number(curr.deposit) || 0), 0);
@@ -1520,7 +1489,6 @@
       renderBookingsGrid();
     };
 
-    // New Booking Modal
     window.openNewBookingModal = function() {
       document.getElementById('modalNewBooking').classList.remove('hidden');
       const today = new Date().toISOString().split('T')[0];
@@ -1550,7 +1518,6 @@
         notes: []
       };
 
-      // Also ensure customer portal account is automatically linked
       const existingCust = appState.customers.find(c => c.phone === newJob.custPhone);
       if (!existingCust) {
         appState.customers.push({
@@ -1573,7 +1540,6 @@
       });
     };
 
-    // Vehicle Detail Sheet View
     window.openVehicleDetailSheet = function(jobId) {
       currentDetailSheetId = jobId;
       const job = appState.bookings.find(b => b.id === jobId);
@@ -1732,7 +1698,6 @@
       });
     };
 
-    // Calendar View
     function renderCalendar() {
       const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
       document.getElementById('calCurrentMonthLabel').innerText = `${monthNames[calendarCurrentMonth]} ${calendarCurrentYear}`;
@@ -1745,7 +1710,6 @@
       const totalDays = new Date(calendarCurrentYear, calendarCurrentMonth + 1, 0).getDate();
 
       let html = '';
-      // Blank offsets for start of week
       for (let i = 0; i < firstDayIndex; i++) {
         html += `<div class="h-20 sm:h-24 bg-bay-950/40 rounded-2xl border border-slate-900 opacity-30"></div>`;
       }
@@ -1834,12 +1798,9 @@
       document.getElementById('nbEntryDate').value = selectedCalendarDateStr;
     };
 
-    // Funds Circuit View
     function renderFundsCircuit() {
       const period = document.getElementById('fundsPeriodSelect')?.value || 'this_month';
       let list = appState.bookings;
-
-      // Filter by period if needed
       const now = new Date();
       if (period === 'this_month') {
         const m = now.getMonth();
@@ -1891,7 +1852,6 @@
       `).join('');
     }
 
-    // Yearly Analysis View
     function renderYearlyAnalytics() {
       const yr = Number(document.getElementById('analyticsYearSelect')?.value || 2026);
       const list = appState.bookings.filter(b => new Date(b.entryDate).getFullYear() === yr);
@@ -1927,7 +1887,6 @@
       }).join('');
     }
 
-    // Accounts & Access Management View
     function renderAccountsLists() {
       const staffContainer = document.getElementById('listStaffAccountsContainer');
       const custContainer = document.getElementById('listCustomerAccountsContainer');
@@ -1944,13 +1903,14 @@
           <div class="bg-bay-850 border border-slate-800 p-4 rounded-2xl space-y-2">
             <div class="flex items-center justify-between">
               <span class="text-xs font-mono px-2 py-0.5 rounded bg-gold-500/20 text-gold-400 border border-gold-500/30 uppercase font-bold">${s.role}</span>
-              ${currentUser && currentUser.role === 'owner' && s.username !== 'Mr.Alfy' ? `
+              ${currentUser && currentUser.role === 'owner' && s.username.toLowerCase() !== 'mr.alfy' ? `
                 <button onclick="window.deleteStaffAccount('${s.id}')" class="text-rose-400 hover:text-rose-300 text-xs"><i class="ph-bold ph-trash"></i></button>
               ` : ''}
             </div>
             <div>
               <h4 class="text-sm font-black text-white">${s.name}</h4>
               <p class="text-xs text-slate-400 font-mono">User: ${s.username}</p>
+              <p class="text-[11px] text-slate-500 font-mono">Pass: ••••••••</p>
             </div>
           </div>
         `).join('');
@@ -1965,6 +1925,7 @@
             <div>
               <h4 class="text-sm font-black text-white">${c.name}</h4>
               <p class="text-xs text-slate-400 font-mono">Mobile: ${c.phone}</p>
+              <p class="text-[11px] text-slate-500 font-mono">Pass: ••••••••</p>
             </div>
           </div>
         `).join('');
@@ -1995,7 +1956,6 @@
       });
     };
 
-    // Export / Import Backup
     window.exportDatabaseBackup = function() {
       const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(appState, null, 2));
       const dlAnchor = document.createElement('a');
@@ -2030,7 +1990,6 @@
       reader.readAsText(file);
     };
 
-    // Bilingual translation engine
     window.setAppLanguage = function(lang) {
       currentLang = lang;
       const bEn = document.getElementById('langBtnEn');
@@ -2061,9 +2020,8 @@
       }
     }
 
-    // Initialize on load
     window.onload = function() {
-      loadCloudState();
+      initCloudSync();
     };
   </script>
 
