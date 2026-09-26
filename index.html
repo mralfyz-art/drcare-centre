@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dr.Care Paint Restoration Centre — Portal & Back-Office</title>
+  <title>Dr.Care Paint Restoration Centre — Cloud Real-Time Portal</title>
   
   <!-- Typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1082,8 +1082,24 @@
   <!-- Toast Container -->
   <div id="toastContainer" class="fixed bottom-6 right-6 z-50 space-y-2 pointer-events-none"></div>
 
-  <!-- JavaScript Engine with Bulletproof Global Binding -->
-  <script>
+  <!-- Firebase & Real-Time Sync Engine -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+    import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+    import { getFirestore, doc, setDoc, getDoc, collection, onSnapshot, addDoc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+    const appId = typeof __app_id !== 'undefined' ? __app_id : 'drcare-port-said-v3';
+    const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : { apiKey: "demo", authDomain: "demo.firebaseapp.com", projectId: "demo" };
+    
+    let app, db, auth;
+    try {
+      app = initializeApp(firebaseConfig);
+      db = getFirestore(app);
+      auth = getAuth(app);
+    } catch (e) {
+      console.warn("Firebase offline mode fallback");
+    }
+
     let currentStaffUser = null;
     let activeCustomerJob = null;
     let activeStaffTab = 'bookings';
@@ -1347,21 +1363,69 @@
       { id: 'cacc-1', jobId: 'job-101', customerName: 'Tarek Mansour', username: 'tarek.m', pass: 'pass123' }
     ];
 
-    let staffUsers = [];
-    let bookings = [];
-    let customerAccounts = [];
+    let staffUsers = DEFAULT_STAFF_USERS;
+    let bookings = DEFAULT_SAMPLE_BOOKINGS;
+    let customerAccounts = DEFAULT_CUSTOMER_ACCOUNTS;
 
-    function hydrateState() {
+    async function initCloudSync() {
+      if (!db || !auth) {
+        hydrateLocalStorageFallback();
+        return;
+      }
+      try {
+        if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+          await signInWithCustomToken(auth, __initial_auth_token);
+        } else {
+          await signInAnonymously(auth);
+        }
+        
+        const bookingsRef = collection(db, 'artifacts', appId, 'public', 'data', 'bookings');
+        onSnapshot(bookingsRef, (snapshot) => {
+          if (!snapshot.empty) {
+            bookings = snapshot.docs.map(docSnap => ({ id: docSnap.id, ...docSnap.data() }));
+          } else if (bookings.length > 0) {
+            bookings.forEach(async b => {
+              await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'bookings', b.id), b);
+            });
+          }
+          refreshActiveView();
+        }, (err) => { console.error("Firestore sync error:", err); });
+
+        const staffRef = collection(db, 'artifacts', appId, 'public', 'data', 'staff');
+        onSnapshot(staffRef, (snapshot) => {
+          if (!snapshot.empty) {
+            staffUsers = snapshot.docs.map(docSnap => ({ id: docSnap.id, ...docSnap.data() }));
+          } else {
+            DEFAULT_STAFF_USERS.forEach(async u => {
+              await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'staff', u.id), u);
+            });
+          }
+          populateDetailerSelectors();
+        }, (err) => { console.error("Staff sync error:", err); });
+
+        const custRef = collection(db, 'artifacts', appId, 'public', 'data', 'customers');
+        onSnapshot(custRef, (snapshot) => {
+          if (!snapshot.empty) {
+            customerAccounts = snapshot.docs.map(docSnap => ({ id: docSnap.id, ...docSnap.data() }));
+          } else {
+            DEFAULT_CUSTOMER_ACCOUNTS.forEach(async c => {
+              await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'customers', c.id), c);
+            });
+          }
+        }, (err) => { console.error("Customer accounts sync error:", err); });
+
+      } catch (e) {
+        console.warn("Cloud sync initialization failed, falling back to localStorage", e);
+        hydrateLocalStorageFallback();
+      }
+    }
+
+    function hydrateLocalStorageFallback() {
       try {
         const storedStaff = localStorage.getItem('drcare_staff_v3');
         staffUsers = storedStaff ? JSON.parse(storedStaff) : DEFAULT_STAFF_USERS;
-        if (!staffUsers.some(u => u.username.toLowerCase() === 'mr.alfy')) {
-          staffUsers = DEFAULT_STAFF_USERS;
-        }
-
         const storedBookings = localStorage.getItem('drcare_bookings_v3');
         bookings = storedBookings ? JSON.parse(storedBookings) : DEFAULT_SAMPLE_BOOKINGS;
-
         const storedCust = localStorage.getItem('drcare_cust_v3');
         customerAccounts = storedCust ? JSON.parse(storedCust) : DEFAULT_CUSTOMER_ACCOUNTS;
       } catch (e) {
@@ -1371,14 +1435,40 @@
       }
     }
 
-    function saveState() {
-      try {
-        localStorage.setItem('drcare_staff_v3', JSON.stringify(staffUsers));
-        localStorage.setItem('drcare_bookings_v3', JSON.stringify(bookings));
-        localStorage.setItem('drcare_cust_v3', JSON.stringify(customerAccounts));
-      } catch (err) {
-        showToast('Storage error! Export your JSON backup.', 'rose');
+    async function persistRecord(collectionName, recordId, data) {
+      if (db) {
+        try {
+          await setDoc(doc(db, 'artifacts', appId, 'public', 'data', collectionName, recordId), data);
+          return;
+        } catch (e) {
+          console.error("Cloud persist error:", e);
+        }
       }
+      // LocalStorage fallback sync
+      if (collectionName === 'bookings') localStorage.setItem('drcare_bookings_v3', JSON.stringify(bookings));
+      if (collectionName === 'staff') localStorage.setItem('drcare_staff_v3', JSON.stringify(staffUsers));
+      if (collectionName === 'customers') localStorage.setItem('drcare_cust_v3', JSON.stringify(customerAccounts));
+    }
+
+    async function removeRecord(collectionName, recordId) {
+      if (db) {
+        try {
+          await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', collectionName, recordId));
+          return;
+        } catch (e) {
+          console.error("Cloud delete error:", e);
+        }
+      }
+    }
+
+    function refreshActiveView() {
+      if (activeStaffTab === 'bookings') filterBookingsGrid();
+      if (activeStaffTab === 'calendar') renderCalendar();
+      if (activeStaffTab === 'funds') renderFundsCircuit();
+      if (activeStaffTab === 'analytics') renderYearlyAnalytics();
+      if (activeStaffTab === 'accounts') renderAccountsLists();
+      if (activeDetailJobId) openVehicleDetailSheet(activeDetailJobId);
+      updateDashboardMetrics();
     }
 
     async function callGemini(prompt, systemInstruction = '', schema = null) {
@@ -1611,11 +1701,7 @@
         }
       });
 
-      if (tabName === 'bookings') filterBookingsGrid();
-      if (tabName === 'calendar') renderCalendar();
-      if (tabName === 'funds') renderFundsCircuit();
-      if (tabName === 'analytics') renderYearlyAnalytics();
-      if (tabName === 'accounts') renderAccountsLists();
+      refreshActiveView();
     }
 
     function debounceSearchBookings() {
@@ -1865,7 +1951,7 @@
       }
     }
 
-    function updateJobProgress(jobId) {
+    async function updateJobProgress(jobId) {
       const job = bookings.find(b => b.id === jobId);
       if (!job) return;
       const val = parseInt(document.getElementById('detailPercentInput')?.value || "0", 10);
@@ -1880,26 +1966,26 @@
         }
       }
       job.progressStageLabel = stageLabel;
-      saveState();
+      await persistRecord('bookings', job.id, job);
       openVehicleDetailSheet(jobId);
       showToast(`Progress updated to ${val}%`, 'emerald');
     }
 
-    function setJobPhase(jobId, percent, label) {
+    async function setJobPhase(jobId, percent, label) {
       const job = bookings.find(b => b.id === jobId);
       if (!job) return;
       job.progressPercent = percent;
       job.progressStageLabel = label;
-      saveState();
+      await persistRecord('bookings', job.id, job);
       openVehicleDetailSheet(jobId);
       showToast(`Phase advanced: ${label}`, 'emerald');
     }
 
-    function saveDetailerNotes(jobId) {
+    async function saveDetailerNotes(jobId) {
       const job = bookings.find(b => b.id === jobId);
       if (!job) return;
       job.detailerNotes = document.getElementById('detailNotesInput')?.value.trim() || '';
-      saveState();
+      await persistRecord('bookings', job.id, job);
       showToast('Technician notes successfully saved.', 'cyan');
     }
 
@@ -2154,7 +2240,7 @@
                   <div>Pass: <strong class="text-white">${escapeHtml(ca.pass)}</strong></div>
                 </div>
                 <div class="flex items-center justify-between pt-1">
-                  <button onclick="window.copyCustomerWhatsAppInvite('${ca.jobId}')" class="px-2.5 py-1 rounded-lg bg-emerald-600/20 text-emerald-300 text-[10px] font-bold flex items-center gap-1"><i class="ph-bold ph-whatsapp-logo"><span>WhatsApp</span></button>
+                  <button onclick="window.copyCustomerWhatsAppInvite('${ca.jobId}')" class="px-2.5 py-1 rounded-lg bg-emerald-600/20 text-emerald-300 text-[10px] font-bold flex items-center gap-1"><i class="ph-bold ph-whatsapp-logo"></i><span>WhatsApp</span></button>
                   <button onclick="window.removeCustomerAccount('${ca.id}')" class="text-[10px] text-rose-400 font-bold">Revoke</button>
                 </div>
               </div>
@@ -2164,7 +2250,7 @@
       }
     }
 
-    function handleOwnerQuickAddStaff(e) {
+    async function handleOwnerQuickAddStaff(e) {
       e.preventDefault();
       const role = document.getElementById('barStaffRole')?.value || 'detailer';
       const name = document.getElementById('barStaffName')?.value.trim();
@@ -2172,8 +2258,9 @@
       const pass = document.getElementById('barStaffPassword')?.value.trim();
       if (!name || !username || !pass) return;
 
-      staffUsers.push({ id: 'usr-' + Date.now(), name, username, pass, role, title: role === 'manager' ? 'Shop Manager' : 'Master Detailer' });
-      saveState();
+      const newStaff = { id: 'usr-' + Date.now(), name, username, pass, role, title: role === 'manager' ? 'Shop Manager' : 'Master Detailer' };
+      staffUsers.push(newStaff);
+      await persistRecord('staff', newStaff.id, newStaff);
       e.target.reset();
       renderAccountsLists();
       populateDetailerSelectors();
@@ -2278,11 +2365,11 @@
       `;
     }
 
-    function handleCustomerSubmitNote(jobId) {
+    async function handleCustomerSubmitNote(jobId) {
       const job = bookings.find(b => b.id === jobId);
       if (!job) return;
       job.customerNotes = document.getElementById('inputCustomerCommentNote')?.value.trim() || '';
-      saveState();
+      await persistRecord('bookings', job.id, job);
       showToast('Special request submitted.', 'gold');
     }
 
@@ -2303,7 +2390,7 @@
 
     function closeNewBookingModal() { document.getElementById('modalNewBooking')?.classList.add('hidden'); }
 
-    function handleNewBookingForm(e) {
+    async function handleNewBookingForm(e) {
       e.preventDefault();
       const depositVal = Number(document.getElementById('newDeposit')?.value) || 0;
       const totalVal = Number(document.getElementById('newTotalPrice')?.value) || (depositVal * 2.5);
@@ -2336,12 +2423,10 @@
       };
 
       bookings.unshift(newJob);
-      saveState();
+      await persistRecord('bookings', newJob.id, newJob);
       closeNewBookingModal();
       e.target.reset();
-      filterBookingsGrid();
-      if (activeStaffTab === 'calendar') renderCalendar();
-      if (activeStaffTab === 'funds') renderFundsCircuit();
+      refreshActiveView();
       showToast('Booking Scheduled Successfully!', 'gold');
     }
 
@@ -2370,7 +2455,7 @@
 
     function closeEditBookingModal() { document.getElementById('modalEditBooking')?.classList.add('hidden'); }
 
-    function handleEditBookingForm(e) {
+    async function handleEditBookingForm(e) {
       e.preventDefault();
       const jobId = document.getElementById('editJobId')?.value;
       const job = bookings.find(b => b.id === jobId);
@@ -2396,27 +2481,27 @@
       job.depositLE = Number(document.getElementById('editDeposit')?.value) || 0;
       job.totalPriceLE = Number(document.getElementById('editTotalPrice')?.value) || 0;
 
-      saveState();
+      await persistRecord('bookings', job.id, job);
       closeEditBookingModal();
       openVehicleDetailSheet(job.id);
       showToast('Booking updated successfully.', 'cyan');
     }
 
-    function toggleDepositVerification(jobId) {
+    async function toggleDepositVerification(jobId) {
       const job = bookings.find(b => b.id === jobId);
       if (job) {
         job.depositVerified = !job.depositVerified;
-        saveState();
+        await persistRecord('bookings', job.id, job);
         openVehicleDetailSheet(job.id);
         showToast(`Deposit marked as ${job.depositVerified ? 'Verified' : 'Pending'}.`, 'emerald');
       }
     }
 
     function confirmDeleteJob(jobId) {
-      pendingDeleteAction = () => {
+      pendingDeleteAction = async () => {
         bookings = bookings.filter(b => b.id !== jobId);
         customerAccounts = customerAccounts.filter(ca => ca.jobId !== jobId);
-        saveState();
+        await removeRecord('bookings', jobId);
         closeDeleteConfirmModal();
         switchStaffTab('bookings');
         showToast('Booking permanently deleted.', 'rose');
@@ -2436,7 +2521,7 @@
     }
     function closeCreateCustomerModal() { document.getElementById('modalCreateCustomer')?.classList.add('hidden'); }
 
-    function handleCreateCustomerForm(e) {
+    async function handleCreateCustomerForm(e) {
       e.preventDefault();
       const jobId = document.getElementById('custLinkJobSelect')?.value;
       const job = bookings.find(b => b.id === jobId);
@@ -2445,16 +2530,29 @@
       if (!job || !username || !pass) return;
 
       customerAccounts = customerAccounts.filter(ca => ca.jobId !== jobId);
-      customerAccounts.push({ id: 'cacc-' + Date.now(), jobId, customerName: job.customerName, username, pass });
-      saveState();
+      const newAcc = { id: 'cacc-' + Date.now(), jobId, customerName: job.customerName, username, pass };
+      customerAccounts.push(newAcc);
+      await persistRecord('customers', newAcc.id, newAcc);
       closeCreateCustomerModal();
       e.target.reset();
       renderAccountsLists();
       showToast('Client Access Pass Generated!', 'emerald');
     }
 
-    function removeCustomerAccount(id) { customerAccounts = customerAccounts.filter(ca => ca.id !== id); saveState(); renderAccountsLists(); showToast('Pass revoked.', 'slate'); }
-    function removeStaffUser(id) { staffUsers = staffUsers.filter(u => u.id !== id); saveState(); renderAccountsLists(); populateDetailerSelectors(); showToast('Staff revoked.', 'slate'); }
+    async function removeCustomerAccount(id) {
+      customerAccounts = customerAccounts.filter(ca => ca.id !== id);
+      await removeRecord('customers', id);
+      renderAccountsLists();
+      showToast('Pass revoked.', 'slate');
+    }
+
+    async function removeStaffUser(id) {
+      staffUsers = staffUsers.filter(u => u.id !== id);
+      await removeRecord('staff', id);
+      renderAccountsLists();
+      populateDetailerSelectors();
+      showToast('Staff revoked.', 'slate');
+    }
 
     function copyToClipboard(text, successToast = 'Copied!') {
       const temp = document.createElement('textarea');
@@ -2489,20 +2587,21 @@
       const file = e.target.files?.[0];
       if (!file) return;
       const reader = new FileReader();
-      reader.onload = function(event) {
+      reader.onload = async function(event) {
         try {
           const parsed = JSON.parse(event.target.result);
           if (parsed && Array.isArray(parsed.bookings)) {
             bookings = parsed.bookings;
             if (Array.isArray(parsed.staff)) staffUsers = parsed.staff;
             if (Array.isArray(parsed.customerAccounts)) customerAccounts = parsed.customerAccounts;
-            saveState();
-            filterBookingsGrid();
-            renderCalendar();
-            renderFundsCircuit();
-            renderAccountsLists();
+            
+            for (const b of bookings) await persistRecord('bookings', b.id, b);
+            for (const s of staffUsers) await persistRecord('staff', s.id, s);
+            for (const c of customerAccounts) await persistRecord('customers', c.id, c);
+
+            refreshActiveView();
             populateDetailerSelectors();
-            showToast(`Database Restored Successfully! (${bookings.length} Vehicles)`, 'emerald');
+            showToast(`Database Restored & Synced! (${bookings.length} Vehicles)`, 'emerald');
           } else { showToast('Invalid file format.', 'rose'); }
         } catch (err) { showToast('Failed to parse JSON.', 'rose'); }
       };
@@ -2681,7 +2780,7 @@
     window.setAppLanguage = setAppLanguage;
 
     window.addEventListener('DOMContentLoaded', () => {
-      hydrateState();
+      initCloudSync();
       navigateToWelcome();
       populateDetailerSelectors();
       setAppLanguage('en');
