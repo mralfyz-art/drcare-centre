@@ -50,6 +50,7 @@
       background-color: #06080D;
       color: #E2E8F0;
       font-family: 'Inter', sans-serif;
+      -webkit-tap-highlight-color: transparent;
     }
     input, textarea, select {
       background-color: #000000 !important;
@@ -69,12 +70,12 @@
     }
     input[type=range]::-webkit-slider-thumb {
       -webkit-appearance: none;
-      height: 22px;
-      width: 22px;
+      height: 24px;
+      width: 24px;
       border-radius: 50%;
       background: #F59E0B;
       cursor: pointer;
-      box-shadow: 0 0 12px rgba(245, 158, 11, 0.85);
+      box-shadow: 0 0 14px rgba(245, 158, 11, 0.9);
       border: 2px solid #000000;
     }
     .gold-leather-badge {
@@ -93,7 +94,7 @@
       -webkit-text-fill-color: transparent;
       filter: drop-shadow(0 3px 6px rgba(0,0,0,0.95)) drop-shadow(0 -1px 1px rgba(255,255,255,0.4));
     }
-    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
     ::-webkit-scrollbar-track { background: #0B0F19; }
     ::-webkit-scrollbar-thumb { background: #232E4A; border-radius: 9999px; }
   </style>
@@ -137,20 +138,19 @@
     </defs>
   </svg>
 
-  <!-- Sticky Header -->
   <header class="sticky top-0 z-40 bg-bay-900/95 backdrop-blur-md border-b border-slate-800 shadow-2xl">
     <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-18 sm:h-20 flex items-center justify-between gap-2">
       
       <!-- Brand Logo -->
-      <div class="flex items-center gap-2.5 sm:gap-3.5 cursor-pointer group" onclick="window.navigateToWelcome()">
+      <div class="flex items-center gap-2 sm:gap-3 cursor-pointer group" onclick="window.navigateToWelcome()">
         <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl gold-leather-badge flex items-center justify-center p-1.5 transition-all group-hover:scale-105">
           <svg viewBox="0 0 100 115" class="w-7 h-7 sm:w-9 sm:h-9" style="filter: url(#drCare3dEmboss)">
             <use href="#drCareEmblem" />
           </svg>
         </div>
         <div>
-          <div class="flex items-center gap-1.5 sm:gap-2">
-            <span class="font-brand text-base sm:text-xl font-black tracking-wider gold-chiseled-title">DR.CARE</span>
+          <div class="flex items-center gap-1.5">
+            <span class="font-brand text-sm sm:text-xl font-black tracking-wider gold-chiseled-title">DR.CARE</span>
             <span class="text-[9px] sm:text-[10px] font-mono font-bold px-1.5 py-0.5 rounded bg-gold-500/20 text-gold-400 border border-gold-500/30">CENTRE</span>
           </div>
           <p class="text-[7.5px] sm:text-[8.5px] tracking-[0.2em] font-extrabold text-gold-400 uppercase hidden sm:block" data-i18n="revivingSoul">REVIVING THE AUTOMOTIVE SOUL</p>
@@ -158,7 +158,7 @@
       </div>
 
       <!-- Header Controls -->
-      <div class="flex items-center gap-2 sm:gap-3">
+      <div class="flex items-center gap-2">
         
         <!-- Bilingual Toggle -->
         <div class="flex items-center bg-bay-950 border border-slate-800 rounded-xl p-0.5">
@@ -167,40 +167,37 @@
         </div>
 
         <!-- Staff Navigation Tabs -->
-        <nav id="staffNavTabs" class="hidden items-center gap-1 overflow-x-auto max-w-[45vw] sm:max-w-none py-1">
-          <button onclick="window.openNewBookingModal()" id="navBtnNewBooking" class="hidden px-3 py-1.5 rounded-xl text-xs font-black transition text-slate-950 bg-gradient-to-r from-amber-400 to-gold-500 hover:from-gold-400 hover:to-amber-500 shadow-md flex items-center gap-1 whitespace-nowrap">
-            <i class="ph-bold ph-plus-circle text-sm"></i>
-            <span data-i18n="newBooking">+ New Booking</span>
-          </button>
-
+        <nav id="staffNavTabs" class="hidden items-center gap-1 overflow-x-auto max-w-[32vw] sm:max-w-none py-1">
           <button onclick="window.switchStaffTab('bookings')" id="tabBtnBookings" class="px-3 py-1.5 rounded-xl text-xs font-bold transition text-gold-400 bg-gold-500/10 border border-gold-500/30 whitespace-nowrap" data-i18n="intakeBay">
             Intake Bay
           </button>
-          
           <button onclick="window.switchStaffTab('calendar')" id="tabBtnCalendar" class="px-3 py-1.5 rounded-xl text-xs font-bold transition text-slate-400 hover:text-white whitespace-nowrap" data-i18n="calendar">
-            5-Year Calendar
+            Calendar
           </button>
-          
           <button onclick="window.switchStaffTab('funds')" id="tabBtnFunds" class="px-3 py-1.5 rounded-xl text-xs font-bold transition text-slate-400 hover:text-white whitespace-nowrap" data-i18n="fundsCircuit">
-            Funds Circuit
+            Funds
           </button>
-
           <button onclick="window.switchStaffTab('analytics')" id="tabBtnAnalytics" class="px-3 py-1.5 rounded-xl text-xs font-bold transition text-slate-400 hover:text-white whitespace-nowrap" data-i18n="yearlyAnalysis">
-            Yearly Analysis
+            Analysis
           </button>
-          
           <button onclick="window.switchStaffTab('accounts')" id="tabBtnAccounts" class="px-3 py-1.5 rounded-xl text-xs font-bold transition text-slate-400 hover:text-white whitespace-nowrap" data-i18n="accountsAccess">
-            Accounts & Access
+            Accounts
           </button>
         </nav>
 
+        <!-- New Booking Button for Owner / Manager (Header) -->
+        <button onclick="window.openNewBookingModal()" id="headerNewBookingBtn" class="hidden px-3.5 py-2 rounded-xl bg-gold-500 hover:bg-gold-400 text-slate-950 font-black text-xs uppercase tracking-wider transition shadow-lg flex items-center gap-1.5">
+          <i class="ph-bold ph-plus-circle text-base"></i>
+          <span class="hidden md:inline" data-i18n="newBooking">+ New Booking</span>
+        </button>
+
         <!-- Auth Header Buttons -->
-        <div id="authHeaderContainer" class="flex items-center gap-2">
+        <div id="authHeaderContainer" class="flex items-center gap-1.5 sm:gap-2">
           <button onclick="window.navigateToCustomerPortalGateway()" class="hidden sm:flex px-3 py-2 rounded-xl bg-bay-850 hover:bg-bay-800 text-gold-400 border border-gold-500/30 font-bold text-xs items-center gap-1.5 shadow-sm">
             <i class="ph-bold ph-car"></i>
             <span data-i18n="customerTracking">Customer Tracking</span>
           </button>
-          <button onclick="window.openStaffLoginModal()" id="btnStaffLoginNav" class="px-3.5 sm:px-4 py-2 rounded-xl bg-gold-500 hover:bg-gold-400 text-slate-950 font-black text-xs uppercase tracking-wider transition shadow-lg flex items-center gap-1.5">
+          <button onclick="window.openStaffLoginModal()" id="btnStaffLoginNav" class="px-3 sm:px-4 py-2 rounded-xl bg-gold-500 hover:bg-gold-400 text-slate-950 font-black text-xs uppercase tracking-wider transition shadow-lg flex items-center gap-1">
             <i class="ph-bold ph-shield-check"></i>
             <span data-i18n="staffLogin">Staff Login</span>
           </button>
@@ -210,8 +207,7 @@
     </div>
   </header>
 
-  <!-- Main Viewport -->
-  <main class="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-6">
+  <main class="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-6 pb-24">
 
     <!-- 1. WELCOME GATEWAY -->
     <div id="viewWelcomeGateway" class="space-y-8 animate-fadeIn">
@@ -385,21 +381,16 @@
         </div>
 
         <div class="flex items-center gap-2.5 w-full sm:w-auto overflow-x-auto py-1">
-          <button onclick="window.exportDatabaseBackup()" id="btnOwnerExportDb" class="px-3 py-2 rounded-xl bg-bay-850 hover:bg-bay-800 text-slate-300 hover:text-white border border-slate-700 text-xs font-bold transition flex items-center gap-1.5 whitespace-nowrap" title="Backup all records">
+          <button onclick="window.exportDatabaseBackup()" id="btnOwnerExportDb" class="hidden px-3 py-2 rounded-xl bg-bay-850 hover:bg-bay-800 text-slate-300 hover:text-white border border-slate-700 text-xs font-bold transition flex items-center gap-1.5 whitespace-nowrap">
             <i class="ph-bold ph-download-simple"></i>
             <span class="hidden sm:inline" data-i18n="exportJson">Export JSON</span>
           </button>
 
-          <label id="btnOwnerImportDbLabel" class="px-3 py-2 rounded-xl bg-bay-850 hover:bg-bay-800 text-slate-300 hover:text-white border border-slate-700 text-xs font-bold transition flex items-center gap-1.5 cursor-pointer whitespace-nowrap" title="Import backup">
+          <label id="btnOwnerImportDbLabel" class="hidden px-3 py-2 rounded-xl bg-bay-850 hover:bg-bay-800 text-slate-300 hover:text-white border border-slate-700 text-xs font-bold transition flex items-center gap-1.5 cursor-pointer whitespace-nowrap">
             <i class="ph-bold ph-upload-simple"></i>
             <span class="hidden sm:inline" data-i18n="import">Import</span>
             <input type="file" id="fileDbImport" accept=".json" class="hidden" onchange="window.importDatabaseBackup(event)">
           </label>
-
-          <button onclick="window.openNewBookingModal()" id="btnOpenNewBooking" class="flex-1 sm:flex-initial px-4 py-2 rounded-2xl bg-gold-500 hover:bg-gold-400 text-slate-950 font-black text-xs uppercase tracking-wider transition shadow-lg flex items-center justify-center gap-1.5 whitespace-nowrap">
-            <i class="ph-bold ph-plus-circle text-base"></i>
-            <span data-i18n="newBooking">+ New Booking Sheet</span>
-          </button>
         </div>
       </div>
 
@@ -431,7 +422,7 @@
         <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 bg-bay-900 p-3 rounded-2xl border border-slate-800">
           <div class="relative flex-1">
             <i class="ph-bold ph-magnifying-glass absolute left-3.5 top-3 text-slate-400"></i>
-            <input type="text" id="inputSearchJobs" oninput="window.debounceSearchBookings()" placeholder="Search customer name, car model, plate, PIN, or mobile..."
+            <input type="text" id="inputSearchJobs" oninput="window.debounceSearchBookings()" placeholder="Search customer name, car model, plate, or mobile..."
               class="w-full pl-10 pr-4 py-2 border border-slate-700 rounded-xl text-xs focus:outline-none focus:border-gold-500">
           </div>
 
@@ -644,7 +635,7 @@
             </div>
           </div>
 
-          <div id="ownerStaffProvisioningBar" class="p-4 sm:p-5 rounded-3xl bg-bay-850 border-2 border-gold-500/40 shadow-xl space-y-3">
+          <div id="ownerStaffProvisioningBar" class="hidden p-4 sm:p-5 rounded-3xl bg-bay-850 border-2 border-gold-500/40 shadow-xl space-y-3">
             <div class="flex items-center justify-between pb-2 border-b border-slate-800">
               <div class="flex items-center gap-2">
                 <span class="w-8 h-8 rounded-xl bg-gold-500/20 text-gold-400 flex items-center justify-center text-base border border-gold-500/30">
@@ -676,7 +667,6 @@
                 <select id="barStaffRole" class="w-full border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
                   <option value="manager" data-i18n="tierManager">Level 2: Shop Manager</option>
                   <option value="detailer" selected data-i18n="tierDetailer">Level 3: Master Detailer</option>
-                  <option value="owner" data-i18n="tierOwner">Level 1: Co-Director</option>
                 </select>
               </div>
               <div class="flex items-end">
@@ -716,6 +706,17 @@
     <div id="viewSheetDetail" class="hidden space-y-6 animate-fadeIn"></div>
 
   </main>
+
+  <div id="mobileFloatingActionBar" class="fixed bottom-4 left-4 right-4 z-40 flex items-center justify-between gap-3 p-2 bg-bay-900/95 backdrop-blur-xl border border-gold-500/40 rounded-2xl shadow-2xl sm:hidden">
+    <button onclick="window.switchStaffTab('bookings')" class="flex-1 py-2.5 rounded-xl bg-bay-850 text-gold-400 font-bold text-xs flex items-center justify-center gap-1.5 border border-slate-800">
+      <i class="ph-bold ph-car text-base"></i>
+      <span data-i18n="intakeBay">Intake Bay</span>
+    </button>
+    <button onclick="window.openNewBookingModal()" id="mobileFloatNewBookingBtn" class="hidden flex-1 py-2.5 rounded-xl bg-gradient-to-r from-amber-400 to-gold-500 text-slate-950 font-black text-xs items-center justify-center gap-1.5 shadow-lg">
+      <i class="ph-bold ph-plus-circle text-base"></i>
+      <span data-i18n="newBooking">+ New Booking</span>
+    </button>
+  </div>
 
   <!-- MODALS -->
 
@@ -859,7 +860,7 @@
   </div>
 
   <!-- Notification Toast Container -->
-  <div id="toastContainer" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 max-w-sm pointer-events-none"></div>
+  <div id="toastContainer" class="fixed bottom-20 right-5 z-50 flex flex-col gap-2 max-w-sm pointer-events-none"></div>
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
@@ -947,7 +948,7 @@
         ownerConsole: "Owner Staff Provisioning Console",
         ownerConsoleSub: "Add workshop managers & technicians directly to your team roster.",
         staffNameLabel: "Staff Full Name *", authorityTier: "Authority Tier *", createStaffBtn: "+ Create Staff",
-        tierManager: "Level 2: Shop Manager", tierDetailer: "Level 3: Master Detailer", tierOwner: "Level 1: Co-Director",
+        tierManager: "Level 2: Shop Manager", tierDetailer: "Level 3: Master Detailer",
         workshopTeamTitle: "Workshop Management & Staff Team",
         customerLoginsTitle: "Customer Dedicated Portal Logins",
         customerLoginsSub: "Assigned customer accounts for direct username and password access.",
@@ -1021,7 +1022,7 @@
         ownerConsole: "لوحة تخصيص صلاحيات المؤسس",
         ownerConsoleSub: "إضافة مديري الورشة والفنيين مباشرة إلى قائمة فريقك.",
         staffNameLabel: "اسم الموظف بالكامل *", authorityTier: "مستوى الصلاحية *", createStaffBtn: "+ إنشاء موظف",
-        tierManager: "المستوى 2: مدير الورشة", tierDetailer: "المستوى 3: فني طلاء أول", tierOwner: "المستوى 1: شريك مؤسس",
+        tierManager: "المستوى 2: مدير الورشة", tierDetailer: "المستوى 3: فني طلاء أول",
         workshopTeamTitle: "إدارة الورشة وفريق العمل",
         customerLoginsTitle: "حسابات بوابة العملاء المخصصة",
         customerLoginsSub: "حسابات العملاء المعينة للدخول المباشر باسم المستخدم وكلمة المرور.",
@@ -1140,6 +1141,8 @@
       document.getElementById('viewSheetDetail').classList.add('hidden');
       document.getElementById('staffNavTabs').classList.add('hidden');
       document.getElementById('authHeaderContainer').classList.remove('hidden');
+      document.getElementById('headerNewBookingBtn').classList.add('hidden');
+      document.getElementById('mobileFloatNewBookingBtn').classList.add('hidden');
     };
 
     window.navigateToCustomerPortalGateway = function() {
@@ -1149,6 +1152,8 @@
       document.getElementById('viewStaffBackOffice').classList.add('hidden');
       document.getElementById('viewSheetDetail').classList.add('hidden');
       document.getElementById('staffNavTabs').classList.add('hidden');
+      document.getElementById('headerNewBookingBtn').classList.add('hidden');
+      document.getElementById('mobileFloatNewBookingBtn').classList.add('hidden');
     };
 
     window.switchCustomerLookupMode = function(mode) {
@@ -1323,39 +1328,39 @@
     function updateStaffRoleBadge() {
       const titleEl = document.getElementById('staffRoleHeaderTitle');
       const badgeEl = document.getElementById('badgeActiveStaffRole');
-      const newBookBtn = document.getElementById('navBtnNewBooking');
-      const headerNewBookBtn = document.getElementById('btnOpenNewBooking');
       const ownerExp = document.getElementById('btnOwnerExportDb');
       const ownerImp = document.getElementById('btnOwnerImportDbLabel');
       const accTabBtn = document.getElementById('tabBtnAccounts');
+      const headerNewBtn = document.getElementById('headerNewBookingBtn');
+      const mobileFloatBtn = document.getElementById('mobileFloatNewBookingBtn');
 
       if (currentUser.role === 'owner') {
         titleEl.innerText = "Vehicle Booking & Intake Bay";
         badgeEl.innerText = "OWNER (LEVEL 1)";
         badgeEl.className = "text-[10px] sm:text-[11px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-gold-500/20 text-gold-400 border border-gold-500/40";
-        newBookBtn.classList.remove('hidden');
-        if (headerNewBookBtn) headerNewBookBtn.classList.remove('hidden');
         if (ownerExp) ownerExp.classList.remove('hidden');
         if (ownerImp) ownerImp.classList.remove('hidden');
         if (accTabBtn) accTabBtn.classList.remove('hidden');
+        if (headerNewBtn) headerNewBtn.classList.remove('hidden');
+        if (mobileFloatBtn) mobileFloatBtn.classList.remove('hidden');
       } else if (currentUser.role === 'manager') {
         titleEl.innerText = "Manager Restoration & Intake Bay";
         badgeEl.innerText = "MANAGER (LEVEL 2)";
         badgeEl.className = "text-[10px] sm:text-[11px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-cyan-500/20 text-cyan-400 border border-cyan-500/40";
-        newBookBtn.classList.remove('hidden');
-        if (headerNewBookBtn) headerNewBookBtn.classList.remove('hidden');
         if (ownerExp) ownerExp.classList.add('hidden');
         if (ownerImp) ownerImp.classList.add('hidden');
-        if (accTabBtn) accTabBtn.classList.add('hidden');
+        if (accTabBtn) accTabBtn.classList.remove('hidden');
+        if (headerNewBtn) headerNewBtn.classList.remove('hidden');
+        if (mobileFloatBtn) mobileFloatBtn.classList.remove('hidden');
       } else {
         titleEl.innerText = "Master Detailer Bay Terminal";
         badgeEl.innerText = "DETAILER (LEVEL 3)";
         badgeEl.className = "text-[10px] sm:text-[11px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-400 border border-amber-500/40";
-        newBookBtn.classList.add('hidden');
-        if (headerNewBookBtn) headerNewBookBtn.classList.add('hidden');
         if (ownerExp) ownerExp.classList.add('hidden');
         if (ownerImp) ownerImp.classList.add('hidden');
         if (accTabBtn) accTabBtn.classList.add('hidden');
+        if (headerNewBtn) headerNewBtn.classList.add('hidden');
+        if (mobileFloatBtn) mobileFloatBtn.classList.add('hidden');
       }
     }
 
@@ -1490,6 +1495,10 @@
     };
 
     window.openNewBookingModal = function() {
+      if (!currentUser || currentUser.role === 'detailer') {
+        showToast("Only Owners and Managers can create new vehicle bookings.", "error");
+        return;
+      }
       document.getElementById('modalNewBooking').classList.remove('hidden');
       const today = new Date().toISOString().split('T')[0];
       document.getElementById('nbEntryDate').value = today;
@@ -1555,6 +1564,7 @@
       view.classList.remove('hidden');
 
       const isDetailer = currentUser && currentUser.role === 'detailer';
+      const isOwner = currentUser && currentUser.role === 'owner';
 
       view.innerHTML = `
         <div class="bg-bay-900 border border-gold-500/40 rounded-3xl p-6 sm:p-10 shadow-2xl space-y-8">
@@ -1575,7 +1585,7 @@
               <button onclick="window.closeVehicleDetailSheet()" class="px-4 py-2 rounded-xl bg-bay-800 text-xs font-bold text-slate-300 hover:text-white flex items-center gap-1.5 transition">
                 <i class="ph-bold ph-arrow-left"></i> Back to Intake Bay
               </button>
-              ${currentUser && currentUser.role === 'owner' ? `
+              ${isOwner ? `
                 <button onclick="window.deleteBooking('${job.id}')" class="px-3 py-2 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/30 text-xs font-bold transition flex items-center gap-1">
                   <i class="ph-bold ph-trash"></i> Delete
                 </button>
@@ -1690,6 +1700,10 @@
     };
 
     window.deleteBooking = function(jobId) {
+      if (!currentUser || currentUser.role !== 'owner') {
+        showToast("Only Level 1 Owner can delete vehicle bookings.", "error");
+        return;
+      }
       if (!confirm("Are you sure you want to delete this vehicle booking sheet?")) return;
       appState.bookings = appState.bookings.filter(b => b.id !== jobId);
       saveCloudState().then(() => {
@@ -1891,11 +1905,12 @@
       const staffContainer = document.getElementById('listStaffAccountsContainer');
       const custContainer = document.getElementById('listCustomerAccountsContainer');
       const ownerBar = document.getElementById('ownerStaffProvisioningBar');
+      const isOwner = currentUser && currentUser.role === 'owner';
 
-      if (currentUser && currentUser.role !== 'owner') {
-        if (ownerBar) ownerBar.classList.add('hidden');
-      } else {
+      if (isOwner) {
         if (ownerBar) ownerBar.classList.remove('hidden');
+      } else {
+        if (ownerBar) ownerBar.classList.add('hidden');
       }
 
       if (staffContainer) {
@@ -1903,14 +1918,14 @@
           <div class="bg-bay-850 border border-slate-800 p-4 rounded-2xl space-y-2">
             <div class="flex items-center justify-between">
               <span class="text-xs font-mono px-2 py-0.5 rounded bg-gold-500/20 text-gold-400 border border-gold-500/30 uppercase font-bold">${s.role}</span>
-              ${currentUser && currentUser.role === 'owner' && s.username.toLowerCase() !== 'mr.alfy' ? `
+              ${isOwner && s.username.toLowerCase() !== 'mr.alfy' ? `
                 <button onclick="window.deleteStaffAccount('${s.id}')" class="text-rose-400 hover:text-rose-300 text-xs"><i class="ph-bold ph-trash"></i></button>
               ` : ''}
             </div>
             <div>
               <h4 class="text-sm font-black text-white">${s.name}</h4>
-              <p class="text-xs text-slate-400 font-mono">User: ${s.username}</p>
-              <p class="text-[11px] text-slate-500 font-mono">Pass: ••••••••</p>
+              <p class="text-xs text-slate-400 font-mono">User: ${isOwner ? s.username : '••••••••••••'}</p>
+              <p class="text-[11px] text-slate-500 font-mono">Pass: ${isOwner ? s.pass : '••••••••••••'}</p>
             </div>
           </div>
         `).join('');
@@ -1921,11 +1936,14 @@
           <div class="bg-bay-850 border border-slate-800 p-4 rounded-2xl space-y-2">
             <div class="flex items-center justify-between">
               <span class="text-xs font-mono px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 uppercase font-bold">Plate: ${c.plate}</span>
+              ${isOwner ? `
+                <button onclick="window.deleteCustomerAccount('${c.id}')" class="text-rose-400 hover:text-rose-300 text-xs"><i class="ph-bold ph-trash"></i></button>
+              ` : ''}
             </div>
             <div>
               <h4 class="text-sm font-black text-white">${c.name}</h4>
-              <p class="text-xs text-slate-400 font-mono">Mobile: ${c.phone}</p>
-              <p class="text-[11px] text-slate-500 font-mono">Pass: ••••••••</p>
+              <p class="text-xs text-slate-400 font-mono">Mobile: ${isOwner ? c.phone : '••••••••••••'}</p>
+              <p class="text-[11px] text-slate-500 font-mono">Pass: ${isOwner ? c.pass : '••••••••••••'}</p>
             </div>
           </div>
         `).join('');
@@ -1934,6 +1952,10 @@
 
     window.handleOwnerQuickAddStaff = function(e) {
       e.preventDefault();
+      if (!currentUser || currentUser.role !== 'owner') {
+        showToast("Only Level 1 Owner can provision staff.", "error");
+        return;
+      }
       const name = document.getElementById('barStaffName').value.trim();
       const username = document.getElementById('barStaffUsername').value.trim();
       const pass = document.getElementById('barStaffPassword').value.trim();
@@ -1948,11 +1970,28 @@
     };
 
     window.deleteStaffAccount = function(id) {
+      if (!currentUser || currentUser.role !== 'owner') {
+        showToast("Only Level 1 Owner can delete accounts.", "error");
+        return;
+      }
       if (!confirm("Are you sure you want to remove this staff account?")) return;
       appState.staff = appState.staff.filter(s => s.id !== id);
       saveCloudState().then(() => {
         renderAccountsLists();
         showToast("Staff account removed.");
+      });
+    };
+
+    window.deleteCustomerAccount = function(id) {
+      if (!currentUser || currentUser.role !== 'owner') {
+        showToast("Only Level 1 Owner can delete accounts.", "error");
+        return;
+      }
+      if (!confirm("Are you sure you want to remove this customer account?")) return;
+      appState.customers = appState.customers.filter(c => c.id !== id);
+      saveCloudState().then(() => {
+        renderAccountsLists();
+        showToast("Customer account removed.");
       });
     };
 
