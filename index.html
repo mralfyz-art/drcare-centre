@@ -138,7 +138,7 @@
     </defs>
   </svg>
 
-  <header class="sticky top-0 z-40 bg-bay-900/95 backdrop-blur-md border-b border-slate-800 shadow-2xl">
+  <header class="sticky top-0 z-40 bg-bay-900/95 backdrop-blur-md border-b border-gold-500/30 shadow-2xl">
     <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-18 sm:h-20 flex items-center justify-between gap-2">
       
       <!-- Brand Logo -->
@@ -151,7 +151,7 @@
         <div>
           <div class="flex items-center gap-1.5">
             <span class="font-brand text-sm sm:text-xl font-black tracking-wider gold-chiseled-title">DR.CARE</span>
-            <span class="text-[9px] sm:text-[10px] font-mono font-bold px-1.5 py-0.5 rounded bg-gold-500/20 text-gold-400 border border-gold-500/30">ENTERPRISE</span>
+            <span class="text-[9px] sm:text-[10px] font-mono font-bold px-1.5 py-0.5 rounded bg-gold-500/20 text-gold-400 border border-gold-500/30">ELITE</span>
           </div>
           <p class="text-[7.5px] sm:text-[8.5px] tracking-[0.2em] font-extrabold text-gold-400 uppercase hidden sm:block" data-i18n="revivingSoul">REVIVING THE AUTOMOTIVE SOUL</p>
         </div>
@@ -174,8 +174,8 @@
           <button onclick="window.switchStaffTab('calendar')" id="tabBtnCalendar" class="px-3 py-1.5 rounded-xl text-xs font-bold transition text-slate-400 hover:text-white whitespace-nowrap" data-i18n="calendar">
             Calendar
           </button>
-          <button onclick="window.switchStaffTab('funds')" id="tabBtnFunds" class="px-3 py-1.5 rounded-xl text-xs font-bold transition text-slate-400 hover:text-white whitespace-nowrap" data-i18n="fundsCircuit">
-            Funds & Vault
+          <button onclick="window.switchStaffTab('funds')" id="tabBtnFunds" class="px-3 py-1.5 rounded-xl text-xs font-bold transition text-slate-400 hover:text-white whitespace-nowrap" data-i18n="cashFlow">
+            Cash Flow & Ledger
           </button>
           <button onclick="window.switchStaffTab('analytics')" id="tabBtnAnalytics" class="px-3 py-1.5 rounded-xl text-xs font-bold transition text-slate-400 hover:text-white whitespace-nowrap" data-i18n="yearlyAnalysis">
             Analysis
@@ -185,7 +185,7 @@
           </button>
         </nav>
 
-        <!-- New Booking Button for Owner / Manager (Header) -->
+        <!-- New Booking Button for Owner / Manager -->
         <button onclick="window.openNewBookingModal()" id="headerNewBookingBtn" class="hidden px-3.5 py-2 rounded-xl bg-gold-500 hover:bg-gold-400 text-slate-950 font-black text-xs uppercase tracking-wider transition shadow-lg flex items-center gap-1.5">
           <i class="ph-bold ph-plus-circle text-base"></i>
           <span class="hidden md:inline" data-i18n="newBooking">+ New Booking</span>
@@ -211,7 +211,7 @@
 
     <!-- 1. WELCOME GATEWAY -->
     <div id="viewWelcomeGateway" class="space-y-8 animate-fadeIn">
-      <div class="relative overflow-hidden rounded-3xl bg-gradient-to-b from-bay-850 via-bay-900 to-bay-950 border border-gold-500/30 p-6 sm:p-14 text-center shadow-2xl">
+      <div class="relative overflow-hidden rounded-3xl bg-gradient-to-b from-bay-850 via-bay-900 to-bay-950 border border-gold-500/40 p-6 sm:p-14 text-center shadow-2xl">
         <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,_var(--tw-gradient-stops))] from-gold-500/10 via-transparent to-transparent pointer-events-none"></div>
         
         <div class="relative z-10 max-w-2xl mx-auto space-y-4">
@@ -259,7 +259,7 @@
             </div>
           </div>
 
-          <div onclick="window.openStaffLoginModal()" class="group bg-bay-900/90 border border-slate-800 hover:border-slate-600 rounded-3xl p-6 sm:p-8 cursor-pointer transition-all shadow-2xl hover:-translate-y-1 flex flex-col justify-between text-left space-y-5">
+          <div onclick="window.openStaffLoginModal()" class="group bg-bay-900/90 border border-slate-800 hover:border-gold-500/40 rounded-3xl p-6 sm:p-8 cursor-pointer transition-all shadow-2xl hover:-translate-y-1 flex flex-col justify-between text-left space-y-5">
             <div class="space-y-3">
               <div class="w-14 h-14 rounded-2xl bg-bay-800 border border-slate-700 flex items-center justify-center text-slate-300 group-hover:scale-110 transition-transform">
                 <i class="ph-bold ph-shield-check text-3xl text-gold-400"></i>
@@ -269,7 +269,7 @@
                 <h3 class="text-xl font-black text-white group-hover:text-gold-300 transition" data-i18n="staffLoginTitle">Authorized Workshop Staff</h3>
               </div>
               <p class="text-xs text-slate-400 leading-relaxed" data-i18n="staffPortalDesc">
-                Dedicated terminal for Owner, Shop Managers, and Master Detailers. Manage intakes, Funds & Material Ledger, 5-year master calendar, and accounts.
+                Dedicated terminal for Owner (Level 1), Managers (Level 2), and Master Detailers (Level 3). Manage intakes, Cash Flow, calendar, and security.
               </p>
             </div>
             <div class="pt-4 border-t border-slate-800 flex items-center justify-between text-xs font-bold text-slate-300 group-hover:text-white">
@@ -375,7 +375,7 @@
               OWNER (LEVEL 1)
             </span>
           </div>
-          <p class="text-xs text-slate-400 mt-1" data-i18n="backofficeSub">
+          <p id="staffRoleHeaderSub" class="text-xs text-slate-400 mt-1" data-i18n="backofficeSub">
             Real-time paint restoration workflow, deposit auditing in Egyptian Pounds (L.E), and multi-stage bay tracking.
           </p>
         </div>
@@ -502,16 +502,16 @@
         </div>
       </div>
 
-      <!-- SUB-VIEW: FUNDS CIRCUIT & MATERIAL LEDGER -->
+      <!-- SUB-VIEW: CASH FLOW & MATERIAL LEDGER -->
       <div id="subViewFunds" class="space-y-6 hidden">
         <div class="bg-bay-900 border border-slate-800 rounded-3xl p-5 sm:p-8 space-y-6 shadow-2xl">
           <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-slate-800">
             <div>
               <h3 class="text-lg font-black text-white uppercase tracking-wider flex items-center gap-2">
-                <span data-i18n="fundsTitle">Funds Circuit & Material Consumables</span>
-                <span class="text-xs font-mono px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">L.E CASH FLOW & NET PROFIT</span>
+                <span data-i18n="cashFlowTitle">Cash Flow & Material Consumables</span>
+                <span class="text-xs font-mono px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">L.E REVENUE & NET PROFIT</span>
               </h3>
-              <p class="text-xs text-slate-400 mt-0.5" data-i18n="fundsSub">Real-time tracking of secured deposits and Meguiar's / Rupes consumable costs.</p>
+              <p class="text-xs text-slate-400 mt-0.5" data-i18n="cashFlowSub">Real-time auditing of secured deposits, payment channels, and Meguiar's / Rupes consumable expenses.</p>
             </div>
 
             <div class="flex items-center gap-2">
@@ -610,7 +610,7 @@
           <div class="flex items-center justify-between pb-4 border-b border-slate-800">
             <div>
               <h3 class="text-lg font-black text-white uppercase tracking-wider" data-i18n="accountsTitle">Workshop Team & Customer Access Management</h3>
-              <p class="text-xs text-slate-400 mt-0.5" data-i18n="accountsSub">Owner controls credentials for Owners, Managers, Master Detailers, and private Customer passes.</p>
+              <p class="text-xs text-slate-400 mt-0.5" data-i18n="accountsSub">Level 1 Owner controls credentials and staff roles across the enterprise.</p>
             </div>
           </div>
 
@@ -621,8 +621,8 @@
                   <i class="ph-bold ph-shield-star"></i>
                 </span>
                 <div>
-                  <h4 class="text-xs font-black text-white uppercase tracking-wider" data-i18n="ownerConsole">Owner Staff Provisioning Console</h4>
-                  <p class="text-[10px] text-slate-400" data-i18n="ownerConsoleSub">Add workshop managers & technicians directly to your team roster.</p>
+                  <h4 class="text-xs font-black text-white uppercase tracking-wider" data-i18n="ownerConsole">Level 1 Owner Staff Provisioning Console</h4>
+                  <p class="text-[10px] text-slate-400" data-i18n="ownerConsoleSub">Add managers & master detailers, manage passwords, and oversee team credentials.</p>
                 </div>
               </div>
               <span class="text-[9px] font-mono font-bold px-2 py-0.5 rounded bg-gold-500/10 text-gold-400 border border-gold-500/30">MR. ALFY EXCLUSIVE</span>
@@ -639,7 +639,7 @@
               </div>
               <div>
                 <label class="block text-[10px] font-bold text-slate-300 mb-1" data-i18n="passwordLabel">Password *</label>
-                <input type="password" id="barStaffPassword" required placeholder="Create password" class="w-full border border-slate-700 rounded-xl px-3 py-2 text-xs font-mono">
+                <input type="text" id="barStaffPassword" required placeholder="Create password" class="w-full border border-slate-700 rounded-xl px-3 py-2 text-xs font-mono">
               </div>
               <div>
                 <label class="block text-[10px] font-bold text-slate-300 mb-1" data-i18n="authorityTier">Authority Tier *</label>
@@ -794,8 +794,8 @@
             <input type="date" id="nbEntryDate" required class="w-full border border-slate-700 rounded-xl px-4 py-2.5 text-xs font-mono">
           </div>
           <div>
-            <label class="block text-xs font-bold text-white mb-1.5" data-i18n="assignedDetailer">Assigned Master Detailer</label>
-            <select id="nbAssignedDetailer" class="w-full border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white">
+            <label class="block text-xs font-bold text-white mb-1.5" data-i18n="assignedDetailer">Assigned Master Detailer *</label>
+            <select id="nbAssignedDetailer" required class="w-full border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white">
               <option value="Mahmoud Detailer">Mahmoud Detailer</option>
               <option value="Ibrahim Master">Ibrahim Master</option>
               <option value="Hassan Paint Expert">Hassan Paint Expert</option>
@@ -918,7 +918,7 @@
         trackMyCar: "Track My Car Live",
         internalAccess: "Internal Access",
         staffLoginTitle: "Authorized Workshop Staff",
-        staffPortalDesc: "Dedicated terminal for Owner, Shop Managers, and Master Detailers. Manage intakes, Funds & Material Ledger, 5-year master calendar, and accounts.",
+        staffPortalDesc: "Dedicated terminal for Owner (Level 1), Managers (Level 2), and Master Detailers (Level 3). Manage intakes, Cash Flow, calendar, and security.",
         staffLoginBtnText: "Staff Login & Workspace",
         customerLoginHeader: "Customer Live Bay Tracking",
         customerLoginSub: "Inspect your personal vehicle's restoration progress and verified deposit.",
@@ -933,7 +933,7 @@
         back: "Back",
         intakeBay: "Intake Bay",
         calendar: "5-Year Calendar",
-        fundsCircuit: "Funds & Vault",
+        cashFlow: "Cash Flow & Ledger",
         yearlyAnalysis: "Yearly Analysis",
         accountsAccess: "Accounts & Access",
         newBooking: "+ New Booking",
@@ -952,8 +952,8 @@
         today: "Today",
         sun: "Sun", mon: "Mon", tue: "Tue", wed: "Wed", thu: "Thu", fri: "Fri", sat: "Sat",
         bookForDate: "+ Book Car for This Date",
-        fundsTitle: "Funds Circuit & Material Consumables",
-        fundsSub: "Real-time tracking of secured deposits and Meguiar's / Rupes consumable costs.",
+        cashFlowTitle: "Cash Flow & Material Consumables",
+        cashFlowSub: "Real-time auditing of secured deposits, payment channels, and Meguiar's / Rupes consumable expenses.",
         thisMonth: "This Month", thisWeek: "This Week", allTime: "All Time",
         totalDepositsPeriod: "Gross Secured Deposits",
         consumablesCost: "Consumables & Materials (Rupes/Meguiar's)",
@@ -965,9 +965,9 @@
         grossDeposits: "Gross Deposits Recorded", avgDeposit: "Average Deposit / Vehicle", settledRatio: "Settled & Verified Ratio",
         monthlyVelocity: "Monthly Intake Velocity & Deposit Collection (L.E)",
         accountsTitle: "Workshop Team & Customer Access Management",
-        accountsSub: "Owner controls credentials for Owners, Managers, Master Detailers, and private Customer passes.",
-        ownerConsole: "Owner Staff Provisioning Console",
-        ownerConsoleSub: "Add workshop managers & technicians directly to your team roster.",
+        accountsSub: "Level 1 Owner controls credentials and staff roles across the enterprise.",
+        ownerConsole: "Level 1 Owner Staff Provisioning Console",
+        ownerConsoleSub: "Add managers & master detailers, manage passwords, and oversee team credentials.",
         staffNameLabel: "Staff Full Name *", authorityTier: "Authority Tier *", createStaffBtn: "+ Create Staff",
         tierManager: "Level 2: Shop Manager", tierDetailer: "Level 3: Master Detailer",
         workshopTeamTitle: "Workshop Management & Staff Team",
@@ -980,7 +980,7 @@
         newBookingModalSub: "Register incoming customer vehicle, assigned detailer bay, and advance deposit in L.E.",
         custNameLabel: "Customer Full Name *", carBrandModel: "Car Brand & Model *", carPlateLabel: "Car License Plate *",
         carColorLabel: "Car Paint Color *", odometerLabel: "Odometer (KM)", entryDateLabel: "Entry Date *",
-        assignedDetailer: "Assigned Master Detailer", depositAmountLabel: "Advance Deposit Amount (L.E) *",
+        assignedDetailer: "Assigned Master Detailer *", depositAmountLabel: "Advance Deposit Amount (L.E) *",
         paymentChannelLabel: "Payment Channel *", scopeOfWorkLabel: "Scope of Paint Restoration & Services *",
         cancel: "Cancel", saveBookingBtn: "Save & Open Booking Sheet", exportJson: "Export JSON", import: "Import"
       },
@@ -994,7 +994,7 @@
         trackMyCar: "تتبع سيارتي مباشرة",
         internalAccess: "الدخول الداخلي",
         staffLoginTitle: "طاقم الورشة المصرح لهم",
-        staffPortalDesc: "محطة مخصصة للمؤسس، مديري الورشة، وفنيو الطلاء. إدارة الحزامات، دائرة الأموال والمواد، التقويم الخماسي، والحسابات.",
+        staffPortalDesc: "محطة مخصصة للمؤسس (مستوى 1)، مديري الورشة (مستوى 2)، وفنيو الطلاء الأوائل (مستوى 3). إدارة الاستقبال، التدفق النقدي، التقويم، والأمان.",
         staffLoginBtnText: "دخول الموظفين ومنطقة العمل",
         customerLoginHeader: "تتبع العميل المباشر للورشة",
         customerLoginSub: "افحص تقدم ترميم سيارتك الشخصية والوديعة المؤكدة.",
@@ -1009,7 +1009,7 @@
         back: "رجوع",
         intakeBay: "ساحة الاستقبال",
         calendar: "التقويم الخماسي",
-        fundsCircuit: "الأموال والمواد",
+        cashFlow: "التدفق النقدي والسجل",
         yearlyAnalysis: "التحليل السنوي",
         accountsAccess: "الحسابات والصلاحيات",
         newBooking: "+ حجز جديد",
@@ -1028,8 +1028,8 @@
         today: "اليوم",
         sun: "الأحد", mon: "الإثنين", tue: "الثلاثاء", wed: "الأربعاء", thu: "الخميس", fri: "الجمعة", sat: "السبت",
         bookForDate: "+ حجز سيارة لهذا التاريخ",
-        fundsTitle: "دائرة الأموال واستهلاك المواد",
-        fundsSub: "تتبع حي للودائع ومصاريف مركبات ميجوايرز وروبس.",
+        cashFlowTitle: "التدفق النقدي واستهلاك المواد",
+        cashFlowSub: "مراجعة حية للودائع المؤكدة، قنوات الدفع، ومصاريف مركبات ميجوايرز وروبس.",
         thisMonth: "هذا الشهر", thisWeek: "هذا الأسبوع", allTime: "كل الوقت",
         totalDepositsPeriod: "إجمالي الودائع المؤكدة",
         consumablesCost: "تكلفة المواد (روبس / ميجوايرز)",
@@ -1041,9 +1041,9 @@
         grossDeposits: "إجمالي الودائع المسجلة", avgDeposit: "متوسط الودائع / سيارة", settledRatio: "نسبة التسوية والتحقق",
         monthlyVelocity: "سرعة الاستقبال الشهرية وتحصيل الودائع (ج.م)",
         accountsTitle: "إدارة فريق الورشة وحسابات العملاء",
-        accountsSub: "يتحكم المؤسس في بيانات اعتماد المديرين، وفنيي الطلاء، وحسابات العملاء الخاصة.",
-        ownerConsole: "لوحة تخصيص صلاحيات المؤسس",
-        ownerConsoleSub: "إضافة مديري الورشة والفنيين مباشرة إلى قائمة فريقك.",
+        accountsSub: "المؤسس (مستوى 1) يتحكم في بيانات الاعتماد وأدوار الموظفين.",
+        ownerConsole: "لوحة تخصيص صلاحيات المؤسس (مستوى 1)",
+        ownerConsoleSub: "إضافة مديرين وفنيين أوائل، إدارة كلمات المرور، ومتابعة فريق العمل.",
         staffNameLabel: "اسم الموظف بالكامل *", authorityTier: "مستوى الصلاحية *", createStaffBtn: "+ إنشاء موظف",
         tierManager: "المستوى 2: مدير الورشة", tierDetailer: "المستوى 3: فني طلاء أول",
         workshopTeamTitle: "إدارة الورشة وفريق العمل",
@@ -1056,7 +1056,7 @@
         newBookingModalSub: "تسجيل سيارة العميل القادمة، ساحة فني الطلاء المعين، والعربون المقدم بالجنيه المصري.",
         custNameLabel: "اسم العميل بالكامل *", carBrandModel: "ماركة وموديل السيارة *", carPlateLabel: "رقم لوحة السيارة *",
         carColorLabel: "لون طلاء السيارة *", odometerLabel: "عداد الكيلومترات (KM)", entryDateLabel: "تاريخ الدخول *",
-        assignedDetailer: "فني الطلاء المسؤول", depositAmountLabel: "مبلغ العربون المقدم (ج.م) *",
+        assignedDetailer: "فني الطلاء المسؤول *", depositAmountLabel: "مبلغ العربون المقدم (ج.م) *",
         paymentChannelLabel: "قناة الدفع *", scopeOfWorkLabel: "نطاق أعمال ترميم الطلاء والخدمات *",
         cancel: "إلغاء", saveBookingBtn: "حفظ وفتح ورقة الحجز", exportJson: "تصدير JSON", import: "استيراد"
       }
@@ -1363,49 +1363,73 @@
       document.getElementById('viewStaffBackOffice').classList.remove('hidden');
       
       updateStaffRoleBadge();
-      switchStaffTab('bookings');
+      
+      // If user is a Master Detailer (Level 3), jump directly to bookings or their assigned vehicle
+      if (currentUser.role === 'detailer') {
+        switchStaffTab('bookings');
+      } else {
+        switchStaffTab('bookings');
+      }
     };
 
     function updateStaffRoleBadge() {
       const titleEl = document.getElementById('staffRoleHeaderTitle');
+      const subEl = document.getElementById('staffRoleHeaderSub');
       const badgeEl = document.getElementById('badgeActiveStaffRole');
       const ownerExp = document.getElementById('btnOwnerExportDb');
       const ownerImp = document.getElementById('btnOwnerImportDbLabel');
       const accTabBtn = document.getElementById('tabBtnAccounts');
+      const fundsTabBtn = document.getElementById('tabBtnFunds');
       const headerNewBtn = document.getElementById('headerNewBookingBtn');
       const mobileFloatBtn = document.getElementById('mobileFloatNewBookingBtn');
 
       if (currentUser.role === 'owner') {
-        titleEl.innerText = "Vehicle Booking & Intake Bay";
-        badgeEl.innerText = "OWNER (LEVEL 1)";
+        titleEl.innerText = "Level 1 Owner Master Workspace";
+        subEl.innerText = "Full Enterprise Access: Staff credentials, cash flow auditing, complete booking edit/delete, and photo vaults.";
+        badgeEl.innerText = "LEVEL 1: OWNER (MR. ALFY)";
         badgeEl.className = "text-[10px] sm:text-[11px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-gold-500/20 text-gold-400 border border-gold-500/40";
         if (ownerExp) ownerExp.classList.remove('hidden');
         if (ownerImp) ownerImp.classList.remove('hidden');
         if (accTabBtn) accTabBtn.classList.remove('hidden');
+        if (fundsTabBtn) fundsTabBtn.classList.remove('hidden');
         if (headerNewBtn) headerNewBtn.classList.remove('hidden');
         if (mobileFloatBtn) mobileFloatBtn.classList.remove('hidden');
       } else if (currentUser.role === 'manager') {
-        titleEl.innerText = "Manager Restoration & Intake Bay";
-        badgeEl.innerText = "MANAGER (LEVEL 2)";
+        titleEl.innerText = "Level 2 Manager Operations Bay";
+        subEl.innerText = "Manager Access: Calendar, Cash Flow, and New Booking Creation with Detailer Assignment.";
+        badgeEl.innerText = "LEVEL 2: SHOP MANAGER";
         badgeEl.className = "text-[10px] sm:text-[11px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-cyan-500/20 text-cyan-400 border border-cyan-500/40";
         if (ownerExp) ownerExp.classList.add('hidden');
         if (ownerImp) ownerImp.classList.add('hidden');
-        if (accTabBtn) accTabBtn.classList.remove('hidden');
+        if (accTabBtn) accTabBtn.classList.add('hidden'); // Managers cannot see staff passwords
+        if (fundsTabBtn) fundsTabBtn.classList.remove('hidden'); // Managers can see cash flow
         if (headerNewBtn) headerNewBtn.classList.remove('hidden');
         if (mobileFloatBtn) mobileFloatBtn.classList.remove('hidden');
       } else {
-        titleEl.innerText = "Master Detailer Bay Terminal";
-        badgeEl.innerText = "DETAILER (LEVEL 3)";
+        titleEl.innerText = `Level 3 Master Detailer Terminal — ${currentUser.name}`;
+        subEl.innerText = "Detailer Access: Showing strictly your assigned vehicles and before-and-after photo vault uploads.";
+        badgeEl.innerText = "LEVEL 3: MASTER DETAILER";
         badgeEl.className = "text-[10px] sm:text-[11px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-400 border border-amber-500/40";
         if (ownerExp) ownerExp.classList.add('hidden');
         if (ownerImp) ownerImp.classList.add('hidden');
         if (accTabBtn) accTabBtn.classList.add('hidden');
+        if (fundsTabBtn) fundsTabBtn.classList.add('hidden'); // Detailers cannot see cash flow
         if (headerNewBtn) headerNewBtn.classList.add('hidden');
         if (mobileFloatBtn) mobileFloatBtn.classList.add('hidden');
       }
     }
 
     window.switchStaffTab = function(tab) {
+      // Enforce role-based access restrictions on tabs
+      if (currentUser && currentUser.role === 'detailer' && (tab === 'funds' || tab === 'accounts')) {
+        showToast("Access restricted to Level 1 Owner and Level 2 Managers.", "error");
+        return;
+      }
+      if (currentUser && currentUser.role === 'manager' && tab === 'accounts') {
+        showToast("Staff accounts and passwords are restricted to Level 1 Owner.", "error");
+        return;
+      }
+
       activeStaffTab = tab;
       const bBookings = document.getElementById('tabBtnBookings');
       const bCal = document.getElementById('tabBtnCalendar');
@@ -1457,6 +1481,8 @@
       if (!container) return;
 
       let list = appState.bookings;
+      
+      // Level 3 Master Detailer: Show ONLY assigned cars
       if (currentUser && currentUser.role === 'detailer') {
         list = list.filter(b => b.assignedDetailer && b.assignedDetailer.toLowerCase().includes(currentUser.name.toLowerCase().split(' ')[0]));
       }
@@ -1537,13 +1563,21 @@
 
     window.openNewBookingModal = function() {
       if (!currentUser || currentUser.role === 'detailer') {
-        showToast("Only Owners and Managers can create new vehicle bookings.", "error");
+        showToast("Master Detailers are restricted to viewing assigned tasks and photo uploads.", "error");
         return;
       }
       document.getElementById('modalNewBooking').classList.remove('hidden');
       const today = new Date().toISOString().split('T')[0];
       document.getElementById('nbEntryDate').value = today;
+      
+      // Populate Detailer dropdown dynamically from staff list with detailer role
+      const detailerSelect = document.getElementById('nbAssignedDetailer');
+      const detailers = appState.staff.filter(s => s.role === 'detailer');
+      if (detailers.length > 0) {
+        detailerSelect.innerHTML = detailers.map(d => `<option value="${d.name}">${d.name}</option>`).join('');
+      }
     };
+
     window.closeNewBookingModal = function() {
       document.getElementById('modalNewBooking').classList.add('hidden');
     };
@@ -1587,7 +1621,7 @@
         document.getElementById('formNewBooking').reset();
         renderBookingsGrid();
         window.dispatchWhatsAppNotification(newJob, "New Vehicle Intake & Booking Confirmation");
-        showToast("New vehicle booking sheet successfully registered!");
+        showToast("New vehicle booking sheet successfully registered & assigned!");
         openVehicleDetailSheet(newJob.id);
       });
     };
@@ -1603,7 +1637,7 @@
         `_${customTitle}_\n\n` +
         `• *Vehicle*: ${job.carModel} (${job.carPlate})\n` +
         `• *Progress*: ${job.progress}% Complete\n` +
-        `• *Assigned Detailer*: ${job.assignedDetailer}\n` +
+        `• *Assigned Master Detailer*: ${job.assignedDetailer}\n` +
         `• *Secured Advance Deposit*: ${job.deposit} L.E\n\n` +
         `Track live via Client Portal using your phone and plate.\n` +
         `Reviving the Automotive Soul!`
@@ -1705,7 +1739,7 @@
                   <img src="${p.url}" alt="${p.caption}" class="w-full h-full object-cover">
                   <div class="absolute bottom-0 inset-x-0 bg-bay-950/90 p-1.5 text-[9px] text-gold-400 font-bold truncate">${p.caption}</div>
                 </div>
-              `).join('') : '<div class="col-span-full py-6 text-center text-xs text-slate-500 bg-bay-950 rounded-2xl border border-slate-800">No photos uploaded to vault yet. Click "+ Upload Photo" to record vehicle condition.</div>'}
+              `).join('') : '<div class="col-span-full py-6 text-center text-xs text-slate-500 bg-bay-950 rounded-2xl border border-slate-800">No photos uploaded to vault yet. Click "+ Upload Photo" to record before-and-after car processing steps.</div>'}
             </div>
           </div>
 
@@ -1766,11 +1800,11 @@
         const job = appState.bookings.find(b => b.id === jobId);
         if (!job) return;
         if (!job.photos) job.photos = [];
-        const captionPrompt = prompt("Enter photo caption (e.g., 'Bonnet Scratch Pre-Inspection' or 'Final Ceramic Gloss'):", "Vault Inspection Photo");
-        job.photos.push({ url: evt.target.result, caption: captionPrompt || 'Inspection Photo' });
+        const captionPrompt = prompt("Enter photo caption (e.g., 'Before: Bonnet Scratch Inspection' or 'After: 3-Layer Ceramic Gloss'):", "Vault Processing Photo");
+        job.photos.push({ url: evt.target.result, caption: captionPrompt || 'Vault Processing Photo' });
         saveCloudState().then(() => {
           openVehicleDetailSheet(jobId);
-          showToast("Photo successfully added to digital vault!");
+          showToast("Before-and-After photo successfully added to vault!");
         });
       };
       reader.readAsDataURL(file);
@@ -1805,7 +1839,7 @@
 
     window.deleteBooking = function(jobId) {
       if (!currentUser || currentUser.role !== 'owner') {
-        showToast("Only Level 1 Owner can delete vehicle bookings.", "error");
+        showToast("Only Level 1 Owner (Mr. Alfy) can delete vehicle bookings.", "error");
         return;
       }
       if (!confirm("Are you sure you want to delete this vehicle booking sheet?")) return;
@@ -1836,7 +1870,13 @@
         const mStr = String(calendarCurrentMonth + 1).padStart(2, '0');
         const dStr = String(day).padStart(2, '0');
         const dateKey = `${calendarCurrentYear}-${mStr}-${dStr}`;
-        const dayBookings = appState.bookings.filter(b => b.entryDate === dateKey);
+        let dayBookings = appState.bookings.filter(b => b.entryDate === dateKey);
+        
+        // If Detailer, only show assigned cars in calendar inspector
+        if (currentUser && currentUser.role === 'detailer') {
+          dayBookings = dayBookings.filter(b => b.assignedDetailer && b.assignedDetailer.toLowerCase().includes(currentUser.name.toLowerCase().split(' ')[0]));
+        }
+
         const count = dayBookings.length;
         const isFull = count >= 12;
 
@@ -1892,9 +1932,13 @@
       box.classList.remove('hidden');
       title.innerText = `Vehicles Booked on ${dateStr}`;
 
-      const dayBookings = appState.bookings.filter(b => b.entryDate === dateStr);
+      let dayBookings = appState.bookings.filter(b => b.entryDate === dateStr);
+      if (currentUser && currentUser.role === 'detailer') {
+        dayBookings = dayBookings.filter(b => b.assignedDetailer && b.assignedDetailer.toLowerCase().includes(currentUser.name.toLowerCase().split(' ')[0]));
+      }
+
       if (dayBookings.length === 0) {
-        listEl.innerHTML = `<p class="text-xs text-slate-400 italic">No vehicle intake scheduled for this date. (Capacity: ${dayBookings.length}/12)</p>`;
+        listEl.innerHTML = `<p class="text-xs text-slate-400 italic">No vehicle intake scheduled for this date.</p>`;
         return;
       }
 
@@ -1912,11 +1956,16 @@
 
     window.quickBookForSelectedDate = function() {
       if (!selectedCalendarDateStr) return;
+      if (currentUser && currentUser.role === 'detailer') {
+        showToast("Restricted: Detailers cannot create bookings.", "error");
+        return;
+      }
       openNewBookingModal();
       document.getElementById('nbEntryDate').value = selectedCalendarDateStr;
     };
 
     function renderFundsCircuit() {
+      if (currentUser && currentUser.role === 'detailer') return; // Detailers cannot view cash flow
       const period = document.getElementById('fundsPeriodSelect')?.value || 'this_month';
       let list = appState.bookings;
       let expList = appState.expenses || [];
@@ -1958,8 +2007,8 @@
     }
 
     window.openAddExpenseModal = function() {
-      if (!currentUser || currentUser.role !== 'owner') {
-        showToast("Only Level 1 Owner can log consumable expenses.", "error");
+      if (!currentUser || currentUser.role === 'detailer') {
+        showToast("Restricted to Level 1 Owner and Level 2 Managers.", "error");
         return;
       }
       document.getElementById('modalAddExpense').classList.remove('hidden');
@@ -2071,7 +2120,7 @@
     window.handleOwnerQuickAddStaff = function(e) {
       e.preventDefault();
       if (!currentUser || currentUser.role !== 'owner') {
-        showToast("Only Level 1 Owner can provision staff.", "error");
+        showToast("Only Level 1 Owner (Mr. Alfy) can provision staff.", "error");
         return;
       }
       const name = document.getElementById('barStaffName').value.trim();
