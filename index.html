@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dr.Care Paint Restoration Centre — Cloud Real-Time Portal</title>
+  <title>Dr.Care Paint Restoration Centre — Enterprise Cloud Edition</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -151,7 +151,7 @@
         <div>
           <div class="flex items-center gap-1.5">
             <span class="font-brand text-sm sm:text-xl font-black tracking-wider gold-chiseled-title">DR.CARE</span>
-            <span class="text-[9px] sm:text-[10px] font-mono font-bold px-1.5 py-0.5 rounded bg-gold-500/20 text-gold-400 border border-gold-500/30">CENTRE</span>
+            <span class="text-[9px] sm:text-[10px] font-mono font-bold px-1.5 py-0.5 rounded bg-gold-500/20 text-gold-400 border border-gold-500/30">ENTERPRISE</span>
           </div>
           <p class="text-[7.5px] sm:text-[8.5px] tracking-[0.2em] font-extrabold text-gold-400 uppercase hidden sm:block" data-i18n="revivingSoul">REVIVING THE AUTOMOTIVE SOUL</p>
         </div>
@@ -175,7 +175,7 @@
             Calendar
           </button>
           <button onclick="window.switchStaffTab('funds')" id="tabBtnFunds" class="px-3 py-1.5 rounded-xl text-xs font-bold transition text-slate-400 hover:text-white whitespace-nowrap" data-i18n="fundsCircuit">
-            Funds
+            Funds & Vault
           </button>
           <button onclick="window.switchStaffTab('analytics')" id="tabBtnAnalytics" class="px-3 py-1.5 rounded-xl text-xs font-bold transition text-slate-400 hover:text-white whitespace-nowrap" data-i18n="yearlyAnalysis">
             Analysis
@@ -250,7 +250,7 @@
                 <h3 class="text-xl font-black text-white group-hover:text-gold-300 transition" data-i18n="customerTracking">Customer Vehicle Tracking</h3>
               </div>
               <p class="text-xs text-slate-400 leading-relaxed" data-i18n="customerPortalDesc">
-                Track your vehicle's live detailing progress, mileage, verified advance deposit in L.E, and send special instructions directly to your technician.
+                Track your vehicle's live detailing progress, digital before-and-after photo vault, verified advance deposit in L.E, and send instructions directly to your technician.
               </p>
             </div>
             <div class="pt-4 border-t border-slate-800 flex items-center justify-between text-xs font-bold text-gold-400">
@@ -269,7 +269,7 @@
                 <h3 class="text-xl font-black text-white group-hover:text-gold-300 transition" data-i18n="staffLoginTitle">Authorized Workshop Staff</h3>
               </div>
               <p class="text-xs text-slate-400 leading-relaxed" data-i18n="staffPortalDesc">
-                Dedicated terminal for Owner, Shop Managers, and Master Detailers. Manage intakes, Funds Circuit, 5-year master calendar, and accounts.
+                Dedicated terminal for Owner, Shop Managers, and Master Detailers. Manage intakes, Funds & Material Ledger, 5-year master calendar, and accounts.
               </p>
             </div>
             <div class="pt-4 border-t border-slate-800 flex items-center justify-between text-xs font-bold text-slate-300 group-hover:text-white">
@@ -502,16 +502,16 @@
         </div>
       </div>
 
-      <!-- SUB-VIEW: FUNDS CIRCUIT -->
+      <!-- SUB-VIEW: FUNDS CIRCUIT & MATERIAL LEDGER -->
       <div id="subViewFunds" class="space-y-6 hidden">
         <div class="bg-bay-900 border border-slate-800 rounded-3xl p-5 sm:p-8 space-y-6 shadow-2xl">
           <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-slate-800">
             <div>
               <h3 class="text-lg font-black text-white uppercase tracking-wider flex items-center gap-2">
-                <span data-i18n="fundsTitle">Funds Circuit & Payment Channels</span>
-                <span class="text-xs font-mono px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">L.E CASH FLOW</span>
+                <span data-i18n="fundsTitle">Funds Circuit & Material Consumables</span>
+                <span class="text-xs font-mono px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">L.E CASH FLOW & NET PROFIT</span>
               </h3>
-              <p class="text-xs text-slate-400 mt-0.5" data-i18n="fundsSub">Real-time tracking of secured deposits across Cash, InstaPay, Mobile Wallets, and Card/POS.</p>
+              <p class="text-xs text-slate-400 mt-0.5" data-i18n="fundsSub">Real-time tracking of secured deposits and Meguiar's / Rupes consumable costs.</p>
             </div>
 
             <div class="flex items-center gap-2">
@@ -523,49 +523,28 @@
             </div>
           </div>
 
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div class="bg-bay-850 border border-slate-800 p-5 rounded-2xl space-y-2">
-              <div class="flex items-center justify-between text-xs">
-                <span class="font-bold text-amber-400 flex items-center gap-1.5"><i class="ph-bold ph-money text-base"></i> <span data-i18n="cashHand">Cash in Hand</span></span>
-                <span id="fundsCashCount" class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-bay-900 text-slate-400">0 tx</span>
-              </div>
-              <div id="fundsCashTotal" class="text-2xl font-black text-white font-mono">0 L.E</div>
+              <span class="text-xs text-slate-400 font-bold uppercase tracking-wider" data-i18n="totalDepositsPeriod">Gross Secured Deposits</span>
+              <div id="fundsGrossDeposits" class="text-2xl font-black text-emerald-400 font-mono">0 L.E</div>
             </div>
-
             <div class="bg-bay-850 border border-slate-800 p-5 rounded-2xl space-y-2">
-              <div class="flex items-center justify-between text-xs">
-                <span class="font-bold text-cyan-400 flex items-center gap-1.5"><i class="ph-bold ph-lightning text-base"></i> InstaPay</span>
-                <span id="fundsInstaCount" class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-bay-900 text-slate-400">0 tx</span>
-              </div>
-              <div id="fundsInstaTotal" class="text-2xl font-black text-cyan-400 font-mono">0 L.E</div>
+              <span class="text-xs text-slate-400 font-bold uppercase tracking-wider" data-i18n="consumablesCost">Consumables & Materials (Rupes/Meguiar's)</span>
+              <div id="fundsConsumablesCost" class="text-2xl font-black text-rose-400 font-mono">0 L.E</div>
             </div>
-
             <div class="bg-bay-850 border border-slate-800 p-5 rounded-2xl space-y-2">
-              <div class="flex items-center justify-between text-xs">
-                <span class="font-bold text-rose-400 flex items-center gap-1.5"><i class="ph-bold ph-device-mobile text-base"></i> <span data-i18n="mobileWallet">Mobile Wallet</span></span>
-                <span id="fundsWalletCount" class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-bay-900 text-slate-400">0 tx</span>
-              </div>
-              <div id="fundsWalletTotal" class="text-2xl font-black text-rose-400 font-mono">0 L.E</div>
-            </div>
-
-            <div class="bg-bay-850 border border-slate-800 p-5 rounded-2xl space-y-2">
-              <div class="flex items-center justify-between text-xs">
-                <span class="font-bold text-emerald-400 flex items-center gap-1.5"><i class="ph-bold ph-credit-card text-base"></i> <span data-i18n="visaCard">Visa / POS Card</span></span>
-                <span id="fundsCardCount" class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-bay-900 text-slate-400">0 tx</span>
-              </div>
-              <div id="fundsCardTotal" class="text-2xl font-black text-emerald-400 font-mono">0 L.E</div>
+              <span class="text-xs text-slate-400 font-bold uppercase tracking-wider" data-i18n="netEstProfit">Estimated Net Profit (L.E)</span>
+              <div id="fundsNetProfit" class="text-2xl font-black text-gold-400 font-mono">0 L.E</div>
             </div>
           </div>
 
-          <div class="p-5 rounded-2xl bg-bay-850 border border-gold-500/30 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-            <div>
-              <span class="text-[10px] font-mono font-bold text-gold-400 uppercase tracking-wider block" data-i18n="totalDepositsPeriod">Total Deposits in Selected Period</span>
-              <div id="fundsGrandTotal" class="text-3xl font-black text-white font-mono mt-0.5">0 L.E</div>
+          <div class="space-y-3 pt-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-white uppercase tracking-wider" data-i18n="recentDepositsLedger">Recent Deposits & Payment Channel Ledger</span>
+              <button onclick="window.openAddExpenseModal()" class="px-3 py-1.5 rounded-xl bg-bay-800 hover:bg-bay-750 text-gold-400 border border-gold-500/30 text-xs font-bold transition flex items-center gap-1">
+                <i class="ph-bold ph-plus"></i> <span data-i18n="logExpense">Log Consumable Expense</span>
+              </button>
             </div>
-          </div>
-
-          <div class="space-y-3">
-            <span class="text-xs font-black text-white uppercase tracking-wider block" data-i18n="recentDepositsLedger">Recent Deposits & Payment Channel Ledger</span>
             <div class="overflow-x-auto rounded-2xl border border-slate-800">
               <table class="w-full text-left text-xs min-w-[600px]">
                 <thead class="bg-bay-850 text-slate-400 uppercase font-mono text-[10px]">
@@ -859,6 +838,45 @@
     </div>
   </div>
 
+  <!-- Expense Log Modal -->
+  <div id="modalAddExpense" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+    <div class="bg-bay-900 border border-gold-500/40 rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl space-y-5">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+        <div class="flex items-center gap-2.5">
+          <div class="w-10 h-10 rounded-2xl bg-gold-500/10 border border-gold-500/30 flex items-center justify-center text-gold-400">
+            <i class="ph-bold ph-receipt text-xl"></i>
+          </div>
+          <div>
+            <h3 class="text-sm font-black text-white uppercase tracking-wider" data-i18n="logConsumableTitle">Log Meguiar's / Rupes Consumable Cost</h3>
+            <p class="text-[11px] text-slate-400" data-i18n="logConsumableSub">Record material and compound costs to calculate net shop profit.</p>
+          </div>
+        </div>
+        <button onclick="window.closeAddExpenseModal()" class="w-8 h-8 rounded-full bg-bay-800 hover:bg-bay-750 text-slate-400 hover:text-white flex items-center justify-center transition">
+          <i class="ph-bold ph-x text-sm"></i>
+        </button>
+      </div>
+
+      <form id="formAddExpense" onsubmit="window.handleSaveExpense(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs font-bold text-white mb-1.5" data-i18n="materialDesc">Material / Compound Description *</label>
+          <input type="text" id="expDesc" required placeholder="e.g. Rupes DA Coarse Compound & Meguiar's Mirror Glaze"
+            class="w-full border border-slate-700 rounded-xl px-4 py-3 text-xs">
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-white mb-1.5" data-i18n="costLE">Cost Amount (L.E) *</label>
+          <input type="number" id="expAmount" required min="0" placeholder="e.g. 1200"
+            class="w-full border border-slate-700 rounded-xl px-4 py-3 text-xs font-mono text-rose-400">
+        </div>
+
+        <button type="submit" class="w-full py-3.5 rounded-2xl bg-gold-500 hover:bg-gold-400 text-slate-950 font-black text-xs uppercase tracking-wider transition shadow-xl flex items-center justify-center gap-2">
+          <i class="ph-bold ph-check text-base"></i>
+          <span data-i18n="saveExpenseBtn">Save Consumable Expense</span>
+        </button>
+      </form>
+    </div>
+  </div>
+
   <!-- Notification Toast Container -->
   <div id="toastContainer" class="fixed bottom-20 right-5 z-50 flex flex-col gap-2 max-w-sm pointer-events-none"></div>
 
@@ -866,18 +884,19 @@
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
     import { getFirestore, doc, getDoc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 
-    const firebaseConfig = typeof window !== 'undefined' && window.__firebase_config ? JSON.parse(window.__firebase_config) : {
-      apiKey: "AIzaSyDummyKeyForLocalTesting12345",
-      authDomain: "drcare-cloud.firebaseapp.com",
-      projectId: "drcare-cloud",
-      storageBucket: "drcare-cloud.appspot.com",
-      messagingSenderId: "123456789",
-      appId: "1:123:web:abc"
+    const firebaseConfig = {
+      apiKey: "AIzaSyAmLj9vj6jn9ASbWcUL2CjtJX0n_tG8W18",
+      authDomain: "drcare-centre.firebaseapp.com",
+      projectId: "drcare-centre",
+      storageBucket: "drcare-centre.firebasestorage.app",
+      messagingSenderId: "945201915740",
+      appId: "1:945201915740:web:dca2c552e7106f39560399",
+      measurementId: "G-K6MEN28BJ0"
     };
 
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
-    const appId = typeof window !== 'undefined' && window.__app_id ? window.__app_id : 'drcare-centre-port-said-v1';
+    const appId = 'drcare-centre-port-said-v1';
 
     let currentLang = 'en';
     let currentUser = null;
@@ -895,11 +914,11 @@
         staffLogin: "Staff Login",
         welcomeSub: "Welcome to Dr.Care Paint Restoration Centre in Port Said, Egypt. Select your portal below to track your ongoing restoration or access internal workshop management.",
         clientPortal: "Client Portal",
-        customerPortalDesc: "Track your vehicle's live detailing progress, mileage, verified advance deposit in L.E, and send special instructions directly to your technician.",
+        customerPortalDesc: "Track your vehicle's live detailing progress, digital before-and-after photo vault, verified advance deposit in L.E, and send instructions directly to your technician.",
         trackMyCar: "Track My Car Live",
         internalAccess: "Internal Access",
         staffLoginTitle: "Authorized Workshop Staff",
-        staffPortalDesc: "Dedicated terminal for Owner, Shop Managers, and Master Detailers. Manage intakes, Funds Circuit, 5-year master calendar, and accounts.",
+        staffPortalDesc: "Dedicated terminal for Owner, Shop Managers, and Master Detailers. Manage intakes, Funds & Material Ledger, 5-year master calendar, and accounts.",
         staffLoginBtnText: "Staff Login & Workspace",
         customerLoginHeader: "Customer Live Bay Tracking",
         customerLoginSub: "Inspect your personal vehicle's restoration progress and verified deposit.",
@@ -914,7 +933,7 @@
         back: "Back",
         intakeBay: "Intake Bay",
         calendar: "5-Year Calendar",
-        fundsCircuit: "Funds Circuit",
+        fundsCircuit: "Funds & Vault",
         yearlyAnalysis: "Yearly Analysis",
         accountsAccess: "Accounts & Access",
         newBooking: "+ New Booking",
@@ -933,11 +952,13 @@
         today: "Today",
         sun: "Sun", mon: "Mon", tue: "Tue", wed: "Wed", thu: "Thu", fri: "Fri", sat: "Sat",
         bookForDate: "+ Book Car for This Date",
-        fundsTitle: "Funds Circuit & Payment Channels",
-        fundsSub: "Real-time tracking of secured deposits across Cash, InstaPay, Mobile Wallets, and Card/POS.",
+        fundsTitle: "Funds Circuit & Material Consumables",
+        fundsSub: "Real-time tracking of secured deposits and Meguiar's / Rupes consumable costs.",
         thisMonth: "This Month", thisWeek: "This Week", allTime: "All Time",
-        cashHand: "Cash in Hand", mobileWallet: "Mobile Wallet", visaCard: "Visa / POS Card",
-        totalDepositsPeriod: "Total Deposits in Selected Period",
+        totalDepositsPeriod: "Gross Secured Deposits",
+        consumablesCost: "Consumables & Materials (Rupes/Meguiar's)",
+        netEstProfit: "Estimated Net Profit (L.E)",
+        logExpense: "Log Consumable Expense",
         recentDepositsLedger: "Recent Deposits & Payment Channel Ledger",
         thDate: "Date", thCustomer: "Customer", thVehicle: "Vehicle", thChannel: "Channel", thDeposit: "Deposit (L.E)", thStatus: "Status",
         analyticsTitle: "Yearly Deposit & Revenue Analysis",
@@ -969,11 +990,11 @@
         staffLogin: "دخول الموظفين",
         welcomeSub: "مرحباً بكم في مركز دكتور كير لترميم الطلاء في بورسعيد، مصر. اختر بوابتك أدناه لمتابعة أعمال ترميم سيارتك أو إدارة الورشة.",
         clientPortal: "بوابة العملاء",
-        customerPortalDesc: "تتبع تقدم أعمال طلاء سيارتك مباشرة، العداد، العربون المدفوع بالجنيه المصري، وإرسال تعليمات خاصة للفني.",
+        customerPortalDesc: "تتبع تقدم أعمال طلاء سيارتك مباشرة، معرض الصور الرقمي، العربون بالجنيه المصري، وإرسال التعليمات للفني.",
         trackMyCar: "تتبع سيارتي مباشرة",
         internalAccess: "الدخول الداخلي",
         staffLoginTitle: "طاقم الورشة المصرح لهم",
-        staffPortalDesc: "محطة مخصصة للمؤسس، مديري الورشة، وفنيو الطلاء. إدارة الحزامات، دائرة الأموال، التقويم الخماسي، والحسابات.",
+        staffPortalDesc: "محطة مخصصة للمؤسس، مديري الورشة، وفنيو الطلاء. إدارة الحزامات، دائرة الأموال والمواد، التقويم الخماسي، والحسابات.",
         staffLoginBtnText: "دخول الموظفين ومنطقة العمل",
         customerLoginHeader: "تتبع العميل المباشر للورشة",
         customerLoginSub: "افحص تقدم ترميم سيارتك الشخصية والوديعة المؤكدة.",
@@ -988,7 +1009,7 @@
         back: "رجوع",
         intakeBay: "ساحة الاستقبال",
         calendar: "التقويم الخماسي",
-        fundsCircuit: "دائرة الأموال",
+        fundsCircuit: "الأموال والمواد",
         yearlyAnalysis: "التحليل السنوي",
         accountsAccess: "الحسابات والصلاحيات",
         newBooking: "+ حجز جديد",
@@ -1007,11 +1028,13 @@
         today: "اليوم",
         sun: "الأحد", mon: "الإثنين", tue: "الثلاثاء", wed: "الأربعاء", thu: "الخميس", fri: "الجمعة", sat: "السبت",
         bookForDate: "+ حجز سيارة لهذا التاريخ",
-        fundsTitle: "دائرة الأموال وقنوات الدفع",
-        fundsSub: "تتبع حي للودائع المؤكدة عبر النقدي، انستا باي، المحافظ الإلكترونية، وبطاقات الـ POS.",
+        fundsTitle: "دائرة الأموال واستهلاك المواد",
+        fundsSub: "تتبع حي للودائع ومصاريف مركبات ميجوايرز وروبس.",
         thisMonth: "هذا الشهر", thisWeek: "هذا الأسبوع", allTime: "كل الوقت",
-        cashHand: "النقد اليدوي", mobileWallet: "محفظة محمولة", visaCard: "فيزا / بطاقة بنكية",
-        totalDepositsPeriod: "إجمالي الودائع في الفترة المحددة",
+        totalDepositsPeriod: "إجمالي الودائع المؤكدة",
+        consumablesCost: "تكلفة المواد (روبس / ميجوايرز)",
+        netEstProfit: "صافي الربح التقديري (ج.م)",
+        logExpense: "تسجيل مصروف مواد",
         recentDepositsLedger: "سجل الودائع وقنوات الدفع الحديثة",
         thDate: "التاريخ", thCustomer: "العميل", thVehicle: "المركبة", thChannel: "القناة", thDeposit: "الودائع (ج.م)", thStatus: "الحالة",
         analyticsTitle: "تحليل الودائع والإيرادات السنوية",
@@ -1048,6 +1071,9 @@
       customers: [
         { id: 'cust-1', name: 'Mohamed El-Sayed', phone: '01012345678', plate: 'ط ر ب 1234', username: '01012345678', pass: 'ط ر ب 1234' }
       ],
+      expenses: [
+        { id: 'exp-1', desc: 'Rupes DA Coarse Compound & Meguiar\'s Pads', amount: 1450, date: '2026-09-02' }
+      ],
       bookings: [
         {
           id: 'job-1700000000001',
@@ -1066,7 +1092,8 @@
           stage: 'IN_PROGRESS',
           notes: [
             { sender: 'Mr. Alfy', text: 'Ensure extra care on bonnet stone chips.', time: '2026-09-01 10:30' }
-          ]
+          ],
+          photos: []
         }
       ]
     };
@@ -1100,7 +1127,7 @@
 
       } catch (err) {
         console.warn("Cloud sync fallback to local storage:", err);
-        const local = localStorage.getItem('drcare_cloud_fallback');
+        const local = localStorage.getItem('drcare_enterprise_fallback');
         if (local) {
           try { appState = JSON.parse(local); } catch(e){}
         }
@@ -1114,7 +1141,7 @@
       } catch (err) {
         console.warn("Cloud write error:", err);
       }
-      localStorage.setItem('drcare_cloud_fallback', JSON.stringify(appState));
+      localStorage.setItem('drcare_enterprise_fallback', JSON.stringify(appState));
     }
 
     window.showToast = function(message, type = 'success') {
@@ -1250,6 +1277,20 @@
               <div class="bg-gradient-to-r from-amber-500 to-gold-400 h-full transition-all duration-500" style="width: ${job.progress}%"></div>
             </div>
             <span class="text-[11px] text-slate-400 block pt-1">Assigned Master Detailer: <strong class="text-white">${job.assignedDetailer}</strong></span>
+          </div>
+
+          <div class="space-y-3">
+            <h3 class="text-xs font-black text-white uppercase tracking-wider flex items-center gap-1.5">
+              <i class="ph-bold ph-images text-gold-400"></i> Digital Before-and-After Photo Vault
+            </h3>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              ${job.photos && job.photos.length > 0 ? job.photos.map(p => `
+                <div class="relative group rounded-2xl overflow-hidden border border-slate-800 bg-bay-950 aspect-square">
+                  <img src="${p.url}" alt="${p.caption}" class="w-full h-full object-cover">
+                  <div class="absolute bottom-0 inset-x-0 bg-bay-950/90 p-1.5 text-[9px] text-gold-400 font-bold truncate">${p.caption}</div>
+                </div>
+              `).join('') : '<div class="col-span-full py-6 text-center text-xs text-slate-500 bg-bay-950 rounded-2xl border border-slate-800">No photos uploaded to vault yet.</div>'}
+            </div>
           </div>
 
           <div class="space-y-3">
@@ -1524,7 +1565,8 @@
         scope: document.getElementById('nbScope').value.trim(),
         progress: 10,
         stage: 'IN_PROGRESS',
-        notes: []
+        notes: [],
+        photos: []
       };
 
       const existingCust = appState.customers.find(c => c.phone === newJob.custPhone);
@@ -1544,9 +1586,29 @@
         closeNewBookingModal();
         document.getElementById('formNewBooking').reset();
         renderBookingsGrid();
+        window.dispatchWhatsAppNotification(newJob, "New Vehicle Intake & Booking Confirmation");
         showToast("New vehicle booking sheet successfully registered!");
         openVehicleDetailSheet(newJob.id);
       });
+    };
+
+    window.dispatchWhatsAppNotification = function(job, customTitle = "Restoration Update") {
+      let phoneClean = job.custPhone.trim();
+      if (phoneClean.startsWith('0')) phoneClean = '+20' + phoneClean.substring(1);
+      else if (!phoneClean.startsWith('+')) phoneClean = '+20' + phoneClean;
+
+      const msg = encodeURIComponent(
+        `🚗 *DR.CARE PAINT RESTORATION CENTRE* (Port Said)\n\n` +
+        `Dear *${job.custName}*,\n` +
+        `_${customTitle}_\n\n` +
+        `• *Vehicle*: ${job.carModel} (${job.carPlate})\n` +
+        `• *Progress*: ${job.progress}% Complete\n` +
+        `• *Assigned Detailer*: ${job.assignedDetailer}\n` +
+        `• *Secured Advance Deposit*: ${job.deposit} L.E\n\n` +
+        `Track live via Client Portal using your phone and plate.\n` +
+        `Reviving the Automotive Soul!`
+      );
+      window.open(`https://wa.me/${phoneClean.replace('+', '')}?text=${msg}`, '_blank');
     };
 
     window.openVehicleDetailSheet = function(jobId) {
@@ -1576,14 +1638,17 @@
                 </svg>
               </div>
               <div>
-                <span class="text-[10px] font-mono font-bold text-gold-400 uppercase tracking-widest block">Dr.Care Official Job Card</span>
+                <span class="text-[10px] font-mono font-bold text-gold-400 uppercase tracking-widest block">Dr.Care Official Enterprise Job Card</span>
                 <h2 class="text-2xl font-black text-white">${job.carModel} (${job.carPlate})</h2>
               </div>
             </div>
 
-            <div class="flex items-center gap-2">
+            <div class="flex items-center gap-2 flex-wrap">
+              <button onclick="window.dispatchWhatsAppNotification(appState.bookings.find(b => b.id === '${job.id}'), 'Milestone Progress Update: ${job.progress}%')" class="px-3 py-2 rounded-xl bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-xs font-bold transition flex items-center gap-1.5">
+                <i class="ph-bold ph-whatsapp-logo"></i> Send WhatsApp Milestone
+              </button>
               <button onclick="window.closeVehicleDetailSheet()" class="px-4 py-2 rounded-xl bg-bay-800 text-xs font-bold text-slate-300 hover:text-white flex items-center gap-1.5 transition">
-                <i class="ph-bold ph-arrow-left"></i> Back to Intake Bay
+                <i class="ph-bold ph-arrow-left"></i> Back
               </button>
               ${isOwner ? `
                 <button onclick="window.deleteBooking('${job.id}')" class="px-3 py-2 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/30 text-xs font-bold transition flex items-center gap-1">
@@ -1621,6 +1686,27 @@
           <div class="space-y-3 bg-bay-850 p-6 rounded-3xl border border-slate-800">
             <span class="text-xs font-black text-white uppercase tracking-wider block">Scope of Restoration Services</span>
             <p class="text-xs text-slate-300 leading-relaxed">${job.scope}</p>
+          </div>
+
+          <!-- Digital Photo Vault Section -->
+          <div class="space-y-4 bg-bay-850 p-6 rounded-3xl border border-slate-800">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-white uppercase tracking-wider flex items-center gap-1.5">
+                <i class="ph-bold ph-images text-gold-400"></i> Digital Before-and-After Photo Vault
+              </span>
+              <label class="px-3 py-1.5 rounded-xl bg-gold-500 hover:bg-gold-400 text-slate-950 font-black text-xs uppercase tracking-wider transition cursor-pointer flex items-center gap-1">
+                <i class="ph-bold ph-camera"></i> + Upload Photo
+                <input type="file" accept="image/*" class="hidden" onchange="window.handleUploadJobPhoto(event, '${job.id}')">
+              </label>
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              ${job.photos && job.photos.length > 0 ? job.photos.map(p => `
+                <div class="relative group rounded-2xl overflow-hidden border border-slate-800 bg-bay-950 aspect-square">
+                  <img src="${p.url}" alt="${p.caption}" class="w-full h-full object-cover">
+                  <div class="absolute bottom-0 inset-x-0 bg-bay-950/90 p-1.5 text-[9px] text-gold-400 font-bold truncate">${p.caption}</div>
+                </div>
+              `).join('') : '<div class="col-span-full py-6 text-center text-xs text-slate-500 bg-bay-950 rounded-2xl border border-slate-800">No photos uploaded to vault yet. Click "+ Upload Photo" to record vehicle condition.</div>'}
+            </div>
           </div>
 
           <div class="space-y-4 bg-bay-850 p-6 rounded-3xl border border-gold-500/30">
@@ -1670,6 +1756,24 @@
     window.closeVehicleDetailSheet = function() {
       document.getElementById('viewSheetDetail').classList.add('hidden');
       switchStaffTab(activeStaffTab);
+    };
+
+    window.handleUploadJobPhoto = function(e, jobId) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        const job = appState.bookings.find(b => b.id === jobId);
+        if (!job) return;
+        if (!job.photos) job.photos = [];
+        const captionPrompt = prompt("Enter photo caption (e.g., 'Bonnet Scratch Pre-Inspection' or 'Final Ceramic Gloss'):", "Vault Inspection Photo");
+        job.photos.push({ url: evt.target.result, caption: captionPrompt || 'Inspection Photo' });
+        saveCloudState().then(() => {
+          openVehicleDetailSheet(jobId);
+          showToast("Photo successfully added to digital vault!");
+        });
+      };
+      reader.readAsDataURL(file);
     };
 
     window.updateJobProgressSlider = function(val) {
@@ -1815,6 +1919,7 @@
     function renderFundsCircuit() {
       const period = document.getElementById('fundsPeriodSelect')?.value || 'this_month';
       let list = appState.bookings;
+      let expList = appState.expenses || [];
       const now = new Date();
       if (period === 'this_month') {
         const m = now.getMonth();
@@ -1823,33 +1928,19 @@
           const d = new Date(b.entryDate);
           return d.getMonth() === m && d.getFullYear() === y;
         });
+        expList = expList.filter(e => {
+          const d = new Date(e.date);
+          return d.getMonth() === m && d.getFullYear() === y;
+        });
       }
 
-      let cashTot = 0, cashCnt = 0;
-      let instaTot = 0, instaCnt = 0;
-      let walletTot = 0, walletCnt = 0;
-      let cardTot = 0, cardCnt = 0;
+      const gross = list.reduce((acc, curr) => acc + (Number(curr.deposit) || 0), 0);
+      const totalExp = expList.reduce((acc, curr) => acc + (Number(curr.amount) || 0), 0);
+      const netProfit = gross - totalExp;
 
-      list.forEach(b => {
-        const dep = Number(b.deposit) || 0;
-        const ch = (b.paymentChannel || 'Cash').toLowerCase();
-        if (ch.includes('cash')) { cashTot += dep; cashCnt++; }
-        else if (ch.includes('instapay')) { instaTot += dep; instaCnt++; }
-        else if (ch.includes('wallet')) { walletTot += dep; walletCnt++; }
-        else { cardTot += dep; cardCnt++; }
-      });
-
-      const grand = cashTot + instaTot + walletTot + cardTot;
-
-      document.getElementById('fundsCashTotal').innerText = cashTot.toLocaleString() + ' L.E';
-      document.getElementById('fundsCashCount').innerText = cashCnt + ' tx';
-      document.getElementById('fundsInstaTotal').innerText = instaTot.toLocaleString() + ' L.E';
-      document.getElementById('fundsInstaCount').innerText = instaCnt + ' tx';
-      document.getElementById('fundsWalletTotal').innerText = walletTot.toLocaleString() + ' L.E';
-      document.getElementById('fundsWalletCount').innerText = walletCnt + ' tx';
-      document.getElementById('fundsCardTotal').innerText = cardTot.toLocaleString() + ' L.E';
-      document.getElementById('fundsCardCount').innerText = cardCnt + ' tx';
-      document.getElementById('fundsGrandTotal').innerText = grand.toLocaleString() + ' L.E';
+      document.getElementById('fundsGrossDeposits').innerText = gross.toLocaleString() + ' L.E';
+      document.getElementById('fundsConsumablesCost').innerText = totalExp.toLocaleString() + ' L.E';
+      document.getElementById('fundsNetProfit').innerText = netProfit.toLocaleString() + ' L.E';
 
       const tbody = document.getElementById('fundsLedgerTableBody');
       if (!tbody) return;
@@ -1865,6 +1956,33 @@
         </tr>
       `).join('');
     }
+
+    window.openAddExpenseModal = function() {
+      if (!currentUser || currentUser.role !== 'owner') {
+        showToast("Only Level 1 Owner can log consumable expenses.", "error");
+        return;
+      }
+      document.getElementById('modalAddExpense').classList.remove('hidden');
+    };
+    window.closeAddExpenseModal = function() {
+      document.getElementById('modalAddExpense').classList.add('hidden');
+    };
+
+    window.handleSaveExpense = function(e) {
+      e.preventDefault();
+      const desc = document.getElementById('expDesc').value.trim();
+      const amount = Number(document.getElementById('expAmount').value) || 0;
+      const today = new Date().toISOString().split('T')[0];
+
+      if (!appState.expenses) appState.expenses = [];
+      appState.expenses.push({ id: 'exp-' + Date.now(), desc, amount, date: today });
+      saveCloudState().then(() => {
+        closeAddExpenseModal();
+        document.getElementById('formAddExpense').reset();
+        renderFundsCircuit();
+        showToast("Meguiar's/Rupes consumable expense logged successfully!");
+      });
+    };
 
     function renderYearlyAnalytics() {
       const yr = Number(document.getElementById('analyticsYearSelect')?.value || 2026);
@@ -1999,11 +2117,11 @@
       const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(appState, null, 2));
       const dlAnchor = document.createElement('a');
       dlAnchor.setAttribute("href", dataStr);
-      dlAnchor.setAttribute("download", `drcare_backup_${new Date().toISOString().split('T')[0]}.json`);
+      dlAnchor.setAttribute("download", `drcare_enterprise_backup_${new Date().toISOString().split('T')[0]}.json`);
       document.body.appendChild(dlAnchor);
       dlAnchor.click();
       dlAnchor.remove();
-      showToast("Database backup JSON exported successfully!");
+      showToast("Enterprise database backup JSON exported successfully!");
     };
 
     window.importDatabaseBackup = function(e) {
@@ -2017,7 +2135,7 @@
             appState = parsed;
             saveCloudState().then(() => {
               renderApp();
-              showToast("Database successfully restored from backup!");
+              showToast("Database successfully restored from enterprise backup!");
             });
           } else {
             showToast("Invalid backup file structure.", "error");
@@ -2026,7 +2144,7 @@
           showToast("Failed to parse JSON file.", "error");
         }
       };
-      reader.readAsText(file);
+      reader.readAsDataURL(file);
     };
 
     window.setAppLanguage = function(lang) {
