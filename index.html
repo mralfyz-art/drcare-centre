@@ -127,7 +127,7 @@
         <feDropShadow dx="2" dy="3" stdDeviation="2.5" flood-color="#000000" flood-opacity="0.95" />
         <feDropShadow dx="-1" dy="-1.5" stdDeviation="1.2" flood-color="#FFFDF0" flood-opacity="0.65" />
       </filter>
-      <!-- Official Dr. Care Golden Fingerprint Emblem (Cleaned, No Dots) -->
+      <!-- Official Dr. Care Golden Fingerprint Emblem -->
       <g id="drCareEmblem">
         <path d="M 50 15 C 32 15, 18 29, 18 47 C 18 60, 26 72, 36 78 V 82 C 24 75, 14 62, 14 47 C 14 27, 30 11, 50 11 C 70 11, 86 27, 86 47 C 86 62, 76 75, 64 82 V 78 C 74 72, 82 60, 82 47 C 82 29, 68 15, 50 15 Z" fill="url(#drCareGoldGradient)" opacity="0.35"/>
         <path d="M 38 65 C 38 52, 50 52, 50 65 V 75" fill="none" stroke="url(#drCareGoldGradient)" stroke-width="3" stroke-linecap="round" />
@@ -155,7 +155,7 @@
             <span class="font-brand text-sm sm:text-xl font-black tracking-wider gold-chiseled-title">DR.CARE</span>
             <span class="text-[9px] sm:text-[10px] font-mono font-bold px-1.5 py-0.5 rounded bg-gold-500/20 text-gold-400 border border-gold-500/30">ELITE</span>
           </div>
-          <p class="text-[7px] sm:text-[8px] tracking-[0.18em] font-extrabold text-gold-400 uppercase" data-i18n="revivingSoul">REVIVING THE AUTOMOTIVE SOUL[cite: 5]</p>
+          <p class="text-[7px] sm:text-[8px] tracking-[0.18em] font-extrabold text-gold-400 uppercase" data-i18n="revivingSoul">REVIVING THE AUTOMOTIVE SOUL</p>
         </div>
       </div>
 
@@ -233,7 +233,7 @@
             <div class="flex items-center justify-center gap-3 pt-1">
               <span class="h-[1px] w-8 sm:w-16 bg-gradient-to-r from-transparent via-gold-500 to-gold-400"></span>
               <p class="text-[10px] sm:text-xs text-gold-400 tracking-[0.3em] font-extrabold uppercase" data-i18n="revivingSoul">
-                REVIVING THE AUTOMOTIVE SOUL[cite: 5]
+                REVIVING THE AUTOMOTIVE SOUL
               </p>
               <span class="h-[1px] w-8 sm:w-16 bg-gradient-to-l from-transparent via-gold-500 to-gold-400"></span>
             </div>
@@ -1068,7 +1068,7 @@
     let selectedCalendarDateStr = null;
     let currentDetailSheetId = null;
 
-    let detailerStopwatches = {}; // jobId -> { startTime, running }
+    let detailerStopwatches = {};
 
     const dict = {
       en: {
@@ -1312,7 +1312,6 @@
       localStorage.setItem('drcare_enterprise_fallback', JSON.stringify(appState));
     }
 
-    // 12-Hour format & DD/MM/YYYY helper
     function formatDateTime12H(isoString) {
       if (!isoString) return '';
       const d = new Date(isoString);
@@ -1422,7 +1421,6 @@
       openCustomerDashboard(foundJob);
     };
 
-    // STRICT CUSTOMER DATA ISOLATION + DIVIDED 2 SECTIONS + MICROFIBER TOWEL ICON BUTTON
     function openCustomerDashboard(job) {
       activeCustomerJob = job;
       document.getElementById('viewCustomerLogin').classList.add('hidden');
@@ -1546,7 +1544,6 @@
         </div>
       `;
 
-      // Render floating microfiber towel icon button in bottom area of customer dashboard
       document.getElementById('floatingMicrofiberContainer').innerHTML = `
         <div class="fixed bottom-12 right-6 z-50 floating-microfiber-now">
           <button onclick="window.openMicrofiberModal()" class="w-16 h-16 rounded-full bg-gradient-to-r from-amber-400 via-gold-500 to-gold-600 text-slate-950 shadow-[0_0_35px_rgba(245,158,11,0.7)] flex items-center justify-center text-3xl border-2 border-slate-950 transition transform hover:scale-110 cursor-pointer" title="Request Microfiber Edgeless Towel NOW (180 L.E)">
@@ -1577,11 +1574,8 @@
 
       if (!activeCustomerJob.notes) activeCustomerJob.notes = [];
       const nowStr = formatDateTime12H(new Date());
-      
-      // Highlighted Green Purchase Notification in Customer Booking Notes for Managers & Owner
       const purchaseText = `🟢 [NEW CUSTOMER PURCHASE REQUEST]: Requested ${qty}x Microfiber Edgeless Towels @ 180 L.E/pc. Total: ${total} L.E (Added to final delivery payment settlement).`;
       activeCustomerJob.notes.push({ sender: 'Customer Microfiber Store', text: purchaseText, time: nowStr });
-      
       activeCustomerJob.grandTotal = (Number(activeCustomerJob.grandTotal) || 0) + total;
 
       saveCloudState().then(() => {
@@ -1822,7 +1816,6 @@
                 ${currentUser && currentUser.role !== 'detailer' ? `<span class="text-emerald-400 font-mono font-bold">${b.deposit} L.E</span>` : ''}
               </div>
 
-              <!-- Level 3 Master Detailer Stopwatch & Feedback Buttons -->
               ${currentUser && currentUser.role === 'detailer' ? `
                 <div class="space-y-2 pt-1">
                   ${!timerActive ? `
@@ -1999,7 +1992,6 @@
     window.openVehicleDetailSheet = function(jobId) {
       currentDetailSheetId = jobId;
       
-      // Check in active bookings first, then completed archive so managers/owner can open from anywhere!
       let job = appState.bookings.find(b => b.id === jobId);
       let isArchived = false;
       if (!job && appState.completedArchive) {
@@ -2018,7 +2010,6 @@
       const view = document.getElementById('viewSheetDetail');
       view.classList.remove('hidden');
 
-      const isDetailer = currentUser && currentUser.role === 'detailer';
       const isOwner = currentUser && currentUser.role === 'owner';
       const isManagerOrOwner = currentUser && (currentUser.role === 'owner' || currentUser.role === 'manager');
       const restAmt = Math.max(0, (Number(job.grandTotal||0) - Number(job.deposit||0)));
@@ -2043,7 +2034,6 @@
                 <i class="ph-bold ph-whatsapp-logo"></i> Send WhatsApp Milestone
               </button>
               
-              <!-- Settle & Deliver Workflow Button for Managers and Owner (if not archived) -->
               ${isManagerOrOwner && !isArchived ? `
                 <button onclick="window.openSettleModal('${job.id}')" class="px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-black text-xs uppercase tracking-wider transition shadow-lg flex items-center gap-1.5">
                   <i class="ph-bold ph-check-square text-base"></i> Settle & Deliver
@@ -2086,7 +2076,6 @@
             </div>
           </div>
 
-          <!-- Edit Payment / Milestone Option for Managers and Owner (if not archived) -->
           ${isManagerOrOwner && !isArchived ? `
             <div class="bg-bay-850 p-5 rounded-3xl border border-gold-500/30 space-y-4 shadow-xl">
               <div class="flex items-center justify-between pb-2 border-b border-slate-800">
@@ -2116,7 +2105,6 @@
             <p class="text-xs text-slate-300 leading-relaxed">${job.scope}</p>
           </div>
 
-          <!-- Digital Photo Vault Section -->
           <div class="space-y-4 bg-bay-850 p-6 rounded-3xl border border-slate-800">
             <div class="flex items-center justify-between">
               <span class="text-xs font-black text-white uppercase tracking-wider flex items-center gap-1.5">
@@ -2186,7 +2174,6 @@
       `;
     }
 
-    // Settle & Deliver Checkbox Confirmation Modal for Level 1 & Level 2
     window.openSettleModal = function(jobId) {
       const job = appState.bookings.find(b => b.id === jobId);
       if (!job) return;
