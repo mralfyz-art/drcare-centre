@@ -1,2738 +1,394 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en" dir="ltr" id="htmlRoot">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dr.Care Paint Restoration Centre — Enterprise Elite Edition</title>
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700;800&display=swap" rel="stylesheet">
-  
-  <!-- Phosphor Icons -->
-  <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
-  
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-            brand: ['Cinzel', 'serif'],
-            mono: ['"JetBrains Mono"', 'monospace']
-          },
-          colors: {
-            gold: {
-              300: '#FDE68A',
-              400: '#F59E0B',
-              500: '#D97706',
-              600: '#B45309',
-              metallic: '#D4AF37'
-            },
-            bay: {
-              950: '#06080D',
-              900: '#0B0F19',
-              850: '#111726',
-              800: '#1A2338',
-              750: '#232E4A'
-            }
-          }
-        }
-      }
-    };
-  </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr. Care | Reviving The Automotive Soul</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Cinzel:wght@500;700&family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #0c0a09; color: #f5f5f4; }
+        [dir="rtl"] body { font-family: 'Cairo', sans-serif; }
+        .serif-brand { font-family: 'Cinzel', serif; }
+        .gold-glow { text-shadow: 0 0 20px rgba(234, 179, 8, 0.3); }
+    </style>
+    <!-- Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, Timestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-  <style>
-    body {
-      background-color: #06080D;
-      color: #E2E8F0;
-      font-family: 'Inter', sans-serif;
-      -webkit-tap-highlight-color: transparent;
-    }
-    input, textarea, select {
-      background-color: #000000 !important;
-      color: #ffffff !important;
-      -webkit-text-fill-color: #ffffff !important;
-      font-weight: 600 !important;
-    }
-    input::placeholder, textarea::placeholder {
-      color: #64748B !important;
-      -webkit-text-fill-color: #64748B !important;
-    }
-    input[type=range] {
-      -webkit-appearance: none;
-      background: #1E293B;
-      border-radius: 9999px;
-      height: 8px;
-    }
-    input[type=range]::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      height: 24px;
-      width: 24px;
-      border-radius: 50%;
-      background: #F59E0B;
-      cursor: pointer;
-      box-shadow: 0 0 14px rgba(245, 158, 11, 0.9);
-      border: 2px solid #000000;
-    }
-    .gold-leather-badge {
-      background: radial-gradient(circle at 35% 30%, #1e283d 0%, #0d1320 65%, #05070c 100%);
-      border: 1.5px solid rgba(212, 175, 55, 0.45);
-      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.85), inset 0 2px 4px rgba(255, 251, 235, 0.2), inset 0 -3px 8px rgba(0, 0, 0, 0.8), 0 0 25px rgba(212, 175, 55, 0.2);
-    }
-    .gold-leather-hero {
-      background: radial-gradient(circle at 50% 35%, #1c263c 0%, #0e1526 55%, #05080f 100%);
-      box-shadow: inset 0 0 80px rgba(0, 0, 0, 0.95), 0 25px 60px -15px rgba(0, 0, 0, 0.9), 0 0 45px rgba(212, 175, 55, 0.15);
-    }
-    .gold-chiseled-title {
-      font-family: 'Cinzel', serif;
-      background: linear-gradient(180deg, #FFFFFF 0%, #FFF3B0 20%, #F5C542 45%, #D4AF37 60%, #996515 85%, #664104 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      filter: drop-shadow(0 3px 6px rgba(0,0,0,0.95)) drop-shadow(0 -1px 1px rgba(255,255,255,0.4));
-    }
-    @keyframes floatSlow {
-      0%, 100% { transform: translateY(0px) rotate(0deg); }
-      50% { transform: translateY(-8px) rotate(3deg); }
-    }
-    .floating-microfiber-now {
-      animation: floatSlow 3s ease-in-out infinite;
-    }
-    .silky-tab {
-      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    ::-webkit-scrollbar { width: 5px; height: 5px; }
-    ::-webkit-scrollbar-track { background: #0B0F19; }
-    ::-webkit-scrollbar-thumb { background: #232E4A; border-radius: 9999px; }
-  </style>
+        // REPLACE WITH YOUR FIREBASE CONFIG KEYS
+        const firebaseConfig = {
+            apiKey: "YOUR_FIREBASE_API_KEY",
+            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_PROJECT_ID.appspot.com",
+            messagingSenderId: "YOUR_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        window.db = db;
+        window.collection = collection;
+        window.addDoc = addDoc;
+        window.onSnapshot = onSnapshot;
+        window.query = query;
+        window.orderBy = orderBy;
+        window.Timestamp = Timestamp;
+    </script>
 </head>
+<body class="antialiased min-h-screen flex flex-col justify-between selection:bg-amber-500 selection:text-black">
 
-<body class="min-h-screen flex flex-col bg-bay-950 text-slate-100 antialiased selection:bg-gold-500/30 selection:text-gold-300">
-
-  <svg style="position: absolute; width: 0; height: 0; overflow: hidden;" aria-hidden="true">
-    <defs>
-      <linearGradient id="drCareGoldGradient" x1="15%" y1="0%" x2="85%" y2="100%">
-        <stop offset="0%" stop-color="#FFFFFF" />
-        <stop offset="14%" stop-color="#FFF6C7" />
-        <stop offset="30%" stop-color="#FCD34D" />
-        <stop offset="52%" stop-color="#D4AF37" />
-        <stop offset="72%" stop-color="#AA7A1E" />
-        <stop offset="88%" stop-color="#784E0F" />
-        <stop offset="100%" stop-color="#452603" />
-      </linearGradient>
-      <filter id="drCare3dEmboss" x="-30%" y="-30%" width="160%" height="160%">
-        <feDropShadow dx="2" dy="3" stdDeviation="2.5" flood-color="#000000" flood-opacity="0.95" />
-        <feDropShadow dx="-1" dy="-1.5" stdDeviation="1.2" flood-color="#FFFDF0" flood-opacity="0.65" />
-      </filter>
-      <!-- Official Dr. Care Golden Fingerprint Emblem -->
-      <g id="drCareEmblem">
-        <path d="M 50 15 C 32 15, 18 29, 18 47 C 18 60, 26 72, 36 78 V 82 C 24 75, 14 62, 14 47 C 14 27, 30 11, 50 11 C 70 11, 86 27, 86 47 C 86 62, 76 75, 64 82 V 78 C 74 72, 82 60, 82 47 C 82 29, 68 15, 50 15 Z" fill="url(#drCareGoldGradient)" opacity="0.35"/>
-        <path d="M 38 65 C 38 52, 50 52, 50 65 V 75" fill="none" stroke="url(#drCareGoldGradient)" stroke-width="3" stroke-linecap="round" />
-        <path d="M 44 60 V 54" fill="none" stroke="url(#drCareGoldGradient)" stroke-width="2.8" stroke-linecap="round" />
-        <path d="M 32 72 V 60 C 32 42, 68 42, 68 60 V 75" fill="none" stroke="url(#drCareGoldGradient)" stroke-width="3" stroke-linecap="round" />
-        <path d="M 26 78 V 56 C 26 34, 74 34, 74 56 V 78" fill="none" stroke="url(#drCareGoldGradient)" stroke-width="3" stroke-linecap="round" />
-        <path d="M 20 70 C 19 46, 34 22, 50 22 C 66 22, 81 46, 80 70" fill="none" stroke="url(#drCareGoldGradient)" stroke-width="3" stroke-linecap="round" />
-        <path d="M 34 24 C 40 18, 60 18, 66 24" fill="none" stroke="url(#drCareGoldGradient)" stroke-width="3" stroke-linecap="round" />
-      </g>
-    </defs>
-  </svg>
-
-  <header class="sticky top-0 z-40 bg-bay-900/95 backdrop-blur-md border-b border-gold-500/30 shadow-2xl">
-    <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-18 sm:h-20 flex items-center justify-between gap-2">
-      
-      <!-- Brand Logo with Slogan -->
-      <div class="flex items-center gap-2.5 sm:gap-3 cursor-pointer group" onclick="window.navigateToWelcome()">
-        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl gold-leather-badge flex items-center justify-center p-1.5 transition-all group-hover:scale-105">
-          <svg viewBox="0 0 100 100" class="w-7 h-7 sm:w-9 sm:h-9" style="filter: url(#drCare3dEmboss)">
-            <use href="#drCareEmblem" />
-          </svg>
-        </div>
-        <div>
-          <div class="flex items-center gap-1.5">
-            <span class="font-brand text-sm sm:text-xl font-black tracking-wider gold-chiseled-title">DR.CARE</span>
-            <span class="text-[9px] sm:text-[10px] font-mono font-bold px-1.5 py-0.5 rounded bg-gold-500/20 text-gold-400 border border-gold-500/30">ELITE</span>
-          </div>
-          <p class="text-[7px] sm:text-[8px] tracking-[0.18em] font-extrabold text-gold-400 uppercase" data-i18n="revivingSoul">REVIVING THE AUTOMOTIVE SOUL</p>
-        </div>
-      </div>
-
-      <!-- Header Controls -->
-      <div class="flex items-center gap-2">
-        
-        <!-- Bilingual Toggle -->
-        <div class="flex items-center bg-bay-950 border border-slate-800 rounded-xl p-0.5">
-          <button onclick="window.setAppLanguage('en')" id="langBtnEn" class="px-2 py-1 rounded-lg text-xs font-bold bg-gold-500 text-slate-950 transition">EN</button>
-          <button onclick="window.setAppLanguage('ar')" id="langBtnAr" class="px-2 py-1 rounded-lg text-xs font-bold text-slate-400 hover:text-white transition">عربي</button>
-        </div>
-
-        <!-- Staff Navigation Tabs -->
-        <nav id="staffNavTabs" class="hidden items-center gap-1 overflow-x-auto max-w-[32vw] sm:max-w-none py-1">
-          <button onclick="window.switchStaffTab('bookings')" id="tabBtnBookings" class="px-3 py-1.5 rounded-xl text-xs font-bold transition text-gold-400 bg-gold-500/10 border border-gold-500/30 whitespace-nowrap" data-i18n="intakeBay">
-            Intake Bay
-          </button>
-          <button onclick="window.switchStaffTab('calendar')" id="tabBtnCalendar" class="px-3 py-1.5 rounded-xl text-xs font-bold transition text-slate-400 hover:text-white whitespace-nowrap" data-i18n="calendar">
-            Calendar
-          </button>
-          <button onclick="window.switchStaffTab('funds')" id="tabBtnFunds" class="px-3 py-1.5 rounded-xl text-xs font-bold transition text-slate-400 hover:text-white whitespace-nowrap" data-i18n="cashFlow">
-            Cash Flow & Ledger
-          </button>
-          <button onclick="window.switchStaffTab('analytics')" id="tabBtnAnalytics" class="px-3 py-1.5 rounded-xl text-xs font-bold transition text-slate-400 hover:text-white whitespace-nowrap" data-i18n="operationsTab">
-            Fleet Operations
-          </button>
-          <button onclick="window.switchStaffTab('completedArchive')" id="tabBtnCompleted" class="px-3 py-1.5 rounded-xl text-xs font-bold transition text-slate-400 hover:text-white whitespace-nowrap" data-i18n="completedArchiveTab">
-            Completed Archive
-          </button>
-          <button onclick="window.switchStaffTab('accounts')" id="tabBtnAccounts" class="px-3 py-1.5 rounded-xl text-xs font-bold transition text-slate-400 hover:text-white whitespace-nowrap" data-i18n="accountsAccess">
-            Accounts
-          </button>
-        </nav>
-
-        <!-- New Booking Button for Owner / Manager -->
-        <button onclick="window.openNewBookingModal()" id="headerNewBookingBtn" class="hidden px-3.5 py-2 rounded-xl bg-gold-500 hover:bg-gold-400 text-slate-950 font-black text-xs uppercase tracking-wider transition shadow-lg flex items-center gap-1.5">
-          <i class="ph-bold ph-plus-circle text-base"></i>
-          <span class="hidden md:inline" data-i18n="newBooking">+ New Booking</span>
-        </button>
-
-        <!-- Auth Header Buttons -->
-        <div id="authHeaderContainer" class="flex items-center gap-1.5 sm:gap-2">
-          <button onclick="window.navigateToCustomerPortalGateway()" class="hidden sm:flex px-3 py-2 rounded-xl bg-bay-850 hover:bg-bay-800 text-gold-400 border border-gold-500/30 font-bold text-xs items-center gap-1.5 shadow-sm">
-            <i class="ph-bold ph-car"></i>
-            <span data-i18n="customerTracking">Customer Tracking</span>
-          </button>
-          <button onclick="window.openStaffLoginModal()" id="btnStaffLoginNav" class="px-3 sm:px-4 py-2 rounded-xl bg-gold-500 hover:bg-gold-400 text-slate-950 font-black text-xs uppercase tracking-wider transition shadow-lg flex items-center gap-1">
-            <i class="ph-bold ph-shield-check"></i>
-            <span data-i18n="staffLogin">Staff Login</span>
-          </button>
-        </div>
-
-      </div>
-    </div>
-  </header>
-
-  <main class="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-6 pb-24">
-
-    <!-- 1. WELCOME GATEWAY -->
-    <div id="viewWelcomeGateway" class="space-y-8 animate-fadeIn">
-      <div class="relative overflow-hidden rounded-3xl bg-gradient-to-b from-bay-850 via-bay-900 to-bay-950 border border-gold-500/40 p-6 sm:p-14 text-center shadow-2xl">
-        <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,_var(--tw-gradient-stops))] from-gold-500/10 via-transparent to-transparent pointer-events-none"></div>
-        
-        <div class="relative z-10 max-w-2xl mx-auto space-y-4">
-          <div class="w-24 h-24 sm:w-28 sm:h-28 mx-auto rounded-3xl gold-leather-hero border-2 border-gold-500/50 flex items-center justify-center p-3 shadow-2xl">
-            <svg viewBox="0 0 100 100" class="w-20 h-20 sm:w-24 sm:h-24" style="filter: url(#drCare3dEmboss)">
-              <use href="#drCareEmblem" />
-            </svg>
-          </div>
-
-          <div class="space-y-1">
-            <h1 class="font-brand text-3xl sm:text-5xl font-black tracking-wider gold-chiseled-title uppercase">
-              DR.CARE
-            </h1>
-            <div class="flex items-center justify-center gap-3 pt-1">
-              <span class="h-[1px] w-8 sm:w-16 bg-gradient-to-r from-transparent via-gold-500 to-gold-400"></span>
-              <p class="text-[10px] sm:text-xs text-gold-400 tracking-[0.3em] font-extrabold uppercase" data-i18n="revivingSoul">
-                REVIVING THE AUTOMOTIVE SOUL
-              </p>
-              <span class="h-[1px] w-8 sm:w-16 bg-gradient-to-l from-transparent via-gold-500 to-gold-400"></span>
-            </div>
-          </div>
-          <p class="text-xs text-slate-400 max-w-lg mx-auto leading-relaxed pt-1" data-i18n="welcomeSub">
-            Welcome to Dr.Care Paint Restoration Centre in Port Said, Egypt. Select your portal below to track your ongoing restoration or access internal workshop management.
-          </p>
-        </div>
-
-        <div class="relative z-10 mt-8 sm:mt-10 grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 max-w-3xl mx-auto">
-          
-          <div onclick="window.navigateToCustomerPortalGateway()" class="group bg-bay-900/90 border border-gold-500/30 hover:border-gold-500 rounded-3xl p-6 sm:p-8 cursor-pointer transition-all shadow-2xl hover:-translate-y-1 flex flex-col justify-between text-left space-y-5">
-            <div class="space-y-3">
-              <div class="w-14 h-14 rounded-2xl bg-gold-500/10 border border-gold-500/30 flex items-center justify-center text-gold-400 group-hover:scale-110 transition-transform">
-                <i class="ph-bold ph-car text-3xl"></i>
-              </div>
-              <div>
-                <span class="text-[10px] font-mono font-bold text-gold-400 uppercase tracking-widest block" data-i18n="clientPortal">Client Portal</span>
-                <h3 class="text-xl font-black text-white group-hover:text-gold-300 transition" data-i18n="customerTracking">Customer Vehicle Tracking</h3>
-              </div>
-              <p class="text-xs text-slate-400 leading-relaxed" data-i18n="customerPortalDesc">
-                Track your vehicle's live detailing progress, digital before-and-after photo vault, verified advance deposit in L.E, and send instructions directly to your technician.
-              </p>
-            </div>
-            <div class="pt-4 border-t border-slate-800 flex items-center justify-between text-xs font-bold text-gold-400">
-              <span data-i18n="trackMyCar">Track My Car Live</span>
-              <i class="ph-bold ph-arrow-right text-base group-hover:translate-x-1.5 transition-transform"></i>
-            </div>
-          </div>
-
-          <div onclick="window.openStaffLoginModal()" class="group bg-bay-900/90 border border-slate-800 hover:border-gold-500/40 rounded-3xl p-6 sm:p-8 cursor-pointer transition-all shadow-2xl hover:-translate-y-1 flex flex-col justify-between text-left space-y-5">
-            <div class="space-y-3">
-              <div class="w-14 h-14 rounded-2xl bg-bay-800 border border-slate-700 flex items-center justify-center text-slate-300 group-hover:scale-110 transition-transform">
-                <i class="ph-bold ph-shield-check text-3xl text-gold-400"></i>
-              </div>
-              <div>
-                <span class="text-[10px] font-mono font-bold text-slate-400 uppercase tracking-widest block" data-i18n="internalAccess">Internal Access</span>
-                <h3 class="text-xl font-black text-white group-hover:text-gold-300 transition" data-i18n="staffLoginTitle">Authorized Workshop Staff</h3>
-              </div>
-              <p class="text-xs text-slate-400 leading-relaxed" data-i18n="staffPortalDesc">
-                Dedicated terminal for Owner (Level 1), Managers (Level 2), and Master Detailers (Level 3). Manage intakes, Cash Flow, calendar, and security.
-              </p>
-            </div>
-            <div class="pt-4 border-t border-slate-800 flex items-center justify-between text-xs font-bold text-slate-300 group-hover:text-white">
-              <span data-i18n="staffLoginBtnText">Staff Login & Workspace</span>
-              <i class="ph-bold ph-lock-key text-base group-hover:translate-x-1.5 transition-transform"></i>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </div>
-
-    <!-- 2. SILKY PREMIUM CUSTOMER LOGIN GATEWAY -->
-    <div id="viewCustomerLogin" class="hidden space-y-8 animate-fadeIn">
-      <div class="max-w-xl mx-auto bg-gradient-to-b from-bay-900 via-bay-900/95 to-bay-950 backdrop-blur-2xl border-2 border-gold-500/40 rounded-3xl p-6 sm:p-10 shadow-[0_0_50px_rgba(212,175,55,0.15)] relative overflow-hidden">
-        <div class="absolute -right-20 -top-20 w-48 h-48 bg-gold-500/10 rounded-full blur-3xl pointer-events-none"></div>
-        
-        <div class="flex items-center justify-between pb-5 border-b border-slate-800/80 mb-6 relative z-10">
-          <div class="flex items-center gap-3">
-            <div class="w-12 h-12 rounded-2xl gold-leather-badge flex items-center justify-center text-gold-400 shadow-lg">
-              <i class="ph-bold ph-car text-2xl"></i>
-            </div>
+    <!-- Top Navigation & Language Switcher -->
+    <header class="bg-black/95 backdrop-blur-md border-b border-stone-800/80 sticky top-0 z-50 px-4 py-3 flex justify-between items-center shadow-lg">
+        <div class="flex items-center gap-3">
+            <img src="logo.png" alt="Dr. Care Logo" class="w-11 h-11 object-cover rounded-full border border-amber-500/60 shadow-md">
             <div>
-              <h2 class="text-lg font-black text-white uppercase tracking-wider font-brand gold-chiseled-title" data-i18n="customerLoginHeader">Client Live Bay Portal</h2>
-              <p class="text-[11px] text-slate-400" data-i18n="customerLoginSub">Inspect your personal vehicle's restoration progress and verified deposit.</p>
+                <h1 class="text-base font-bold tracking-widest text-amber-100 serif-brand">DR. CARE</h1>
+                <p class="text-[8px] text-amber-500 tracking-widest uppercase font-semibold" data-en="REVIVING THE AUTOMOTIVE SOUL" data-ar="إحياء روح السيارات">REVIVING THE AUTOMOTIVE SOUL</p>
             </div>
-          </div>
-          <button onclick="window.navigateToWelcome()" class="px-3.5 py-2 rounded-xl bg-bay-850 hover:bg-bay-800 text-xs text-slate-300 hover:text-white flex items-center gap-1.5 font-bold border border-slate-700 transition">
-            <i class="ph-bold ph-arrow-left"></i> <span data-i18n="back">Back</span>
-          </button>
         </div>
-
-        <!-- Silky Animated Switcher Tabs -->
-        <div class="relative flex items-center p-1.5 rounded-2xl bg-bay-950 border border-slate-800/80 mb-6 z-10 shadow-inner">
-          <div id="tabIndicator" class="absolute h-[calc(100%-12px)] w-[calc(50%-6px)] bg-gradient-to-r from-amber-500 to-gold-500 rounded-xl shadow-lg transition-all duration-300 ease-out left-1.5 top-1.5"></div>
-          <button onclick="window.switchCustomerLookupMode('phone')" id="btnLookupModePhone" class="relative z-10 flex-1 py-3 text-xs font-black rounded-xl text-slate-950 transition silky-tab" data-i18n="phonePlateTab">
-            Phone & Car Plate
-          </button>
-          <button onclick="window.switchCustomerLookupMode('credentials')" id="btnLookupModeCreds" class="relative z-10 flex-1 py-3 text-xs font-black rounded-xl text-slate-400 hover:text-white transition silky-tab" data-i18n="usernamePassTab">
-            Username & Login Code
-          </button>
+        <div class="flex items-center gap-2">
+            <button onclick="openAdminLogin()" class="bg-stone-900 border border-stone-800 text-[11px] px-3 py-1.5 rounded-lg text-stone-400 hover:text-white transition" data-en="CRM" data-ar="الإدارة">CRM</button>
+            <button onclick="toggleLanguage()" class="bg-amber-500/10 border border-amber-500/30 text-xs px-3.5 py-1.5 rounded-lg font-semibold text-amber-400 hover:bg-amber-500/20 transition">
+                <span id="langBtnText">العربية</span>
+            </button>
         </div>
+    </header>
 
-        <form id="formCustomerPhoneLookup" onsubmit="window.handleCustomerPhoneLookup(event)" class="space-y-4 relative z-10">
-          <div>
-            <label class="block text-xs font-bold text-white mb-1.5 flex items-center gap-1.5">
-              <i class="ph-bold ph-phone text-gold-400"></i> <span data-i18n="mobileLabel">Customer Mobile Phone Number *</span>
-            </label>
-            <input type="text" id="custSearchPhone" required placeholder="e.g. 01012345678"
-              class="w-full border border-slate-700 rounded-2xl px-4 py-3.5 text-sm focus:outline-none focus:border-gold-500 transition shadow-md">
-          </div>
+    <!-- Main Content Container -->
+    <main class="max-w-md mx-auto w-full p-4 space-y-6 flex-grow">
 
-          <div>
-            <label class="block text-xs font-bold text-white mb-1.5 flex items-center gap-1.5">
-              <i class="ph-bold ph-car text-gold-400"></i> <span data-i18n="plateLabel">Car License Plate *</span>
-            </label>
-            <input type="text" id="custSearchPlate" required placeholder="e.g. ط ر ب 1234 or ABC 123"
-              class="w-full border border-slate-700 rounded-2xl px-4 py-3.5 text-sm focus:outline-none focus:border-gold-500 uppercase transition shadow-md">
-          </div>
-
-          <button type="submit" class="w-full py-4 rounded-2xl bg-gradient-to-r from-amber-400 via-gold-500 to-gold-600 hover:from-amber-300 hover:to-gold-400 text-slate-950 font-black text-xs uppercase tracking-widest transition shadow-[0_0_25px_rgba(245,158,11,0.4)] flex items-center justify-center gap-2 transform active:scale-[0.98]">
-            <i class="ph-bold ph-magnifying-glass text-base"></i>
-            <span data-i18n="trackButton">Track My Car's Restoration Live</span>
-          </button>
-        </form>
-
-        <form id="formCustomerCredsLookup" onsubmit="window.handleCustomerCredsLookup(event)" class="space-y-4 relative z-10 hidden">
-          <div>
-            <label class="block text-xs font-bold text-white mb-1.5 flex items-center gap-1.5">
-              <i class="ph-bold ph-user text-gold-400"></i> <span data-i18n="usernameLabel">Customer Assigned Username *</span>
-            </label>
-            <input type="text" id="custSearchUsername" required placeholder="e.g. 01012345678"
-              class="w-full border border-slate-700 rounded-2xl px-4 py-3.5 text-sm focus:outline-none focus:border-gold-500 transition shadow-md">
-          </div>
-
-          <div>
-            <label class="block text-xs font-bold text-white mb-1.5 flex items-center gap-1.5">
-              <i class="ph-bold ph-lock text-gold-400"></i> <span data-i18n="passwordLabel">Password (Generated Login Code) *</span>
-            </label>
-            <input type="text" id="custSearchPass" required placeholder="e.g. ط ر ب 1234 or CODE123"
-              class="w-full border border-slate-700 rounded-2xl px-4 py-3.5 text-sm focus:outline-none focus:border-gold-500 uppercase transition shadow-md font-mono">
-          </div>
-
-          <button type="submit" class="w-full py-4 rounded-2xl bg-gradient-to-r from-amber-400 via-gold-500 to-gold-600 hover:from-amber-300 hover:to-gold-400 text-slate-950 font-black text-xs uppercase tracking-widest transition shadow-[0_0_25px_rgba(245,158,11,0.4)] flex items-center justify-center gap-2 transform active:scale-[0.98]">
-            <i class="ph-bold ph-sign-in text-base"></i>
-            <span data-i18n="signInButton">Sign In to My Vehicle Dashboard</span>
-          </button>
-        </form>
-
-      </div>
-    </div>
-
-    <!-- 3. CUSTOMER DASHBOARD -->
-    <div id="viewCustomerDashboard" class="hidden max-w-4xl mx-auto space-y-6 animate-fadeIn relative pb-16"></div>
-
-    <!-- 4. STAFF WORKSPACE BACK-OFFICE -->
-    <div id="viewStaffBackOffice" class="hidden space-y-6 animate-fadeIn">
-      
-      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-slate-800">
-        <div>
-          <div class="flex items-center gap-2.5">
-            <h2 id="staffRoleHeaderTitle" class="text-xl sm:text-2xl font-black text-white uppercase tracking-wider">
-              Vehicle Booking & Intake Bay
-            </h2>
-            <span id="badgeActiveStaffRole" class="text-[10px] sm:text-[11px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-gold-500/20 text-gold-400 border border-gold-500/40">
-              OWNER (LEVEL 1)
-            </span>
-          </div>
-          <p id="staffRoleHeaderSub" class="text-xs text-slate-400 mt-1" data-i18n="backofficeSub">
-            Real-time paint restoration workflow, deposit auditing in Egyptian Pounds (L.E), and multi-stage bay tracking.
-          </p>
-        </div>
-
-        <div class="flex items-center gap-2.5 w-full sm:w-auto overflow-x-auto py-1">
-          <button onclick="window.exportDatabaseBackup()" id="btnOwnerExportDb" class="hidden px-3 py-2 rounded-xl bg-bay-850 hover:bg-bay-800 text-slate-300 hover:text-white border border-slate-700 text-xs font-bold transition flex items-center gap-1.5 whitespace-nowrap">
-            <i class="ph-bold ph-download-simple"></i>
-            <span class="hidden sm:inline" data-i18n="exportJson">Export JSON</span>
-          </button>
-
-          <label id="btnOwnerImportDbLabel" class="hidden px-3 py-2 rounded-xl bg-bay-850 hover:bg-bay-800 text-slate-300 hover:text-white border border-slate-700 text-xs font-bold transition flex items-center gap-1.5 cursor-pointer whitespace-nowrap">
-            <i class="ph-bold ph-upload-simple"></i>
-            <span class="hidden sm:inline" data-i18n="import">Import</span>
-            <input type="file" id="fileDbImport" accept=".json" class="hidden" onchange="window.importDatabaseBackup(event)">
-          </label>
-        </div>
-      </div>
-
-      <!-- SUB-VIEW: BOOKINGS (Intake Bay) -->
-      <div id="subViewBookings" class="space-y-6">
-        
-        <div id="metricsBarContainer" class="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <div class="bg-bay-900 border border-slate-800 p-4 rounded-2xl">
-            <span class="text-[11px] text-slate-400 font-bold uppercase tracking-wider block" data-i18n="activeVehicles">Active Vehicles</span>
-            <span id="metricTotalActive" class="text-2xl font-black text-white font-mono mt-1 block">0</span>
-          </div>
-          
-          <div class="bg-bay-900 border border-slate-800 p-4 rounded-2xl">
-            <span class="text-[11px] text-slate-400 font-bold uppercase tracking-wider block" data-i18n="inCoating">In Coating & Curing</span>
-            <span id="metricInCoating" class="text-2xl font-black text-amber-400 font-mono mt-1 block">0</span>
-          </div>
-
-          <div id="metricCardDeposits" class="bg-bay-900 border border-slate-800 p-4 rounded-2xl">
-            <span class="text-[11px] text-slate-400 font-bold uppercase tracking-wider block" data-i18n="securedDeposits">Secured Deposits (L.E)</span>
-            <span id="metricTotalDeposits" class="text-2xl font-black text-emerald-400 font-mono mt-1 block">0 L.E</span>
-          </div>
-
-          <div class="bg-bay-900 border border-slate-800 p-4 rounded-2xl">
-            <span class="text-[11px] text-slate-400 font-bold uppercase tracking-wider block" data-i18n="handoverReady">Handover Ready</span>
-            <span id="metricReadyHandover" class="text-2xl font-black text-gold-400 font-mono mt-1 block">0</span>
-          </div>
-        </div>
-
-        <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 bg-bay-900 p-3 rounded-2xl border border-slate-800">
-          <div class="relative flex-1">
-            <i class="ph-bold ph-magnifying-glass absolute left-3.5 top-3 text-slate-400"></i>
-            <input type="text" id="inputSearchJobs" oninput="window.debounceSearchBookings()" placeholder="Search customer name, car model, plate, or mobile..."
-              class="w-full pl-10 pr-4 py-2 border border-slate-700 rounded-xl text-xs focus:outline-none focus:border-gold-500">
-          </div>
-
-          <div class="flex items-center gap-2">
-            <select id="selectStageFilter" onchange="window.filterBookingsGrid()" class="border border-slate-700 rounded-xl px-3 py-2 text-xs text-white w-full sm:w-auto">
-              <option value="ALL" data-i18n="filterAll">All Restoration Stages</option>
-              <option value="IN_PROGRESS" data-i18n="filterActive">Active In-Bay (Under 100%)</option>
-              <option value="COMPLETED" data-i18n="filterReady">100% Ready for Handover</option>
-              <option value="CERAMIC" data-i18n="filterCeramic">Ceramic & Curing (90%+)</option>
-            </select>
-          </div>
-        </div>
-
-        <div id="gridBookingsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"></div>
-
-        <div id="bookingsEmptyState" class="hidden py-16 text-center space-y-3 bg-bay-900/50 rounded-3xl border border-slate-800">
-          <i class="ph-bold ph-car text-4xl text-slate-600 mx-auto"></i>
-          <p class="text-sm font-bold text-slate-300" data-i18n="noJobsFound">No vehicle booking sheets found matching your search.</p>
-          <p class="text-xs text-slate-500" data-i18n="clickNewBooking">Click "+ New Booking" to intake an incoming vehicle.</p>
-        </div>
-      </div>
-
-      <!-- SUB-VIEW: CALENDAR -->
-      <div id="subViewCalendar" class="space-y-6 hidden">
-        <div class="bg-bay-900 border border-slate-800 rounded-3xl p-5 sm:p-8 space-y-6 shadow-2xl">
-          
-          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-slate-800">
-            <div>
-              <h3 class="text-lg font-black text-white uppercase tracking-wider flex items-center gap-2">
-                <span data-i18n="calendarTitle">5-Year Workshop Master Calendar</span>
-                <span class="text-xs font-mono px-2 py-0.5 rounded bg-gold-500/20 text-gold-400 border border-gold-500/30">2026 – 2031</span>
-              </h3>
-              <p class="text-xs text-slate-400 mt-0.5" data-i18n="calendarSub">
-                Maximum capacity: <strong class="text-amber-400 font-mono">12 bookings per day</strong>. Monitored for Level 1 Owner and Level 2 Managers.
-              </p>
-            </div>
-
-            <div class="flex items-center gap-2 flex-wrap">
-              <button onclick="window.navigateCalendarMonth(-1)" class="w-9 h-9 rounded-xl bg-bay-800 hover:bg-bay-750 text-slate-300 flex items-center justify-center border border-slate-700 transition">
-                <i class="ph-bold ph-caret-left"></i>
-              </button>
-              
-              <select id="calYearSelect" onchange="window.handleCalendarYearJump(this.value)" class="border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-white font-mono font-bold">
-                <option value="2026">2026</option>
-                <option value="2027">2027</option>
-                <option value="2028">2028</option>
-                <option value="2029">2029</option>
-                <option value="2030">2030</option>
-                <option value="2031">2031</option>
-              </select>
-
-              <span id="calCurrentMonthLabel" class="text-xs font-black text-gold-400 uppercase tracking-wider px-1 text-center min-w-[100px]">September 2026</span>
-
-              <button onclick="window.navigateCalendarMonth(1)" class="w-9 h-9 rounded-xl bg-bay-800 hover:bg-bay-750 text-slate-300 flex items-center justify-center border border-slate-700 transition">
-                <i class="ph-bold ph-caret-right"></i>
-              </button>
-
-              <button onclick="window.resetCalendarToToday()" class="px-3 py-1.5 rounded-xl bg-bay-800 text-slate-300 text-xs font-bold border border-slate-700 transition" data-i18n="today">Today</button>
-            </div>
-          </div>
-
-          <div class="grid grid-cols-7 gap-1.5 text-center text-[10px] sm:text-xs font-black text-slate-400 uppercase tracking-wider pb-1">
-            <span data-i18n="sun">Sun</span><span data-i18n="mon">Mon</span><span data-i18n="tue">Tue</span><span data-i18n="wed">Wed</span><span data-i18n="thu">Thu</span><span data-i18n="fri">Fri</span><span data-i18n="sat">Sat</span>
-          </div>
-
-          <div id="calDaysGridMatrix" class="grid grid-cols-7 gap-1.5 sm:gap-2"></div>
-
-          <div id="calDayInspectorBox" class="mt-6 p-4 sm:p-5 rounded-2xl bg-bay-850 border border-slate-800 space-y-3 hidden">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-              <span id="calSelectedDayTitle" class="text-xs font-black text-gold-400 uppercase tracking-wider">Vehicles Booked on Selected Date</span>
-              <button onclick="window.quickBookForSelectedDate()" class="px-3 py-1.5 rounded-xl bg-gold-500 hover:bg-gold-400 text-slate-950 font-black text-[11px] uppercase tracking-wider transition" data-i18n="bookForDate">
-                + Book Car for This Date
-              </button>
-            </div>
-            <div id="calSelectedDayCarsList" class="space-y-2"></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- SUB-VIEW: CASH FLOW & MATERIAL LEDGER -->
-      <div id="subViewFunds" class="space-y-6 hidden">
-        <div class="bg-bay-900 border border-slate-800 rounded-3xl p-5 sm:p-8 space-y-6 shadow-2xl">
-          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-slate-800">
-            <div>
-              <h3 class="text-lg font-black text-white uppercase tracking-wider flex items-center gap-2">
-                <span data-i18n="cashFlowTitle">Cash Flow & Material Consumables</span>
-                <span class="text-xs font-mono px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">L.E REVENUE & NET PROFIT</span>
-              </h3>
-              <p class="text-xs text-slate-400 mt-0.5" data-i18n="cashFlowSub">Real-time auditing of secured deposits, payment timestamps, and auto-calculated 10% material consumption.</p>
-            </div>
-
-            <div class="flex items-center gap-2">
-              <select id="fundsPeriodSelect" onchange="window.renderFundsCircuit()" class="border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-white font-mono font-bold">
-                <option value="this_month" data-i18n="thisMonth">This Month</option>
-                <option value="this_week" data-i18n="thisWeek">This Week</option>
-                <option value="all_time" data-i18n="allTime">All Time</option>
-              </select>
-            </div>
-          </div>
-
-          <!-- Three Professional Grand Totals Dashboard -->
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <div class="bg-bay-850 border border-gold-500/30 p-5 rounded-2xl space-y-2">
-              <span class="text-xs text-gold-400 font-bold uppercase tracking-wider" data-i18n="totalCashOnHand">Total Cash on Hand (Collected)</span>
-              <div id="fundsCashOnHand" class="text-2xl font-black text-emerald-400 font-mono">0 L.E</div>
-              <p class="text-[10px] text-slate-400">Deposits & milestone installments currently collected.</p>
-            </div>
+        <!-- Hero Section with Uploaded Logo & Slogan -->
+        <div class="bg-gradient-to-b from-stone-900 to-stone-950 border border-stone-800 rounded-2xl p-6 text-center shadow-2xl relative overflow-hidden space-y-4">
+            <div class="absolute -top-12 -right-12 w-36 h-36 bg-amber-500/10 rounded-full blur-3xl"></div>
             
-            <div class="bg-bay-850 border border-gold-500/30 p-5 rounded-2xl space-y-2">
-              <span class="text-xs text-gold-400 font-bold uppercase tracking-wider" data-i18n="netProfitNow">Net Profit Now (After 10% Consumables)</span>
-              <div id="fundsNetProfitNow" class="text-2xl font-black text-gold-300 font-mono">0 L.E</div>
-              <p class="text-[10px] text-slate-400">Cash on Hand minus real 10% material expenses.</p>
+            <!-- Logo Showcase Frame -->
+            <div class="w-24 h-24 mx-auto rounded-full bg-black border-2 border-amber-500/60 flex items-center justify-center shadow-2xl p-1 overflow-hidden">
+                <img src="logo.png" alt="Dr. Care Logo Emblem" class="w-full h-full object-cover rounded-full">
             </div>
 
-            <div class="bg-bay-850 border border-gold-500/30 p-5 rounded-2xl space-y-2">
-              <span class="text-xs text-gold-400 font-bold uppercase tracking-wider" data-i18n="expectedCollections">Expected Future Collections (Rest)</span>
-              <div id="fundsExpectedCollections" class="text-2xl font-black text-amber-400 font-mono">0 L.E</div>
-              <p class="text-[10px] text-slate-400">Remaining balances pending final delivery.</p>
+            <div>
+                <h2 class="text-xl font-bold mb-1 text-stone-100 serif-brand tracking-wide">DR. CARE</h2>
+                <p class="text-xs font-semibold text-amber-400 tracking-widest uppercase mb-3 gold-glow" data-en="REVIVING THE AUTOMOTIVE SOUL" data-ar="إحياء روح السيارات">REVIVING THE AUTOMOTIVE SOUL</p>
+                <p class="text-xs text-stone-400 leading-relaxed" data-en="Exclusive weekend mobile refinement service across Heliopolis, Madinaty, and the 5th Settlement." data-ar="خدمة العناية الفاخرة المتنقلة حصرياً في عطلة نهاية الأسبوع في هليوبوليس، مدينتي، والتجمع الخامس.">Exclusive weekend mobile refinement service across Heliopolis, Madinaty, and the 5th Settlement.</p>
             </div>
-          </div>
 
-          <div class="space-y-3 pt-2">
-            <div class="flex items-center justify-between">
-              <span class="text-xs font-black text-white uppercase tracking-wider" data-i18n="recentDepositsLedger">Recent Deposits & Payment Channel Ledger</span>
-              <button onclick="window.openAddExpenseModal()" class="px-3 py-1.5 rounded-xl bg-bay-800 hover:bg-bay-750 text-gold-400 border border-gold-500/30 text-xs font-bold transition flex items-center gap-1">
-                <i class="ph-bold ph-plus"></i> <span data-i18n="logExpense">Log Additional Expense</span>
-              </button>
+            <div class="inline-flex items-center gap-2 text-[10px] uppercase font-semibold text-amber-400 bg-amber-500/10 border border-amber-500/20 py-1.5 px-3 rounded-lg">
+                <span data-en="Thu • Fri • Sat Only (Weekend Strike Team)" data-ar="الخميس • الجمعة • السبت فقط">Thu • Fri • Sat Only</span>
             </div>
-            <div class="overflow-x-auto rounded-2xl border border-slate-800">
-              <table class="w-full text-left text-xs min-w-[700px]">
-                <thead class="bg-bay-850 text-slate-400 uppercase font-mono text-[10px]">
-                  <tr>
-                    <th class="p-3" data-i18n="thTimestamp">Payment Date & Time</th>
-                    <th class="p-3" data-i18n="thCustomer">Customer</th>
-                    <th class="p-3" data-i18n="thVehicle">Vehicle</th>
-                    <th class="p-3" data-i18n="thChannel">Channel</th>
-                    <th class="p-3" data-i18n="thDeposit">Deposit & Grand Total (L.E)</th>
-                    <th class="p-3" data-i18n="thStatus">Status</th>
-                  </tr>
-                </thead>
-                <tbody id="fundsLedgerTableBody" class="divide-y divide-slate-800/80 bg-bay-900/60"></tbody>
-              </table>
-            </div>
-          </div>
-
         </div>
-      </div>
 
-      <!-- SUB-VIEW: FLEET OPERATIONS & VELOCITY -->
-      <div id="subViewAnalytics" class="space-y-6 hidden">
-        <div class="bg-bay-900 border border-slate-800 rounded-3xl p-5 sm:p-8 space-y-6 shadow-2xl">
-          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-slate-800">
-            <div>
-              <h3 class="text-lg font-black text-white uppercase tracking-wider flex items-center gap-2">
-                <span data-i18n="fleetOperationsTitle">Active Operations & Fleet Velocity Intelligence</span>
-                <span class="text-xs font-mono px-2 py-0.5 rounded bg-gold-500/20 text-gold-400 border border-gold-500/30">MR. ALFY SUPERVISION</span>
-              </h3>
-              <p class="text-xs text-slate-400 mt-0.5" data-i18n="fleetOperationsSub">Real-time supervision of active bay turnaround rates, technician task completion, and business efficiency.</p>
-            </div>
-          </div>
-
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <div class="bg-bay-850 border border-slate-800 p-5 rounded-2xl space-y-1">
-              <span class="text-xs text-slate-400 font-bold uppercase tracking-wider">Total Active Fleet</span>
-              <div id="fleetStatTotal" class="text-2xl font-black text-white font-mono">0</div>
-            </div>
-            <div class="bg-bay-850 border border-slate-800 p-5 rounded-2xl space-y-1">
-              <span class="text-xs text-slate-400 font-bold uppercase tracking-wider">Completed Handover Vehicles</span>
-              <div id="fleetStatCompleted" class="text-2xl font-black text-emerald-400 font-mono">0</div>
-            </div>
-            <div class="bg-bay-850 border border-slate-800 p-5 rounded-2xl space-y-1">
-              <span class="text-xs text-slate-400 font-bold uppercase tracking-wider">Average Bay Turnaround</span>
-              <div class="text-2xl font-black text-gold-400 font-mono">3.4 Days</div>
-            </div>
-          </div>
-
-          <div class="bg-bay-850 border border-slate-800 p-5 sm:p-6 rounded-2xl space-y-4">
-            <span class="text-xs font-black text-white uppercase tracking-wider block">Master Detailer Task Completion Breakdown</span>
-            <div id="fleetDetailerPerformanceContainer" class="space-y-3"></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- SUB-VIEW: COMPLETED & DELIVERED ARCHIVE -->
-      <div id="subViewCompletedArchive" class="space-y-6 hidden">
-        <div class="bg-bay-900 border border-slate-800 rounded-3xl p-5 sm:p-8 space-y-6 shadow-2xl">
-          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-slate-800">
-            <div>
-              <h3 class="text-lg font-black text-white uppercase tracking-wider flex items-center gap-2">
-                <span data-i18n="completedArchiveTitle">Completed & Delivered Vehicle Archive</span>
-                <span class="text-xs font-mono px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">SETTLED HISTORY</span>
-              </h3>
-              <p class="text-xs text-slate-400 mt-0.5">Search and filter all settled vehicles by car model, customer name, date, or service.</p>
-            </div>
-          </div>
-
-          <!-- Advanced Search & Filter Bar -->
-          <div class="grid grid-cols-1 sm:grid-cols-4 gap-3 bg-bay-850 p-4 rounded-2xl border border-slate-800">
-            <div class="sm:col-span-2">
-              <input type="text" id="archiveSearchInput" oninput="window.renderCompletedArchive()" placeholder="Search car model, customer name, plate, or phone..." class="w-full border border-slate-700 rounded-xl px-3 py-2 text-xs">
-            </div>
-            <div>
-              <select id="archiveYearFilter" onchange="window.renderCompletedArchive()" class="border border-slate-700 rounded-xl px-3 py-2 text-xs text-white w-full">
-                <option value="ALL">All Years</option>
-                <option value="2026">2026</option>
-                <option value="2027">2027</option>
-              </select>
-            </div>
-            <div>
-              <select id="archiveMonthFilter" onchange="window.renderCompletedArchive()" class="border border-slate-700 rounded-xl px-3 py-2 text-xs text-white w-full">
-                <option value="ALL">All Months</option>
-                <option value="01">January</option><option value="02">February</option><option value="03">March</option><option value="04">April</option>
-                <option value="05">May</option><option value="06">June</option><option value="07">July</option><option value="08">August</option>
-                <option value="09">September</option><option value="10">October</option><option value="11">November</option><option value="12">December</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="overflow-x-auto rounded-2xl border border-slate-800">
-            <table class="w-full text-left text-xs min-w-[750px]">
-              <thead class="bg-bay-850 text-slate-400 uppercase font-mono text-[10px]">
-                <tr>
-                  <th class="p-3">Delivery Date</th>
-                  <th class="p-3">Customer & Province</th>
-                  <th class="p-3">Vehicle & Plate</th>
-                  <th class="p-3">Detailer</th>
-                  <th class="p-3">Settled Total (L.E)</th>
-                  <th class="p-3">Status</th>
-                </tr>
-              </thead>
-              <tbody id="completedArchiveTableBody" class="divide-y divide-slate-800/80 bg-bay-900/60"></tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-
-      <!-- SUB-VIEW: ACCOUNTS & ACCESS -->
-      <div id="subViewAccounts" class="space-y-6 hidden">
-        <div class="bg-bay-900 border border-slate-800 rounded-3xl p-5 sm:p-8 space-y-6 shadow-2xl">
-          <div class="flex items-center justify-between pb-4 border-b border-slate-800">
-            <div>
-              <h3 class="text-lg font-black text-white uppercase tracking-wider" data-i18n="accountsTitle">Workshop Team & Customer Access Management</h3>
-              <p class="text-xs text-slate-400 mt-0.5" data-i18n="accountsSub">Level 1 Owner controls credentials and staff roles across the enterprise.</p>
-            </div>
-          </div>
-
-          <div id="ownerStaffProvisioningBar" class="hidden p-4 sm:p-5 rounded-3xl bg-bay-850 border-2 border-gold-500/40 shadow-xl space-y-3">
-            <div class="flex items-center justify-between pb-2 border-b border-slate-800">
-              <div class="flex items-center gap-2">
-                <span class="w-8 h-8 rounded-xl bg-gold-500/20 text-gold-400 flex items-center justify-center text-base border border-gold-500/30">
-                  <i class="ph-bold ph-shield-star"></i>
-                </span>
-                <div>
-                  <h4 class="text-xs font-black text-white uppercase tracking-wider" data-i18n="ownerConsole">Level 1 Owner Staff & Customer Credential Generator</h4>
-                  <p class="text-[10px] text-slate-400" data-i18n="ownerConsoleSub">Add managers, master detailers, or generate individual client login codes.</p>
+        <!-- Who We Are Section (Elite Stylish Copywriting) -->
+        <div class="bg-stone-900/60 border border-stone-800 rounded-2xl p-5 space-y-3 shadow-lg">
+            <h3 class="text-xs font-bold uppercase tracking-wider text-amber-400 serif-brand" data-en="Who We Are" data-ar="من نحن">Who We Are</h3>
+            <p class="text-xs text-stone-300 leading-relaxed font-medium" data-en="Dr. Care is the pioneering paint clinic dedicated to pristine factory finish restoration and preserving the enduring value of your automotive investment. Dr. Care: Reviving the Automotive Soul." data-ar="دكتور كير هي عيادة الطلاء الأولى المخصصة لاستعادة الطلاء الأصلي وحماية القيمة الاستثنائية لسيارتك الفاخرة. دكتور كير: لإحياء روح السيارات.">
+                Dr. Care is the pioneering paint clinic dedicated to pristine factory finish restoration and preserving the enduring value of your automotive investment. Dr. Care: Reviving the Automotive Soul.
+            </p>
+            <div class="grid grid-cols-2 gap-2 pt-2">
+                <div class="bg-stone-950 p-2.5 rounded-xl border border-stone-800 text-center">
+                    <span class="block text-sm font-bold text-amber-400">45 Min</span>
+                    <span class="text-[10px] text-stone-400" data-en="Express Dry Wash" data-ar="غسيل جاف سريع">Express Dry Wash</span>
                 </div>
-              </div>
-              <span class="text-[9px] font-mono font-bold px-2 py-0.5 rounded bg-gold-500/10 text-gold-400 border border-gold-500/30">MR. ALFY EXCLUSIVE</span>
-            </div>
-
-            <form id="formOwnerQuickAddStaff" onsubmit="window.handleOwnerQuickAddStaff(event)" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-3 pt-1">
-              <div>
-                <label class="block text-[10px] font-bold text-slate-300 mb-1" data-i18n="staffNameLabel">Staff Full Name *</label>
-                <input type="text" id="barStaffName" required placeholder="e.g. Kareem Adel" class="w-full border border-slate-700 rounded-xl px-3 py-2 text-xs">
-              </div>
-              <div>
-                <label class="block text-[10px] font-bold text-slate-300 mb-1" data-i18n="usernameLabel">Username *</label>
-                <input type="text" id="barStaffUsername" required placeholder="e.g. kareem.adel" class="w-full border border-slate-700 rounded-xl px-3 py-2 text-xs">
-              </div>
-              <div>
-                <label class="block text-[10px] font-bold text-slate-300 mb-1" data-i18n="passwordLabel">Password *</label>
-                <input type="text" id="barStaffPassword" required placeholder="Create password" class="w-full border border-slate-700 rounded-xl px-3 py-2 text-xs font-mono">
-              </div>
-              <div>
-                <label class="block text-[10px] font-bold text-slate-300 mb-1" data-i18n="authorityTier">Authority Tier *</label>
-                <select id="barStaffRole" class="w-full border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
-                  <option value="manager" data-i18n="tierManager">Level 2: Shop Manager</option>
-                  <option value="detailer" selected data-i18n="tierDetailer">Level 3: Master Detailer</option>
-                </select>
-              </div>
-              <div class="flex items-end">
-                <button type="submit" class="w-full py-2 rounded-xl bg-gold-500 hover:bg-gold-400 text-slate-950 font-black text-xs uppercase tracking-wider transition shadow-lg flex items-center justify-center gap-1.5">
-                  <i class="ph-bold ph-user-plus text-sm"></i>
-                  <span data-i18n="createStaffBtn">+ Create Staff</span>
-                </button>
-              </div>
-            </form>
-          </div>
-
-          <div class="space-y-3">
-            <span class="text-xs font-black text-gold-400 uppercase tracking-wider flex items-center gap-2">
-              <i class="ph-bold ph-shield-check"></i> <span data-i18n="workshopTeamTitle">Workshop Management & Staff Team</span>
-            </span>
-            <div id="listStaffAccountsContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
-          </div>
-
-          <div class="pt-6 border-t border-slate-800 space-y-3">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-              <div>
-                <span class="text-xs font-black text-emerald-400 uppercase tracking-wider flex items-center gap-2">
-                  <i class="ph-bold ph-user-circle"></i> <span data-i18n="customerLoginsTitle">Customer Dedicated Portal Logins (Generated Passes)</span>
-                </span>
-                <p class="text-[11px] text-slate-400" data-i18n="customerLoginsSub">Generated client login codes for separate portal access.</p>
-              </div>
-            </div>
-            <div id="listCustomerAccountsContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
-          </div>
-
-        </div>
-      </div>
-
-    </div>
-
-    <!-- 5. VEHICLE DETAIL SHEET VIEW -->
-    <div id="viewSheetDetail" class="hidden space-y-6 animate-fadeIn"></div>
-
-  </main>
-
-  <!-- Floating Microfiber Towel Icon in Customer Mode -->
-  <div id="floatingMicrofiberContainer"></div>
-
-  <!-- Bilingual Sync Notice Footer Note -->
-  <footer class="py-4 text-center border-t border-slate-900 bg-bay-900/60 text-[11px] text-slate-400 font-mono">
-    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-center gap-2">
-      <span>Please select and wait — our site takes 1 minute to sync. Please wait.</span>
-      <span class="text-gold-400">|</span>
-      <span>يرجى الانتظار - يستغرق مزامنة الموقع دقيقة واحدة. يرجى الانتظار.</span>
-    </div>
-  </footer>
-
-  <div id="mobileFloatingActionBar" class="fixed bottom-4 left-4 right-4 z-40 flex items-center justify-between gap-3 p-2 bg-bay-900/95 backdrop-blur-xl border border-gold-500/40 rounded-2xl shadow-2xl sm:hidden">
-    <button onclick="window.switchStaffTab('bookings')" class="flex-1 py-2.5 rounded-xl bg-bay-850 text-gold-400 font-bold text-xs flex items-center justify-center gap-1.5 border border-slate-800">
-      <i class="ph-bold ph-car text-base"></i>
-      <span data-i18n="intakeBay">Intake Bay</span>
-    </button>
-    <button onclick="window.openNewBookingModal()" id="mobileFloatNewBookingBtn" class="hidden flex-1 py-2.5 rounded-xl bg-gradient-to-r from-amber-400 to-gold-500 text-slate-950 font-black text-xs items-center justify-center gap-1.5 shadow-lg">
-      <i class="ph-bold ph-plus-circle text-base"></i>
-      <span data-i18n="newBooking">+ New Booking</span>
-    </button>
-  </div>
-
-  <!-- MODALS -->
-
-  <!-- Staff Login Modal -->
-  <div id="modalStaffAuth" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4 hidden">
-    <div class="bg-bay-900 border border-gold-500/40 rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl space-y-5">
-      <div class="flex items-center justify-between pb-3 border-b border-slate-800">
-        <div class="flex items-center gap-2.5">
-          <div class="w-10 h-10 rounded-2xl bg-gold-500/10 border border-gold-500/30 flex items-center justify-center text-gold-400">
-            <i class="ph-bold ph-shield-check text-xl"></i>
-          </div>
-          <div>
-            <h3 class="text-sm font-black text-white uppercase tracking-wider" data-i18n="staffLoginTitleModal">Workshop Staff Portal Login</h3>
-            <p class="text-[11px] text-slate-400" data-i18n="staffLoginSubModal">Enter your authorized credentials for secure back-office access.</p>
-          </div>
-        </div>
-        <button onclick="window.closeStaffLoginModal()" class="w-8 h-8 rounded-full bg-bay-800 hover:bg-bay-750 text-slate-400 hover:text-white flex items-center justify-center transition">
-          <i class="ph-bold ph-x text-sm"></i>
-        </button>
-      </div>
-
-      <form id="formStaffLogin" onsubmit="window.handleStaffLoginForm(event)" class="space-y-4">
-        <div>
-          <label class="block text-xs font-bold text-white mb-1.5" data-i18n="usernameLabel">Staff Username *</label>
-          <input type="text" id="staffLoginUser" required placeholder="Enter your staff username"
-            class="w-full border border-slate-700 rounded-2xl px-4 py-3 text-xs focus:outline-none focus:border-gold-500">
-        </div>
-
-        <div>
-          <label class="block text-xs font-bold text-white mb-1.5" data-i18n="passwordLabel">Password *</label>
-          <input type="password" id="staffLoginPass" required placeholder="••••••••"
-            class="w-full border border-slate-700 rounded-2xl px-4 py-3 text-xs focus:outline-none focus:border-gold-500 font-mono">
-        </div>
-
-        <button type="submit" class="w-full py-3.5 rounded-2xl bg-gold-500 hover:bg-gold-400 text-slate-950 font-black text-xs uppercase tracking-wider transition shadow-xl flex items-center justify-center gap-2">
-          <i class="ph-bold ph-sign-in text-base"></i>
-          <span data-i18n="loginButton">Securely Access Workshop Console</span>
-        </button>
-      </form>
-    </div>
-  </div>
-
-  <!-- New Booking Modal -->
-  <div id="modalNewBooking" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4 hidden overflow-y-auto">
-    <div class="bg-bay-900 border border-gold-500/40 rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl space-y-6 my-8">
-      
-      <div class="flex items-center justify-between pb-3 border-b border-slate-800">
-        <div class="flex items-center gap-2.5">
-          <div class="w-10 h-10 rounded-2xl bg-gold-500/10 border border-gold-500/30 flex items-center justify-center text-gold-400">
-            <i class="ph-bold ph-car text-xl"></i>
-          </div>
-          <div>
-            <h3 class="text-base font-black text-white uppercase tracking-wider" data-i18n="newBookingModalTitle">New Vehicle Restoration Booking Sheet</h3>
-            <p class="text-[11px] text-slate-400" data-i18n="newBookingModalSub">Register incoming customer vehicle, assigned detailer bay, province, grand total, and advance deposit in L.E.</p>
-          </div>
-        </div>
-        <button onclick="window.closeNewBookingModal()" class="w-8 h-8 rounded-full bg-bay-800 hover:bg-bay-750 text-slate-400 hover:text-white flex items-center justify-center transition">
-          <i class="ph-bold ph-x text-sm"></i>
-        </button>
-      </div>
-
-      <form id="formNewBooking" onsubmit="window.handleSaveNewBooking(event)" class="space-y-4">
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <label class="block text-xs font-bold text-white mb-1.5" data-i18n="custNameLabel">Customer Full Name *</label>
-            <input type="text" id="nbCustName" required placeholder="e.g. Mohamed El-Sayed" class="w-full border border-slate-700 rounded-xl px-4 py-2.5 text-xs">
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-white mb-1.5" data-i18n="mobileLabel">Customer Mobile Phone *</label>
-            <input type="text" id="nbCustPhone" required placeholder="e.g. 01012345678" class="w-full border border-slate-700 rounded-xl px-4 py-2.5 text-xs">
-          </div>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <label class="block text-xs font-bold text-white mb-1.5" data-i18n="provinceLabel">Province / Governorate *</label>
-            <select id="nbProvince" required class="w-full border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white">
-              <option value="Port Said">Port Said (بورسعيد)</option>
-              <option value="Cairo">Cairo (القاهرة)</option>
-              <option value="Alexandria">Alexandria (الإسكندرية)</option>
-              <option value="Giza">Giza (الجيزة)</option>
-              <option value="Dakahlia">Dakahlia (الدقهلية)</option>
-              <option value="Sharkia">Sharkia (الشرقية)</option>
-              <option value="Qalyubia">Qalyubia (القليوبية)</option>
-              <option value="Gharbia">Gharbia (الغربية)</option>
-              <option value="Monufia">Monufia (المنوفية)</option>
-              <option value="Beheira">Beheira (البحيرة)</option>
-              <option value="Kafr El Sheikh">Kafr El Sheikh (كفر الشيخ)</option>
-              <option value="Damietta">Damietta (دمياط)</option>
-              <option value="Ismailia">Ismailia (الإسماعيلية)</option>
-              <option value="Suez">Suez (السويس)</option>
-              <option value="Fayoum">Fayoum (الفيوم)</option>
-              <option value="Beni Suef">Beni Suef (بني سويف)</option>
-              <option value="Minya">Minya (المنيا)</option>
-              <option value="Asyut">Asyut (أسيوط)</option>
-              <option value="Sohag">Sohag (سوهاج)</option>
-              <option value="Qena">Qena (قنا)</option>
-              <option value="Aswan">Aswan (أسوان)</option>
-              <option value="Luxor">Luxor (الأقصر)</option>
-              <option value="Red Sea">Red Sea (البحر الأحمر)</option>
-              <option value="South Sinai">South Sinai (جنوب سيناء)</option>
-              <option value="North Sinai">North Sinai (شمال سيناء)</option>
-            </select>
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-white mb-1.5" data-i18n="carPlateLabel">Car License Plate (Login Code) *</label>
-            <input type="text" id="nbCarPlate" required placeholder="e.g. ط ر ب 1234" class="w-full border border-slate-700 rounded-xl px-4 py-2.5 text-xs uppercase">
-          </div>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <div>
-            <label class="block text-xs font-bold text-white mb-1.5" data-i18n="carBrandModel">Car Brand & Model *</label>
-            <input type="text" id="nbCarModel" required placeholder="e.g. BMW 520i 2024" class="w-full border border-slate-700 rounded-xl px-4 py-2.5 text-xs">
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-white mb-1.5" data-i18n="carColorLabel">Car Paint Color *</label>
-            <input type="text" id="nbCarColor" required placeholder="e.g. Midnight Black Metallic" class="w-full border border-slate-700 rounded-xl px-4 py-2.5 text-xs">
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-white mb-1.5" data-i18n="odometerLabel">Mileage (KM)</label>
-            <input type="text" id="nbOdometer" placeholder="e.g. 45,000 KM" class="w-full border border-slate-700 rounded-xl px-4 py-2.5 text-xs font-mono">
-          </div>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <label class="block text-xs font-bold text-white mb-1.5" data-i18n="entryDateLabel">Entry Date *</label>
-            <input type="date" id="nbEntryDate" required class="w-full border border-slate-700 rounded-xl px-4 py-2.5 text-xs font-mono">
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-white mb-1.5" data-i18n="assignedDetailer">Assigned Master Detailer *</label>
-            <select id="nbAssignedDetailer" required class="w-full border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white">
-              <option value="Mahmoud Detailer">Mahmoud Detailer</option>
-              <option value="Ibrahim Master">Ibrahim Master</option>
-              <option value="Hassan Paint Expert">Hassan Paint Expert</option>
-            </select>
-          </div>
-        </div>
-
-        <!-- Payment Option Details with 12-Hour Time Format -->
-        <div class="bg-bay-950 p-4 rounded-2xl border border-gold-500/30 space-y-3">
-          <span class="text-xs font-black text-gold-400 uppercase tracking-wider block">Payment & Milestone Deal Configuration (12-Hour Format)</span>
-          
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label class="block text-xs font-bold text-white mb-1.5" data-i18n="grandTotalLabel">Grand Total Service Price (L.E) *</label>
-              <input type="number" id="nbGrandTotal" required min="0" placeholder="e.g. 15000" class="w-full border border-slate-700 rounded-xl px-4 py-2.5 text-xs font-mono text-gold-400">
-            </div>
-            <div>
-              <label class="block text-xs font-bold text-white mb-1.5" data-i18n="depositAmountLabel">Advance Deposit Amount (L.E) *</label>
-              <input type="number" id="nbDeposit" required min="0" placeholder="e.g. 5000" class="w-full border border-slate-700 rounded-xl px-4 py-2.5 text-xs font-mono text-emerald-400">
-            </div>
-          </div>
-
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label class="block text-xs font-bold text-white mb-1.5">Payment Date & 12-Hour Time *</label>
-              <input type="datetime-local" id="nbPaymentDatetime" required class="w-full border border-slate-700 rounded-xl px-4 py-2.5 text-xs font-mono">
-            </div>
-            <div>
-              <label class="block text-xs font-bold text-white mb-1.5" data-i18n="paymentChannelLabel">Payment Channel *</label>
-              <select id="nbPaymentChannel" class="w-full border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white">
-                <option value="Cash">Cash in Hand (نقدي)</option>
-                <option value="InstaPay">InstaPay (انستا باي)</option>
-                <option value="Wallet">Mobile Wallet (محفظة إلكترونية)</option>
-                <option value="Card">Visa / POS Card (بطاقة بنكية)</option>
-              </select>
-            </div>
-          </div>
-        </div>
-
-        <div>
-          <label class="block text-xs font-bold text-white mb-1.5" data-i18n="scopeOfWorkLabel">Scope of Paint Restoration & Services *</label>
-          <textarea id="nbScope" rows="2" required placeholder="e.g. Full body German paint restoration, scratch removal, 3-layer ceramic coating..."
-            class="w-full border border-slate-700 rounded-xl px-4 py-2 text-xs focus:outline-none focus:border-gold-500"></textarea>
-        </div>
-
-        <div class="pt-3 flex items-center justify-end gap-3">
-          <button type="button" onclick="window.closeNewBookingModal()" class="px-5 py-2.5 rounded-xl bg-bay-800 text-slate-300 hover:text-white text-xs font-bold transition">
-            <span data-i18n="cancel">Cancel</span>
-          </button>
-          <button type="submit" class="px-6 py-2.5 rounded-xl bg-gold-500 hover:bg-gold-400 text-slate-950 font-black text-xs uppercase tracking-wider transition shadow-lg flex items-center gap-1.5">
-            <i class="ph-bold ph-check-circle text-base"></i>
-            <span data-i18n="saveBookingBtn">Save & Open Booking Sheet</span>
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <!-- Expense Log Modal -->
-  <div id="modalAddExpense" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4 hidden">
-    <div class="bg-bay-900 border border-gold-500/40 rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl space-y-5">
-      <div class="flex items-center justify-between pb-3 border-b border-slate-800">
-        <div class="flex items-center gap-2.5">
-          <div class="w-10 h-10 rounded-2xl bg-gold-500/10 border border-gold-500/30 flex items-center justify-center text-gold-400">
-            <i class="ph-bold ph-receipt text-xl"></i>
-          </div>
-          <div>
-            <h3 class="text-sm font-black text-white uppercase tracking-wider" data-i18n="logConsumableTitle">Log Meguiar's / Rupes Consumable Cost</h3>
-            <p class="text-[11px] text-slate-400" data-i18n="logConsumableSub">Record material and compound costs to calculate net shop profit.</p>
-          </div>
-        </div>
-        <button onclick="window.closeAddExpenseModal()" class="w-8 h-8 rounded-full bg-bay-800 hover:bg-bay-750 text-slate-400 hover:text-white flex items-center justify-center transition">
-          <i class="ph-bold ph-x text-sm"></i>
-        </button>
-      </div>
-
-      <form id="formAddExpense" onsubmit="window.handleSaveExpense(event)" class="space-y-4">
-        <div>
-          <label class="block text-xs font-bold text-white mb-1.5" data-i18n="materialDesc">Material / Compound Description *</label>
-          <input type="text" id="expDesc" required placeholder="e.g. Rupes DA Coarse Compound & Meguiar's Mirror Glaze"
-            class="w-full border border-slate-700 rounded-xl px-4 py-3 text-xs">
-        </div>
-
-        <div>
-          <label class="block text-xs font-bold text-white mb-1.5" data-i18n="costLE">Cost Amount (L.E) *</label>
-          <input type="number" id="expAmount" required min="0" placeholder="e.g. 1200"
-            class="w-full border border-slate-700 rounded-xl px-4 py-3 text-xs font-mono text-rose-400">
-        </div>
-
-        <button type="submit" class="w-full py-3.5 rounded-2xl bg-gold-500 hover:bg-gold-400 text-slate-950 font-black text-xs uppercase tracking-wider transition shadow-xl flex items-center justify-center gap-2">
-          <i class="ph-bold ph-check text-base"></i>
-          <span data-i18n="saveExpenseBtn">Save Consumable Expense</span>
-        </button>
-      </form>
-    </div>
-  </div>
-
-  <!-- Microfiber Request Modal in Customer Mode -->
-  <div id="modalMicrofiberOrder" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4 hidden">
-    <div class="bg-bay-900 border-2 border-gold-500/50 rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl space-y-5">
-      <div class="flex items-center justify-between pb-3 border-b border-slate-800">
-        <div class="flex items-center gap-2.5">
-          <div class="w-10 h-10 rounded-2xl bg-gold-500/20 text-gold-400 flex items-center justify-center text-xl border border-gold-500/30">
-            <i class="ph-bold ph-sparkle"></i>
-          </div>
-          <div>
-            <h3 class="text-sm font-black text-white uppercase tracking-wider">Request Microfiber Edgeless Towel NOW</h3>
-            <p class="text-[11px] text-slate-400">180 L.E per premium towel (Dust & Swirl Prevention)</p>
-          </div>
-        </div>
-        <button onclick="window.closeMicrofiberModal()" class="w-8 h-8 rounded-full bg-bay-800 hover:bg-bay-750 text-slate-400 hover:text-white flex items-center justify-center transition">
-          <i class="ph-bold ph-x text-sm"></i>
-        </button>
-      </div>
-
-      <div class="space-y-4">
-        <div>
-          <label class="block text-xs font-bold text-white mb-1.5">Quantity of Microfiber Towels (180 L.E each)</label>
-          <input type="number" id="mfQuantity" min="1" value="2" oninput="window.calcMicrofiberTotal(this.value)" class="w-full border border-slate-700 rounded-xl px-4 py-3 text-sm font-mono text-gold-400">
-        </div>
-
-        <div class="p-4 rounded-2xl bg-bay-950 border border-slate-800 flex items-center justify-between">
-          <span class="text-xs text-slate-300 font-bold uppercase">Grand Total Price:</span>
-          <span id="mfGrandTotalDisplay" class="text-base font-black text-emerald-400 font-mono">360 L.E</span>
-        </div>
-
-        <button onclick="window.submitMicrofiberOrder()" class="w-full py-3.5 rounded-2xl bg-gradient-to-r from-amber-400 to-gold-500 text-slate-950 font-black text-xs uppercase tracking-wider transition shadow-lg flex items-center justify-center gap-2">
-          <i class="ph-bold ph-paper-plane-tilt text-base"></i> Request Microfiber Edgeless Towel NOW
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Notification Toast Container -->
-  <div id="toastContainer" class="fixed bottom-20 right-5 z-50 flex flex-col gap-2 max-w-sm pointer-events-none"></div>
-
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
-    import { getFirestore, doc, getDoc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyAmLj9vj6jn9ASbWcUL2CjtJX0n_tG8W18",
-      authDomain: "drcare-centre.firebaseapp.com",
-      projectId: "drcare-centre",
-      storageBucket: "drcare-centre.firebasestorage.app",
-      messagingSenderId: "945201915740",
-      appId: "1:945201915740:web:dca2c552e7106f39560399",
-      measurementId: "G-K6MEN28BJ0"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-    const appId = 'drcare-centre-port-said-v1';
-
-    let currentLang = 'en';
-    let currentUser = null;
-    let activeCustomerJob = null;
-    let activeStaffTab = 'bookings';
-    let currentCustomerLookupMode = 'phone';
-    let calendarCurrentYear = 2026;
-    let calendarCurrentMonth = 8;
-    let selectedCalendarDateStr = null;
-    let currentDetailSheetId = null;
-
-    let detailerStopwatches = {};
-
-    const dict = {
-      en: {
-        revivingSoul: "REVIVING THE AUTOMOTIVE SOUL",
-        customerTracking: "Customer Tracking",
-        staffLogin: "Staff Login",
-        welcomeSub: "Welcome to Dr.Care Paint Restoration Centre in Port Said, Egypt. Select your portal below to track your ongoing restoration or access internal workshop management.",
-        clientPortal: "Client Portal",
-        customerPortalDesc: "Track your vehicle's live detailing progress, digital before-and-after photo vault, verified advance deposit in L.E, and send instructions directly to your technician.",
-        trackMyCar: "Track My Car Live",
-        internalAccess: "Internal Access",
-        staffLoginTitle: "Authorized Workshop Staff",
-        staffPortalDesc: "Dedicated terminal for Owner (Level 1), Managers (Level 2), and Master Detailers (Level 3). Manage intakes, Cash Flow, calendar, and security.",
-        staffLoginBtnText: "Staff Login & Workspace",
-        customerLoginHeader: "Client Live Bay Portal",
-        customerLoginSub: "Inspect your personal vehicle's restoration progress and verified deposit.",
-        phonePlateTab: "Phone & Car Plate",
-        usernamePassTab: "Username & Login Code",
-        mobileLabel: "Customer Mobile Phone Number *",
-        plateLabel: "Car License Plate *",
-        usernameLabel: "Customer Assigned Username *",
-        passwordLabel: "Password (Generated Login Code) *",
-        trackButton: "Track My Car's Restoration Live",
-        signInButton: "Sign In to My Vehicle Dashboard",
-        back: "Back",
-        intakeBay: "Intake Bay",
-        calendar: "5-Year Calendar",
-        cashFlow: "Cash Flow & Ledger",
-        operationsTab: "Fleet Operations",
-        completedArchiveTab: "Completed Archive",
-        accountsAccess: "Accounts & Access",
-        newBooking: "+ New Booking",
-        activeVehicles: "Active Vehicles",
-        inCoating: "In Coating & Curing",
-        securedDeposits: "Secured Deposits (L.E)",
-        handoverReady: "Handover Ready",
-        filterAll: "All Restoration Stages",
-        filterActive: "Active In-Bay (Under 100%)",
-        filterReady: "100% Ready for Handover",
-        filterCeramic: "Ceramic & Curing (90%+)",
-        noJobsFound: "No vehicle booking sheets found matching your search.",
-        clickNewBooking: "Click \"+ New Booking\" to intake an incoming vehicle.",
-        calendarTitle: "5-Year Workshop Master Calendar",
-        calendarSub: "Maximum capacity: 12 bookings per day. Monitored for Level 1 Owner and Level 2 Managers.",
-        today: "Today",
-        sun: "Sun", mon: "Mon", tue: "Tue", wed: "Wed", thu: "Thu", fri: "Fri", sat: "Sat",
-        bookForDate: "+ Book Car for This Date",
-        cashFlowTitle: "Cash Flow & Material Consumables",
-        cashFlowSub: "Real-time auditing of secured deposits, payment timestamps, and auto-calculated 10% material consumption.",
-        thisMonth: "This Month", thisWeek: "This Week", allTime: "All Time",
-        totalDepositsPeriod: "Gross Secured Deposits",
-        consumablesCost: "Consumables & Materials (10% Auto-Calculated)",
-        netEstProfit: "Estimated Net Profit (L.E)",
-        logExpense: "Log Consumable Expense",
-        recentDepositsLedger: "Recent Deposits & Payment Channel Ledger",
-        thTimestamp: "Payment Date & Time", thCustomer: "Customer", thVehicle: "Vehicle", thChannel: "Channel", thDeposit: "Deposit & Grand Total (L.E)", thStatus: "Status",
-        fleetOperationsTitle: "Active Operations & Fleet Velocity Intelligence",
-        fleetOperationsSub: "Real-time supervision of active bay turnaround rates, technician task completion, and business efficiency.",
-        accountsTitle: "Workshop Team & Customer Access Management",
-        accountsSub: "Level 1 Owner controls credentials and staff roles across the enterprise.",
-        ownerConsole: "Level 1 Owner Staff & Customer Credential Generator",
-        ownerConsoleSub: "Add managers, master detailers, or generate individual client login codes.",
-        staffNameLabel: "Staff Full Name *", authorityTier: "Authority Tier *", createStaffBtn: "+ Create Staff",
-        tierManager: "Level 2: Shop Manager", tierDetailer: "Level 3: Master Detailer",
-        workshopTeamTitle: "Workshop Management & Staff Team",
-        customerLoginsTitle: "Customer Dedicated Portal Logins (Generated Passes)",
-        customerLoginsSub: "Generated client login codes for separate portal access.",
-        staffLoginTitleModal: "Workshop Staff Portal Login",
-        staffLoginSubModal: "Enter your authorized credentials for secure back-office access.",
-        loginButton: "Securely Access Workshop Console",
-        newBookingModalTitle: "New Vehicle Restoration Booking Sheet",
-        newBookingModalSub: "Register incoming customer vehicle, assigned detailer bay, province, grand total, and advance deposit in L.E.",
-        custNameLabel: "Customer Full Name *", provinceLabel: "Province / Governorate *", carBrandModel: "Car Brand & Model *", carPlateLabel: "Car License Plate (Login Code) *",
-        carColorLabel: "Car Paint Color *", odometerLabel: "Mileage (KM)", entryDateLabel: "Entry Date *",
-        assignedDetailer: "Assigned Master Detailer *", grandTotalLabel: "Grand Total Service Price (L.E) *", depositAmountLabel: "Advance Deposit Amount (L.E) *",
-        paymentChannelLabel: "Payment Channel *", scopeOfWorkLabel: "Scope of Paint Restoration & Services *",
-        cancel: "Cancel", saveBookingBtn: "Save & Open Booking Sheet", exportJson: "Export JSON", import: "Import"
-      },
-      ar: {
-        revivingSoul: "إحياء الروح السيارية",
-        customerTracking: "تتبع العملاء",
-        staffLogin: "دخول الموظفين",
-        welcomeSub: "مرحباً بكم في مركز دكتور كير لترميم الطلاء في بورسعيد، مصر. اختر بوابتك أدناه لمتابعة أعمال ترميم سيارتك أو إدارة الورشة.",
-        clientPortal: "بوابة العملاء",
-        customerPortalDesc: "تتبع تقدم أعمال طلاء سيارتك مباشرة، معرض الصور الرقمي، العربون بالجنيه المصري، وإرسال التعليمات للفني.",
-        trackMyCar: "تتبع سيارتي مباشرة",
-        internalAccess: "الدخول الداخلي",
-        staffLoginTitle: "طاقم الورشة المصرح لهم",
-        staffPortalDesc: "محطة مخصصة للمؤسس (مستوى 1)، مديري الورشة (مستوى 2)، وفنيو الطلاء الأوائل (مستوى 3). إدارة الاستقبال، التدفق النقدي، التقويم، والأمان.",
-        staffLoginBtnText: "دخول الموظفين ومنطقة العمل",
-        customerLoginHeader: "بوابة تتبع العميل المباشرة",
-        customerLoginSub: "افحص تقدم ترميم سيارتك الشخصية والوديعة المؤكدة.",
-        phonePlateTab: "الهاتف ورقم اللوحة",
-        usernamePassTab: "اسم المستخدم ورمز الدخول",
-        mobileLabel: "رقم هاتف العميل المحمول *",
-        plateLabel: "رقم لوحة السيارة *",
-        usernameLabel: "اسم المستخدم المخصص للعميل *",
-        passwordLabel: "كلمة المرور (رمز الدخول المولّد) *",
-        trackButton: "تتبع ترميم سيارتي مباشرة",
-        signInButton: "تسجيل الدخول إلى لوحة تحكم سيارتي",
-        back: "رجوع",
-        intakeBay: "ساحة الاستقبال",
-        calendar: "التقويم الخماسي",
-        cashFlow: "التدفق النقدي والسجل",
-        operationsTab: "إدارة العمليات والأسطول",
-        completedArchiveTab: "أرشيف المهام المكتملة",
-        accountsAccess: "الحسابات والصلاحيات",
-        newBooking: "+ حجز جديد",
-        activeVehicles: "السيارات النشطة",
-        inCoating: "في مرحلة الطلاء والمعالجة",
-        securedDeposits: "الودائع المؤكدة (ج.م)",
-        handoverReady: "جاهزة للتسليم",
-        filterAll: "جميع مراحل الترميم",
-        filterActive: "النشطة داخل الورشة (أقل من 100%)",
-        filterReady: "جاهزة 100% للتسليم",
-        filterCeramic: "السيراميك والمعالجة (90%+)",
-        noJobsFound: "لم يتم العثور على حركات سيارات تطابق بحثك.",
-        clickNewBooking: "انقر فوق \"+ حجز جديد\" لاستقبال سيارة جديدة.",
-        calendarTitle: "التقويم الرئيسي للورشة (5 سنوات)",
-        calendarSub: "القدرة الاستيعابية القصوى: 12 سيارة يومياً. مراقب بواسطة المؤسس ومديري الورشة.",
-        today: "اليوم",
-        sun: "الأحد", mon: "الإثنين", tue: "الثلاثاء", wed: "الأربعاء", thu: "الخميس", fri: "الجمعة", sat: "السبت",
-        bookForDate: "+ حجز سيارة لهذا التاريخ",
-        cashFlowTitle: "التدفق النقدي واستهلاك المواد",
-        cashFlowSub: "مراجعة حية للودائع المؤكدة، توقيت الدفع، واستهلاك المواد المحسوب آلياً بنسبة 10%.",
-        thisMonth: "هذا الشهر", thisWeek: "هذا الأسبوع", allTime: "كل الوقت",
-        totalDepositsPeriod: "إجمالي الودائع المؤكدة",
-        consumablesCost: "تكلفة المواد (محسوبة آلية 10%)",
-        netEstProfit: "صافي الربح التقديري (ج.م)",
-        logExpense: "تسجيل مصروف مواد",
-        recentDepositsLedger: "سجل الودائع وقنوات الدفع الحديثة",
-        thTimestamp: "تاريخ ووقت الدفع", thCustomer: "العميل", thVehicle: "المركبة", thChannel: "القناة", thDeposit: "العربون وإجمالي السعر (ج.م)", thStatus: "الحالة",
-        fleetOperationsTitle: "العمليات النشطة وسرعة إنجاز الأسطول",
-        fleetOperationsSub: "مراقبة حية لسرعة الإنجاز، إتمام المهام بواسطة الفنيين، وكفاءة إدارة الورشة.",
-        accountsTitle: "إدارة فريق الورشة وحسابات العملاء",
-        accountsSub: "المؤسس (مستوى 1) يتحكم في بيانات الاعتماد وأدوار الموظفين.",
-        ownerConsole: "لوحة تخصيص صلاحيات المؤسس (مستوى 1)",
-        ownerConsoleSub: "إضافة مديرين وفنيين أوائل، وتوليد رموز دخول للعملاء.",
-        staffNameLabel: "اسم الموظف بالكامل *", authorityTier: "مستوى الصلاحية *", createStaffBtn: "+ إنشاء موظف",
-        tierManager: "المستوى 2: مدير الورشة", tierDetailer: "المستوى 3: فني طلاء أول",
-        workshopTeamTitle: "إدارة الورشة وفريق العمل",
-        customerLoginsTitle: "حسابات بوابة العملاء المخصصة (رموز الدخول)",
-        customerLoginsSub: "حسابات العملاء المعينة للدخول المباشر برمز سري.",
-        staffLoginTitleModal: "تسجيل دخول طاقم الورشة",
-        staffLoginSubModal: "أدخل بيانات اعتمادك المصرح بها للوصول الآمن.",
-        loginButton: "الدخول الآمن لوحة التحكم",
-        newBookingModalTitle: "ورقة حجز ترميم سيارة جديد",
-        newBookingModalSub: "تسجيل سيارة العميل القادمة، ساحة فني الطلاء المعين، المحافظة، الإجمالي الكلي، والعربون بالجنيه المصري.",
-        custNameLabel: "اسم العميل بالكامل *", provinceLabel: "المحافظة / الإقليم *", carBrandModel: "ماركة وموديل السيارة *", carPlateLabel: "رقم لوحة السيارة (رمز الدخول) *",
-        carColorLabel: "لون طلاء السيارة *", odometerLabel: "عداد الكيلومترات (KM)", entryDateLabel: "تاريخ الدخول *",
-        assignedDetailer: "فني الطلاء المسؤول *", grandTotalLabel: "إجمالي السعر الكلي للخدمة (ج.م) *", depositAmountLabel: "مبلغ العربون المقدم (ج.م) *",
-        paymentChannelLabel: "قناة الدفع *", scopeOfWorkLabel: "نطاق أعمال ترميم الطلاء والخدمات *",
-        cancel: "إلغاء", saveBookingBtn: "حفظ وفتح ورقة الحجز", exportJson: "تصدير JSON", import: "استيراد"
-      }
-    };
-
-    const defaultState = {
-      staff: [
-        { id: 'usr-1', name: 'Mr. Alfy', username: 'Mr.Alfy', pass: 'Mr.1000y', role: 'owner' },
-        { id: 'usr-2', name: 'Ahmed Mohsen', username: 'ahmed.mohsen', pass: '123456', role: 'manager' },
-        { id: 'usr-3', name: 'Mahmoud Detailer', username: 'mahmoud.detail', pass: '123456', role: 'detailer' }
-      ],
-      customers: [
-        { id: 'cust-1', name: 'Mohamed El-Sayed', phone: '01012345678', province: 'Port Said', plate: 'ط ر ب 1234', username: '01012345678', pass: 'ط ر ب 1234' }
-      ],
-      expenses: [
-        { id: 'exp-1', desc: 'Rupes DA Coarse Compound & Meguiar\'s Pads', amount: 1450, date: '2026-09-02' }
-      ],
-      bookings: [
-        {
-          id: 'job-1700000000001',
-          custName: 'Mohamed El-Sayed',
-          custPhone: '01012345678',
-          province: 'Port Said',
-          carModel: 'BMW 520i 2024',
-          carPlate: 'ط ر ب 1234',
-          carColor: 'Midnight Black Metallic',
-          odometer: '32,000 KM',
-          entryDate: '2026-09-01',
-          paymentTimestamp: '09/01/2026 10:15 AM',
-          assignedDetailer: 'Mahmoud Detailer',
-          grandTotal: 15000,
-          deposit: 7500,
-          paymentChannel: 'InstaPay',
-          createdBy: 'Mr. Alfy (OWNER)',
-          scope: 'Full body German paint restoration, scratch removal, 3-layer ceramic coating.',
-          progress: 85,
-          stage: 'IN_PROGRESS',
-          notes: [
-            { sender: 'Mr. Alfy (OWNER)', text: 'Initial Intake & Payment Profile Created. Deposit: 7,500 L.E via InstaPay on 09/01/2026 10:15 AM', time: '09/01/2026 10:15 AM' }
-          ],
-          photos: []
-        }
-      ],
-      completedArchive: []
-    };
-
-    let appState = JSON.parse(JSON.stringify(defaultState));
-    const dbRef = doc(db, 'artifacts', appId, 'public', 'data');
-
-    async function initCloudSync() {
-      try {
-        const snap = await getDoc(dbRef);
-        if (snap.exists()) {
-          const cloudData = snap.data();
-          if (cloudData && cloudData.staff && cloudData.bookings) {
-            appState = cloudData;
-          }
-        } else {
-          await setDoc(dbRef, defaultState);
-        }
-
-        onSnapshot(dbRef, (docSnap) => {
-          if (docSnap.exists()) {
-            const cloudData = docSnap.data();
-            if (cloudData && cloudData.staff && cloudData.bookings) {
-              appState = cloudData;
-              renderApp();
-            }
-          }
-        }, (err) => {
-          console.warn("Snapshot listener notice:", err);
-        });
-
-      } catch (err) {
-        console.warn("Cloud sync fallback to local storage:", err);
-        const local = localStorage.getItem('drcare_enterprise_fallback');
-        if (local) {
-          try { appState = JSON.parse(local); } catch(e){}
-        }
-      }
-      renderApp();
-    }
-
-    async function saveCloudState() {
-      try {
-        await setDoc(dbRef, appState);
-      } catch (err) {
-        console.warn("Cloud write error:", err);
-      }
-      localStorage.setItem('drcare_enterprise_fallback', JSON.stringify(appState));
-    }
-
-    function formatDateTime12H(isoString) {
-      if (!isoString) return '';
-      const d = new Date(isoString);
-      if (isNaN(d.getTime())) return isoString;
-      const day = String(d.getDate()).padStart(2, '0');
-      const month = String(d.getMonth() + 1).padStart(2, '0');
-      const year = d.getFullYear();
-      let hours = d.getHours();
-      const minutes = String(d.getMinutes()).padStart(2, '0');
-      const ampm = hours >= 12 ? 'PM' : 'AM';
-      hours = hours % 12;
-      hours = hours ? hours : 12;
-      return `${day}/${month}/${year} ${String(hours).padStart(2, '0')}:${minutes} ${ampm}`;
-    }
-
-    window.showToast = function(message, type = 'success') {
-      const container = document.getElementById('toastContainer');
-      if (!container) return;
-      const t = document.createElement('div');
-      t.className = `pointer-events-auto px-4 py-3 rounded-2xl text-xs font-bold shadow-2xl border flex items-center gap-2.5 transition-all animate-fadeIn ${
-        type === 'success' ? 'bg-bay-900 border-emerald-500/50 text-emerald-400' : 'bg-bay-900 border-rose-500/50 text-rose-400'
-      }`;
-      t.innerHTML = `<i class="ph-bold ${type === 'success' ? 'ph-check-circle' : 'ph-warning-circle'} text-base"></i><span>${message}</span>`;
-      container.appendChild(t);
-      setTimeout(() => {
-        t.style.opacity = '0';
-        setTimeout(() => t.remove(), 400);
-      }, 3500);
-    };
-
-    window.navigateToWelcome = function() {
-      currentUser = null;
-      activeCustomerJob = null;
-      document.getElementById('viewWelcomeGateway').classList.remove('hidden');
-      document.getElementById('viewCustomerLogin').classList.add('hidden');
-      document.getElementById('viewCustomerDashboard').classList.add('hidden');
-      document.getElementById('viewStaffBackOffice').classList.add('hidden');
-      document.getElementById('viewSheetDetail').classList.add('hidden');
-      document.getElementById('staffNavTabs').classList.add('hidden');
-      document.getElementById('authHeaderContainer').classList.remove('hidden');
-      document.getElementById('headerNewBookingBtn').classList.add('hidden');
-      document.getElementById('mobileFloatNewBookingBtn').classList.add('hidden');
-      document.getElementById('floatingMicrofiberContainer').innerHTML = '';
-    };
-
-    window.navigateToCustomerPortalGateway = function() {
-      document.getElementById('viewWelcomeGateway').classList.add('hidden');
-      document.getElementById('viewCustomerLogin').classList.remove('hidden');
-      document.getElementById('viewCustomerDashboard').classList.add('hidden');
-      document.getElementById('viewStaffBackOffice').classList.add('hidden');
-      document.getElementById('viewSheetDetail').classList.add('hidden');
-      document.getElementById('staffNavTabs').classList.add('hidden');
-      document.getElementById('headerNewBookingBtn').classList.add('hidden');
-      document.getElementById('mobileFloatNewBookingBtn').classList.add('hidden');
-      document.getElementById('floatingMicrofiberContainer').innerHTML = '';
-    };
-
-    window.switchCustomerLookupMode = function(mode) {
-      currentCustomerLookupMode = mode;
-      const btnPhone = document.getElementById('btnLookupModePhone');
-      const btnCreds = document.getElementById('btnLookupModeCreds');
-      const fPhone = document.getElementById('formCustomerPhoneLookup');
-      const fCreds = document.getElementById('formCustomerCredsLookup');
-      const indicator = document.getElementById('tabIndicator');
-
-      if (mode === 'phone') {
-        indicator.style.transform = 'translateX(0%)';
-        btnPhone.className = "relative z-10 flex-1 py-3 text-xs font-black rounded-xl text-slate-950 transition silky-tab";
-        btnCreds.className = "relative z-10 flex-1 py-3 text-xs font-black rounded-xl text-slate-400 hover:text-white transition silky-tab";
-        fPhone.classList.remove('hidden');
-        fCreds.classList.add('hidden');
-      } else {
-        indicator.style.transform = 'translateX(100%)';
-        btnCreds.className = "relative z-10 flex-1 py-3 text-xs font-black rounded-xl text-slate-950 transition silky-tab";
-        btnPhone.className = "relative z-10 flex-1 py-3 text-xs font-black rounded-xl text-slate-400 hover:text-white transition silky-tab";
-        fCreds.classList.remove('hidden');
-        fPhone.classList.add('hidden');
-      }
-    };
-
-    window.handleCustomerPhoneLookup = function(e) {
-      e.preventDefault();
-      const phone = document.getElementById('custSearchPhone').value.trim();
-      const plate = document.getElementById('custSearchPlate').value.trim().toUpperCase();
-      const found = appState.bookings.find(b => b.custPhone === phone && b.carPlate.toUpperCase() === plate);
-      if (!found) {
-        showToast("No active restoration booking found matching this phone and plate.", "error");
-        return;
-      }
-      openCustomerDashboard(found);
-    };
-
-    window.handleCustomerCredsLookup = function(e) {
-      e.preventDefault();
-      const username = document.getElementById('custSearchUsername').value.trim();
-      const pass = document.getElementById('custSearchPass').value.trim().toUpperCase();
-      const foundCust = appState.customers.find(c => c.username === username && c.pass.toUpperCase() === pass);
-      if (!foundCust) {
-        showToast("Invalid customer username or password/login code.", "error");
-        return;
-      }
-      const foundJob = appState.bookings.find(b => b.custPhone === foundCust.phone || b.carPlate.toUpperCase() === foundCust.plate.toUpperCase());
-      if (!foundJob) {
-        showToast("No active vehicle associated with this account.", "error");
-        return;
-      }
-      openCustomerDashboard(foundJob);
-    };
-
-    function openCustomerDashboard(job) {
-      activeCustomerJob = job;
-      document.getElementById('viewCustomerLogin').classList.add('hidden');
-      const dash = document.getElementById('viewCustomerDashboard');
-      dash.classList.remove('hidden');
-
-      const restAmt = Math.max(0, (Number(job.grandTotal||0) - Number(job.deposit||0)));
-
-      dash.innerHTML = `
-        <div class="space-y-6">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 rounded-3xl bg-bay-900 border border-gold-500/40 shadow-2xl">
-            <div class="flex items-center gap-3">
-              <div class="w-12 h-12 rounded-2xl bg-gold-500/10 border border-gold-500/30 flex items-center justify-center text-gold-400">
-                <i class="ph-bold ph-car text-2xl"></i>
-              </div>
-              <div>
-                <span class="text-[10px] font-mono font-bold text-gold-400 uppercase tracking-widest block">Client Portal Gateway</span>
-                <h2 class="text-xl font-black text-white">${job.carModel} (${job.carPlate})</h2>
-              </div>
-            </div>
-            <div class="flex items-center gap-2">
-              <a href="https://www.facebook.com/doctorcare1" target="_blank" class="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold flex items-center gap-1.5 transition shadow-lg">
-                <i class="ph-bold ph-messenger-logo text-base"></i> CS Support (Messenger)
-              </a>
-              <button onclick="window.navigateToCustomerPortalGateway()" class="px-4 py-2 rounded-xl bg-bay-800 text-xs font-bold text-slate-300 hover:text-white flex items-center gap-1.5 transition">
-                <i class="ph-bold ph-arrow-left"></i> Logout
-              </button>
-            </div>
-          </div>
-
-          <!-- SECTION 1: Car Details & Live Restoration Progress -->
-          <div class="bg-bay-900 border border-slate-800 rounded-3xl p-6 space-y-5 shadow-xl">
-            <h3 class="text-sm font-black text-gold-400 uppercase tracking-wider flex items-center gap-2 pb-3 border-b border-slate-800">
-              <i class="ph-bold ph-shield-check text-base"></i> Section 1: Car Details & Live Restoration Progress
-            </h3>
-
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              <div class="bg-bay-850 p-4 rounded-2xl border border-slate-800 space-y-1">
-                <span class="text-[10px] text-slate-400 font-bold uppercase">Customer & Province</span>
-                <span class="text-sm font-black text-white block">${job.custName}</span>
-                <span class="text-xs text-gold-400 block">${job.province || 'Port Said'}</span>
-              </div>
-              <div class="bg-bay-850 p-4 rounded-2xl border border-slate-800 space-y-1">
-                <span class="text-[10px] text-slate-400 font-bold uppercase">Paint Color & Mileage</span>
-                <span class="text-sm font-black text-white block">${job.carColor}</span>
-                <span class="text-xs text-amber-400 font-mono block">${job.odometer || 'N/A'}</span>
-              </div>
-              <div class="bg-bay-850 p-4 rounded-2xl border border-slate-800 space-y-1">
-                <span class="text-[10px] text-slate-400 font-bold uppercase">Assigned Master Detailer</span>
-                <span class="text-sm font-black text-white block">${job.assignedDetailer}</span>
-                <span class="text-xs text-slate-400 block">Entry: ${job.entryDate}</span>
-              </div>
-            </div>
-
-            <div class="space-y-2 bg-bay-850 p-5 rounded-2xl border border-slate-800">
-              <div class="flex items-center justify-between text-xs font-bold">
-                <span class="text-slate-300 uppercase tracking-wider">Live Bay Restoration Stage</span>
-                <span class="font-mono text-gold-400 text-sm">${job.progress}% Complete</span>
-              </div>
-              <div class="w-full bg-bay-950 rounded-full h-3 overflow-hidden border border-slate-800">
-                <div class="bg-gradient-to-r from-amber-500 to-gold-400 h-full transition-all duration-500" style="width: ${job.progress}%"></div>
-              </div>
-            </div>
-
-            <div class="space-y-3">
-              <h4 class="text-xs font-black text-white uppercase tracking-wider flex items-center gap-1.5">
-                <i class="ph-bold ph-images text-gold-400"></i> Digital Before-and-After Photo Vault
-              </h4>
-              <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                ${job.photos && job.photos.length > 0 ? job.photos.map(p => `
-                  <div class="relative group rounded-2xl overflow-hidden border border-slate-800 bg-bay-950 aspect-square">
-                    <img src="${p.url}" alt="${p.caption}" class="w-full h-full object-cover">
-                    <div class="absolute bottom-0 inset-x-0 bg-bay-950/90 p-1.5 text-[9px] text-gold-400 font-bold truncate">${p.caption}</div>
-                  </div>
-                `).join('') : '<div class="col-span-full py-6 text-center text-xs text-slate-500 bg-bay-950 rounded-2xl border border-slate-800">No photos uploaded to vault yet.</div>'}
-              </div>
-            </div>
-          </div>
-
-          <!-- SECTION 2: Payment Details & Balances -->
-          <div class="bg-bay-900 border border-slate-800 rounded-3xl p-6 space-y-5 shadow-xl">
-            <h3 class="text-sm font-black text-emerald-400 uppercase tracking-wider flex items-center gap-2 pb-3 border-b border-slate-800">
-              <i class="ph-bold ph-currency-dollar text-base"></i> Section 2: Payment Details & Settlement Summary
-            </h3>
-
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              <div class="bg-bay-850 p-4 rounded-2xl border border-slate-800 space-y-1">
-                <span class="text-[10px] text-slate-400 font-bold uppercase">Grand Total Service Price</span>
-                <span class="text-lg font-black text-gold-300 font-mono block">${job.grandTotal || 0} L.E</span>
-              </div>
-              <div class="bg-bay-850 p-4 rounded-2xl border border-slate-800 space-y-1">
-                <span class="text-[10px] text-slate-400 font-bold uppercase">Advance Deposit Paid</span>
-                <span class="text-lg font-black text-emerald-400 font-mono block">${job.deposit} L.E</span>
-                <span class="text-[9px] text-slate-400 block">${job.paymentChannel} @ ${job.paymentTimestamp || 'N/A'}</span>
-              </div>
-              <div class="bg-bay-850 p-4 rounded-2xl border border-slate-800 space-y-1">
-                <span class="text-[10px] text-slate-400 font-bold uppercase">Remaining Balance Due</span>
-                <span class="text-lg font-black text-amber-400 font-mono block">${restAmt} L.E</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Elite Paint Care Guide -->
-          <div class="bg-gradient-to-br from-bay-850 to-bay-950 p-6 rounded-3xl border border-gold-500/40 space-y-4 shadow-xl">
-            <div class="flex items-center gap-3 pb-3 border-b border-slate-800">
-              <div class="w-10 h-10 rounded-xl bg-gold-500/20 text-gold-400 flex items-center justify-center border border-gold-500/30">
-                <i class="ph-bold ph-sparkle text-xl"></i>
-              </div>
-              <div>
-                <h4 class="text-sm font-black text-white uppercase tracking-wider">Dr. Care Elite Paint Protection & Care Guide</h4>
-                <p class="text-[11px] text-slate-400">Essential instructions to preserve your fresh German clear coat and gloss.</p>
-              </div>
-            </div>
-
-            <ul class="space-y-2 text-xs text-slate-300">
-              <li class="flex items-start gap-2"><i class="ph-bold ph-check text-gold-400 mt-0.5"></i> <strong>Avoid Automatic Car Washes:</strong> Always wash by hand using a pH-neutral shampoo to prevent micro-swirls.</li>
-              <li class="flex items-start gap-2"><i class="ph-bold ph-check text-gold-400 mt-0.5"></i> <strong>Use Premium Microfiber Towels:</strong> Never dry your car with standard cotton towels. Always use plush, edgeless microfiber to eliminate dust scratching.</li>
-              <li class="flex items-start gap-2"><i class="ph-bold ph-check text-gold-400 mt-0.5"></i> <strong>Bird Droppings & Sap:</strong> Remove organic residue immediately with quick detailer spray so it doesn't etch into the clear coat.</li>
-            </ul>
-          </div>
-        </div>
-      `;
-
-      document.getElementById('floatingMicrofiberContainer').innerHTML = `
-        <div class="fixed bottom-12 right-6 z-50 floating-microfiber-now">
-          <button onclick="window.openMicrofiberModal()" class="w-16 h-16 rounded-full bg-gradient-to-r from-amber-400 via-gold-500 to-gold-600 text-slate-950 shadow-[0_0_35px_rgba(245,158,11,0.7)] flex items-center justify-center text-3xl border-2 border-slate-950 transition transform hover:scale-110 cursor-pointer" title="Request Microfiber Edgeless Towel NOW (180 L.E)">
-            <i class="ph-bold ph-sparkle"></i>
-          </button>
-        </div>
-      `;
-    }
-
-    window.openMicrofiberModal = function() {
-      document.getElementById('modalMicrofiberOrder').classList.remove('hidden');
-      window.calcMicrofiberTotal(2);
-    };
-    window.closeMicrofiberModal = function() {
-      document.getElementById('modalMicrofiberOrder').classList.add('hidden');
-    };
-
-    window.calcMicrofiberTotal = function(qty) {
-      const q = Number(qty) || 1;
-      const total = q * 180;
-      document.getElementById('mfGrandTotalDisplay').innerText = total.toLocaleString() + ' L.E';
-    };
-
-    window.submitMicrofiberOrder = function() {
-      const qty = Number(document.getElementById('mfQuantity').value) || 2;
-      const total = qty * 180;
-      if (!activeCustomerJob) return;
-
-      if (!activeCustomerJob.notes) activeCustomerJob.notes = [];
-      const nowStr = formatDateTime12H(new Date());
-      const purchaseText = `🟢 [NEW CUSTOMER PURCHASE REQUEST]: Requested ${qty}x Microfiber Edgeless Towels @ 180 L.E/pc. Total: ${total} L.E (Added to final delivery payment settlement).`;
-      activeCustomerJob.notes.push({ sender: 'Customer Microfiber Store', text: purchaseText, time: nowStr });
-      activeCustomerJob.grandTotal = (Number(activeCustomerJob.grandTotal) || 0) + total;
-
-      saveCloudState().then(() => {
-        closeMicrofiberModal();
-        showToast(`Microfiber towel order submitted successfully! Added to your booking for final delivery settlement.`);
-        openCustomerDashboard(activeCustomerJob);
-      });
-    };
-
-    window.openStaffLoginModal = function() {
-      document.getElementById('modalStaffAuth').classList.remove('hidden');
-    };
-    window.closeStaffLoginModal = function() {
-      document.getElementById('modalStaffAuth').classList.add('hidden');
-    };
-
-    window.handleStaffLoginForm = function(e) {
-      e.preventDefault();
-      const u = document.getElementById('staffLoginUser').value.trim();
-      const p = document.getElementById('staffLoginPass').value.trim();
-      const found = appState.staff.find(s => s.username.toLowerCase() === u.toLowerCase() && s.pass === p);
-      if (!found) {
-        showToast("Invalid staff username or password.", "error");
-        return;
-      }
-      currentUser = found;
-      closeStaffLoginModal();
-      document.getElementById('viewWelcomeGateway').classList.add('hidden');
-      document.getElementById('viewCustomerLogin').classList.add('hidden');
-      document.getElementById('viewCustomerDashboard').classList.add('hidden');
-      document.getElementById('authHeaderContainer').classList.add('hidden');
-      document.getElementById('staffNavTabs').classList.remove('hidden');
-      document.getElementById('viewStaffBackOffice').classList.remove('hidden');
-      document.getElementById('floatingMicrofiberContainer').innerHTML = '';
-      
-      updateStaffRoleBadge();
-      switchStaffTab('bookings');
-    };
-
-    function updateStaffRoleBadge() {
-      const titleEl = document.getElementById('staffRoleHeaderTitle');
-      const subEl = document.getElementById('staffRoleHeaderSub');
-      const badgeEl = document.getElementById('badgeActiveStaffRole');
-      const ownerExp = document.getElementById('btnOwnerExportDb');
-      const ownerImp = document.getElementById('btnOwnerImportDbLabel');
-      const accTabBtn = document.getElementById('tabBtnAccounts');
-      const fundsTabBtn = document.getElementById('tabBtnFunds');
-      const completedTabBtn = document.getElementById('tabBtnCompleted');
-      const headerNewBtn = document.getElementById('headerNewBookingBtn');
-      const mobileFloatBtn = document.getElementById('mobileFloatNewBookingBtn');
-
-      if (currentUser.role === 'owner') {
-        titleEl.innerText = "Level 1 Owner Master Workspace";
-        subEl.innerText = "Full Enterprise Access: Staff credentials, cash flow auditing, complete booking edit/delete, audit logs, and photo vaults.";
-        badgeEl.innerText = "LEVEL 1: OWNER (MR. ALFY)";
-        badgeEl.className = "text-[10px] sm:text-[11px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-gold-500/20 text-gold-400 border border-gold-500/40";
-        if (ownerExp) ownerExp.classList.remove('hidden');
-        if (ownerImp) ownerImp.classList.remove('hidden');
-        if (accTabBtn) accTabBtn.classList.remove('hidden');
-        if (fundsTabBtn) fundsTabBtn.classList.remove('hidden');
-        if (completedTabBtn) completedTabBtn.classList.remove('hidden');
-        if (headerNewBtn) headerNewBtn.classList.remove('hidden');
-        if (mobileFloatBtn) mobileFloatBtn.classList.remove('hidden');
-      } else if (currentUser.role === 'manager') {
-        titleEl.innerText = "Level 2 Manager Operations Bay";
-        subEl.innerText = "Manager Access: Calendar, Cash Flow, Milestone Payment Logging, Settlement & Delivery Archiving.";
-        badgeEl.innerText = "LEVEL 2: SHOP MANAGER";
-        badgeEl.className = "text-[10px] sm:text-[11px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-cyan-500/20 text-cyan-400 border border-cyan-500/40";
-        if (ownerExp) ownerExp.classList.add('hidden');
-        if (ownerImp) ownerImp.classList.add('hidden');
-        if (accTabBtn) accTabBtn.classList.add('hidden');
-        if (fundsTabBtn) fundsTabBtn.classList.remove('hidden');
-        if (completedTabBtn) completedTabBtn.classList.remove('hidden');
-        if (headerNewBtn) headerNewBtn.classList.remove('hidden');
-        if (mobileFloatBtn) mobileFloatBtn.classList.remove('hidden');
-      } else {
-        titleEl.innerText = `Level 3 Master Detailer Terminal — ${currentUser.name}`;
-        subEl.innerText = "Detailer Access: Select your assigned task to start stopwatch and upload before-and-after photos.";
-        badgeEl.innerText = "LEVEL 3: MASTER DETAILER";
-        badgeEl.className = "text-[10px] sm:text-[11px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-400 border border-amber-500/40";
-        if (ownerExp) ownerExp.classList.add('hidden');
-        if (ownerImp) ownerImp.classList.add('hidden');
-        if (accTabBtn) accTabBtn.classList.add('hidden');
-        if (fundsTabBtn) fundsTabBtn.classList.add('hidden');
-        if (completedTabBtn) completedTabBtn.classList.add('hidden');
-        if (headerNewBtn) headerNewBtn.classList.add('hidden');
-        if (mobileFloatBtn) mobileFloatBtn.classList.add('hidden');
-      }
-    }
-
-    window.switchStaffTab = function(tab) {
-      if (currentUser && currentUser.role === 'detailer' && (tab === 'funds' || tab === 'accounts' || tab === 'completedArchive')) {
-        showToast("Access restricted. Master Detailers can only manage assigned tasks.", "error");
-        return;
-      }
-      if (currentUser && currentUser.role === 'manager' && tab === 'accounts') {
-        showToast("Staff accounts and passwords are restricted to Level 1 Owner.", "error");
-        return;
-      }
-
-      activeStaffTab = tab;
-      const bBookings = document.getElementById('tabBtnBookings');
-      const bCal = document.getElementById('tabBtnCalendar');
-      const bFunds = document.getElementById('tabBtnFunds');
-      const bAna = document.getElementById('tabBtnAnalytics');
-      const bComp = document.getElementById('tabBtnCompleted');
-      const bAcc = document.getElementById('tabBtnAccounts');
-
-      const sBookings = document.getElementById('subViewBookings');
-      const sCal = document.getElementById('subViewCalendar');
-      const sFunds = document.getElementById('subViewFunds');
-      const sAna = document.getElementById('subViewAnalytics');
-      const sComp = document.getElementById('subViewCompletedArchive');
-      const sAcc = document.getElementById('subViewAccounts');
-
-      [bBookings, bCal, bFunds, bAna, bComp, bAcc].forEach(b => {
-        if (b) {
-          b.className = "px-3 py-1.5 rounded-xl text-xs font-bold transition text-slate-400 hover:text-white whitespace-nowrap";
-        }
-      });
-      [sBookings, sCal, sFunds, sAna, sComp, sAcc].forEach(s => {
-        if (s) s.classList.add('hidden');
-      });
-
-      if (tab === 'bookings') {
-        if (bBookings) bBookings.className = "px-3 py-1.5 rounded-xl text-xs font-bold transition text-gold-400 bg-gold-500/10 border border-gold-500/30 whitespace-nowrap";
-        if (sBookings) sBookings.classList.remove('hidden');
-        renderBookingsGrid();
-      } else if (tab === 'calendar') {
-        if (bCal) bCal.className = "px-3 py-1.5 rounded-xl text-xs font-bold transition text-gold-400 bg-gold-500/10 border border-gold-500/30 whitespace-nowrap";
-        if (sCal) sCal.classList.remove('hidden');
-        renderCalendar();
-      } else if (tab === 'funds') {
-        if (bFunds) bFunds.className = "px-3 py-1.5 rounded-xl text-xs font-bold transition text-gold-400 bg-gold-500/10 border border-gold-500/30 whitespace-nowrap";
-        if (sFunds) sFunds.classList.remove('hidden');
-        renderFundsCircuit();
-      } else if (tab === 'analytics') {
-        if (bAna) bAna.className = "px-3 py-1.5 rounded-xl text-xs font-bold transition text-gold-400 bg-gold-500/10 border border-gold-500/30 whitespace-nowrap";
-        if (sAna) {
-          sAna.classList.remove('hidden');
-          renderFleetOperations();
-        }
-      } else if (tab === 'completedArchive') {
-        if (bComp) bComp.className = "px-3 py-1.5 rounded-xl text-xs font-bold transition text-gold-400 bg-gold-500/10 border border-gold-500/30 whitespace-nowrap";
-        if (sComp) {
-          sComp.classList.remove('hidden');
-          renderCompletedArchive();
-        }
-      } else if (tab === 'accounts') {
-        if (bAcc) bAcc.className = "px-3 py-1.5 rounded-xl text-xs font-bold transition text-gold-400 bg-gold-500/10 border border-gold-500/30 whitespace-nowrap";
-        if (sAcc) sAcc.classList.remove('hidden');
-        renderAccountsLists();
-      }
-    };
-
-    function renderBookingsGrid() {
-      const container = document.getElementById('gridBookingsContainer');
-      const emptyState = document.getElementById('bookingsEmptyState');
-      if (!container) return;
-
-      let list = appState.bookings;
-      
-      if (currentUser && currentUser.role === 'detailer') {
-        list = list.filter(b => b.assignedDetailer && b.assignedDetailer.toLowerCase().includes(currentUser.name.toLowerCase().split(' ')[0]));
-      }
-
-      const searchVal = (document.getElementById('inputSearchJobs')?.value || '').toLowerCase();
-      const stageFilter = document.getElementById('selectStageFilter')?.value || 'ALL';
-
-      if (searchVal) {
-        list = list.filter(b => 
-          b.custName.toLowerCase().includes(searchVal) ||
-          b.carModel.toLowerCase().includes(searchVal) ||
-          b.carPlate.toLowerCase().includes(searchVal) ||
-          b.custPhone.toLowerCase().includes(searchVal)
-        );
-      }
-
-      if (stageFilter === 'IN_PROGRESS') {
-        list = list.filter(b => b.progress < 100);
-      } else if (stageFilter === 'COMPLETED') {
-        list = list.filter(b => b.progress >= 100);
-      } else if (stageFilter === 'CERAMIC') {
-        list = list.filter(b => b.progress >= 90);
-      }
-
-      const totalActive = appState.bookings.length;
-      const inCoating = appState.bookings.filter(b => b.progress >= 50 && b.progress < 100).length;
-      const totalDep = appState.bookings.reduce((acc, curr) => acc + (Number(curr.deposit) || 0), 0);
-      const readyHandover = appState.bookings.filter(b => b.progress >= 100).length;
-
-      document.getElementById('metricTotalActive').innerText = totalActive;
-      document.getElementById('metricInCoating').innerText = inCoating;
-      document.getElementById('metricTotalDeposits').innerText = totalDep.toLocaleString() + ' L.E';
-      document.getElementById('metricReadyHandover').innerText = readyHandover;
-
-      if (currentUser && currentUser.role === 'detailer') {
-        const depCard = document.getElementById('metricCardDeposits');
-        if (depCard) depCard.classList.add('hidden');
-      }
-
-      if (list.length === 0) {
-        container.innerHTML = '';
-        emptyState.classList.remove('hidden');
-        return;
-      }
-      emptyState.classList.add('hidden');
-
-      container.innerHTML = list.map(b => {
-        const hasNewPurchase = b.notes && b.notes.some(n => n.text && n.text.includes('NEW CUSTOMER PURCHASE'));
-        const sw = detailerStopwatches[b.id];
-        const timerActive = sw && sw.running;
-
-        return `
-          <div ondblclick="window.openVehicleDetailSheet('${b.id}')" class="bg-bay-900 border ${hasNewPurchase ? 'border-emerald-500 shadow-[0_0_20px_rgba(16,185,129,0.25)]' : 'border-slate-800'} hover:border-gold-500/50 rounded-3xl p-5 transition-all shadow-xl flex flex-col justify-between space-y-4 relative group">
-            <div class="absolute top-3 right-3 flex items-center gap-1.5">
-              ${hasNewPurchase ? '<span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 text-[9px] font-mono font-bold animate-pulse">🛒 New Purchase Request</span>' : ''}
-              <span class="text-[10px] font-mono text-slate-500 group-hover:text-gold-400 transition">Double-click to open</span>
-            </div>
-            
-            <div class="space-y-2 cursor-pointer pt-3" onclick="window.openVehicleDetailSheet('${b.id}')">
-              <div class="flex items-center justify-between">
-                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-gold-500/20 text-gold-400 border border-gold-500/30 uppercase font-bold">${b.carPlate}</span>
-                <span class="text-xs font-mono font-bold ${b.progress >= 100 ? 'text-emerald-400' : 'text-amber-400'}">${b.progress}% Complete</span>
-              </div>
-              <h3 class="text-base font-black text-white">${b.carModel}</h3>
-              <p class="text-xs text-slate-400 flex items-center gap-1.5"><i class="ph-bold ph-user text-gold-400"></i> ${b.custName} — <span class="text-gold-300 font-bold">${b.province || 'Port Said'}</span></p>
-            </div>
-
-            <div class="space-y-3 pt-2 border-t border-slate-800/80">
-              <div class="w-full bg-bay-950 rounded-full h-2 overflow-hidden border border-slate-800 cursor-pointer" onclick="window.openVehicleDetailSheet('${b.id}')">
-                <div class="bg-gradient-to-r from-amber-500 to-gold-400 h-full" style="width: ${b.progress}%"></div>
-              </div>
-              
-              <div class="flex items-center justify-between text-[11px] text-slate-400">
-                <span class="cursor-pointer" onclick="window.openVehicleDetailSheet('${b.id}')">Detailer: <strong class="text-white">${b.assignedDetailer}</strong></span>
-                ${timerActive ? `<span class="font-mono text-xs text-amber-400 animate-pulse font-bold">⏱️ Active Stopwatch</span>` : ''}
-                ${currentUser && currentUser.role !== 'detailer' ? `<span class="text-emerald-400 font-mono font-bold">${b.deposit} L.E</span>` : ''}
-              </div>
-
-              ${currentUser && currentUser.role === 'detailer' ? `
-                <div class="space-y-2 pt-1">
-                  ${!timerActive ? `
-                    <button onclick="window.startDetailerStopwatch('${b.id}')" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-gold-500 hover:from-amber-400 hover:to-gold-400 text-slate-950 font-black text-xs uppercase tracking-wider transition shadow-md flex items-center justify-center gap-1.5">
-                      <i class="ph-bold ph-play-circle text-base"></i> Start Task & Stopwatch
-                    </button>
-                  ` : `
-                    <button onclick="window.stopDetailerStopwatchAndFeedback('${b.id}')" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-black text-xs uppercase tracking-wider transition shadow-md flex items-center justify-center gap-1.5">
-                      <i class="ph-bold ph-stop-circle text-base"></i> Give Feedback & Complete Task
-                    </button>
-                  `}
+                <div class="bg-stone-950 p-2.5 rounded-xl border border-stone-800 text-center">
+                    <span class="block text-sm font-bold text-amber-400">2-3 Days</span>
+                    <span class="text-[10px] text-stone-400" data-en="Precision Scratch Healing" data-ar="علاج الخدوش بدقة">Precision Healing</span>
                 </div>
-              ` : ''}
             </div>
-          </div>
-        `;
-      }).join('');
-    }
+        </div>
 
-    window.startDetailerStopwatch = function(jobId) {
-      const job = appState.bookings.find(b => b.id === jobId);
-      if (!job) return;
-      
-      const startTime = Date.now();
-      detailerStopwatches[jobId] = { startTime: startTime, running: true };
-
-      if (!job.notes) job.notes = [];
-      const nowStr = formatDateTime12H(new Date());
-      const alertText = `⏱️ Stopwatch started by Master Detailer [${currentUser.name}] for ${job.carModel} (${job.carPlate}) at ${nowStr}.`;
-      job.notes.push({ sender: 'System Stopwatch', text: alertText, time: nowStr });
-      
-      saveCloudState().then(() => {
-        showToast(`Stopwatch started for ${job.carModel}! Management notified.`);
-        renderBookingsGrid();
-      });
-    };
-
-    window.stopDetailerStopwatchAndFeedback = function(jobId) {
-      const job = appState.bookings.find(b => b.id === jobId);
-      if (!job) return;
-
-      const sw = detailerStopwatches[jobId];
-      let elapsedStr = "N/A";
-      if (sw && sw.startTime) {
-        const diffSec = Math.floor((Date.now() - sw.startTime) / 1000);
-        const hrs = Math.floor(diffSec / 3600);
-        const mins = Math.floor((diffSec % 3600) / 60);
-        elapsedStr = `${hrs} hours ${mins} minutes`;
-        sw.running = false;
-      }
-
-      const feedback = prompt("Enter technical feedback / car status notes upon task completion:", "Restoration coat polished & cured successfully.");
-      if (feedback === null) return;
-
-      const nowStr = formatDateTime12H(new Date());
-      if (!job.notes) job.notes = [];
-      job.notes.push({ sender: `Detailer Feedback [${currentUser.name}]`, text: `🏁 Task Completed in [${elapsedStr}]. Feedback: ${feedback}`, time: nowStr });
-      job.progress = 100;
-      job.stage = 'COMPLETED';
-
-      saveCloudState().then(() => {
-        showToast(`Task completed in ${elapsedStr}! Feedback saved.`);
-        renderBookingsGrid();
-      });
-    };
-
-    window.debounceSearchBookings = function() {
-      renderBookingsGrid();
-    };
-
-    window.filterBookingsGrid = function() {
-      renderBookingsGrid();
-    };
-
-    window.openNewBookingModal = function() {
-      if (!currentUser || currentUser.role === 'detailer') {
-        showToast("Master Detailers are restricted to viewing assigned tasks and photo uploads.", "error");
-        return;
-      }
-      document.getElementById('modalNewBooking').classList.remove('hidden');
-      const today = new Date().toISOString().split('T')[0];
-      document.getElementById('nbEntryDate').value = today;
-      
-      const nowLocal = new Date().toISOString().substring(0, 16);
-      document.getElementById('nbPaymentDatetime').value = nowLocal;
-
-      const detailerSelect = document.getElementById('nbAssignedDetailer');
-      const detailers = appState.staff.filter(s => s.role === 'detailer');
-      if (detailers.length > 0) {
-        detailerSelect.innerHTML = detailers.map(d => `<option value="${d.name}">${d.name}</option>`).join('');
-      }
-    };
-
-    window.closeNewBookingModal = function() {
-      document.getElementById('modalNewBooking').classList.add('hidden');
-    };
-
-    window.handleSaveNewBooking = function(e) {
-      e.preventDefault();
-      const paymentDtInput = document.getElementById('nbPaymentDatetime').value;
-      const formattedDt = paymentDtInput ? formatDateTime12H(paymentDtInput) : formatDateTime12H(new Date());
-      const creatorName = currentUser ? `${currentUser.name} (${currentUser.role.toUpperCase()})` : 'System';
-
-      const newJob = {
-        id: 'job-' + Date.now(),
-        custName: document.getElementById('nbCustName').value.trim(),
-        custPhone: document.getElementById('nbCustPhone').value.trim(),
-        province: document.getElementById('nbProvince').value.trim(),
-        carModel: document.getElementById('nbCarModel').value.trim(),
-        carPlate: document.getElementById('nbCarPlate').value.trim().toUpperCase(),
-        carColor: document.getElementById('nbCarColor').value.trim(),
-        odometer: document.getElementById('nbOdometer').value.trim() || '0 KM',
-        entryDate: document.getElementById('nbEntryDate').value,
-        paymentTimestamp: formattedDt,
-        assignedDetailer: document.getElementById('nbAssignedDetailer').value,
-        grandTotal: Number(document.getElementById('nbGrandTotal').value) || 0,
-        deposit: Number(document.getElementById('nbDeposit').value) || 0,
-        paymentChannel: document.getElementById('nbPaymentChannel').value,
-        createdBy: creatorName,
-        scope: document.getElementById('nbScope').value.trim(),
-        progress: 10,
-        stage: 'IN_PROGRESS',
-        notes: [
-          { sender: `Profile Created by ${creatorName}`, text: `Initial Intake Profile & Payment Schedule created on ${formattedDt}. Grand Total: ${document.getElementById('nbGrandTotal').value} L.E | Deposit: ${document.getElementById('nbDeposit').value} L.E via ${document.getElementById('nbPaymentChannel').value}`, time: formattedDt }
-        ],
-        photos: []
-      };
-
-      const existingCust = appState.customers.find(c => c.phone === newJob.custPhone);
-      if (!existingCust) {
-        appState.customers.push({
-          id: 'cust-' + Date.now(),
-          name: newJob.custName,
-          phone: newJob.custPhone,
-          province: newJob.province,
-          plate: newJob.carPlate,
-          username: newJob.custPhone,
-          pass: newJob.carPlate
-        });
-      }
-
-      appState.bookings.unshift(newJob);
-      saveCloudState().then(() => {
-        closeNewBookingModal();
-        document.getElementById('formNewBooking').reset();
-        renderBookingsGrid();
-        window.dispatchWhatsAppNotification(newJob, "New Vehicle Intake & Payment Deal Confirmation");
-        showToast("New customer booking profile successfully registered with payment schedule!");
-        openVehicleDetailSheet(newJob.id);
-      });
-    };
-
-    window.dispatchWhatsAppNotification = function(job, customTitle = "Restoration Update") {
-      let phoneClean = job.custPhone.trim();
-      if (phoneClean.startsWith('0')) phoneClean = '+20' + phoneClean.substring(1);
-      else if (!phoneClean.startsWith('+')) phoneClean = '+20' + phoneClean;
-
-      const restAmt = Math.max(0, (Number(job.grandTotal||0) - Number(job.deposit||0)));
-      const msg = encodeURIComponent(
-        `🚗 *DR.CARE PAINT RESTORATION CENTRE* (Port Said)\n\n` +
-        `Dear *${job.custName}* (${job.province || 'Port Said'}),\n` +
-        `_${customTitle}_\n\n` +
-        `• *Vehicle*: ${job.carModel} (${job.carPlate})\n` +
-        `• *Grand Total*: ${job.grandTotal || 0} L.E\n` +
-        `• *Paid Deposit*: ${job.deposit} L.E (${job.paymentChannel} @ ${job.paymentTimestamp || 'N/A'})\n` +
-        `• *Remaining Balance*: ${restAmt} L.E (Due upon delivery)\n` +
-        `• *Assigned Detailer*: ${job.assignedDetailer}\n\n` +
-        `Track live via Client Portal using your phone and plate.\n` +
-        `Reviving the Automotive Soul!`
-      );
-      window.open(`https://wa.me/${phoneClean.replace('+', '')}?text=${msg}`, '_blank');
-    };
-
-    window.openVehicleDetailSheet = function(jobId) {
-      currentDetailSheetId = jobId;
-      
-      let job = appState.bookings.find(b => b.id === jobId);
-      let isArchived = false;
-      if (!job && appState.completedArchive) {
-        job = appState.completedArchive.find(b => b.id === jobId);
-        isArchived = true;
-      }
-      if (!job) return;
-
-      document.getElementById('subViewBookings').classList.add('hidden');
-      document.getElementById('subViewCalendar').classList.add('hidden');
-      document.getElementById('subViewFunds').classList.add('hidden');
-      document.getElementById('subViewAnalytics').classList.add('hidden');
-      document.getElementById('subViewCompletedArchive').classList.add('hidden');
-      document.getElementById('subViewAccounts').classList.add('hidden');
-
-      const view = document.getElementById('viewSheetDetail');
-      view.classList.remove('hidden');
-
-      const isOwner = currentUser && currentUser.role === 'owner';
-      const isManagerOrOwner = currentUser && (currentUser.role === 'owner' || currentUser.role === 'manager');
-      const restAmt = Math.max(0, (Number(job.grandTotal||0) - Number(job.deposit||0)));
-
-      view.innerHTML = `
-        <div class="bg-bay-900 border border-gold-500/40 rounded-3xl p-6 sm:p-10 shadow-2xl space-y-8">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-800">
-            <div class="flex items-center gap-3">
-              <div class="w-14 h-14 rounded-2xl gold-leather-badge flex items-center justify-center p-2">
-                <svg viewBox="0 0 100 100" class="w-10 h-10" style="filter: url(#drCare3dEmboss)">
-                  <use href="#drCareEmblem" />
-                </svg>
-              </div>
-              <div>
-                <span class="text-[10px] font-mono font-bold text-gold-400 uppercase tracking-widest block">Dr.Care Official Enterprise Job Card ${isArchived ? '(Archived / Completed)' : ''}</span>
-                <h2 class="text-2xl font-black text-white">${job.carModel} (${job.carPlate})</h2>
-              </div>
-            </div>
-
-            <div class="flex items-center gap-2 flex-wrap">
-              <button onclick="window.dispatchWhatsAppNotification(appState.bookings.find(b => b.id === '${job.id}') || appState.completedArchive.find(b => b.id === '${job.id}'), 'Milestone Progress Update: ${job.progress}%')" class="px-3 py-2 rounded-xl bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-xs font-bold transition flex items-center gap-1.5">
-                <i class="ph-bold ph-whatsapp-logo"></i> Send WhatsApp Milestone
-              </button>
-              
-              ${isManagerOrOwner && !isArchived ? `
-                <button onclick="window.openSettleModal('${job.id}')" class="px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-black text-xs uppercase tracking-wider transition shadow-lg flex items-center gap-1.5">
-                  <i class="ph-bold ph-check-square text-base"></i> Settle & Deliver
-                </button>
-              ` : ''}
-
-              <button onclick="window.closeVehicleDetailSheet()" class="px-4 py-2 rounded-xl bg-bay-800 text-xs font-bold text-slate-300 hover:text-white flex items-center gap-1.5 transition">
-                <i class="ph-bold ph-arrow-left"></i> Back
-              </button>
-              ${isOwner ? `
-                <button onclick="window.deleteBookingAnywhere('${job.id}')" class="px-3 py-2 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/30 text-xs font-bold transition flex items-center gap-1">
-                  <i class="ph-bold ph-trash"></i> Delete Profile
-                </button>
-              ` : ''}
-            </div>
-          </div>
-
-          <div class="grid grid-cols-1 sm:grid-cols-4 gap-4">
-            <div class="bg-bay-850 p-4 rounded-2xl border border-slate-800 space-y-1">
-              <span class="text-[10px] text-slate-400 font-bold uppercase">Customer & Province</span>
-              <span class="text-sm font-black text-white block">${job.custName}</span>
-              <span class="text-xs text-gold-400 block">${job.province || 'Port Said'} (${job.custPhone})</span>
-              <span class="text-[9px] text-slate-500 block pt-1">Profile Created By: <strong>${job.createdBy || 'System'}</strong></span>
-            </div>
-            <div class="bg-bay-850 p-4 rounded-2xl border border-slate-800 space-y-1">
-              <span class="text-[10px] text-slate-400 font-bold uppercase">Paint Color & Mileage</span>
-              <span class="text-sm font-black text-white block">${job.carColor}</span>
-              <span class="text-xs text-amber-400 font-mono block">${job.odometer}</span>
-            </div>
-            <div class="bg-bay-850 p-4 rounded-2xl border border-slate-800 space-y-1">
-              <span class="text-[10px] text-slate-400 font-bold uppercase">Assigned Master Detailer</span>
-              <span class="text-sm font-black text-white block">${job.assignedDetailer}</span>
-              <span class="text-xs text-slate-400 block">Entry: ${job.entryDate}</span>
-            </div>
-            <div class="bg-bay-850 p-4 rounded-2xl border border-slate-800 space-y-1">
-              <span class="text-[10px] text-slate-400 font-bold uppercase">Grand Total & Balance</span>
-              <span class="text-sm font-black text-gold-300 font-mono block">Grand Total: ${job.grandTotal || 0} L.E</span>
-              <span class="text-xs font-black text-emerald-400 font-mono block">Paid: ${job.deposit} L.E</span>
-              <span class="text-[10px] text-amber-400 block">Rest: ${restAmt} L.E</span>
-            </div>
-          </div>
-
-          ${isManagerOrOwner && !isArchived ? `
-            <div class="bg-bay-850 p-5 rounded-3xl border border-gold-500/30 space-y-4 shadow-xl">
-              <div class="flex items-center justify-between pb-2 border-b border-slate-800">
-                <span class="text-xs font-black text-white uppercase tracking-wider flex items-center gap-1.5">
-                  <i class="ph-bold ph-currency-dollar text-gold-400"></i> Manage Payment Milestones & Subsequent Installments
-                </span>
-                <span class="text-xs font-mono font-bold text-emerald-400">Collected: ${job.deposit || 0} L.E / Balance: ${restAmt} L.E</span>
-              </div>
-              <div class="grid grid-cols-1 sm:grid-cols-4 gap-3">
-                <input type="number" id="editAddPaymentAmount" placeholder="New payment amount (L.E)" class="border border-slate-700 rounded-xl px-3 py-2.5 text-xs font-mono">
-                <input type="datetime-local" id="editAddPaymentTimestamp" class="border border-slate-700 rounded-xl px-3 py-2.5 text-xs font-mono text-white">
-                <select id="editAddPaymentChannel" class="border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white">
-                  <option value="Cash">Cash in Hand (نقدي)</option>
-                  <option value="InstaPay">InstaPay (انستا باي)</option>
-                  <option value="Wallet">Mobile Wallet (محفظة)</option>
-                  <option value="Card">Visa / POS Card (بطاقة)</option>
-                </select>
-                <button onclick="window.recordInstallmentPayment('${job.id}')" class="py-2.5 rounded-xl bg-gold-500 hover:bg-gold-400 text-slate-950 font-black text-xs uppercase tracking-wider transition shadow-lg">
-                  + Save Installment
-                </button>
-              </div>
-            </div>
-          ` : ''}
-
-          <div class="space-y-3 bg-bay-850 p-6 rounded-3xl border border-slate-800">
-            <span class="text-xs font-black text-white uppercase tracking-wider block">Scope of Restoration Services</span>
-            <p class="text-xs text-slate-300 leading-relaxed">${job.scope}</p>
-          </div>
-
-          <div class="space-y-4 bg-bay-850 p-6 rounded-3xl border border-slate-800">
-            <div class="flex items-center justify-between">
-              <span class="text-xs font-black text-white uppercase tracking-wider flex items-center gap-1.5">
-                <i class="ph-bold ph-images text-gold-400"></i> Digital Before-and-After Photo Vault
-              </span>
-              <label class="px-3 py-1.5 rounded-xl bg-gold-500 hover:bg-gold-400 text-slate-950 font-black text-xs uppercase tracking-wider transition cursor-pointer flex items-center gap-1">
-                <i class="ph-bold ph-camera"></i> + Upload Photo
-                <input type="file" accept="image/*" class="hidden" onchange="window.handleUploadJobPhoto(event, '${job.id}')">
-              </label>
-            </div>
-            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-              ${job.photos && job.photos.length > 0 ? job.photos.map(p => `
-                <div class="relative group rounded-2xl overflow-hidden border border-slate-800 bg-bay-950 aspect-square">
-                  <img src="${p.url}" alt="${p.caption}" class="w-full h-full object-cover">
-                  <div class="absolute bottom-0 inset-x-0 bg-bay-950/90 p-1.5 text-[9px] text-gold-400 font-bold truncate">${p.caption}</div>
+        <!-- Materials Showcase -->
+        <div class="bg-stone-900/60 border border-stone-800 rounded-2xl p-5 shadow-lg">
+            <h3 class="text-xs font-bold uppercase tracking-wider text-amber-400 mb-3 serif-brand" data-en="Global Gold Standard Materials" data-ar="معايير عالمية لا تقبل التنازل">Global Gold Standard Materials</h3>
+            <div class="grid grid-cols-2 gap-3 text-center">
+                <div class="bg-stone-950 p-3 rounded-xl border border-stone-800">
+                    <span class="block font-bold text-sm text-stone-100">Meguiar's</span>
+                    <span class="text-[10px] text-stone-400" data-en="American Gloss Tech" data-ar="تكنولوجيا اللمعان الأمريكية">American Gloss Tech</span>
                 </div>
-              `).join('') : '<div class="col-span-full py-6 text-center text-xs text-slate-500 bg-bay-950 rounded-2xl border border-slate-800">No photos uploaded to vault yet. Click "+ Upload Photo" to record before-and-after car processing steps.</div>'}
+                <div class="bg-stone-950 p-3 rounded-xl border border-stone-800">
+                    <span class="block font-bold text-sm text-stone-100">Rupes</span>
+                    <span class="text-[10px] text-stone-400" data-en="European Precision" data-ar="التشطيب الأوروبي الدقيق">European Precision</span>
+                </div>
             </div>
-          </div>
+        </div>
 
-          ${!isArchived ? `
-            <div class="space-y-4 bg-bay-850 p-6 rounded-3xl border border-gold-500/30">
-              <div class="flex items-center justify-between">
-                <span class="text-xs font-black text-white uppercase tracking-wider">Restoration Stage & Progress Slider</span>
-                <span id="labelDetailProgress" class="text-sm font-mono font-bold text-gold-400">${job.progress}%</span>
-              </div>
-              <input type="range" id="rangeJobProgress" min="0" max="100" value="${job.progress}" oninput="window.updateJobProgressSlider(this.value)"
-                class="w-full">
-              <div class="flex justify-between text-[10px] font-mono text-slate-400">
-                <span>0% Intake</span>
-                <span>25% Prep & Sanding</span>
-                <span>50% Base Coat</span>
-                <span>75% Ceramic/Clear</span>
-                <span>100% Handover</span>
-              </div>
-            </div>
-          ` : ''}
-
-          <div class="space-y-3">
-            <h3 class="text-xs font-black text-white uppercase tracking-wider flex items-center gap-1.5">
-              <i class="ph-bold ph-chat-text text-gold-400"></i> Workshop & Customer Communication Notes (Audit Trail)
-            </h3>
-            <div class="space-y-2 max-h-56 overflow-y-auto p-4 rounded-3xl bg-bay-950 border border-slate-800">
-              ${job.notes && job.notes.length > 0 ? job.notes.map(n => {
-                const isPurchase = n.text && n.text.includes('NEW CUSTOMER PURCHASE');
-                return `
-                  <div class="p-3 rounded-2xl ${isPurchase ? 'bg-emerald-950/60 border border-emerald-500/40 text-emerald-300' : 'bg-bay-850 text-slate-200'} text-xs space-y-1">
-                    <div class="flex items-center justify-between text-[10px] font-mono text-slate-400">
-                      <span class="font-bold ${isPurchase ? 'text-emerald-400' : 'text-gold-400'}">${n.sender}</span>
-                      <span>${n.time}</span>
+        <!-- Packages & Pricing Menu Preview (Updated: 550, 670, 965) -->
+        <div class="bg-stone-900/60 border border-stone-800 rounded-2xl p-5 space-y-3 shadow-lg">
+            <h3 class="text-xs font-bold uppercase tracking-wider text-amber-400 serif-brand" data-en="Dry Wash Packages & Pricing" data-ar="باقات وأسعار الغسيل الجاف">Dry Wash Packages & Pricing</h3>
+            <div class="space-y-2">
+                <div class="bg-stone-950 p-3 rounded-xl border border-stone-800 flex justify-between items-center">
+                    <div>
+                        <p class="text-xs font-bold text-stone-100" data-en="Standard Exterior" data-ar="الباقة الأساسية">Standard Exterior</p>
+                        <p class="text-[10px] text-stone-400" data-en="Shining restoration (45 mins)" data-ar="استعادة اللمعان (45 دقيقة)">Shining restoration (45 mins)</p>
                     </div>
-                    <p>${n.text}</p>
-                  </div>
-                `;
-              }).join('') : '<p class="text-xs text-slate-500 text-center py-4">No notes recorded yet.</p>'}
-            </div>
-
-            <div class="flex gap-2">
-              <input type="text" id="inputStaffNote" placeholder="Type technical note or update for customer..."
-                class="flex-1 border border-slate-700 rounded-2xl px-4 py-3 text-xs">
-              <button onclick="window.sendStaffNote('${job.id}')" class="px-6 py-3 rounded-2xl bg-gold-500 hover:bg-gold-400 text-slate-950 font-black text-xs uppercase tracking-wider transition">
-                Add Note
-              </button>
-            </div>
-          </div>
-        </div>
-      `;
-    }
-
-    window.openSettleModal = function(jobId) {
-      const job = appState.bookings.find(b => b.id === jobId);
-      if (!job) return;
-      const restAmt = Math.max(0, (Number(job.grandTotal||0) - Number(job.deposit||0)));
-
-      const fullPaidConfirmed = confirm(`Settle & Deliver Vehicle: ${job.carModel} (${job.carPlate})\n\nRemaining Balance Due: ${restAmt} L.E\n\n[CHECKBOX CONFIRMATION]: Did you receive the full amount (${job.grandTotal} L.E total) and hand over the vehicle to the customer?`);
-      if (fullPaidConfirmed) {
-        job.stage = 'COMPLETED';
-        job.progress = 100;
-        const nowStr = formatDateTime12H(new Date());
-        if (!job.notes) job.notes = [];
-        job.notes.push({ sender: `Settled by ${currentUser.name} (${currentUser.role.toUpperCase()})`, text: `✅ [FULL AMOUNT RECEIVED & SETTLED]: Vehicle delivered to customer on ${nowStr}. Balance of ${restAmt} L.E verified and cleared.`, time: nowStr });
-
-        if (!appState.completedArchive) appState.completedArchive = [];
-        appState.completedArchive.unshift({
-          ...job,
-          deliveryTimestamp: nowStr
-        });
-        appState.bookings = appState.bookings.filter(b => b.id !== jobId);
-
-        saveCloudState().then(() => {
-          closeVehicleDetailSheet();
-          switchStaffTab('completedArchive');
-          showToast(`Vehicle successfully settled, delivered, and moved to Completed Archive!`);
-        });
-      }
-    };
-
-    window.renderCompletedArchive = function() {
-      const tbody = document.getElementById('completedArchiveTableBody');
-      if (!tbody) return;
-
-      let list = appState.completedArchive || [];
-      const search = (document.getElementById('archiveSearchInput')?.value || '').toLowerCase();
-      const yr = document.getElementById('archiveYearFilter')?.value || 'ALL';
-      const mo = document.getElementById('archiveMonthFilter')?.value || 'ALL';
-
-      if (search) {
-        list = list.filter(b => 
-          b.carModel.toLowerCase().includes(search) ||
-          b.custName.toLowerCase().includes(search) ||
-          b.carPlate.toLowerCase().includes(search) ||
-          b.custPhone.toLowerCase().includes(search) ||
-          b.scope.toLowerCase().includes(search)
-        );
-      }
-
-      if (yr !== 'ALL') {
-        list = list.filter(b => b.deliveryTimestamp && b.deliveryTimestamp.includes(yr));
-      }
-      if (mo !== 'ALL') {
-        list = list.filter(b => b.deliveryTimestamp && b.deliveryTimestamp.includes(`/${mo}/`));
-      }
-
-      if (list.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="6" class="p-8 text-center text-xs text-slate-500">No completed or delivered vehicles found matching your search.</td></tr>`;
-        return;
-      }
-
-      tbody.innerHTML = list.map(b => `
-        <tr ondblclick="window.openVehicleDetailSheet('${b.id}')" class="hover:bg-bay-800/50 transition cursor-pointer" title="Double-click to open archived sheet">
-          <td class="p-3 font-mono text-slate-300">${b.deliveryTimestamp || 'N/A'}</td>
-          <td class="p-3 font-bold text-white">${b.custName} <span class="text-[10px] text-gold-400 block">(${b.province || 'Port Said'})</span></td>
-          <td class="p-3 text-slate-300">${b.carModel} <span class="font-mono text-gold-400 block">(${b.carPlate})</span></td>
-          <td class="p-3 text-slate-300">${b.assignedDetailer}</td>
-          <td class="p-3 font-mono font-bold text-emerald-400">${b.grandTotal || b.deposit} L.E <span class="text-[10px] text-slate-400 font-normal block">Settled</span></td>
-          <td class="p-3"><span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 text-[10px] font-bold">Delivered</span></td>
-        </tr>
-      `).join('');
-    };
-
-    window.recordInstallmentPayment = function(jobId) {
-      if (!currentUser || (currentUser.role !== 'owner' && currentUser.role !== 'manager')) {
-        showToast("Restricted: Only Owners and Managers can log milestone payments.", "error");
-        return;
-      }
-      const amtInput = document.getElementById('editAddPaymentAmount');
-      const timeInput = document.getElementById('editAddPaymentTimestamp');
-      const chanInput = document.getElementById('editAddPaymentChannel');
-      
-      const amount = Number(amtInput.value) || 0;
-      if (amount <= 0) {
-        showToast("Please enter a valid payment amount.", "error");
-        return;
-      }
-      const dtVal = timeInput.value ? formatDateTime12H(timeInput.value) : formatDateTime12H(new Date());
-      const job = appState.bookings.find(b => b.id === jobId);
-      if (!job) return;
-
-      const staffSign = `${currentUser.name} (${currentUser.role.toUpperCase()})`;
-      job.deposit = (Number(job.deposit) || 0) + amount;
-      if (!job.notes) job.notes = [];
-      job.notes.push({ sender: `Payment Logged by ${staffSign}`, text: `Saved installment payment of ${amount.toLocaleString()} L.E via ${chanInput.value} at ${dtVal}. Total paid now: ${job.deposit.toLocaleString()} L.E of Grand Total: ${job.grandTotal || 0} L.E`, time: dtVal });
-
-      saveCloudState().then(() => {
-        amtInput.value = '';
-        openVehicleDetailSheet(jobId);
-        showToast(`Installment payment of ${amount.toLocaleString()} L.E successfully recorded by ${currentUser.name}!`);
-      });
-    };
-
-    window.closeVehicleDetailSheet = function() {
-      document.getElementById('viewSheetDetail').classList.add('hidden');
-      switchStaffTab(activeStaffTab);
-    };
-
-    window.handleUploadJobPhoto = function(e, jobId) {
-      let job = appState.bookings.find(b => b.id === jobId);
-      if (!job && appState.completedArchive) job = appState.completedArchive.find(b => b.id === jobId);
-      if (!job) return;
-
-      const file = e.target.files[0];
-      if (!file) return;
-      const reader = new FileReader();
-      reader.onload = function(evt) {
-        if (!job.photos) job.photos = [];
-        const captionPrompt = prompt("Enter photo caption (e.g., 'Before: Bonnet Scratch Inspection' or 'After: 3-Layer Ceramic Gloss'):", "Vault Processing Photo");
-        job.photos.push({ url: evt.target.result, caption: captionPrompt || 'Vault Processing Photo' });
-        saveCloudState().then(() => {
-          openVehicleDetailSheet(jobId);
-          showToast("Before-and-After photo successfully added to vault!");
-        });
-      };
-      reader.readAsDataURL(file);
-    };
-
-    window.updateJobProgressSlider = function(val) {
-      const num = Number(val);
-      document.getElementById('labelDetailProgress').innerText = num + '%';
-      const job = appState.bookings.find(b => b.id === currentDetailSheetId);
-      if (!job) return;
-      job.progress = num;
-      if (num >= 100) {
-        job.stage = 'COMPLETED';
-        const nowStr = formatDateTime12H(new Date());
-        if (!job.notes) job.notes = [];
-        job.notes.push({ sender: 'System Completion Audit', text: `🎉 Task completed 100% by Master Detailer [${job.assignedDetailer}] at ${nowStr}.`, time: nowStr });
-        showToast(`Vehicle ${job.carModel} marked 100% completed!`);
-      } else {
-        job.stage = 'IN_PROGRESS';
-      }
-      saveCloudState();
-    };
-
-    window.sendStaffNote = function(jobId) {
-      let job = appState.bookings.find(b => b.id === jobId);
-      if (!job && appState.completedArchive) job = appState.completedArchive.find(b => b.id === jobId);
-      if (!job) return;
-
-      const input = document.getElementById('inputStaffNote');
-      const val = input.value.trim();
-      if (!val) return;
-      if (!job.notes) job.notes = [];
-      const nowStr = formatDateTime12H(new Date());
-      job.notes.push({ sender: currentUser ? currentUser.name + ' (' + currentUser.role.toUpperCase() + ')' : 'Staff', text: val, time: nowStr });
-      saveCloudState().then(() => {
-        input.value = '';
-        openVehicleDetailSheet(jobId);
-        showToast("Note added successfully!");
-      });
-    };
-
-    window.deleteBookingAnywhere = function(jobId) {
-      if (!currentUser || currentUser.role !== 'owner') {
-        showToast("Only Level 1 Owner (Mr. Alfy) can delete vehicle bookings.", "error");
-        return;
-      }
-      if (!confirm("Are you sure you want to permanently delete this vehicle profile?")) return;
-      appState.bookings = appState.bookings.filter(b => b.id !== jobId);
-      if (appState.completedArchive) {
-        appState.completedArchive = appState.completedArchive.filter(b => b.id !== jobId);
-      }
-      saveCloudState().then(() => {
-        closeVehicleDetailSheet();
-        showToast("Vehicle profile deleted successfully.");
-      });
-    };
-
-    function renderCalendar() {
-      const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-      document.getElementById('calCurrentMonthLabel').innerText = `${monthNames[calendarCurrentMonth]} ${calendarCurrentYear}`;
-      document.getElementById('calYearSelect').value = calendarCurrentYear;
-
-      const grid = document.getElementById('calDaysGridMatrix');
-      if (!grid) return;
-
-      const firstDayIndex = new Date(calendarCurrentYear, calendarCurrentMonth, 1).getDay();
-      const totalDays = new Date(calendarCurrentYear, calendarCurrentMonth + 1, 0).getDate();
-
-      let html = '';
-      for (let i = 0; i < firstDayIndex; i++) {
-        html += `<div class="h-20 sm:h-24 bg-bay-950/40 rounded-2xl border border-slate-900 opacity-30"></div>`;
-      }
-
-      for (let day = 1; day <= totalDays; day++) {
-        const mStr = String(calendarCurrentMonth + 1).padStart(2, '0');
-        const dStr = String(day).padStart(2, '0');
-        const dateKey = `${calendarCurrentYear}-${mStr}-${dStr}`;
-        let dayBookings = appState.bookings.filter(b => b.entryDate === dateKey);
-        
-        if (currentUser && currentUser.role === 'detailer') {
-          dayBookings = dayBookings.filter(b => b.assignedDetailer && b.assignedDetailer.toLowerCase().includes(currentUser.name.toLowerCase().split(' ')[0]));
-        }
-
-        const count = dayBookings.length;
-        const isFull = count >= 12;
-
-        html += `
-          <div onclick="window.inspectCalendarDate('${dateKey}')" class="h-20 sm:h-24 p-2 rounded-2xl bg-bay-850 hover:bg-bay-850/80 border ${selectedCalendarDateStr === dateKey ? 'border-gold-500' : 'border-slate-800'} cursor-pointer flex flex-col justify-between transition group">
-            <div class="flex items-center justify-between">
-              <span class="text-xs font-mono font-bold text-white">${day}</span>
-              <span class="text-[9px] font-mono px-1.5 py-0.5 rounded ${isFull ? 'bg-rose-500/20 text-rose-400 border border-rose-500/30' : count > 0 ? 'bg-gold-500/20 text-gold-400 border border-gold-500/30' : 'bg-bay-900 text-slate-500'}">
-                ${count}/12
-              </span>
-            </div>
-            <div class="space-y-0.5 overflow-hidden">
-              ${dayBookings.slice(0, 2).map(b => `<div class="text-[9px] truncate bg-bay-900 text-slate-300 px-1 rounded">${b.carPlate}</div>`).join('')}
-              ${count > 2 ? `<div class="text-[8px] text-gold-400">+${count - 2} more</div>` : ''}
-            </div>
-          </div>
-        `;
-      }
-
-      grid.innerHTML = html;
-    }
-
-    window.navigateCalendarMonth = function(dir) {
-      calendarCurrentMonth += dir;
-      if (calendarCurrentMonth > 11) {
-        calendarCurrentMonth = 0;
-        calendarCurrentYear++;
-      } else if (calendarCurrentMonth < 0) {
-        calendarCurrentMonth = 11;
-        calendarCurrentYear--;
-      }
-      renderCalendar();
-    };
-
-    window.handleCalendarYearJump = function(yr) {
-      calendarCurrentYear = Number(yr);
-      renderCalendar();
-    };
-
-    window.resetCalendarToToday = function() {
-      const now = new Date();
-      calendarCurrentYear = now.getFullYear();
-      calendarCurrentMonth = now.getMonth();
-      renderCalendar();
-    };
-
-    window.inspectCalendarDate = function(dateStr) {
-      selectedCalendarDateStr = dateStr;
-      renderCalendar();
-      const box = document.getElementById('calDayInspectorBox');
-      const title = document.getElementById('calSelectedDayTitle');
-      const listEl = document.getElementById('calSelectedDayCarsList');
-      box.classList.remove('hidden');
-      title.innerText = `Vehicles Booked on ${dateStr}`;
-
-      let dayBookings = appState.bookings.filter(b => b.entryDate === dateStr);
-      if (currentUser && currentUser.role === 'detailer') {
-        dayBookings = dayBookings.filter(b => b.assignedDetailer && b.assignedDetailer.toLowerCase().includes(currentUser.name.toLowerCase().split(' ')[0]));
-      }
-
-      if (dayBookings.length === 0) {
-        listEl.innerHTML = `<p class="text-xs text-slate-400 italic">No vehicle intake scheduled for this date.</p>`;
-        return;
-      }
-
-      listEl.innerHTML = dayBookings.map(b => `
-        <div onclick="window.openVehicleDetailSheet('${b.id}')" class="p-3 rounded-xl bg-bay-900 hover:bg-bay-800 border border-slate-800 cursor-pointer flex items-center justify-between text-xs transition">
-          <div class="flex items-center gap-2.5">
-            <span class="font-mono px-2 py-0.5 rounded bg-gold-500/20 text-gold-400 border border-gold-500/30 font-bold">${b.carPlate}</span>
-            <span class="font-bold text-white">${b.carModel}</span>
-            <span class="text-slate-400">(${b.custName})</span>
-          </div>
-          <span class="font-mono text-gold-400">${b.progress}%</span>
-        </div>
-      `).join('');
-    };
-
-    window.quickBookForSelectedDate = function() {
-      if (!selectedCalendarDateStr) return;
-      if (currentUser && currentUser.role === 'detailer') {
-        showToast("Restricted: Detailers cannot create bookings.", "error");
-        return;
-      }
-      openNewBookingModal();
-      document.getElementById('nbEntryDate').value = selectedCalendarDateStr;
-    };
-
-    function renderFundsCircuit() {
-      if (currentUser && currentUser.role === 'detailer') return;
-      const period = document.getElementById('fundsPeriodSelect')?.value || 'this_month';
-      let list = appState.bookings;
-      const now = new Date();
-      if (period === 'this_month') {
-        const m = now.getMonth();
-        const y = now.getFullYear();
-        list = list.filter(b => {
-          const d = new Date(b.entryDate);
-          return d.getMonth() === m && d.getFullYear() === y;
-        });
-      }
-
-      const cashOnHand = list.reduce((acc, curr) => acc + (Number(curr.deposit) || 0), 0);
-      const totalConsumption = list.reduce((acc, curr) => acc + (Number(curr.grandTotal || 0) * 0.10), 0);
-      const netProfitNow = cashOnHand - totalConsumption;
-      const expectedCollections = list.reduce((acc, curr) => acc + Math.max(0, (Number(curr.grandTotal || 0) - Number(curr.deposit || 0))), 0);
-
-      document.getElementById('fundsCashOnHand').innerText = cashOnHand.toLocaleString() + ' L.E';
-      document.getElementById('fundsNetProfitNow').innerText = Math.round(netProfitNow).toLocaleString() + ' L.E';
-      document.getElementById('fundsExpectedCollections').innerText = expectedCollections.toLocaleString() + ' L.E';
-
-      const tbody = document.getElementById('fundsLedgerTableBody');
-      if (!tbody) return;
-
-      tbody.innerHTML = list.map(b => {
-        const restAmt = Math.max(0, (Number(b.grandTotal||0) - Number(b.deposit||0)));
-        return `
-          <tr class="hover:bg-bay-800/50 transition">
-            <td class="p-3 font-mono text-slate-300">${b.paymentTimestamp || b.entryDate}</td>
-            <td class="p-3 font-bold text-white">${b.custName} <span class="text-[10px] text-gold-400">(${b.province || 'Port Said'})</span></td>
-            <td class="p-3 text-slate-300">${b.carModel} <span class="font-mono text-gold-400">(${b.carPlate})</span></td>
-            <td class="p-3"><span class="px-2 py-0.5 rounded bg-bay-800 text-gold-400 font-mono text-[10px]">${b.paymentChannel}</span></td>
-            <td class="p-3 font-mono">
-              <span class="font-bold text-emerald-400">+${b.deposit} L.E Paid</span>
-              <span class="text-[10px] text-gold-300 block">Grand Total: ${b.grandTotal || 0} L.E (Rest: ${restAmt} L.E)</span>
-            </td>
-            <td class="p-3"><span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 text-[10px] font-bold">Verified</span></td>
-          </tr>
-        `;
-      }).join('');
-    }
-
-    window.openAddExpenseModal = function() {
-      if (!currentUser || currentUser.role === 'detailer') {
-        showToast("Restricted to Level 1 Owner and Level 2 Managers.", "error");
-        return;
-      }
-      document.getElementById('modalAddExpense').classList.remove('hidden');
-    };
-    window.closeAddExpenseModal = function() {
-      document.getElementById('modalAddExpense').classList.add('hidden');
-    };
-
-    window.handleSaveExpense = function(e) {
-      e.preventDefault();
-      const desc = document.getElementById('expDesc').value.trim();
-      const amount = Number(document.getElementById('expAmount').value) || 0;
-      const today = new Date().toISOString().split('T')[0];
-
-      if (!appState.expenses) appState.expenses = [];
-      appState.expenses.push({ id: 'exp-' + Date.now(), desc, amount, date: today });
-      saveCloudState().then(() => {
-        closeAddExpenseModal();
-        document.getElementById('formAddExpense').reset();
-        renderFundsCircuit();
-        showToast("Additional workshop expense logged successfully!");
-      });
-    };
-
-    function renderFleetOperations() {
-      const totalActive = appState.bookings.length;
-      const completedCount = appState.completedArchive ? appState.completedArchive.length : 0;
-      document.getElementById('fleetStatTotal').innerText = totalActive;
-      document.getElementById('fleetStatCompleted').innerText = completedCount;
-
-      const container = document.getElementById('fleetDetailerPerformanceContainer');
-      if (!container) return;
-
-      const detailers = appState.staff.filter(s => s.role === 'detailer');
-      container.innerHTML = detailers.map(d => {
-        const assignedJobs = appState.bookings.filter(b => b.assignedDetailer && b.assignedDetailer.toLowerCase().includes(d.name.toLowerCase().split(' ')[0]));
-        const archivedJobs = appState.completedArchive ? appState.completedArchive.filter(b => b.assignedDetailer && b.assignedDetailer.toLowerCase().includes(d.name.toLowerCase().split(' ')[0])) : [];
-        return `
-          <div class="bg-bay-900 border border-slate-800 p-4 rounded-2xl flex items-center justify-between text-xs">
-            <div>
-              <h4 class="font-black text-white text-sm">${d.name}</h4>
-              <p class="text-slate-400 mt-0.5">Active Fleet: <strong class="text-gold-400">${assignedJobs.length} cars</strong></p>
-            </div>
-            <div class="text-right font-mono">
-              <span class="text-emerald-400 font-bold block">${archivedJobs.length} Settled & Delivered</span>
-              <span class="text-[10px] text-slate-400">Velocity Rate: Optimal</span>
-            </div>
-          </div>
-        `;
-      }).join('');
-    }
-
-    window.renderAccountsLists = function() {
-      const staffContainer = document.getElementById('listStaffAccountsContainer');
-      const custContainer = document.getElementById('listCustomerAccountsContainer');
-      const ownerBar = document.getElementById('ownerStaffProvisioningBar');
-      const isOwner = currentUser && currentUser.role === 'owner';
-
-      if (isOwner) {
-        if (ownerBar) ownerBar.classList.remove('hidden');
-      } else {
-        if (ownerBar) ownerBar.classList.add('hidden');
-      }
-
-      if (staffContainer) {
-        staffContainer.innerHTML = appState.staff.map(s => {
-          const completedCount = appState.completedArchive ? appState.completedArchive.filter(b => b.assignedDetailer && b.assignedDetailer.toLowerCase().includes(s.name.toLowerCase().split(' ')[0])).length : 0;
-          
-          return `
-            <div class="bg-bay-850 border border-slate-800 p-4 rounded-2xl space-y-2">
-              <div class="flex items-center justify-between">
-                <span class="text-xs font-mono px-2 py-0.5 rounded bg-gold-500/20 text-gold-400 border border-gold-500/30 uppercase font-bold">${s.role}</span>
-                ${isOwner && s.username.toLowerCase() !== 'mr.alfy' ? `
-                  <button onclick="window.deleteStaffAccount('${s.id}')" class="text-rose-400 hover:text-rose-300 text-xs"><i class="ph-bold ph-trash"></i></button>
-                ` : ''}
-              </div>
-              <div>
-                <h4 class="text-sm font-black text-white">${s.name}</h4>
-                <p class="text-xs text-slate-400 font-mono">User: ${isOwner ? s.username : '••••••••••••'}</p>
-                <p class="text-[11px] text-slate-500 font-mono">Pass: ${isOwner ? s.pass : '••••••••••••'}</p>
-                <div class="mt-2 pt-2 border-t border-slate-800 text-[11px] text-emerald-400 font-mono font-bold">
-                  Completed & Delivered: ${completedCount} cars
+                    <span class="text-sm font-black text-amber-400">550 EGP</span>
                 </div>
-              </div>
+                <div class="bg-stone-950 p-3 rounded-xl border border-stone-800 flex justify-between items-center">
+                    <div>
+                        <p class="text-xs font-bold text-stone-100" data-en="Special Exterior + Rims" data-ar="الباقة الخاصة + الجنوط">Special Exterior + Rims</p>
+                        <p class="text-[10px] text-stone-400" data-en="Shining + rims detailing (60 mins)" data-ar="لمعان خارجي + الجنوط (60 دقيقة)">Shining + rims detailing (60 mins)</p>
+                    </div>
+                    <span class="text-sm font-black text-amber-400">670 EGP</span>
+                </div>
+                <div class="bg-stone-950 p-3 rounded-xl border border-stone-800 flex justify-between items-center">
+                    <div>
+                        <p class="text-xs font-bold text-stone-100" data-en="Executive Premium" data-ar="الباقة التنفيذية الفاخرة">Executive Premium</p>
+                        <p class="text-[10px] text-stone-400" data-en="Exterior + rims + glass coating (90 mins)" data-ar="شامل + زجاج (90 دقيقة)">Exterior + rims + glass coating (90 mins)</p>
+                    </div>
+                    <span class="text-sm font-black text-amber-400">965 EGP</span>
+                </div>
             </div>
-          `;
-        }).join('');
-      }
+        </div>
 
-      if (custContainer) {
-        custContainer.innerHTML = appState.customers.map(c => `
-          <div class="bg-bay-850 border border-slate-800 p-4 rounded-2xl space-y-2">
-            <div class="flex items-center justify-between">
-              <span class="text-xs font-mono px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 uppercase font-bold">Login Pass: ${c.plate}</span>
-              ${isOwner ? `
-                <button onclick="window.deleteCustomerAccount('${c.id}')" class="text-rose-400 hover:text-rose-300 text-xs"><i class="ph-bold ph-trash"></i></button>
-              ` : ''}
+        <!-- Real Before & After Work Gallery -->
+        <div class="bg-stone-900/60 border border-stone-800 rounded-2xl p-5 space-y-3 shadow-lg">
+            <h3 class="text-xs font-bold uppercase tracking-wider text-amber-400 serif-brand" data-en="Real Results: Before & After" data-ar="النتائج الواقعية: قبل وبعد">Real Results: Before & After</h3>
+            <p class="text-xs text-stone-400" data-en="Witness the dramatic transformation of our mobile dry wash & paint care." data-ar="شاهد التحول المذهل لخدمة الغسيل الجاف وعناية الطلاء.">Witness the dramatic transformation of our mobile dry wash.</p>
+            
+            <div class="grid grid-cols-2 gap-3 pt-1">
+                <!-- Before Photo Card -->
+                <div class="bg-stone-950 rounded-xl border border-stone-800 overflow-hidden flex flex-col">
+                    <div class="h-32 relative">
+                        <img src="before.jpg" alt="Before Dry Wash" class="w-full h-full object-cover">
+                        <span class="absolute top-1 left-1 bg-red-600/90 text-white text-[9px] font-bold px-2 py-0.5 rounded" data-en="BEFORE" data-ar="قبل">BEFORE</span>
+                    </div>
+                    <div class="p-2 text-center">
+                        <span class="text-[10px] text-stone-300 font-medium" data-en="Dust & Dull Surface" data-ar="السطح المغبر والباست">Dust & Dull Surface</span>
+                    </div>
+                </div>
+
+                <!-- After Photo Card -->
+                <div class="bg-stone-950 rounded-xl border border-amber-500/40 overflow-hidden flex flex-col shadow-md">
+                    <div class="h-32 relative">
+                        <img src="after.jpg" alt="After Dry Wash" class="w-full h-full object-cover">
+                        <span class="absolute top-1 left-1 bg-amber-500 text-stone-950 text-[9px] font-bold px-2 py-0.5 rounded" data-en="AFTER" data-ar="بعد">AFTER</span>
+                    </div>
+                    <div class="p-2 text-center">
+                        <span class="text-[10px] text-amber-300 font-medium" data-en="Mirror Gloss Finish" data-ar="لمعان المرآة الفاخر">Mirror Gloss Finish</span>
+                    </div>
+                </div>
             </div>
-            <div>
-              <h4 class="text-sm font-black text-white">${c.name} (${c.province || 'Port Said'})</h4>
-              <p class="text-xs text-slate-400 font-mono">Mobile: ${isOwner ? c.phone : '••••••••••••'}</p>
-              <p class="text-[11px] text-slate-500 font-mono">Pass: ${isOwner ? c.pass : '••••••••••••'}</p>
+        </div>
+
+        <!-- Booking Form Card -->
+        <div class="bg-stone-900 border border-stone-800 rounded-2xl p-6 shadow-2xl relative">
+            <h3 class="text-base font-bold mb-4 text-amber-400 serif-brand" data-en="Book Your Weekend Slot" data-ar="احجز موعدك لعطلة نهاية الأسبوع">Book Your Weekend Slot</h3>
+
+            <form id="bookingForm" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold uppercase text-stone-400 mb-1" data-en="Full Name" data-ar="الاسم الكامل">Full Name</label>
+                    <input type="text" id="customerName" required class="w-full bg-stone-950 border border-stone-800 rounded-lg p-3 text-sm focus:border-amber-500 focus:outline-none" placeholder="Mohamed Elalfy">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold uppercase text-stone-400 mb-1" data-en="Phone Number" data-ar="رقم الهاتف">Phone Number</label>
+                    <input type="tel" id="phone" required class="w-full bg-stone-950 border border-stone-800 rounded-lg p-3 text-sm focus:border-amber-500 focus:outline-none" placeholder="00201003300600">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold uppercase text-stone-400 mb-1" data-en="Service Zone" data-ar="منطقة الخدمة">Service Zone</label>
+                    <select id="zone" required class="w-full bg-stone-950 border border-stone-800 rounded-lg p-3 text-sm focus:border-amber-500 focus:outline-none">
+                        <option value="Heliopolis">Heliopolis (هليوبوليس)</option>
+                        <option value="Madinaty">Madinaty (مدينتي)</option>
+                        <option value="5th Settlement">5th Settlement (التجمع الخامس)</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold uppercase text-stone-400 mb-1" data-en="Exact Street / Compound Address" data-ar="العنوان التفصيلي / الشارع أو الكمبوند">Exact Street / Compound Address</label>
+                    <input type="text" id="exactAddress" required class="w-full bg-stone-950 border border-stone-800 rounded-lg p-3 text-sm focus:border-amber-500 focus:outline-none" placeholder="Phase 2, Street 5, Villa 42">
+                </div>
+
+                <div class="grid grid-cols-2 gap-2">
+                    <div>
+                        <label class="block text-xs font-semibold uppercase text-stone-400 mb-1" data-en="Car Model" data-ar="موديل السيارة">Car Model</label>
+                        <input type="text" id="carModel" required class="w-full bg-stone-950 border border-stone-800 rounded-lg p-3 text-sm focus:border-amber-500 focus:outline-none" placeholder="BMW 320i">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold uppercase text-stone-400 mb-1" data-en="Plate Number" data-ar="رقم اللوحة">Plate Number</label>
+                        <input type="text" id="plateNumber" required class="w-full bg-stone-950 border border-stone-800 rounded-lg p-3 text-sm focus:border-amber-500 focus:outline-none" placeholder="س م ج 1234">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold uppercase text-stone-400 mb-1" data-en="Select Package & Service" data-ar="اختر الباقة والخدمة">Select Package & Service</label>
+                    <select id="packageSelect" required class="w-full bg-stone-950 border border-stone-800 rounded-lg p-3 text-sm focus:border-amber-500 focus:outline-none">
+                        <option value="Standard Dry Wash - 550 EGP (45 mins)">Standard Dry Wash - 550 EGP (45 mins)</option>
+                        <option value="Special Dry Wash + Rims - 670 EGP (60 mins)">Special Dry Wash + Rims - 670 EGP (60 mins)</option>
+                        <option value="Executive Premium - 965 EGP (90 mins)">Executive Premium - 965 EGP (90 mins)</option>
+                        <option value="Paint Scratch Healing (Assessment)">Paint Scratch Healing (2-3 Days Assessment)</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold uppercase text-stone-400 mb-1" data-en="Preferred Weekend Date & Time" data-ar="التاريخ والوقت المفضل (عطلة نهاية الأسبوع)">Preferred Weekend Date & Time</label>
+                    <input type="datetime-local" id="slotTime" required class="w-full bg-stone-950 border border-stone-800 rounded-lg p-3 text-sm focus:border-amber-500 focus:outline-none">
+                </div>
+
+                <button type="submit" id="submitBtn" class="w-full bg-amber-500 hover:bg-amber-400 text-stone-950 font-bold p-3.5 rounded-lg transition-all shadow-lg mt-4" data-en="Confirm Booking & Lock Slot" data-ar="تأكيد الحجز وتثبيت الموعد">
+                    Confirm Booking & Lock Slot
+                </button>
+            </form>
+            
+            <div id="successMsg" class="hidden mt-4 p-3 bg-stone-950 border border-amber-500 text-amber-300 text-xs rounded-lg text-center font-semibold">
+                <span data-en="Booking confirmed successfully! Synced to operations room." data-ar="تم تأكيد الحجز بنجاح! تم إرساله مباشرة لغرفة العمليات.">Booking confirmed successfully!</span>
             </div>
-          </div>
-        `).join('');
-      }
-    };
+        </div>
 
-    window.handleOwnerQuickAddStaff = function(e) {
-      e.preventDefault();
-      if (!currentUser || currentUser.role !== 'owner') {
-        showToast("Only Level 1 Owner (Mr. Alfy) can provision staff.", "error");
-        return;
-      }
-      const name = document.getElementById('barStaffName').value.trim();
-      const username = document.getElementById('barStaffUsername').value.trim();
-      const pass = document.getElementById('barStaffPassword').value.trim();
-      const role = document.getElementById('barStaffRole').value;
+        <!-- Floating Quick WhatsApp Button -->
+        <a href="https://wa.me/201003300600?text=Hello%20Dr.%20Care,%20I%20would%20like%20to%20inquire%20about%20detailing%20services." target="_blank" class="block bg-green-600/20 hover:bg-green-600/30 border border-green-500/40 text-green-300 font-bold py-3 rounded-xl text-xs text-center transition">
+            <span data-en="💬 Direct WhatsApp Inquiry" data-ar="💬 استفسار مباشر عبر واتساب">💬 Direct WhatsApp Inquiry</span>
+        </a>
+    </main>
 
-      appState.staff.push({ id: 'usr-' + Date.now(), name, username, pass, role });
-      saveCloudState().then(() => {
-        document.getElementById('formOwnerQuickAddStaff').reset();
-        renderAccountsLists();
-        showToast("New staff account created successfully!");
-      });
-    };
+    <!-- Footer -->
+    <footer class="bg-black border-t border-stone-800 p-6 text-center space-y-2">
+        <p class="text-xs text-amber-500/80 tracking-widest uppercase serif-brand gold-glow">REVIVING THE AUTOMOTIVE SOUL</p>
+        <p class="text-[11px] text-stone-500">&copy; 2026 Dr. Care. Powered by Meguiar's & Rupes.</p>
+    </footer>
 
-    window.deleteStaffAccount = function(id) {
-      if (!currentUser || currentUser.role !== 'owner') {
-        showToast("Only Level 1 Owner can delete accounts.", "error");
-        return;
-      }
-      if (!confirm("Are you sure you want to remove this staff account?")) return;
-      appState.staff = appState.staff.filter(s => s.id !== id);
-      saveCloudState().then(() => {
-        renderAccountsLists();
-        showToast("Staff account removed.");
-      });
-    };
+    <!-- ADMIN CRM MODAL (PIN Protected: 2026) -->
+    <div id="adminModal" class="hidden fixed inset-0 bg-black/95 backdrop-blur-md z-50 flex items-center justify-center p-4">
+        <div class="bg-stone-900 border border-stone-800 rounded-2xl p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto space-y-6">
+            <div class="flex justify-between items-center border-b border-stone-800 pb-4">
+                <div>
+                    <h3 class="text-lg font-bold text-amber-400 serif-brand">DR. CARE CRM</h3>
+                    <p class="text-xs text-stone-400">Back-Office Live Dispatch & Operations</p>
+                </div>
+                <button onclick="closeAdmin()" class="text-stone-400 hover:text-white font-bold text-sm px-3 py-1 bg-stone-800 rounded-lg">✕ Close</button>
+            </div>
 
-    window.deleteCustomerAccount = function(id) {
-      if (!currentUser || currentUser.role !== 'owner') {
-        showToast("Only Level 1 Owner can delete accounts.", "error");
-        return;
-      }
-      if (!confirm("Are you sure you want to remove this customer account?")) return;
-      appState.customers = appState.customers.filter(c => c.id !== id);
-      saveCloudState().then(() => {
-        renderAccountsLists();
-        showToast("Customer account removed.");
-      });
-    };
+            <div id="pinBox" class="space-y-4 py-8 text-center">
+                <p class="text-xs text-stone-400">Enter Manager PIN to access live bookings:</p>
+                <input type="password" id="pinInput" maxlength="4" placeholder="••••" class="w-32 mx-auto bg-stone-950 border border-stone-800 rounded-lg p-3 text-center text-xl tracking-widest focus:border-amber-500 focus:outline-none">
+                <div>
+                    <button onclick="verifyPin()" class="bg-amber-500 text-stone-950 font-bold text-xs px-6 py-2.5 rounded-lg">Authenticate</button>
+                </div>
+            </div>
 
-    window.exportDatabaseBackup = function() {
-      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(appState, null, 2));
-      const dlAnchor = document.createElement('a');
-      dlAnchor.setAttribute("href", dataStr);
-      dlAnchor.setAttribute("download", `drcare_enterprise_backup_${new Date().toISOString().split('T')[0]}.json`);
-      document.body.appendChild(dlAnchor);
-      dlAnchor.click();
-      dlAnchor.remove();
-      showToast("Enterprise database backup JSON exported successfully!");
-    };
+            <div id="crmDashboard" class="hidden space-y-4">
+                <div class="flex justify-between items-center">
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-stone-400">Live Weekend Reservations</h4>
+                    <div class="flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                        <span class="text-[10px] text-green-400 font-semibold">Live Sync Active</span>
+                    </div>
+                </div>
+                <div id="bookingsList" class="space-y-3">
+                    <p class="text-stone-500 text-center py-6 text-xs">Loading live bookings...</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    window.importDatabaseBackup = function(e) {
-      const file = e.target.files[0];
-      if (!file) return;
-      const reader = new FileReader();
-      reader.onload = function(evt) {
-        try {
-          const parsed = JSON.parse(evt.target.result);
-          if (parsed && parsed.staff && parsed.bookings) {
-            appState = parsed;
-            saveCloudState().then(() => {
-              renderApp();
-              showToast("Database successfully restored from enterprise backup!");
+    <!-- Scripts -->
+    <script>
+        let currentLang = 'en';
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'ar' : 'en';
+            const html = document.getElementById('htmlRoot');
+            html.setAttribute('dir', currentLang === 'ar' ? 'rtl' : 'ltr');
+            html.setAttribute('lang', currentLang);
+            document.getElementById('langBtnText').textContent = currentLang === 'en' ? 'العربية' : 'English';
+
+            document.querySelectorAll('[data-en]').forEach(el => {
+                const text = el.getAttribute(`data-${currentLang}`);
+                if (text) el.textContent = text;
             });
-          } else {
-            showToast("Invalid backup file structure.", "error");
-          }
-        } catch(err) {
-          showToast("Failed to parse JSON file.", "error");
         }
-      };
-      reader.readAsDataURL(file);
-    };
 
-    window.setAppLanguage = function(lang) {
-      currentLang = lang;
-      const bEn = document.getElementById('langBtnEn');
-      const bAr = document.getElementById('langBtnAr');
-      if (lang === 'en') {
-        bEn.className = "px-2 py-1 rounded-lg text-xs font-bold bg-gold-500 text-slate-950 transition";
-        bAr.className = "px-2 py-1 rounded-lg text-xs font-bold text-slate-400 hover:text-white transition";
-        document.documentElement.dir = 'ltr';
-      } else {
-        bAr.className = "px-2 py-1 rounded-lg text-xs font-bold bg-gold-500 text-slate-950 transition";
-        bEn.className = "px-2 py-1 rounded-lg text-xs font-bold text-slate-400 hover:text-white transition";
-        document.documentElement.dir = 'rtl';
-      }
-
-      const elements = document.querySelectorAll('[data-i18n]');
-      elements.forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        if (dict[lang][key]) {
-          el.innerText = dict[lang][key];
+        function openAdminLogin() {
+            document.getElementById('adminModal').classList.remove('hidden');
         }
-      });
-    };
 
-    function renderApp() {
-      if (currentUser) {
-        updateStaffRoleBadge();
-        switchStaffTab(activeStaffTab);
-      }
-    }
+        function closeAdmin() {
+            document.getElementById('adminModal').classList.add('hidden');
+        }
 
-    window.onload = function() {
-      initCloudSync();
-    };
-  </script>
+        function verifyPin() {
+            const pin = document.getElementById('pinInput').value;
+            if (pin === "2026") {
+                document.getElementById('pinBox').classList.add('hidden');
+                document.getElementById('crmDashboard').classList.remove('hidden');
+                loadLiveBookings();
+            } else {
+                alert("Incorrect PIN!");
+            }
+        }
+    </script>
 
+    <script type="module">
+        const form = document.getElementById('bookingForm');
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('submitBtn');
+            btn.disabled = true;
+            btn.textContent = currentLang === 'en' ? "Syncing..." : "جاري الإرسال...";
+
+            try {
+                const bookingData = {
+                    customerName: document.getElementById('customerName').value,
+                    phone: document.getElementById('phone').value,
+                    zone: document.getElementById('zone').value,
+                    exactAddress: document.getElementById('exactAddress').value,
+                    carModel: document.getElementById('carModel').value,
+                    plateNumber: document.getElementById('plateNumber').value,
+                    package: document.getElementById('packageSelect').value,
+                    slotTime: document.getElementById('slotTime').value,
+                    status: "Pending Deposit",
+                    createdAt: window.Timestamp.now()
+                };
+
+                await window.addDoc(window.collection(window.db, "bookings"), bookingData);
+                
+                form.reset();
+                document.getElementById('successMsg').classList.remove('hidden');
+            } catch (error) {
+                console.error("Error saving booking: ", error);
+                alert("Error saving booking. Please check your connection.");
+            } finally {
+                btn.disabled = false;
+                btn.textContent = currentLang === 'en' ? "Confirm Booking & Lock Slot" : "تأكيد الحجز وتثبيت الموعد";
+            }
+        });
+
+        window.loadLiveBookings = function() {
+            const q = window.query(window.collection(window.db, "bookings"), window.orderBy("createdAt", "desc"));
+            window.onSnapshot(q, (snapshot) => {
+                const container = document.getElementById('bookingsList');
+                container.innerHTML = "";
+                
+                if(snapshot.empty) {
+                    container.innerHTML = `<p class="text-stone-500 text-center py-8 text-xs">No bookings received yet.</p>`;
+                    return;
+                }
+
+                snapshot.forEach((doc) => {
+                    const b = doc.data();
+                    const card = document.createElement('div');
+                    card.className = "bg-stone-950 border border-stone-800 rounded-xl p-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-3";
+                    card.innerHTML = `
+                        <div>
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="bg-amber-500/20 text-amber-400 text-[10px] font-bold px-2 py-0.5 rounded">${b.zone}</span>
+                                <span class="bg-stone-900 text-stone-300 text-[10px] px-2 py-0.5 rounded font-mono">${b.plateNumber}</span>
+                            </div>
+                            <h4 class="text-sm font-bold text-white">${b.customerName} <span class="text-[11px] text-stone-400 font-normal">(${b.phone})</span></h4>
+                            <p class="text-[11px] text-stone-400 mt-0.5"><strong>Car:</strong> ${b.carModel} | <strong>Service:</strong> ${b.package}</p>
+                            <p class="text-[11px] text-stone-400"><strong>Address:</strong> ${b.exactAddress}</p>
+                            <p class="text-[11px] text-amber-300 mt-0.5"><strong>Slot:</strong> ${b.slotTime}</p>
+                        </div>
+                        <div class="flex flex-col items-end gap-1.5 w-full md:w-auto">
+                            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-yellow-500/20 text-yellow-400 border border-yellow-500/30">${b.status}</span>
+                            <span class="text-[9px] text-stone-500">Live Firebase Sync</span>
+                        </div>
+                    `;
+                    container.appendChild(card);
+                });
+            });
+        }
+    </script>
 </body>
 </html>
