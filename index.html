@@ -11,11 +11,12 @@
         [dir="rtl"] body { font-family: 'Cairo', sans-serif; }
         .serif-brand { font-family: 'Cinzel', serif; }
         .gold-glow { text-shadow: 0 0 20px rgba(234, 179, 8, 0.3); }
+        .gold-border { border-color: rgba(234, 179, 8, 0.4); }
     </style>
     <!-- Firebase SDK -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, Timestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, Timestamp, doc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
         // REPLACE WITH YOUR FIREBASE CONFIG KEYS
         const firebaseConfig = {
@@ -37,6 +38,9 @@
         window.query = query;
         window.orderBy = orderBy;
         window.Timestamp = Timestamp;
+        window.doc = doc;
+        window.updateDoc = updateDoc;
+        window.deleteDoc = deleteDoc;
     </script>
 </head>
 <body class="antialiased min-h-screen flex flex-col justify-between selection:bg-amber-500 selection:text-black">
@@ -44,7 +48,7 @@
     <!-- Top Navigation & Language Switcher -->
     <header class="bg-black/95 backdrop-blur-md border-b border-stone-800/80 sticky top-0 z-50 px-4 py-3 flex justify-between items-center shadow-lg">
         <div class="flex items-center gap-3">
-            <img src="logo.png" alt="Dr. Care Logo" class="w-11 h-11 object-cover rounded-full border border-amber-500/60 shadow-md">
+            <img src="image_cf49a424.png" alt="Dr. Care Logo" class="w-11 h-11 object-cover rounded-full border border-amber-500/60 shadow-md">
             <div>
                 <h1 class="text-base font-bold tracking-widest text-amber-100 serif-brand">DR. CARE</h1>
                 <p class="text-[8px] text-amber-500 tracking-widest uppercase font-semibold" data-en="REVIVING THE AUTOMOTIVE SOUL" data-ar="إحياء روح السيارات">REVIVING THE AUTOMOTIVE SOUL</p>
@@ -61,27 +65,50 @@
     <!-- Main Content Container -->
     <main class="max-w-md mx-auto w-full p-4 space-y-6 flex-grow">
 
-        <!-- Hero Section with Uploaded Logo & Slogan -->
-        <div class="bg-gradient-to-b from-stone-900 to-stone-950 border border-stone-800 rounded-2xl p-6 text-center shadow-2xl relative overflow-hidden space-y-4">
+        <!-- HERO SECTION WITH REAL MERCEDES TRANSFORMATION SHOWCASE -->
+        <div class="bg-gradient-to-b from-stone-900 to-stone-950 border gold-border rounded-2xl p-5 text-center shadow-2xl relative overflow-hidden space-y-4">
             <div class="absolute -top-12 -right-12 w-36 h-36 bg-amber-500/10 rounded-full blur-3xl"></div>
             
-            <!-- Logo Showcase Frame -->
-            <div class="w-24 h-24 mx-auto rounded-full bg-black border-2 border-amber-500/60 flex items-center justify-center shadow-2xl p-1 overflow-hidden">
-                <img src="logo.png" alt="Dr. Care Logo Emblem" class="w-full h-full object-cover rounded-full">
+            <div class="flex items-center justify-center gap-3">
+                <div class="w-14 h-14 rounded-full bg-black border-2 border-amber-500/80 flex items-center justify-center shadow-xl overflow-hidden p-0.5">
+                    <img src="image_cf49a424.png" alt="Dr. Care Logo" class="w-full h-full object-cover rounded-full">
+                </div>
+                <div class="text-left">
+                    <h2 class="text-base font-bold text-stone-100 serif-brand tracking-wide">DR. CARE</h2>
+                    <p class="text-[9px] font-semibold text-amber-400 tracking-widest uppercase gold-glow" data-en="REVIVING THE AUTOMOTIVE SOUL" data-ar="إحياء روح السيارات">REVIVING THE AUTOMOTIVE SOUL</p>
+                </div>
             </div>
 
-            <div>
-                <h2 class="text-xl font-bold mb-1 text-stone-100 serif-brand tracking-wide">DR. CARE</h2>
-                <p class="text-xs font-semibold text-amber-400 tracking-widest uppercase mb-3 gold-glow" data-en="REVIVING THE AUTOMOTIVE SOUL" data-ar="إحياء روح السيارات">REVIVING THE AUTOMOTIVE SOUL</p>
-                <p class="text-xs text-stone-400 leading-relaxed" data-en="Exclusive weekend mobile refinement service across Heliopolis, Madinaty, and the 5th Settlement." data-ar="خدمة العناية الفاخرة المتنقلة حصرياً في عطلة نهاية الأسبوع في هليوبوليس، مدينتي، والتجمع الخامس.">Exclusive weekend mobile refinement service across Heliopolis, Madinaty, and the 5th Settlement.</p>
+            <p class="text-xs text-stone-300 leading-relaxed px-1 font-medium" data-en="Exclusive weekend mobile refinement service across Heliopolis, Madinaty, and the 5th Settlement." data-ar="خدمة العناية الفاخرة المتنقلة حصرياً في عطلة نهاية الأسبوع في هليوبوليس، مدينتي، والتجمع الخامس.">Exclusive weekend mobile refinement service across Heliopolis, Madinaty, and the 5th Settlement.</p>
+
+            <!-- REAL WORK TRANSFORMATION SHOWCASE -->
+            <div class="bg-stone-950/90 border border-amber-500/30 rounded-xl p-3 space-y-2 shadow-inner">
+                <div class="flex justify-between items-center px-1">
+                    <span class="text-[11px] font-bold uppercase tracking-wider text-amber-400 serif-brand" data-en="Real Mercedes E-Class Work" data-ar="معاينة عمل حقيقي لمرسيدس">Real Mercedes Transformation</span>
+                    <div class="inline-flex bg-stone-900 p-0.5 rounded-lg border border-stone-800 text-[10px] font-semibold">
+                        <button id="btnBefore" onclick="switchView('before')" class="px-3 py-1 rounded-md bg-amber-500 text-stone-950 transition font-bold">Before</button>
+                        <button id="btnAfter" onclick="switchView('after')" class="px-3 py-1 rounded-md text-stone-400 hover:text-white transition font-bold">After</button>
+                    </div>
+                </div>
+
+                <div class="bg-stone-950 rounded-lg border border-stone-800 overflow-hidden relative shadow-2xl h-80 w-full">
+                    <div id="layerBefore" class="absolute inset-0 transition-opacity duration-300 opacity-100">
+                        <img src="before.jpeg" alt="Before Mercedes Detailing" class="w-full h-full object-cover">
+                        <span class="absolute top-2 left-2 bg-red-600/90 text-white text-[10px] font-bold px-2.5 py-1 rounded shadow" data-en="BEFORE: DUST & SCRATCHES" data-ar="قبل: الأتربة والبهتان">BEFORE: DUST & SCRATCHES</span>
+                    </div>
+                    <div id="layerAfter" class="absolute inset-0 transition-opacity duration-300 opacity-0 pointer-events-none">
+                        <img src="after.jpeg" alt="After Mercedes Detailing" class="w-full h-full object-cover">
+                        <span class="absolute top-2 left-2 bg-amber-500 text-stone-950 text-[10px] font-bold px-2.5 py-1 rounded shadow" data-en="AFTER: SHOWROOM MIRROR GLOSS" data-ar="بعد: لمعان المرآة الفاخر">AFTER: SHOWROOM MIRROR GLOSS</span>
+                    </div>
+                </div>
             </div>
 
             <div class="inline-flex items-center gap-2 text-[10px] uppercase font-semibold text-amber-400 bg-amber-500/10 border border-amber-500/20 py-1.5 px-3 rounded-lg">
-                <span data-en="Thu • Fri • Sat Only (Weekend Strike Team)" data-ar="الخميس • الجمعة • السبت فقط">Thu • Fri • Sat Only</span>
+                <span data-en="Thu • Fri • Sat Only (Limited Weekend Slots)" data-ar="الخميس • الجمعة • السبت فقط">Thu • Fri • Sat Only</span>
             </div>
         </div>
 
-        <!-- Who We Are Section (Elite Stylish Copywriting) -->
+        <!-- Who We Are Section -->
         <div class="bg-stone-900/60 border border-stone-800 rounded-2xl p-5 space-y-3 shadow-lg">
             <h3 class="text-xs font-bold uppercase tracking-wider text-amber-400 serif-brand" data-en="Who We Are" data-ar="من نحن">Who We Are</h3>
             <p class="text-xs text-stone-300 leading-relaxed font-medium" data-en="Dr. Care is the pioneering paint clinic dedicated to pristine factory finish restoration and preserving the enduring value of your automotive investment. Dr. Care: Reviving the Automotive Soul." data-ar="دكتور كير هي عيادة الطلاء الأولى المخصصة لاستعادة الطلاء الأصلي وحماية القيمة الاستثنائية لسيارتك الفاخرة. دكتور كير: لإحياء روح السيارات.">
@@ -99,22 +126,31 @@
             </div>
         </div>
 
-        <!-- Materials Showcase -->
-        <div class="bg-stone-900/60 border border-stone-800 rounded-2xl p-5 shadow-lg">
-            <h3 class="text-xs font-bold uppercase tracking-wider text-amber-400 mb-3 serif-brand" data-en="Global Gold Standard Materials" data-ar="معايير عالمية لا تقبل التنازل">Global Gold Standard Materials</h3>
+        <!-- Materials Showcase with Clickable Official Mother Company Links & Logos -->
+        <div class="bg-stone-900/60 border border-stone-800 rounded-2xl p-5 shadow-lg space-y-3">
+            <h3 class="text-xs font-bold uppercase tracking-wider text-amber-400 serif-brand text-center" data-en="Global Gold Standard Materials" data-ar="معايير عالمية لا تقبل التنازل">Global Gold Standard Materials</h3>
+            <p class="text-[10px] text-stone-400 text-center" data-en="Tap any brand below to explore their official website" data-ar="اضغط على أي علامة تجارية للاستكشاف">Tap any brand below to explore their official website</p>
+            
             <div class="grid grid-cols-2 gap-3 text-center">
-                <div class="bg-stone-950 p-3 rounded-xl border border-stone-800">
-                    <span class="block font-bold text-sm text-stone-100">Meguiar's</span>
-                    <span class="text-[10px] text-stone-400" data-en="American Gloss Tech" data-ar="تكنولوجيا اللمعان الأمريكية">American Gloss Tech</span>
-                </div>
-                <div class="bg-stone-950 p-3 rounded-xl border border-stone-800">
-                    <span class="block font-bold text-sm text-stone-100">Rupes</span>
-                    <span class="text-[10px] text-stone-400" data-en="European Precision" data-ar="التشطيب الأوروبي الدقيق">European Precision</span>
-                </div>
+                <!-- Meguiar's Clickable Logo Card -->
+                <a href="https://www.meguiars.com" target="_blank" class="bg-stone-950 p-3.5 rounded-xl border border-amber-500/30 flex flex-col items-center justify-center space-y-2 shadow-md hover:border-amber-500 hover:scale-[1.02] transition">
+                    <div class="h-10 flex items-center justify-center">
+                        <img src="meguiars-logo.png" alt="Meguiar's Logo" class="max-h-full max-w-full object-contain filter brightness-110">
+                    </div>
+                    <span class="text-[9px] text-stone-400" data-en="American Polymer Tech" data-ar="تكنولوجيا البوليمر الأمريكية">American Polymer Tech</span>
+                </a>
+
+                <!-- Rupes Clickable Logo Card -->
+                <a href="https://www.rupes.com" target="_blank" class="bg-stone-950 p-3.5 rounded-xl border border-amber-500/30 flex flex-col items-center justify-center space-y-2 shadow-md hover:border-amber-500 hover:scale-[1.02] transition">
+                    <div class="h-10 flex items-center justify-center">
+                        <img src="rupes-logo.png" alt="Rupes Logo" class="max-h-full max-w-full object-contain filter brightness-110">
+                    </div>
+                    <span class="text-[9px] text-stone-400" data-en="Italian BigFoot Systems" data-ar="أنظمة بيج فوت الإيطالية">Italian BigFoot Systems</span>
+                </a>
             </div>
         </div>
 
-        <!-- Packages & Pricing Menu Preview (Updated: 550, 670, 965) -->
+        <!-- Packages & Pricing Menu Preview -->
         <div class="bg-stone-900/60 border border-stone-800 rounded-2xl p-5 space-y-3 shadow-lg">
             <h3 class="text-xs font-bold uppercase tracking-wider text-amber-400 serif-brand" data-en="Dry Wash Packages & Pricing" data-ar="باقات وأسعار الغسيل الجاف">Dry Wash Packages & Pricing</h3>
             <div class="space-y-2">
@@ -142,49 +178,20 @@
             </div>
         </div>
 
-        <!-- Real Before & After Work Gallery -->
-        <div class="bg-stone-900/60 border border-stone-800 rounded-2xl p-5 space-y-3 shadow-lg">
-            <h3 class="text-xs font-bold uppercase tracking-wider text-amber-400 serif-brand" data-en="Real Results: Before & After" data-ar="النتائج الواقعية: قبل وبعد">Real Results: Before & After</h3>
-            <p class="text-xs text-stone-400" data-en="Witness the dramatic transformation of our mobile dry wash & paint care." data-ar="شاهد التحول المذهل لخدمة الغسيل الجاف وعناية الطلاء.">Witness the dramatic transformation of our mobile dry wash.</p>
-            
-            <div class="grid grid-cols-2 gap-3 pt-1">
-                <!-- Before Photo Card -->
-                <div class="bg-stone-950 rounded-xl border border-stone-800 overflow-hidden flex flex-col">
-                    <div class="h-32 relative">
-                        <img src="before.jpg" alt="Before Dry Wash" class="w-full h-full object-cover">
-                        <span class="absolute top-1 left-1 bg-red-600/90 text-white text-[9px] font-bold px-2 py-0.5 rounded" data-en="BEFORE" data-ar="قبل">BEFORE</span>
-                    </div>
-                    <div class="p-2 text-center">
-                        <span class="text-[10px] text-stone-300 font-medium" data-en="Dust & Dull Surface" data-ar="السطح المغبر والباست">Dust & Dull Surface</span>
-                    </div>
-                </div>
-
-                <!-- After Photo Card -->
-                <div class="bg-stone-950 rounded-xl border border-amber-500/40 overflow-hidden flex flex-col shadow-md">
-                    <div class="h-32 relative">
-                        <img src="after.jpg" alt="After Dry Wash" class="w-full h-full object-cover">
-                        <span class="absolute top-1 left-1 bg-amber-500 text-stone-950 text-[9px] font-bold px-2 py-0.5 rounded" data-en="AFTER" data-ar="بعد">AFTER</span>
-                    </div>
-                    <div class="p-2 text-center">
-                        <span class="text-[10px] text-amber-300 font-medium" data-en="Mirror Gloss Finish" data-ar="لمعان المرآة الفاخر">Mirror Gloss Finish</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Booking Form Card -->
-        <div class="bg-stone-900 border border-stone-800 rounded-2xl p-6 shadow-2xl relative">
-            <h3 class="text-base font-bold mb-4 text-amber-400 serif-brand" data-en="Book Your Weekend Slot" data-ar="احجز موعدك لعطلة نهاية الأسبوع">Book Your Weekend Slot</h3>
+        <!-- Booking Form Card with GPS Auto-Detect & Compound Address -->
+        <div class="bg-stone-900 border gold-border rounded-2xl p-6 shadow-2xl relative">
+            <h3 class="text-base font-bold mb-1 text-amber-400 serif-brand" data-en="Book Your Weekend Slot" data-ar="احجز موعدك لعطلة نهاية الأسبوع">Book Your Weekend Slot</h3>
+            <p class="text-[11px] text-stone-400 mb-4" data-en="* Reservation requires a 100 EGP deposit. Our representative will contact you shortly after confirmation." data-ar="* الحجز يتطلب عربون بقيمة 100 جنيه. سيتواصل معك أحد ممثلينا قريباً.">* Reservation requires a 100 EGP deposit. Our representative will contact you shortly.</p>
 
             <form id="bookingForm" class="space-y-4">
                 <div>
                     <label class="block text-xs font-semibold uppercase text-stone-400 mb-1" data-en="Full Name" data-ar="الاسم الكامل">Full Name</label>
-                    <input type="text" id="customerName" required class="w-full bg-stone-950 border border-stone-800 rounded-lg p-3 text-sm focus:border-amber-500 focus:outline-none" placeholder="Mohamed Elalfy">
+                    <input type="text" id="customerName" required autocomplete="name" class="w-full bg-stone-950 border border-stone-800 rounded-lg p-3 text-sm focus:border-amber-500 focus:outline-none" placeholder="Mohamed Elalfy">
                 </div>
 
                 <div>
                     <label class="block text-xs font-semibold uppercase text-stone-400 mb-1" data-en="Phone Number" data-ar="رقم الهاتف">Phone Number</label>
-                    <input type="tel" id="phone" required class="w-full bg-stone-950 border border-stone-800 rounded-lg p-3 text-sm focus:border-amber-500 focus:outline-none" placeholder="00201003300600">
+                    <input type="tel" id="phone" required autocomplete="tel" class="w-full bg-stone-950 border border-stone-800 rounded-lg p-3 text-sm focus:border-amber-500 focus:outline-none" placeholder="00201003300600">
                 </div>
 
                 <div>
@@ -196,9 +203,21 @@
                     </select>
                 </div>
 
-                <div>
-                    <label class="block text-xs font-semibold uppercase text-stone-400 mb-1" data-en="Exact Street / Compound Address" data-ar="العنوان التفصيلي / الشارع أو الكمبوند">Exact Street / Compound Address</label>
-                    <input type="text" id="exactAddress" required class="w-full bg-stone-950 border border-stone-800 rounded-lg p-3 text-sm focus:border-amber-500 focus:outline-none" placeholder="Phase 2, Street 5, Villa 42">
+                <!-- Structured Compound Address with GPS Button -->
+                <div class="space-y-2 pt-1">
+                    <div class="flex justify-between items-center">
+                        <label class="block text-xs font-semibold uppercase text-stone-400" data-en="Compound & Location Details" data-ar="تفاصيل الكمبوند والموقع">Compound & Location Details</label>
+                        <button type="button" onclick="detectGPS()" class="bg-amber-500/10 hover:bg-amber-500/25 border border-amber-500/40 text-amber-400 text-[10px] font-semibold px-2.5 py-1 rounded-lg transition flex items-center gap-1">
+                            📍 <span data-en="Detect GPS Location" data-ar="تحديد الموقع تلقائياً">Detect GPS Location</span>
+                        </button>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-2">
+                        <input type="text" id="compoundName" required class="w-full bg-stone-950 border border-stone-800 rounded-lg p-3 text-sm focus:border-amber-500 focus:outline-none" placeholder="Compound / Area (e.g. Madinaty)">
+                        <input type="text" id="phaseStreet" required class="w-full bg-stone-950 border border-stone-800 rounded-lg p-3 text-sm focus:border-amber-500 focus:outline-none" placeholder="Phase / Street">
+                    </div>
+                    <input type="text" id="unitNumber" required class="w-full bg-stone-950 border border-stone-800 rounded-lg p-3 text-sm focus:border-amber-500 focus:outline-none" placeholder="Villa / Building / Apartment Number (e.g. Villa 42)">
+                    <input type="hidden" id="gpsMapLink" value="Manual Address Provided">
                 </div>
 
                 <div class="grid grid-cols-2 gap-2">
@@ -215,9 +234,9 @@
                 <div>
                     <label class="block text-xs font-semibold uppercase text-stone-400 mb-1" data-en="Select Package & Service" data-ar="اختر الباقة والخدمة">Select Package & Service</label>
                     <select id="packageSelect" required class="w-full bg-stone-950 border border-stone-800 rounded-lg p-3 text-sm focus:border-amber-500 focus:outline-none">
-                        <option value="Standard Dry Wash - 550 EGP (45 mins)">Standard Dry Wash - 550 EGP (45 mins)</option>
-                        <option value="Special Dry Wash + Rims - 670 EGP (60 mins)">Special Dry Wash + Rims - 670 EGP (60 mins)</option>
-                        <option value="Executive Premium - 965 EGP (90 mins)">Executive Premium - 965 EGP (90 mins)</option>
+                        <option value="Standard Exterior - 550 EGP">Standard Exterior - 550 EGP (45 mins)</option>
+                        <option value="Special Exterior + Rims - 670 EGP">Special Exterior + Rims - 670 EGP (60 mins)</option>
+                        <option value="Executive Premium - 965 EGP">Executive Premium - 965 EGP (90 mins)</option>
                         <option value="Paint Scratch Healing (Assessment)">Paint Scratch Healing (2-3 Days Assessment)</option>
                     </select>
                 </div>
@@ -227,13 +246,14 @@
                     <input type="datetime-local" id="slotTime" required class="w-full bg-stone-950 border border-stone-800 rounded-lg p-3 text-sm focus:border-amber-500 focus:outline-none">
                 </div>
 
-                <button type="submit" id="submitBtn" class="w-full bg-amber-500 hover:bg-amber-400 text-stone-950 font-bold p-3.5 rounded-lg transition-all shadow-lg mt-4" data-en="Confirm Booking & Lock Slot" data-ar="تأكيد الحجز وتثبيت الموعد">
-                    Confirm Booking & Lock Slot
+                <button type="submit" id="submitBtn" class="w-full bg-amber-500 hover:bg-amber-400 text-stone-950 font-bold p-3.5 rounded-lg transition-all shadow-lg mt-4" data-en="Confirm Booking & Request Callback" data-ar="تأكيد الحجز وطلب الاتصال">
+                    Confirm Booking & Request Callback
                 </button>
             </form>
             
-            <div id="successMsg" class="hidden mt-4 p-3 bg-stone-950 border border-amber-500 text-amber-300 text-xs rounded-lg text-center font-semibold">
-                <span data-en="Booking confirmed successfully! Synced to operations room." data-ar="تم تأكيد الحجز بنجاح! تم إرساله مباشرة لغرفة العمليات.">Booking confirmed successfully!</span>
+            <div id="successMsg" class="hidden mt-4 p-4 bg-stone-950 border border-amber-500 text-amber-300 text-xs rounded-xl text-center space-y-1 font-medium">
+                <p class="font-bold text-sm text-amber-400" data-en="Booking Received Successfully!" data-ar="تم استلام حجزك بنجاح!">Booking Received Successfully!</p>
+                <p data-en="A Dr. Care representative will call you shortly to confirm your weekend slot and coordinate the 100 EGP deposit." data-ar="سيقوم ممثل دكتور كير بالاتصال بك قريباً لتأكيد موعد عطلة نهاية الأسبوع وتنسيق العربون (100 جنيه).">A Dr. Care representative will call you shortly to confirm your slot and coordinate the deposit.</p>
             </div>
         </div>
 
@@ -245,17 +265,20 @@
 
     <!-- Footer -->
     <footer class="bg-black border-t border-stone-800 p-6 text-center space-y-2">
-        <p class="text-xs text-amber-500/80 tracking-widest uppercase serif-brand gold-glow">REVIVING THE AUTOMOTIVE SOUL</p>
+        <div class="flex justify-center items-center gap-2 mb-1">
+            <img src="image_cf49a424.png" alt="Dr. Care Logo" class="w-6 h-6 object-cover rounded-full">
+            <p class="text-xs text-amber-500/90 tracking-widest uppercase serif-brand gold-glow">DR. CARE</p>
+        </div>
         <p class="text-[11px] text-stone-500">&copy; 2026 Dr. Care. Powered by Meguiar's & Rupes.</p>
     </footer>
 
-    <!-- ADMIN CRM MODAL (PIN Protected: 2026) -->
-    <div id="adminModal" class="hidden fixed inset-0 bg-black/95 backdrop-blur-md z-50 flex items-center justify-center p-4">
-        <div class="bg-stone-900 border border-stone-800 rounded-2xl p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto space-y-6">
-            <div class="flex justify-between items-center border-b border-stone-800 pb-4">
+    <!-- ENHANCED MOBILE CRM MODAL (PIN Protected: 2026) -->
+    <div id="adminModal" class="hidden fixed inset-0 bg-black/95 backdrop-blur-md z-50 flex items-center justify-center p-2 sm:p-4">
+        <div class="bg-stone-900 border border-stone-800 rounded-2xl p-4 sm:p-6 max-w-2xl w-full max-h-[92vh] overflow-y-auto space-y-5">
+            <div class="flex justify-between items-center border-b border-stone-800 pb-3">
                 <div>
-                    <h3 class="text-lg font-bold text-amber-400 serif-brand">DR. CARE CRM</h3>
-                    <p class="text-xs text-stone-400">Back-Office Live Dispatch & Operations</p>
+                    <h3 class="text-base sm:text-lg font-bold text-amber-400 serif-brand">DR. CARE MOBILE CRM</h3>
+                    <p class="text-[11px] text-stone-400">Operations, Strike Teams & Financial Settled Tracking</p>
                 </div>
                 <button onclick="closeAdmin()" class="text-stone-400 hover:text-white font-bold text-sm px-3 py-1 bg-stone-800 rounded-lg">✕ Close</button>
             </div>
@@ -269,13 +292,35 @@
             </div>
 
             <div id="crmDashboard" class="hidden space-y-4">
-                <div class="flex justify-between items-center">
-                    <h4 class="text-xs font-bold uppercase tracking-wider text-stone-400">Live Weekend Reservations</h4>
-                    <div class="flex items-center gap-2">
+                <!-- FILTRATION CONTROLS -->
+                <div class="bg-stone-950 p-3 rounded-xl border border-stone-800 space-y-2">
+                    <p class="text-[10px] uppercase font-bold text-stone-400">Filter Reservations</p>
+                    <div class="grid grid-cols-2 gap-2">
+                        <select id="filterZone" onchange="renderBookings()" class="bg-stone-900 text-xs text-stone-300 border border-stone-800 rounded-lg p-2 focus:outline-none">
+                            <option value="ALL">All Zones</option>
+                            <option value="Heliopolis">Heliopolis</option>
+                            <option value="Madinaty">Madinaty</option>
+                            <option value="5th Settlement">5th Settlement</option>
+                        </select>
+                        <select id="filterStatus" onchange="renderBookings()" class="bg-stone-900 text-xs text-stone-300 border border-stone-800 rounded-lg p-2 focus:outline-none">
+                            <option value="ALL">All Statuses</option>
+                            <option value="Pending Callback (100 EGP Deposit)">Pending Callback</option>
+                            <option value="Deposit Received (100 EGP)">Deposit Received</option>
+                            <option value="Confirmed & Dispatched">Confirmed & Dispatched</option>
+                            <option value="Settled (Paid in Full)">Settled (Paid in Full)</option>
+                            <option value="Archived / Cancelled">Archived / Cancelled</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="flex justify-between items-center px-1">
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-stone-400">Reservations List</h4>
+                    <div class="flex items-center gap-1.5">
                         <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
                         <span class="text-[10px] text-green-400 font-semibold">Live Sync Active</span>
                     </div>
                 </div>
+
                 <div id="bookingsList" class="space-y-3">
                     <p class="text-stone-500 text-center py-6 text-xs">Loading live bookings...</p>
                 </div>
@@ -283,7 +328,18 @@
         </div>
     </div>
 
-    <!-- Scripts -->
+    <!-- CUSTOMER DETAILS & ARCHIVE REASON MODAL -->
+    <div id="detailsModal" class="hidden fixed inset-0 bg-black/90 backdrop-blur-md z-50 flex items-center justify-center p-4">
+        <div class="bg-stone-900 border border-stone-800 rounded-2xl p-5 max-w-md w-full space-y-4">
+            <h3 class="text-sm font-bold text-amber-400 uppercase tracking-wide serif-brand">Customer Full Details</h3>
+            <div id="modalDetailsContent" class="space-y-2 text-xs text-stone-300 bg-stone-950 p-3.5 rounded-xl border border-stone-800">
+                <!-- Dynamically filled -->
+            </div>
+            <button onclick="closeDetailsModal()" class="w-full bg-stone-800 text-white font-semibold py-2 rounded-lg text-xs">Close Details</button>
+        </div>
+    </div>
+
+    <!-- SCRIPTS -->
     <script>
         let currentLang = 'en';
         function toggleLanguage() {
@@ -297,6 +353,29 @@
                 const text = el.getAttribute(`data-${currentLang}`);
                 if (text) el.textContent = text;
             });
+        }
+
+        function switchView(view) {
+            const btnBefore = document.getElementById('btnBefore');
+            const btnAfter = document.getElementById('btnAfter');
+            const layerBefore = document.getElementById('layerBefore');
+            const layerAfter = document.getElementById('layerAfter');
+
+            if (view === 'before') {
+                btnBefore.className = "px-3 py-1 rounded-md bg-amber-500 text-stone-950 transition font-bold";
+                btnAfter.className = "px-3 py-1 rounded-md text-stone-400 hover:text-white transition font-bold";
+                layerBefore.style.opacity = "1";
+                layerBefore.style.pointerEvents = "auto";
+                layerAfter.style.opacity = "0";
+                layerAfter.style.pointerEvents = "none";
+            } else {
+                btnAfter.className = "px-3 py-1 rounded-md bg-amber-500 text-stone-950 transition font-bold";
+                btnBefore.className = "px-3 py-1 rounded-md text-stone-400 hover:text-white transition font-bold";
+                layerAfter.style.opacity = "1";
+                layerAfter.style.pointerEvents = "auto";
+                layerBefore.style.opacity = "0";
+                layerBefore.style.pointerEvents = "none";
+            }
         }
 
         function openAdminLogin() {
@@ -317,9 +396,43 @@
                 alert("Incorrect PIN!");
             }
         }
+
+        function closeDetailsModal() {
+            document.getElementById('detailsModal').classList.add('hidden');
+        }
+
+        function detectGPS() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const lat = position.coords.latitude;
+                        const lng = position.coords.longitude;
+                        const mapsUrl = `https://maps.google.com/?q=${lat},${lng}`;
+                        document.getElementById('gpsMapLink').value = mapsUrl;
+                        document.getElementById('compoundName').value = "GPS Pin Captured";
+                        document.getElementById('unitNumber').value = "Lat: " + lat.toFixed(4) + ", Lng: " + lng.toFixed(4);
+                        alert(currentLang === 'en' ? "GPS Location detected successfully!" : "تم تحديد الموقع الجغرافي بنجاح!");
+                    },
+                    (error) => {
+                        alert(currentLang === 'en' ? "Unable to retrieve your location. Please type manually." : "تعسّر تحديد موقعك. يرجى الكتابة يدوياً.");
+                    }
+                );
+            } else {
+                alert("Geolocation is not supported by this browser.");
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedName = localStorage.getItem('drcare_name');
+            const savedPhone = localStorage.getItem('drcare_phone');
+            if(savedName) document.getElementById('customerName').value = savedName;
+            if(savedPhone) document.getElementById('phone').value = savedPhone;
+        });
     </script>
 
     <script type="module">
+        let globalBookings = [];
+
         const form = document.getElementById('bookingForm');
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -327,17 +440,28 @@
             btn.disabled = true;
             btn.textContent = currentLang === 'en' ? "Syncing..." : "جاري الإرسال...";
 
+            const cName = document.getElementById('customerName').value;
+            const cPhone = document.getElementById('phone').value;
+
+            localStorage.setItem('drcare_name', cName);
+            localStorage.setItem('drcare_phone', cPhone);
+
             try {
                 const bookingData = {
-                    customerName: document.getElementById('customerName').value,
-                    phone: document.getElementById('phone').value,
+                    customerName: cName,
+                    phone: cPhone,
                     zone: document.getElementById('zone').value,
-                    exactAddress: document.getElementById('exactAddress').value,
+                    compoundName: document.getElementById('compoundName').value,
+                    phaseStreet: document.getElementById('phaseStreet').value,
+                    unitNumber: document.getElementById('unitNumber').value,
+                    gpsMapLink: document.getElementById('gpsMapLink').value,
                     carModel: document.getElementById('carModel').value,
                     plateNumber: document.getElementById('plateNumber').value,
                     package: document.getElementById('packageSelect').value,
                     slotTime: document.getElementById('slotTime').value,
-                    status: "Pending Deposit",
+                    status: "Pending Callback (100 EGP Deposit)",
+                    unitAssigned: "Unit A (General)",
+                    archiveNote: "",
                     createdAt: window.Timestamp.now()
                 };
 
@@ -350,43 +474,135 @@
                 alert("Error saving booking. Please check your connection.");
             } finally {
                 btn.disabled = false;
-                btn.textContent = currentLang === 'en' ? "Confirm Booking & Lock Slot" : "تأكيد الحجز وتثبيت الموعد";
+                btn.textContent = currentLang === 'en' ? "Confirm Booking & Request Callback" : "تأكيد الحجز وطلب الاتصال";
             }
         });
 
-        window.loadLiveBookings = function() {
-            const q = window.query(window.collection(window.db, "bookings"), window.orderBy("createdAt", "desc"));
-            window.onSnapshot(q, (snapshot) => {
-                const container = document.getElementById('bookingsList');
-                container.innerHTML = "";
-                
-                if(snapshot.empty) {
-                    container.innerHTML = `<p class="text-stone-500 text-center py-8 text-xs">No bookings received yet.</p>`;
-                    return;
-                }
+        window.updateBookingStatus = async function(id, newStatus) {
+            try {
+                const ref = window.doc(window.db, "bookings", id);
+                await window.updateDoc(ref, { status: newStatus });
+            } catch (err) {
+                console.error("Error updating status:", err);
+            }
+        };
 
-                snapshot.forEach((doc) => {
-                    const b = doc.data();
-                    const card = document.createElement('div');
-                    card.className = "bg-stone-950 border border-stone-800 rounded-xl p-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-3";
-                    card.innerHTML = `
+        window.updateTeamUnit = async function(id, unit) {
+            try {
+                const ref = window.doc(window.db, "bookings", id);
+                await window.updateDoc(ref, { unitAssigned: unit });
+            } catch (err) {
+                console.error("Error updating team unit:", err);
+            }
+        };
+
+        window.archiveBookingWithNote = async function(id) {
+            const note = prompt("Please enter the reason for archiving/deleting this booking:");
+            if (note !== null) {
+                try {
+                    const ref = window.doc(window.db, "bookings", id);
+                    await window.updateDoc(ref, { 
+                        status: "Archived / Cancelled",
+                        archiveNote: note || "No reason provided"
+                    });
+                } catch (err) {
+                    console.error("Error archiving booking:", err);
+                }
+            }
+        };
+
+        window.viewDetails = function(id) {
+            const b = globalBookings.find(item => item.id === id);
+            if (!b) return;
+
+            const content = `
+                <p><strong>Name:</strong> ${b.customerName}</p>
+                <p><strong>Phone:</strong> ${b.phone}</p>
+                <p><strong>Zone:</strong> ${b.zone}</p>
+                <p><strong>Compound:</strong> ${b.compoundName}</p>
+                <p><strong>Phase/Street:</strong> ${b.phaseStreet}</p>
+                <p><strong>Villa/Unit:</strong> ${b.unitNumber}</p>
+                <p><strong>GPS Link:</strong> ${b.gpsMapLink && b.gpsMapLink !== 'Manual Address Provided' ? `<a href="${b.gpsMapLink}" target="_blank" class="text-amber-400 underline">Open in Google Maps</a>` : 'Manual Address'}</p>
+                <p><strong>Car Model:</strong> ${b.carModel}</p>
+                <p><strong>Plate Number:</strong> ${b.plateNumber}</p>
+                <p><strong>Package:</strong> ${b.package}</p>
+                <p><strong>Slot:</strong> ${b.slotTime}</p>
+                <p><strong>Status:</strong> ${b.status}</p>
+                <p><strong>Assigned Unit:</strong> ${b.unitAssigned || 'Unit A'}</p>
+                ${b.archiveNote ? `<p class="text-red-400 mt-2"><strong>Archive Note:</strong> ${b.archiveNote}</p>` : ''}
+            `;
+            document.getElementById('modalDetailsContent').innerHTML = content;
+            document.getElementById('detailsModal').classList.remove('hidden');
+        };
+
+        window.renderBookings = function() {
+            const zoneFilter = document.getElementById('filterZone').value;
+            const statusFilter = document.getElementById('filterStatus').value;
+            const container = document.getElementById('bookingsList');
+            container.innerHTML = "";
+
+            const filtered = globalBookings.filter(b => {
+                const matchZone = (zoneFilter === 'ALL' || b.zone === zoneFilter);
+                const matchStatus = (statusFilter === 'ALL' || b.status === statusFilter);
+                return matchZone && matchStatus;
+            });
+
+            if(filtered.length === 0) {
+                container.innerHTML = `<p class="text-stone-500 text-center py-8 text-xs">No matching bookings found.</p>`;
+                return;
+            }
+
+            filtered.forEach((b) => {
+                const isActive = b.status.includes("Deposit Received") || b.status.includes("Confirmed & Dispatched");
+                const cardBorder = isActive ? "border-green-500/60 bg-green-950/10" : "border-stone-800 bg-stone-950";
+
+                const card = document.createElement('div');
+                card.className = `border rounded-xl p-3 sm:p-4 space-y-3 ${cardBorder}`;
+                card.innerHTML = `
+                    <div class="flex justify-between items-start gap-2">
                         <div>
                             <div class="flex items-center gap-2 mb-1">
                                 <span class="bg-amber-500/20 text-amber-400 text-[10px] font-bold px-2 py-0.5 rounded">${b.zone}</span>
                                 <span class="bg-stone-900 text-stone-300 text-[10px] px-2 py-0.5 rounded font-mono">${b.plateNumber}</span>
+                                <span class="bg-stone-900 text-stone-400 text-[9px] px-1.5 py-0.5 rounded">${b.unitAssigned || 'Unit A'}</span>
                             </div>
-                            <h4 class="text-sm font-bold text-white">${b.customerName} <span class="text-[11px] text-stone-400 font-normal">(${b.phone})</span></h4>
-                            <p class="text-[11px] text-stone-400 mt-0.5"><strong>Car:</strong> ${b.carModel} | <strong>Service:</strong> ${b.package}</p>
-                            <p class="text-[11px] text-stone-400"><strong>Address:</strong> ${b.exactAddress}</p>
-                            <p class="text-[11px] text-amber-300 mt-0.5"><strong>Slot:</strong> ${b.slotTime}</p>
+                            <h4 class="text-sm font-bold text-white">${b.customerName}</h4>
+                            <p class="text-[11px] text-stone-400"><strong>Car:</strong> ${b.carModel} | <strong>Compound:</strong> ${b.compoundName} (${b.unitNumber})</p>
+                            <p class="text-[11px] text-amber-300"><strong>Slot:</strong> ${b.slotTime}</p>
+                            ${b.archiveNote ? `<p class="text-[10px] text-red-400 mt-1"><strong>Note:</strong> ${b.archiveNote}</p>` : ''}
                         </div>
-                        <div class="flex flex-col items-end gap-1.5 w-full md:w-auto">
-                            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-yellow-500/20 text-yellow-400 border border-yellow-500/30">${b.status}</span>
-                            <span class="text-[9px] text-stone-500">Live Firebase Sync</span>
+                        <button onclick="viewDetails('${b.id}')" class="bg-stone-900 hover:bg-stone-800 text-amber-400 text-[11px] px-2.5 py-1.5 rounded border border-stone-800">Details</button>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2 border-t border-stone-900">
+                        <select onchange="updateBookingStatus('${b.id}', this.value)" class="bg-stone-900 text-xs text-amber-300 border border-stone-800 rounded p-1.5 focus:outline-none">
+                            <option value="Pending Callback (100 EGP Deposit)" ${b.status === 'Pending Callback (100 EGP Deposit)' ? 'selected' : ''}>Pending Callback</option>
+                            <option value="Deposit Received (100 EGP)" ${b.status === 'Deposit Received (100 EGP)' ? 'selected' : ''}>Deposit Received (100 EGP)</option>
+                            <option value="Confirmed & Dispatched" ${b.status === 'Confirmed & Dispatched' ? 'selected' : ''}>Confirmed & Dispatched</option>
+                            <option value="Settled (Paid in Full)" ${b.status === 'Settled (Paid in Full)' ? 'selected' : ''}>Settled (Paid in Full)</option>
+                            <option value="Archived / Cancelled" ${b.status === 'Archived / Cancelled' ? 'selected' : ''}>Archived / Cancelled</option>
+                        </select>
+                        <div class="flex gap-2">
+                            <select onchange="updateTeamUnit('${b.id}', this.value)" class="bg-stone-900 text-[11px] text-stone-300 border border-stone-800 rounded p-1.5 focus:outline-none w-1/2">
+                                <option value="Unit A" ${b.unitAssigned === 'Unit A' ? 'selected' : ''}>Unit A</option>
+                                <option value="Unit B" ${b.unitAssigned === 'Unit B' ? 'selected' : ''}>Unit B</option>
+                            </select>
+                            <button onclick="archiveBookingWithNote('${b.id}')" class="w-1/2 text-[10px] bg-red-950/40 text-red-400 hover:bg-red-900/40 border border-red-900/50 py-1 rounded transition">Archive</button>
                         </div>
-                    `;
-                    container.appendChild(card);
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        };
+
+        window.loadLiveBookings = function() {
+            const q = window.query(window.collection(window.db, "bookings"), window.orderBy("createdAt", "desc"));
+            window.onSnapshot(q, (snapshot) => {
+                globalBookings = [];
+                snapshot.forEach((docSnap) => {
+                    globalBookings.push({ id: docSnap.id, ...docSnap.data() });
                 });
+                renderBookings();
             });
         }
     </script>
