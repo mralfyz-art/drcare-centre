@@ -282,7 +282,7 @@
             </div>
         </div>
 
-        <!-- Floating Quick WhatsApp Button with Updated Number -->
+        <!-- Floating Quick WhatsApp Button -->
         <a href="https://wa.me/201129662233?text=Hello%20Dr.%20Care,%20I%20would%20like%20to%20inquire%20about%20detailing%20services." target="_blank" class="block bg-green-600/20 hover:bg-green-600/30 border border-green-500/40 text-green-300 font-bold py-3 rounded-xl text-xs text-center transition">
             <span data-en="💬 Direct WhatsApp Inquiry" data-ar="💬 استفسار مباشر عبر واتساب">💬 Direct WhatsApp Inquiry</span>
         </a>
@@ -297,13 +297,13 @@
         <p class="text-[11px] text-stone-500">&copy; 2026 Dr. Care. Powered by Meguiar's & Rupes.</p>
     </footer>
 
-    <!-- ENHANCED MOBILE CRM MODAL WITH FULL EDITING & AUTOMATED NOTE (PIN Protected: 2026) -->
+    <!-- STREAMLINED MOBILE CRM MODAL WITH PIN PROTECTION & 3 ACTION TABS -->
     <div id="adminModal" class="hidden fixed inset-0 bg-black/85 backdrop-blur-md z-50 flex items-center justify-center p-2 sm:p-4">
         <div class="bg-stone-900 border border-stone-800 rounded-2xl p-4 sm:p-6 max-w-2xl w-full max-h-[92vh] overflow-y-auto space-y-5 shadow-2xl text-stone-100">
             <div class="flex justify-between items-center border-b border-stone-800 pb-3">
                 <div>
                     <h3 class="text-base sm:text-lg font-bold text-amber-400 serif-brand">DR. CARE MOBILE CRM</h3>
-                    <p class="text-[11px] text-stone-400">Operations, Live Editing & Financial Settled Tracking</p>
+                    <p class="text-[11px] text-stone-400">Streamlined Operations & Action Tabs</p>
                 </div>
                 <button onclick="closeAdmin()" class="text-stone-400 hover:text-white font-bold text-sm px-3 py-1 bg-stone-800 rounded-lg">✕ Close</button>
             </div>
@@ -317,33 +317,22 @@
             </div>
 
             <div id="crmDashboard" class="hidden space-y-4">
-                <!-- FILTRATION CONTROLS -->
-                <div class="bg-stone-950 p-3 rounded-xl border border-stone-800 space-y-2">
-                    <p class="text-[10px] uppercase font-bold text-stone-400">Filter Reservations</p>
-                    <div class="grid grid-cols-2 gap-2">
-                        <select id="filterZone" onchange="renderBookings()" class="bg-stone-900 text-xs text-stone-300 border border-stone-800 rounded-lg p-2 focus:outline-none">
-                            <option value="ALL">All Zones</option>
-                            <option value="Heliopolis">Heliopolis</option>
-                            <option value="Madinaty">Madinaty</option>
-                            <option value="5th Settlement">5th Settlement</option>
-                        </select>
-                        <select id="filterStatus" onchange="renderBookings()" class="bg-stone-900 text-xs text-stone-300 border border-stone-800 rounded-lg p-2 focus:outline-none">
-                            <option value="ALL">All Statuses</option>
-                            <option value="New Customer Waiting for Call">New Customer Waiting for Call</option>
-                            <option value="15% Deposit Received">15% Deposit Received</option>
-                            <option value="Confirmed & Dispatched">Confirmed & Dispatched</option>
-                            <option value="Settled (Paid in Full)">Settled (Paid in Full)</option>
-                            <option value="Archived / Cancelled">Archived / Cancelled</option>
-                        </select>
-                    </div>
+                <!-- STREAMLINED TABS (Pending Deposit | Settled | Cancelled) -->
+                <div class="grid grid-cols-3 gap-1 bg-stone-950 p-1.5 rounded-xl border border-stone-800">
+                    <button id="tabPending" onclick="switchCrmTab('Pending')" class="py-2 text-[11px] font-bold rounded-lg bg-amber-500 text-stone-950 transition shadow-sm">⏳ Pending</button>
+                    <button id="tabSettled" onclick="switchCrmTab('Settled')" class="py-2 text-[11px] font-bold rounded-lg text-stone-400 hover:text-white transition">✅ Settled</button>
+                    <button id="tabCancelled" onclick="switchCrmTab('Cancelled')" class="py-2 text-[11px] font-bold rounded-lg text-stone-400 hover:text-white transition">❌ Cancelled</button>
                 </div>
 
-                <div class="flex justify-between items-center px-1">
-                    <h4 class="text-xs font-bold uppercase tracking-wider text-stone-400">Reservations List</h4>
-                    <div class="flex items-center gap-1.5">
-                        <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-                        <span class="text-[10px] text-green-400 font-semibold">Live Sync Active</span>
-                    </div>
+                <!-- ZONE FILTER -->
+                <div class="bg-stone-950 p-3 rounded-xl border border-stone-800 flex justify-between items-center">
+                    <span class="text-[10px] uppercase font-bold text-stone-400">Filter Zone</span>
+                    <select id="filterZone" onchange="renderBookings()" class="bg-stone-900 text-xs text-stone-300 border border-stone-800 rounded-lg p-2 focus:outline-none">
+                        <option value="ALL">All Zones</option>
+                        <option value="Heliopolis">Heliopolis</option>
+                        <option value="Madinaty">Madinaty</option>
+                        <option value="5th Settlement">5th Settlement</option>
+                    </select>
                 </div>
 
                 <div id="bookingsList" class="space-y-3">
@@ -433,6 +422,9 @@
         }
 
         function openAdminLogin() {
+            document.getElementById('pinBox').classList.remove('hidden');
+            document.getElementById('crmDashboard').classList.add('hidden');
+            document.getElementById('pinInput').value = "";
             document.getElementById('adminModal').classList.remove('hidden');
         }
 
@@ -447,7 +439,7 @@
                 document.getElementById('crmDashboard').classList.remove('hidden');
                 loadLiveBookings();
             } else {
-                alert("Incorrect PIN!");
+                alert("Incorrect PIN! (Use 2026)");
             }
         }
 
@@ -487,6 +479,20 @@
     <script type="module">
         let globalBookings = [];
         let editingBookingId = null;
+        let currentCrmTab = 'Pending'; // 'Pending' | 'Settled' | 'Cancelled'
+
+        window.switchCrmTab = function(tabName) {
+            currentCrmTab = tabName;
+            ['Pending', 'Settled', 'Cancelled'].forEach(t => {
+                const btn = document.getElementById(`tab${t}`);
+                if (t === tabName) {
+                    btn.className = "py-2 text-[11px] font-bold rounded-lg bg-amber-500 text-stone-950 transition shadow-sm";
+                } else {
+                    btn.className = "py-2 text-[11px] font-bold rounded-lg text-stone-400 hover:text-white transition";
+                }
+            });
+            renderBookings();
+        };
 
         const form = document.getElementById('bookingForm');
         form.addEventListener('submit', async (e) => {
@@ -514,9 +520,7 @@
                     plateNumber: document.getElementById('plateNumber').value,
                     package: document.getElementById('packageSelect').value,
                     slotTime: document.getElementById('slotTime').value,
-                    status: "New Customer Waiting for Call",
-                    unitAssigned: "Unit A (General)",
-                    archiveNote: "New customer waiting for the call to progress the reservations fast",
+                    status: "Pending Deposit",
                     createdAt: window.Timestamp.now()
                 };
 
@@ -540,7 +544,7 @@
                 const ref = window.doc(window.db, "bookings", id);
                 await window.updateDoc(ref, { status: newStatus });
 
-                if (newStatus === "15% Deposit Received") {
+                if (newStatus === "Settled") {
                     const b = globalBookings.find(item => item.id === id);
                     const localPhone = localStorage.getItem('drcare_phone');
                     if (b && b.phone === localPhone) {
@@ -555,30 +559,6 @@
                 }
             } catch (err) {
                 console.error("Error updating status:", err);
-            }
-        };
-
-        window.updateTeamUnit = async function(id, unit) {
-            try {
-                const ref = window.doc(window.db, "bookings", id);
-                await window.updateDoc(ref, { unitAssigned: unit });
-            } catch (err) {
-                console.error("Error updating team unit:", err);
-            }
-        };
-
-        window.archiveBookingWithNote = async function(id) {
-            const note = prompt("Please enter the reason for archiving/deleting this booking:");
-            if (note !== null) {
-                try {
-                    const ref = window.doc(window.db, "bookings", id);
-                    await window.updateDoc(ref, { 
-                        status: "Archived / Cancelled",
-                        archiveNote: note || "No reason provided"
-                    });
-                } catch (err) {
-                    console.error("Error archiving booking:", err);
-                }
             }
         };
 
@@ -609,7 +589,6 @@
                 </div>
 
                 <p class="pt-2 text-[11px] text-stone-400"><strong>GPS Link:</strong> ${b.gpsMapLink && b.gpsMapLink !== 'Manual Address Provided' ? `<a href="${b.gpsMapLink}" target="_blank" class="text-amber-400 underline">Open in Maps</a>` : 'Manual Address'}</p>
-                <p class="text-[11px] text-stone-400"><strong>CRM Note:</strong> ${b.archiveNote || 'None'}</p>
             `;
             document.getElementById('modalDetailsContent').innerHTML = content;
             document.getElementById('detailsModal').classList.remove('hidden');
@@ -636,24 +615,33 @@
 
         window.renderBookings = function() {
             const zoneFilter = document.getElementById('filterZone').value;
-            const statusFilter = document.getElementById('filterStatus').value;
             const container = document.getElementById('bookingsList');
             container.innerHTML = "";
 
             const filtered = globalBookings.filter(b => {
                 const matchZone = (zoneFilter === 'ALL' || b.zone === zoneFilter);
-                const matchStatus = (statusFilter === 'ALL' || b.status === statusFilter);
-                return matchZone && matchStatus;
+                let matchTab = false;
+                const status = b.status || "Pending Deposit";
+                
+                if (currentCrmTab === 'Pending') {
+                    matchTab = (status === 'Pending Deposit');
+                } else if (currentCrmTab === 'Settled') {
+                    matchTab = (status === 'Settled');
+                } else if (currentCrmTab === 'Cancelled') {
+                    matchTab = (status === 'Cancelled');
+                }
+
+                return matchZone && matchTab;
             });
 
             if(filtered.length === 0) {
-                container.innerHTML = `<p class="text-stone-500 text-center py-6 text-xs">No matching bookings found.</p>`;
+                container.innerHTML = `<p class="text-stone-500 text-center py-8 text-xs">No bookings found in this view.</p>`;
                 return;
             }
 
             filtered.forEach((b) => {
-                const isActive = b.status.includes("Waiting for Call") || b.status.includes("Deposit Received") || b.status.includes("Confirmed & Dispatched");
-                const cardBorder = isActive ? "border-green-500/60 bg-green-950/10" : "border-stone-800 bg-stone-950";
+                const isPending = (b.status === 'Pending Deposit' || !b.status);
+                const cardBorder = isPending ? "border-green-500/70 bg-green-950/20 shadow-lg" : "border-stone-800 bg-stone-950";
 
                 const card = document.createElement('div');
                 card.className = `border rounded-xl p-3 sm:p-4 space-y-3 ${cardBorder}`;
@@ -663,31 +651,23 @@
                             <div class="flex items-center gap-2 mb-1">
                                 <span class="bg-amber-500/20 text-amber-400 text-[10px] font-bold px-2 py-0.5 rounded">${b.zone}</span>
                                 <span class="bg-stone-900 text-stone-300 text-[10px] px-2 py-0.5 rounded font-mono">${b.plateNumber}</span>
-                                <span class="bg-stone-900 text-stone-400 text-[9px] px-1.5 py-0.5 rounded">${b.unitAssigned || 'Unit A'}</span>
+                                ${isPending ? '<span class="inline-flex items-center gap-1 bg-green-500/20 text-green-400 text-[9px] px-2 py-0.5 rounded font-semibold"><span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span> New</span>' : ''}
                             </div>
-                            <h4 class="text-sm font-bold text-white">${b.customerName}</h4>
+                            <h4 class="text-sm font-bold text-white">${b.customerName} (${b.phone})</h4>
                             <p class="text-[11px] text-stone-400"><strong>Car:</strong> ${b.carModel} | <strong>Compound:</strong> ${b.compoundName} (${b.unitNumber})</p>
                             <p class="text-[11px] text-amber-300"><strong>Slot:</strong> ${b.slotTime}</p>
-                            <p class="text-[10px] text-amber-400 mt-1"><strong>Note:</strong> ${b.archiveNote || 'New customer waiting for call'}</p>
+                            <p class="text-[10px] text-stone-300 mt-1"><strong>Package:</strong> ${b.package}</p>
                         </div>
                         <button onclick="viewDetails('${b.id}')" class="bg-stone-900 hover:bg-stone-800 text-amber-400 text-[11px] px-2.5 py-1.5 rounded border border-stone-800">Edit / Details</button>
                     </div>
 
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2 border-t border-stone-950">
-                        <select onchange="updateBookingStatus('${b.id}', this.value)" class="bg-stone-900 text-xs text-amber-300 border border-stone-800 rounded p-1.5 focus:outline-none">
-                            <option value="New Customer Waiting for Call" ${b.status === 'New Customer Waiting for Call' ? 'selected' : ''}>New Customer Waiting for Call</option>
-                            <option value="15% Deposit Received" ${b.status === '15% Deposit Received' ? 'selected' : ''}>15% Deposit Received</option>
-                            <option value="Confirmed & Dispatched" ${b.status === 'Confirmed & Dispatched' ? 'selected' : ''}>Confirmed & Dispatched</option>
-                            <option value="Settled (Paid in Full)" ${b.status === 'Settled (Paid in Full)' ? 'selected' : ''}>Settled (Paid in Full)</option>
-                            <option value="Archived / Cancelled" ${b.status === 'Archived / Cancelled' ? 'selected' : ''}>Archived / Cancelled</option>
+                    <div class="pt-2 border-t border-stone-900 flex justify-between items-center">
+                        <span class="text-[10px] text-stone-400 uppercase font-bold">Action / Status:</span>
+                        <select onchange="updateBookingStatus('${b.id}', this.value)" class="bg-stone-900 text-xs text-amber-300 border border-stone-800 rounded p-1.5 focus:outline-none font-medium">
+                            <option value="Pending Deposit" ${b.status === 'Pending Deposit' ? 'selected' : ''}>Pending Deposit</option>
+                            <option value="Settled" ${b.status === 'Settled' ? 'selected' : ''}>Settled</option>
+                            <option value="Cancelled" ${b.status === 'Cancelled' ? 'selected' : ''}>Cancelled</option>
                         </select>
-                        <div class="flex gap-2">
-                            <select onchange="updateTeamUnit('${b.id}', this.value)" class="bg-stone-900 text-[11px] text-stone-300 border border-stone-800 rounded p-1.5 focus:outline-none w-1/2">
-                                <option value="Unit A" ${b.unitAssigned === 'Unit A' ? 'selected' : ''}>Unit A</option>
-                                <option value="Unit B" ${b.unitAssigned === 'Unit B' ? 'selected' : ''}>Unit B</option>
-                            </select>
-                            <button onclick="archiveBookingWithNote('${b.id}')" class="w-1/2 text-[10px] bg-red-950/40 text-red-400 hover:bg-red-900/40 border border-red-900/50 py-1 rounded transition">Archive</button>
-                        </div>
                     </div>
                 `;
                 container.appendChild(card);
