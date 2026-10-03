@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dr. Care | Reviving The Automotive Soul</title>
+    <link rel="icon" type="image/jpeg" href="logo.jpg">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Cinzel:wght@500;700&family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
     <style>
@@ -31,19 +32,19 @@
             50% { transform: translateX(35px); }
         }
     </style>
-    <!-- Firebase SDK -->
+    <!-- Firebase SDK & Real Credentials Integration -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, Timestamp, doc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-        // REPLACE WITH YOUR FIREBASE CONFIG KEYS
         const firebaseConfig = {
-            apiKey: "YOUR_FIREBASE_API_KEY",
-            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-            projectId: "YOUR_PROJECT_ID",
-            storageBucket: "YOUR_PROJECT_ID.appspot.com",
-            messagingSenderId: "YOUR_SENDER_ID",
-            appId: "YOUR_APP_ID"
+            apiKey: "AIzaSyAmLj9vj6jn9ASbWcUL2CjtJX0n_tG8W18",
+            authDomain: "drcare-centre.firebaseapp.com",
+            projectId: "drcare-centre",
+            storageBucket: "drcare-centre.firebasestorage.app",
+            messagingSenderId: "945201915740",
+            appId: "1:945201915740:web:dca2c552e7106f39560399",
+            measurementId: "G-K6MEN28BJ0"
         };
 
         const app = initializeApp(firebaseConfig);
@@ -147,7 +148,7 @@
             </div>
         </div>
 
-        <!-- Materials Showcase with Enhanced Framed Logo Badges[cite: 4, 5] -->
+        <!-- Materials Showcase with Enhanced Framed Logo Badges -->
         <div class="bg-stone-900/70 border border-stone-800 rounded-2xl p-5 shadow-lg space-y-3 backdrop-blur-sm">
             <h3 class="text-xs font-bold uppercase tracking-wider text-amber-400 serif-brand text-center" data-en="Global Gold Standard Materials" data-ar="معايير عالمية لا تقبل التنازل">Global Gold Standard Materials</h3>
             <p class="text-[10px] text-stone-400 text-center" data-en="Tap any brand below to explore their official website" data-ar="اضغط على أي علامة تجارية للاستكشاف">Tap any brand below to explore their official website</p>
@@ -209,12 +210,12 @@
             <form id="bookingForm" class="space-y-4">
                 <div>
                     <label class="block text-xs font-semibold uppercase text-stone-400 mb-1" data-en="Full Name" data-ar="الاسم الكامل">Full Name</label>
-                    <input type="text" id="customerName" required autocomplete="name" class="w-full bg-stone-950 border border-stone-800 rounded-lg p-3 text-sm text-stone-100 focus:border-amber-500 focus:outline-none" placeholder="Mohamed Elalfy">
+                    <input type="text" id="customerName" required autocomplete="name" class="w-full bg-stone-950 border border-stone-800 rounded-lg p-3 text-sm text-stone-100 focus:border-amber-500 focus:outline-none" placeholder="Ahmed Ali">
                 </div>
 
                 <div>
                     <label class="block text-xs font-semibold uppercase text-stone-400 mb-1" data-en="Phone Number" data-ar="رقم الهاتف">Phone Number</label>
-                    <input type="tel" id="phone" required autocomplete="tel" class="w-full bg-stone-950 border border-stone-800 rounded-lg p-3 text-sm text-stone-100 focus:border-amber-500 focus:outline-none" placeholder="00201003300600">
+                    <input type="tel" id="phone" required autocomplete="tel" class="w-full bg-stone-950 border border-stone-800 rounded-lg p-3 text-sm text-stone-100 focus:border-amber-500 focus:outline-none" placeholder="01012345678">
                 </div>
 
                 <div>
