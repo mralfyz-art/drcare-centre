@@ -35,7 +35,7 @@
     <!-- Firebase SDK & Real Credentials Integration -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, Timestamp, doc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, Timestamp, doc, updateDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyAmLj9vj6jn9ASbWcUL2CjtJX0n_tG8W18",
@@ -59,7 +59,6 @@
         window.Timestamp = Timestamp;
         window.doc = doc;
         window.updateDoc = updateDoc;
-        window.deleteDoc = deleteDoc;
     </script>
 </head>
 <body class="antialiased min-h-screen flex flex-col justify-between selection:bg-amber-500 selection:text-black">
@@ -101,7 +100,7 @@
                 </div>
             </div>
 
-            <p class="text-xs text-stone-300 leading-relaxed px-1 font-medium" data-en="Exclusive weekend mobile refinement service across Heliopolis, Madinaty, and the 5th Settlement." data-ar="خدمة العناية الفاخرة المتنقلة حصرياً في عطلة نهاية الأسبوع في هليوبوليس، مدينتي، والتجمع الخامس.">Exclusive weekend mobile refinement service across Heliopolis, Madinaty, and the 5th Settlement.</p>
+            <p class="text-xs text-stone-300 leading-relaxed px-1 font-medium" data-en="Exclusive weekend mobile refinement service across Heliopolis, Nasr City, Madinaty, and the 5th Settlement." data-ar="خدمة العناية الفاخرة المتنقلة حصرياً في عطلة نهاية الأسبوع في هليوبوليس، مدينة نصر، مدينتي، والتجمع الخامس.">Exclusive weekend mobile refinement service across Heliopolis, Nasr City, Madinaty, and the 5th Settlement.</p>
 
             <!-- REAL WORK TRANSFORMATION SHOWCASE -->
             <div class="bg-stone-950/90 border border-stone-800 rounded-xl p-3 space-y-2 shadow-inner">
@@ -222,6 +221,7 @@
                     <label class="block text-xs font-semibold uppercase text-stone-400 mb-1" data-en="Service Zone" data-ar="منطقة الخدمة">Service Zone</label>
                     <select id="zone" required class="w-full bg-stone-950 border border-stone-800 rounded-lg p-3 text-sm text-stone-100 focus:border-amber-500 focus:outline-none">
                         <option value="Heliopolis">Heliopolis (هليوبوليس)</option>
+                        <option value="Nasr City">Nasr City (مدينة نصر)</option>
                         <option value="Madinaty">Madinaty (مدينتي)</option>
                         <option value="5th Settlement">5th Settlement (التجمع الخامس)</option>
                     </select>
@@ -330,6 +330,7 @@
                     <select id="filterZone" onchange="renderBookings()" class="bg-stone-900 text-xs text-stone-300 border border-stone-800 rounded-lg p-2 focus:outline-none">
                         <option value="ALL">All Zones</option>
                         <option value="Heliopolis">Heliopolis</option>
+                        <option value="Nasr City">Nasr City</option>
                         <option value="Madinaty">Madinaty</option>
                         <option value="5th Settlement">5th Settlement</option>
                     </select>
@@ -434,12 +435,12 @@
 
         function verifyPin() {
             const pin = document.getElementById('pinInput').value;
-            if (pin === "2026") {
+            if (pin === "2027") {
                 document.getElementById('pinBox').classList.add('hidden');
                 document.getElementById('crmDashboard').classList.remove('hidden');
                 loadLiveBookings();
             } else {
-                alert("Incorrect PIN! (Use 2026)");
+                alert("Incorrect PIN!");
             }
         }
 
@@ -601,7 +602,7 @@
 
             try {
                 const ref = window.doc(window.db, "bookings", editingBookingId);
-                await window.updateDoc(ref, {
+                await updateDoc(ref, {
                     slotTime: newSlot,
                     package: newPkg
                 });
@@ -635,7 +636,7 @@
             });
 
             if(filtered.length === 0) {
-                container.innerHTML = `<p class="text-stone-500 text-center py-8 text-xs">No bookings found in this view.</p>`;
+                container.innerHTML = `<p class="text-stone-500 text-center py-6 text-xs">No bookings found in this view.</p>`;
                 return;
             }
 
