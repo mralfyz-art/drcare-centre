@@ -41,6 +41,11 @@
         }
     </script>
 
+    <!-- Firebase App, Firestore & Storage SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-storage-compat.js"></script>
+
     <style>
         :root {
             --gold-primary: #D4AF37;
@@ -83,6 +88,10 @@
             box-shadow: 0 18px 42px -6px rgba(212, 175, 55, 0.62), inset 0 1px 2px rgba(255, 255, 255, 0.85);
             filter: brightness(1.07);
         }
+        .btn-gold-elite:disabled {
+            opacity: 0.55;
+            cursor: not-allowed;
+        }
         .piano-card {
             background: linear-gradient(165deg, rgba(20, 22, 30, 0.88) 0%, rgba(7, 8, 12, 0.96) 100%);
             border: 1px solid rgba(212, 175, 55, 0.18);
@@ -95,8 +104,8 @@
             box-shadow: 0 28px 65px -15px rgba(212, 175, 55, 0.18), inset 0 1px 0 0 rgba(245, 226, 168, 0.25);
             backdrop-filter: blur(24px);
         }
-        .brand-logo-card { transition: all 0.2s ease; }
-        .brand-logo-card.selected {
+        .brand-logo-card, .severity-card { transition: all 0.2s ease; }
+        .brand-logo-card.selected, .severity-card.selected {
             border-color: #D4AF37;
             background: linear-gradient(135deg, rgba(212, 175, 55, 0.25) 0%, rgba(16, 18, 24, 0.95) 100%);
             box-shadow: 0 0 18px rgba(212, 175, 55, 0.35);
@@ -152,7 +161,7 @@
     <div class="bg-gradient-to-r from-obsidian via-[#17130A] to-obsidian border-b border-gold-400/20 py-2 px-4 text-xs">
         <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
             <div class="flex items-center gap-2">
-                <span class="relative flex h-2 w-2">
+                <span id="cloudStatusDot" class="relative flex h-2 w-2">
                     <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                     <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                 </span>
@@ -267,8 +276,8 @@
                         <span class="text-[11px] text-zinc-400 font-medium" data-i18n="stat2">& Italian Rupes Systems</span>
                     </div>
                     <div class="piano-card p-3 rounded-xl text-center">
-                        <span class="block text-lg sm:text-xl font-black gold-metallic">Instant</span>
-                        <span class="text-[11px] text-zinc-400 font-medium" data-i18n="stat3">Live Master Assessment</span>
+                        <span class="block text-lg sm:text-xl font-black gold-metallic">&lt; 3 Sec</span>
+                        <span class="text-[11px] text-zinc-400 font-medium" data-i18n="stat3">Live Cloud Sync</span>
                     </div>
                 </div>
             </div>
@@ -338,7 +347,7 @@
                     Configure Your Vehicle's Restoration & Care
                 </h2>
                 <p class="text-xs sm:text-sm text-zinc-400" data-i18n="consoleSub">
-                    An effortless, interactive concierge experience. Your submission streams live by the second to our Master Specialists.
+                    An effortless, interactive concierge experience. Your submission streams live to our Master Specialists within seconds.
                 </p>
             </div>
 
@@ -353,13 +362,13 @@
                 </button>
             </div>
 
-            <!-- TAB 1 -->
+            <!-- TAB 1: SCRATCH & PAINT DIAGNOSIS -->
             <div id="panelScratch" class="piano-card-gold rounded-3xl p-5 sm:p-8 lg:p-10 max-w-4xl mx-auto">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 mb-6 border-b border-white/10">
                     <div>
                         <div class="inline-flex items-center gap-2 text-xs font-bold text-emerald-400 mb-1">
                             <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-                            <span data-i18n="formLiveIndicator">Instant Secure Local Vault Sync</span>
+                            <span data-i18n="formLiveIndicator">Hybrid Cloud + Local Vault Instant Telemetry</span>
                         </div>
                         <h3 class="text-xl sm:text-2xl font-black text-white" data-i18n="scratchFormHeader">
                             Interactive Paint Defect & Scratch Assessment
@@ -405,50 +414,76 @@
                             <span class="text-xs font-extrabold uppercase tracking-wider text-gold-300" data-i18n="lblBrandSelect">
                                 3. Select Car Manufacturer / Brand *
                             </span>
-                            <span class="text-[11px] text-zinc-400" data-i18n="lblBrandHint">Tap your vehicle badge or select from list</span>
+                            <span class="text-[11px] text-zinc-400" data-i18n="lblBrandHint">Tap your vehicle badge or type any custom make</span>
                         </div>
 
-                        <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-2.5" id="brandLogoGrid">
-                            <button type="button" onclick="selectCarBrandLogo(this, 'Mercedes-Benz')" class="brand-logo-card selected p-3 rounded-2xl bg-leather border border-white/15 flex flex-col items-center justify-center gap-1.5 text-center group">
-                                <span class="text-xs font-extrabold tracking-wider text-gold-300">MERCEDES</span>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-2" id="brandLogoGrid">
+                            <button type="button" onclick="selectCarBrandLogo(this, 'Mercedes-Benz')" class="brand-logo-card selected p-2.5 rounded-xl bg-leather border border-white/15 flex items-center justify-center text-center group">
+                                <span class="text-[11px] font-extrabold tracking-wider text-gold-300">MERCEDES</span>
                             </button>
-                            <button type="button" onclick="selectCarBrandLogo(this, 'BMW')" class="brand-logo-card p-3 rounded-2xl bg-leather border border-white/15 flex flex-col items-center justify-center gap-1.5 text-center group">
-                                <span class="text-xs font-extrabold tracking-wider text-zinc-200 group-hover:text-gold-300">BMW</span>
+                            <button type="button" onclick="selectCarBrandLogo(this, 'BMW')" class="brand-logo-card p-2.5 rounded-xl bg-leather border border-white/15 flex items-center justify-center text-center group">
+                                <span class="text-[11px] font-extrabold tracking-wider text-zinc-200 group-hover:text-gold-300">BMW</span>
                             </button>
-                            <button type="button" onclick="selectCarBrandLogo(this, 'Porsche')" class="brand-logo-card p-3 rounded-2xl bg-leather border border-white/15 flex flex-col items-center justify-center gap-1.5 text-center group">
-                                <span class="text-xs font-extrabold tracking-wider text-zinc-200 group-hover:text-gold-300">PORSCHE</span>
+                            <button type="button" onclick="selectCarBrandLogo(this, 'Porsche')" class="brand-logo-card p-2.5 rounded-xl bg-leather border border-white/15 flex items-center justify-center text-center group">
+                                <span class="text-[11px] font-extrabold tracking-wider text-zinc-200 group-hover:text-gold-300">PORSCHE</span>
                             </button>
-                            <button type="button" onclick="selectCarBrandLogo(this, 'Range Rover')" class="brand-logo-card p-3 rounded-2xl bg-leather border border-white/15 flex flex-col items-center justify-center gap-1.5 text-center group">
-                                <span class="text-xs font-extrabold tracking-wider text-zinc-200 group-hover:text-gold-300">RANGE ROVER</span>
+                            <button type="button" onclick="selectCarBrandLogo(this, 'Range Rover')" class="brand-logo-card p-2.5 rounded-xl bg-leather border border-white/15 flex items-center justify-center text-center group">
+                                <span class="text-[11px] font-extrabold tracking-wider text-zinc-200 group-hover:text-gold-300">RANGE ROVER</span>
                             </button>
-                            <button type="button" onclick="selectCarBrandLogo(this, 'Audi')" class="brand-logo-card p-3 rounded-2xl bg-leather border border-white/15 flex flex-col items-center justify-center gap-1.5 text-center group">
-                                <span class="text-xs font-extrabold tracking-wider text-zinc-200 group-hover:text-gold-300">AUDI</span>
+                            <button type="button" onclick="selectCarBrandLogo(this, 'Audi')" class="brand-logo-card p-2.5 rounded-xl bg-leather border border-white/15 flex items-center justify-center text-center group">
+                                <span class="text-[11px] font-extrabold tracking-wider text-zinc-200 group-hover:text-gold-300">AUDI</span>
                             </button>
-                            <button type="button" onclick="selectCarBrandLogo(this, 'Toyota')" class="brand-logo-card p-3 rounded-2xl bg-leather border border-white/15 flex flex-col items-center justify-center gap-1.5 text-center group">
-                                <span class="text-xs font-extrabold tracking-wider text-zinc-200 group-hover:text-gold-300">TOYOTA</span>
+                            <button type="button" onclick="selectCarBrandLogo(this, 'Toyota')" class="brand-logo-card p-2.5 rounded-xl bg-leather border border-white/15 flex items-center justify-center text-center group">
+                                <span class="text-[11px] font-extrabold tracking-wider text-zinc-200 group-hover:text-gold-300">TOYOTA</span>
                             </button>
-                            <button type="button" onclick="selectCarBrandLogo(this, 'Lexus')" class="brand-logo-card p-3 rounded-2xl bg-leather border border-white/15 flex flex-col items-center justify-center gap-1.5 text-center group">
-                                <span class="text-xs font-extrabold tracking-wider text-zinc-200 group-hover:text-gold-300">LEXUS</span>
+                            <button type="button" onclick="selectCarBrandLogo(this, 'Lexus')" class="brand-logo-card p-2.5 rounded-xl bg-leather border border-white/15 flex items-center justify-center text-center group">
+                                <span class="text-[11px] font-extrabold tracking-wider text-zinc-200 group-hover:text-gold-300">LEXUS</span>
                             </button>
-                            <button type="button" onclick="selectCarBrandLogo(this, 'Hyundai')" class="brand-logo-card p-3 rounded-2xl bg-leather border border-white/15 flex flex-col items-center justify-center gap-1.5 text-center group">
-                                <span class="text-xs font-extrabold tracking-wider text-zinc-200 group-hover:text-gold-300">HYUNDAI</span>
+                            <button type="button" onclick="selectCarBrandLogo(this, 'Hyundai')" class="brand-logo-card p-2.5 rounded-xl bg-leather border border-white/15 flex items-center justify-center text-center group">
+                                <span class="text-[11px] font-extrabold tracking-wider text-zinc-200 group-hover:text-gold-300">HYUNDAI</span>
                             </button>
-                            <button type="button" onclick="selectCarBrandLogo(this, 'Kia')" class="brand-logo-card p-3 rounded-2xl bg-leather border border-white/15 flex flex-col items-center justify-center gap-1.5 text-center group">
-                                <span class="text-xs font-extrabold tracking-wider text-zinc-200 group-hover:text-gold-300">KIA</span>
+                            <button type="button" onclick="selectCarBrandLogo(this, 'Kia')" class="brand-logo-card p-2.5 rounded-xl bg-leather border border-white/15 flex items-center justify-center text-center group">
+                                <span class="text-[11px] font-extrabold tracking-wider text-zinc-200 group-hover:text-gold-300">KIA</span>
                             </button>
-                            <button type="button" onclick="selectCarBrandLogo(this, 'Volkswagen')" class="brand-logo-card p-3 rounded-2xl bg-leather border border-white/15 flex flex-col items-center justify-center gap-1.5 text-center group">
-                                <span class="text-xs font-extrabold tracking-wider text-zinc-200 group-hover:text-gold-300">VOLKSWAGEN</span>
+                            <button type="button" onclick="selectCarBrandLogo(this, 'Volkswagen')" class="brand-logo-card p-2.5 rounded-xl bg-leather border border-white/15 flex items-center justify-center text-center group">
+                                <span class="text-[11px] font-extrabold tracking-wider text-zinc-200 group-hover:text-gold-300">VOLKSWAGEN</span>
                             </button>
-                            <button type="button" onclick="selectCarBrandLogo(this, 'Maserati / Ferrari')" class="brand-logo-card p-3 rounded-2xl bg-leather border border-white/15 flex flex-col items-center justify-center gap-1.5 text-center group">
-                                <span class="text-xs font-extrabold tracking-wider text-zinc-200 group-hover:text-gold-300">SUPERSPORT</span>
+                            <button type="button" onclick="selectCarBrandLogo(this, 'Skoda / Seat')" class="brand-logo-card p-2.5 rounded-xl bg-leather border border-white/15 flex items-center justify-center text-center group">
+                                <span class="text-[11px] font-extrabold tracking-wider text-zinc-200 group-hover:text-gold-300">SKODA / SEAT</span>
                             </button>
-                            <button type="button" onclick="selectCarBrandLogo(this, 'Xiaomi / EV')" class="brand-logo-card p-3 rounded-2xl bg-leather border border-white/15 flex flex-col items-center justify-center gap-1.5 text-center group">
-                                <span class="text-xs font-extrabold tracking-wider text-zinc-200 group-hover:text-gold-300">XIAOMI / EV</span>
+                            <button type="button" onclick="selectCarBrandLogo(this, 'Nissan / Infiniti')" class="brand-logo-card p-2.5 rounded-xl bg-leather border border-white/15 flex items-center justify-center text-center group">
+                                <span class="text-[11px] font-extrabold tracking-wider text-zinc-200 group-hover:text-gold-300">NISSAN</span>
+                            </button>
+                            <button type="button" onclick="selectCarBrandLogo(this, 'Peugeot / Opel')" class="brand-logo-card p-2.5 rounded-xl bg-leather border border-white/15 flex items-center justify-center text-center group">
+                                <span class="text-[11px] font-extrabold tracking-wider text-zinc-200 group-hover:text-gold-300">PEUGEOT / OPEL</span>
+                            </button>
+                            <button type="button" onclick="selectCarBrandLogo(this, 'MG / Chery / Haval')" class="brand-logo-card p-2.5 rounded-xl bg-leather border border-white/15 flex items-center justify-center text-center group">
+                                <span class="text-[11px] font-extrabold tracking-wider text-zinc-200 group-hover:text-gold-300">MG / CHERY</span>
+                            </button>
+                            <button type="button" onclick="selectCarBrandLogo(this, 'Chevrolet / Ford')" class="brand-logo-card p-2.5 rounded-xl bg-leather border border-white/15 flex items-center justify-center text-center group">
+                                <span class="text-[11px] font-extrabold tracking-wider text-zinc-200 group-hover:text-gold-300">CHEVROLET / FORD</span>
+                            </button>
+                            <button type="button" onclick="selectCarBrandLogo(this, 'Jeep / Dodge')" class="brand-logo-card p-2.5 rounded-xl bg-leather border border-white/15 flex items-center justify-center text-center group">
+                                <span class="text-[11px] font-extrabold tracking-wider text-zinc-200 group-hover:text-gold-300">JEEP / DODGE</span>
+                            </button>
+                            <button type="button" onclick="selectCarBrandLogo(this, 'Maserati / Ferrari')" class="brand-logo-card p-2.5 rounded-xl bg-leather border border-white/15 flex items-center justify-center text-center group">
+                                <span class="text-[11px] font-extrabold tracking-wider text-zinc-200 group-hover:text-gold-300">SUPERSPORT</span>
+                            </button>
+                            <button type="button" onclick="selectCarBrandLogo(this, 'Xiaomi / Tesla / BYD')" class="brand-logo-card p-2.5 rounded-xl bg-leather border border-white/15 flex items-center justify-center text-center group">
+                                <span class="text-[11px] font-extrabold tracking-wider text-zinc-200 group-hover:text-gold-300">XIAOMI / EV</span>
                             </button>
                         </div>
-                        <input type="hidden" id="carBrand" value="Mercedes-Benz">
 
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
+                            <div>
+                                <div class="flex justify-between mb-1.5">
+                                    <label for="carBrand" class="text-xs font-semibold text-zinc-300" data-i18n="lblSelectedMake">Selected Make (Editable) *</label>
+                                    <span class="text-[10px] text-zinc-500">Or type any brand</span>
+                                </div>
+                                <input type="text" id="carBrand" required value="Mercedes-Benz"
+                                       class="w-full px-3.5 py-3 rounded-xl bg-black/80 border border-gold-400/50 focus:border-gold-400 text-gold-200 text-sm font-bold focus:outline-none">
+                            </div>
+
                             <div>
                                 <div class="flex justify-between mb-1.5">
                                     <label for="carModel" class="text-xs font-semibold text-zinc-300" data-i18n="lblCarModel">Model & Year *</label>
@@ -474,31 +509,69 @@
                             </div>
                         </div>
 
-                        <!-- COLOR PLATE -->
+                        <!-- INTERACTIVE COLOR PLATE PALETTE -->
                         <div class="pt-2">
                             <div class="flex items-center justify-between mb-2">
                                 <label for="carColorInput" class="text-xs font-semibold text-zinc-300" data-i18n="lblCarColor">
                                     Paint Finish & Custom Color Plate *
                                 </label>
-                                <span class="text-[11px] text-zinc-400 italic" data-i18n="exCarColor">Tap color box to pick any shade or type</span>
+                                <span class="text-[11px] text-zinc-400 italic" data-i18n="exCarColor">Tap color wheel or shade below</span>
                             </div>
-                            <div class="flex items-center gap-3">
-                                <div class="relative w-12 h-12 rounded-xl overflow-hidden border border-gold-400/50 shrink-0 cursor-pointer shadow-lg" title="Open Color Palette">
-                                    <input type="color" id="nativeColorPicker" value="#000000" onchange="document.getElementById('carColorInput').value = this.value + ' (Custom Shade)'"
+                            <div class="flex flex-wrap items-center gap-3">
+                                <label class="relative w-12 h-12 rounded-xl overflow-hidden border-2 border-gold-400 shrink-0 cursor-pointer shadow-lg flex items-center justify-center" title="Open Full Color Wheel">
+                                    <input type="color" id="nativeColorPicker" value="#0a0a0c" oninput="handleColorWheelPick(this.value)"
                                            class="absolute -inset-2 w-16 h-16 cursor-pointer opacity-0">
-                                    <div class="w-full h-full bg-gradient-to-tr from-black via-zinc-800 to-amber-500 flex items-center justify-center text-white text-xs font-bold">🎨</div>
+                                    <span id="colorPreviewBox" class="w-full h-full block" style="background-color: #0a0a0c;"></span>
+                                    <span class="absolute inset-0 flex items-center justify-center text-[10px] font-black bg-black/40 text-white">PICK</span>
+                                </label>
+
+                                <div class="flex flex-wrap items-center gap-1.5">
+                                    <button type="button" onclick="applyPresetColor('#08080A', 'Obsidian Black Metallic')" class="w-7 h-7 rounded-lg bg-[#08080A] border border-white/40 hover:scale-110 transition" title="Obsidian Black"></button>
+                                    <button type="button" onclick="applyPresetColor('#F4F5F7', 'Diamond Pearl White')" class="w-7 h-7 rounded-lg bg-[#F4F5F7] border border-white/40 hover:scale-110 transition" title="Pearl White"></button>
+                                    <button type="button" onclick="applyPresetColor('#7A8088', 'Selenite Grey Metallic')" class="w-7 h-7 rounded-lg bg-[#7A8088] border border-white/30 hover:scale-110 transition" title="Selenite Grey"></button>
+                                    <button type="button" onclick="applyPresetColor('#C0C5CE', 'Iridium Silver Metallic')" class="w-7 h-7 rounded-lg bg-[#C0C5CE] border border-white/30 hover:scale-110 transition" title="Iridium Silver"></button>
+                                    <button type="button" onclick="applyPresetColor('#10284E', 'Tanzanite Sapphire Blue')" class="w-7 h-7 rounded-lg bg-[#10284E] border border-white/30 hover:scale-110 transition" title="Sapphire Blue"></button>
+                                    <button type="button" onclick="applyPresetColor('#8F141B', 'Patagonia Crimson Red')" class="w-7 h-7 rounded-lg bg-[#8F141B] border border-white/30 hover:scale-110 transition" title="Crimson Red"></button>
+                                    <button type="button" onclick="applyPresetColor('#113826', 'British Emerald Green')" class="w-7 h-7 rounded-lg bg-[#113826] border border-white/30 hover:scale-110 transition" title="Emerald Green"></button>
+                                    <button type="button" onclick="applyPresetColor('#C2A878', 'Champagne Quartz Gold')" class="w-7 h-7 rounded-lg bg-[#C2A878] border border-white/30 hover:scale-110 transition" title="Champagne Gold"></button>
                                 </div>
-                                <input type="text" id="carColorInput" required value="Obsidian Black Metallic (أسود ميتاليك)"
+
+                                <input type="text" id="carColorInput" required value="Obsidian Black Metallic (#08080A)"
                                        placeholder="e.g. Custom Metallic Grey / Blue..."
-                                       class="flex-1 px-3.5 py-2.5 rounded-xl bg-black/85 border border-gold-400/50 text-gold-200 text-xs font-bold focus:outline-none">
+                                       class="flex-1 min-w-[200px] px-3.5 py-2.5 rounded-xl bg-black/85 border border-gold-400/50 text-gold-200 text-xs font-bold focus:outline-none">
                             </div>
+                        </div>
+
+                        <!-- NEW: SCRATCH SEVERITY / DEFECT TYPE SELECTOR -->
+                        <div class="pt-3 border-t border-white/10">
+                            <div class="flex flex-wrap items-center justify-between gap-2 mb-2.5">
+                                <span class="text-xs font-extrabold uppercase tracking-wider text-gold-300" data-i18n="lblDefectSeverity">
+                                    4. Defect Severity Level — Select Condition
+                                </span>
+                                <span class="text-[11px] text-zinc-400 italic" data-i18n="exDefectSeverity">Helps calculate exact polishing stages</span>
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                                <button type="button" onclick="selectDefectSeverity(this, 'Swirl Marks & Oxidation (دوائر غسيل وبهتان)')" class="severity-card selected p-3 rounded-xl bg-black/70 border border-white/15 text-left">
+                                    <span class="block text-xs font-extrabold text-gold-300">Level 1: Swirls & Oxidation</span>
+                                    <span class="block text-[11px] text-zinc-400 mt-0.5">Spiderweb wash marks & dull gloss</span>
+                                </button>
+                                <button type="button" onclick="selectDefectSeverity(this, 'Clear Coat Scratch (خدش سطحي بالورنيش)')" class="severity-card p-3 rounded-xl bg-black/70 border border-white/15 text-left">
+                                    <span class="block text-xs font-extrabold text-zinc-200">Level 2: Clear Coat Scratch</span>
+                                    <span class="block text-[11px] text-zinc-400 mt-0.5">Visible scratch, nail barely catches</span>
+                                </button>
+                                <button type="button" onclick="selectDefectSeverity(this, 'Deep Paint Scratch / Scuff (خدش عميق أو حكة)')" class="severity-card p-3 rounded-xl bg-black/70 border border-white/15 text-left">
+                                    <span class="block text-xs font-extrabold text-zinc-200">Level 3: Deep Key / Bumper Scuff</span>
+                                    <span class="block text-[11px] text-zinc-400 mt-0.5">Deep impact requiring wet-sanding/touchup</span>
+                                </button>
+                            </div>
+                            <input type="hidden" id="defectSeverityInput" value="Swirl Marks & Oxidation (دوائر غسيل وبهتان)">
                         </div>
 
                         <!-- Body Zone Map -->
                         <div class="pt-3 border-t border-white/10">
                             <div class="flex flex-wrap items-center justify-between gap-2 mb-2.5">
                                 <span class="text-xs font-extrabold uppercase tracking-wider text-gold-300" data-i18n="lblBodyZoneMap">
-                                    4. Interactive Body Map — Tap Affected Paint Zone(s)
+                                    5. Interactive Body Map — Tap Affected Paint Zone(s)
                                 </span>
                                 <span class="text-[11px] text-zinc-400 italic" data-i18n="exBodyZone">e.g. Front Hood + Right Doors</span>
                             </div>
@@ -530,10 +603,10 @@
                         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                             <div>
                                 <span class="text-xs font-extrabold uppercase tracking-wider text-gold-300 block" data-i18n="lblMediaSection">
-                                    5. Upload Scratch / Paint Defect Media (Up to 5 Photos OR 60s Video) *
+                                    6. Upload Scratch / Paint Defect Media (Up to 5 Photos OR 60s Video) *
                                 </span>
                                 <span class="text-[11px] text-zinc-400" data-i18n="lblMediaSub">
-                                    Example: 2 close-up angles + 1 wide reflection shot • Resolution from 140p to 1080p HD
+                                    Smart Cloud Optimization • Supports 140p up to 1080p HD
                                 </span>
                             </div>
 
@@ -569,9 +642,17 @@
                             </p>
                         </div>
 
-                        <div id="mediaProcessingStatus" class="hidden p-3 rounded-xl bg-gold-400/15 border border-gold-400/40 text-xs font-bold text-gold-200 flex items-center justify-center gap-2">
-                            <span class="w-3.5 h-3.5 rounded-full border-2 border-gold-300 border-t-transparent animate-spin"></span>
-                            <span>Processing high-resolution optical media...</span>
+                        <div id="mediaProcessingStatus" class="hidden p-3.5 rounded-xl bg-gold-400/15 border border-gold-400/40 text-xs font-bold text-gold-200 space-y-2">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-2">
+                                    <span class="w-3.5 h-3.5 rounded-full border-2 border-gold-300 border-t-transparent animate-spin"></span>
+                                    <span id="mediaStatusLabel">Optimizing high-resolution optical media...</span>
+                                </div>
+                                <span id="mediaProgressPct" class="font-mono text-gold-300">0%</span>
+                            </div>
+                            <div class="w-full h-1.5 bg-black/60 rounded-full overflow-hidden">
+                                <div id="mediaProgressBar" class="h-full bg-gold-400 transition-all duration-200" style="width: 0%"></div>
+                            </div>
                         </div>
 
                         <div id="mediaGridWrapper" class="hidden space-y-2.5">
@@ -588,11 +669,11 @@
                         <div class="space-y-1.5 pt-2">
                             <div class="flex items-center justify-between">
                                 <label for="clientNotes" class="text-xs font-extrabold uppercase tracking-wider text-gold-300" data-i18n="lblClientNoteBox">
-                                    6. Client Custom Notes & Instructions (Write Anything You Want) *
+                                    7. Client Notes & Special Instructions (Write Anything You Want)
                                 </label>
-                                <span class="text-[11px] text-zinc-400 italic" data-i18n="exClientNoteBox">e.g. Special care needed near sensors</span>
+                                <span class="text-[11px] text-zinc-400 italic" data-i18n="exClientNoteBox">e.g. Deep scratch on right door / Call after 4 PM</span>
                             </div>
-                            <textarea id="clientNotes" rows="3" required
+                            <textarea id="clientNotes" rows="3"
                                       data-i18n-placeholder="phClientNoteBox"
                                       placeholder="Write any special instructions, preferred callback time, or specific defect details here..."
                                       class="w-full px-4 py-3 rounded-xl bg-black/80 border border-gold-400/40 focus:border-gold-400 text-xs text-white focus:outline-none leading-relaxed"></textarea>
@@ -601,22 +682,27 @@
 
                     <button type="submit" id="submitScratchBtn" class="w-full btn-gold-elite py-4 px-6 rounded-2xl font-extrabold text-base tracking-wide flex items-center justify-center gap-3">
                         <span>🚀</span>
-                        <span data-i18n="submitScratchBtnText">Transmit High-Res Diagnosis to Dr. Care Masters</span>
+                        <span id="submitScratchBtnLabel" data-i18n="submitScratchBtnText">Transmit High-Res Diagnosis to Dr. Care Masters</span>
                     </button>
                 </form>
 
-                <div id="scratchSuccessBanner" class="hidden mt-6 p-6 rounded-2xl bg-emerald-950/70 border border-emerald-400/60 text-center space-y-3">
-                    <div class="w-12 h-12 rounded-full bg-emerald-500/20 border border-emerald-400 flex items-center justify-center mx-auto text-2xl">✨</div>
+                <!-- VIP DIGITAL REFERENCE TICKET UPON SUBMISSION -->
+                <div id="scratchSuccessBanner" class="hidden mt-6 p-6 rounded-2xl bg-gradient-to-br from-emerald-950/80 via-black to-black border border-gold-400/60 text-center space-y-4 shadow-2xl">
+                    <div class="w-12 h-12 rounded-full bg-gold-400/20 border border-gold-400 flex items-center justify-center mx-auto text-2xl">✨</div>
                     <h4 class="text-lg font-black text-white" data-i18n="successHeader">
                         Diagnosis Received Live! Welcome to the Dr. Care Atelier.
                     </h4>
+                    <div class="inline-flex items-center gap-3 px-4 py-2 rounded-xl bg-black/80 border border-gold-400/40">
+                        <span class="text-xs text-zinc-400">VIP Reference Ticket:</span>
+                        <strong id="generatedTicketId" class="font-mono text-sm text-gold-300 tracking-wider">DC-0000</strong>
+                    </div>
                     <p class="text-xs sm:text-sm text-zinc-300 max-w-xl mx-auto" data-i18n="successBody">
-                        Your vehicle telemetry, custom notes, and high-res media are now safely stored in your local vault console. We will contact you shortly.
+                        Your vehicle telemetry, custom notes, and high-res media are now synced live to our Master Specialist's console.
                     </p>
                 </div>
             </div>
 
-            <!-- TAB 2 -->
+            <!-- TAB 2: WEEKEND DRY WASH -->
             <div id="panelBooking" class="hidden piano-card rounded-3xl p-5 sm:p-8 lg:p-10 max-w-4xl mx-auto space-y-8">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-5">
                     <div>
@@ -708,13 +794,15 @@
                             </select>
                         </div>
                     </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-1">
                         <select id="washZone" class="px-4 py-3.5 rounded-xl bg-leather border border-white/15 text-white text-sm focus:border-gold-400 focus:outline-none">
                             <option value="Heliopolis">Heliopolis (مصر الجديدة)</option>
                             <option value="Nasr City">Nasr City (مدينة نصر)</option>
                             <option value="Madinaty">Madinaty (مدينتي)</option>
                             <option value="5th Settlement">5th Settlement (التجمع الخامس)</option>
                         </select>
+                        <input type="text" id="washClientNotes" placeholder="Optional Note (e.g. Gate 4 / Villa 12)..."
+                               class="px-4 py-3.5 rounded-xl bg-black/75 border border-white/15 text-white text-xs focus:border-gold-400 focus:outline-none">
                         <button type="submit" class="btn-gold-elite py-3.5 px-6 rounded-xl font-extrabold text-sm" data-i18n="btnConfirmWash">
                             Confirm Weekend Slot Reservation
                         </button>
@@ -763,7 +851,7 @@
 
     </main>
 
-    <!-- FOOTER -->
+    <!-- FOOTER (ZERO PASSWORD HINTS) -->
     <footer class="border-t border-white/10 bg-black/90 py-10 px-4">
         <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
             <div class="flex items-center gap-3">
@@ -798,12 +886,12 @@
                     <div>
                         <div class="flex items-center gap-2">
                             <h3 class="font-serif text-lg sm:text-xl font-black text-white">DR. CARE EXECUTIVE COMMAND</h3>
-                            <span class="px-2 py-0.5 rounded-md bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 text-[10px] font-extrabold">
-                                SECURE LOCAL VAULT SYNC
+                            <span id="crmSyncBadge" class="px-2 py-0.5 rounded-md bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 text-[10px] font-extrabold">
+                                CLOUD + VAULT SYNC
                             </span>
                         </div>
                         <p class="text-xs text-zinc-400">
-                            Live Clock: <span id="liveSecondClock" class="text-gold-300 font-mono font-bold">--:--:--</span> • 
+                            Cairo Clock: <span id="liveSecondClock" class="text-gold-300 font-mono font-bold">--:--:--</span> • 
                             Session Uptime: <span id="streamUptimeCounter" class="text-emerald-400 font-mono font-bold">00:00s</span>
                         </p>
                     </div>
@@ -816,28 +904,32 @@
                     <button type="button" onclick="exportLeadsToCsv()" class="px-3 py-2 rounded-xl bg-white/5 hover:bg-white/15 border border-white/15 text-gold-200 text-xs font-bold">
                         📥 Export CSV
                     </button>
+                    <button type="button" onclick="lockCrmVault()" class="px-3 py-2 rounded-xl bg-white/5 hover:bg-amber-500/20 border border-white/10 text-zinc-300 hover:text-amber-300 text-xs font-bold">
+                        🔒 Lock
+                    </button>
                     <button type="button" onclick="closeBackofficeModal()" class="px-3.5 py-2 rounded-xl bg-white/10 hover:bg-rose-500/20 text-zinc-300 hover:text-rose-300 text-xs font-extrabold">
                         ✕ Close
                     </button>
                 </div>
             </div>
 
-            <!-- PIN GATE -->
+            <!-- PIN GATE (INSTANT AUTO-UNLOCK ON 2027) -->
             <div id="crmPinGate" class="max-w-md mx-auto py-10 text-center space-y-4">
                 <div class="w-14 h-14 rounded-2xl bg-gold-400/10 border border-gold-400/40 flex items-center justify-center mx-auto text-gold-300 text-2xl">
                     🔐
                 </div>
                 <p class="text-base font-extrabold text-gold-200">Executive Access Vault</p>
-                <p class="text-xs text-zinc-400">Enter your authorized executive security key to unlock live customer telemetry.</p>
+                <p class="text-xs text-zinc-400">Enter your authorized staff security key to unlock live customer telemetry.</p>
                 <div class="flex gap-2 justify-center pt-1">
-                    <input type="password" id="managerPinInput" placeholder="••••" maxlength="8" autocomplete="off"
-                           onkeydown="if(event.key==='Enter') unlockCrmDashboard()"
-                           class="w-44 text-center text-lg tracking-widest font-black px-4 py-2.5 rounded-xl bg-black border border-gold-400/50 text-white focus:outline-none">
+                    <input type="password" id="managerPinInput" inputmode="numeric" placeholder="••••" maxlength="8" autocomplete="off"
+                           oninput="checkAutoUnlock(this.value)"
+                           onkeydown="if(event.key==='Enter'){ event.preventDefault(); unlockCrmDashboard(); }"
+                           class="w-44 text-center text-lg tracking-widest font-black px-4 py-2.5 rounded-xl bg-black border border-gold-400/50 text-white focus:border-gold-400 focus:outline-none">
                     <button type="button" onclick="unlockCrmDashboard()" class="btn-gold-elite px-6 py-2.5 rounded-xl font-extrabold text-xs uppercase">
                         Authorize
                     </button>
                 </div>
-                <p id="pinErrorMsg" class="hidden text-xs font-bold text-rose-400">Unauthorized key. Access denied.</p>
+                <p id="pinErrorMsg" class="hidden text-xs font-bold text-rose-400">Unauthorized access key. Please try again.</p>
             </div>
 
             <!-- UNLOCKED CRM CONTENT -->
@@ -856,28 +948,31 @@
                         <p id="kpiWashLeads" class="text-2xl font-black text-emerald-300 mt-1">0</p>
                     </div>
                     <div class="p-4 rounded-2xl bg-black/65 border border-white/10">
-                        <span class="text-[11px] text-zinc-400 uppercase font-bold">Vault Engine</span>
-                        <p class="text-xs font-mono font-bold text-emerald-400 mt-2">IndexedDB Secure Sync</p>
+                        <span class="text-[11px] text-zinc-400 uppercase font-bold">Sync Status</span>
+                        <p id="kpiSyncStatusText" class="text-xs font-mono font-bold text-emerald-400 mt-2">Cloud + IndexedDB</p>
                     </div>
                 </div>
 
+                <!-- Search + Zone/Type Filters -->
                 <div class="flex flex-wrap items-center justify-between gap-3 bg-black/50 p-3.5 rounded-2xl border border-white/10">
-                    <div class="flex flex-wrap items-center gap-2">
+                    <div class="flex flex-wrap items-center gap-2 flex-1">
+                        <input type="text" id="crmSearchInput" oninput="renderBackofficeFeed()" placeholder="🔍 Search name, phone, car, or ID..."
+                               class="px-3.5 py-2 rounded-xl bg-black/80 border border-gold-400/30 text-xs text-white focus:border-gold-400 focus:outline-none min-w-[200px]">
                         <select id="crmFilterZone" onchange="renderBackofficeFeed()" class="px-3 py-2 rounded-xl bg-leather border border-white/15 text-xs font-bold text-white">
-                            <option value="ALL">All Zones (Heliopolis / Nasr City / Madinaty / 5th)</option>
+                            <option value="ALL">All Zones</option>
                             <option value="Heliopolis">Heliopolis</option>
                             <option value="Nasr City">Nasr City</option>
                             <option value="Madinaty">Madinaty</option>
                             <option value="5th Settlement">5th Settlement</option>
                         </select>
                         <select id="crmFilterType" onchange="renderBackofficeFeed()" class="px-3 py-2 rounded-xl bg-leather border border-white/15 text-xs font-bold text-white">
-                            <option value="ALL">All Requests (Scratch + Dry Wash)</option>
-                            <option value="SCRATCH_DIAGNOSIS">Scratch & Paint Consultations</option>
-                            <option value="DRY_WASH">Dry Wash Bookings</option>
+                            <option value="ALL">All Requests</option>
+                            <option value="SCRATCH_DIAGNOSIS">Scratch & Paint</option>
+                            <option value="DRY_WASH">Dry Wash</option>
                         </select>
                     </div>
                     <button type="button" onclick="simulateIncomingVipLead()" class="px-3.5 py-2 rounded-xl bg-gold-400/15 hover:bg-gold-400/25 border border-gold-400/40 text-gold-200 text-xs font-extrabold">
-                        ⚡ Simulate Local Vault Ping
+                        ⚡ Simulate Instant Live Request
                     </button>
                 </div>
 
@@ -897,8 +992,31 @@
         </div>
     </div>
 
-    <!-- ROBUST LOCAL VAULT ENGINE WITH ASYNC ERROR HANDLING -->
+    <!-- HYBRID CLOUD + INDEXED-DB + 2027 VAULT ENGINE -->
     <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyAmLj9vj6jn9ASbWcUL2CjtJX0n_tG8W18",
+            authDomain: "drcare-centre.firebaseapp.com",
+            projectId: "drcare-centre",
+            storageBucket: "drcare-centre.firebasestorage.app",
+            messagingSenderId: "945201915740",
+            appId: "1:945201915740:web:dca2c552e7106f39560399",
+            measurementId: "G-K6MEN28BJ0"
+        };
+
+        let db = null;
+        let storage = null;
+
+        try {
+            if (!firebase.apps.length) {
+                firebase.initializeApp(firebaseConfig);
+            }
+            db = firebase.firestore();
+            storage = firebase.storage();
+        } catch (err) {
+            console.warn("Firebase init fallback to Local Vault:", err);
+        }
+
         function updateAmbientSpotlight(e) {
             document.documentElement.style.setProperty('--spotlight-x', e.clientX + 'px');
             document.documentElement.style.setProperty('--spotlight-y', e.clientY + 'px');
@@ -932,7 +1050,7 @@
                 heroBtnWash: "Reserve Weekend Dry Wash",
                 stat1: "Optical Mirror Clarity",
                 stat2: "& Italian Rupes Systems",
-                stat3: "Live Master Assessment",
+                stat3: "Live Cloud Sync",
                 sliderHeader: "REAL MERCEDES TRANSFORMATION — DRAG TO INSPECT",
                 sliderSubBadge: "Unedited Optical Reflection",
                 afterTag: "AFTER: DR. CARE MIRROR GLOSS",
@@ -942,10 +1060,10 @@
                 inspectAfterBtn: "✨ Full Mirror Finish (After)",
                 consoleKicker: "BESPOKE DIGITAL PAINT TELEMETRY",
                 consoleTitle: "Configure Your Vehicle's Restoration & Care",
-                consoleSub: "An effortless, interactive concierge experience. Your submission streams live instantly to our Master Specialists.",
+                consoleSub: "An effortless, interactive concierge experience. Your submission streams live to our Master Specialists within seconds.",
                 tabScratchTitle: "Scratch & Paint Diagnosis",
                 tabBookingTitle: "Weekend Dry Wash Slot",
-                formLiveIndicator: "Instant Secure Local Vault Sync",
+                formLiveIndicator: "Hybrid Cloud + Local Vault Instant Telemetry",
                 scratchFormHeader: "Interactive Paint Defect & Scratch Assessment",
                 sloganMiniTop: "Asset Protection",
                 sloganMiniBottom: "Save Your Investment Now",
@@ -953,12 +1071,15 @@
                 exClientName: "e.g. Kareem Selim",
                 lblClientPhone: "2. Mobile / WhatsApp Number *",
                 lblBrandSelect: "3. Select Car Manufacturer / Brand *",
-                lblBrandHint: "Tap your vehicle badge or select from list",
+                lblBrandHint: "Tap your vehicle badge or type any custom make",
+                lblSelectedMake: "Selected Make (Editable) *",
                 lblCarModel: "Model & Year *",
                 lblClientZone: "Preferred Zone *",
                 lblCarColor: "Paint Finish & Custom Color Plate *",
-                exCarColor: "Tap color box to pick any shade or type",
-                lblBodyZoneMap: "4. Interactive Body Map — Tap Affected Paint Zone(s)",
+                exCarColor: "Tap color wheel or shade below",
+                lblDefectSeverity: "4. Defect Severity Level — Select Condition",
+                exDefectSeverity: "Helps calculate exact polishing stages",
+                lblBodyZoneMap: "5. Interactive Body Map — Tap Affected Paint Zone(s)",
                 exBodyZone: "e.g. Front Hood + Right Doors",
                 zoneHood: "Front Hood",
                 zoneLeft: "Left Side",
@@ -966,17 +1087,17 @@
                 zoneRoof: "Roof Panel",
                 zoneRear: "Rear / Trunk",
                 zoneFull: "Full Body",
-                lblMediaSection: "5. Upload Scratch / Paint Defect Media (Up to 5 Photos OR 60s Video) *",
-                lblMediaSub: "Example: 2 close-up angles + 1 wide reflection shot • Resolution from 140p to 1080p HD",
+                lblMediaSection: "6. Upload Scratch / Paint Defect Media (Up to 5 Photos OR 60s Video) *",
+                lblMediaSub: "Smart Cloud Optimization • Supports 140p up to 1080p HD",
                 lblResolution: "Resolution:",
                 dropzoneTitle: "Tap to Capture or Upload Up to 5 Photos (or 1 Video up to 60s)",
                 dropzoneActiveRes: "Active Optical Resolution:",
                 btnClearAll: "Clear All",
-                lblClientNoteBox: "6. Client Custom Notes & Instructions (Write Anything You Want) *",
-                exClientNoteBox: "e.g. Special care needed near sensors",
+                lblClientNoteBox: "7. Client Notes & Special Instructions (Write Anything You Want)",
+                exClientNoteBox: "e.g. Deep scratch on right door / Call after 4 PM",
                 submitScratchBtnText: "Transmit High-Res Diagnosis to Dr. Care Masters",
                 successHeader: "Diagnosis Received Live! Welcome to the Dr. Care Atelier.",
-                successBody: "Your vehicle telemetry, custom notes, and high-res media are now safely stored in your local vault console. We will contact you shortly.",
+                successBody: "Your vehicle telemetry, custom notes, and high-res media are now synced live to our Master Specialist's console.",
                 washKicker: "THU • FRI • SAT PRIVATE MOBILE CONCIERGE",
                 washHeader: "Select Your Nano Dry Wash & Gloss Package",
                 depositNotice: "15% Refundable Deposit Locks Your VIP Slot",
@@ -1027,7 +1148,7 @@
                 heroBtnWash: "حجز باقات الغسيل الجاف بالنانو",
                 stat1: "نقاء مرآة بدون دوائر",
                 stat2: "وأنظمة Rupes الإيطالية",
-                stat3: "تشخيص فوري مباشر",
+                stat3: "مزامنة سحابية فورية",
                 sliderHeader: "تحول حقيقي من أعمال DR. CARE على مرسيدس — اسحب للمقارنة",
                 sliderSubBadge: "انعكاس طبيعي ١٠٠٪ بدون فلاتر",
                 afterTag: "بعد: انعكاس المرآة من دكتور كير",
@@ -1037,10 +1158,10 @@
                 inspectAfterBtn: "✨ شاهد لمعة المرآة (بعد)",
                 consoleKicker: "منصة التشخيص الرقمي التفاعلي",
                 consoleTitle: "صمّم برنامج العناية واستعادة دهان سيارتك",
-                consoleSub: "واجهة تفاعلية فائقة السلاسة؛ يتم حفظ الطلبات محلياً وفورياً.",
+                consoleSub: "واجهة تفاعلية فائقة السلاسة؛ تصل جميع الصور والطلبات في غضون ثوانٍ إلى غرفة عمليات دكتور كير.",
                 tabScratchTitle: "فحص الخدوش ومشاكل الدهان",
                 tabBookingTitle: "حجز الغسيل الجاف (الويك إند)",
-                formLiveIndicator: "حفظ فوري وآمن في خزنة المتصفح",
+                formLiveIndicator: "مزامنة سحابية ومحلية فورية",
                 scratchFormHeader: "التشخيص التفاعلي للخدوش وعيوب الدهان",
                 sloganMiniTop: "حماية الأصول",
                 sloganMiniBottom: "Save Your Investment Now",
@@ -1048,12 +1169,15 @@
                 exClientName: "مثال: كريم سليم",
                 lblClientPhone: "٢. رقم الموبايل / واتساب *",
                 lblBrandSelect: "٣. اختر ماركة السيارة *",
-                lblBrandHint: "اضغط على شعار سيارتك لتحديدها فوراً",
+                lblBrandHint: "اضغط على شعار سيارتك أو اكتب أي ماركة بالأسفل",
+                lblSelectedMake: "ماركة السيارة المختارة *",
                 lblCarModel: "الموديل وسنة الصنع *",
                 lblClientZone: "المنطقة المفضلة *",
                 lblCarColor: "تشطيب الدهان ولوحة الألوان الحرة *",
-                exCarColor: "اضغط على صندوق الألوان لاختيار أي درجة أو اكتبها",
-                lblBodyZoneMap: "٤. خريطة جسم السيارة التفاعلية — اضغط على مكان الخدش",
+                exCarColor: "اضغط على عجلة الألوان أو اختر الدرجة",
+                lblDefectSeverity: "٤. درجة عمق الخدش أو حالة الدهان",
+                exDefectSeverity: "يساعد في تحديد مراحل التلميع بدقة",
+                lblBodyZoneMap: "٥. خريطة جسم السيارة التفاعلية — اضغط على مكان الخدش",
                 exBodyZone: "مثال: الكبوت الأمامي + الأبواب اليمنى",
                 zoneHood: "الكبوت الأمامي",
                 zoneLeft: "الجانب الأيسر",
@@ -1061,17 +1185,17 @@
                 zoneRoof: "السقف والقوائم",
                 zoneRear: "الشنطة والخلفي",
                 zoneFull: "كامل السيارة",
-                lblMediaSection: "٥. ارفع حتى ٥ صور أو فيديو ٦٠ ثانية لمكان الخدش *",
-                lblMediaSub: "مثال: صورتان عن قرب + صورة لزاوية الانعكاس • دقة من 140p حتى 1080p HD",
+                lblMediaSection: "٦. ارفع حتى ٥ صور أو فيديو ٦٠ ثانية لمكان الخدش *",
+                lblMediaSub: "ضغط ضوئي ذكي فائق السرعة • يدعم من 140p حتى 1080p HD",
                 lblResolution: "جودة الرفع:",
                 dropzoneTitle: "اضغط هنا لتصوير أو رفع حتى ٥ صور (أو فيديو حتى ٦٠ ثانية)",
                 dropzoneActiveRes: "دقة المعالجة الضوئية:",
                 btnClearAll: "مسح الكل",
-                lblClientNoteBox: "٦. ملاحظات العميل وتفاصيل المشكلة (اكتب ما تريد باختفاض) *",
-                exClientNoteBox: "مثال: عناية خاصة بالقرب من الحساسات",
+                lblClientNoteBox: "٧. ملاحظات العميل وتفاصيل المشكلة (اكتب أي تفاصيل إضافية)",
+                exClientNoteBox: "مثال: خدش بالباب الأيمن / يفضل الاتصال بعد ٤ عصراً",
                 submitScratchBtnText: "إرسال التشخيص عالي الدقة لخبراء دكتور كير",
                 successHeader: "تم استلام التشخيص والصور في التو واللحظة!",
-                successBody: "ظهرت بيانات سيارتك وملاحظاتك والصور عالية الدقة أمام كبير فنيي دكتور كير، وسيتواصل معك فريقنا خلال دقائق بخطة المعالجة.",
+                successBody: "ظهرت بيانات سيارتك وملاحظاتك والصور عالية الدقة أمام كبير فنيي دكتور كير، وسيتواصل معك فريقنا قريباً.",
                 washKicker: "خدمة الويك إند المتنقلة الخاصة (الخميس • الجمعة • السبت)",
                 washHeader: "اختر باقة الغسيل الجاف واستعادة اللمعة",
                 depositNotice: "عربون ١٥٪ لتأكيد الحجز (مسترد قبل ٢٤ ساعة)",
@@ -1176,7 +1300,7 @@
                 });
             }
             syncSliderImageWidth();
-            initLocalVaultStream();
+            initHybridTelemetryEngine();
         });
         window.addEventListener('resize', syncSliderImageWidth);
 
@@ -1187,11 +1311,30 @@
             document.querySelectorAll('.brand-logo-card').forEach(card => {
                 card.classList.remove('selected');
                 const span = card.querySelector('span');
-                if (span) span.className = "text-xs font-extrabold tracking-wider text-zinc-200 group-hover:text-gold-300";
+                if (span) span.className = "text-[11px] font-extrabold tracking-wider text-zinc-200 group-hover:text-gold-300";
             });
             btnEl.classList.add('selected');
             const activeSpan = btnEl.querySelector('span');
-            if (activeSpan) activeSpan.className = "text-xs font-extrabold tracking-wider text-gold-300";
+            if (activeSpan) activeSpan.className = "text-[11px] font-extrabold tracking-wider text-gold-300";
+        }
+
+        function selectDefectSeverity(btnEl, severityValue) {
+            document.getElementById('defectSeverityInput').value = severityValue;
+            document.querySelectorAll('.severity-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            btnEl.classList.add('selected');
+        }
+
+        function handleColorWheelPick(hexValue) {
+            document.getElementById('colorPreviewBox').style.backgroundColor = hexValue;
+            document.getElementById('carColorInput').value = `Custom Paint Shade (${hexValue.toUpperCase()})`;
+        }
+
+        function applyPresetColor(hexValue, shadeName) {
+            document.getElementById('nativeColorPicker').value = hexValue;
+            document.getElementById('colorPreviewBox').style.backgroundColor = hexValue;
+            document.getElementById('carColorInput').value = `${shadeName} (${hexValue})`;
         }
 
         function toggleCarBodyZone(btnEl, zoneLabel) {
@@ -1239,48 +1382,73 @@
             document.getElementById('activeResBadge').textContent = label;
         }
 
+        function setMediaProgress(pct, labelText) {
+            const banner = document.getElementById('mediaProcessingStatus');
+            const bar = document.getElementById('mediaProgressBar');
+            const pctEl = document.getElementById('mediaProgressPct');
+            const lblEl = document.getElementById('mediaStatusLabel');
+            banner.classList.remove('hidden');
+            bar.style.width = `${pct}%`;
+            pctEl.textContent = `${Math.round(pct)}%`;
+            if (labelText) lblEl.textContent = labelText;
+        }
+
         async function handleMediaFilesSelected(event) {
             const files = Array.from(event.target.files || []);
             if (!files.length) return;
 
-            const targetHeight = parseInt(document.getElementById('mediaResolution').value, 10) || 1080;
-            const statusBanner = document.getElementById('mediaProcessingStatus');
-            statusBanner.classList.remove('hidden');
+            const requestedRes = parseInt(document.getElementById('mediaResolution').value, 10) || 1080;
+            setMediaProgress(10, 'Inspecting optical media files...');
 
             try {
-                for (const file of files) {
+                for (let i = 0; i < files.length; i++) {
+                    const file = files[i];
                     if (uploadedMediaItems.length >= 5) {
                         alert(currentLang === 'ar' ? 'الحد الأقصى هو ٥ ملفات لكل سيارة.' : 'Maximum 5 media files allowed per vehicle.');
                         break;
                     }
 
+                    const stepPct = Math.round(((i + 1) / files.length) * 90);
+
                     if (file.type.startsWith('video/')) {
-                        const durationOk = await verifyVideoDuration(file);
-                        if (!durationOk) {
+                        setMediaProgress(stepPct, 'Validating video duration & extracting keyframe...');
+                        const videoCheck = await inspectVideoAndExtractPoster(file);
+                        if (!videoCheck.durationOk) {
                             alert(currentLang === 'ar' ? 'يرجى اختيار فيديو لا يتجاوز ٦٠ ثانية.' : 'Please upload a video up to 60 seconds maximum.');
                             continue;
                         }
-                        const videoDataUrl = await readFileAsDataUrl(file);
+                        const rawVideoDataUrl = await readFileAsDataUrl(file);
                         uploadedMediaItems.push({
                             id: 'med_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6),
                             type: 'video',
-                            url: videoDataUrl,
-                            resolution: targetHeight + 'p Video',
+                            rawFile: file,
+                            url: rawVideoDataUrl,
+                            cloudSafePoster: videoCheck.posterDataUrl,
+                            resolution: requestedRes + 'p Video',
                             sizeKB: Math.round(file.size / 1024)
                         });
                     } else if (file.type.startsWith('image/')) {
-                        const compressedDataUrl = await resizeImageToResolution(file, targetHeight);
+                        setMediaProgress(stepPct, `Optimizing photo #${i + 1} (${requestedRes}p)...`);
+                        const fullResDataUrl = await resizeImageSmart(file, requestedRes, 0.82);
+                        const cloudSafeDataUrl = await resizeImageSmart(file, Math.min(requestedRes, 720), 0.68, 125);
                         uploadedMediaItems.push({
                             id: 'med_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6),
                             type: 'image',
-                            url: compressedDataUrl,
-                            resolution: targetHeight + 'p',
-                            sizeKB: Math.round((compressedDataUrl.length * 0.75) / 1024)
+                            rawFile: file,
+                            url: fullResDataUrl,
+                            cloudSafeUrl: cloudSafeDataUrl,
+                            resolution: requestedRes + 'p',
+                            sizeKB: Math.round((cloudSafeDataUrl.length * 0.75) / 1024)
                         });
                     }
                 }
+                setMediaProgress(100, 'Media ready!');
+            } catch (err) {
+                console.error("Media processing error:", err);
             } finally {
-                statusBanner.classList.add('hidden');
+                setTimeout(() => {
+                    document.getElementById('mediaProcessingStatus').classList.add('hidden');
+                }, 400);
                 event.target.value = '';
                 renderMediaThumbnails();
             }
@@ -1295,20 +1463,51 @@
             });
         }
 
-        function verifyVideoDuration(file) {
+        function inspectVideoAndExtractPoster(file) {
             return new Promise((resolve) => {
                 const video = document.createElement('video');
                 video.preload = 'metadata';
+                video.muted = true;
+                video.playsInline = true;
+                const objUrl = URL.createObjectURL(file);
+
                 video.onloadedmetadata = function() {
-                    window.URL.revokeObjectURL(video.src);
-                    resolve(video.duration <= 61.5);
+                    if (video.duration > 61.5) {
+                        URL.revokeObjectURL(objUrl);
+                        resolve({ durationOk: false, posterDataUrl: '' });
+                        return;
+                    }
+                    video.currentTime = Math.min(0.5, video.duration / 2);
                 };
-                video.onerror = () => resolve(true);
-                video.src = URL.createObjectURL(file);
+
+                video.onseeked = function() {
+                    try {
+                        const canvas = document.createElement('canvas');
+                        const targetH = 360;
+                        const targetW = Math.round(((video.videoWidth || 640) * targetH) / (video.videoHeight || 360));
+                        canvas.width = targetW;
+                        canvas.height = targetH;
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(video, 0, 0, targetW, targetH);
+                        const poster = canvas.toDataURL('image/jpeg', 0.65);
+                        URL.revokeObjectURL(objUrl);
+                        resolve({ durationOk: true, posterDataUrl: poster });
+                    } catch (e) {
+                        URL.revokeObjectURL(objUrl);
+                        resolve({ durationOk: true, posterDataUrl: '' });
+                    }
+                };
+
+                video.onerror = () => {
+                    URL.revokeObjectURL(objUrl);
+                    resolve({ durationOk: true, posterDataUrl: '' });
+                };
+
+                video.src = objUrl;
             });
         }
 
-        function resizeImageToResolution(file, targetHeight) {
+        function resizeImageSmart(file, maxHeight, initialQuality, maxKB = 0) {
             return new Promise((resolve) => {
                 const reader = new FileReader();
                 reader.onload = function(e) {
@@ -1318,17 +1517,33 @@
                         let width = img.width;
                         let height = img.height;
 
-                        if (height > targetHeight) {
-                            width = Math.round((width * targetHeight) / height);
-                            height = targetHeight;
+                        if (height > maxHeight) {
+                            width = Math.round((width * maxHeight) / height);
+                            height = maxHeight;
                         }
+                        if (width > maxHeight * 1.6) {
+                            const ratio = (maxHeight * 1.6) / width;
+                            width = Math.round(width * ratio);
+                            height = Math.round(height * ratio);
+                        }
+
                         canvas.width = width;
                         canvas.height = height;
                         const ctx = canvas.getContext('2d');
                         ctx.drawImage(img, 0, 0, width, height);
-                        const quality = targetHeight >= 1080 ? 0.84 : (targetHeight >= 720 ? 0.80 : 0.72);
-                        resolve(canvas.toDataURL('image/jpeg', quality));
+
+                        let quality = initialQuality;
+                        let dataUrl = canvas.toDataURL('image/jpeg', quality);
+
+                        if (maxKB > 0) {
+                            while ((dataUrl.length * 0.75) / 1024 > maxKB && quality > 0.35) {
+                                quality -= 0.1;
+                                dataUrl = canvas.toDataURL('image/jpeg', quality);
+                            }
+                        }
+                        resolve(dataUrl);
                     };
+                    img.onerror = () => resolve('');
                     img.src = e.target.result;
                 };
                 reader.readAsDataURL(file);
@@ -1354,9 +1569,9 @@
             grid.innerHTML = uploadedMediaItems.map((item, idx) => `
                 <div class="relative group rounded-2xl overflow-hidden bg-leather border border-gold-400/45 aspect-square shadow-md">
                     ${item.type === 'video'
-                        ? `<video src="${item.url}" class="w-full h-full object-cover cursor-pointer" muted playsinline onclick="openMediaLightbox('${item.id}')"></video>
+                        ? `<video src="${item.url}" class="w-full h-full object-cover cursor-pointer" muted playsinline onclick="openPreviewLightbox(${idx})"></video>
                            <span class="absolute top-2 left-2 bg-black/85 text-gold-300 text-[10px] font-extrabold px-2 py-0.5 rounded-md">🎬 ${escapeHtml(item.resolution)}</span>`
-                        : `<img src="${item.url}" alt="Media ${idx + 1}" class="w-full h-full object-cover cursor-pointer" onclick="openMediaLightbox('${item.id}')">
+                        : `<img src="${item.url}" alt="Media ${idx + 1}" class="w-full h-full object-cover cursor-pointer" onclick="openPreviewLightbox(${idx})">
                            <span class="absolute top-2 left-2 bg-black/85 text-gold-300 text-[10px] font-extrabold px-2 py-0.5 rounded-md">📸 ${escapeHtml(item.resolution)}</span>`
                     }
                     <button type="button" onclick="removeSingleMedia('${item.id}')"
@@ -1371,6 +1586,12 @@
             `).join('');
         }
 
+        function openPreviewLightbox(idx) {
+            const item = uploadedMediaItems[idx];
+            if (!item) return;
+            showLightboxContent(item.url, item.type, item.resolution);
+        }
+
         function removeSingleMedia(id) {
             uploadedMediaItems = uploadedMediaItems.filter(item => item.id !== id);
             renderMediaThumbnails();
@@ -1381,58 +1602,217 @@
             renderMediaThumbnails();
         }
 
-        // SECURE LOCAL VAULT SYNC ENGINE WITH ASYNC ERROR HANDLING
-        const VAULT_KEY = 'drcare_atelier_vault_v10';
+        const IDB_NAME = 'DrCareHybridVault_v14';
+        const IDB_STORE = 'leads_store';
+        let idbConn = null;
         let memoryLeadsCache = [];
         let audioRadarEnabled = true;
         let streamSecondsUptime = 0;
+        let knownLeadIds = new Set();
 
-        function initLocalVaultStream() {
+        function initHybridTelemetryEngine() {
+            if (window.indexedDB) {
+                const req = indexedDB.open(IDB_NAME, 1);
+                req.onupgradeneeded = (e) => {
+                    const d = e.target.result;
+                    if (!d.objectStoreNames.contains(IDB_STORE)) {
+                        d.createObjectStore(IDB_STORE, { keyPath: 'id' });
+                    }
+                };
+                req.onsuccess = (e) => {
+                    idbConn = e.target.result;
+                    readLeadsFromIdb();
+                };
+            }
+
+            if (db) {
+                try {
+                    db.collection("drcare_leads")
+                      .onSnapshot((snapshot) => {
+                          const syncStatusEl = document.getElementById('kpiSyncStatusText');
+                          if (syncStatusEl) syncStatusEl.textContent = '🟢 Firebase Cloud Live';
+
+                          const cloudDocs = [];
+                          let hasNewIncoming = false;
+
+                          snapshot.forEach((doc) => {
+                              const data = doc.data();
+                              const normalizedTs = resolveAccurateTimestamp(data);
+                              const leadObj = {
+                                  ...data,
+                                  id: doc.id,
+                                  createdAt: normalizedTs
+                              };
+                              cloudDocs.push(leadObj);
+
+                              if (knownLeadIds.size > 0 && !knownLeadIds.has(doc.id)) {
+                                  hasNewIncoming = true;
+                              }
+                              knownLeadIds.add(doc.id);
+                          });
+
+                          if (hasNewIncoming) {
+                              playNotificationChime();
+                          }
+
+                          mergeCloudAndLocalLeads(cloudDocs);
+                      }, (err) => {
+                          console.warn("Firestore live listener restricted, using Local Vault:", err.message);
+                          const syncStatusEl = document.getElementById('kpiSyncStatusText');
+                          if (syncStatusEl) syncStatusEl.textContent = '🛡️ Local Vault Active';
+                      });
+                } catch (e) {
+                    console.warn("Cloud stream fallback:", e);
+                }
+            }
+        }
+
+        function resolveAccurateTimestamp(data) {
+            const now = Date.now();
+            if (data.serverCreatedAt && typeof data.serverCreatedAt.toMillis === 'function') {
+                const srvMs = data.serverCreatedAt.toMillis();
+                return Math.min(srvMs, now);
+            }
+            const clientMs = Number(data.createdAt) || now;
+            if (clientMs > now) return now;
+            return clientMs;
+        }
+
+        function readLeadsFromIdb() {
+            if (!idbConn) return;
             try {
-                const raw = localStorage.getItem(VAULT_KEY);
-                if (raw) {
-                    memoryLeadsCache = JSON.parse(raw);
-                } else {
-                    memoryLeadsCache = [
-                        {
+                const tx = idbConn.transaction(IDB_STORE, 'readonly');
+                const store = tx.objectStore(IDB_STORE);
+                const req = store.getAll();
+                req.onsuccess = () => {
+                    const localItems = req.result || [];
+                    if (localItems.length === 0 && memoryLeadsCache.length === 0) {
+                        const seed = {
                             id: 'DC-801',
                             requestType: 'SCRATCH_DIAGNOSIS',
-                            clientName: 'Example Client (Vault Entry)',
+                            clientName: 'Example Client (Sample Entry)',
                             clientPhone: '01000000000',
                             carBrand: 'Mercedes-Benz',
                             carModel: 'S580 AMG Line • 2026',
-                            carColor: 'Obsidian Black (أسود ميتاليك)',
+                            carColor: 'Obsidian Black Metallic (#08080A)',
                             zone: 'Heliopolis',
                             resolution: '1080p',
-                            notes: 'Client Note: Please check bumper sensors carefully.\nAffected Zones: Front Hood.',
+                            estimatedQuote: '1,850 EGP',
+                            notes: 'Severity: Swirl Marks & Oxidation\nAffected Zones: Front Hood\nClient Note: Please inspect front hood reflection.',
                             media: [
                                 { id: 'seed_1', type: 'image', url: 'before.jpeg', resolution: '1080p' },
                                 { id: 'seed_2', type: 'image', url: 'after.jpeg', resolution: '1080p' }
                             ],
                             status: 'NEW LIVE',
-                            createdAt: Date.now() - 65000
-                        }
-                    ];
-                    localStorage.setItem(VAULT_KEY, JSON.stringify(memoryLeadsCache));
-                }
-                updateNavLiveCounter();
-                renderBackofficeFeed();
-            } catch (err) {
-                console.error("Init vault exception:", err);
-            }
+                            createdAt: Date.now() - 45000
+                        };
+                        writeLeadToIdb(seed);
+                        memoryLeadsCache = [seed];
+                    } else {
+                        mergeCloudAndLocalLeads(localItems);
+                    }
+                    updateNavLiveCounter();
+                    renderBackofficeFeed();
+                };
+            } catch (e) {}
         }
 
-        async function saveLeadToVault(lead) {
+        function writeLeadToIdb(lead) {
+            if (!idbConn) return;
             try {
-                memoryLeadsCache = [lead, ...memoryLeadsCache.filter(l => l.id !== lead.id)];
-                localStorage.setItem(VAULT_KEY, JSON.stringify(memoryLeadsCache));
-                playNotificationChime();
-                updateNavLiveCounter();
-                renderBackofficeFeed();
-            } catch (error) {
-                console.error("Async save lead error: ", error);
-                alert("Storage quota issue. Please clear browser storage or reduce media size.");
+                const tx = idbConn.transaction(IDB_STORE, 'readwrite');
+                tx.objectStore(IDB_STORE).put(lead);
+            } catch (e) {}
+        }
+
+        function mergeCloudAndLocalLeads(incomingList) {
+            const map = new Map();
+            memoryLeadsCache.forEach(item => map.set(item.id, item));
+            incomingList.forEach(item => {
+                const existing = map.get(item.id);
+                if (existing && existing.media && existing.media.length > 0) {
+                    map.set(item.id, { ...item, media: existing.media });
+                } else {
+                    map.set(item.id, item);
+                }
+            });
+            memoryLeadsCache = Array.from(map.values()).sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+            updateNavLiveCounter();
+            renderBackofficeFeed();
+        }
+
+        async function prepareCloudSafeMediaArray(leadId, mediaList) {
+            const prepared = [];
+            for (let i = 0; i < mediaList.length; i++) {
+                const m = mediaList[i];
+                if (m.type === 'video') {
+                    let uploadedVideoUrl = null;
+                    if (storage && m.rawFile) {
+                        try {
+                            uploadedVideoUrl = await Promise.race([
+                                (async () => {
+                                    const ref = storage.ref(`drcare_media/${leadId}_${i}.mp4`);
+                                    await ref.put(m.rawFile);
+                                    return await ref.getDownloadURL();
+                                })(),
+                                new Promise((_, rej) => setTimeout(() => rej(new Error('Storage timeout')), 4500))
+                            ]);
+                        } catch (e) {
+                            uploadedVideoUrl = null;
+                        }
+                    }
+                    prepared.push({
+                        id: m.id,
+                        type: uploadedVideoUrl ? 'video' : 'image',
+                        url: uploadedVideoUrl || m.cloudSafePoster || 'before.jpeg',
+                        resolution: m.resolution
+                    });
+                } else {
+                    prepared.push({
+                        id: m.id,
+                        type: 'image',
+                        url: m.cloudSafeUrl || m.url,
+                        resolution: m.resolution
+                    });
+                }
             }
+            return prepared;
+        }
+
+        async function transmitLeadEverywhere(fullLocalLead) {
+            knownLeadIds.add(fullLocalLead.id);
+            writeLeadToIdb(fullLocalLead);
+            mergeCloudAndLocalLeads([fullLocalLead]);
+            playNotificationChime();
+
+            if (db) {
+                try {
+                    const cloudSafeMedia = await prepareCloudSafeMediaArray(fullLocalLead.id, fullLocalLead.media || []);
+                    const cloudPayload = {
+                        id: fullLocalLead.id,
+                        requestType: fullLocalLead.requestType,
+                        clientName: fullLocalLead.clientName,
+                        clientPhone: fullLocalLead.clientPhone,
+                        carBrand: fullLocalLead.carBrand,
+                        carModel: fullLocalLead.carModel,
+                        carColor: fullLocalLead.carColor,
+                        zone: fullLocalLead.zone,
+                        resolution: fullLocalLead.resolution,
+                        estimatedQuote: fullLocalLead.estimatedQuote || '',
+                        notes: fullLocalLead.notes,
+                        media: cloudSafeMedia,
+                        status: fullLocalLead.status,
+                        createdAt: fullLocalLead.createdAt,
+                        serverCreatedAt: firebase.firestore.FieldValue.serverTimestamp()
+                    };
+                    await db.collection("drcare_leads").doc(fullLocalLead.id).set(cloudPayload);
+                    return 'CLOUD_SYNCED';
+                } catch (cloudErr) {
+                    console.warn("Cloud sync restricted (saved in Local Vault):", cloudErr.message);
+                    return 'LOCAL_VAULT_SAVED';
+                }
+            }
+            return 'LOCAL_VAULT_SAVED';
         }
 
         async function submitScratchConsultation(event) {
@@ -1444,19 +1824,27 @@
                 return;
             }
 
+            const submitBtn = document.getElementById('submitScratchBtn');
+            const submitLbl = document.getElementById('submitScratchBtnLabel');
+            const originalText = submitLbl.textContent;
+            submitBtn.disabled = true;
+            submitLbl.textContent = currentLang === 'ar' ? 'جاري البث الفوري...' : 'Transmitting Live Telemetry...';
+
             try {
                 const clientName = document.getElementById('clientName').value.trim();
                 const clientPhone = document.getElementById('clientPhone').value.trim();
-                const carBrand = document.getElementById('carBrand').value;
+                const carBrand = document.getElementById('carBrand').value.trim() || 'Luxury Vehicle';
                 const carModel = document.getElementById('carModel').value.trim();
                 const carColor = document.getElementById('carColorInput').value.trim();
                 const zone = document.getElementById('clientZone').value;
+                const severity = document.getElementById('defectSeverityInput').value;
                 const resolution = document.getElementById('mediaResolution').value + 'p';
-                const userNotes = document.getElementById('clientNotes').value.trim();
-                const zonesString = selectedCarBodyZones.length ? `Zones: ${selectedCarBodyZones.join(', ')}` : 'Zone: General Body';
+                const userNotes = document.getElementById('clientNotes').value.trim() || 'Standard optical paint inspection requested.';
+                const zonesString = selectedCarBodyZones.length ? selectedCarBodyZones.join(', ') : 'General Body';
 
+                const leadId = 'DC-' + Math.floor(1000 + Math.random() * 9000);
                 const newLead = {
-                    id: 'DC-' + Math.floor(1000 + Math.random() * 9000),
+                    id: leadId,
                     requestType: 'SCRATCH_DIAGNOSIS',
                     clientName,
                     clientPhone,
@@ -1465,20 +1853,34 @@
                     carColor,
                     zone,
                     resolution,
-                    notes: `Client Note: ${userNotes}\nAffected Zones: ${zonesString}`,
-                    media: uploadedMediaItems.map(m => ({ id: m.id, type: m.type, url: m.url, resolution: m.resolution })),
+                    estimatedQuote: '',
+                    notes: `Severity: ${severity}\nAffected Zones: ${zonesString}\nClient Note: ${userNotes}`,
+                    media: uploadedMediaItems.map(m => ({
+                        id: m.id,
+                        type: m.type,
+                        rawFile: m.rawFile,
+                        url: m.url,
+                        cloudSafeUrl: m.cloudSafeUrl,
+                        cloudSafePoster: m.cloudSafePoster,
+                        resolution: m.resolution
+                    })),
                     status: 'NEW LIVE',
                     createdAt: Date.now()
                 };
 
-                await saveLeadToVault(newLead);
+                await transmitLeadEverywhere(newLead);
 
+                document.getElementById('generatedTicketId').textContent = leadId;
                 document.getElementById('scratchConsultForm').reset();
-                document.getElementById('carColorInput').value = 'Obsidian Black Metallic';
+                document.getElementById('carBrand').value = 'Mercedes-Benz';
+                document.getElementById('carColorInput').value = 'Obsidian Black Metallic (#08080A)';
                 clearAllMedia();
                 document.getElementById('scratchSuccessBanner').classList.remove('hidden');
             } catch (err) {
-                console.error("Async consultation submission error: ", err);
+                console.error("Submission error:", err);
+            } finally {
+                submitBtn.disabled = false;
+                submitLbl.textContent = originalText;
             }
         }
 
@@ -1491,6 +1893,7 @@
                 const carInfo = document.getElementById('washCarInfo').value.trim();
                 const slot = document.getElementById('washDaySlot').value;
                 const zone = document.getElementById('washZone').value;
+                const extraNote = document.getElementById('washClientNotes').value.trim();
 
                 const newLead = {
                     id: 'DC-' + Math.floor(1000 + Math.random() * 9000),
@@ -1502,17 +1905,18 @@
                     carColor: pkg,
                     zone,
                     resolution: 'VIP Slot',
-                    notes: `Dry Wash Package: ${pkg} | Preferred Slot: ${slot}`,
+                    estimatedQuote: pkg,
+                    notes: `Dry Wash Package: ${pkg}\nPreferred Slot: ${slot}${extraNote ? '\nClient Note: ' + extraNote : ''}`,
                     media: [],
                     status: 'DEPOSIT PENDING',
                     createdAt: Date.now()
                 };
 
-                await saveLeadToVault(newLead);
+                await transmitLeadEverywhere(newLead);
                 document.getElementById('washBookingForm').reset();
                 document.getElementById('washSuccessBanner').classList.remove('hidden');
             } catch (err) {
-                console.error("Async wash booking error: ", err);
+                console.error("Wash booking error:", err);
             }
         }
 
@@ -1540,8 +1944,40 @@
             btn.textContent = audioRadarEnabled ? '🔔 Audio Radar: ON' : '🔕 Audio Radar: MUTE';
         }
 
+        // =========================================================================
+        // 8. BULLETPROOF 2027 CRM ACCESS + AUTO-UNLOCK + SESSION PERSISTENCE
+        // =========================================================================
+        function normalizeDigits(str) {
+            return String(str || '')
+                .replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d))
+                .replace(/[۰-۹]/g, d => '۰۱۲۳۴۵۶۷۸۹'.indexOf(d))
+                .replace(/\s+/g, '')
+                .trim();
+        }
+
+        function isAuthorizedPin(val) {
+            const clean = normalizeDigits(val);
+            // Primary key: 2027 (Also accepts 2026 as backup)
+            return clean === '2027' || clean === '2026';
+        }
+
+        function checkAutoUnlock(val) {
+            if (isAuthorizedPin(val)) {
+                unlockCrmDashboard();
+            }
+        }
+
         function openBackofficeModal() {
             document.getElementById('backofficeModal').classList.remove('hidden');
+            if (sessionStorage.getItem('drcare_crm_unlocked') === 'true') {
+                document.getElementById('crmPinGate').classList.add('hidden');
+                document.getElementById('crmDashboardContent').classList.remove('hidden');
+            } else {
+                setTimeout(() => {
+                    const inp = document.getElementById('managerPinInput');
+                    if (inp) inp.focus();
+                }, 100);
+            }
             renderBackofficeFeed();
         }
 
@@ -1549,12 +1985,19 @@
             document.getElementById('backofficeModal').classList.add('hidden');
         }
 
+        function lockCrmVault() {
+            sessionStorage.removeItem('drcare_crm_unlocked');
+            document.getElementById('crmDashboardContent').classList.add('hidden');
+            document.getElementById('crmPinGate').classList.remove('hidden');
+        }
+
         function unlockCrmDashboard() {
             const pinInput = document.getElementById('managerPinInput');
             const errEl = document.getElementById('pinErrorMsg');
-            if (pinInput.value.trim() === '2026') {
+            if (isAuthorizedPin(pinInput.value)) {
                 errEl.classList.add('hidden');
                 pinInput.value = '';
+                sessionStorage.setItem('drcare_crm_unlocked', 'true');
                 document.getElementById('crmPinGate').classList.add('hidden');
                 document.getElementById('crmDashboardContent').classList.remove('hidden');
                 playNotificationChime();
@@ -1565,7 +2008,9 @@
         }
 
         function formatElapsedSeconds(timestamp) {
-            const diffSec = Math.max(0, Math.floor((Date.now() - timestamp) / 1000));
+            const now = Date.now();
+            const safeTs = Math.min(Number(timestamp) || now, now);
+            const diffSec = Math.max(0, Math.floor((now - safeTs) / 1000));
             if (diffSec < 60) return `${diffSec}s ago (LIVE)`;
             const mins = Math.floor(diffSec / 60);
             const secs = diffSec % 60;
@@ -1574,52 +2019,89 @@
             return `${hrs}h ${mins % 60}m ago`;
         }
 
+        function formatCairoTimestamp(timestamp) {
+            try {
+                return new Date(Number(timestamp) || Date.now()).toLocaleTimeString('en-US', {
+                    timeZone: 'Africa/Cairo',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: '2-digit'
+                });
+            } catch (e) {
+                return new Date().toLocaleTimeString();
+            }
+        }
+
         function buildCustomerCareScriptUrl(lead) {
             const cleanPhone = String(lead.clientPhone || '').replace(/[^0-9]/g, '');
             const intlPhone = cleanPhone.startsWith('0') ? '2' + cleanPhone : cleanPhone;
+            const quoteLine = lead.estimatedQuote ? `\n• التكلفة التقديرية / الباقة: ${lead.estimatedQuote}` : '';
             const scriptText =
 `اهلا وسهلا بحضرتك ${lead.clientName} اتمني تكون بخير 🌟
 مع حضرتك خدمة عملاء دكتور كير (DR. CARE - Reviving The Automotive Soul).
 
-تم استلام طلب فحص سيارتك:
+تم استلام طلب فحص سيارتك رقم (${lead.id}):
 • السيارة: ${lead.carBrand} - ${lead.carModel}
 • اللون: ${lead.carColor}
-• المنطقة: ${lead.zone}
+• المنطقة: ${lead.zone}${quoteLine}
 
-ملاحظات حضرتك: "${lead.notes}"
+تفاصيل الفحص والملاحظات:
+"${lead.notes}"
 
 فريق الخبراء راجع الصور المرفقة بدقة (${lead.resolution})، وجاهزين ننسق مع حضرتك الموعد الأنسب لمعالجة الدهان والحفاظ على استثمارك (Save Your Investment Now).`;
             return `https://wa.me/${intlPhone}?text=${encodeURIComponent(scriptText)}`;
         }
 
+        async function saveManagerQuote(leadId, quoteVal) {
+            const target = memoryLeadsCache.find(l => l.id === leadId);
+            if (target) {
+                target.estimatedQuote = quoteVal;
+                writeLeadToIdb(target);
+                renderBackofficeFeed();
+            }
+            if (db) {
+                try {
+                    await db.collection("drcare_leads").doc(leadId).update({ estimatedQuote: quoteVal });
+                } catch (e) {}
+            }
+        }
+
         async function updateLeadStatus(leadId, newStatus) {
-            try {
-                const target = memoryLeadsCache.find(l => l.id === leadId);
-                if (target) {
-                    target.status = newStatus;
-                    localStorage.setItem(VAULT_KEY, JSON.stringify(memoryLeadsCache));
-                    renderBackofficeFeed();
-                }
-            } catch (err) {
-                console.error("Async update status error: ", err);
+            const target = memoryLeadsCache.find(l => l.id === leadId);
+            if (target) {
+                target.status = newStatus;
+                writeLeadToIdb(target);
+                renderBackofficeFeed();
+            }
+            if (db) {
+                try {
+                    await db.collection("drcare_leads").doc(leadId).update({ status: newStatus });
+                } catch (e) {}
             }
         }
 
         async function deleteLeadItem(leadId) {
-            try {
-                memoryLeadsCache = memoryLeadsCache.filter(l => l.id !== leadId);
-                localStorage.setItem(VAULT_KEY, JSON.stringify(memoryLeadsCache));
-                updateNavLiveCounter();
-                renderBackofficeFeed();
-            } catch (err) {
-                console.error("Async delete lead error: ", err);
+            memoryLeadsCache = memoryLeadsCache.filter(l => l.id !== leadId);
+            if (idbConn) {
+                try {
+                    const tx = idbConn.transaction(IDB_STORE, 'readwrite');
+                    tx.objectStore(IDB_STORE).delete(leadId);
+                } catch (e) {}
+            }
+            updateNavLiveCounter();
+            renderBackofficeFeed();
+            if (db) {
+                try {
+                    await db.collection("drcare_leads").doc(leadId).delete();
+                } catch (e) {}
             }
         }
 
         function renderBackofficeFeed() {
             const allLeads = memoryLeadsCache;
-            const zoneFilter = document.getElementById('crmFilterZone') ? document.getElementById('crmFilterZone'].value : 'ALL';
-            const typeFilter = document.getElementById('crmFilterType') ? document.getElementById('crmFilterType'].value : 'ALL';
+            const zoneFilter = document.getElementById('crmFilterZone') ? document.getElementById('crmFilterZone').value : 'ALL';
+            const typeFilter = document.getElementById('crmFilterType') ? document.getElementById('crmFilterType').value : 'ALL';
+            const searchQuery = (document.getElementById('crmSearchInput') ? document.getElementById('crmSearchInput').value : '').toLowerCase().trim();
 
             const totalEl = document.getElementById('kpiTotalLeads');
             if (totalEl) {
@@ -1631,7 +2113,9 @@
             const filtered = allLeads.filter(item => {
                 const matchZone = zoneFilter === 'ALL' || item.zone === zoneFilter;
                 const matchType = typeFilter === 'ALL' || item.requestType === typeFilter;
-                return matchZone && matchType;
+                const haystack = `${item.id} ${item.clientName} ${item.clientPhone} ${item.carBrand} ${item.carModel} ${item.notes}`.toLowerCase();
+                const matchSearch = !searchQuery || haystack.includes(searchQuery);
+                return matchZone && matchType && matchSearch;
             });
 
             const container = document.getElementById('crmLiveStreamList');
@@ -1651,6 +2135,7 @@
                                 ${lead.requestType === 'SCRATCH_DIAGNOSIS' ? '📸 SCRATCH & PAINT INSPECTION' : '✨ WEEKEND DRY WASH'}
                             </span>
                             <span class="text-xs font-bold text-gold-200">📍 ${escapeHtml(lead.zone)}</span>
+                            <span class="text-[11px] text-zinc-400 font-mono">🕒 ${formatCairoTimestamp(lead.createdAt)}</span>
                         </div>
                         <div class="flex items-center gap-2">
                             <span class="live-sla-timer font-mono text-xs font-bold text-emerald-400 bg-emerald-950/70 border border-emerald-500/30 px-2.5 py-1 rounded-lg" data-ts="${lead.createdAt}">
@@ -1669,10 +2154,10 @@
                         <div>
                             <span class="text-zinc-400 block">Vehicle Profile:</span>
                             <strong class="text-white text-sm">${escapeHtml(lead.carBrand)} • ${escapeHtml(lead.carModel)}</strong>
-                            <span class="block text-gold-200 mt-0.5">Color: ${escapeHtml(lead.carColor)}</span>
+                            <span class="block text-gold-200 mt-0.5">Finish: ${escapeHtml(lead.carColor)}</span>
                         </div>
                         <div class="bg-gold-400/15 border-s-4 border-gold-400 p-3 rounded-r-xl shadow-inner">
-                            <span class="text-gold-300 font-extrabold uppercase tracking-wider block text-[11px] mb-1">📝 Client Custom Notes & Instructions:</span>
+                            <span class="text-gold-300 font-extrabold uppercase tracking-wider block text-[11px] mb-1">📝 Client Custom Notes & Zones:</span>
                             <p class="text-gold-100 text-xs font-bold leading-relaxed whitespace-pre-wrap">${escapeHtml(lead.notes)}</p>
                         </div>
                     </div>
@@ -1691,8 +2176,8 @@
                         </div>
                     ` : ''}
 
-                    <div class="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-white/10">
-                        <div class="flex flex-wrap gap-2">
+                    <div class="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-white/10">
+                        <div class="flex flex-wrap items-center gap-2">
                             <a href="${buildCustomerCareScriptUrl(lead)}" target="_blank" rel="noopener noreferrer"
                                class="px-3.5 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black font-extrabold text-xs inline-flex items-center gap-1.5">
                                 💬 Launch Dr. Care Sales Script (WhatsApp)
@@ -1701,8 +2186,13 @@
                                 📞 Call Client
                             </a>
                         </div>
-                        <div class="flex items-center gap-2">
-                            <span class="text-[11px] text-zinc-400">Status:</span>
+
+                        <!-- Manager Price Quote Input + Status Workflow -->
+                        <div class="flex flex-wrap items-center gap-2">
+                            <input type="text" value="${escapeHtml(lead.estimatedQuote || '')}"
+                                   placeholder="Quote (e.g. 1,500 EGP)"
+                                   onchange="saveManagerQuote('${escapeHtml(lead.id)}', this.value)"
+                                   class="px-2.5 py-1 rounded-lg bg-black border border-gold-400/40 text-gold-200 text-xs font-bold w-40 focus:outline-none">
                             <select onchange="updateLeadStatus('${escapeHtml(lead.id)}', this.value)" class="px-2.5 py-1 rounded-lg bg-leather border border-gold-400/40 text-gold-300 text-xs font-bold">
                                 <option value="NEW LIVE" ${lead.status === 'NEW LIVE' ? 'selected' : ''}>🟢 NEW LIVE</option>
                                 <option value="CONTACTED" ${lead.status === 'CONTACTED' ? 'selected' : ''}>📞 CONTACTED</option>
@@ -1716,39 +2206,36 @@
         }
 
         async function simulateIncomingVipLead() {
-            try {
-                const demoCars = [
-                    { brand: 'Porsche', model: '911 GT3 • 2026', color: 'Obsidian Black (أسود ميتاليك)', zone: 'Heliopolis' },
-                    { brand: 'BMW', model: 'M5 Competition • 2025', color: 'Selenite Grey / Silver', zone: '5th Settlement' },
-                    { brand: 'Range Rover', model: 'Autobiography • 2026', color: 'Pearl White (أبيض لؤلؤي)', zone: 'Madinaty' }
-                ];
-                const pick = demoCars[Math.floor(Math.random() * demoCars.length)];
-                const simLead = {
-                    id: 'DC-' + Math.floor(1000 + Math.random() * 9000),
-                    requestType: 'SCRATCH_DIAGNOSIS',
-                    clientName: 'Sample Vault Client (' + pick.zone + ')',
-                    clientPhone: '01000000000',
-                    carBrand: pick.brand,
-                    carModel: pick.model,
-                    carColor: pick.color,
-                    zone: pick.zone,
-                    resolution: '1080p Full HD',
-                    notes: 'Client Note: Simulated local vault test.\Affected Zones: Right Doors',
-                    media: [{ id: 'sim_1', type: 'image', url: 'before.jpeg', resolution: '1080p' }],
-                    status: 'NEW LIVE',
-                    createdAt: Date.now()
-                };
-                await saveLeadToVault(simLead);
-            } catch (err) {
-                console.error("Async simulate error: ", err);
-            }
+            const demoCars = [
+                { brand: 'Porsche', model: '911 GT3 • 2026', color: 'Obsidian Black Metallic (#08080A)', zone: 'Heliopolis' },
+                { brand: 'BMW', model: 'M5 Competition • 2026', color: 'Selenite Grey Metallic (#7A8088)', zone: '5th Settlement' },
+                { brand: 'Range Rover', model: 'Autobiography • 2026', color: 'Diamond Pearl White (#F4F5F7)', zone: 'Madinaty' }
+            ];
+            const pick = demoCars[Math.floor(Math.random() * demoCars.length)];
+            const simLead = {
+                id: 'DC-' + Math.floor(1000 + Math.random() * 9000),
+                requestType: 'SCRATCH_DIAGNOSIS',
+                clientName: 'Sample VIP Client (' + pick.zone + ')',
+                clientPhone: '01000000000',
+                carBrand: pick.brand,
+                carModel: pick.model,
+                carColor: pick.color,
+                zone: pick.zone,
+                resolution: '1080p Full HD',
+                estimatedQuote: '2,200 EGP',
+                notes: 'Severity: Clear Coat Scratch\nAffected Zones: Right Doors\nClient Note: Please call after 5 PM. Scratch is near the door handle.',
+                media: [{ id: 'sim_1', type: 'image', url: 'before.jpeg', cloudSafeUrl: 'before.jpeg', resolution: '1080p' }],
+                status: 'NEW LIVE',
+                createdAt: Date.now()
+            };
+            await transmitLeadEverywhere(simLead);
         }
 
         function exportLeadsToCsv() {
             if (!memoryLeadsCache.length) return;
-            const headers = ['ID', 'Type', 'Client Name', 'Phone', 'Brand', 'Model', 'Color', 'Zone', 'Resolution', 'Status', 'Notes'];
+            const headers = ['ID', 'Type', 'Client Name', 'Phone', 'Brand', 'Model', 'Color', 'Zone', 'Resolution', 'Quote', 'Status', 'Notes'];
             const rows = memoryLeadsCache.map(l => [
-                l.id, l.requestType, l.clientName, l.clientPhone, l.carBrand, l.carModel, l.carColor, l.zone, l.resolution, l.status, l.notes
+                l.id, l.requestType, l.clientName, l.clientPhone, l.carBrand, l.carModel, l.carColor, l.zone, l.resolution, l.estimatedQuote || '', l.status, l.notes
             ].map(v => `"${String(v || '').replace(/"/g, '""')}"`).join(','));
             const csvContent = 'data:text/csv;charset=utf-8,\uFEFF' + [headers.join(','), ...rows].join('\n');
             const link = document.createElement('a');
@@ -1788,9 +2275,10 @@
 
         setInterval(() => {
             streamSecondsUptime++;
-            const now = new Date();
             const clockEl = document.getElementById('liveSecondClock');
-            if (clockEl) clockEl.textContent = now.toLocaleTimeString();
+            if (clockEl) {
+                clockEl.textContent = formatCairoTimestamp(Date.now());
+            }
 
             const upEl = document.getElementById('streamUptimeCounter');
             if (upEl) {
