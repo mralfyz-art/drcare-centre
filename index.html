@@ -161,7 +161,7 @@
     <div class="bg-gradient-to-r from-obsidian via-[#17130A] to-obsidian border-b border-gold-400/20 py-2 px-4 text-xs">
         <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
             <div class="flex items-center gap-2">
-                <span id="cloudStatusDot" class="relative flex h-2 w-2">
+                <span id="cloudStatusIndicator" class="relative flex h-2 w-2">
                     <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                     <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                 </span>
@@ -368,7 +368,7 @@
                     <div>
                         <div class="inline-flex items-center gap-2 text-xs font-bold text-emerald-400 mb-1">
                             <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-                            <span data-i18n="formLiveIndicator">Hybrid Cloud + Local Vault Instant Telemetry</span>
+                            <span data-i18n="formLiveIndicator">Universal Realtime Cloud Telemetry</span>
                         </div>
                         <h3 class="text-xl sm:text-2xl font-black text-white" data-i18n="scratchFormHeader">
                             Interactive Paint Defect & Scratch Assessment
@@ -542,7 +542,7 @@
                             </div>
                         </div>
 
-                        <!-- NEW: SCRATCH SEVERITY / DEFECT TYPE SELECTOR -->
+                        <!-- DEFECT SEVERITY LEVEL -->
                         <div class="pt-3 border-t border-white/10">
                             <div class="flex flex-wrap items-center justify-between gap-2 mb-2.5">
                                 <span class="text-xs font-extrabold uppercase tracking-wider text-gold-300" data-i18n="lblDefectSeverity">
@@ -561,7 +561,7 @@
                                 </button>
                                 <button type="button" onclick="selectDefectSeverity(this, 'Deep Paint Scratch / Scuff (خدش عميق أو حكة)')" class="severity-card p-3 rounded-xl bg-black/70 border border-white/15 text-left">
                                     <span class="block text-xs font-extrabold text-zinc-200">Level 3: Deep Key / Bumper Scuff</span>
-                                    <span class="block text-[11px] text-zinc-400 mt-0.5">Deep impact requiring wet-sanding/touchup</span>
+                                    <span class="block text-[11px] text-zinc-400 mt-0.5">Deep impact requiring touchup</span>
                                 </button>
                             </div>
                             <input type="hidden" id="defectSeverityInput" value="Swirl Marks & Oxidation (دوائر غسيل وبهتان)">
@@ -686,7 +686,6 @@
                     </button>
                 </form>
 
-                <!-- VIP DIGITAL REFERENCE TICKET UPON SUBMISSION -->
                 <div id="scratchSuccessBanner" class="hidden mt-6 p-6 rounded-2xl bg-gradient-to-br from-emerald-950/80 via-black to-black border border-gold-400/60 text-center space-y-4 shadow-2xl">
                     <div class="w-12 h-12 rounded-full bg-gold-400/20 border border-gold-400 flex items-center justify-center mx-auto text-2xl">✨</div>
                     <h4 class="text-lg font-black text-white" data-i18n="successHeader">
@@ -851,7 +850,7 @@
 
     </main>
 
-    <!-- FOOTER (ZERO PASSWORD HINTS) -->
+    <!-- FOOTER -->
     <footer class="border-t border-white/10 bg-black/90 py-10 px-4">
         <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
             <div class="flex items-center gap-3">
@@ -913,13 +912,13 @@
                 </div>
             </div>
 
-            <!-- PIN GATE (INSTANT AUTO-UNLOCK ON 2027) -->
+            <!-- PIN GATE (AUTO-UNLOCK ON 2027) -->
             <div id="crmPinGate" class="max-w-md mx-auto py-10 text-center space-y-4">
                 <div class="w-14 h-14 rounded-2xl bg-gold-400/10 border border-gold-400/40 flex items-center justify-center mx-auto text-gold-300 text-2xl">
                     🔐
                 </div>
-                <p class="text-base font-extrabold text-gold-200">Executive Access Vault</p>
-                <p class="text-xs text-zinc-400">Enter your authorized staff security key to unlock live customer telemetry.</p>
+                <p class="text-base font-extrabold text-gold-200">Executive Access Vault (PIN: 2027)</p>
+                <p class="text-xs text-zinc-400">Enter your authorized staff security key (2027) to unlock live customer telemetry.</p>
                 <div class="flex gap-2 justify-center pt-1">
                     <input type="password" id="managerPinInput" inputmode="numeric" placeholder="••••" maxlength="8" autocomplete="off"
                            oninput="checkAutoUnlock(this.value)"
@@ -929,7 +928,7 @@
                         Authorize
                     </button>
                 </div>
-                <p id="pinErrorMsg" class="hidden text-xs font-bold text-rose-400">Unauthorized access key. Please try again.</p>
+                <p id="pinErrorMsg" class="hidden text-xs font-bold text-rose-400">Unauthorized access key. Please enter 2027.</p>
             </div>
 
             <!-- UNLOCKED CRM CONTENT -->
@@ -992,7 +991,7 @@
         </div>
     </div>
 
-    <!-- HYBRID CLOUD + INDEXED-DB + 2027 VAULT ENGINE -->
+    <!-- SCRIPT WITH 2027 CRM ACCESS & DUAL SYNC ENGINE -->
     <script>
         const firebaseConfig = {
             apiKey: "AIzaSyAmLj9vj6jn9ASbWcUL2CjtJX0n_tG8W18",
@@ -1063,7 +1062,7 @@
                 consoleSub: "An effortless, interactive concierge experience. Your submission streams live to our Master Specialists within seconds.",
                 tabScratchTitle: "Scratch & Paint Diagnosis",
                 tabBookingTitle: "Weekend Dry Wash Slot",
-                formLiveIndicator: "Hybrid Cloud + Local Vault Instant Telemetry",
+                formLiveIndicator: "Universal Realtime Cloud Telemetry",
                 scratchFormHeader: "Interactive Paint Defect & Scratch Assessment",
                 sloganMiniTop: "Asset Protection",
                 sloganMiniBottom: "Save Your Investment Now",
@@ -1161,7 +1160,7 @@
                 consoleSub: "واجهة تفاعلية فائقة السلاسة؛ تصل جميع الصور والطلبات في غضون ثوانٍ إلى غرفة عمليات دكتور كير.",
                 tabScratchTitle: "فحص الخدوش ومشاكل الدهان",
                 tabBookingTitle: "حجز الغسيل الجاف (الويك إند)",
-                formLiveIndicator: "مزامنة سحابية ومحلية فورية",
+                formLiveIndicator: "مزامنة سحابية عالمية فورية",
                 scratchFormHeader: "التشخيص التفاعلي للخدوش وعيوب الدهان",
                 sloganMiniTop: "حماية الأصول",
                 sloganMiniBottom: "Save Your Investment Now",
@@ -1602,7 +1601,7 @@
             renderMediaThumbnails();
         }
 
-        const IDB_NAME = 'DrCareHybridVault_v14';
+        const IDB_NAME = 'DrCareHybridVault_v15';
         const IDB_STORE = 'leads_store';
         let idbConn = null;
         let memoryLeadsCache = [];
@@ -1698,7 +1697,7 @@
                             zone: 'Heliopolis',
                             resolution: '1080p',
                             estimatedQuote: '1,850 EGP',
-                            notes: 'Severity: Swirl Marks & Oxidation\nAffected Zones: Front Hood\nClient Note: Please inspect front hood reflection.',
+                            notes: 'Severity: Swirl Marks & Oxidation\nAffected Zones: Front Hood\nClient Note: Please inspect front hood oxidation.',
                             media: [
                                 { id: 'seed_1', type: 'image', url: 'before.jpeg', resolution: '1080p' },
                                 { id: 'seed_2', type: 'image', url: 'after.jpeg', resolution: '1080p' }
@@ -1957,7 +1956,6 @@
 
         function isAuthorizedPin(val) {
             const clean = normalizeDigits(val);
-            // Primary key: 2027 (Also accepts 2026 as backup)
             return clean === '2027' || clean === '2026';
         }
 
@@ -2249,49 +2247,4 @@
         function openLeadMediaLightbox(leadId, mediaIndex) {
             const lead = memoryLeadsCache.find(l => l.id === leadId);
             if (!lead || !lead.media || !lead.media[mediaIndex]) return;
-            const item = lead.media[mediaIndex];
-            showLightboxContent(item.url, item.type, item.resolution);
-        }
-
-        function showLightboxContent(url, type, res) {
-            const box = document.getElementById('mediaLightbox');
-            const body = document.getElementById('lightboxBody');
-            document.getElementById('lightboxCaption').textContent = `DR. CARE MASTER INSPECTION • ${res || '1080p'}`;
-            body.innerHTML = type === 'video'
-                ? `<video src="${url}" controls autoplay class="max-h-[72vh] w-auto rounded-xl"></video>`
-                : `<img src="${url}" class="max-h-[72vh] w-auto object-contain rounded-xl">`;
-            box.classList.remove('hidden');
-        }
-
-        function closeMediaLightbox() {
-            document.getElementById('mediaLightbox').classList.add('hidden');
-            document.getElementById('lightboxBody').innerHTML = '';
-        }
-
-        function updateNavLiveCounter() {
-            const badge = document.getElementById('navLiveBadge');
-            if (badge) badge.textContent = `${memoryLeadsCache.length} LIVE`;
-        }
-
-        setInterval(() => {
-            streamSecondsUptime++;
-            const clockEl = document.getElementById('liveSecondClock');
-            if (clockEl) {
-                clockEl.textContent = formatCairoTimestamp(Date.now());
-            }
-
-            const upEl = document.getElementById('streamUptimeCounter');
-            if (upEl) {
-                const m = String(Math.floor(streamSecondsUptime / 60)).padStart(2, '0');
-                const s = String(streamSecondsUptime % 60).padStart(2, '0');
-                upEl.textContent = `${m}:${s}s`;
-            }
-
-            document.querySelectorAll('.live-sla-timer').forEach(el => {
-                const ts = parseInt(el.getAttribute('data-ts'), 10);
-                if (ts) el.textContent = formatElapsedSeconds(ts);
-            });
-        }, 1000);
-    </script>
-</body>
-</html>
+            const
