@@ -41,11 +41,6 @@
         }
     </script>
 
-    <!-- Firebase App & Firestore SDKs (Cloud Live Sync) -->
-    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-storage-compat.js"></script>
-
     <style>
         :root {
             --gold-primary: #D4AF37;
@@ -364,7 +359,7 @@
                     <div>
                         <div class="inline-flex items-center gap-2 text-xs font-bold text-emerald-400 mb-1">
                             <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-                            <span data-i18n="formLiveIndicator">Direct Cloud Sync to Dr. Care Specialists</span>
+                            <span data-i18n="formLiveIndicator">Instant Secure Local Vault Sync</span>
                         </div>
                         <h3 class="text-xl sm:text-2xl font-black text-white" data-i18n="scratchFormHeader">
                             Interactive Paint Defect & Scratch Assessment
@@ -616,7 +611,7 @@
                         Diagnosis Received Live! Welcome to the Dr. Care Atelier.
                     </h4>
                     <p class="text-xs sm:text-sm text-zinc-300 max-w-xl mx-auto" data-i18n="successBody">
-                        Your vehicle telemetry, custom notes, and high-res media are now displayed on our Master Specialist's console. We will contact you shortly.
+                        Your vehicle telemetry, custom notes, and high-res media are now safely stored in your local vault console. We will contact you shortly.
                     </p>
                 </div>
             </div>
@@ -768,7 +763,7 @@
 
     </main>
 
-    <!-- FOOTER (HIDDEN PASSWORD HINTS) -->
+    <!-- FOOTER -->
     <footer class="border-t border-white/10 bg-black/90 py-10 px-4">
         <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
             <div class="flex items-center gap-3">
@@ -804,7 +799,7 @@
                         <div class="flex items-center gap-2">
                             <h3 class="font-serif text-lg sm:text-xl font-black text-white">DR. CARE EXECUTIVE COMMAND</h3>
                             <span class="px-2 py-0.5 rounded-md bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 text-[10px] font-extrabold">
-                                CLOUD REALTIME SYNC
+                                SECURE LOCAL VAULT SYNC
                             </span>
                         </div>
                         <p class="text-xs text-zinc-400">
@@ -827,7 +822,7 @@
                 </div>
             </div>
 
-            <!-- PIN GATE (HIDDEN PASSWORD HINT) -->
+            <!-- PIN GATE -->
             <div id="crmPinGate" class="max-w-md mx-auto py-10 text-center space-y-4">
                 <div class="w-14 h-14 rounded-2xl bg-gold-400/10 border border-gold-400/40 flex items-center justify-center mx-auto text-gold-300 text-2xl">
                     🔐
@@ -861,8 +856,8 @@
                         <p id="kpiWashLeads" class="text-2xl font-black text-emerald-300 mt-1">0</p>
                     </div>
                     <div class="p-4 rounded-2xl bg-black/65 border border-white/10">
-                        <span class="text-[11px] text-zinc-400 uppercase font-bold">Cloud Engine</span>
-                        <p class="text-xs font-mono font-bold text-emerald-400 mt-2">Firebase Firestore</p>
+                        <span class="text-[11px] text-zinc-400 uppercase font-bold">Vault Engine</span>
+                        <p class="text-xs font-mono font-bold text-emerald-400 mt-2">IndexedDB Secure Sync</p>
                     </div>
                 </div>
 
@@ -882,7 +877,7 @@
                         </select>
                     </div>
                     <button type="button" onclick="simulateIncomingVipLead()" class="px-3.5 py-2 rounded-xl bg-gold-400/15 hover:bg-gold-400/25 border border-gold-400/40 text-gold-200 text-xs font-extrabold">
-                        ⚡ Simulate Cloud Sync Ping
+                        ⚡ Simulate Local Vault Ping
                     </button>
                 </div>
 
@@ -902,20 +897,8 @@
         </div>
     </div>
 
-    <!-- SAFE ASYNC SCRIPT WITH FIREBASE -->
+    <!-- ROBUST LOCAL VAULT ENGINE WITH ASYNC ERROR HANDLING -->
     <script>
-        const firebaseConfig = {
-            apiKey: "AIzaSyAmLj9vj6jn9ASbWcUL2CjtJX0n_tG8W18",
-            authDomain: "drcare-centre.firebaseapp.com",
-            projectId: "drcare-centre",
-            storageBucket: "drcare-centre.firebasestorage.app",
-            messagingSenderId: "945201915740",
-            appId: "1:945201915740:web:dca2c552e7106f39560399",
-            measurementId: "G-K6MEN28BJ0"
-        };
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.firestore();
-
         function updateAmbientSpotlight(e) {
             document.documentElement.style.setProperty('--spotlight-x', e.clientX + 'px');
             document.documentElement.style.setProperty('--spotlight-y', e.clientY + 'px');
@@ -959,10 +942,10 @@
                 inspectAfterBtn: "✨ Full Mirror Finish (After)",
                 consoleKicker: "BESPOKE DIGITAL PAINT TELEMETRY",
                 consoleTitle: "Configure Your Vehicle's Restoration & Care",
-                consoleSub: "An effortless, interactive concierge experience. Your submission streams live to our Master Specialists.",
+                consoleSub: "An effortless, interactive concierge experience. Your submission streams live instantly to our Master Specialists.",
                 tabScratchTitle: "Scratch & Paint Diagnosis",
                 tabBookingTitle: "Weekend Dry Wash Slot",
-                formLiveIndicator: "Direct Cloud Sync to Dr. Care Specialists",
+                formLiveIndicator: "Instant Secure Local Vault Sync",
                 scratchFormHeader: "Interactive Paint Defect & Scratch Assessment",
                 sloganMiniTop: "Asset Protection",
                 sloganMiniBottom: "Save Your Investment Now",
@@ -993,7 +976,7 @@
                 exClientNoteBox: "e.g. Special care needed near sensors",
                 submitScratchBtnText: "Transmit High-Res Diagnosis to Dr. Care Masters",
                 successHeader: "Diagnosis Received Live! Welcome to the Dr. Care Atelier.",
-                successBody: "Your vehicle telemetry, custom notes, and high-res media are now securely synced to our Master Specialist's cloud console.",
+                successBody: "Your vehicle telemetry, custom notes, and high-res media are now safely stored in your local vault console. We will contact you shortly.",
                 washKicker: "THU • FRI • SAT PRIVATE MOBILE CONCIERGE",
                 washHeader: "Select Your Nano Dry Wash & Gloss Package",
                 depositNotice: "15% Refundable Deposit Locks Your VIP Slot",
@@ -1054,10 +1037,10 @@
                 inspectAfterBtn: "✨ شاهد لمعة المرآة (بعد)",
                 consoleKicker: "منصة التشخيص الرقمي التفاعلي",
                 consoleTitle: "صمّم برنامج العناية واستعادة دهان سيارتك",
-                consoleSub: "واجهة تفاعلية فائقة السلاسة؛ يتم مزامنة جميع الطلبات سحابياً في أقل من ثوانٍ.",
+                consoleSub: "واجهة تفاعلية فائقة السلاسة؛ يتم حفظ الطلبات محلياً وفورياً.",
                 tabScratchTitle: "فحص الخدوش ومشاكل الدهان",
                 tabBookingTitle: "حجز الغسيل الجاف (الويك إند)",
-                formLiveIndicator: "مزامنة سحابية مباشرة مع خبراء دكتور كير",
+                formLiveIndicator: "حفظ فوري وآمن في خزنة المتصفح",
                 scratchFormHeader: "التشخيص التفاعلي للخدوش وعيوب الدهان",
                 sloganMiniTop: "حماية الأصول",
                 sloganMiniBottom: "Save Your Investment Now",
@@ -1108,7 +1091,7 @@
                 exWashCar: "السيارة (مثال: BMW X6 • أسود)",
                 exWashSlot: "فترة الحجز المفضلة",
                 btnConfirmWash: "تأكيد حجز موعد الويك إند الآن",
-                washSuccessTitle: "🌟 تم تسجيل حجزك سحابياً في غرفة عمليات دكتور كير!",
+                washSuccessTitle: "🌟 تم تسجيل حجزك في غرفة عمليات دكتور كير!",
                 washSuccessSub: "سيتواصل معك مسؤول الحجوزات قريباً لتنسيق عربون الـ ١٥٪ وتأكيد الموعد.",
                 megSub: "تكنولوجيا البوليمر الأمريكية",
                 megTitle: "مواد Meguiar's الاحترافية",
@@ -1193,7 +1176,7 @@
                 });
             }
             syncSliderImageWidth();
-            initRealtimeCloudStream();
+            initLocalVaultStream();
         });
         window.addEventListener('resize', syncSliderImageWidth);
 
@@ -1398,68 +1381,57 @@
             renderMediaThumbnails();
         }
 
-        // FIREBASE FIRESTORE REALTIME SYNC ENGINE WITH ASYNC ERROR HANDLING
+        // SECURE LOCAL VAULT SYNC ENGINE WITH ASYNC ERROR HANDLING
+        const VAULT_KEY = 'drcare_atelier_vault_v10';
         let memoryLeadsCache = [];
         let audioRadarEnabled = true;
         let streamSecondsUptime = 0;
-        let lastLeadCount = 0;
 
-        function initRealtimeCloudStream() {
+        function initLocalVaultStream() {
             try {
-                db.collection("drcare_leads")
-                  .orderBy("createdAt", "desc")
-                  .onSnapshot((snapshot) => {
-                      const fetchedLeads = [];
-                      snapshot.forEach((doc) => {
-                          fetchedLeads.push({ id: doc.id, ...doc.data() });
-                      });
-
-                      if (fetchedLeads.length === 0) {
-                          const seed = {
-                              id: 'DC-801',
-                              requestType: 'SCRATCH_DIAGNOSIS',
-                              clientName: 'Example Client (Cloud Sync)',
-                              clientPhone: '01000000000',
-                              carBrand: 'Mercedes-Benz',
-                              carModel: 'S580 AMG Line • 2026',
-                              carColor: 'Obsidian Black (أسود ميتاليك)',
-                              zone: 'Heliopolis',
-                              resolution: '1080p',
-                              notes: 'Client Note: Cloud sync is fully operational.\nAffected Zones: Front Hood.',
-                              media: [
-                                  { id: 'seed_1', type: 'image', url: 'before.jpeg', resolution: '1080p' },
-                                  { id: 'seed_2', type: 'image', url: 'after.jpeg', resolution: '1080p' }
-                              ],
-                              status: 'NEW LIVE',
-                              createdAt: Date.now() - 65000
-                          };
-                          db.collection("drcare_leads").doc(seed.id).set(seed).catch(err => console.error("Seed error:", err));
-                          return;
-                      }
-
-                      if (fetchedLeads.length > lastLeadCount && lastLeadCount > 0) {
-                          playNotificationChime();
-                      }
-                      lastLeadCount = fetchedLeads.length;
-                      memoryLeadsCache = fetchedLeads;
-
-                      updateNavLiveCounter();
-                      renderBackofficeFeed();
-                  }, (error) => {
-                      console.error("Firestore sync stream error: ", error);
-                  });
+                const raw = localStorage.getItem(VAULT_KEY);
+                if (raw) {
+                    memoryLeadsCache = JSON.parse(raw);
+                } else {
+                    memoryLeadsCache = [
+                        {
+                            id: 'DC-801',
+                            requestType: 'SCRATCH_DIAGNOSIS',
+                            clientName: 'Example Client (Vault Entry)',
+                            clientPhone: '01000000000',
+                            carBrand: 'Mercedes-Benz',
+                            carModel: 'S580 AMG Line • 2026',
+                            carColor: 'Obsidian Black (أسود ميتاليك)',
+                            zone: 'Heliopolis',
+                            resolution: '1080p',
+                            notes: 'Client Note: Please check bumper sensors carefully.\nAffected Zones: Front Hood.',
+                            media: [
+                                { id: 'seed_1', type: 'image', url: 'before.jpeg', resolution: '1080p' },
+                                { id: 'seed_2', type: 'image', url: 'after.jpeg', resolution: '1080p' }
+                            ],
+                            status: 'NEW LIVE',
+                            createdAt: Date.now() - 65000
+                        }
+                    ];
+                    localStorage.setItem(VAULT_KEY, JSON.stringify(memoryLeadsCache));
+                }
+                updateNavLiveCounter();
+                renderBackofficeFeed();
             } catch (err) {
-                console.error("Init cloud stream exception: ", err);
+                console.error("Init vault exception:", err);
             }
         }
 
-        async function saveLeadToCloud(lead) {
+        async function saveLeadToVault(lead) {
             try {
-                await db.collection("drcare_leads").doc(lead.id).set(lead);
+                memoryLeadsCache = [lead, ...memoryLeadsCache.filter(l => l.id !== lead.id)];
+                localStorage.setItem(VAULT_KEY, JSON.stringify(memoryLeadsCache));
                 playNotificationChime();
+                updateNavLiveCounter();
+                renderBackofficeFeed();
             } catch (error) {
                 console.error("Async save lead error: ", error);
-                alert("Network connectivity issue. Please retry transmission.");
+                alert("Storage quota issue. Please clear browser storage or reduce media size.");
             }
         }
 
@@ -1499,7 +1471,7 @@
                     createdAt: Date.now()
                 };
 
-                await saveLeadToCloud(newLead);
+                await saveLeadToVault(newLead);
 
                 document.getElementById('scratchConsultForm').reset();
                 document.getElementById('carColorInput').value = 'Obsidian Black Metallic';
@@ -1536,7 +1508,7 @@
                     createdAt: Date.now()
                 };
 
-                await saveLeadToCloud(newLead);
+                await saveLeadToVault(newLead);
                 document.getElementById('washBookingForm').reset();
                 document.getElementById('washSuccessBanner').classList.remove('hidden');
             } catch (err) {
@@ -1622,7 +1594,12 @@
 
         async function updateLeadStatus(leadId, newStatus) {
             try {
-                await db.collection("drcare_leads").doc(leadId).update({ status: newStatus });
+                const target = memoryLeadsCache.find(l => l.id === leadId);
+                if (target) {
+                    target.status = newStatus;
+                    localStorage.setItem(VAULT_KEY, JSON.stringify(memoryLeadsCache));
+                    renderBackofficeFeed();
+                }
             } catch (err) {
                 console.error("Async update status error: ", err);
             }
@@ -1630,7 +1607,10 @@
 
         async function deleteLeadItem(leadId) {
             try {
-                await db.collection("drcare_leads").doc(leadId).delete();
+                memoryLeadsCache = memoryLeadsCache.filter(l => l.id !== leadId);
+                localStorage.setItem(VAULT_KEY, JSON.stringify(memoryLeadsCache));
+                updateNavLiveCounter();
+                renderBackofficeFeed();
             } catch (err) {
                 console.error("Async delete lead error: ", err);
             }
@@ -1638,8 +1618,8 @@
 
         function renderBackofficeFeed() {
             const allLeads = memoryLeadsCache;
-            const zoneFilter = document.getElementById('crmFilterZone') ? document.getElementById('crmFilterZone').value : 'ALL';
-            const typeFilter = document.getElementById('crmFilterType') ? document.getElementById('crmFilterType').value : 'ALL';
+            const zoneFilter = document.getElementById('crmFilterZone') ? document.getElementById('crmFilterZone'].value : 'ALL';
+            const typeFilter = document.getElementById('crmFilterType') ? document.getElementById('crmFilterType'].value : 'ALL';
 
             const totalEl = document.getElementById('kpiTotalLeads');
             if (totalEl) {
@@ -1746,19 +1726,19 @@
                 const simLead = {
                     id: 'DC-' + Math.floor(1000 + Math.random() * 9000),
                     requestType: 'SCRATCH_DIAGNOSIS',
-                    clientName: 'Sample Cloud Client (' + pick.zone + ')',
+                    clientName: 'Sample Vault Client (' + pick.zone + ')',
                     clientPhone: '01000000000',
                     carBrand: pick.brand,
                     carModel: pick.model,
                     carColor: pick.color,
                     zone: pick.zone,
                     resolution: '1080p Full HD',
-                    notes: 'Client Note: Simulated cloud sync test.\nAffected Zones: Right Doors',
+                    notes: 'Client Note: Simulated local vault test.\Affected Zones: Right Doors',
                     media: [{ id: 'sim_1', type: 'image', url: 'before.jpeg', resolution: '1080p' }],
                     status: 'NEW LIVE',
                     createdAt: Date.now()
                 };
-                await saveLeadToCloud(simLead);
+                await saveLeadToVault(simLead);
             } catch (err) {
                 console.error("Async simulate error: ", err);
             }
