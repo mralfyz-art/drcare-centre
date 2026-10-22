@@ -768,7 +768,7 @@
 
     </main>
 
-    <!-- FOOTER -->
+    <!-- FOOTER (HIDDEN PASSWORD HINTS) -->
     <footer class="border-t border-white/10 bg-black/90 py-10 px-4">
         <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
             <div class="flex items-center gap-3">
@@ -785,7 +785,7 @@
                     ✨ Start Online Inspection
                 </a>
                 <button type="button" onclick="openBackofficeModal()" class="px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-zinc-400 hover:text-gold-300 text-xs font-bold">
-                    🔒 Executive Live CRM (PIN: 2026)
+                    🔒 Executive Live CRM
                 </button>
             </div>
         </div>
@@ -827,13 +827,13 @@
                 </div>
             </div>
 
-            <!-- PIN GATE -->
+            <!-- PIN GATE (HIDDEN PASSWORD HINT) -->
             <div id="crmPinGate" class="max-w-md mx-auto py-10 text-center space-y-4">
                 <div class="w-14 h-14 rounded-2xl bg-gold-400/10 border border-gold-400/40 flex items-center justify-center mx-auto text-gold-300 text-2xl">
                     🔐
                 </div>
-                <p class="text-base font-extrabold text-gold-200">Staff CRM Access (2026 Security Key)</p>
-                <p class="text-xs text-zinc-400">Enter your 2026 executive security PIN to unlock cloud telemetry.</p>
+                <p class="text-base font-extrabold text-gold-200">Executive Access Vault</p>
+                <p class="text-xs text-zinc-400">Enter your authorized executive security key to unlock live customer telemetry.</p>
                 <div class="flex gap-2 justify-center pt-1">
                     <input type="password" id="managerPinInput" placeholder="••••" maxlength="8" autocomplete="off"
                            onkeydown="if(event.key==='Enter') unlockCrmDashboard()"
@@ -842,7 +842,7 @@
                         Authorize
                     </button>
                 </div>
-                <p id="pinErrorMsg" class="hidden text-xs font-bold text-rose-400">Invalid PIN. Please enter 2026.</p>
+                <p id="pinErrorMsg" class="hidden text-xs font-bold text-rose-400">Unauthorized key. Access denied.</p>
             </div>
 
             <!-- UNLOCKED CRM CONTENT -->
@@ -902,9 +902,8 @@
         </div>
     </div>
 
-    <!-- SCRIPT WITH FIREBASE CLOUD SYNC -->
+    <!-- SAFE ASYNC SCRIPT WITH FIREBASE -->
     <script>
-        // FIREBASE CLOUD CONFIG INTEGRATION
         const firebaseConfig = {
             apiKey: "AIzaSyAmLj9vj6jn9ASbWcUL2CjtJX0n_tG8W18",
             authDomain: "drcare-centre.firebaseapp.com",
@@ -1088,8 +1087,8 @@
                 lblClientNoteBox: "٦. ملاحظات العميل وتفاصيل المشكلة (اكتب ما تريد باختفاض) *",
                 exClientNoteBox: "مثال: عناية خاصة بالقرب من الحساسات",
                 submitScratchBtnText: "إرسال التشخيص عالي الدقة لخبراء دكتور كير",
-                successHeader: "تم إرسال التشخيص سحابياً في التو واللحظة!",
-                successBody: "ظهرت بيانات سيارتك وملاحظاتك والصور سحابياً أمام كبير فنيي دكتور كير، وسيتواصل معك فريقنا خلال دقائق.",
+                successHeader: "تم استلام التشخيص والصور في التو واللحظة!",
+                successBody: "ظهرت بيانات سيارتك وملاحظاتك والصور عالية الدقة أمام كبير فنيي دكتور كير، وسيتواصل معك فريقنا خلال دقائق بخطة المعالجة.",
                 washKicker: "خدمة الويك إند المتنقلة الخاصة (الخميس • الجمعة • السبت)",
                 washHeader: "اختر باقة الغسيل الجاف واستعادة اللمعة",
                 depositNotice: "عربون ١٥٪ لتأكيد الحجز (مسترد قبل ٢٤ ساعة)",
@@ -1399,70 +1398,72 @@
             renderMediaThumbnails();
         }
 
-        // FIREBASE FIRESTORE REALTIME SYNC ENGINE (< 20 SECONDS ANYWHERE)
+        // FIREBASE FIRESTORE REALTIME SYNC ENGINE WITH ASYNC ERROR HANDLING
         let memoryLeadsCache = [];
         let audioRadarEnabled = true;
         let streamSecondsUptime = 0;
         let lastLeadCount = 0;
 
         function initRealtimeCloudStream() {
-            db.collection("drcare_leads")
-              .orderBy("createdAt", "desc")
-              .onSnapshot((snapshot) => {
-                  const fetchedLeads = [];
-                  snapshot.forEach((doc) => {
-                      fetchedLeads.push({ id: doc.id, ...doc.data() });
+            try {
+                db.collection("drcare_leads")
+                  .orderBy("createdAt", "desc")
+                  .onSnapshot((snapshot) => {
+                      const fetchedLeads = [];
+                      snapshot.forEach((doc) => {
+                          fetchedLeads.push({ id: doc.id, ...doc.data() });
+                      });
+
+                      if (fetchedLeads.length === 0) {
+                          const seed = {
+                              id: 'DC-801',
+                              requestType: 'SCRATCH_DIAGNOSIS',
+                              clientName: 'Example Client (Cloud Sync)',
+                              clientPhone: '01000000000',
+                              carBrand: 'Mercedes-Benz',
+                              carModel: 'S580 AMG Line • 2026',
+                              carColor: 'Obsidian Black (أسود ميتاليك)',
+                              zone: 'Heliopolis',
+                              resolution: '1080p',
+                              notes: 'Client Note: Cloud sync is fully operational.\nAffected Zones: Front Hood.',
+                              media: [
+                                  { id: 'seed_1', type: 'image', url: 'before.jpeg', resolution: '1080p' },
+                                  { id: 'seed_2', type: 'image', url: 'after.jpeg', resolution: '1080p' }
+                              ],
+                              status: 'NEW LIVE',
+                              createdAt: Date.now() - 65000
+                          };
+                          db.collection("drcare_leads").doc(seed.id).set(seed).catch(err => console.error("Seed error:", err));
+                          return;
+                      }
+
+                      if (fetchedLeads.length > lastLeadCount && lastLeadCount > 0) {
+                          playNotificationChime();
+                      }
+                      lastLeadCount = fetchedLeads.length;
+                      memoryLeadsCache = fetchedLeads;
+
+                      updateNavLiveCounter();
+                      renderBackofficeFeed();
+                  }, (error) => {
+                      console.error("Firestore sync stream error: ", error);
                   });
-
-                  if (fetchedLeads.length === 0) {
-                      // Seed initial sample if collection is empty
-                      const seed = {
-                          id: 'DC-801',
-                          requestType: 'SCRATCH_DIAGNOSIS',
-                          clientName: 'Example Client (Cloud Sync)',
-                          clientPhone: '01000000000',
-                          carBrand: 'Mercedes-Benz',
-                          carModel: 'S580 AMG Line • 2026',
-                          carColor: 'Obsidian Black (أسود ميتاليك)',
-                          zone: 'Heliopolis',
-                          resolution: '1080p',
-                          notes: 'Client Note: Cloud sync is fully operational.\nAffected Zones: Front Hood.',
-                          media: [
-                              { id: 'seed_1', type: 'image', url: 'before.jpeg', resolution: '1080p' },
-                              { id: 'seed_2', type: 'image', url: 'after.jpeg', resolution: '1080p' }
-                          ],
-                          status: 'NEW LIVE',
-                          createdAt: Date.now() - 65000
-                      };
-                      db.collection("drcare_leads").doc(seed.id).set(seed);
-                      return;
-                  }
-
-                  if (fetchedLeads.length > lastLeadCount && lastLeadCount > 0) {
-                      playNotificationChime();
-                  }
-                  lastLeadCount = fetchedLeads.length;
-                  memoryLeadsCache = fetchedLeads;
-
-                  updateNavLiveCounter();
-                  renderBackofficeFeed();
-              }, (error) => {
-                  console.error("Firestore sync error: ", error);
-              });
+            } catch (err) {
+                console.error("Init cloud stream exception: ", err);
+            }
         }
 
-        function saveLeadToCloud(lead) {
-            db.collection("drcare_leads").doc(lead.id).set(lead)
-              .then(() => {
-                  playNotificationChime();
-              })
-              .catch((error) => {
-                  console.error("Error writing lead to cloud: ", error);
-                  alert("Cloud sync error. Please check your internet connection.");
-              });
+        async function saveLeadToCloud(lead) {
+            try {
+                await db.collection("drcare_leads").doc(lead.id).set(lead);
+                playNotificationChime();
+            } catch (error) {
+                console.error("Async save lead error: ", error);
+                alert("Network connectivity issue. Please retry transmission.");
+            }
         }
 
-        function submitScratchConsultation(event) {
+        async function submitScratchConsultation(event) {
             event.preventDefault();
             if (uploadedMediaItems.length === 0) {
                 alert(currentLang === 'ar'
@@ -1471,68 +1472,76 @@
                 return;
             }
 
-            const clientName = document.getElementById('clientName').value.trim();
-            const clientPhone = document.getElementById('clientPhone').value.trim();
-            const carBrand = document.getElementById('carBrand').value;
-            const carModel = document.getElementById('carModel').value.trim();
-            const carColor = document.getElementById('carColorInput').value.trim();
-            const zone = document.getElementById('clientZone').value;
-            const resolution = document.getElementById('mediaResolution').value + 'p';
-            const userNotes = document.getElementById('clientNotes').value.trim();
-            const zonesString = selectedCarBodyZones.length ? `Zones: ${selectedCarBodyZones.join(', ')}` : 'Zone: General Body';
+            try {
+                const clientName = document.getElementById('clientName').value.trim();
+                const clientPhone = document.getElementById('clientPhone').value.trim();
+                const carBrand = document.getElementById('carBrand').value;
+                const carModel = document.getElementById('carModel').value.trim();
+                const carColor = document.getElementById('carColorInput').value.trim();
+                const zone = document.getElementById('clientZone').value;
+                const resolution = document.getElementById('mediaResolution').value + 'p';
+                const userNotes = document.getElementById('clientNotes').value.trim();
+                const zonesString = selectedCarBodyZones.length ? `Zones: ${selectedCarBodyZones.join(', ')}` : 'Zone: General Body';
 
-            const newLead = {
-                id: 'DC-' + Math.floor(1000 + Math.random() * 9000),
-                requestType: 'SCRATCH_DIAGNOSIS',
-                clientName,
-                clientPhone,
-                carBrand,
-                carModel,
-                carColor,
-                zone,
-                resolution,
-                notes: `Client Note: ${userNotes}\nAffected Zones: ${zonesString}`,
-                media: uploadedMediaItems.map(m => ({ id: m.id, type: m.type, url: m.url, resolution: m.resolution })),
-                status: 'NEW LIVE',
-                createdAt: Date.now()
-            };
+                const newLead = {
+                    id: 'DC-' + Math.floor(1000 + Math.random() * 9000),
+                    requestType: 'SCRATCH_DIAGNOSIS',
+                    clientName,
+                    clientPhone,
+                    carBrand,
+                    carModel,
+                    carColor,
+                    zone,
+                    resolution,
+                    notes: `Client Note: ${userNotes}\nAffected Zones: ${zonesString}`,
+                    media: uploadedMediaItems.map(m => ({ id: m.id, type: m.type, url: m.url, resolution: m.resolution })),
+                    status: 'NEW LIVE',
+                    createdAt: Date.now()
+                };
 
-            saveLeadToCloud(newLead);
+                await saveLeadToCloud(newLead);
 
-            document.getElementById('scratchConsultForm').reset();
-            document.getElementById('carColorInput').value = 'Obsidian Black Metallic';
-            clearAllMedia();
-            document.getElementById('scratchSuccessBanner').classList.remove('hidden');
+                document.getElementById('scratchConsultForm').reset();
+                document.getElementById('carColorInput').value = 'Obsidian Black Metallic';
+                clearAllMedia();
+                document.getElementById('scratchSuccessBanner').classList.remove('hidden');
+            } catch (err) {
+                console.error("Async consultation submission error: ", err);
+            }
         }
 
-        function submitWashBooking(event) {
+        async function submitWashBooking(event) {
             event.preventDefault();
-            const pkg = document.getElementById('selectedPkgName').value;
-            const clientName = document.getElementById('washClientName').value.trim();
-            const clientPhone = document.getElementById('washClientPhone').value.trim();
-            const carInfo = document.getElementById('washCarInfo').value.trim();
-            const slot = document.getElementById('washDaySlot').value;
-            const zone = document.getElementById('washZone').value;
+            try {
+                const pkg = document.getElementById('selectedPkgName').value;
+                const clientName = document.getElementById('washClientName').value.trim();
+                const clientPhone = document.getElementById('washClientPhone').value.trim();
+                const carInfo = document.getElementById('washCarInfo').value.trim();
+                const slot = document.getElementById('washDaySlot').value;
+                const zone = document.getElementById('washZone').value;
 
-            const newLead = {
-                id: 'DC-' + Math.floor(1000 + Math.random() * 9000),
-                requestType: 'DRY_WASH',
-                clientName,
-                clientPhone,
-                carBrand: carInfo,
-                carModel: slot,
-                carColor: pkg,
-                zone,
-                resolution: 'VIP Slot',
-                notes: `Dry Wash Package: ${pkg} | Preferred Slot: ${slot}`,
-                media: [],
-                status: 'DEPOSIT PENDING',
-                createdAt: Date.now()
-            };
+                const newLead = {
+                    id: 'DC-' + Math.floor(1000 + Math.random() * 9000),
+                    requestType: 'DRY_WASH',
+                    clientName,
+                    clientPhone,
+                    carBrand: carInfo,
+                    carModel: slot,
+                    carColor: pkg,
+                    zone,
+                    resolution: 'VIP Slot',
+                    notes: `Dry Wash Package: ${pkg} | Preferred Slot: ${slot}`,
+                    media: [],
+                    status: 'DEPOSIT PENDING',
+                    createdAt: Date.now()
+                };
 
-            saveLeadToCloud(newLead);
-            document.getElementById('washBookingForm').reset();
-            document.getElementById('washSuccessBanner').classList.remove('hidden');
+                await saveLeadToCloud(newLead);
+                document.getElementById('washBookingForm').reset();
+                document.getElementById('washSuccessBanner').classList.remove('hidden');
+            } catch (err) {
+                console.error("Async wash booking error: ", err);
+            }
         }
 
         function playNotificationChime() {
@@ -1611,14 +1620,20 @@
             return `https://wa.me/${intlPhone}?text=${encodeURIComponent(scriptText)}`;
         }
 
-        function updateLeadStatus(leadId, newStatus) {
-            db.collection("drcare_leads").doc(leadId).update({ status: newStatus })
-              .catch(err => console.error("Error updating status: ", err));
+        async function updateLeadStatus(leadId, newStatus) {
+            try {
+                await db.collection("drcare_leads").doc(leadId).update({ status: newStatus });
+            } catch (err) {
+                console.error("Async update status error: ", err);
+            }
         }
 
-        function deleteLeadItem(leadId) {
-            db.collection("drcare_leads").doc(leadId).delete()
-              .catch(err => console.error("Error deleting lead: ", err));
+        async function deleteLeadItem(leadId) {
+            try {
+                await db.collection("drcare_leads").doc(leadId).delete();
+            } catch (err) {
+                console.error("Async delete lead error: ", err);
+            }
         }
 
         function renderBackofficeFeed() {
@@ -1720,29 +1735,33 @@
             `).join('');
         }
 
-        function simulateIncomingVipLead() {
-            const demoCars = [
-                { brand: 'Porsche', model: '911 GT3 • 2026', color: 'Obsidian Black (أسود ميتاليك)', zone: 'Heliopolis' },
-                { brand: 'BMW', model: 'M5 Competition • 2025', color: 'Selenite Grey / Silver', zone: '5th Settlement' },
-                { brand: 'Range Rover', model: 'Autobiography • 2026', color: 'Pearl White (أبيض لؤلؤي)', zone: 'Madinaty' }
-            ];
-            const pick = demoCars[Math.floor(Math.random() * demoCars.length)];
-            const simLead = {
-                id: 'DC-' + Math.floor(1000 + Math.random() * 9000),
-                requestType: 'SCRATCH_DIAGNOSIS',
-                clientName: 'Sample Cloud Client (' + pick.zone + ')',
-                clientPhone: '01000000000',
-                carBrand: pick.brand,
-                carModel: pick.model,
-                carColor: pick.color,
-                zone: pick.zone,
-                resolution: '1080p Full HD',
-                notes: 'Client Note: Simulated cloud sync test.\nAffected Zones: Right Doors',
-                media: [{ id: 'sim_1', type: 'image', url: 'before.jpeg', resolution: '1080p' }],
-                status: 'NEW LIVE',
-                createdAt: Date.now()
-            };
-            saveLeadToCloud(simLead);
+        async function simulateIncomingVipLead() {
+            try {
+                const demoCars = [
+                    { brand: 'Porsche', model: '911 GT3 • 2026', color: 'Obsidian Black (أسود ميتاليك)', zone: 'Heliopolis' },
+                    { brand: 'BMW', model: 'M5 Competition • 2025', color: 'Selenite Grey / Silver', zone: '5th Settlement' },
+                    { brand: 'Range Rover', model: 'Autobiography • 2026', color: 'Pearl White (أبيض لؤلؤي)', zone: 'Madinaty' }
+                ];
+                const pick = demoCars[Math.floor(Math.random() * demoCars.length)];
+                const simLead = {
+                    id: 'DC-' + Math.floor(1000 + Math.random() * 9000),
+                    requestType: 'SCRATCH_DIAGNOSIS',
+                    clientName: 'Sample Cloud Client (' + pick.zone + ')',
+                    clientPhone: '01000000000',
+                    carBrand: pick.brand,
+                    carModel: pick.model,
+                    carColor: pick.color,
+                    zone: pick.zone,
+                    resolution: '1080p Full HD',
+                    notes: 'Client Note: Simulated cloud sync test.\nAffected Zones: Right Doors',
+                    media: [{ id: 'sim_1', type: 'image', url: 'before.jpeg', resolution: '1080p' }],
+                    status: 'NEW LIVE',
+                    createdAt: Date.now()
+                };
+                await saveLeadToCloud(simLead);
+            } catch (err) {
+                console.error("Async simulate error: ", err);
+            }
         }
 
         function exportLeadsToCsv() {
@@ -1754,7 +1773,7 @@
             const csvContent = 'data:text/csv;charset=utf-8,\uFEFF' + [headers.join(','), ...rows].join('\n');
             const link = document.createElement('a');
             link.setAttribute('href', encodeURI(csvContent));
-            link.setAttribute('download', `DrCare_Cloud_CRM_${new Date().toISOString().slice(0,10)}.csv`);
+            link.setAttribute('download', `DrCare_Executive_CRM_${new Date().toISOString().slice(0,10)}.csv`);
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
