@@ -6,7 +6,7 @@
     <title>DR. CARE | Reviving The Automotive Soul — Bespoke Paint Atelier</title>
     <link rel="icon" href="logo.jpg" type="image/jpeg">
 
-    <!-- Google Fonts: Cinzel (Luxury Serif), Plus Jakarta Sans (Modern UI), Cairo (Royal Arabic) -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Cinzel:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -40,6 +40,11 @@
             }
         }
     </script>
+
+    <!-- Firebase App & Firestore SDKs (Cloud Live Sync) -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-storage-compat.js"></script>
 
     <style>
         :root {
@@ -359,7 +364,7 @@
                     <div>
                         <div class="inline-flex items-center gap-2 text-xs font-bold text-emerald-400 mb-1">
                             <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-                            <span data-i18n="formLiveIndicator">Direct Encrypted Telemetry to Dr. Care Specialists</span>
+                            <span data-i18n="formLiveIndicator">Direct Cloud Sync to Dr. Care Specialists</span>
                         </div>
                         <h3 class="text-xl sm:text-2xl font-black text-white" data-i18n="scratchFormHeader">
                             Interactive Paint Defect & Scratch Assessment
@@ -399,7 +404,7 @@
                         </div>
                     </div>
 
-                    <!-- EXPANDED CAR BRANDS SELECTOR (NO EMOJIS) -->
+                    <!-- CAR BRANDS SELECTOR -->
                     <div class="p-4 sm:p-6 rounded-2xl bg-black/50 border border-white/10 space-y-5">
                         <div class="flex flex-wrap items-center justify-between gap-2">
                             <span class="text-xs font-extrabold uppercase tracking-wider text-gold-300" data-i18n="lblBrandSelect">
@@ -408,7 +413,6 @@
                             <span class="text-[11px] text-zinc-400" data-i18n="lblBrandHint">Tap your vehicle badge or select from list</span>
                         </div>
 
-                        <!-- Brand Grid Cards -->
                         <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-2.5" id="brandLogoGrid">
                             <button type="button" onclick="selectCarBrandLogo(this, 'Mercedes-Benz')" class="brand-logo-card selected p-3 rounded-2xl bg-leather border border-white/15 flex flex-col items-center justify-center gap-1.5 text-center group">
                                 <span class="text-xs font-extrabold tracking-wider text-gold-300">MERCEDES</span>
@@ -475,7 +479,7 @@
                             </div>
                         </div>
 
-                        <!-- OPEN COLOR PLATE PALETTE SELECTOR -->
+                        <!-- COLOR PLATE -->
                         <div class="pt-2">
                             <div class="flex items-center justify-between mb-2">
                                 <label for="carColorInput" class="text-xs font-semibold text-zinc-300" data-i18n="lblCarColor">
@@ -484,7 +488,6 @@
                                 <span class="text-[11px] text-zinc-400 italic" data-i18n="exCarColor">Tap color box to pick any shade or type</span>
                             </div>
                             <div class="flex items-center gap-3">
-                                <!-- HTML5 Color Picker Plate -->
                                 <div class="relative w-12 h-12 rounded-xl overflow-hidden border border-gold-400/50 shrink-0 cursor-pointer shadow-lg" title="Open Color Palette">
                                     <input type="color" id="nativeColorPicker" value="#000000" onchange="document.getElementById('carColorInput').value = this.value + ' (Custom Shade)'"
                                            class="absolute -inset-2 w-16 h-16 cursor-pointer opacity-0">
@@ -586,7 +589,7 @@
                             <div id="mediaThumbnailGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3"></div>
                         </div>
 
-                        <!-- PROMINENT EMPTY NOTE LABEL FOR CLIENT INTERFACE -->
+                        <!-- CLIENT CUSTOM NOTE BOX -->
                         <div class="space-y-1.5 pt-2">
                             <div class="flex items-center justify-between">
                                 <label for="clientNotes" class="text-xs font-extrabold uppercase tracking-wider text-gold-300" data-i18n="lblClientNoteBox">
@@ -801,7 +804,7 @@
                         <div class="flex items-center gap-2">
                             <h3 class="font-serif text-lg sm:text-xl font-black text-white">DR. CARE EXECUTIVE COMMAND</h3>
                             <span class="px-2 py-0.5 rounded-md bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 text-[10px] font-extrabold">
-                                REALTIME TELEMETRY
+                                CLOUD REALTIME SYNC
                             </span>
                         </div>
                         <p class="text-xs text-zinc-400">
@@ -830,7 +833,7 @@
                     🔐
                 </div>
                 <p class="text-base font-extrabold text-gold-200">Staff CRM Access (2026 Security Key)</p>
-                <p class="text-xs text-zinc-400">Enter your 2026 executive security PIN to unlock live customer telemetry.</p>
+                <p class="text-xs text-zinc-400">Enter your 2026 executive security PIN to unlock cloud telemetry.</p>
                 <div class="flex gap-2 justify-center pt-1">
                     <input type="password" id="managerPinInput" placeholder="••••" maxlength="8" autocomplete="off"
                            onkeydown="if(event.key==='Enter') unlockCrmDashboard()"
@@ -858,8 +861,8 @@
                         <p id="kpiWashLeads" class="text-2xl font-black text-emerald-300 mt-1">0</p>
                     </div>
                     <div class="p-4 rounded-2xl bg-black/65 border border-white/10">
-                        <span class="text-[11px] text-zinc-400 uppercase font-bold">Telemetry Engine</span>
-                        <p class="text-xs font-mono font-bold text-emerald-400 mt-2">IndexedDB + Live Sync</p>
+                        <span class="text-[11px] text-zinc-400 uppercase font-bold">Cloud Engine</span>
+                        <p class="text-xs font-mono font-bold text-emerald-400 mt-2">Firebase Firestore</p>
                     </div>
                 </div>
 
@@ -879,7 +882,7 @@
                         </select>
                     </div>
                     <button type="button" onclick="simulateIncomingVipLead()" class="px-3.5 py-2 rounded-xl bg-gold-400/15 hover:bg-gold-400/25 border border-gold-400/40 text-gold-200 text-xs font-extrabold">
-                        ⚡ Simulate Sample VIP Request
+                        ⚡ Simulate Cloud Sync Ping
                     </button>
                 </div>
 
@@ -899,8 +902,21 @@
         </div>
     </div>
 
-    <!-- SCRIPT -->
+    <!-- SCRIPT WITH FIREBASE CLOUD SYNC -->
     <script>
+        // FIREBASE CLOUD CONFIG INTEGRATION
+        const firebaseConfig = {
+            apiKey: "AIzaSyAmLj9vj6jn9ASbWcUL2CjtJX0n_tG8W18",
+            authDomain: "drcare-centre.firebaseapp.com",
+            projectId: "drcare-centre",
+            storageBucket: "drcare-centre.firebasestorage.app",
+            messagingSenderId: "945201915740",
+            appId: "1:945201915740:web:dca2c552e7106f39560399",
+            measurementId: "G-K6MEN28BJ0"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
         function updateAmbientSpotlight(e) {
             document.documentElement.style.setProperty('--spotlight-x', e.clientX + 'px');
             document.documentElement.style.setProperty('--spotlight-y', e.clientY + 'px');
@@ -944,10 +960,10 @@
                 inspectAfterBtn: "✨ Full Mirror Finish (After)",
                 consoleKicker: "BESPOKE DIGITAL PAINT TELEMETRY",
                 consoleTitle: "Configure Your Vehicle's Restoration & Care",
-                consoleSub: "An effortless, interactive concierge experience. Your submission streams live by the second to our Master Specialists.",
+                consoleSub: "An effortless, interactive concierge experience. Your submission streams live to our Master Specialists.",
                 tabScratchTitle: "Scratch & Paint Diagnosis",
                 tabBookingTitle: "Weekend Dry Wash Slot",
-                formLiveIndicator: "Direct Encrypted Telemetry to Dr. Care Specialists",
+                formLiveIndicator: "Direct Cloud Sync to Dr. Care Specialists",
                 scratchFormHeader: "Interactive Paint Defect & Scratch Assessment",
                 sloganMiniTop: "Asset Protection",
                 sloganMiniBottom: "Save Your Investment Now",
@@ -978,7 +994,7 @@
                 exClientNoteBox: "e.g. Special care needed near sensors",
                 submitScratchBtnText: "Transmit High-Res Diagnosis to Dr. Care Masters",
                 successHeader: "Diagnosis Received Live! Welcome to the Dr. Care Atelier.",
-                successBody: "Your vehicle telemetry, custom notes, and high-res media are now displayed on our Master Specialist's console. We will contact you shortly.",
+                successBody: "Your vehicle telemetry, custom notes, and high-res media are now securely synced to our Master Specialist's cloud console.",
                 washKicker: "THU • FRI • SAT PRIVATE MOBILE CONCIERGE",
                 washHeader: "Select Your Nano Dry Wash & Gloss Package",
                 depositNotice: "15% Refundable Deposit Locks Your VIP Slot",
@@ -1039,10 +1055,10 @@
                 inspectAfterBtn: "✨ شاهد لمعة المرآة (بعد)",
                 consoleKicker: "منصة التشخيص الرقمي التفاعلي",
                 consoleTitle: "صمّم برنامج العناية واستعادة دهان سيارتك",
-                consoleSub: "واجهة تفاعلية فائقة السلاسة؛ جميع الصور والطلبات تظهر في نفس الثانية أمام خبراء دكتور كير.",
+                consoleSub: "واجهة تفاعلية فائقة السلاسة؛ يتم مزامنة جميع الطلبات سحابياً في أقل من ثوانٍ.",
                 tabScratchTitle: "فحص الخدوش ومشاكل الدهان",
                 tabBookingTitle: "حجز الغسيل الجاف (الويك إند)",
-                formLiveIndicator: "بث مشفر ومباشر لغرفة عمليات دكتور كير",
+                formLiveIndicator: "مزامنة سحابية مباشرة مع خبراء دكتور كير",
                 scratchFormHeader: "التشخيص التفاعلي للخدوش وعيوب الدهان",
                 sloganMiniTop: "حماية الأصول",
                 sloganMiniBottom: "Save Your Investment Now",
@@ -1072,8 +1088,8 @@
                 lblClientNoteBox: "٦. ملاحظات العميل وتفاصيل المشكلة (اكتب ما تريد باختفاض) *",
                 exClientNoteBox: "مثال: عناية خاصة بالقرب من الحساسات",
                 submitScratchBtnText: "إرسال التشخيص عالي الدقة لخبراء دكتور كير",
-                successHeader: "تم استلام التشخيص والصور في التو واللحظة!",
-                successBody: "ظهرت بيانات سيارتك وملاحظاتك والصور عالية الدقة أمام كبير فنيي دكتور كير، وسيتواصل معك فريقنا خلال دقائق بخطة المعالجة.",
+                successHeader: "تم إرسال التشخيص سحابياً في التو واللحظة!",
+                successBody: "ظهرت بيانات سيارتك وملاحظاتك والصور سحابياً أمام كبير فنيي دكتور كير، وسيتواصل معك فريقنا خلال دقائق.",
                 washKicker: "خدمة الويك إند المتنقلة الخاصة (الخميس • الجمعة • السبت)",
                 washHeader: "اختر باقة الغسيل الجاف واستعادة اللمعة",
                 depositNotice: "عربون ١٥٪ لتأكيد الحجز (مسترد قبل ٢٤ ساعة)",
@@ -1093,7 +1109,7 @@
                 exWashCar: "السيارة (مثال: BMW X6 • أسود)",
                 exWashSlot: "فترة الحجز المفضلة",
                 btnConfirmWash: "تأكيد حجز موعد الويك إند الآن",
-                washSuccessTitle: "🌟 تم تسجيل حجزك في غرفة عمليات دكتور كير!",
+                washSuccessTitle: "🌟 تم تسجيل حجزك سحابياً في غرفة عمليات دكتور كير!",
                 washSuccessSub: "سيتواصل معك مسؤول الحجوزات قريباً لتنسيق عربون الـ ١٥٪ وتأكيد الموعد.",
                 megSub: "تكنولوجيا البوليمر الأمريكية",
                 megTitle: "مواد Meguiar's الاحترافية",
@@ -1178,7 +1194,7 @@
                 });
             }
             syncSliderImageWidth();
-            initIndexedDbAndLoadStream();
+            initRealtimeCloudStream();
         });
         window.addEventListener('resize', syncSliderImageWidth);
 
@@ -1383,120 +1399,68 @@
             renderMediaThumbnails();
         }
 
-        const DB_NAME = 'DrCareAtelierVaultDB_v8';
-        const DB_STORE = 'live_leads';
-        const FALLBACK_KEY = 'drcare_atelier_leads_v8';
-        let idbInstance = null;
+        // FIREBASE FIRESTORE REALTIME SYNC ENGINE (< 20 SECONDS ANYWHERE)
         let memoryLeadsCache = [];
         let audioRadarEnabled = true;
         let streamSecondsUptime = 0;
+        let lastLeadCount = 0;
 
-        function initIndexedDbAndLoadStream() {
-            const req = window.indexedDB ? indexedDB.open(DB_NAME, 1) : null;
-            if (!req) {
-                memoryLeadsCache = loadFallbackLeads();
-                updateNavLiveCounter();
-                return;
-            }
+        function initRealtimeCloudStream() {
+            db.collection("drcare_leads")
+              .orderBy("createdAt", "desc")
+              .onSnapshot((snapshot) => {
+                  const fetchedLeads = [];
+                  snapshot.forEach((doc) => {
+                      fetchedLeads.push({ id: doc.id, ...doc.data() });
+                  });
 
-            req.onupgradeneeded = (e) => {
-                const db = e.target.result;
-                if (!db.objectStoreNames.contains(DB_STORE)) {
-                    db.createObjectStore(DB_STORE, { keyPath: 'id' });
-                }
-            };
+                  if (fetchedLeads.length === 0) {
+                      // Seed initial sample if collection is empty
+                      const seed = {
+                          id: 'DC-801',
+                          requestType: 'SCRATCH_DIAGNOSIS',
+                          clientName: 'Example Client (Cloud Sync)',
+                          clientPhone: '01000000000',
+                          carBrand: 'Mercedes-Benz',
+                          carModel: 'S580 AMG Line • 2026',
+                          carColor: 'Obsidian Black (أسود ميتاليك)',
+                          zone: 'Heliopolis',
+                          resolution: '1080p',
+                          notes: 'Client Note: Cloud sync is fully operational.\nAffected Zones: Front Hood.',
+                          media: [
+                              { id: 'seed_1', type: 'image', url: 'before.jpeg', resolution: '1080p' },
+                              { id: 'seed_2', type: 'image', url: 'after.jpeg', resolution: '1080p' }
+                          ],
+                          status: 'NEW LIVE',
+                          createdAt: Date.now() - 65000
+                      };
+                      db.collection("drcare_leads").doc(seed.id).set(seed);
+                      return;
+                  }
 
-            req.onsuccess = (e) => {
-                idbInstance = e.target.result;
-                loadAllLeadsFromIndexedDb();
-            };
+                  if (fetchedLeads.length > lastLeadCount && lastLeadCount > 0) {
+                      playNotificationChime();
+                  }
+                  lastLeadCount = fetchedLeads.length;
+                  memoryLeadsCache = fetchedLeads;
 
-            req.onerror = () => {
-                memoryLeadsCache = loadFallbackLeads();
-                updateNavLiveCounter();
-            };
+                  updateNavLiveCounter();
+                  renderBackofficeFeed();
+              }, (error) => {
+                  console.error("Firestore sync error: ", error);
+              });
         }
 
-        function getSeedLeads() {
-            return [
-                {
-                    id: 'DC-801',
-                    requestType: 'SCRATCH_DIAGNOSIS',
-                    clientName: 'Example Client (Sample Entry)',
-                    clientPhone: '01000000000',
-                    carBrand: 'Mercedes-Benz',
-                    carModel: 'S580 AMG Line • 2026',
-                    carColor: 'Obsidian Black (أسود ميتاليك)',
-                    zone: 'Heliopolis',
-                    resolution: '1080p',
-                    notes: 'Client Note: Please check bumper sensors carefully.\nAffected Zones: Front Hood.',
-                    media: [
-                        { id: 'seed_1', type: 'image', url: 'before.jpeg', resolution: '1080p' },
-                        { id: 'seed_2', type: 'image', url: 'after.jpeg', resolution: '1080p' }
-                    ],
-                    status: 'NEW LIVE',
-                    createdAt: Date.now() - 65000
-                }
-            ];
+        function saveLeadToCloud(lead) {
+            db.collection("drcare_leads").doc(lead.id).set(lead)
+              .then(() => {
+                  playNotificationChime();
+              })
+              .catch((error) => {
+                  console.error("Error writing lead to cloud: ", error);
+                  alert("Cloud sync error. Please check your internet connection.");
+              });
         }
-
-        function loadFallbackLeads() {
-            try {
-                const raw = localStorage.getItem(FALLBACK_KEY);
-                if (raw) return JSON.parse(raw);
-            } catch (e) {}
-            const seed = getSeedLeads();
-            try { localStorage.setItem(FALLBACK_KEY, JSON.stringify(seed)); } catch (e) {}
-            return seed;
-        }
-
-        function loadAllLeadsFromIndexedDb() {
-            if (!idbInstance) return;
-            const tx = idbInstance.transaction(DB_STORE, 'readonly');
-            const store = tx.objectStore(DB_STORE);
-            const getAllReq = store.getAll();
-
-            getAllReq.onsuccess = () => {
-                const results = getAllReq.result || [];
-                if (results.length === 0) {
-                    const seed = getSeedLeads();
-                    seed.forEach(item => saveLeadToIndexedDb(item, false));
-                    memoryLeadsCache = seed;
-                } else {
-                    memoryLeadsCache = results.sort((a, b) => b.createdAt - a.createdAt);
-                }
-                updateNavLiveCounter();
-                renderBackofficeFeed();
-            };
-        }
-
-        function saveLeadToIndexedDb(lead, triggerAlerts = true) {
-            memoryLeadsCache = [lead, ...memoryLeadsCache.filter(l => l.id !== lead.id)];
-
-            if (idbInstance) {
-                try {
-                    const tx = idbInstance.transaction(DB_STORE, 'readwrite');
-                    tx.objectStore(DB_STORE).put(lead);
-                } catch (e) {}
-            }
-
-            try {
-                localStorage.setItem('drcare_live_ping_ts', String(Date.now()));
-            } catch (e) {}
-
-            if (triggerAlerts) {
-                playNotificationChime();
-            }
-            updateNavLiveCounter();
-            renderBackofficeFeed();
-        }
-
-        window.addEventListener('storage', (e) => {
-            if (e.key === 'drcare_live_ping_ts') {
-                playNotificationChime();
-                loadAllLeadsFromIndexedDb();
-            }
-        });
 
         function submitScratchConsultation(event) {
             event.preventDefault();
@@ -1533,7 +1497,7 @@
                 createdAt: Date.now()
             };
 
-            saveLeadToIndexedDb(newLead, true);
+            saveLeadToCloud(newLead);
 
             document.getElementById('scratchConsultForm').reset();
             document.getElementById('carColorInput').value = 'Obsidian Black Metallic';
@@ -1566,7 +1530,7 @@
                 createdAt: Date.now()
             };
 
-            saveLeadToIndexedDb(newLead, true);
+            saveLeadToCloud(newLead);
             document.getElementById('washBookingForm').reset();
             document.getElementById('washSuccessBanner').classList.remove('hidden');
         }
@@ -1648,22 +1612,13 @@
         }
 
         function updateLeadStatus(leadId, newStatus) {
-            const target = memoryLeadsCache.find(l => l.id === leadId);
-            if (!target) return;
-            target.status = newStatus;
-            saveLeadToIndexedDb(target, false);
+            db.collection("drcare_leads").doc(leadId).update({ status: newStatus })
+              .catch(err => console.error("Error updating status: ", err));
         }
 
         function deleteLeadItem(leadId) {
-            memoryLeadsCache = memoryLeadsCache.filter(l => l.id !== leadId);
-            if (idbInstance) {
-                try {
-                    const tx = idbInstance.transaction(DB_STORE, 'readwrite');
-                    tx.objectStore(DB_STORE).delete(leadId);
-                } catch (e) {}
-            }
-            updateNavLiveCounter();
-            renderBackofficeFeed();
+            db.collection("drcare_leads").doc(leadId).delete()
+              .catch(err => console.error("Error deleting lead: ", err));
         }
 
         function renderBackofficeFeed() {
@@ -1721,7 +1676,6 @@
                             <strong class="text-white text-sm">${escapeHtml(lead.carBrand)} • ${escapeHtml(lead.carModel)}</strong>
                             <span class="block text-gold-200 mt-0.5">Color: ${escapeHtml(lead.carColor)}</span>
                         </div>
-                        <!-- HIGHLY HIGHLIGHTED CLIENT NOTES SECTION -->
                         <div class="bg-gold-400/15 border-s-4 border-gold-400 p-3 rounded-r-xl shadow-inner">
                             <span class="text-gold-300 font-extrabold uppercase tracking-wider block text-[11px] mb-1">📝 Client Custom Notes & Instructions:</span>
                             <p class="text-gold-100 text-xs font-bold leading-relaxed whitespace-pre-wrap">${escapeHtml(lead.notes)}</p>
@@ -1773,21 +1727,22 @@
                 { brand: 'Range Rover', model: 'Autobiography • 2026', color: 'Pearl White (أبيض لؤلؤي)', zone: 'Madinaty' }
             ];
             const pick = demoCars[Math.floor(Math.random() * demoCars.length)];
-            saveLeadToIndexedDb({
+            const simLead = {
                 id: 'DC-' + Math.floor(1000 + Math.random() * 9000),
                 requestType: 'SCRATCH_DIAGNOSIS',
-                clientName: 'Sample VIP Client (' + pick.zone + ')',
+                clientName: 'Sample Cloud Client (' + pick.zone + ')',
                 clientPhone: '01000000000',
                 carBrand: pick.brand,
                 carModel: pick.model,
                 carColor: pick.color,
                 zone: pick.zone,
                 resolution: '1080p Full HD',
-                notes: 'Client Note: Please call after 5 PM. Scratch is near the door handle.\nAffected Zones: Right Doors',
+                notes: 'Client Note: Simulated cloud sync test.\nAffected Zones: Right Doors',
                 media: [{ id: 'sim_1', type: 'image', url: 'before.jpeg', resolution: '1080p' }],
                 status: 'NEW LIVE',
                 createdAt: Date.now()
-            }, true);
+            };
+            saveLeadToCloud(simLead);
         }
 
         function exportLeadsToCsv() {
@@ -1799,16 +1754,10 @@
             const csvContent = 'data:text/csv;charset=utf-8,\uFEFF' + [headers.join(','), ...rows].join('\n');
             const link = document.createElement('a');
             link.setAttribute('href', encodeURI(csvContent));
-            link.setAttribute('download', `DrCare_Executive_CRM_${new Date().toISOString().slice(0,10)}.csv`);
+            link.setAttribute('download', `DrCare_Cloud_CRM_${new Date().toISOString().slice(0,10)}.csv`);
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
-        }
-
-        function openMediaLightbox(mediaId) {
-            const item = uploadedMediaItems.find(m => m.id === mediaId);
-            if (!item) return;
-            showLightboxContent(item.url, item.type, item.resolution);
         }
 
         function openLeadMediaLightbox(leadId, mediaIndex) {
