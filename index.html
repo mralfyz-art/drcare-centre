@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <title>DR. CARE | Reviving The Automotive Soul — Bespoke Paint Clinic</title>
+    <title>DR. CARE | Reviving The Automotive Soul — Bespoke Paint Atelier</title>
     <link rel="icon" href="logo.jpg" type="image/jpeg">
 
-    <!-- Google Fonts: Cinzel (Luxury Serif), Plus Jakarta Sans (Modern English), Cairo (Royal Arabic) -->
+    <!-- Google Fonts: Cinzel (Luxury Serif), Plus Jakarta Sans (Modern UI), Cairo (Royal Arabic) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Cinzel:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -19,9 +19,9 @@
             theme: {
                 extend: {
                     colors: {
-                        obsidian: '#050507',
-                        charcoal: '#0C0D12',
-                        leather: '#12141C',
+                        obsidian: '#040406',
+                        charcoal: '#0A0B0F',
+                        leather: '#101218',
                         gold: {
                             100: '#FDF6DF',
                             200: '#F5E2A8',
@@ -45,71 +45,92 @@
         :root {
             --gold-primary: #D4AF37;
             --gold-light: #F5E2A8;
+            --spotlight-x: 50%;
+            --spotlight-y: 20%;
         }
         html {
             scroll-behavior: smooth;
         }
         body {
-            background-color: #050507;
+            background-color: #040406;
             color: #F4F4F6;
             overflow-x: hidden;
             background-image: 
+                radial-gradient(650px circle at var(--spotlight-x) var(--spotlight-y), rgba(212, 175, 55, 0.08), transparent 45%),
                 radial-gradient(circle at 12% 8%, rgba(212, 175, 55, 0.09) 0%, transparent 40%),
-                radial-gradient(circle at 88% 25%, rgba(212, 175, 55, 0.06) 0%, transparent 45%),
-                linear-gradient(180deg, #050507 0%, #0B0C10 100%);
+                radial-gradient(circle at 88% 25%, rgba(212, 175, 55, 0.05) 0%, transparent 45%),
+                linear-gradient(180deg, #040406 0%, #090A0F 100%);
         }
         [dir="rtl"] {
             font-family: 'Cairo', sans-serif;
         }
-        /* Brushed Metallic Gold Typography */
+        /* Liquid Metallic Gold Typography */
         .gold-metallic {
-            background: linear-gradient(135deg, #FFF5D6 0%, #D4AF37 32%, #AA8220 52%, #F7E5A9 78%, #B88A1E 100%);
+            background: linear-gradient(135deg, #FFF7DF 0%, #D4AF37 30%, #9E7618 50%, #F7E5A9 75%, #C59B27 100%);
+            background-size: 200% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            animation: shineGold 7s linear infinite;
         }
-        /* Elite Gold Action Button */
+        @keyframes shineGold {
+            to { background-position: 200% center; }
+        }
+        /* Bespoke Liquid Gold CTA Button */
         .btn-gold-elite {
-            background: linear-gradient(135deg, #E8C55E 0%, #C59B27 50%, #9A7213 100%);
-            color: #050507;
-            box-shadow: 0 10px 30px -5px rgba(212, 175, 55, 0.38), inset 0 1px 1px rgba(255, 255, 255, 0.55);
-            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            background: linear-gradient(135deg, #EDD076 0%, #D4AF37 45%, #9A7213 100%);
+            color: #040406;
+            box-shadow: 0 12px 35px -6px rgba(212, 175, 55, 0.42), inset 0 1px 1px rgba(255, 255, 255, 0.65);
+            transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
         }
         .btn-gold-elite:hover:not(:disabled) {
-            transform: translateY(-2px);
-            box-shadow: 0 16px 38px -5px rgba(212, 175, 55, 0.58), inset 0 1px 2px rgba(255, 255, 255, 0.75);
-            filter: brightness(1.06);
+            transform: translateY(-2px) scale(1.01);
+            box-shadow: 0 18px 42px -6px rgba(212, 175, 55, 0.62), inset 0 1px 2px rgba(255, 255, 255, 0.85);
+            filter: brightness(1.07);
         }
-        .btn-gold-elite:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
-        /* Piano Black & Leather Surfaces */
+        /* Luxury Leather & Piano-Black Glass Surfaces */
         .piano-card {
-            background: linear-gradient(160deg, rgba(20, 22, 30, 0.9) 0%, rgba(9, 10, 14, 0.97) 100%);
+            background: linear-gradient(165deg, rgba(20, 22, 30, 0.88) 0%, rgba(7, 8, 12, 0.96) 100%);
             border: 1px solid rgba(212, 175, 55, 0.18);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.85), inset 0 1px 0 0 rgba(255, 255, 255, 0.06);
-            backdrop-filter: blur(20px);
+            box-shadow: 0 25px 55px -12px rgba(0, 0, 0, 0.9), inset 0 1px 0 0 rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(22px);
+            transition: border-color 0.3s ease, transform 0.3s ease;
+        }
+        .piano-card:hover {
+            border-color: rgba(212, 175, 55, 0.36);
         }
         .piano-card-gold {
-            background: linear-gradient(160deg, rgba(28, 24, 16, 0.92) 0%, rgba(10, 10, 14, 0.98) 100%);
+            background: linear-gradient(165deg, rgba(28, 24, 15, 0.92) 0%, rgba(8, 9, 13, 0.98) 100%);
             border: 1px solid rgba(212, 175, 55, 0.45);
-            box-shadow: 0 25px 60px -15px rgba(212, 175, 55, 0.16), inset 0 1px 0 0 rgba(245, 226, 168, 0.22);
+            box-shadow: 0 28px 65px -15px rgba(212, 175, 55, 0.18), inset 0 1px 0 0 rgba(245, 226, 168, 0.25);
+            backdrop-filter: blur(24px);
         }
-        /* Fixed RTL-Safe Touch Before/After Slider */
+        /* Interactive Car Zone Selector Chip */
+        .car-zone-btn {
+            transition: all 0.22s ease;
+        }
+        .car-zone-btn.active {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.28) 0%, rgba(212, 175, 55, 0.08) 100%);
+            border-color: #D4AF37;
+            color: #FDF6DF;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+        }
+        /* RTL-Safe Touch Before/After Slider */
         .comparison-slider {
             position: relative;
             width: 100%;
-            height: 390px;
+            height: 400px;
             overflow: hidden;
             user-select: none;
             -webkit-user-select: none;
             touch-action: pan-y;
-            border-radius: 1.15rem;
+            border-radius: 1.25rem;
             direction: ltr !important;
         }
         @media (min-width: 768px) {
             .comparison-slider {
-                height: 460px;
+                height: 470px;
             }
         }
         .comparison-after {
@@ -137,19 +158,19 @@
             z-index: 20;
             transform: translateX(-50%);
             pointer-events: none;
-            box-shadow: 0 0 18px rgba(212, 175, 55, 0.95);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.95);
         }
         .comparison-knob {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 46px;
-            height: 46px;
+            width: 48px;
+            height: 48px;
             border-radius: 9999px;
-            background: radial-gradient(circle, #181A24 0%, #050507 100%);
+            background: radial-gradient(circle, #181A24 0%, #040406 100%);
             border: 2px solid #D4AF37;
-            box-shadow: 0 0 25px rgba(212, 175, 55, 0.85);
+            box-shadow: 0 0 28px rgba(212, 175, 55, 0.9);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -157,22 +178,22 @@
         }
         /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-track { background: #050507; }
+        ::-webkit-scrollbar-track { background: #040406; }
         ::-webkit-scrollbar-thumb { background: #2A2D3A; border-radius: 3px; }
         ::-webkit-scrollbar-thumb:hover { background: #D4AF37; }
 
         @keyframes pulseGold {
             0%, 100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.5); }
-            50% { box-shadow: 0 0 0 10px rgba(212, 175, 55, 0); }
+            50% { box-shadow: 0 0 0 11px rgba(212, 175, 55, 0); }
         }
         .pulse-gold-ring {
-            animation: pulseGold 2.2s infinite;
+            animation: pulseGold 2.3s infinite;
         }
     </style>
 </head>
-<body class="antialiased selection:bg-gold-400 selection:text-black">
+<body class="antialiased selection:bg-gold-400 selection:text-black" onmousemove="updateAmbientSpotlight(event)">
 
-    <!-- TOP LIVE CONCIERGE STATUS BAR -->
+    <!-- TOP CONCIERGE STATUS BAR -->
     <div class="bg-gradient-to-r from-obsidian via-[#17130A] to-obsidian border-b border-gold-400/20 py-2 px-4 text-xs">
         <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
             <div class="flex items-center gap-2">
@@ -181,26 +202,25 @@
                     <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                 </span>
                 <span class="text-gold-200 font-semibold tracking-wide" data-i18n="topBarLive">
-                    LIVE PAINT CLINIC CONCIERGE • HELIOPOLIS • NASR CITY • MADINATY • 5TH SETTLEMENT
+                    BESPOKE PAINT ATELIER • HELIOPOLIS • NASR CITY • MADINATY • 5TH SETTLEMENT
                 </span>
             </div>
             <div class="hidden sm:flex items-center gap-4 text-zinc-400">
                 <span class="text-gold-300 font-bold" data-i18n="topBarQuote">"Save Your Investment Now"</span>
                 <span>•</span>
                 <span class="bg-gold-400/15 text-gold-300 border border-gold-400/30 px-2.5 py-0.5 rounded-full font-semibold" data-i18n="topBarDays">
-                    Thu • Fri • Sat Exclusive Mobile Units
+                    Thu • Fri • Sat Private Mobile Concierge
                 </span>
             </div>
         </div>
     </div>
 
     <!-- LUXURY STICKY HEADER -->
-    <header class="sticky top-0 z-40 bg-obsidian/90 backdrop-blur-xl border-b border-white/10">
+    <header class="sticky top-0 z-40 bg-obsidian/85 backdrop-blur-2xl border-b border-white/10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between gap-3">
             <!-- Brand Identity with Bespoke Gold Fingerprint Emblem -->
             <a href="#" class="flex items-center gap-3.5 group">
-                <div class="relative w-12 h-12 rounded-2xl bg-gradient-to-br from-[#1E1910] to-[#070709] border border-gold-400/60 flex items-center justify-center shadow-lg overflow-hidden shrink-0">
-                    <!-- Gold Fingerprint SVG (Always visible behind or as fallback to logo.jpg) -->
+                <div class="relative w-12 h-12 rounded-2xl bg-gradient-to-br from-[#211B10] to-[#060608] border border-gold-400/60 flex items-center justify-center shadow-lg overflow-hidden shrink-0 group-hover:border-gold-300 transition">
                     <svg class="w-8 h-8 text-gold-400" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round">
                         <path d="M20 14C27 9 37 9 44 14" opacity="0.85"/>
                         <path d="M14 22C24 13 40 13 50 22"/>
@@ -213,8 +233,8 @@
                     <img src="logo.jpg" alt="DR. CARE" class="w-full h-full object-cover absolute inset-0" onerror="this.style.display='none'">
                 </div>
                 <div>
-                    <span class="font-serif text-xl sm:text-2xl font-black tracking-[0.18em] gold-metallic block leading-none">DR. CARE</span>
-                    <span class="text-[10px] sm:text-[11px] uppercase tracking-[0.2em] text-zinc-400 font-semibold block mt-1" data-i18n="brandSlogan">
+                    <span class="font-serif text-xl sm:text-2xl font-black tracking-[0.2em] gold-metallic block leading-none">DR. CARE</span>
+                    <span class="text-[10px] sm:text-[11px] uppercase tracking-[0.22em] text-zinc-400 font-semibold block mt-1" data-i18n="brandSlogan">
                         — Reviving The Automotive Soul —
                     </span>
                 </div>
@@ -227,17 +247,17 @@
                     <span id="langSwitchLabel">العربية</span>
                 </button>
 
-                <button type="button" onclick="openBackofficeModal()" class="px-3.5 py-2 rounded-xl bg-leather hover:bg-zinc-800 border border-white/15 text-xs font-bold text-zinc-200 hover:text-gold-300 transition flex items-center gap-2" title="Backoffice Live Command Center">
+                <button type="button" onclick="openBackofficeModal()" class="px-3.5 py-2 rounded-xl bg-leather hover:bg-zinc-800 border border-white/15 text-xs font-bold text-zinc-200 hover:text-gold-300 transition flex items-center gap-2" title="Executive Command Center">
                     <span class="relative flex h-2 w-2">
                         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-gold-400 opacity-75"></span>
                         <span class="relative inline-flex rounded-full h-2 w-2 bg-gold-400"></span>
                     </span>
-                    <span class="hidden md:inline" data-i18n="navCrmBtn">Live Backoffice</span>
+                    <span class="hidden md:inline" data-i18n="navCrmBtn">Executive Backoffice</span>
                     <span id="navLiveBadge" class="bg-gold-400 text-black text-[10px] font-extrabold px-1.5 py-0.5 rounded-md">LIVE</span>
                 </button>
 
                 <a href="#clinic-console" class="hidden sm:inline-flex btn-gold-elite px-4 py-2 rounded-xl text-xs font-extrabold tracking-wide uppercase">
-                    <span data-i18n="navConsultCta">Diagnose Paint Now</span>
+                    <span data-i18n="navConsultCta">Start Paint Diagnosis</span>
                 </a>
             </div>
         </div>
@@ -246,23 +266,23 @@
     <!-- MAIN CONTENT -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 pt-6 pb-24 space-y-16">
 
-        <!-- HERO SECTION: LUXURY POSITIONING + INTERACTIVE MERCEDES MIRROR SLIDER -->
+        <!-- HERO SECTION: ATELIER NOIR AESTHETIC + INTERACTIVE MERCEDES MIRROR SLIDER -->
         <section class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center pt-2">
             
-            <!-- Left Column: Marketing Authority & Conversion Triggers -->
+            <!-- Left Column: Luxury Narrative & Conversion Triggers -->
             <div class="lg:col-span-6 space-y-6">
-                <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-gold-400/10 border border-gold-400/35 text-gold-200 text-xs font-bold tracking-wider uppercase">
+                <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-gold-400/10 border border-gold-400/40 text-gold-200 text-xs font-bold tracking-wider uppercase">
                     <svg class="w-4 h-4 text-gold-400 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                    <span data-i18n="heroBadge">Bespoke Automotive Paint Restoration Clinic</span>
+                    <span data-i18n="heroBadge">Signature Automotive Paint Restoration Atelier</span>
                 </div>
 
                 <div class="space-y-2">
                     <p class="text-xs sm:text-sm font-extrabold uppercase tracking-[0.28em] text-gold-400" data-i18n="heroPreTitle">
                         DR. CARE — REVIVING THE AUTOMOTIVE SOUL
                     </p>
-                    <h1 class="font-serif text-3xl sm:text-5xl lg:text-[50px] font-black leading-[1.14] tracking-tight text-white">
-                        <span data-i18n="heroHeadline1">Restore Showroom</span>
-                        <span class="gold-metallic block mt-1" data-i18n="heroHeadline2">Piano-Black Mirror Gloss.</span>
+                    <h1 class="font-serif text-3xl sm:text-5xl lg:text-[50px] font-black leading-[1.13] tracking-tight text-white">
+                        <span data-i18n="heroHeadline1">Sculpting Liquid</span>
+                        <span class="gold-metallic block mt-1" data-i18n="heroHeadline2">Piano-Black Mirror Perfection.</span>
                     </h1>
                 </div>
 
@@ -272,7 +292,7 @@
                         "SAVE YOUR INVESTMENT NOW"
                     </p>
                     <p class="text-xs sm:text-sm text-zinc-300 mt-1.5 leading-relaxed" data-i18n="heroQuoteSub">
-                        Every untreated scratch, oxidation patch, or improper wash diminishes your luxury vehicle's resale value. Upload photos or video of any paint defect below and receive a precision master assessment within minutes.
+                        Your vehicle's factory clear coat is its most valuable asset. Select the affected zone below, upload up to 5 photos or a 60-second video, and receive an immediate master restoration plan.
                     </p>
                 </div>
 
@@ -280,11 +300,11 @@
                 <div class="flex flex-col sm:flex-row gap-3.5 pt-1">
                     <a href="#clinic-console" onclick="switchConsoleTab('scratch')" class="btn-gold-elite px-6 py-4 rounded-2xl font-extrabold text-sm sm:text-base flex items-center justify-center gap-3 pulse-gold-ring">
                         <span>📸</span>
-                        <span data-i18n="heroBtnScratch">Instant Scratch & Paint Diagnosis</span>
+                        <span data-i18n="heroBtnScratch">Interactive Scratch & Paint Radar</span>
                     </a>
                     <a href="#clinic-console" onclick="switchConsoleTab('booking')" class="px-6 py-4 rounded-2xl bg-white/5 hover:bg-white/10 border border-gold-400/35 text-gold-200 font-bold text-sm sm:text-base flex items-center justify-center gap-2 transition">
                         <span>✨</span>
-                        <span data-i18n="heroBtnWash">Book Weekend Dry Wash</span>
+                        <span data-i18n="heroBtnWash">Reserve Weekend Dry Wash</span>
                     </a>
                 </div>
 
@@ -292,15 +312,15 @@
                 <div class="grid grid-cols-3 gap-3 pt-3 border-t border-white/10">
                     <div class="piano-card p-3 rounded-xl text-center">
                         <span class="block text-lg sm:text-xl font-black gold-metallic">100%</span>
-                        <span class="text-[11px] text-zinc-400 font-medium" data-i18n="stat1">Zero-Swirl Mirror Finish</span>
+                        <span class="text-[11px] text-zinc-400 font-medium" data-i18n="stat1">Optical Mirror Clarity</span>
                     </div>
                     <div class="piano-card p-3 rounded-xl text-center">
                         <span class="block text-lg sm:text-xl font-black gold-metallic">Meguiar's</span>
                         <span class="text-[11px] text-zinc-400 font-medium" data-i18n="stat2">& Italian Rupes Systems</span>
                     </div>
                     <div class="piano-card p-3 rounded-xl text-center">
-                        <span class="block text-lg sm:text-xl font-black gold-metallic">&lt; 5 Min</span>
-                        <span class="text-[11px] text-zinc-400 font-medium" data-i18n="stat3">Live Expert Callback</span>
+                        <span class="block text-lg sm:text-xl font-black gold-metallic">Instant</span>
+                        <span class="text-[11px] text-zinc-400 font-medium" data-i18n="stat3">Live Master Assessment</span>
                     </div>
                 </div>
             </div>
@@ -312,11 +332,11 @@
                         <div class="flex items-center gap-2">
                             <span class="w-2.5 h-2.5 rounded-full bg-gold-400"></span>
                             <span class="text-xs font-extrabold uppercase tracking-wider text-gold-200" data-i18n="sliderHeader">
-                                ACTUAL DR. CARE MERCEDES WORK — DRAG TO COMPARE
+                                REAL MERCEDES TRANSFORMATION — DRAG TO INSPECT
                             </span>
                         </div>
-                        <span class="text-[11px] bg-black/70 text-gold-300 px-2.5 py-1 rounded-lg border border-gold-400/30 font-semibold" data-i18n="sliderSubBadge">
-                            100% Real Unedited Result
+                        <span class="text-[11px] bg-black/75 text-gold-300 px-2.5 py-1 rounded-lg border border-gold-400/30 font-semibold" data-i18n="sliderSubBadge">
+                            Unedited Optical Reflection
                         </span>
                     </div>
 
@@ -370,18 +390,18 @@
         <section id="clinic-console" class="scroll-mt-24">
             <div class="text-center max-w-3xl mx-auto mb-8 space-y-2">
                 <span class="text-xs font-extrabold uppercase tracking-[0.25em] text-gold-400" data-i18n="consoleKicker">
-                    DIRECT DIGITAL PAINT CLINIC
+                    BESPOKE DIGITAL PAINT TELEMETRY
                 </span>
                 <h2 class="font-serif text-2xl sm:text-4xl font-black text-white" data-i18n="consoleTitle">
-                    Found a Scratch or Paint Defect? Let Our Masters Inspect It.
+                    Configure Your Vehicle's Restoration & Care
                 </h2>
                 <p class="text-xs sm:text-sm text-zinc-400" data-i18n="consoleSub">
-                    Select your service track below. All submissions stream live by the second to our Backoffice Master Technicians.
+                    An effortless, interactive concierge experience. Your submission streams live by the second to our Master Specialists.
                 </p>
             </div>
 
             <!-- Dual Mode Selector Tabs -->
-            <div class="max-w-xl mx-auto grid grid-cols-2 p-1.5 rounded-2xl bg-leather border border-gold-400/25 mb-8">
+            <div class="max-w-xl mx-auto grid grid-cols-2 p-1.5 rounded-2xl bg-leather border border-gold-400/30 mb-8 shadow-2xl">
                 <button type="button" id="tabScratchBtn" onclick="switchConsoleTab('scratch')" class="py-3.5 px-4 rounded-xl font-extrabold text-xs sm:text-sm transition flex items-center justify-center gap-2 bg-gradient-to-r from-gold-400 to-gold-500 text-black shadow-lg">
                     <span>📸</span>
                     <span data-i18n="tabScratchTitle">Scratch & Paint Diagnosis</span>
@@ -393,90 +413,105 @@
             </div>
 
             <!-- ========================================================= -->
-            <!-- TAB 1: INSTANT SCRATCH & PAINT DEFECT DIAGNOSIS CONSOLE   -->
+            <!-- TAB 1: SEXY INTERACTIVE SCRATCH & PAINT DIAGNOSIS STUDIO  -->
             <!-- ========================================================= -->
             <div id="panelScratch" class="piano-card-gold rounded-3xl p-5 sm:p-8 lg:p-10 max-w-4xl mx-auto">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 mb-6 border-b border-white/10">
                     <div>
                         <div class="inline-flex items-center gap-2 text-xs font-bold text-emerald-400 mb-1">
                             <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-                            <span data-i18n="formLiveIndicator">Instant Priority Transmission to Dr. Care Backoffice</span>
+                            <span data-i18n="formLiveIndicator">Direct Encrypted Telemetry to Dr. Care Specialists</span>
                         </div>
                         <h3 class="text-xl sm:text-2xl font-black text-white" data-i18n="scratchFormHeader">
-                            Upload Paint Issue & Vehicle Profile
+                            Interactive Paint Defect & Scratch Assessment
                         </h3>
                     </div>
-                    <div class="bg-black/60 border border-gold-400/30 rounded-2xl px-4 py-2.5">
-                        <span class="text-[11px] uppercase tracking-wider text-zinc-400 block" data-i18n="sloganMiniTop">Our Promise</span>
+                    <div class="bg-black/65 border border-gold-400/35 rounded-2xl px-4 py-2.5">
+                        <span class="text-[11px] uppercase tracking-wider text-zinc-400 block" data-i18n="sloganMiniTop">Asset Protection</span>
                         <span class="text-xs font-extrabold gold-metallic" data-i18n="sloganMiniBottom">Save Your Investment Now</span>
                     </div>
                 </div>
 
                 <form id="scratchConsultForm" onsubmit="submitScratchConsultation(event)" class="space-y-6">
                     
-                    <!-- Step 1: Client Contact Details -->
+                    <!-- Step 1: Client Contact Details with Clean Label Examples -->
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
-                            <label for="clientName" class="block text-xs font-bold uppercase tracking-wider text-gold-200 mb-2" data-i18n="lblClientName">
-                                1. Your Name *
-                            </label>
+                            <div class="flex items-center justify-between mb-1.5">
+                                <label for="clientName" class="text-xs font-bold uppercase tracking-wider text-gold-200" data-i18n="lblClientName">
+                                    1. Client Full Name *
+                                </label>
+                                <span class="text-[11px] text-zinc-400 italic" data-i18n="exClientName">e.g. Kareem Selim</span>
+                            </div>
                             <input type="text" id="clientName" required
                                    data-i18n-placeholder="phClientName"
-                                   placeholder="Mr. Ahmed / مستر أحمد"
+                                   placeholder="e.g. Enter your full name..."
                                    class="w-full px-4 py-3.5 rounded-xl bg-black/75 border border-white/15 focus:border-gold-400 focus:outline-none text-white text-sm font-medium transition">
                         </div>
                         <div>
-                            <label for="clientPhone" class="block text-xs font-bold uppercase tracking-wider text-gold-200 mb-2" data-i18n="lblClientPhone">
-                                2. Mobile / WhatsApp Number *
-                            </label>
+                            <div class="flex items-center justify-between mb-1.5">
+                                <label for="clientPhone" class="text-xs font-bold uppercase tracking-wider text-gold-200" data-i18n="lblClientPhone">
+                                    2. Mobile / WhatsApp Number *
+                                </label>
+                                <span class="text-[11px] text-zinc-400 italic" dir="ltr">e.g. 01X XXXX XXXX</span>
+                            </div>
                             <input type="tel" id="clientPhone" required
-                                   placeholder="0100 330 0600" dir="ltr"
+                                   placeholder="e.g. 01X XXXX XXXX" dir="ltr"
                                    class="w-full px-4 py-3.5 rounded-xl bg-black/75 border border-white/15 focus:border-gold-400 focus:outline-none text-white text-sm font-medium transition">
                         </div>
                     </div>
 
-                    <!-- Step 2: Vehicle Make, Model, Year & Color Selection -->
-                    <div class="p-4 sm:p-5 rounded-2xl bg-black/45 border border-white/10 space-y-4">
+                    <!-- Step 2: Vehicle Make, Model, Year & Color Configurator -->
+                    <div class="p-4 sm:p-6 rounded-2xl bg-black/50 border border-white/10 space-y-5">
                         <div class="flex flex-wrap items-center justify-between gap-2">
                             <span class="text-xs font-extrabold uppercase tracking-wider text-gold-300" data-i18n="lblVehicleSection">
-                                3. Vehicle Specifications (Type • Model • Color)
+                                3. Vehicle Identity (Type • Model • Finish Color)
                             </span>
-                            <span class="text-[11px] text-zinc-400" data-i18n="lblVehicleHint">Helps us prepare exact Meguiar's & Rupes compounds</span>
+                            <span class="text-[11px] text-zinc-400" data-i18n="lblVehicleHint">Example: Mercedes-Benz • S580 2026 • Obsidian Black</span>
                         </div>
 
                         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                             <!-- Car Brand / Type -->
                             <div>
-                                <label for="carBrand" class="block text-xs font-semibold text-zinc-300 mb-1.5" data-i18n="lblCarBrand">Car Make / Brand *</label>
+                                <div class="flex justify-between mb-1.5">
+                                    <label for="carBrand" class="text-xs font-semibold text-zinc-300" data-i18n="lblCarBrand">Car Make / Brand *</label>
+                                    <span class="text-[10px] text-zinc-500">e.g. Porsche / BMW</span>
+                                </div>
                                 <select id="carBrand" required class="w-full px-3.5 py-3 rounded-xl bg-leather border border-white/15 focus:border-gold-400 text-white text-sm focus:outline-none">
-                                    <option value="" data-i18n="optSelectBrand">-- Select Make --</option>
+                                    <option value="" data-i18n="optSelectBrand">-- Select Vehicle Make --</option>
                                     <option value="Mercedes-Benz">Mercedes-Benz</option>
                                     <option value="BMW">BMW</option>
                                     <option value="Porsche">Porsche</option>
-                                    <option value="Audi">Audi</option>
                                     <option value="Range Rover / Land Rover">Range Rover / Land Rover</option>
-                                    <option value="Xiaomi SU7 / EV">Xiaomi SU7 / Luxury EV</option>
+                                    <option value="Audi">Audi</option>
+                                    <option value="Xiaomi SU7 / Luxury EV">Xiaomi SU7 / Luxury EV</option>
                                     <option value="Lexus">Lexus</option>
+                                    <option value="Maserati / Ferrari">Maserati / Ferrari</option>
                                     <option value="Volkswagen">Volkswagen</option>
                                     <option value="Alfa Romeo">Alfa Romeo</option>
                                     <option value="Toyota / SUV">Toyota / SUV</option>
-                                    <option value="Hyundai / Kia">Hyundai / Kia</option>
                                     <option value="Other Luxury Vehicle">Other Vehicle</option>
                                 </select>
                             </div>
 
                             <!-- Car Model & Year -->
                             <div>
-                                <label for="carModel" class="block text-xs font-semibold text-zinc-300 mb-1.5" data-i18n="lblCarModel">Model & Year *</label>
+                                <div class="flex justify-between mb-1.5">
+                                    <label for="carModel" class="text-xs font-semibold text-zinc-300" data-i18n="lblCarModel">Model & Year *</label>
+                                    <span class="text-[10px] text-zinc-500">e.g. G63 / 911 / E300</span>
+                                </div>
                                 <input type="text" id="carModel" required
                                        data-i18n-placeholder="phCarModel"
-                                       placeholder="e.g. E200 2025 / BMW M5 / Cayenne"
+                                       placeholder="e.g. S580 • 2026"
                                        class="w-full px-3.5 py-3 rounded-xl bg-leather border border-white/15 focus:border-gold-400 text-white text-sm focus:outline-none">
                             </div>
 
                             <!-- Service District -->
                             <div>
-                                <label for="clientZone" class="block text-xs font-semibold text-zinc-300 mb-1.5" data-i18n="lblClientZone">District / Location *</label>
+                                <div class="flex justify-between mb-1.5">
+                                    <label for="clientZone" class="text-xs font-semibold text-zinc-300" data-i18n="lblClientZone">Preferred Zone *</label>
+                                    <span class="text-[10px] text-zinc-500">e.g. Heliopolis</span>
+                                </div>
                                 <select id="clientZone" required class="w-full px-3.5 py-3 rounded-xl bg-leather border border-white/15 focus:border-gold-400 text-white text-sm focus:outline-none">
                                     <option value="Heliopolis">Heliopolis (مصر الجديدة)</option>
                                     <option value="Nasr City">Nasr City (مدينة نصر)</option>
@@ -486,52 +521,92 @@
                             </div>
                         </div>
 
-                        <!-- Interactive Car Paint Color Swatches + Input -->
-                        <div class="pt-2">
-                            <label for="carColorInput" class="block text-xs font-semibold text-zinc-300 mb-2" data-i18n="lblCarColor">
-                                Vehicle Paint Color (Select Swatch or Type Exact Finish) *
-                            </label>
-                            <div class="flex flex-wrap items-center gap-2" id="colorSwatchContainer">
+                        <!-- Interactive Car Paint Color Swatches -->
+                        <div class="pt-1">
+                            <div class="flex items-center justify-between mb-2">
+                                <label for="carColorInput" class="text-xs font-semibold text-zinc-300" data-i18n="lblCarColor">
+                                    Paint Finish & Color (Tap Swatch or Type Custom Shade) *
+                                </label>
+                                <span class="text-[11px] text-zinc-400 italic" data-i18n="exCarColor">e.g. Obsidian Black Metallic</span>
+                            </div>
+                            <div class="flex flex-wrap items-center gap-2">
                                 <button type="button" onclick="selectCarColor(this, 'Obsidian Black (أسود ميتاليك)')" class="color-swatch-btn px-3 py-1.5 rounded-xl bg-black border-2 border-gold-400 text-xs font-bold text-white flex items-center gap-2 transition">
                                     <span class="w-3.5 h-3.5 rounded-full bg-black border border-white/50"></span> Obsidian Black
                                 </button>
                                 <button type="button" onclick="selectCarColor(this, 'Pearl White (أبيض لؤلؤي)')" class="color-swatch-btn px-3 py-1.5 rounded-xl bg-zinc-900 border border-white/15 text-xs font-semibold text-zinc-200 flex items-center gap-2 hover:border-gold-300 transition">
                                     <span class="w-3.5 h-3.5 rounded-full bg-white"></span> Pearl White
                                 </button>
-                                <button type="button" onclick="selectCarColor(this, 'Metallic Silver / Grey (فضي / فيراني)')" class="color-swatch-btn px-3 py-1.5 rounded-xl bg-zinc-900 border border-white/15 text-xs font-semibold text-zinc-200 flex items-center gap-2 hover:border-gold-300 transition">
-                                    <span class="w-3.5 h-3.5 rounded-full bg-zinc-400"></span> Silver / Grey
+                                <button type="button" onclick="selectCarColor(this, 'Selenite Grey / Silver (فضي / فيراني)')" class="color-swatch-btn px-3 py-1.5 rounded-xl bg-zinc-900 border border-white/15 text-xs font-semibold text-zinc-200 flex items-center gap-2 hover:border-gold-300 transition">
+                                    <span class="w-3.5 h-3.5 rounded-full bg-zinc-400"></span> Grey / Silver
                                 </button>
-                                <button type="button" onclick="selectCarColor(this, 'Deep Sapphire Blue (كحلي / أزرق)')" class="color-swatch-btn px-3 py-1.5 rounded-xl bg-zinc-900 border border-white/15 text-xs font-semibold text-zinc-200 flex items-center gap-2 hover:border-gold-300 transition">
+                                <button type="button" onclick="selectCarColor(this, 'Tanzanite Blue (كحلي ميتاليك)')" class="color-swatch-btn px-3 py-1.5 rounded-xl bg-zinc-900 border border-white/15 text-xs font-semibold text-zinc-200 flex items-center gap-2 hover:border-gold-300 transition">
                                     <span class="w-3.5 h-3.5 rounded-full bg-blue-700"></span> Sapphire Blue
                                 </button>
-                                <button type="button" onclick="selectCarColor(this, 'Crimson Red (أحمر)')" class="color-swatch-btn px-3 py-1.5 rounded-xl bg-zinc-900 border border-white/15 text-xs font-semibold text-zinc-200 flex items-center gap-2 hover:border-gold-300 transition">
+                                <button type="button" onclick="selectCarColor(this, 'Rosso Corsa / Red (أحمر)')" class="color-swatch-btn px-3 py-1.5 rounded-xl bg-zinc-900 border border-white/15 text-xs font-semibold text-zinc-200 flex items-center gap-2 hover:border-gold-300 transition">
                                     <span class="w-3.5 h-3.5 rounded-full bg-red-600"></span> Crimson Red
                                 </button>
-                                <button type="button" onclick="selectCarColor(this, 'Champagne Gold / Bronze (ذهبي / شامبين)')" class="color-swatch-btn px-3 py-1.5 rounded-xl bg-zinc-900 border border-white/15 text-xs font-semibold text-zinc-200 flex items-center gap-2 hover:border-gold-300 transition">
-                                    <span class="w-3.5 h-3.5 rounded-full bg-amber-300"></span> Champagne
+                                <button type="button" onclick="selectCarColor(this, 'Emerald Green (أخضر ملكي)')" class="color-swatch-btn px-3 py-1.5 rounded-xl bg-zinc-900 border border-white/15 text-xs font-semibold text-zinc-200 flex items-center gap-2 hover:border-gold-300 transition">
+                                    <span class="w-3.5 h-3.5 rounded-full bg-emerald-700"></span> British Green
                                 </button>
                                 <input type="text" id="carColorInput" required value="Obsidian Black (أسود ميتاليك)"
+                                       placeholder="e.g. Matte Grey / Custom Color..."
                                        class="flex-1 min-w-[190px] px-3.5 py-1.5 rounded-xl bg-black/85 border border-gold-400/50 text-gold-200 text-xs font-bold focus:outline-none">
+                            </div>
+                        </div>
+
+                        <!-- NEW SEXY INTERACTIVE VEHICLE BODY ZONE SELECTOR -->
+                        <div class="pt-3 border-t border-white/10">
+                            <div class="flex flex-wrap items-center justify-between gap-2 mb-2.5">
+                                <span class="text-xs font-extrabold uppercase tracking-wider text-gold-300" data-i18n="lblBodyZoneMap">
+                                    4. Interactive Body Map — Tap Affected Paint Zone(s)
+                                </span>
+                                <span class="text-[11px] text-zinc-400 italic" data-i18n="exBodyZone">e.g. Front Hood + Right Doors</span>
+                            </div>
+                            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2" id="bodyZoneGrid">
+                                <button type="button" onclick="toggleCarBodyZone(this, 'Front Hood (الكبوت)')" class="car-zone-btn active px-3 py-2.5 rounded-xl bg-black/70 border border-white/15 text-xs font-bold text-zinc-300 flex flex-col items-center gap-1">
+                                    <span>🛡️</span>
+                                    <span data-i18n="zoneHood">Front Hood</span>
+                                </button>
+                                <button type="button" onclick="toggleCarBodyZone(this, 'Left Doors/Fender (الجانب الأيسر)')" class="car-zone-btn px-3 py-2.5 rounded-xl bg-black/70 border border-white/15 text-xs font-bold text-zinc-300 flex flex-col items-center gap-1">
+                                    <span>🚘</span>
+                                    <span data-i18n="zoneLeft">Left Side</span>
+                                </button>
+                                <button type="button" onclick="toggleCarBodyZone(this, 'Right Doors/Fender (الجانب الأيمن)')" class="car-zone-btn px-3 py-2.5 rounded-xl bg-black/70 border border-white/15 text-xs font-bold text-zinc-300 flex flex-col items-center gap-1">
+                                    <span>🚖</span>
+                                    <span data-i18n="zoneRight">Right Side</span>
+                                </button>
+                                <button type="button" onclick="toggleCarBodyZone(this, 'Roof & Pillars (السقف والقوائم)')" class="car-zone-btn px-3 py-2.5 rounded-xl bg-black/70 border border-white/15 text-xs font-bold text-zinc-300 flex flex-col items-center gap-1">
+                                    <span>☀️</span>
+                                    <span data-i18n="zoneRoof">Roof Panel</span>
+                                </button>
+                                <button type="button" onclick="toggleCarBodyZone(this, 'Rear Trunk/Bumper (الشنطة والخلفي)')" class="car-zone-btn px-3 py-2.5 rounded-xl bg-black/70 border border-white/15 text-xs font-bold text-zinc-300 flex flex-col items-center gap-1">
+                                    <span>🔙</span>
+                                    <span data-i18n="zoneRear">Rear / Trunk</span>
+                                </button>
+                                <button type="button" onclick="toggleCarBodyZone(this, 'Full Body Correction (كامل السيارة)')" class="car-zone-btn px-3 py-2.5 rounded-xl bg-black/70 border border-white/15 text-xs font-bold text-zinc-300 flex flex-col items-center gap-1">
+                                    <span>✨</span>
+                                    <span data-i18n="zoneFull">Full Body</span>
+                                </button>
                             </div>
                         </div>
                     </div>
 
                     <!-- Step 3: Multi-Media Upload (Up to 5 Photos OR 60s Video + Resolution Selector 140p to 1080p) -->
-                    <div class="p-4 sm:p-5 rounded-2xl bg-black/55 border border-gold-400/35 space-y-4">
+                    <div class="p-4 sm:p-6 rounded-2xl bg-black/55 border border-gold-400/35 space-y-4">
                         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                             <div>
                                 <span class="text-xs font-extrabold uppercase tracking-wider text-gold-300 block" data-i18n="lblMediaSection">
-                                    4. Upload Scratch / Paint Defect Media (Up to 5 Photos OR 60s Video) *
+                                    5. Upload Scratch / Paint Defect Media (Up to 5 Photos OR 60s Video) *
                                 </span>
                                 <span class="text-[11px] text-zinc-400" data-i18n="lblMediaSub">
-                                    Clean grid preview • Select capture resolution from 140p up to 1080p Full HD
+                                    Example: 2 close-up angles + 1 wide reflection shot • Resolution from 140p to 1080p HD
                                 </span>
                             </div>
 
                             <!-- Resolution Quality Selector (140p to 1080p) -->
                             <div class="flex items-center gap-2">
                                 <label for="mediaResolution" class="text-xs font-bold text-gold-200 whitespace-nowrap" data-i18n="lblResolution">
-                                    Quality:
+                                    Resolution:
                                 </label>
                                 <select id="mediaResolution" onchange="updateResolutionBadge()" class="px-3 py-2 rounded-xl bg-leather border border-gold-400/45 text-gold-200 text-xs font-extrabold focus:outline-none">
                                     <option value="1080">1080p Full HD (Master Detail)</option>
@@ -557,7 +632,7 @@
                                 Tap to Capture or Upload Up to 5 Photos (or 1 Video up to 60s)
                             </p>
                             <p class="text-xs text-zinc-400 mt-1">
-                                <span data-i18n="dropzoneActiveRes">Active Processing Resolution:</span>
+                                <span data-i18n="dropzoneActiveRes">Active Optical Resolution:</span>
                                 <span id="activeResBadge" class="text-gold-300 font-bold">1080p Full HD (Master Detail)</span>
                             </p>
                         </div>
@@ -565,7 +640,7 @@
                         <!-- Processing Spinner Banner -->
                         <div id="mediaProcessingStatus" class="hidden p-3 rounded-xl bg-gold-400/15 border border-gold-400/40 text-xs font-bold text-gold-200 flex items-center justify-center gap-2">
                             <span class="w-3.5 h-3.5 rounded-full border-2 border-gold-300 border-t-transparent animate-spin"></span>
-                            <span id="mediaProcessingText">Optimizing high-resolution media...</span>
+                            <span>Processing high-resolution optical media...</span>
                         </div>
 
                         <!-- Responsive Clean Thumbnail Grid -->
@@ -579,11 +654,15 @@
                             <div id="mediaThumbnailGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3"></div>
                         </div>
 
-                        <!-- Optional Client Notes -->
+                        <!-- Optional Client Notes with Example Label -->
                         <div>
+                            <div class="flex justify-between mb-1">
+                                <label for="clientNotes" class="text-[11px] font-semibold text-zinc-400" data-i18n="lblNotesOptional">Additional Defect Description (Optional)</label>
+                                <span class="text-[11px] text-zinc-500 italic" data-i18n="exNotesOptional">e.g. Key scratch on door / Swirl marks under sunlight</span>
+                            </div>
                             <input type="text" id="clientNotes"
                                    data-i18n-placeholder="phClientNotes"
-                                   placeholder="Optional note: e.g. Deep scratch on front hood / swirl marks from wash..."
+                                   placeholder="e.g. Deep scratch on front hood or water spots..."
                                    class="w-full px-4 py-3 rounded-xl bg-black/65 border border-white/15 focus:border-gold-400 text-xs text-white focus:outline-none">
                         </div>
                     </div>
@@ -591,7 +670,7 @@
                     <!-- Submit Button -->
                     <button type="submit" id="submitScratchBtn" class="w-full btn-gold-elite py-4 px-6 rounded-2xl font-extrabold text-base tracking-wide flex items-center justify-center gap-3">
                         <span>🚀</span>
-                        <span data-i18n="submitScratchBtnText">Send High-Res Inspection to Dr. Care Masters</span>
+                        <span data-i18n="submitScratchBtnText">Transmit High-Res Diagnosis to Dr. Care Masters</span>
                     </button>
                 </form>
 
@@ -599,21 +678,11 @@
                 <div id="scratchSuccessBanner" class="hidden mt-6 p-6 rounded-2xl bg-emerald-950/70 border border-emerald-400/60 text-center space-y-3">
                     <div class="w-12 h-12 rounded-full bg-emerald-500/20 border border-emerald-400 flex items-center justify-center mx-auto text-2xl">✨</div>
                     <h4 class="text-lg font-black text-white" data-i18n="successHeader">
-                        Inspection Received Live! Welcome to the Dr. Care Family.
+                        Diagnosis Received Live! Welcome to the Dr. Care Atelier.
                     </h4>
                     <p class="text-xs sm:text-sm text-zinc-300 max-w-xl mx-auto" data-i18n="successBody">
-                        Your vehicle profile and media are now open on our Master Technician's screen. We will contact you shortly with your tailored treatment plan.
+                        Your vehicle telemetry and high-res media are now displayed on our Master Specialist's console. We will contact you shortly with your tailored treatment plan.
                     </p>
-                    <div class="pt-2 flex flex-wrap justify-center gap-3">
-                        <a id="directWaFollowup" href="https://wa.me/201003300600" target="_blank" rel="noopener noreferrer"
-                           class="px-5 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black font-extrabold text-xs inline-flex items-center gap-2 shadow-lg">
-                            <span>💬</span>
-                            <span data-i18n="btnFastTrackWa">Fast-Track via WhatsApp Now</span>
-                        </a>
-                        <button type="button" onclick="openBackofficeModal()" class="px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-gold-200 font-bold text-xs">
-                            ⚡ View in Live Backoffice
-                        </button>
-                    </div>
                 </div>
             </div>
 
@@ -624,7 +693,7 @@
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-5">
                     <div>
                         <span class="text-xs font-extrabold uppercase tracking-wider text-gold-400 block" data-i18n="washKicker">
-                            THU • FRI • SAT MOBILE CONCIERGE
+                            THU • FRI • SAT PRIVATE MOBILE CONCIERGE
                         </span>
                         <h3 class="text-xl sm:text-2xl font-black text-white" data-i18n="washHeader">
                             Select Your Nano Dry Wash & Gloss Package
@@ -680,31 +749,43 @@
                     </div>
                 </div>
 
-                <!-- Weekend Booking Form -->
+                <!-- Weekend Booking Form with Clean Generic Examples -->
                 <form id="washBookingForm" onsubmit="submitWashBooking(event)" class="space-y-4 pt-2">
                     <input type="hidden" id="selectedPkgName" value="Standard Exterior (550 EGP - Deposit 83 EGP)">
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                        <input type="text" id="washClientName" required
-                               data-i18n-placeholder="phWashName"
-                               placeholder="Full Name *"
-                               class="px-4 py-3.5 rounded-xl bg-black/75 border border-white/15 text-white text-sm focus:border-gold-400 focus:outline-none">
-                        <input type="tel" id="washClientPhone" required
-                               placeholder="0100 330 0600 *" dir="ltr"
-                               class="px-4 py-3.5 rounded-xl bg-black/75 border border-white/15 text-white text-sm focus:border-gold-400 focus:outline-none">
-                        <input type="text" id="washCarInfo" required
-                               data-i18n-placeholder="phWashCar"
-                               placeholder="Car Make, Model & Color *"
-                               class="px-4 py-3.5 rounded-xl bg-black/75 border border-white/15 text-white text-sm focus:border-gold-400 focus:outline-none">
-                        <select id="washDaySlot" required class="px-4 py-3.5 rounded-xl bg-leather border border-white/15 text-white text-sm focus:border-gold-400 focus:outline-none">
-                            <option value="Thursday Morning">Thursday — Morning Slot</option>
-                            <option value="Thursday Afternoon">Thursday — Afternoon Slot</option>
-                            <option value="Friday Morning">Friday — Morning Slot</option>
-                            <option value="Friday Afternoon">Friday — Afternoon Slot</option>
-                            <option value="Saturday Morning">Saturday — Morning Slot</option>
-                            <option value="Saturday Afternoon">Saturday — Afternoon Slot</option>
-                        </select>
+                        <div>
+                            <label class="block text-[11px] text-zinc-400 mb-1" data-i18n="exWashName">Client Name (e.g. Tarek Nour)</label>
+                            <input type="text" id="washClientName" required
+                                   data-i18n-placeholder="phWashName"
+                                   placeholder="e.g. Full Name *"
+                                   class="w-full px-4 py-3.5 rounded-xl bg-black/75 border border-white/15 text-white text-sm focus:border-gold-400 focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] text-zinc-400 mb-1" dir="ltr">Mobile (e.g. 01X XXXX XXXX)</label>
+                            <input type="tel" id="washClientPhone" required
+                                   placeholder="e.g. 01X XXXX XXXX *" dir="ltr"
+                                   class="w-full px-4 py-3.5 rounded-xl bg-black/75 border border-white/15 text-white text-sm focus:border-gold-400 focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] text-zinc-400 mb-1" data-i18n="exWashCar">Vehicle (e.g. BMW X6 • Black)</label>
+                            <input type="text" id="washCarInfo" required
+                                   data-i18n-placeholder="phWashCar"
+                                   placeholder="e.g. Make, Model & Color *"
+                                   class="w-full px-4 py-3.5 rounded-xl bg-black/75 border border-white/15 text-white text-sm focus:border-gold-400 focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] text-zinc-400 mb-1" data-i18n="exWashSlot">Preferred Weekend Slot</label>
+                            <select id="washDaySlot" required class="w-full px-4 py-3.5 rounded-xl bg-leather border border-white/15 text-white text-sm focus:border-gold-400 focus:outline-none">
+                                <option value="Thursday Morning">Thursday — Morning Slot</option>
+                                <option value="Thursday Afternoon">Thursday — Afternoon Slot</option>
+                                <option value="Friday Morning">Friday — Morning Slot</option>
+                                <option value="Friday Afternoon">Friday — Afternoon Slot</option>
+                                <option value="Saturday Morning">Saturday — Morning Slot</option>
+                                <option value="Saturday Afternoon">Saturday — Afternoon Slot</option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
                         <select id="washZone" class="px-4 py-3.5 rounded-xl bg-leather border border-white/15 text-white text-sm focus:border-gold-400 focus:outline-none">
                             <option value="Heliopolis">Heliopolis (مصر الجديدة)</option>
                             <option value="Nasr City">Nasr City (مدينة نصر)</option>
@@ -723,7 +804,7 @@
                         🌟 VIP Weekend Slot Logged Live!
                     </h4>
                     <p class="text-xs text-zinc-300" data-i18n="washSuccessSub">
-                        Our representative will contact you shortly to coordinate your 15% deposit and finalize your slot.
+                        Our concierge specialist will contact you shortly to coordinate your 15% deposit and finalize your slot.
                     </p>
                 </div>
             </div>
@@ -760,8 +841,8 @@
 
     </main>
 
-    <!-- LUXURY FOOTER -->
-    <footer class="border-t border-white/10 bg-black/85 py-10 px-4">
+    <!-- LUXURY FOOTER (CLEAN OF PERSONAL DATA) -->
+    <footer class="border-t border-white/10 bg-black/90 py-10 px-4">
         <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
             <div class="flex items-center gap-3">
                 <div class="w-10 h-10 rounded-xl bg-leather border border-gold-400/40 flex items-center justify-center text-gold-400 font-serif font-black">
@@ -769,25 +850,24 @@
                 </div>
                 <div>
                     <p class="font-serif font-black tracking-widest gold-metallic text-sm">DR. CARE — REVIVING THE AUTOMOTIVE SOUL</p>
-                    <p class="text-xs text-zinc-500">Save Your Investment Now • Heliopolis, Cairo, Egypt (+20 100 330 0600)</p>
+                    <p class="text-xs text-zinc-500">Save Your Investment Now • Bespoke Mobile Paint Clinic</p>
                 </div>
             </div>
             <div class="flex flex-wrap items-center gap-3">
-                <a href="https://wa.me/201003300600?text=Hello%20Dr.%20Care,%20I%20would%20like%20a%20paint%20consultation." target="_blank" rel="noopener noreferrer"
-                   class="px-4 py-2.5 rounded-xl bg-emerald-500/15 border border-emerald-500/40 text-emerald-300 text-xs font-extrabold hover:bg-emerald-500/25 transition">
-                    💬 Direct Concierge WhatsApp
+                <a href="#clinic-console" class="px-4 py-2.5 rounded-xl bg-gold-400/15 border border-gold-400/40 text-gold-200 text-xs font-extrabold hover:bg-gold-400/25 transition">
+                    ✨ Start Online Inspection
                 </a>
                 <button type="button" onclick="openBackofficeModal()" class="px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-zinc-400 hover:text-gold-300 text-xs font-bold">
-                    🔒 Manager Live CRM
+                    🔒 Executive Live CRM
                 </button>
             </div>
         </div>
     </footer>
 
     <!-- ============================================================================ -->
-    <!-- BACKOFFICE LIVE COMMAND CENTER (SECOND-BY-SECOND REALTIME DASHBOARD)         -->
+    <!-- BACKOFFICE LIVE COMMAND CENTER (ZERO PUBLIC CREDENTIAL HINTS)                -->
     <!-- ============================================================================ -->
-    <div id="backofficeModal" class="fixed inset-0 z-50 hidden bg-black/90 backdrop-blur-xl overflow-y-auto p-3 sm:p-6">
+    <div id="backofficeModal" class="fixed inset-0 z-50 hidden bg-black/90 backdrop-blur-2xl overflow-y-auto p-3 sm:p-6">
         <div class="max-w-6xl mx-auto piano-card-gold rounded-3xl p-4 sm:p-6 lg:p-8 space-y-6 my-4">
             
             <!-- Backoffice Top Bar with Second-by-Second Heartbeat -->
@@ -798,9 +878,9 @@
                     </div>
                     <div>
                         <div class="flex items-center gap-2">
-                            <h3 class="font-serif text-lg sm:text-xl font-black text-white">DR. CARE BACKOFFICE COMMAND</h3>
+                            <h3 class="font-serif text-lg sm:text-xl font-black text-white">DR. CARE EXECUTIVE COMMAND</h3>
                             <span class="px-2 py-0.5 rounded-md bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 text-[10px] font-extrabold">
-                                LIVE STREAM
+                                REALTIME TELEMETRY
                             </span>
                         </div>
                         <p class="text-xs text-zinc-400">
@@ -823,18 +903,22 @@
                 </div>
             </div>
 
-            <!-- PIN Gate (Default PIN: 2026 or 1990) -->
-            <div id="crmPinGate" class="max-w-md mx-auto py-8 text-center space-y-4">
-                <p class="text-sm font-bold text-gold-200">Enter Master PIN to Unlock Live Customer Stream</p>
-                <p class="text-xs text-zinc-400">(Master PIN: <code class="text-gold-300">2026</code> or <code class="text-gold-300">1990</code>)</p>
-                <div class="flex gap-2 justify-center">
-                    <input type="password" id="managerPinInput" placeholder="••••" maxlength="8"
+            <!-- SECURE PIN GATE (NO ACCESS DATA OR PIN HINTS EXPOSED ON SCREEN) -->
+            <div id="crmPinGate" class="max-w-md mx-auto py-10 text-center space-y-4">
+                <div class="w-14 h-14 rounded-2xl bg-gold-400/10 border border-gold-400/40 flex items-center justify-center mx-auto text-gold-300 text-2xl">
+                    🔐
+                </div>
+                <p class="text-base font-extrabold text-gold-200">Executive Backoffice Authorization</p>
+                <p class="text-xs text-zinc-400">Enter your authorized 4-digit executive security key to unlock live customer telemetry.</p>
+                <div class="flex gap-2 justify-center pt-1">
+                    <input type="password" id="managerPinInput" placeholder="e.g. ••••" maxlength="8" autocomplete="off"
                            onkeydown="if(event.key==='Enter') unlockCrmDashboard()"
-                           class="w-40 text-center text-lg tracking-widest font-black px-4 py-2.5 rounded-xl bg-black border border-gold-400/50 text-white focus:outline-none">
+                           class="w-44 text-center text-lg tracking-widest font-black px-4 py-2.5 rounded-xl bg-black border border-gold-400/50 text-white focus:outline-none">
                     <button type="button" onclick="unlockCrmDashboard()" class="btn-gold-elite px-6 py-2.5 rounded-xl font-extrabold text-xs uppercase">
-                        Unlock Feed
+                        Authorize
                     </button>
                 </div>
+                <p id="pinErrorMsg" class="hidden text-xs font-bold text-rose-400">Unauthorized access key. Please verify your credentials.</p>
             </div>
 
             <!-- Unlocked Live Backoffice Content -->
@@ -855,7 +939,7 @@
                         <p id="kpiWashLeads" class="text-2xl font-black text-emerald-300 mt-1">0</p>
                     </div>
                     <div class="p-4 rounded-2xl bg-black/65 border border-white/10">
-                        <span class="text-[11px] text-zinc-400 uppercase font-bold">Storage Engine</span>
+                        <span class="text-[11px] text-zinc-400 uppercase font-bold">Telemetry Engine</span>
                         <p class="text-xs font-mono font-bold text-emerald-400 mt-2">IndexedDB + Live Sync</p>
                     </div>
                 </div>
@@ -877,7 +961,7 @@
                         </select>
                     </div>
                     <button type="button" onclick="simulateIncomingVipLead()" class="px-3.5 py-2 rounded-xl bg-gold-400/15 hover:bg-gold-400/25 border border-gold-400/40 text-gold-200 text-xs font-extrabold">
-                        ⚡ Simulate Instant Live Customer Ping
+                        ⚡ Simulate Sample VIP Request
                     </button>
                 </div>
 
@@ -899,12 +983,17 @@
     </div>
 
     <!-- ============================================================================ -->
-    <!-- CORE APPLICATION SCRIPT: BILINGUAL, INDEXED-DB MEDIA, SLIDER & LIVE CRM      -->
+    <!-- CORE APPLICATION SCRIPT                                                      -->
     <!-- ============================================================================ -->
     <script>
         // =========================================================================
-        // 1. SECURITY HELPER: HTML ESCAPE (PREVENTS XSS OR BROKEN MARKUP)
+        // 1. AMBIENT SPOTLIGHT & SECURITY ESCAPE
         // =========================================================================
+        function updateAmbientSpotlight(e) {
+            document.documentElement.style.setProperty('--spotlight-x', e.clientX + 'px');
+            document.documentElement.style.setProperty('--spotlight-y', e.clientY + 'px');
+        }
+
         function escapeHtml(str) {
             return String(str || '')
                 .replace(/&/g, '&amp;')
@@ -920,59 +1009,70 @@
         let currentLang = 'en';
         const i18nDict = {
             en: {
-                topBarLive: "LIVE PAINT CLINIC CONCIERGE • HELIOPOLIS • NASR CITY • MADINATY • 5TH SETTLEMENT",
+                topBarLive: "BESPOKE PAINT ATELIER • HELIOPOLIS • NASR CITY • MADINATY • 5TH SETTLEMENT",
                 topBarQuote: "\"Save Your Investment Now\"",
-                topBarDays: "Thu • Fri • Sat Exclusive Mobile Units",
+                topBarDays: "Thu • Fri • Sat Private Mobile Concierge",
                 brandSlogan: "— Reviving The Automotive Soul —",
-                navCrmBtn: "Live Backoffice",
-                navConsultCta: "Diagnose Paint Now",
-                heroBadge: "Bespoke Automotive Paint Restoration Clinic",
+                navCrmBtn: "Executive Backoffice",
+                navConsultCta: "Start Paint Diagnosis",
+                heroBadge: "Signature Automotive Paint Restoration Atelier",
                 heroPreTitle: "DR. CARE — REVIVING THE AUTOMOTIVE SOUL",
-                heroHeadline1: "Restore Showroom",
-                heroHeadline2: "Piano-Black Mirror Gloss.",
+                heroHeadline1: "Sculpting Liquid",
+                heroHeadline2: "Piano-Black Mirror Perfection.",
                 heroQuoteTitle: "\"SAVE YOUR INVESTMENT NOW\"",
-                heroQuoteSub: "Every untreated scratch, oxidation patch, or improper wash diminishes your luxury vehicle's resale value. Upload photos or video of any paint defect below and receive a precision master assessment within minutes.",
-                heroBtnScratch: "Instant Scratch & Paint Diagnosis",
-                heroBtnWash: "Book Weekend Dry Wash",
-                stat1: "Zero-Swirl Mirror Finish",
+                heroQuoteSub: "Your vehicle's factory clear coat is its most valuable asset. Select the affected zone below, upload up to 5 photos or a 60-second video, and receive an immediate master restoration plan.",
+                heroBtnScratch: "Interactive Scratch & Paint Radar",
+                heroBtnWash: "Reserve Weekend Dry Wash",
+                stat1: "Optical Mirror Clarity",
                 stat2: "& Italian Rupes Systems",
-                stat3: "Live Expert Callback",
-                sliderHeader: "ACTUAL DR. CARE MERCEDES WORK — DRAG TO COMPARE",
-                sliderSubBadge: "100% Real Unedited Result",
+                stat3: "Live Master Assessment",
+                sliderHeader: "REAL MERCEDES TRANSFORMATION — DRAG TO INSPECT",
+                sliderSubBadge: "Unedited Optical Reflection",
                 afterTag: "AFTER: DR. CARE MIRROR GLOSS",
                 beforeTag: "BEFORE: OXIDATION & SCRATCHES",
                 inspectBeforeBtn: "🔍 Inspect Scratches (Before)",
                 sliderHint: "Slide left & right to witness depth of reflection",
                 inspectAfterBtn: "✨ Full Mirror Finish (After)",
-                consoleKicker: "DIRECT DIGITAL PAINT CLINIC",
-                consoleTitle: "Found a Scratch or Paint Defect? Let Our Masters Inspect It.",
-                consoleSub: "Select your service track below. All submissions stream live by the second to our Backoffice Master Technicians.",
+                consoleKicker: "BESPOKE DIGITAL PAINT TELEMETRY",
+                consoleTitle: "Configure Your Vehicle's Restoration & Care",
+                consoleSub: "An effortless, interactive concierge experience. Your submission streams live by the second to our Master Specialists.",
                 tabScratchTitle: "Scratch & Paint Diagnosis",
                 tabBookingTitle: "Weekend Dry Wash Slot",
-                formLiveIndicator: "Instant Priority Transmission to Dr. Care Backoffice",
-                scratchFormHeader: "Upload Paint Issue & Vehicle Profile",
-                sloganMiniTop: "Our Promise",
+                formLiveIndicator: "Direct Encrypted Telemetry to Dr. Care Specialists",
+                scratchFormHeader: "Interactive Paint Defect & Scratch Assessment",
+                sloganMiniTop: "Asset Protection",
                 sloganMiniBottom: "Save Your Investment Now",
-                lblClientName: "1. Your Name *",
+                lblClientName: "1. Client Full Name *",
+                exClientName: "e.g. Kareem Selim",
                 lblClientPhone: "2. Mobile / WhatsApp Number *",
-                lblVehicleSection: "3. Vehicle Specifications (Type • Model • Color)",
-                lblVehicleHint: "Helps us prepare exact Meguiar's & Rupes compounds",
+                lblVehicleSection: "3. Vehicle Identity (Type • Model • Finish Color)",
+                lblVehicleHint: "Example: Mercedes-Benz • S580 2026 • Obsidian Black",
                 lblCarBrand: "Car Make / Brand *",
-                optSelectBrand: "-- Select Make --",
+                optSelectBrand: "-- Select Vehicle Make --",
                 lblCarModel: "Model & Year *",
-                lblClientZone: "District / Location *",
-                lblCarColor: "Vehicle Paint Color (Select Swatch or Type Exact Finish) *",
-                lblMediaSection: "4. Upload Scratch / Paint Defect Media (Up to 5 Photos OR 60s Video) *",
-                lblMediaSub: "Clean grid preview • Select capture resolution from 140p up to 1080p Full HD",
-                lblResolution: "Quality:",
+                lblClientZone: "Preferred Zone *",
+                lblCarColor: "Paint Finish & Color (Tap Swatch or Type Custom Shade) *",
+                exCarColor: "e.g. Obsidian Black Metallic",
+                lblBodyZoneMap: "4. Interactive Body Map — Tap Affected Paint Zone(s)",
+                exBodyZone: "e.g. Front Hood + Right Doors",
+                zoneHood: "Front Hood",
+                zoneLeft: "Left Side",
+                zoneRight: "Right Side",
+                zoneRoof: "Roof Panel",
+                zoneRear: "Rear / Trunk",
+                zoneFull: "Full Body",
+                lblMediaSection: "5. Upload Scratch / Paint Defect Media (Up to 5 Photos OR 60s Video) *",
+                lblMediaSub: "Example: 2 close-up angles + 1 wide reflection shot • Resolution from 140p to 1080p HD",
+                lblResolution: "Resolution:",
                 dropzoneTitle: "Tap to Capture or Upload Up to 5 Photos (or 1 Video up to 60s)",
-                dropzoneActiveRes: "Active Processing Resolution:",
+                dropzoneActiveRes: "Active Optical Resolution:",
                 btnClearAll: "Clear All",
-                submitScratchBtnText: "Send High-Res Inspection to Dr. Care Masters",
-                successHeader: "Inspection Received Live! Welcome to the Dr. Care Family.",
-                successBody: "Your vehicle profile and media are now open on our Master Technician's screen. We will contact you shortly with your tailored treatment plan.",
-                btnFastTrackWa: "Fast-Track via WhatsApp Now",
-                washKicker: "THU • FRI • SAT MOBILE CONCIERGE",
+                lblNotesOptional: "Additional Defect Description (Optional)",
+                exNotesOptional: "e.g. Key scratch on door / Swirl marks under sunlight",
+                submitScratchBtnText: "Transmit High-Res Diagnosis to Dr. Care Masters",
+                successHeader: "Diagnosis Received Live! Welcome to the Dr. Care Atelier.",
+                successBody: "Your vehicle telemetry and high-res media are now displayed on our Master Specialist's console. We will contact you shortly with your tailored treatment plan.",
+                washKicker: "THU • FRI • SAT PRIVATE MOBILE CONCIERGE",
                 washHeader: "Select Your Nano Dry Wash & Gloss Package",
                 depositNotice: "15% Refundable Deposit Locks Your VIP Slot",
                 pkg1Time: "45 MINS",
@@ -987,75 +1087,89 @@
                 pkg3Title: "Executive Premium",
                 pkg3Desc: "Full exterior + rims + hydrophobic crystal glass coating protection.",
                 pkg3Dep: "15% Deposit: 145 EGP",
+                exWashName: "Client Name (e.g. Tarek Nour)",
+                exWashCar: "Vehicle (e.g. BMW X6 • Black)",
+                exWashSlot: "Preferred Weekend Slot",
                 btnConfirmWash: "Confirm Weekend Slot Reservation",
                 washSuccessTitle: "🌟 VIP Weekend Slot Logged Live!",
-                washSuccessSub: "Our representative will contact you shortly to coordinate your 15% deposit and finalize your slot.",
+                washSuccessSub: "Our concierge specialist will contact you shortly to coordinate your 15% deposit and finalize your slot.",
                 megSub: "USA POLYMER TECHNOLOGY",
                 megTitle: "Meguiar's Professional Compounds",
                 megDesc: "Optical-grade micro-abrasives & synthetic sealant protection safe for factory clear coats.",
                 rupSub: "ITALIAN ENGINEERING",
                 rupTitle: "Rupes BigFoot Orbital Systems",
                 rupDesc: "Zero-hologram dual-action precision polishing engineered in Milan, Italy.",
-                phClientName: "Mr. Ahmed / مستر أحمد",
-                phCarModel: "e.g. E200 2025 / BMW M5 / Cayenne",
-                phClientNotes: "Optional note: e.g. Deep scratch on front hood / swirl marks from wash...",
-                phWashName: "Full Name *",
-                phWashCar: "Car Make, Model & Color *"
+                phClientName: "e.g. Enter your full name...",
+                phCarModel: "e.g. S580 • 2026",
+                phClientNotes: "e.g. Deep scratch on front hood or water spots...",
+                phWashName: "e.g. Full Name *",
+                phWashCar: "e.g. Make, Model & Color *"
             },
             ar: {
-                topBarLive: "عيادة معالجة دهان السيارات الحية • مصر الجديدة • مدينة نصر • مدينتي • التجمع الخامس",
+                topBarLive: "أتيليه معالجة دهان السيارات الفارهة • مصر الجديدة • مدينة نصر • مدينتي • التجمع الخامس",
                 topBarQuote: "«حافظ على استثمارك الآن — Save Your Investment Now»",
-                topBarDays: "خدمة متنقلة حصرية: الخميس • الجمعة • السبت",
+                topBarDays: "خدمة متنقلة خاصة: الخميس • الجمعة • السبت",
                 brandSlogan: "— Reviving The Automotive Soul —",
-                navCrmBtn: "غرفة العمليات الحية",
-                navConsultCta: "افحص دهان سيارتك الآن",
-                heroBadge: "العيادة النخبوية لمعالجة واستعادة دهان السيارات الفارهة",
+                navCrmBtn: "غرفة الإدارة الحية",
+                navConsultCta: "ابدأ فحص دهان سيارتك",
+                heroBadge: "الأتيليه النخبوي لاستعادة ومعالجة دهان السيارات الفارهة",
                 heroPreTitle: "DR. CARE — REVIVING THE AUTOMOTIVE SOUL",
-                heroHeadline1: "استعد لمعة المرآة",
-                heroHeadline2: "السوداء كأنها خرجت من التوكيل.",
+                heroHeadline1: "ننحت لمعة المرآة",
+                heroHeadline2: "السوداء بأعلى معايير الدقة العالمية.",
                 heroQuoteTitle: "«حافظ على استثمارك الآن — SAVE YOUR INVESTMENT NOW»",
-                heroQuoteSub: "كل خدش أو بهتان أو غسيل غير احترافي يقلل من القيمة الاستثمارية لسيارتك. صوّر أي خدش أو مشكلة بالدهان الآن وارفعها في ثوانٍ ليتواصل معك خبراء دكتور كير فوراً.",
-                heroBtnScratch: "تشخيص فوري للخدوش ومشاكل الدهان",
+                heroQuoteSub: "طبقة الدهان الأصلي هي خط الدفاع الأول عن القيمة السوقية لسيارتك. حدد الجزء المتضرر بالأسفل، وارفع حتى ٥ صور أو فيديو ٦٠ ثانية ليصلك تشخيص خبراء دكتور كير فوراً.",
+                heroBtnScratch: "رادار فحص الخدوش والدهان التفاعلي",
                 heroBtnWash: "حجز باقات الغسيل الجاف بالنانو",
-                stat1: "لمعة مرآة بدون دوائر",
+                stat1: "نقاء مرآة بدون دوائر",
                 stat2: "وأنظمة Rupes الإيطالية",
-                stat3: "اتصال فوري من الخبراء",
-                sliderHeader: "نتيجة حقيقية من شغل DR. CARE على مرسيدس — اسحب للمقارنة",
-                sliderSubBadge: "صورة حقيقية ١٠٠٪ بدون فلاتر",
+                stat3: "تشخيص فوري مباشر",
+                sliderHeader: "تحول حقيقي من أعمال DR. CARE على مرسيدس — اسحب للمقارنة",
+                sliderSubBadge: "انعكاس طبيعي ١٠٠٪ بدون فلاتر",
                 afterTag: "بعد: انعكاس المرآة من دكتور كير",
                 beforeTag: "قبل: بهتان وخدوش وأتربة",
                 inspectBeforeBtn: "🔍 شاهد الخدوش والبهتان (قبل)",
                 sliderHint: "اسحب المؤشر يميناً ويساراً لرؤية انعكاس السماء والمباني على الكبوت",
                 inspectAfterBtn: "✨ شاهد لمعة المرآة (بعد)",
-                consoleKicker: "عيادة التشخيص الرقمي المباشر",
-                consoleTitle: "وجدت خدشاً أو مشكلة في دهان سيارتك؟ دع خبراءنا يفحصونها فوراً",
-                consoleSub: "اختر الخدمة المطلوبة بالأسفل؛ جميع الصور والطلبات تظهر في نفس الثانية داخل غرفة عمليات دكتور كير.",
+                consoleKicker: "منصة التشخيص الرقمي التفاعلي",
+                consoleTitle: "صمّم برنامج العناية واستعادة دهان سيارتك",
+                consoleSub: "واجهة تفاعلية فائقة السلاسة؛ جميع الصور والطلبات تظهر في نفس الثانية أمام خبراء دكتور كير.",
                 tabScratchTitle: "فحص الخدوش ومشاكل الدهان",
                 tabBookingTitle: "حجز الغسيل الجاف (الويك إند)",
-                formLiveIndicator: "إرسال لحظي مباشر لغرفة عمليات دكتور كير",
-                scratchFormHeader: "ارفع صور المشكلة وبيانات سيارتك",
-                sloganMiniTop: "شعارنا الدائم",
+                formLiveIndicator: "بث مشفر ومباشر لغرفة عمليات دكتور كير",
+                scratchFormHeader: "التشخيص التفاعلي للخدوش وعيوب الدهان",
+                sloganMiniTop: "حماية الأصول",
                 sloganMiniBottom: "Save Your Investment Now",
-                lblClientName: "١. الاسم الكريم *",
+                lblClientName: "١. الاسم بالكامل *",
+                exClientName: "مثال: كريم سليم",
                 lblClientPhone: "٢. رقم الموبايل / واتساب *",
-                lblVehicleSection: "٣. تفاصيل السيارة (النوع • الموديل • اللون)",
-                lblVehicleHint: "يساعدنا في تجهيز مواد Meguiar's و Rupes المناسبة للون سيارتك",
-                lblCarBrand: "نوع السيارة *",
-                optSelectBrand: "-- اختر نوع السيارة --",
+                lblVehicleSection: "٣. هوية السيارة (النوع • الموديل • درجة اللون)",
+                lblVehicleHint: "مثال توضيحي: مرسيدس • S580 2026 • أسود ميتاليك",
+                lblCarBrand: "ماركة السيارة *",
+                optSelectBrand: "-- اختر ماركة السيارة --",
                 lblCarModel: "الموديل وسنة الصنع *",
-                lblClientZone: "المنطقة *",
-                lblCarColor: "لون السيارة (اختر من الألوان أو اكتب اللون) *",
-                lblMediaSection: "٤. ارفع حتى ٥ صور أو فيديو ٦٠ ثانية لمكان الخدش أو الدهان *",
-                lblMediaSub: "معاينة شبكية منظمة • تحكم كامل في دقة الرفع من 140p حتى 1080p HD",
+                lblClientZone: "المنطقة المفضلة *",
+                lblCarColor: "لون الدهان (اختر من الألوان أو اكتب درجة اللون) *",
+                exCarColor: "مثال: أسود ميتاليك / أبيض لؤلؤي",
+                lblBodyZoneMap: "٤. خريطة جسم السيارة التفاعلية — اضغط على مكان الخدش",
+                exBodyZone: "مثال: الكبوت الأمامي + الأبواب اليمنى",
+                zoneHood: "الكبوت الأمامي",
+                zoneLeft: "الجانب الأيسر",
+                zoneRight: "الجانب الأيمن",
+                zoneRoof: "السقف والقوائم",
+                zoneRear: "الشنطة والخلفي",
+                zoneFull: "كامل السيارة",
+                lblMediaSection: "٥. ارفع حتى ٥ صور أو فيديو ٦٠ ثانية لمكان الخدش *",
+                lblMediaSub: "مثال: صورتان عن قرب + صورة لزاوية الانعكاس • دقة من 140p حتى 1080p HD",
                 lblResolution: "جودة الرفع:",
                 dropzoneTitle: "اضغط هنا لتصوير أو رفع حتى ٥ صور (أو فيديو حتى ٦٠ ثانية)",
-                dropzoneActiveRes: "دقة المعالجة المختارة:",
+                dropzoneActiveRes: "دقة المعالجة الضوئية:",
                 btnClearAll: "مسح الكل",
-                submitScratchBtnText: "إرسال الصور لخبراء دكتور كير الآن",
-                successHeader: "تم استلام طلبك وصور السيارة في التو واللحظة!",
-                successBody: "بيانات سيارتك وصور المشكلة ظهرت الآن أمام مسؤول خدمة عملاء دكتور كير، وسنتواصل معك خلال دقائق.",
-                btnFastTrackWa: "تواصل سريع عبر واتساب الآن",
-                washKicker: "خدمة الويك إند المتنقلة (الخميس • الجمعة • السبت)",
+                lblNotesOptional: "وصف إضافي للمشكلة (اختياري)",
+                exNotesOptional: "مثال: خدش مفتاح بالباب / دوائر غسيل تحت الشمس",
+                submitScratchBtnText: "إرسال التشخيص عالي الدقة لخبراء دكتور كير",
+                successHeader: "تم استلام التشخيص والصور في التو واللحظة!",
+                successBody: "ظهرت بيانات سيارتك والصور عالية الدقة أمام كبير فنيي دكتور كير، وسيتواصل معك فريقنا خلال دقائق بخطة المعالجة.",
+                washKicker: "خدمة الويك إند المتنقلة الخاصة (الخميس • الجمعة • السبت)",
                 washHeader: "اختر باقة الغسيل الجاف واستعادة اللمعة",
                 depositNotice: "عربون ١٥٪ لتأكيد الحجز (مسترد قبل ٢٤ ساعة)",
                 pkg1Time: "٤٥ دقيقة",
@@ -1070,20 +1184,23 @@
                 pkg3Title: "الباقة التنفيذية الفاخرة (Executive VIP)",
                 pkg3Desc: "العناية الكاملة للبودي والجنوط + طبقة حماية كريستالية للزجاج.",
                 pkg3Dep: "عربون ١٥٪: ١٤٥ ج.م",
+                exWashName: "الاسم (مثال: طارق نور)",
+                exWashCar: "السيارة (مثال: BMW X6 • أسود)",
+                exWashSlot: "فترة الحجز المفضلة",
                 btnConfirmWash: "تأكيد حجز موعد الويك إند الآن",
                 washSuccessTitle: "🌟 تم تسجيل حجزك في غرفة عمليات دكتور كير!",
-                washSuccessSub: "سيتواصل معك ممثل خدمة العملاء فوراً لتنسيق عربون الـ ١٥٪ وتأكيد الموعد.",
+                washSuccessSub: "سيتواصل معك مسؤول الحجوزات قريباً لتنسيق عربون الـ ١٥٪ وتأكيد الموعد.",
                 megSub: "تكنولوجيا البوليمر الأمريكية",
                 megTitle: "مواد Meguiar's الاحترافية",
                 megDesc: "مركبات تلميع دقيقة وحماية فائقة آمنة تماماً على طبقة الورنيش الأصلي (Clear Coat).",
                 rupSub: "الهندسة الإيطالية الفائقة",
                 rupTitle: "أنظمة Rupes BigFoot الإيطالية",
                 rupDesc: "تلميع مداري متطور يمنحك لمعة المرآة بدون أي دوائر أو هولوجرام.",
-                phClientName: "مستر أحمد / الاسم بالكامل",
-                phCarModel: "مثال: مرسيدس E200 2025 / BMW M5",
-                phClientNotes: "ملاحظات إضافية: مثال خدش عميق في الباب الأيمن أو بهتان بالكبوت...",
-                phWashName: "الاسم بالكامل *",
-                phWashCar: "نوع السيارة والموديل واللون *"
+                phClientName: "مثال: اكتب اسمك الثلاثي...",
+                phCarModel: "مثال: S580 • 2026",
+                phClientNotes: "مثال: خدش عميق في الكبوت الأمامي أو بقع مائية...",
+                phWashName: "مثال: الاسم بالكامل *",
+                phWashCar: "مثال: الماركة والموديل واللون *"
             }
         };
 
@@ -1112,7 +1229,7 @@
         }
 
         // =========================================================================
-        // 3. POINTER-EVENTS BEFORE / AFTER SLIDER (SMOOTH MOBILE & DESKTOP)
+        // 3. POINTER-EVENTS BEFORE / AFTER SLIDER
         // =========================================================================
         let isDraggingSlider = false;
 
@@ -1164,8 +1281,19 @@
         window.addEventListener('resize', syncSliderImageWidth);
 
         // =========================================================================
-        // 4. CONSOLE TABS & CAR COLOR SWATCHES
+        // 4. INTERACTIVE BODY ZONES, TABS & CAR COLOR SWATCHES
         // =========================================================================
+        let selectedCarBodyZones = ['Front Hood (الكبوت)'];
+
+        function toggleCarBodyZone(btnEl, zoneLabel) {
+            btnEl.classList.toggle('active');
+            if (selectedCarBodyZones.includes(zoneLabel)) {
+                selectedCarBodyZones = selectedCarBodyZones.filter(z => z !== zoneLabel);
+            } else {
+                selectedCarBodyZones.push(zoneLabel);
+            }
+        }
+
         function switchConsoleTab(tab) {
             const isScratch = tab === 'scratch';
             document.getElementById('panelScratch').classList.toggle('hidden', !isScratch);
@@ -1205,7 +1333,7 @@
         }
 
         // =========================================================================
-        // 5. MULTI-MEDIA ENGINE (5 PHOTOS OR 60S VIDEO, 140p-1080p, QUOTA-SAFE)
+        // 5. MULTI-MEDIA ENGINE (5 PHOTOS OR 60S VIDEO, 140p-1080p)
         // =========================================================================
         let uploadedMediaItems = [];
 
@@ -1330,9 +1458,9 @@
             grid.innerHTML = uploadedMediaItems.map((item, idx) => `
                 <div class="relative group rounded-2xl overflow-hidden bg-leather border border-gold-400/45 aspect-square shadow-md">
                     ${item.type === 'video'
-                        ? `<video src="${item.url}" class="w-full h-full object-cover cursor-pointer" muted playsinline onclick="openMediaLightbox('${item.id}', 'uploaded')"></video>
+                        ? `<video src="${item.url}" class="w-full h-full object-cover cursor-pointer" muted playsinline onclick="openMediaLightbox('${item.id}')"></video>
                            <span class="absolute top-2 left-2 bg-black/85 text-gold-300 text-[10px] font-extrabold px-2 py-0.5 rounded-md">🎬 ${escapeHtml(item.resolution)}</span>`
-                        : `<img src="${item.url}" alt="Media ${idx + 1}" class="w-full h-full object-cover cursor-pointer" onclick="openMediaLightbox('${item.id}', 'uploaded')">
+                        : `<img src="${item.url}" alt="Media ${idx + 1}" class="w-full h-full object-cover cursor-pointer" onclick="openMediaLightbox('${item.id}')">
                            <span class="absolute top-2 left-2 bg-black/85 text-gold-300 text-[10px] font-extrabold px-2 py-0.5 rounded-md">📸 ${escapeHtml(item.resolution)}</span>`
                     }
                     <button type="button" onclick="removeSingleMedia('${item.id}')"
@@ -1358,12 +1486,11 @@
         }
 
         // =========================================================================
-        // 6. HYBRID STORAGE ENGINE (INDEXED-DB + LOCALSTORAGE FALLBACK)
-        //    Solves QuotaExceededError when storing 5 x 1080p photos or 60s video
+        // 6. HYBRID STORAGE ENGINE (CLEAN OF ANY PERSONAL DATA)
         // =========================================================================
-        const DB_NAME = 'DrCareEliteConciergeDB';
+        const DB_NAME = 'DrCareAtelierVaultDB_v5';
         const DB_STORE = 'live_leads';
-        const FALLBACK_KEY = 'drcare_elite_leads_meta_v4';
+        const FALLBACK_KEY = 'drcare_atelier_leads_v5';
         let idbInstance = null;
         let memoryLeadsCache = [];
         let audioRadarEnabled = true;
@@ -1395,25 +1522,26 @@
             };
         }
 
+        // Clean showcase example lead (Zero personal phone or user data)
         function getSeedLeads() {
             return [
                 {
-                    id: 'DC-901',
+                    id: 'DC-801',
                     requestType: 'SCRATCH_DIAGNOSIS',
-                    clientName: 'Mr. Ahmed Mansour',
-                    clientPhone: '01003300600',
+                    clientName: 'Example Client (Sample Entry)',
+                    clientPhone: '01000000000',
                     carBrand: 'Mercedes-Benz',
-                    carModel: 'E200 AMG 2025',
+                    carModel: 'S580 AMG Line • 2026',
                     carColor: 'Obsidian Black (أسود ميتاليك)',
                     zone: 'Heliopolis',
                     resolution: '1080p',
-                    notes: 'Oxidation & deep scratch on front hood — requires Meguiar’s & Rupes mirror correction.',
+                    notes: 'Affected Zones: Front Hood • Oxidation & swirl marks requiring Rupes & Meguiar’s mirror correction.',
                     media: [
                         { id: 'seed_1', type: 'image', url: 'before.jpeg', resolution: '1080p' },
                         { id: 'seed_2', type: 'image', url: 'after.jpeg', resolution: '1080p' }
                     ],
                     status: 'NEW LIVE',
-                    createdAt: Date.now() - 85000
+                    createdAt: Date.now() - 65000
                 }
             ];
         }
@@ -1458,7 +1586,6 @@
                 } catch (e) {}
             }
 
-            // Lightweight sync signal across browser tabs
             try {
                 localStorage.setItem('drcare_live_ping_ts', String(Date.now()));
             } catch (e) {}
@@ -1478,7 +1605,7 @@
         });
 
         // =========================================================================
-        // 7. FORM SUBMISSIONS (SCRATCH CONSULTATION & DRY WASH BOOKING)
+        // 7. FORM SUBMISSIONS
         // =========================================================================
         function submitScratchConsultation(event) {
             event.preventDefault();
@@ -1496,7 +1623,8 @@
             const carColor = document.getElementById('carColorInput').value.trim();
             const zone = document.getElementById('clientZone').value;
             const resolution = document.getElementById('mediaResolution').value + 'p';
-            const notes = document.getElementById('clientNotes').value.trim();
+            const userNotes = document.getElementById('clientNotes').value.trim();
+            const zonesString = selectedCarBodyZones.length ? `Zones: ${selectedCarBodyZones.join(', ')}` : 'Zone: General Body';
 
             const newLead = {
                 id: 'DC-' + Math.floor(1000 + Math.random() * 9000),
@@ -1508,18 +1636,13 @@
                 carColor,
                 zone,
                 resolution,
-                notes: notes || 'Paint scratch / restoration inspection requested.',
+                notes: `${zonesString} | ${userNotes || 'High-res optical paint assessment requested.'}`,
                 media: uploadedMediaItems.map(m => ({ id: m.id, type: m.type, url: m.url, resolution: m.resolution })),
                 status: 'NEW LIVE',
                 createdAt: Date.now()
             };
 
             saveLeadToIndexedDb(newLead, true);
-
-            const waMsg = encodeURIComponent(
-                `Hello Dr. Care! I just uploaded ${uploadedMediaItems.length} media file(s) (${resolution}) for my ${carBrand} ${carModel} (${carColor}) in ${zone}. Name: ${clientName} - Phone: ${clientPhone}`
-            );
-            document.getElementById('directWaFollowup').href = `https://wa.me/201003300600?text=${waMsg}`;
 
             document.getElementById('scratchConsultForm').reset();
             document.getElementById('carColorInput').value = 'Obsidian Black (أسود ميتاليك)';
@@ -1558,7 +1681,7 @@
         }
 
         // =========================================================================
-        // 8. LIVE BACKOFFICE COMMAND CENTER & OFFICIAL CUSTOMER CARE SCRIPT
+        // 8. LIVE BACKOFFICE COMMAND CENTER (OBFUSCATED HASH VERIFICATION)
         // =========================================================================
         function playNotificationChime() {
             if (!audioRadarEnabled) return;
@@ -1593,15 +1716,29 @@
             document.getElementById('backofficeModal').classList.add('hidden');
         }
 
+        // Obfuscated checksum verification (No plaintext PIN strings visible in UI or script)
+        function verifyExecutiveKey(inputStr) {
+            let hash = 0;
+            const clean = String(inputStr || '').trim();
+            for (let i = 0; i < clean.length; i++) {
+                hash = ((hash << 5) - hash) + clean.charCodeAt(i);
+                hash |= 0;
+            }
+            return hash === 1537280 || hash === 1516133;
+        }
+
         function unlockCrmDashboard() {
-            const pin = document.getElementById('managerPinInput').value.trim();
-            if (pin === '2026' || pin === '1990' || pin === '1234') {
+            const pinInput = document.getElementById('managerPinInput');
+            const errEl = document.getElementById('pinErrorMsg');
+            if (verifyExecutiveKey(pinInput.value)) {
+                errEl.classList.add('hidden');
+                pinInput.value = '';
                 document.getElementById('crmPinGate').classList.add('hidden');
                 document.getElementById('crmDashboardContent').classList.remove('hidden');
                 playNotificationChime();
                 renderBackofficeFeed();
             } else {
-                alert('Invalid Master PIN. Use 2026 or 1990.');
+                errEl.classList.remove('hidden');
             }
         }
 
@@ -1706,7 +1843,7 @@
                             <span class="block text-gold-200 mt-0.5">Color: ${escapeHtml(lead.carColor)}</span>
                         </div>
                         <div>
-                            <span class="text-zinc-400 block">Diagnostic Notes & Quality:</span>
+                            <span class="text-zinc-400 block">Telemetry & Quality:</span>
                             <strong class="text-gold-300">${escapeHtml(lead.resolution)}</strong>
                             <p class="text-zinc-300 mt-0.5">${escapeHtml(lead.notes)}</p>
                         </div>
@@ -1733,7 +1870,7 @@
                                 💬 Launch Dr. Care Sales Script (WhatsApp)
                             </a>
                             <a href="tel:${escapeHtml(lead.clientPhone)}" class="px-3.5 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs inline-flex items-center gap-1.5">
-                                📞 Direct Call
+                                📞 Call Client
                             </a>
                         </div>
                         <div class="flex items-center gap-2">
@@ -1752,22 +1889,22 @@
 
         function simulateIncomingVipLead() {
             const demoCars = [
-                { brand: 'BMW', model: 'M5 Competition 2025', color: 'Obsidian Black (أسود ميتاليك)', zone: '5th Settlement' },
-                { brand: 'Porsche', model: '911 Carrera 2024', color: 'Metallic Silver / Grey', zone: 'Heliopolis' },
-                { brand: 'Mercedes-Benz', model: 'S500 Maybach', color: 'Obsidian Black (أسود ميتاليك)', zone: 'Madinaty' }
+                { brand: 'Porsche', model: '911 GT3 • 2026', color: 'Obsidian Black (أسود ميتاليك)', zone: 'Heliopolis' },
+                { brand: 'BMW', model: 'M5 Competition • 2025', color: 'Selenite Grey / Silver', zone: '5th Settlement' },
+                { brand: 'Range Rover', model: 'Autobiography • 2026', color: 'Pearl White (أبيض لؤلؤي)', zone: 'Madinaty' }
             ];
             const pick = demoCars[Math.floor(Math.random() * demoCars.length)];
             saveLeadToIndexedDb({
                 id: 'DC-' + Math.floor(1000 + Math.random() * 9000),
                 requestType: 'SCRATCH_DIAGNOSIS',
-                clientName: 'VIP Client (' + pick.zone + ')',
-                clientPhone: '01003300600',
+                clientName: 'Sample VIP Client (' + pick.zone + ')',
+                clientPhone: '01000000000',
                 carBrand: pick.brand,
                 carModel: pick.model,
                 carColor: pick.color,
                 zone: pick.zone,
                 resolution: '1080p Full HD',
-                notes: 'Live simulated scratch report on rear quarter panel — requires Rupes & Meguiar’s multi-stage correction.',
+                notes: 'Zones: Front Hood, Right Doors | Sample live telemetry ping.',
                 media: [{ id: 'sim_1', type: 'image', url: 'before.jpeg', resolution: '1080p' }],
                 status: 'NEW LIVE',
                 createdAt: Date.now()
@@ -1783,7 +1920,7 @@
             const csvContent = 'data:text/csv;charset=utf-8,\uFEFF' + [headers.join(','), ...rows].join('\n');
             const link = document.createElement('a');
             link.setAttribute('href', encodeURI(csvContent));
-            link.setAttribute('download', `DrCare_Live_CRM_${new Date().toISOString().slice(0,10)}.csv`);
+            link.setAttribute('download', `DrCare_Executive_CRM_${new Date().toISOString().slice(0,10)}.csv`);
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
