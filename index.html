@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <title>DR. CARE | Reviving The Automotive Soul — Bespoke Paint Atelier</title>
+    <title>DR. CARE | Factory Paint. Reborn.</title>
     <link rel="icon" href="logo.jpg" type="image/jpeg">
 
     <!-- Google Fonts -->
@@ -19,16 +19,16 @@
             theme: {
                 extend: {
                     colors: {
-                        obsidian: '#040406',
-                        charcoal: '#0A0B0F',
-                        leather: '#101218',
+                        obsidian: '#050507',
+                        charcoal: '#0B0C10',
+                        leather: '#111319',
                         gold: {
-                            100: '#FDF6DF',
-                            200: '#F5E2A8',
-                            300: '#E8C86B',
-                            400: '#D4AF37',
-                            500: '#AA8220',
-                            600: '#7D5C10'
+                            100: '#FAF3E0',
+                            200: '#EEDC9A',
+                            300: '#DFC57B',
+                            400: '#C5A55A',
+                            500: '#9E7F36',
+                            600: '#755B1E'
                         }
                     },
                     fontFamily: {
@@ -48,78 +48,90 @@
 
     <style>
         :root {
-            --gold-primary: #D4AF37;
-            --gold-light: #F5E2A8;
             --spotlight-x: 50%;
-            --spotlight-y: 20%;
+            --spotlight-y: 18%;
         }
-        html { scroll-behavior: smooth; }
+        html { scroll-behavior: smooth; font-variant-numeric: tabular-nums; }
         body {
-            background-color: #040406;
-            color: #F4F4F6;
+            background-color: #050507;
+            color: #F5F5F7;
             overflow-x: hidden;
             background-image: 
-                radial-gradient(650px circle at var(--spotlight-x) var(--spotlight-y), rgba(212, 175, 55, 0.08), transparent 45%),
-                radial-gradient(circle at 12% 8%, rgba(212, 175, 55, 0.09) 0%, transparent 40%),
-                radial-gradient(circle at 88% 25%, rgba(212, 175, 55, 0.05) 0%, transparent 45%),
-                linear-gradient(180deg, #040406 0%, #090A0F 100%);
+                radial-gradient(600px circle at var(--spotlight-x) var(--spotlight-y), rgba(197, 165, 90, 0.06), transparent 45%),
+                linear-gradient(180deg, #050507 0%, #090A0E 100%);
         }
         [dir="rtl"] { font-family: 'Cairo', sans-serif; }
+        
+        /* Brushed Champagne Metallic Text */
         .gold-metallic {
-            background: linear-gradient(135deg, #FFF7DF 0%, #D4AF37 30%, #9E7618 50%, #F7E5A9 75%, #C59B27 100%);
+            background: linear-gradient(135deg, #FAF3E0 0%, #C5A55A 42%, #F3E3B6 72%, #9E7F36 100%);
             background-size: 200% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: shineGold 7s linear infinite;
+            animation: shineGold 8s linear infinite;
         }
         @keyframes shineGold {
             to { background-position: 200% center; }
         }
-        .btn-gold-elite {
-            background: linear-gradient(135deg, #EDD076 0%, #D4AF37 45%, #9A7213 100%);
-            color: #040406;
-            box-shadow: 0 12px 35px -6px rgba(212, 175, 55, 0.42), inset 0 1px 1px rgba(255, 255, 255, 0.65);
-            transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
-            position: relative;
-            overflow: hidden;
-        }
-        .btn-gold-elite:hover:not(:disabled) {
-            transform: translateY(-2px) scale(1.01);
-            box-shadow: 0 18px 42px -6px rgba(212, 175, 55, 0.62), inset 0 1px 2px rgba(255, 255, 255, 0.85);
-            filter: brightness(1.07);
-        }
-        .btn-gold-elite:disabled {
-            opacity: 0.55;
-            cursor: not-allowed;
-        }
+
+        /* Whisper-Quiet Glass Cards */
         .piano-card {
-            background: linear-gradient(165deg, rgba(20, 22, 30, 0.88) 0%, rgba(7, 8, 12, 0.96) 100%);
-            border: 1px solid rgba(212, 175, 55, 0.18);
-            box-shadow: 0 25px 55px -12px rgba(0, 0, 0, 0.9), inset 0 1px 0 0 rgba(255, 255, 255, 0.07);
-            backdrop-filter: blur(22px);
+            background: rgba(15, 17, 23, 0.78);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.85), inset 0 1px 0 0 rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(20px);
         }
         .piano-card-gold {
-            background: linear-gradient(165deg, rgba(28, 24, 15, 0.92) 0%, rgba(8, 9, 13, 0.98) 100%);
-            border: 1px solid rgba(212, 175, 55, 0.45);
-            box-shadow: 0 28px 65px -15px rgba(212, 175, 55, 0.18), inset 0 1px 0 0 rgba(245, 226, 168, 0.25);
+            background: linear-gradient(165deg, rgba(20, 19, 17, 0.9) 0%, rgba(8, 9, 12, 0.96) 100%);
+            border: 1px solid rgba(197, 165, 90, 0.32);
+            box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.92), inset 0 1px 0 0 rgba(243, 227, 182, 0.16);
             backdrop-filter: blur(24px);
         }
-        .brand-logo-card, .severity-card { transition: all 0.2s ease; }
-        .brand-logo-card.selected, .severity-card.selected {
-            border-color: #D4AF37;
-            background: linear-gradient(135deg, rgba(212, 175, 55, 0.25) 0%, rgba(16, 18, 24, 0.95) 100%);
-            box-shadow: 0 0 18px rgba(212, 175, 55, 0.35);
+
+        /* Tactile Champagne Button */
+        .btn-gold-elite {
+            background: linear-gradient(135deg, #E5CC87 0%, #C5A55A 50%, #967732 100%);
+            color: #050507;
+            box-shadow: 0 10px 28px -6px rgba(197, 165, 90, 0.38), inset 0 1px 1px rgba(255, 255, 255, 0.65);
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .car-zone-btn.active {
-            background: linear-gradient(135deg, rgba(212, 175, 55, 0.28) 0%, rgba(212, 175, 55, 0.08) 100%);
-            border-color: #D4AF37;
-            color: #FDF6DF;
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+        .btn-gold-elite:hover:not(:disabled) {
+            transform: translateY(-1.5px);
+            box-shadow: 0 16px 36px -6px rgba(197, 165, 90, 0.52), inset 0 1px 2px rgba(255, 255, 255, 0.85);
+            filter: brightness(1.05);
         }
+        .btn-gold-elite:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        /* Interactive Selection States */
+        .brand-logo-card, .severity-card, .car-zone-btn { transition: all 0.2s ease; }
+        .brand-logo-card.selected, .severity-card.selected, .car-zone-btn.active {
+            border-color: #C5A55A;
+            background: rgba(197, 165, 90, 0.16);
+            color: #FAF3E0;
+            box-shadow: 0 0 18px rgba(197, 165, 90, 0.22);
+        }
+
+        /* 3D Glossy Paint Spheres */
+        .paint-sphere {
+            position: relative;
+            border-radius: 9999px;
+            box-shadow: inset -3px -3px 6px rgba(0,0,0,0.65), inset 2px 2px 5px rgba(255,255,255,0.45), 0 4px 10px rgba(0,0,0,0.5);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .paint-sphere:hover {
+            transform: scale(1.14);
+            box-shadow: inset -3px -3px 6px rgba(0,0,0,0.65), inset 2px 2px 5px rgba(255,255,255,0.65), 0 0 14px rgba(197, 165, 90, 0.55);
+        }
+
+        /* Hide Scrollbar for Swipeable Brand Strip */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* Before / After Slider */
         .comparison-slider {
             position: relative;
             width: 100%;
-            height: 390px;
+            height: 360px;
             overflow: hidden;
             user-select: none;
             -webkit-user-select: none;
@@ -127,32 +139,27 @@
             border-radius: 1.25rem;
             direction: ltr !important;
         }
-        @media (min-width: 768px) { .comparison-slider { height: 460px; } }
+        @media (min-width: 768px) { .comparison-slider { height: 430px; } }
         .comparison-after { position: absolute; inset: 0; width: 100%; height: 100%; }
         .comparison-before { position: absolute; top: 0; left: 0; bottom: 0; width: 50%; overflow: hidden; z-index: 10; }
         .comparison-handle {
-            position: absolute; top: 0; bottom: 0; left: 50%; width: 3px;
-            background: linear-gradient(180deg, #F5E2A8, #D4AF37, #F5E2A8);
+            position: absolute; top: 0; bottom: 0; left: 50%; width: 2px;
+            background: linear-gradient(180deg, transparent, #DFC57B, #C5A55A, #DFC57B, transparent);
             z-index: 20; transform: translateX(-50%); pointer-events: none;
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.95);
         }
         .comparison-knob {
             position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            width: 48px; height: 48px; border-radius: 9999px;
-            background: radial-gradient(circle, #181A24 0%, #040406 100%);
-            border: 2px solid #D4AF37; box-shadow: 0 0 28px rgba(212, 175, 55, 0.9);
-            display: flex; align-items: center; justify-content: center; color: #F5E2A8;
+            width: 44px; height: 44px; border-radius: 9999px;
+            background: rgba(8, 9, 12, 0.92);
+            border: 1.5px solid #C5A55A;
+            box-shadow: 0 0 24px rgba(197, 165, 90, 0.7);
+            display: flex; align-items: center; justify-content: center; color: #EEDC9A;
         }
-        ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-track { background: #040406; }
-        ::-webkit-scrollbar-thumb { background: #2A2D3A; border-radius: 3px; }
-        ::-webkit-scrollbar-thumb:hover { background: #D4AF37; }
 
-        @keyframes pulseGold {
-            0%, 100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.5); }
-            50% { box-shadow: 0 0 0 11px rgba(212, 175, 55, 0); }
-        }
-        .pulse-gold-ring { animation: pulseGold 2.3s infinite; }
+        ::-webkit-scrollbar { width: 5px; height: 5px; }
+        ::-webkit-scrollbar-track { background: #050507; }
+        ::-webkit-scrollbar-thumb { background: #232630; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #C5A55A; }
 
         @keyframes shakeError {
             0%, 100% { transform: translateX(0); }
@@ -164,719 +171,446 @@
 </head>
 <body class="antialiased selection:bg-gold-400 selection:text-black" onmousemove="updateAmbientSpotlight(event)">
 
-    <!-- TOP STATUS BAR -->
-    <div class="bg-gradient-to-r from-obsidian via-[#17130A] to-obsidian border-b border-gold-400/20 py-2 px-4 text-xs">
-        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
+    <!-- MINIMAL TOP BAR -->
+    <div class="bg-obsidian border-b border-white/5 py-2 px-4 text-[11px]">
+        <div class="max-w-6xl mx-auto flex items-center justify-between">
             <div class="flex items-center gap-2">
-                <span id="cloudStatusIndicator" class="relative flex h-2 w-2">
+                <span class="relative flex h-2 w-2">
                     <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                     <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                 </span>
-                <span class="text-gold-200 font-semibold tracking-wide" data-i18n="topBarLive">
-                    BESPOKE PAINT ATELIER • HELIOPOLIS • NASR CITY • MADINATY • 5TH SETTLEMENT
+                <span class="text-zinc-300 font-medium tracking-wide" data-i18n="topBarLive">
+                    HELIOPOLIS • NASR CITY • MADINATY • 5TH SETTLEMENT
                 </span>
             </div>
-            <div class="hidden sm:flex items-center gap-4 text-zinc-400">
-                <span class="text-gold-300 font-bold" data-i18n="topBarQuote">"Save Your Investment Now"</span>
-                <span>•</span>
-                <span class="bg-gold-400/15 text-gold-300 border border-gold-400/30 px-2.5 py-0.5 rounded-full font-semibold" data-i18n="topBarDays">
-                    Thu • Fri • Sat Private Mobile Concierge
-                </span>
-            </div>
+            <span class="hidden sm:inline text-gold-300 font-semibold tracking-wider uppercase" data-i18n="topBarDays">
+                Thu • Fri • Sat Mobile Concierge
+            </span>
         </div>
     </div>
 
     <!-- STICKY HEADER -->
-    <header class="sticky top-0 z-40 bg-obsidian/85 backdrop-blur-2xl border-b border-white/10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between gap-3">
-            <a href="#" class="flex items-center gap-3.5 group">
-                <div class="relative w-12 h-12 rounded-2xl bg-gradient-to-br from-[#211B10] to-[#060608] border border-gold-400/60 flex items-center justify-center shadow-lg overflow-hidden shrink-0 group-hover:border-gold-300 transition">
-                    <svg class="w-8 h-8 text-gold-400" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round">
-                        <path d="M20 14C27 9 37 9 44 14" opacity="0.85"/>
-                        <path d="M14 22C24 13 40 13 50 22"/>
-                        <path d="M12 32C12 20 21 15 32 15C43 15 52 20 52 33C52 40 49 46 45 50"/>
-                        <path d="M18 35C18 25 24 21 32 21C40 21 46 25 46 34C46 42 41 48 35 52"/>
-                        <path d="M24 38C24 30 27 27 32 27C37 27 40 30 40 37C40 43 36 48 30 52"/>
-                        <path d="M32 33V45"/>
-                        <path d="M22 48C26 45 28 41 28 36"/>
-                    </svg>
+    <header class="sticky top-0 z-40 bg-obsidian/80 backdrop-blur-xl border-b border-white/10">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="relative w-11 h-11 rounded-2xl bg-leather border border-gold-400/50 flex items-center justify-center overflow-hidden shrink-0 group-hover:border-gold-300 transition">
+                    <span class="font-serif font-bold text-sm text-gold-400">DC</span>
                     <img src="logo.jpg" alt="DR. CARE" class="w-full h-full object-cover absolute inset-0" onerror="this.style.display='none'">
                 </div>
                 <div>
-                    <span class="font-serif text-xl sm:text-2xl font-black tracking-[0.2em] gold-metallic block leading-none">DR. CARE</span>
-                    <span class="text-[10px] sm:text-[11px] uppercase tracking-[0.22em] text-zinc-400 font-semibold block mt-1" data-i18n="brandSlogan">
-                        — Reviving The Automotive Soul —
+                    <span class="font-serif text-lg sm:text-xl font-black tracking-[0.18em] gold-metallic block leading-none">DR. CARE</span>
+                    <span class="text-[10px] uppercase tracking-[0.18em] text-zinc-400 font-medium block mt-1" data-i18n="brandSlogan">
+                        Reviving The Automotive Soul
                     </span>
                 </div>
             </a>
 
-            <div class="flex items-center gap-2 sm:gap-3">
-                <button id="langSwitchBtn" type="button" onclick="toggleLanguage()" class="px-3.5 py-2 rounded-xl bg-white/5 hover:bg-gold-400/15 border border-gold-400/35 text-xs font-bold text-gold-200 transition flex items-center gap-1.5 cursor-pointer">
-                    <span>🌐</span>
+            <div class="flex items-center gap-2">
+                <button id="langSwitchBtn" type="button" onclick="toggleLanguage()" class="px-3 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-bold text-gold-200 transition cursor-pointer">
                     <span id="langSwitchLabel">العربية</span>
                 </button>
 
-                <button type="button" onclick="openBackofficeModal()" class="px-3.5 py-2 rounded-xl bg-leather hover:bg-zinc-800 border border-gold-400/35 text-xs font-bold text-zinc-100 hover:text-gold-300 transition flex items-center gap-2 cursor-pointer shadow-lg" title="Executive Command Center">
-                    <span class="relative flex h-2 w-2">
-                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-gold-400 opacity-75"></span>
-                        <span class="relative inline-flex rounded-full h-2 w-2 bg-gold-400"></span>
-                    </span>
-                    <span class="hidden md:inline" data-i18n="navCrmBtn">Executive Backoffice</span>
-                    <span id="navLiveBadge" class="bg-gold-400 text-black text-[10px] font-extrabold px-1.5 py-0.5 rounded-md">LIVE</span>
+                <button type="button" onclick="openBackofficeModal()" class="px-3 py-2 rounded-xl bg-leather hover:bg-zinc-800 border border-white/10 text-xs font-bold text-zinc-200 hover:text-gold-300 transition flex items-center gap-2 cursor-pointer" title="Executive Command">
+                    <span class="w-1.5 h-1.5 rounded-full bg-gold-400"></span>
+                    <span class="hidden md:inline" data-i18n="navCrmBtn">Backoffice</span>
+                    <span id="navLiveBadge" class="bg-gold-400/20 text-gold-200 border border-gold-400/40 text-[10px] font-extrabold px-1.5 py-0.5 rounded-md">LIVE</span>
                 </button>
-
-                <a href="#clinic-console" class="hidden sm:inline-flex btn-gold-elite px-4 py-2 rounded-xl text-xs font-extrabold tracking-wide uppercase">
-                    <span data-i18n="navConsultCta">Start Paint Diagnosis</span>
-                </a>
             </div>
         </div>
     </header>
 
     <!-- MAIN CONTENT -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 pt-6 pb-24 space-y-16">
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 pt-8 pb-24 space-y-14">
 
-        <!-- HERO SECTION -->
-        <section class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center pt-2">
-            <div class="lg:col-span-6 space-y-6">
-                <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-gold-400/10 border border-gold-400/40 text-gold-200 text-xs font-bold tracking-wider uppercase">
-                    <svg class="w-4 h-4 text-gold-400 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                    <span data-i18n="heroBadge">Signature Automotive Paint Restoration Atelier</span>
+        <!-- CLEAN, PUNCHY HERO -->
+        <section class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <div class="lg:col-span-5 space-y-5">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold-400/10 border border-gold-400/30 text-gold-200 text-[11px] font-semibold tracking-wider uppercase">
+                    <span data-i18n="heroBadge">Bespoke Paint Atelier</span>
                 </div>
 
-                <div class="space-y-2">
-                    <p class="text-xs sm:text-sm font-extrabold uppercase tracking-[0.28em] text-gold-400" data-i18n="heroPreTitle">
-                        DR. CARE — REVIVING THE AUTOMOTIVE SOUL
-                    </p>
-                    <h1 class="font-serif text-3xl sm:text-5xl lg:text-[50px] font-black leading-[1.13] tracking-tight text-white">
-                        <span data-i18n="heroHeadline1">Sculpting Liquid</span>
-                        <span class="gold-metallic block mt-1" data-i18n="heroHeadline2">Piano-Black Mirror Perfection.</span>
-                    </h1>
-                </div>
+                <h1 class="font-serif text-4xl sm:text-5xl font-black leading-[1.1] tracking-tight text-white">
+                    <span data-i18n="heroHeadline1">Factory Paint.</span>
+                    <span class="gold-metallic block mt-1" data-i18n="heroHeadline2">Reborn.</span>
+                </h1>
 
-                <div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-gold-400/15 via-gold-400/5 to-transparent border-s-4 border-gold-400">
-                    <p class="text-sm sm:text-base font-extrabold text-gold-200 tracking-wide" data-i18n="heroQuoteTitle">
-                        "SAVE YOUR INVESTMENT NOW"
-                    </p>
-                    <p class="text-xs sm:text-sm text-zinc-300 mt-1.5 leading-relaxed" data-i18n="heroQuoteSub">
-                        Your vehicle's factory clear coat is its most valuable asset. Select your car brand below, upload photos or video, and receive an immediate master restoration plan.
-                    </p>
-                </div>
+                <p class="text-sm sm:text-base text-zinc-300 leading-relaxed" data-i18n="heroQuoteSub">
+                    We erase scratches and oxidation without repainting. Protect your car's original clear coat and market value in minutes.
+                </p>
 
-                <div class="flex flex-col sm:flex-row gap-3.5 pt-1">
-                    <a href="#clinic-console" onclick="switchConsoleTab('scratch')" class="btn-gold-elite px-6 py-4 rounded-2xl font-extrabold text-sm sm:text-base flex items-center justify-center gap-3 pulse-gold-ring">
-                        <span>📸</span>
-                        <span data-i18n="heroBtnScratch">Interactive Scratch & Paint Radar</span>
+                <div class="flex flex-col sm:flex-row gap-3 pt-1">
+                    <a href="#clinic-console" onclick="switchConsoleTab('scratch')" class="btn-gold-elite px-6 py-3.5 rounded-2xl font-extrabold text-sm flex items-center justify-center gap-2">
+                        <span data-i18n="heroBtnScratch">Fix a Scratch</span>
+                        <span>→</span>
                     </a>
-                    <a href="#clinic-console" onclick="switchConsoleTab('booking')" class="px-6 py-4 rounded-2xl bg-white/5 hover:bg-white/10 border border-gold-400/35 text-gold-200 font-bold text-sm sm:text-base flex items-center justify-center gap-2 transition">
-                        <span>✨</span>
-                        <span data-i18n="heroBtnWash">Reserve Weekend Dry Wash</span>
+                    <a href="#clinic-console" onclick="switchConsoleTab('booking')" class="px-6 py-3.5 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/15 text-zinc-200 font-bold text-sm flex items-center justify-center transition">
+                        <span data-i18n="heroBtnWash">Weekend Dry Wash</span>
                     </a>
                 </div>
 
-                <div class="grid grid-cols-3 gap-3 pt-3 border-t border-white/10">
-                    <div class="piano-card p-3 rounded-xl text-center">
-                        <span class="block text-lg sm:text-xl font-black gold-metallic">100%</span>
-                        <span class="text-[11px] text-zinc-400 font-medium" data-i18n="stat1">Optical Mirror Clarity</span>
+                <!-- Minimalist 3-Pillar Strip -->
+                <div class="grid grid-cols-3 gap-2 pt-4 border-t border-white/10 text-center">
+                    <div>
+                        <span class="block text-sm font-black text-white">100%</span>
+                        <span class="text-[11px] text-zinc-400" data-i18n="stat1">Original Paint</span>
                     </div>
-                    <div class="piano-card p-3 rounded-xl text-center">
-                        <span class="block text-lg sm:text-xl font-black gold-metallic">Meguiar's</span>
-                        <span class="text-[11px] text-zinc-400 font-medium" data-i18n="stat2">& Italian Rupes Systems</span>
+                    <div class="border-x border-white/10">
+                        <span class="block text-sm font-black text-gold-300">Rupes &amp; Meguiar's</span>
+                        <span class="text-[11px] text-zinc-400" data-i18n="stat2">Italy &amp; USA Tech</span>
                     </div>
-                    <div class="piano-card p-3 rounded-xl text-center">
-                        <span class="block text-lg sm:text-xl font-black gold-metallic">&lt; 3 Sec</span>
-                        <span class="text-[11px] text-zinc-400 font-medium" data-i18n="stat3">Live Cloud Sync</span>
+                    <div>
+                        <span class="block text-sm font-black text-white" data-i18n="stat3Title">At Your Door</span>
+                        <span class="text-[11px] text-zinc-400" data-i18n="stat3">Mobile Atelier</span>
                     </div>
                 </div>
             </div>
 
-            <div class="lg:col-span-6">
-                <div class="piano-card-gold p-3 sm:p-4 rounded-3xl relative">
-                    <div class="flex flex-wrap items-center justify-between gap-2 mb-3 px-1">
-                        <div class="flex items-center gap-2">
-                            <span class="w-2.5 h-2.5 rounded-full bg-gold-400"></span>
-                            <span class="text-xs font-extrabold uppercase tracking-wider text-gold-200" data-i18n="sliderHeader">
-                                REAL MERCEDES TRANSFORMATION — DRAG TO INSPECT
-                            </span>
-                        </div>
-                        <span class="text-[11px] bg-black/75 text-gold-300 px-2.5 py-1 rounded-lg border border-gold-400/30 font-semibold" data-i18n="sliderSubBadge">
-                            Unedited Optical Reflection
-                        </span>
+            <!-- Interactive Before / After Proof -->
+            <div class="lg:col-span-7">
+                <div class="piano-card p-3 rounded-3xl">
+                    <div class="flex items-center justify-between mb-2.5 px-1 text-xs">
+                        <span class="font-bold text-zinc-200" data-i18n="sliderHeader">Real Transformation — Drag to Compare</span>
+                        <span class="text-[11px] text-gold-300 font-medium" data-i18n="sliderSubBadge">Zero Filters</span>
                     </div>
 
                     <div id="mercedesSlider" class="comparison-slider cursor-ew-resize">
                         <div class="comparison-after">
-                            <img src="after.jpeg" alt="After Dr Care Mirror Finish" draggable="false"
+                            <img src="after.jpeg" alt="After Mirror Finish" draggable="false"
                                  class="w-full h-full object-cover object-center select-none pointer-events-none"
                                  onerror="this.src='https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=1200&q=85'">
-                            <span class="absolute bottom-3.5 right-3.5 z-10 bg-black/85 border border-emerald-400/50 text-emerald-300 text-[11px] font-extrabold px-3 py-1.5 rounded-xl backdrop-blur-md shadow-lg" data-i18n="afterTag">
-                                AFTER: DR. CARE MIRROR GLOSS
+                            <span class="absolute bottom-3 right-3 z-10 bg-black/80 border border-white/15 text-gold-200 text-[10px] font-bold px-2.5 py-1 rounded-lg backdrop-blur-md" data-i18n="afterTag">
+                                AFTER: MIRROR FINISH
                             </span>
                         </div>
 
                         <div id="sliderBeforeLayer" class="comparison-before">
-                            <img id="sliderBeforeImg" src="before.jpeg" alt="Before Oxidized Hood" draggable="false"
+                            <img id="sliderBeforeImg" src="before.jpeg" alt="Before Scratches" draggable="false"
                                  class="h-full max-w-none object-cover object-center select-none pointer-events-none"
                                  onerror="this.src='https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=60'">
-                            <span class="absolute bottom-3.5 left-3.5 z-20 bg-black/85 border border-rose-500/50 text-rose-300 text-[11px] font-extrabold px-3 py-1.5 rounded-xl backdrop-blur-md shadow-lg" data-i18n="beforeTag">
-                                BEFORE: OXIDATION & SCRATCHES
+                            <span class="absolute bottom-3 left-3 z-20 bg-black/80 border border-white/15 text-zinc-300 text-[10px] font-bold px-2.5 py-1 rounded-lg backdrop-blur-md" data-i18n="beforeTag">
+                                BEFORE
                             </span>
                         </div>
 
                         <div id="sliderHandle" class="comparison-handle">
                             <div class="comparison-knob">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M8 9l-4 3 4 3m8-6l4 3-4 3"/>
                                 </svg>
                             </div>
                         </div>
                     </div>
-
-                    <div class="flex items-center justify-between mt-3 px-1 text-xs text-zinc-400">
-                        <button type="button" onclick="setSliderPercentage(88)" class="hover:text-gold-300 transition font-semibold" data-i18n="inspectBeforeBtn">
-                            🔍 Inspect Scratches (Before)
-                        </button>
-                        <span class="text-[11px] text-zinc-500 hidden sm:inline" data-i18n="sliderHint">Slide left & right to witness depth of reflection</span>
-                        <button type="button" onclick="setSliderPercentage(12)" class="hover:text-emerald-300 transition font-semibold" data-i18n="inspectAfterBtn">
-                            ✨ Full Mirror Finish (After)
-                        </button>
-                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- CONSOLE -->
-        <section id="clinic-console" class="scroll-mt-24">
-            <div class="text-center max-w-3xl mx-auto mb-8 space-y-2">
-                <span class="text-xs font-extrabold uppercase tracking-[0.25em] text-gold-400" data-i18n="consoleKicker">
-                    BESPOKE DIGITAL PAINT TELEMETRY
-                </span>
-                <h2 class="font-serif text-2xl sm:text-4xl font-black text-white" data-i18n="consoleTitle">
-                    Configure Your Vehicle's Restoration & Care
-                </h2>
-                <p class="text-xs sm:text-sm text-zinc-400" data-i18n="consoleSub">
-                    An effortless, interactive concierge experience. Your submission streams live to our Master Specialists within seconds.
-                </p>
-            </div>
-
-            <div class="max-w-xl mx-auto grid grid-cols-2 p-1.5 rounded-2xl bg-leather border border-gold-400/30 mb-8 shadow-2xl">
-                <button type="button" id="tabScratchBtn" onclick="switchConsoleTab('scratch')" class="py-3.5 px-4 rounded-xl font-extrabold text-xs sm:text-sm transition flex items-center justify-center gap-2 bg-gradient-to-r from-gold-400 to-gold-500 text-black shadow-lg cursor-pointer">
-                    <span>📸</span>
-                    <span data-i18n="tabScratchTitle">Scratch & Paint Diagnosis</span>
+        <!-- STREAMLINED 4-STEP CONSOLE -->
+        <section id="clinic-console" class="scroll-mt-20 max-w-3xl mx-auto">
+            
+            <!-- Clean 2-Tab Switcher -->
+            <div class="grid grid-cols-2 p-1.5 rounded-2xl bg-leather border border-white/10 mb-6">
+                <button type="button" id="tabScratchBtn" onclick="switchConsoleTab('scratch')" class="py-3 px-4 rounded-xl font-extrabold text-xs sm:text-sm transition flex items-center justify-center gap-2 bg-gradient-to-r from-gold-300 to-gold-400 text-black shadow-md cursor-pointer">
+                    <span data-i18n="tabScratchTitle">Fix a Scratch</span>
                 </button>
-                <button type="button" id="tabBookingBtn" onclick="switchConsoleTab('booking')" class="py-3.5 px-4 rounded-xl font-extrabold text-xs sm:text-sm transition flex items-center justify-center gap-2 text-zinc-300 hover:text-white cursor-pointer">
-                    <span>🛡️</span>
-                    <span data-i18n="tabBookingTitle">Weekend Dry Wash Slot</span>
+                <button type="button" id="tabBookingBtn" onclick="switchConsoleTab('booking')" class="py-3 px-4 rounded-xl font-extrabold text-xs sm:text-sm transition flex items-center justify-center gap-2 text-zinc-400 hover:text-white cursor-pointer">
+                    <span data-i18n="tabBookingTitle">Weekend Care</span>
                 </button>
             </div>
 
-            <!-- TAB 1: SCRATCH & PAINT DIAGNOSIS -->
-            <div id="panelScratch" class="piano-card-gold rounded-3xl p-5 sm:p-8 lg:p-10 max-w-4xl mx-auto">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 mb-6 border-b border-white/10">
+            <!-- TAB 1: 4-STEP SCRATCH ASSESSMENT -->
+            <div id="panelScratch" class="piano-card-gold rounded-3xl p-5 sm:p-8">
+                <div class="flex items-center justify-between pb-5 mb-6 border-b border-white/10">
                     <div>
-                        <div class="inline-flex items-center gap-2 text-xs font-bold text-emerald-400 mb-1">
-                            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-                            <span data-i18n="formLiveIndicator">Universal Realtime Cloud Telemetry</span>
-                        </div>
-                        <h3 class="text-xl sm:text-2xl font-black text-white" data-i18n="scratchFormHeader">
-                            Interactive Paint Defect & Scratch Assessment
-                        </h3>
+                        <h2 class="text-lg sm:text-xl font-black text-white" data-i18n="scratchFormHeader">
+                            Instant Paint Diagnosis
+                        </h2>
+                        <p class="text-xs text-zinc-400 mt-0.5" data-i18n="consoleSub">
+                            4 simple steps — get your custom restoration quote on WhatsApp.
+                        </p>
                     </div>
-                    <div class="bg-black/65 border border-gold-400/35 rounded-2xl px-4 py-2.5">
-                        <span class="text-[11px] uppercase tracking-wider text-zinc-400 block" data-i18n="sloganMiniTop">Asset Protection</span>
-                        <span class="text-xs font-extrabold gold-metallic" data-i18n="sloganMiniBottom">Save Your Investment Now</span>
-                    </div>
+                    <span class="text-[11px] text-gold-300 font-semibold border border-gold-400/30 bg-gold-400/10 px-2.5 py-1 rounded-full" data-i18n="sloganMiniBottom">
+                        Save Your Investment
+                    </span>
                 </div>
 
                 <form id="scratchConsultForm" onsubmit="submitScratchConsultation(event)" class="space-y-6">
-                    
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div>
-                            <div class="flex items-center justify-between mb-1.5">
-                                <label for="clientName" class="text-xs font-bold uppercase tracking-wider text-gold-200" data-i18n="lblClientName">
-                                    1. Client Full Name *
-                                </label>
-                                <span class="text-[11px] text-zinc-400 italic" data-i18n="exClientName">e.g. Kareem Selim</span>
-                            </div>
-                            <input type="text" id="clientName" required
-                                   data-i18n-placeholder="phClientName"
-                                   placeholder="e.g. Enter your full name..."
-                                   class="w-full px-4 py-3.5 rounded-xl bg-black/75 border border-white/15 focus:border-gold-400 focus:outline-none text-white text-sm font-medium transition">
-                        </div>
-                        <div>
-                            <div class="flex items-center justify-between mb-1.5">
-                                <label for="clientPhone" class="text-xs font-bold uppercase tracking-wider text-gold-200" data-i18n="lblClientPhone">
-                                    2. Mobile / WhatsApp Number *
-                                </label>
-                                <span class="text-[11px] text-zinc-400 italic" dir="ltr">e.g. 01X XXXX XXXX</span>
-                            </div>
-                            <input type="tel" id="clientPhone" required
-                                   placeholder="e.g. 01X XXXX XXXX" dir="ltr"
-                                   class="w-full px-4 py-3.5 rounded-xl bg-black/75 border border-white/15 focus:border-gold-400 focus:outline-none text-white text-sm font-medium transition">
-                        </div>
-                    </div>
 
-                    <!-- CAR BRANDS SELECTOR -->
-                    <div class="p-4 sm:p-6 rounded-2xl bg-black/50 border border-white/10 space-y-5">
-                        <div class="flex flex-wrap items-center justify-between gap-2">
-                            <span class="text-xs font-extrabold uppercase tracking-wider text-gold-300" data-i18n="lblBrandSelect">
-                                3. Select Car Manufacturer / Brand *
+                    <!-- STEP 1: YOUR CAR (SWIPEABLE BRANDS + MODEL + 3D COLOR DROPS) -->
+                    <div class="p-4 sm:p-5 rounded-2xl bg-black/40 border border-white/10 space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-extrabold uppercase tracking-wider text-gold-300" data-i18n="step1Title">
+                                1. Your Car
                             </span>
-                            <span class="text-[11px] text-zinc-400" data-i18n="lblBrandHint">Tap your vehicle badge or type any custom make</span>
+                            <span class="text-[11px] text-zinc-400" data-i18n="lblBrandHint">Swipe to pick or type below</span>
                         </div>
 
-                        <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-2" id="brandLogoGrid">
-                            <button type="button" onclick="selectCarBrandLogo(this, 'Mercedes-Benz')" class="brand-logo-card selected p-2.5 rounded-xl bg-leather border border-white/15 flex items-center justify-center text-center group cursor-pointer">
-                                <span class="text-[11px] font-extrabold tracking-wider text-gold-300">MERCEDES</span>
-                            </button>
-                            <button type="button" onclick="selectCarBrandLogo(this, 'BMW')" class="brand-logo-card p-2.5 rounded-xl bg-leather border border-white/15 flex items-center justify-center text-center group cursor-pointer">
-                                <span class="text-[11px] font-extrabold tracking-wider text-zinc-200 group-hover:text-gold-300">BMW</span>
-                            </button>
-                            <button type="button" onclick="selectCarBrandLogo(this, 'Porsche')" class="brand-logo-card p-2.5 rounded-xl bg-leather border border-white/15 flex items-center justify-center text-center group cursor-pointer">
-                                <span class="text-[11px] font-extrabold tracking-wider text-zinc-200 group-hover:text-gold-300">PORSCHE</span>
-                            </button>
-                            <button type="button" onclick="selectCarBrandLogo(this, 'Range Rover')" class="brand-logo-card p-2.5 rounded-xl bg-leather border border-white/15 flex items-center justify-center text-center group cursor-pointer">
-                                <span class="text-[11px] font-extrabold tracking-wider text-zinc-200 group-hover:text-gold-300">RANGE ROVER</span>
-                            </button>
-                            <button type="button" onclick="selectCarBrandLogo(this, 'Audi')" class="brand-logo-card p-2.5 rounded-xl bg-leather border border-white/15 flex items-center justify-center text-center group cursor-pointer">
-                                <span class="text-[11px] font-extrabold tracking-wider text-zinc-200 group-hover:text-gold-300">AUDI</span>
-                            </button>
-                            <button type="button" onclick="selectCarBrandLogo(this, 'Toyota')" class="brand-logo-card p-2.5 rounded-xl bg-leather border border-white/15 flex items-center justify-center text-center group cursor-pointer">
-                                <span class="text-[11px] font-extrabold tracking-wider text-zinc-200 group-hover:text-gold-300">TOYOTA</span>
-                            </button>
-                            <button type="button" onclick="selectCarBrandLogo(this, 'Lexus')" class="brand-logo-card p-2.5 rounded-xl bg-leather border border-white/15 flex items-center justify-center text-center group cursor-pointer">
-                                <span class="text-[11px] font-extrabold tracking-wider text-zinc-200 group-hover:text-gold-300">LEXUS</span>
-                            </button>
-                            <button type="button" onclick="selectCarBrandLogo(this, 'Hyundai')" class="brand-logo-card p-2.5 rounded-xl bg-leather border border-white/15 flex items-center justify-center text-center group cursor-pointer">
-                                <span class="text-[11px] font-extrabold tracking-wider text-zinc-200 group-hover:text-gold-300">HYUNDAI</span>
-                            </button>
-                            <button type="button" onclick="selectCarBrandLogo(this, 'Kia')" class="brand-logo-card p-2.5 rounded-xl bg-leather border border-white/15 flex items-center justify-center text-center group cursor-pointer">
-                                <span class="text-[11px] font-extrabold tracking-wider text-zinc-200 group-hover:text-gold-300">KIA</span>
-                            </button>
-                            <button type="button" onclick="selectCarBrandLogo(this, 'Volkswagen')" class="brand-logo-card p-2.5 rounded-xl bg-leather border border-white/15 flex items-center justify-center text-center group cursor-pointer">
-                                <span class="text-[11px] font-extrabold tracking-wider text-zinc-200 group-hover:text-gold-300">VOLKSWAGEN</span>
-                            </button>
-                            <button type="button" onclick="selectCarBrandLogo(this, 'Skoda / Seat')" class="brand-logo-card p-2.5 rounded-xl bg-leather border border-white/15 flex items-center justify-center text-center group cursor-pointer">
-                                <span class="text-[11px] font-extrabold tracking-wider text-zinc-200 group-hover:text-gold-300">SKODA / SEAT</span>
-                            </button>
-                            <button type="button" onclick="selectCarBrandLogo(this, 'Nissan / Infiniti')" class="brand-logo-card p-2.5 rounded-xl bg-leather border border-white/15 flex items-center justify-center text-center group cursor-pointer">
-                                <span class="text-[11px] font-extrabold tracking-wider text-zinc-200 group-hover:text-gold-300">NISSAN</span>
-                            </button>
-                            <button type="button" onclick="selectCarBrandLogo(this, 'Peugeot / Opel')" class="brand-logo-card p-2.5 rounded-xl bg-leather border border-white/15 flex items-center justify-center text-center group cursor-pointer">
-                                <span class="text-[11px] font-extrabold tracking-wider text-zinc-200 group-hover:text-gold-300">PEUGEOT / OPEL</span>
-                            </button>
-                            <button type="button" onclick="selectCarBrandLogo(this, 'MG / Chery / Haval')" class="brand-logo-card p-2.5 rounded-xl bg-leather border border-white/15 flex items-center justify-center text-center group cursor-pointer">
-                                <span class="text-[11px] font-extrabold tracking-wider text-zinc-200 group-hover:text-gold-300">MG / CHERY</span>
-                            </button>
-                            <button type="button" onclick="selectCarBrandLogo(this, 'Chevrolet / Ford')" class="brand-logo-card p-2.5 rounded-xl bg-leather border border-white/15 flex items-center justify-center text-center group cursor-pointer">
-                                <span class="text-[11px] font-extrabold tracking-wider text-zinc-200 group-hover:text-gold-300">CHEVROLET / FORD</span>
-                            </button>
-                            <button type="button" onclick="selectCarBrandLogo(this, 'Jeep / Dodge')" class="brand-logo-card p-2.5 rounded-xl bg-leather border border-white/15 flex items-center justify-center text-center group cursor-pointer">
-                                <span class="text-[11px] font-extrabold tracking-wider text-zinc-200 group-hover:text-gold-300">JEEP / DODGE</span>
-                            </button>
-                            <button type="button" onclick="selectCarBrandLogo(this, 'Maserati / Ferrari')" class="brand-logo-card p-2.5 rounded-xl bg-leather border border-white/15 flex items-center justify-center text-center group cursor-pointer">
-                                <span class="text-[11px] font-extrabold tracking-wider text-zinc-200 group-hover:text-gold-300">SUPERSPORT</span>
-                            </button>
-                            <button type="button" onclick="selectCarBrandLogo(this, 'Xiaomi / Tesla / BYD')" class="brand-logo-card p-2.5 rounded-xl bg-leather border border-white/15 flex items-center justify-center text-center group cursor-pointer">
-                                <span class="text-[11px] font-extrabold tracking-wider text-zinc-200 group-hover:text-gold-300">XIAOMI / EV</span>
-                            </button>
+                        <!-- Swipeable Brand Pills -->
+                        <div class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1" id="brandLogoGrid">
+                            <button type="button" onclick="selectCarBrandLogo(this, 'Mercedes-Benz')" class="brand-logo-card selected shrink-0 px-3.5 py-2 rounded-xl bg-leather border border-white/10 text-xs font-bold cursor-pointer">Mercedes</button>
+                            <button type="button" onclick="selectCarBrandLogo(this, 'BMW')" class="brand-logo-card shrink-0 px-3.5 py-2 rounded-xl bg-leather border border-white/10 text-xs font-bold text-zinc-300 cursor-pointer">BMW</button>
+                            <button type="button" onclick="selectCarBrandLogo(this, 'Porsche')" class="brand-logo-card shrink-0 px-3.5 py-2 rounded-xl bg-leather border border-white/10 text-xs font-bold text-zinc-300 cursor-pointer">Porsche</button>
+                            <button type="button" onclick="selectCarBrandLogo(this, 'Range Rover')" class="brand-logo-card shrink-0 px-3.5 py-2 rounded-xl bg-leather border border-white/10 text-xs font-bold text-zinc-300 cursor-pointer">Range Rover</button>
+                            <button type="button" onclick="selectCarBrandLogo(this, 'Audi')" class="brand-logo-card shrink-0 px-3.5 py-2 rounded-xl bg-leather border border-white/10 text-xs font-bold text-zinc-300 cursor-pointer">Audi</button>
+                            <button type="button" onclick="selectCarBrandLogo(this, 'Toyota')" class="brand-logo-card shrink-0 px-3.5 py-2 rounded-xl bg-leather border border-white/10 text-xs font-bold text-zinc-300 cursor-pointer">Toyota</button>
+                            <button type="button" onclick="selectCarBrandLogo(this, 'Lexus')" class="brand-logo-card shrink-0 px-3.5 py-2 rounded-xl bg-leather border border-white/10 text-xs font-bold text-zinc-300 cursor-pointer">Lexus</button>
+                            <button type="button" onclick="selectCarBrandLogo(this, 'Volkswagen')" class="brand-logo-card shrink-0 px-3.5 py-2 rounded-xl bg-leather border border-white/10 text-xs font-bold text-zinc-300 cursor-pointer">VW</button>
+                            <button type="button" onclick="selectCarBrandLogo(this, 'Hyundai')" class="brand-logo-card shrink-0 px-3.5 py-2 rounded-xl bg-leather border border-white/10 text-xs font-bold text-zinc-300 cursor-pointer">Hyundai</button>
+                            <button type="button" onclick="selectCarBrandLogo(this, 'Kia')" class="brand-logo-card shrink-0 px-3.5 py-2 rounded-xl bg-leather border border-white/10 text-xs font-bold text-zinc-300 cursor-pointer">Kia</button>
+                            <button type="button" onclick="selectCarBrandLogo(this, 'Skoda / Seat')" class="brand-logo-card shrink-0 px-3.5 py-2 rounded-xl bg-leather border border-white/10 text-xs font-bold text-zinc-300 cursor-pointer">Skoda / Seat</button>
+                            <button type="button" onclick="selectCarBrandLogo(this, 'Peugeot / Opel')" class="brand-logo-card shrink-0 px-3.5 py-2 rounded-xl bg-leather border border-white/10 text-xs font-bold text-zinc-300 cursor-pointer">Peugeot / Opel</button>
+                            <button type="button" onclick="selectCarBrandLogo(this, 'MG / Chery')" class="brand-logo-card shrink-0 px-3.5 py-2 rounded-xl bg-leather border border-white/10 text-xs font-bold text-zinc-300 cursor-pointer">MG / Chery</button>
+                            <button type="button" onclick="selectCarBrandLogo(this, 'Xiaomi / Tesla / EV')" class="brand-logo-card shrink-0 px-3.5 py-2 rounded-xl bg-leather border border-white/10 text-xs font-bold text-zinc-300 cursor-pointer">EV / Xiaomi</button>
                         </div>
 
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
-                            <div>
-                                <div class="flex justify-between mb-1.5">
-                                    <label for="carBrand" class="text-xs font-semibold text-zinc-300" data-i18n="lblSelectedMake">Selected Make (Editable) *</label>
-                                    <span class="text-[10px] text-zinc-500">Or type any brand</span>
-                                </div>
-                                <input type="text" id="carBrand" required value="Mercedes-Benz"
-                                       class="w-full px-3.5 py-3 rounded-xl bg-black/80 border border-gold-400/50 focus:border-gold-400 text-gold-200 text-sm font-bold focus:outline-none">
-                            </div>
-
-                            <div>
-                                <div class="flex justify-between mb-1.5">
-                                    <label for="carModel" class="text-xs font-semibold text-zinc-300" data-i18n="lblCarModel">Model & Year *</label>
-                                    <span class="text-[10px] text-zinc-500">e.g. S580 • 2026</span>
-                                </div>
-                                <input type="text" id="carModel" required
-                                       data-i18n-placeholder="phCarModel"
-                                       placeholder="e.g. S580 • 2026"
-                                       class="w-full px-3.5 py-3 rounded-xl bg-leather border border-white/15 focus:border-gold-400 text-white text-sm focus:outline-none">
-                            </div>
-
-                            <div>
-                                <div class="flex justify-between mb-1.5">
-                                    <label for="clientZone" class="text-xs font-semibold text-zinc-300" data-i18n="lblClientZone">Preferred Zone *</label>
-                                    <span class="text-[10px] text-zinc-500">e.g. Heliopolis</span>
-                                </div>
-                                <select id="clientZone" required class="w-full px-3.5 py-3 rounded-xl bg-leather border border-white/15 focus:border-gold-400 text-white text-sm focus:outline-none">
-                                    <option value="Heliopolis">Heliopolis (مصر الجديدة)</option>
-                                    <option value="Nasr City">Nasr City (مدينة نصر)</option>
-                                    <option value="Madinaty">Madinaty (مدينتي)</option>
-                                    <option value="5th Settlement">5th Settlement (التجمع الخامس)</option>
-                                </select>
-                            </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                            <input type="text" id="carBrand" required value="Mercedes-Benz"
+                                   placeholder="Make"
+                                   class="px-3.5 py-2.5 rounded-xl bg-leather border border-white/10 focus:border-gold-400 text-gold-200 text-xs font-bold focus:outline-none">
+                            <input type="text" id="carModel" required
+                                   data-i18n-placeholder="phCarModel"
+                                   placeholder="Model & Year (e.g. S580 2026) *"
+                                   class="px-3.5 py-2.5 rounded-xl bg-leather border border-white/10 focus:border-gold-400 text-white text-xs focus:outline-none">
+                            <select id="clientZone" required class="px-3.5 py-2.5 rounded-xl bg-leather border border-white/10 focus:border-gold-400 text-white text-xs focus:outline-none">
+                                <option value="Heliopolis">Heliopolis (مصر الجديدة)</option>
+                                <option value="Nasr City">Nasr City (مدينة نصر)</option>
+                                <option value="Madinaty">Madinaty (مدينتي)</option>
+                                <option value="5th Settlement">5th Settlement (التجمع الخامس)</option>
+                            </select>
                         </div>
 
-                        <!-- INTERACTIVE COLOR PLATE PALETTE -->
-                        <div class="pt-2">
-                            <div class="flex items-center justify-between mb-2">
-                                <label for="carColorInput" class="text-xs font-semibold text-zinc-300" data-i18n="lblCarColor">
-                                    Paint Finish & Custom Color Plate *
-                                </label>
-                                <span class="text-[11px] text-zinc-400 italic" data-i18n="exCarColor">Tap color wheel or shade below</span>
-                            </div>
-                            <div class="flex flex-wrap items-center gap-3">
-                                <label class="relative w-12 h-12 rounded-xl overflow-hidden border-2 border-gold-400 shrink-0 cursor-pointer shadow-lg flex items-center justify-center" title="Open Full Color Wheel">
-                                    <input type="color" id="nativeColorPicker" value="#0a0a0c" oninput="handleColorWheelPick(this.value)"
-                                           class="absolute -inset-2 w-16 h-16 cursor-pointer opacity-0">
-                                    <span id="colorPreviewBox" class="w-full h-full block" style="background-color: #0a0a0c;"></span>
-                                    <span class="absolute inset-0 flex items-center justify-center text-[10px] font-black bg-black/40 text-white">PICK</span>
-                                </label>
+                        <!-- 3D Paint Drops + Custom Color Input -->
+                        <div class="flex flex-wrap items-center gap-2.5 pt-1">
+                            <label class="relative w-8 h-8 rounded-full overflow-hidden border border-gold-400 shrink-0 cursor-pointer flex items-center justify-center shadow" title="Custom Color Wheel">
+                                <input type="color" id="nativeColorPicker" value="#08080A" oninput="handleColorWheelPick(this.value)" class="absolute -inset-2 w-12 h-12 cursor-pointer opacity-0">
+                                <span id="colorPreviewBox" class="w-full h-full block" style="background-color: #08080A;"></span>
+                                <span class="absolute text-[8px] font-black text-white bg-black/40 px-1 rounded">+</span>
+                            </label>
 
-                                <div class="flex flex-wrap items-center gap-1.5">
-                                    <button type="button" onclick="applyPresetColor('#08080A', 'Obsidian Black Metallic')" class="w-7 h-7 rounded-lg bg-[#08080A] border border-white/40 hover:scale-110 transition cursor-pointer" title="Obsidian Black"></button>
-                                    <button type="button" onclick="applyPresetColor('#F4F5F7', 'Diamond Pearl White')" class="w-7 h-7 rounded-lg bg-[#F4F5F7] border border-white/40 hover:scale-110 transition cursor-pointer" title="Pearl White"></button>
-                                    <button type="button" onclick="applyPresetColor('#7A8088', 'Selenite Grey Metallic')" class="w-7 h-7 rounded-lg bg-[#7A8088] border border-white/30 hover:scale-110 transition cursor-pointer" title="Selenite Grey"></button>
-                                    <button type="button" onclick="applyPresetColor('#C0C5CE', 'Iridium Silver Metallic')" class="w-7 h-7 rounded-lg bg-[#C0C5CE] border border-white/30 hover:scale-110 transition cursor-pointer" title="Iridium Silver"></button>
-                                    <button type="button" onclick="applyPresetColor('#10284E', 'Tanzanite Sapphire Blue')" class="w-7 h-7 rounded-lg bg-[#10284E] border border-white/30 hover:scale-110 transition cursor-pointer" title="Sapphire Blue"></button>
-                                    <button type="button" onclick="applyPresetColor('#8F141B', 'Patagonia Crimson Red')" class="w-7 h-7 rounded-lg bg-[#8F141B] border border-white/30 hover:scale-110 transition cursor-pointer" title="Crimson Red"></button>
-                                    <button type="button" onclick="applyPresetColor('#113826', 'British Emerald Green')" class="w-7 h-7 rounded-lg bg-[#113826] border border-white/30 hover:scale-110 transition cursor-pointer" title="Emerald Green"></button>
-                                    <button type="button" onclick="applyPresetColor('#C2A878', 'Champagne Quartz Gold')" class="w-7 h-7 rounded-lg bg-[#C2A878] border border-white/30 hover:scale-110 transition cursor-pointer" title="Champagne Gold"></button>
-                                </div>
+                            <button type="button" onclick="applyPresetColor('#08080A', 'Obsidian Black')" class="w-6 h-6 paint-sphere bg-[#08080A] border border-white/30 cursor-pointer" title="Obsidian Black"></button>
+                            <button type="button" onclick="applyPresetColor('#F4F5F7', 'Pearl White')" class="w-6 h-6 paint-sphere bg-[#F4F5F7] border border-white/30 cursor-pointer" title="Pearl White"></button>
+                            <button type="button" onclick="applyPresetColor('#7A8088', 'Selenite Grey')" class="w-6 h-6 paint-sphere bg-[#7A8088] border border-white/20 cursor-pointer" title="Selenite Grey"></button>
+                            <button type="button" onclick="applyPresetColor('#C0C5CE', 'Iridium Silver')" class="w-6 h-6 paint-sphere bg-[#C0C5CE] border border-white/20 cursor-pointer" title="Silver"></button>
+                            <button type="button" onclick="applyPresetColor('#10284E', 'Sapphire Blue')" class="w-6 h-6 paint-sphere bg-[#10284E] border border-white/20 cursor-pointer" title="Blue"></button>
+                            <button type="button" onclick="applyPresetColor('#8F141B', 'Crimson Red')" class="w-6 h-6 paint-sphere bg-[#8F141B] border border-white/20 cursor-pointer" title="Red"></button>
+                            <button type="button" onclick="applyPresetColor('#113826', 'Emerald Green')" class="w-6 h-6 paint-sphere bg-[#113826] border border-white/20 cursor-pointer" title="Green"></button>
+                            <button type="button" onclick="applyPresetColor('#C2A878', 'Champagne Gold')" class="w-6 h-6 paint-sphere bg-[#C2A878] border border-white/20 cursor-pointer" title="Champagne"></button>
 
-                                <input type="text" id="carColorInput" required value="Obsidian Black Metallic (#08080A)"
-                                       placeholder="e.g. Custom Metallic Grey / Blue..."
-                                       class="flex-1 min-w-[200px] px-3.5 py-2.5 rounded-xl bg-black/85 border border-gold-400/50 text-gold-200 text-xs font-bold focus:outline-none">
-                            </div>
-                        </div>
-
-                        <!-- DEFECT SEVERITY LEVEL -->
-                        <div class="pt-3 border-t border-white/10">
-                            <div class="flex flex-wrap items-center justify-between gap-2 mb-2.5">
-                                <span class="text-xs font-extrabold uppercase tracking-wider text-gold-300" data-i18n="lblDefectSeverity">
-                                    4. Defect Severity Level — Select Condition
-                                </span>
-                                <span class="text-[11px] text-zinc-400 italic" data-i18n="exDefectSeverity">Helps calculate exact polishing stages</span>
-                            </div>
-                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
-                                <button type="button" onclick="selectDefectSeverity(this, 'Swirl Marks & Oxidation (دوائر غسيل وبهتان)')" class="severity-card selected p-3 rounded-xl bg-black/70 border border-white/15 text-left cursor-pointer">
-                                    <span class="block text-xs font-extrabold text-gold-300">Level 1: Swirls & Oxidation</span>
-                                    <span class="block text-[11px] text-zinc-400 mt-0.5">Spiderweb wash marks & dull gloss</span>
-                                </button>
-                                <button type="button" onclick="selectDefectSeverity(this, 'Clear Coat Scratch (خدش سطحي بالورنيش)')" class="severity-card p-3 rounded-xl bg-black/70 border border-white/15 text-left cursor-pointer">
-                                    <span class="block text-xs font-extrabold text-zinc-200">Level 2: Clear Coat Scratch</span>
-                                    <span class="block text-[11px] text-zinc-400 mt-0.5">Visible scratch, nail barely catches</span>
-                                </button>
-                                <button type="button" onclick="selectDefectSeverity(this, 'Deep Paint Scratch / Scuff (خدش عميق أو حكة)')" class="severity-card p-3 rounded-xl bg-black/70 border border-white/15 text-left cursor-pointer">
-                                    <span class="block text-xs font-extrabold text-zinc-200">Level 3: Deep Key / Bumper Scuff</span>
-                                    <span class="block text-[11px] text-zinc-400 mt-0.5">Deep impact requiring touchup</span>
-                                </button>
-                            </div>
-                            <input type="hidden" id="defectSeverityInput" value="Swirl Marks & Oxidation (دوائر غسيل وبهتان)">
-                        </div>
-
-                        <!-- Body Zone Map -->
-                        <div class="pt-3 border-t border-white/10">
-                            <div class="flex flex-wrap items-center justify-between gap-2 mb-2.5">
-                                <span class="text-xs font-extrabold uppercase tracking-wider text-gold-300" data-i18n="lblBodyZoneMap">
-                                    5. Interactive Body Map — Tap Affected Paint Zone(s)
-                                </span>
-                                <span class="text-[11px] text-zinc-400 italic" data-i18n="exBodyZone">e.g. Front Hood + Right Doors</span>
-                            </div>
-                            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2">
-                                <button type="button" onclick="toggleCarBodyZone(this, 'Front Hood (الكبوت)')" class="car-zone-btn active px-3 py-2.5 rounded-xl bg-black/70 border border-white/15 text-xs font-bold text-zinc-300 flex items-center justify-center cursor-pointer">
-                                    <span data-i18n="zoneHood">Front Hood</span>
-                                </button>
-                                <button type="button" onclick="toggleCarBodyZone(this, 'Left Doors/Fender (الجانب الأيسر)')" class="car-zone-btn px-3 py-2.5 rounded-xl bg-black/70 border border-white/15 text-xs font-bold text-zinc-300 flex items-center justify-center cursor-pointer">
-                                    <span data-i18n="zoneLeft">Left Side</span>
-                                </button>
-                                <button type="button" onclick="toggleCarBodyZone(this, 'Right Doors/Fender (الجانب الأيمن)')" class="car-zone-btn px-3 py-2.5 rounded-xl bg-black/70 border border-white/15 text-xs font-bold text-zinc-300 flex items-center justify-center cursor-pointer">
-                                    <span data-i18n="zoneRight">Right Side</span>
-                                </button>
-                                <button type="button" onclick="toggleCarBodyZone(this, 'Roof & Pillars (السقف والقوائم)')" class="car-zone-btn px-3 py-2.5 rounded-xl bg-black/70 border border-white/15 text-xs font-bold text-zinc-300 flex items-center justify-center cursor-pointer">
-                                    <span data-i18n="zoneRoof">Roof Panel</span>
-                                </button>
-                                <button type="button" onclick="toggleCarBodyZone(this, 'Rear Trunk/Bumper (الشنطة والخلفي)')" class="car-zone-btn px-3 py-2.5 rounded-xl bg-black/70 border border-white/15 text-xs font-bold text-zinc-300 flex items-center justify-center cursor-pointer">
-                                    <span data-i18n="zoneRear">Rear / Trunk</span>
-                                </button>
-                                <button type="button" onclick="toggleCarBodyZone(this, 'Full Body Correction (كامل السيارة)')" class="car-zone-btn px-3 py-2.5 rounded-xl bg-black/70 border border-white/15 text-xs font-bold text-zinc-300 flex items-center justify-center cursor-pointer">
-                                    <span data-i18n="zoneFull">Full Body</span>
-                                </button>
-                            </div>
+                            <input type="text" id="carColorInput" required value="Obsidian Black (#08080A)"
+                                   class="flex-1 min-w-[150px] px-3 py-2 rounded-xl bg-leather border border-white/10 text-gold-200 text-xs font-semibold focus:outline-none">
                         </div>
                     </div>
 
-                    <!-- Media Upload -->
-                    <div class="p-4 sm:p-6 rounded-2xl bg-black/55 border border-gold-400/35 space-y-4">
-                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                            <div>
-                                <span class="text-xs font-extrabold uppercase tracking-wider text-gold-300 block" data-i18n="lblMediaSection">
-                                    6. Upload Scratch / Paint Defect Media (Up to 5 Photos OR 60s Video) *
-                                </span>
-                                <span class="text-[11px] text-zinc-400" data-i18n="lblMediaSub">
-                                    Smart Cloud Optimization • Supports 140p up to 1080p HD
-                                </span>
-                            </div>
+                    <!-- STEP 2: THE ISSUE (SEVERITY + ZONE IN ONE COMPACT BLOCK) -->
+                    <div class="p-4 sm:p-5 rounded-2xl bg-black/40 border border-white/10 space-y-4">
+                        <span class="text-xs font-extrabold uppercase tracking-wider text-gold-300 block" data-i18n="step2Title">
+                            2. The Issue &amp; Location
+                        </span>
 
-                            <div class="flex items-center gap-2">
-                                <label for="mediaResolution" class="text-xs font-bold text-gold-200 whitespace-nowrap" data-i18n="lblResolution">
-                                    Resolution:
-                                </label>
-                                <select id="mediaResolution" onchange="updateResolutionBadge()" class="px-3 py-2 rounded-xl bg-leather border border-gold-400/45 text-gold-200 text-xs font-extrabold focus:outline-none">
-                                    <option value="1080">1080p Full HD (Master Detail)</option>
-                                    <option value="720">720p HD (Fast High Detail)</option>
-                                    <option value="480">480p SD (Balanced)</option>
-                                    <option value="360">360p (Data Saver)</option>
-                                    <option value="240">240p (Quick Preview)</option>
-                                    <option value="140">140p (Ultra-Light)</option>
-                                </select>
-                            </div>
+                        <div class="grid grid-cols-3 gap-2">
+                            <button type="button" onclick="selectDefectSeverity(this, 'Swirl Marks & Oxidation')" class="severity-card selected p-2.5 rounded-xl bg-leather border border-white/10 text-center cursor-pointer">
+                                <span class="block text-xs font-bold" data-i18n="sev1">Swirls / Dull</span>
+                                <span class="block text-[10px] text-zinc-400 mt-0.5" data-i18n="sev1Sub">Surface haze</span>
+                            </button>
+                            <button type="button" onclick="selectDefectSeverity(this, 'Clear Coat Scratch')" class="severity-card p-2.5 rounded-xl bg-leather border border-white/10 text-center cursor-pointer">
+                                <span class="block text-xs font-bold" data-i18n="sev2">Light Scratch</span>
+                                <span class="block text-[10px] text-zinc-400 mt-0.5" data-i18n="sev2Sub">Clear coat</span>
+                            </button>
+                            <button type="button" onclick="selectDefectSeverity(this, 'Deep Scratch / Scuff')" class="severity-card p-2.5 rounded-xl bg-leather border border-white/10 text-center cursor-pointer">
+                                <span class="block text-xs font-bold" data-i18n="sev3">Deep Scuff</span>
+                                <span class="block text-[10px] text-zinc-400 mt-0.5" data-i18n="sev3Sub">Key / bumper</span>
+                            </button>
+                        </div>
+                        <input type="hidden" id="defectSeverityInput" value="Swirl Marks & Oxidation">
+
+                        <div class="grid grid-cols-3 sm:grid-cols-6 gap-2 pt-1">
+                            <button type="button" onclick="toggleCarBodyZone(this, 'Front Hood')" class="car-zone-btn active py-2 px-2 rounded-xl bg-leather border border-white/10 text-[11px] font-semibold text-zinc-300 cursor-pointer" data-i18n="zoneHood">Hood</button>
+                            <button type="button" onclick="toggleCarBodyZone(this, 'Left Side')" class="car-zone-btn py-2 px-2 rounded-xl bg-leather border border-white/10 text-[11px] font-semibold text-zinc-300 cursor-pointer" data-i18n="zoneLeft">Left Side</button>
+                            <button type="button" onclick="toggleCarBodyZone(this, 'Right Side')" class="car-zone-btn py-2 px-2 rounded-xl bg-leather border border-white/10 text-[11px] font-semibold text-zinc-300 cursor-pointer" data-i18n="zoneRight">Right Side</button>
+                            <button type="button" onclick="toggleCarBodyZone(this, 'Roof')" class="car-zone-btn py-2 px-2 rounded-xl bg-leather border border-white/10 text-[11px] font-semibold text-zinc-300 cursor-pointer" data-i18n="zoneRoof">Roof</button>
+                            <button type="button" onclick="toggleCarBodyZone(this, 'Rear / Trunk')" class="car-zone-btn py-2 px-2 rounded-xl bg-leather border border-white/10 text-[11px] font-semibold text-zinc-300 cursor-pointer" data-i18n="zoneRear">Rear</button>
+                            <button type="button" onclick="toggleCarBodyZone(this, 'Full Body')" class="car-zone-btn py-2 px-2 rounded-xl bg-leather border border-white/10 text-[11px] font-semibold text-zinc-300 cursor-pointer" data-i18n="zoneFull">Full Car</button>
+                        </div>
+                    </div>
+
+                    <!-- STEP 3: PHOTOS / VIDEO + OPTIONAL NOTE -->
+                    <div class="p-4 sm:p-5 rounded-2xl bg-black/40 border border-white/10 space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-extrabold uppercase tracking-wider text-gold-300" data-i18n="step3Title">
+                                3. Photos or Video *
+                            </span>
+                            <select id="mediaResolution" onchange="updateResolutionBadge()" class="px-2.5 py-1 rounded-lg bg-leather border border-white/10 text-gold-200 text-[11px] font-bold focus:outline-none">
+                                <option value="1080">1080p HD</option>
+                                <option value="720">720p Fast</option>
+                                <option value="480">480p Light</option>
+                            </select>
                         </div>
 
                         <div onclick="document.getElementById('mediaFileInput').click()"
-                             class="cursor-pointer rounded-2xl border-2 border-dashed border-gold-400/45 hover:border-gold-400 bg-gradient-to-b from-gold-400/10 to-transparent p-6 text-center transition group">
+                             class="cursor-pointer rounded-2xl border border-dashed border-gold-400/40 hover:border-gold-400 bg-white/[0.02] hover:bg-gold-400/[0.04] p-5 text-center transition">
                             <input type="file" id="mediaFileInput" accept="image/*,video/*" multiple class="hidden" onchange="handleMediaFilesSelected(event)">
-                            <div class="w-12 h-12 rounded-2xl bg-gold-400/15 border border-gold-400/40 flex items-center justify-center mx-auto mb-3 group-hover:scale-105 transition">
-                                <svg class="w-6 h-6 text-gold-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"/>
-                                </svg>
-                            </div>
-                            <p class="text-sm font-extrabold text-white" data-i18n="dropzoneTitle">
-                                Tap to Capture or Upload Up to 5 Photos (or 1 Video up to 60s)
+                            <p class="text-xs sm:text-sm font-bold text-white" data-i18n="dropzoneTitle">
+                                📸 Tap to upload up to 5 photos (or 60s video)
                             </p>
-                            <p class="text-xs text-zinc-400 mt-1">
-                                <span data-i18n="dropzoneActiveRes">Active Optical Resolution:</span>
-                                <span id="activeResBadge" class="text-gold-300 font-bold">1080p Full HD (Master Detail)</span>
-                            </p>
+                            <span id="activeResBadge" class="text-[11px] text-zinc-400 block mt-0.5">1080p HD</span>
                         </div>
 
-                        <div id="mediaProcessingStatus" class="hidden p-3.5 rounded-xl bg-gold-400/15 border border-gold-400/40 text-xs font-bold text-gold-200 space-y-2">
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center gap-2">
-                                    <span class="w-3.5 h-3.5 rounded-full border-2 border-gold-300 border-t-transparent animate-spin"></span>
-                                    <span id="mediaStatusLabel">Optimizing high-resolution optical media...</span>
-                                </div>
-                                <span id="mediaProgressPct" class="font-mono text-gold-300">0%</span>
+                        <div id="mediaProcessingStatus" class="hidden p-3 rounded-xl bg-leather border border-gold-400/30 text-xs text-gold-200 space-y-1.5">
+                            <div class="flex justify-between">
+                                <span id="mediaStatusLabel">Optimizing media...</span>
+                                <span id="mediaProgressPct" class="font-mono">0%</span>
                             </div>
-                            <div class="w-full h-1.5 bg-black/60 rounded-full overflow-hidden">
-                                <div id="mediaProgressBar" class="h-full bg-gold-400 transition-all duration-200" style="width: 0%"></div>
+                            <div class="w-full h-1 bg-black rounded-full overflow-hidden">
+                                <div id="mediaProgressBar" class="h-full bg-gold-400 transition-all" style="width:0%"></div>
                             </div>
                         </div>
 
-                        <div id="mediaGridWrapper" class="hidden space-y-2.5">
+                        <div id="mediaGridWrapper" class="hidden space-y-2">
                             <div class="flex items-center justify-between text-xs">
-                                <span id="mediaCounterText" class="font-extrabold text-gold-300">0 / 5 Media Files Attached</span>
-                                <button type="button" onclick="clearAllMedia()" class="text-rose-400 hover:text-rose-300 font-bold cursor-pointer" data-i18n="btnClearAll">
-                                    Clear All
-                                </button>
+                                <span id="mediaCounterText" class="font-bold text-gold-300">0 / 5 Attached</span>
+                                <button type="button" onclick="clearAllMedia()" class="text-rose-400 text-xs font-bold cursor-pointer" data-i18n="btnClearAll">Clear</button>
                             </div>
-                            <div id="mediaThumbnailGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3"></div>
+                            <div id="mediaThumbnailGrid" class="grid grid-cols-3 sm:grid-cols-5 gap-2.5"></div>
                         </div>
 
-                        <!-- CLIENT CUSTOM NOTE BOX -->
-                        <div class="space-y-1.5 pt-2">
-                            <div class="flex items-center justify-between">
-                                <label for="clientNotes" class="text-xs font-extrabold uppercase tracking-wider text-gold-300" data-i18n="lblClientNoteBox">
-                                    7. Client Notes & Special Instructions (Write Anything You Want)
-                                </label>
-                                <span class="text-[11px] text-zinc-400 italic" data-i18n="exClientNoteBox">e.g. Deep scratch on right door / Call after 4 PM</span>
-                            </div>
-                            <textarea id="clientNotes" rows="3"
-                                      data-i18n-placeholder="phClientNoteBox"
-                                      placeholder="Write any special instructions, preferred callback time, or specific defect details here..."
-                                      class="w-full px-4 py-3 rounded-xl bg-black/80 border border-gold-400/40 focus:border-gold-400 text-xs text-white focus:outline-none leading-relaxed"></textarea>
-                        </div>
+                        <textarea id="clientNotes" rows="2"
+                                  data-i18n-placeholder="phClientNoteBox"
+                                  placeholder="Any special notes or preferred time? (Optional)"
+                                  class="w-full px-3.5 py-2.5 rounded-xl bg-leather border border-white/10 focus:border-gold-400 text-xs text-white focus:outline-none"></textarea>
                     </div>
 
-                    <button type="submit" id="submitScratchBtn" class="w-full btn-gold-elite py-4 px-6 rounded-2xl font-extrabold text-base tracking-wide flex items-center justify-center gap-3 cursor-pointer">
-                        <span>🚀</span>
-                        <span id="submitScratchBtnLabel" data-i18n="submitScratchBtnText">Transmit High-Res Diagnosis to Dr. Care Masters</span>
-                    </button>
+                    <!-- STEP 4: YOUR INFO & SUBMIT -->
+                    <div class="p-4 sm:p-5 rounded-2xl bg-black/40 border border-white/10 space-y-4">
+                        <span class="text-xs font-extrabold uppercase tracking-wider text-gold-300 block" data-i18n="step4Title">
+                            4. Your Contact
+                        </span>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <input type="text" id="clientName" required
+                                   data-i18n-placeholder="phClientName"
+                                   placeholder="Your Name *"
+                                   class="w-full px-4 py-3 rounded-xl bg-leather border border-white/10 focus:border-gold-400 text-white text-sm focus:outline-none">
+                            <input type="tel" id="clientPhone" required
+                                   placeholder="WhatsApp / Mobile (01X...) *" dir="ltr"
+                                   class="w-full px-4 py-3 rounded-xl bg-leather border border-white/10 focus:border-gold-400 text-white text-sm focus:outline-none">
+                        </div>
+
+                        <button type="submit" id="submitScratchBtn" class="w-full btn-gold-elite py-4 px-6 rounded-2xl font-extrabold text-sm sm:text-base tracking-wide flex items-center justify-center gap-2 cursor-pointer">
+                            <span id="submitScratchBtnLabel" data-i18n="submitScratchBtnText">Get My Restoration Plan</span>
+                            <span>→</span>
+                        </button>
+                    </div>
                 </form>
 
-                <div id="scratchSuccessBanner" class="hidden mt-6 p-6 rounded-2xl bg-gradient-to-br from-emerald-950/80 via-black to-black border border-gold-400/60 text-center space-y-4 shadow-2xl">
-                    <div class="w-12 h-12 rounded-full bg-gold-400/20 border border-gold-400 flex items-center justify-center mx-auto text-2xl">✨</div>
+                <!-- BLACK CARD VIP PASS CONFIRMATION -->
+                <div id="scratchSuccessBanner" class="hidden mt-6 p-6 rounded-2xl bg-gradient-to-br from-[#161512] via-[#090A0D] to-black border border-gold-400/50 text-center space-y-3 shadow-2xl">
+                    <span class="text-[10px] font-extrabold uppercase tracking-[0.25em] text-gold-400 block">DR. CARE PRIVATE ATELIER PASS</span>
                     <h4 class="text-lg font-black text-white" data-i18n="successHeader">
-                        Diagnosis Received Live! Welcome to the Dr. Care Atelier.
+                        Received. Our Master Specialist is reviewing your car.
                     </h4>
-                    <div class="inline-flex items-center gap-3 px-4 py-2 rounded-xl bg-black/80 border border-gold-400/40">
-                        <span class="text-xs text-zinc-400">VIP Reference Ticket:</span>
-                        <strong id="generatedTicketId" class="font-mono text-sm text-gold-300 tracking-wider">DC-0000</strong>
+                    <div class="inline-flex items-center gap-3 px-4 py-1.5 rounded-xl bg-white/5 border border-gold-400/30">
+                        <span class="text-xs text-zinc-400">Pass ID:</span>
+                        <strong id="generatedTicketId" class="font-mono text-sm text-gold-300">DC-0000</strong>
                     </div>
-                    <p id="syncConfirmSubText" class="text-xs sm:text-sm text-zinc-300 max-w-xl mx-auto" data-i18n="successBody">
-                        Your vehicle telemetry, custom notes, and high-res media are now synced live to our Master Specialist's console.
+                    <p class="text-xs text-zinc-400 max-w-md mx-auto" data-i18n="successBody">
+                        We will message you on WhatsApp shortly with your bespoke treatment plan.
                     </p>
                 </div>
             </div>
 
-            <!-- TAB 2: WEEKEND DRY WASH -->
-            <div id="panelBooking" class="hidden piano-card rounded-3xl p-5 sm:p-8 lg:p-10 max-w-4xl mx-auto space-y-8">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-5">
+            <!-- TAB 2: WEEKEND CARE -->
+            <div id="panelBooking" class="hidden piano-card rounded-3xl p-5 sm:p-8 space-y-6">
+                <div class="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-4">
                     <div>
-                        <span class="text-xs font-extrabold uppercase tracking-wider text-gold-400 block" data-i18n="washKicker">
-                            THU • FRI • SAT PRIVATE MOBILE CONCIERGE
-                        </span>
-                        <h3 class="text-xl sm:text-2xl font-black text-white" data-i18n="washHeader">
-                            Select Your Nano Dry Wash & Gloss Package
+                        <h3 class="text-lg sm:text-xl font-black text-white" data-i18n="washHeader">
+                            Weekend Nano Dry Wash
                         </h3>
+                        <p class="text-xs text-zinc-400" data-i18n="washKicker">Thu • Fri • Sat at your doorstep</p>
                     </div>
-                    <span class="text-xs bg-gold-400/15 border border-gold-400/30 text-gold-200 px-3 py-1.5 rounded-xl font-bold" data-i18n="depositNotice">
-                        15% Refundable Deposit Locks Your VIP Slot
+                    <span class="text-[11px] bg-gold-400/10 border border-gold-400/30 text-gold-200 px-3 py-1 rounded-full font-semibold" data-i18n="depositNotice">
+                        15% Deposit Locks Slot
                     </span>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div onclick="selectWashPackage('Standard Exterior', 550, 83)" id="pkgCard1"
-                         class="cursor-pointer p-5 rounded-2xl bg-black/65 border-2 border-gold-400 transition space-y-3 relative">
-                        <div class="flex justify-between items-start">
-                            <span class="text-xs font-extrabold uppercase tracking-wider text-gold-300" data-i18n="pkg1Time">45 MINS</span>
-                            <span class="text-xl font-black text-white">550 EGP</span>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5">
+                    <div onclick="selectWashPackage('Signature Gloss', 550, 83)" id="pkgCard1"
+                         class="cursor-pointer p-4 rounded-2xl bg-black/60 border-2 border-gold-400 transition space-y-2">
+                        <div class="flex justify-between items-center">
+                            <span class="text-[11px] font-bold text-gold-300" data-i18n="pkg1Time">45 MINS</span>
+                            <span class="text-lg font-black text-white">550 EGP</span>
                         </div>
-                        <h4 class="font-bold text-base text-white" data-i18n="pkg1Title">Standard Exterior</h4>
-                        <p class="text-xs text-zinc-400" data-i18n="pkg1Desc">Nano waterless Polymer wash + high-gloss paint rejuvenation.</p>
-                        <div class="pt-2 border-t border-white/10 text-[11px] text-gold-300 font-bold" data-i18n="pkg1Dep">
-                            15% Deposit: 83 EGP
-                        </div>
+                        <h4 class="font-bold text-sm text-white" data-i18n="pkg1Title">1. Signature Gloss</h4>
+                        <p class="text-xs text-zinc-400" data-i18n="pkg1Desc">Waterless nano polymer wash &amp; deep mirror shine.</p>
                     </div>
 
-                    <div onclick="selectWashPackage('Special Exterior + Rims', 670, 100)" id="pkgCard2"
-                         class="cursor-pointer p-5 rounded-2xl bg-black/65 border border-white/15 hover:border-gold-400/60 transition space-y-3 relative">
-                        <div class="flex justify-between items-start">
-                            <span class="text-xs font-extrabold uppercase tracking-wider text-gold-300" data-i18n="pkg2Time">60 MINS</span>
-                            <span class="text-xl font-black text-white">670 EGP</span>
+                    <div onclick="selectWashPackage('Concours Detail', 670, 100)" id="pkgCard2"
+                         class="cursor-pointer p-4 rounded-2xl bg-black/60 border border-white/10 hover:border-gold-400/50 transition space-y-2">
+                        <div class="flex justify-between items-center">
+                            <span class="text-[11px] font-bold text-gold-300" data-i18n="pkg2Time">60 MINS</span>
+                            <span class="text-lg font-black text-white">670 EGP</span>
                         </div>
-                        <h4 class="font-bold text-base text-white" data-i18n="pkg2Title">Special Exterior + Rims</h4>
-                        <p class="text-xs text-zinc-400" data-i18n="pkg2Desc">Deep gloss finish + brake-dust alloy rim detailing & tire dressing.</p>
-                        <div class="pt-2 border-t border-white/10 text-[11px] text-gold-300 font-bold" data-i18n="pkg2Dep">
-                            15% Deposit: 100 EGP
-                        </div>
+                        <h4 class="font-bold text-sm text-white" data-i18n="pkg2Title">2. Concours + Rims</h4>
+                        <p class="text-xs text-zinc-400" data-i18n="pkg2Desc">Body gloss + alloy rim detailing &amp; tire satin finish.</p>
                     </div>
 
-                    <div onclick="selectWashPackage('Executive Premium', 965, 145)" id="pkgCard3"
-                         class="cursor-pointer p-5 rounded-2xl bg-black/65 border border-white/15 hover:border-gold-400/60 transition space-y-3 relative">
-                        <div class="flex justify-between items-start">
-                            <span class="text-xs font-extrabold uppercase tracking-wider text-gold-300" data-i18n="pkg3Time">90 MINS • VIP</span>
-                            <span class="text-xl font-black gold-metallic">965 EGP</span>
+                    <div onclick="selectWashPackage('Royal Atelier VIP', 965, 145)" id="pkgCard3"
+                         class="cursor-pointer p-4 rounded-2xl bg-black/60 border border-white/10 hover:border-gold-400/50 transition space-y-2">
+                        <div class="flex justify-between items-center">
+                            <span class="text-[11px] font-bold text-gold-300" data-i18n="pkg3Time">90 MINS • VIP</span>
+                            <span class="text-lg font-black gold-metallic">965 EGP</span>
                         </div>
-                        <h4 class="font-bold text-base text-white" data-i18n="pkg3Title">Executive Premium</h4>
-                        <p class="text-xs text-zinc-400" data-i18n="pkg3Desc">Full exterior + rims + hydrophobic crystal glass coating protection.</p>
-                        <div class="pt-2 border-t border-white/10 text-[11px] text-gold-300 font-bold" data-i18n="pkg3Dep">
-                            15% Deposit: 145 EGP
-                        </div>
+                        <h4 class="font-bold text-sm text-white" data-i18n="pkg3Title">3. Royal Atelier VIP</h4>
+                        <p class="text-xs text-zinc-400" data-i18n="pkg3Desc">Full exterior + rims + hydrophobic crystal seal.</p>
                     </div>
                 </div>
 
-                <form id="washBookingForm" onsubmit="submitWashBooking(event)" class="space-y-4 pt-2">
-                    <input type="hidden" id="selectedPkgName" value="Standard Exterior (550 EGP - Deposit 83 EGP)">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                        <div>
-                            <label class="block text-[11px] text-zinc-400 mb-1" data-i18n="exWashName">Client Name (e.g. Tarek Nour)</label>
-                            <input type="text" id="washClientName" required
-                                   data-i18n-placeholder="phWashName"
-                                   placeholder="e.g. Full Name *"
-                                   class="w-full px-4 py-3.5 rounded-xl bg-black/75 border border-white/15 text-white text-sm focus:border-gold-400 focus:outline-none">
-                        </div>
-                        <div>
-                            <label class="block text-[11px] text-zinc-400 mb-1" dir="ltr">Mobile (e.g. 01X XXXX XXXX)</label>
-                            <input type="tel" id="washClientPhone" required
-                                   placeholder="e.g. 01X XXXX XXXX *" dir="ltr"
-                                   class="w-full px-4 py-3.5 rounded-xl bg-black/75 border border-white/15 text-white text-sm focus:border-gold-400 focus:outline-none">
-                        </div>
-                        <div>
-                            <label class="block text-[11px] text-zinc-400 mb-1" data-i18n="exWashCar">Vehicle (e.g. BMW X6 • Black)</label>
-                            <input type="text" id="washCarInfo" required
-                                   data-i18n-placeholder="phWashCar"
-                                   placeholder="e.g. Make, Model & Color *"
-                                   class="w-full px-4 py-3.5 rounded-xl bg-black/75 border border-white/15 text-white text-sm focus:border-gold-400 focus:outline-none">
-                        </div>
-                        <div>
-                            <label class="block text-[11px] text-zinc-400 mb-1" data-i18n="exWashSlot">Preferred Weekend Slot</label>
-                            <select id="washDaySlot" required class="w-full px-4 py-3.5 rounded-xl bg-leather border border-white/15 text-white text-sm focus:border-gold-400 focus:outline-none">
-                                <option value="Thursday Morning">Thursday — Morning Slot</option>
-                                <option value="Thursday Afternoon">Thursday — Afternoon Slot</option>
-                                <option value="Friday Morning">Friday — Morning Slot</option>
-                                <option value="Friday Afternoon">Friday — Afternoon Slot</option>
-                                <option value="Saturday Morning">Saturday — Morning Slot</option>
-                                <option value="Saturday Afternoon">Saturday — Afternoon Slot</option>
-                            </select>
-                        </div>
+                <form id="washBookingForm" onsubmit="submitWashBooking(event)" class="space-y-3 pt-1">
+                    <input type="hidden" id="selectedPkgName" value="Signature Gloss (550 EGP - Deposit 83 EGP)">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <input type="text" id="washClientName" required data-i18n-placeholder="phWashName" placeholder="Your Name *"
+                               class="px-4 py-3 rounded-xl bg-leather border border-white/10 text-white text-sm focus:border-gold-400 focus:outline-none">
+                        <input type="tel" id="washClientPhone" required placeholder="WhatsApp / Mobile (01X...) *" dir="ltr"
+                               class="px-4 py-3 rounded-xl bg-leather border border-white/10 text-white text-sm focus:border-gold-400 focus:outline-none">
+                        <input type="text" id="washCarInfo" required data-i18n-placeholder="phWashCar" placeholder="Car Make, Model & Color *"
+                               class="px-4 py-3 rounded-xl bg-leather border border-white/10 text-white text-sm focus:border-gold-400 focus:outline-none">
+                        <select id="washDaySlot" required class="px-4 py-3 rounded-xl bg-leather border border-white/10 text-white text-sm focus:border-gold-400 focus:outline-none">
+                            <option value="Thursday Morning">Thursday — Morning</option>
+                            <option value="Thursday Afternoon">Thursday — Afternoon</option>
+                            <option value="Friday Morning">Friday — Morning</option>
+                            <option value="Friday Afternoon">Friday — Afternoon</option>
+                            <option value="Saturday Morning">Saturday — Morning</option>
+                            <option value="Saturday Afternoon">Saturday — Afternoon</option>
+                        </select>
                     </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-1">
-                        <select id="washZone" class="px-4 py-3.5 rounded-xl bg-leather border border-white/15 text-white text-sm focus:border-gold-400 focus:outline-none">
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <select id="washZone" class="px-4 py-3 rounded-xl bg-leather border border-white/10 text-white text-sm focus:border-gold-400 focus:outline-none">
                             <option value="Heliopolis">Heliopolis (مصر الجديدة)</option>
                             <option value="Nasr City">Nasr City (مدينة نصر)</option>
                             <option value="Madinaty">Madinaty (مدينتي)</option>
                             <option value="5th Settlement">5th Settlement (التجمع الخامس)</option>
                         </select>
-                        <input type="text" id="washClientNotes" placeholder="Optional Note (e.g. Gate 4 / Villa 12)..."
-                               class="px-4 py-3.5 rounded-xl bg-black/75 border border-white/15 text-white text-xs focus:border-gold-400 focus:outline-none">
-                        <button type="submit" class="btn-gold-elite py-3.5 px-6 rounded-xl font-extrabold text-sm cursor-pointer" data-i18n="btnConfirmWash">
-                            Confirm Weekend Slot Reservation
+                        <input type="text" id="washClientNotes" placeholder="Address note (Optional)"
+                               class="px-4 py-3 rounded-xl bg-leather border border-white/10 text-white text-xs focus:border-gold-400 focus:outline-none">
+                        <button type="submit" class="btn-gold-elite py-3 px-6 rounded-xl font-extrabold text-sm cursor-pointer" data-i18n="btnConfirmWash">
+                            Reserve Slot →
                         </button>
                     </div>
                 </form>
 
-                <div id="washSuccessBanner" class="hidden p-5 rounded-2xl bg-emerald-950/70 border border-emerald-400/60 text-center space-y-2">
-                    <h4 class="text-base font-black text-white" data-i18n="washSuccessTitle">
-                        🌟 VIP Weekend Slot Logged Live!
-                    </h4>
-                    <p class="text-xs text-zinc-300" data-i18n="washSuccessSub">
-                        Our concierge specialist will contact you shortly to coordinate your 15% deposit and finalize your slot.
-                    </p>
+                <div id="washSuccessBanner" class="hidden p-5 rounded-2xl bg-leather border border-gold-400/50 text-center space-y-1.5">
+                    <h4 class="text-base font-black text-white" data-i18n="washSuccessTitle">🌟 Weekend Slot Reserved</h4>
+                    <p class="text-xs text-zinc-400" data-i18n="washSuccessSub">We will contact you shortly to confirm your 15% deposit.</p>
                 </div>
             </div>
-        </section>
-
-        <!-- MATERIALS -->
-        <section class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <a href="https://www.meguiars.com" target="_blank" rel="noopener noreferrer"
-               class="piano-card p-6 rounded-3xl flex items-center justify-between gap-4 hover:border-gold-400/60 transition group">
-                <div class="space-y-1.5">
-                    <span class="text-[11px] font-extrabold uppercase tracking-widest text-gold-400" data-i18n="megSub">USA POLYMER TECHNOLOGY</span>
-                    <h3 class="text-xl font-black text-white group-hover:text-gold-200 transition" data-i18n="megTitle">Meguiar's Professional Compounds</h3>
-                    <p class="text-xs text-zinc-400" data-i18n="megDesc">Optical-grade micro-abrasives & synthetic sealant protection safe for factory clear coats.</p>
-                </div>
-                <div class="w-20 h-20 rounded-2xl bg-black/75 border border-white/10 flex items-center justify-center p-2 shrink-0">
-                    <img src="meguiars-logo.png" alt="Meguiar's" class="max-h-full max-w-full object-contain" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');">
-                    <span class="hidden font-serif font-bold text-xs text-gold-300">MEGUIAR'S</span>
-                </div>
-            </a>
-
-            <a href="https://www.rupes.com" target="_blank" rel="noopener noreferrer"
-               class="piano-card p-6 rounded-3xl flex items-center justify-between gap-4 hover:border-gold-400/60 transition group">
-                <div class="space-y-1.5">
-                    <span class="text-[11px] font-extrabold uppercase tracking-widest text-gold-400" data-i18n="rupSub">ITALIAN ENGINEERING</span>
-                    <h3 class="text-xl font-black text-white group-hover:text-gold-200 transition" data-i18n="rupTitle">Rupes BigFoot Orbital Systems</h3>
-                    <p class="text-xs text-zinc-400" data-i18n="rupDesc">Zero-hologram dual-action precision polishing engineered in Milan, Italy.</p>
-                </div>
-                <div class="w-20 h-20 rounded-2xl bg-black/75 border border-white/10 flex items-center justify-center p-2 shrink-0">
-                    <img src="rupes-logo.png" alt="Rupes" class="max-h-full max-w-full object-contain" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');">
-                    <span class="hidden font-serif font-bold text-xs text-gold-300">RUPES</span>
-                </div>
-            </a>
         </section>
 
     </main>
 
-    <!-- FOOTER -->
-    <footer class="border-t border-white/10 bg-black/90 py-10 px-4">
-        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl bg-leather border border-gold-400/40 flex items-center justify-center text-gold-400 font-serif font-black">
-                    DC
-                </div>
-                <div>
-                    <p class="font-serif font-black tracking-widest gold-metallic text-sm">DR. CARE — REVIVING THE AUTOMOTIVE SOUL</p>
-                    <p class="text-xs text-zinc-500">Save Your Investment Now • Bespoke Mobile Paint Clinic</p>
-                </div>
-            </div>
-            <div class="flex flex-wrap items-center gap-3">
-                <a href="#clinic-console" class="px-4 py-2.5 rounded-xl bg-gold-400/15 border border-gold-400/40 text-gold-200 text-xs font-extrabold hover:bg-gold-400/25 transition">
-                    ✨ Start Online Inspection
-                </a>
-                <button type="button" onclick="openBackofficeModal()" class="px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-zinc-400 hover:text-gold-300 text-xs font-bold cursor-pointer">
-                    🔒 Executive Live CRM
-                </button>
-            </div>
+    <!-- MINIMAL FOOTER -->
+    <footer class="border-t border-white/10 bg-obsidian py-8 px-4">
+        <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-zinc-500">
+            <p class="font-serif font-bold tracking-widest gold-metallic">DR. CARE — REVIVING THE AUTOMOTIVE SOUL</p>
+            <button type="button" onclick="openBackofficeModal()" class="text-zinc-500 hover:text-gold-300 font-semibold transition cursor-pointer">
+                🔒 Executive CRM
+            </button>
         </div>
     </footer>
 
@@ -886,31 +620,26 @@
             
             <div class="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-4">
                 <div class="flex items-center gap-3">
-                    <div class="w-11 h-11 rounded-2xl bg-gold-400/15 border border-gold-400/50 flex items-center justify-center text-gold-300 font-black">
+                    <div class="w-10 h-10 rounded-2xl bg-gold-400/15 border border-gold-400/40 flex items-center justify-center text-gold-300 font-black">
                         ⚡
                     </div>
                     <div>
-                        <div class="flex items-center gap-2">
-                            <h3 class="font-serif text-lg sm:text-xl font-black text-white">DR. CARE EXECUTIVE COMMAND</h3>
-                            <span id="crmSyncBadge" class="px-2 py-0.5 rounded-md bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 text-[10px] font-extrabold">
-                                REALTIME SYNC
-                            </span>
-                        </div>
+                        <h3 class="font-serif text-base sm:text-lg font-black text-white">DR. CARE EXECUTIVE COMMAND</h3>
                         <p class="text-xs text-zinc-400">
                             Cairo Clock: <span id="liveSecondClock" class="text-gold-300 font-mono font-bold">--:--:--</span> • 
-                            Session Uptime: <span id="streamUptimeCounter" class="text-emerald-400 font-mono font-bold">00:00s</span>
+                            Uptime: <span id="streamUptimeCounter" class="text-emerald-400 font-mono font-bold">00:00s</span>
                         </p>
                     </div>
                 </div>
 
                 <div class="flex flex-wrap items-center gap-2">
-                    <button type="button" id="soundToggleBtn" onclick="toggleAudioRadar()" class="px-3 py-2 rounded-xl bg-emerald-500/15 border border-emerald-400/40 text-emerald-300 text-xs font-bold cursor-pointer">
-                        🔔 Audio Radar: ON
+                    <button type="button" id="soundToggleBtn" onclick="toggleAudioRadar()" class="px-3 py-2 rounded-xl bg-white/5 border border-white/15 text-gold-200 text-xs font-bold cursor-pointer">
+                        🔔 Audio: ON
                     </button>
-                    <button type="button" onclick="exportLeadsToCsv()" class="px-3 py-2 rounded-xl bg-white/5 hover:bg-white/15 border border-white/15 text-gold-200 text-xs font-bold cursor-pointer">
-                        📥 Export CSV
+                    <button type="button" onclick="exportLeadsToCsv()" class="px-3 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 text-zinc-200 text-xs font-bold cursor-pointer">
+                        📥 CSV
                     </button>
-                    <button type="button" onclick="lockCrmVault()" class="px-3 py-2 rounded-xl bg-white/5 hover:bg-amber-500/20 border border-white/10 text-zinc-300 hover:text-amber-300 text-xs font-bold cursor-pointer">
+                    <button type="button" onclick="lockCrmVault()" class="px-3 py-2 rounded-xl bg-white/5 hover:bg-amber-500/20 border border-white/10 text-zinc-300 text-xs font-bold cursor-pointer">
                         🔒 Lock
                     </button>
                     <button type="button" onclick="closeBackofficeModal()" class="px-3.5 py-2 rounded-xl bg-white/10 hover:bg-rose-500/20 text-zinc-300 hover:text-rose-300 text-xs font-extrabold cursor-pointer">
@@ -919,35 +648,34 @@
                 </div>
             </div>
 
-            <!-- PIN GATE (ZERO PUBLIC PASSWORD HINTS - ACCEPTS 2027 OR 2026) -->
-            <div id="crmPinGate" class="max-w-md mx-auto py-10 text-center space-y-4">
-                <div class="w-14 h-14 rounded-2xl bg-gold-400/10 border border-gold-400/40 flex items-center justify-center mx-auto text-gold-300 text-2xl">
+            <!-- PIN GATE -->
+            <div id="crmPinGate" class="max-w-sm mx-auto py-10 text-center space-y-4">
+                <div class="w-12 h-12 rounded-2xl bg-gold-400/10 border border-gold-400/30 flex items-center justify-center mx-auto text-gold-300 text-xl">
                     🔐
                 </div>
-                <p class="text-base font-extrabold text-gold-200">Executive Access Vault</p>
-                <p class="text-xs text-zinc-400">Enter your 4-digit staff security key to unlock live customer telemetry.</p>
+                <p class="text-base font-extrabold text-white">Executive Access Vault</p>
+                <p class="text-xs text-zinc-400">Enter your 4-digit security key to unlock live telemetry.</p>
                 <div id="pinInputBoxWrapper" class="flex gap-2 justify-center pt-1">
                     <input type="password" id="managerPinInput" inputmode="numeric" placeholder="••••" maxlength="8" autocomplete="off"
                            oninput="checkAutoUnlock(this.value)"
                            onkeydown="if(event.key==='Enter'){ event.preventDefault(); unlockCrmDashboard(); }"
-                           class="w-44 text-center text-lg tracking-widest font-black px-4 py-2.5 rounded-xl bg-black border border-gold-400/50 text-white focus:border-gold-400 focus:outline-none">
-                    <button type="button" onclick="unlockCrmDashboard()" class="btn-gold-elite px-6 py-2.5 rounded-xl font-extrabold text-xs uppercase cursor-pointer">
-                        Authorize
+                           class="w-40 text-center text-lg tracking-widest font-black px-4 py-2.5 rounded-xl bg-black border border-gold-400/50 text-white focus:border-gold-400 focus:outline-none">
+                    <button type="button" onclick="unlockCrmDashboard()" class="btn-gold-elite px-5 py-2.5 rounded-xl font-extrabold text-xs uppercase cursor-pointer">
+                        Unlock
                     </button>
                 </div>
-                <p id="pinErrorMsg" class="hidden text-xs font-bold text-rose-400">Unauthorized access key. Please verify your 4-digit key.</p>
+                <p id="pinErrorMsg" class="hidden text-xs font-bold text-rose-400">Unauthorized key.</p>
             </div>
 
             <!-- UNLOCKED CRM CONTENT -->
             <div id="crmDashboardContent" class="hidden space-y-6">
                 
-                <!-- Cloud Firestore Permission Diagnostic Banner (Hidden unless Firebase blocks access) -->
                 <div id="cloudDiagnosticBanner" class="hidden p-4 rounded-2xl bg-amber-950/70 border border-amber-400/50 text-xs text-amber-200 space-y-2">
                     <div class="flex items-center justify-between">
                         <strong class="text-sm text-amber-300">⚠️ Firebase Cloud Rules Notice (Local Vault Active)</strong>
                         <button type="button" onclick="this.parentElement.parentElement.classList.add('hidden')" class="text-amber-400 font-bold">✕</button>
                     </div>
-                    <p>To receive bookings across different phones/laptops, open <strong>Firebase Console ➔ Firestore Database ➔ Rules</strong> and publish:</p>
+                    <p>To sync bookings across all devices, open <strong>Firebase Console ➔ Firestore Database ➔ Rules</strong> and publish:</p>
                     <pre class="p-2.5 rounded-xl bg-black/80 text-emerald-300 font-mono text-[11px] overflow-x-auto">rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
@@ -959,48 +687,47 @@ service cloud.firestore {
                 </div>
 
                 <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                    <div class="p-4 rounded-2xl bg-black/65 border border-white/10">
-                        <span class="text-[11px] text-zinc-400 uppercase font-bold">Total Active Queue</span>
+                    <div class="p-4 rounded-2xl bg-black/60 border border-white/10">
+                        <span class="text-[11px] text-zinc-400 uppercase font-bold">Active Queue</span>
                         <p id="kpiTotalLeads" class="text-2xl font-black text-white mt-1">0</p>
                     </div>
-                    <div class="p-4 rounded-2xl bg-black/65 border border-gold-400/30">
-                        <span class="text-[11px] text-gold-300 uppercase font-bold">Paint / Scratch Cases</span>
+                    <div class="p-4 rounded-2xl bg-black/60 border border-gold-400/30">
+                        <span class="text-[11px] text-gold-300 uppercase font-bold">Scratch Cases</span>
                         <p id="kpiScratchLeads" class="text-2xl font-black text-gold-300 mt-1">0</p>
                     </div>
-                    <div class="p-4 rounded-2xl bg-black/65 border border-emerald-400/30">
-                        <span class="text-[11px] text-emerald-300 uppercase font-bold">Weekend Dry Wash</span>
-                        <p id="kpiWashLeads" class="text-2xl font-black text-emerald-300 mt-1">0</p>
+                    <div class="p-4 rounded-2xl bg-black/60 border border-white/10">
+                        <span class="text-[11px] text-zinc-300 uppercase font-bold">Weekend Wash</span>
+                        <p id="kpiWashLeads" class="text-2xl font-black text-white mt-1">0</p>
                     </div>
-                    <div class="p-4 rounded-2xl bg-black/65 border border-white/10">
-                        <span class="text-[11px] text-zinc-400 uppercase font-bold">Sync Engine Status</span>
+                    <div class="p-4 rounded-2xl bg-black/60 border border-white/10">
+                        <span class="text-[11px] text-zinc-400 uppercase font-bold">Sync Engine</span>
                         <p id="kpiSyncStatusText" class="text-xs font-mono font-bold text-emerald-400 mt-2">Connecting...</p>
                     </div>
                 </div>
 
-                <!-- Search + Zone/Type Filters -->
-                <div class="flex flex-wrap items-center justify-between gap-3 bg-black/50 p-3.5 rounded-2xl border border-white/10">
+                <div class="flex flex-wrap items-center justify-between gap-3 bg-black/40 p-3 rounded-2xl border border-white/10">
                     <div class="flex flex-wrap items-center gap-2 flex-1">
-                        <input type="text" id="crmSearchInput" oninput="renderBackofficeFeed()" placeholder="🔍 Search name, phone, car, or ID..."
-                               class="px-3.5 py-2 rounded-xl bg-black/80 border border-gold-400/30 text-xs text-white focus:border-gold-400 focus:outline-none min-w-[200px]">
-                        <select id="crmFilterZone" onchange="renderBackofficeFeed()" class="px-3 py-2 rounded-xl bg-leather border border-white/15 text-xs font-bold text-white">
+                        <input type="text" id="crmSearchInput" oninput="renderBackofficeFeed()" placeholder="🔍 Search name, phone, car..."
+                               class="px-3.5 py-2 rounded-xl bg-leather border border-white/10 text-xs text-white focus:border-gold-400 focus:outline-none min-w-[180px]">
+                        <select id="crmFilterZone" onchange="renderBackofficeFeed()" class="px-3 py-2 rounded-xl bg-leather border border-white/10 text-xs font-bold text-white">
                             <option value="ALL">All Zones</option>
                             <option value="Heliopolis">Heliopolis</option>
                             <option value="Nasr City">Nasr City</option>
                             <option value="Madinaty">Madinaty</option>
                             <option value="5th Settlement">5th Settlement</option>
                         </select>
-                        <select id="crmFilterType" onchange="renderBackofficeFeed()" class="px-3 py-2 rounded-xl bg-leather border border-white/15 text-xs font-bold text-white">
+                        <select id="crmFilterType" onchange="renderBackofficeFeed()" class="px-3 py-2 rounded-xl bg-leather border border-white/10 text-xs font-bold text-white">
                             <option value="ALL">All Requests</option>
-                            <option value="SCRATCH_DIAGNOSIS">Scratch & Paint</option>
+                            <option value="SCRATCH_DIAGNOSIS">Scratch Cases</option>
                             <option value="DRY_WASH">Dry Wash</option>
                         </select>
                     </div>
-                    <div class="flex flex-wrap gap-2">
-                        <button type="button" onclick="forceCloudRefresh()" class="px-3 py-2 rounded-xl bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-400/40 text-emerald-300 text-xs font-extrabold cursor-pointer">
-                            🔄 Sync Cloud Now
+                    <div class="flex gap-2">
+                        <button type="button" onclick="forceCloudRefresh()" class="px-3 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 text-gold-200 text-xs font-bold cursor-pointer">
+                            🔄 Sync
                         </button>
-                        <button type="button" onclick="simulateIncomingVipLead()" class="px-3.5 py-2 rounded-xl bg-gold-400/15 hover:bg-gold-400/25 border border-gold-400/40 text-gold-200 text-xs font-extrabold cursor-pointer">
-                            ⚡ Simulate Live Request
+                        <button type="button" onclick="simulateIncomingVipLead()" class="px-3 py-2 rounded-xl bg-gold-400/15 hover:bg-gold-400/25 border border-gold-400/30 text-gold-200 text-xs font-bold cursor-pointer">
+                            ⚡ Test Lead
                         </button>
                     </div>
                 </div>
@@ -1014,18 +741,15 @@ service cloud.firestore {
     <div id="mediaLightbox" class="fixed inset-0 z-50 hidden bg-black/95 backdrop-blur-xl flex items-center justify-center p-4" onclick="closeMediaLightbox()">
         <div class="max-w-4xl w-full bg-leather border border-gold-400/40 rounded-3xl p-4 space-y-3" onclick="event.stopPropagation()">
             <div class="flex items-center justify-between">
-                <span id="lightboxCaption" class="text-xs font-extrabold text-gold-300 uppercase tracking-wider">High-Resolution Paint Inspection</span>
+                <span id="lightboxCaption" class="text-xs font-extrabold text-gold-300 uppercase tracking-wider">Optical Paint Inspection</span>
                 <button type="button" onclick="closeMediaLightbox()" class="px-3 py-1 rounded-lg bg-white/10 text-white text-xs font-bold cursor-pointer">✕ Close</button>
             </div>
             <div id="lightboxBody" class="flex items-center justify-center max-h-[75vh] overflow-hidden rounded-2xl bg-black"></div>
         </div>
     </div>
 
-    <!-- COMPLETE VERIFIED APPLICATION SCRIPT -->
+    <!-- APPLICATION SCRIPT -->
     <script>
-        // =========================================================================
-        // 1. FIREBASE INITIALIZATION WITH LONG-POLLING FOR MOBILE NETWORKS
-        // =========================================================================
         const firebaseConfig = {
             apiKey: "AIzaSyAmLj9vj6jn9ASbWcUL2CjtJX0n_tG8W18",
             authDomain: "drcare-centre.firebaseapp.com",
@@ -1044,11 +768,10 @@ service cloud.firestore {
                 firebase.initializeApp(firebaseConfig);
             }
             db = firebase.firestore();
-            // Force long polling to prevent mobile ISP/firewall WebSocket drops
             db.settings({ experimentalForceLongPolling: true, merge: true });
             storage = firebase.storage();
         } catch (err) {
-            console.warn("Firebase init fallback to Local Vault:", err);
+            console.warn("Firebase fallback:", err);
         }
 
         function updateAmbientSpotlight(e) {
@@ -1065,206 +788,142 @@ service cloud.firestore {
                 .replace(/'/g, '&#039;');
         }
 
-        // =========================================================================
-        // 2. COMPLETE BILINGUAL DICTIONARY
-        // =========================================================================
+        // BILINGUAL CREATIVE & SIMPLE DICTIONARY
         let currentLang = 'en';
         const i18nDict = {
             en: {
-                topBarLive: "BESPOKE PAINT ATELIER • HELIOPOLIS • NASR CITY • MADINATY • 5TH SETTLEMENT",
-                topBarQuote: "\"Save Your Investment Now\"",
-                topBarDays: "Thu • Fri • Sat Private Mobile Concierge",
-                brandSlogan: "— Reviving The Automotive Soul —",
-                navCrmBtn: "Executive Backoffice",
-                navConsultCta: "Start Paint Diagnosis",
-                heroBadge: "Signature Automotive Paint Restoration Atelier",
-                heroPreTitle: "DR. CARE — REVIVING THE AUTOMOTIVE SOUL",
-                heroHeadline1: "Sculpting Liquid",
-                heroHeadline2: "Piano-Black Mirror Perfection.",
-                heroQuoteTitle: "\"SAVE YOUR INVESTMENT NOW\"",
-                heroQuoteSub: "Your vehicle's factory clear coat is its most valuable asset. Select your car brand below, upload photos or video, and receive an immediate master restoration plan.",
-                heroBtnScratch: "Interactive Scratch & Paint Radar",
-                heroBtnWash: "Reserve Weekend Dry Wash",
-                stat1: "Optical Mirror Clarity",
-                stat2: "& Italian Rupes Systems",
-                stat3: "Live Cloud Sync",
-                sliderHeader: "REAL MERCEDES TRANSFORMATION — DRAG TO INSPECT",
-                sliderSubBadge: "Unedited Optical Reflection",
-                afterTag: "AFTER: DR. CARE MIRROR GLOSS",
-                beforeTag: "BEFORE: OXIDATION & SCRATCHES",
-                inspectBeforeBtn: "🔍 Inspect Scratches (Before)",
-                sliderHint: "Slide left & right to witness depth of reflection",
-                inspectAfterBtn: "✨ Full Mirror Finish (After)",
-                consoleKicker: "BESPOKE DIGITAL PAINT TELEMETRY",
-                consoleTitle: "Configure Your Vehicle's Restoration & Care",
-                consoleSub: "An effortless, interactive concierge experience. Your submission streams live to our Master Specialists within seconds.",
-                tabScratchTitle: "Scratch & Paint Diagnosis",
-                tabBookingTitle: "Weekend Dry Wash Slot",
-                formLiveIndicator: "Universal Realtime Cloud Telemetry",
-                scratchFormHeader: "Interactive Paint Defect & Scratch Assessment",
-                sloganMiniTop: "Asset Protection",
-                sloganMiniBottom: "Save Your Investment Now",
-                lblClientName: "1. Client Full Name *",
-                exClientName: "e.g. Kareem Selim",
-                lblClientPhone: "2. Mobile / WhatsApp Number *",
-                lblBrandSelect: "3. Select Car Manufacturer / Brand *",
-                lblBrandHint: "Tap your vehicle badge or type any custom make",
-                lblSelectedMake: "Selected Make (Editable) *",
-                lblCarModel: "Model & Year *",
-                lblClientZone: "Preferred Zone *",
-                lblCarColor: "Paint Finish & Custom Color Plate *",
-                exCarColor: "Tap color wheel or shade below",
-                lblDefectSeverity: "4. Defect Severity Level — Select Condition",
-                exDefectSeverity: "Helps calculate exact polishing stages",
-                lblBodyZoneMap: "5. Interactive Body Map — Tap Affected Paint Zone(s)",
-                exBodyZone: "e.g. Front Hood + Right Doors",
-                zoneHood: "Front Hood",
+                topBarLive: "HELIOPOLIS • NASR CITY • MADINATY • 5TH SETTLEMENT",
+                topBarDays: "Thu • Fri • Sat Mobile Concierge",
+                brandSlogan: "Reviving The Automotive Soul",
+                navCrmBtn: "Backoffice",
+                heroBadge: "Bespoke Paint Atelier",
+                heroHeadline1: "Factory Paint.",
+                heroHeadline2: "Reborn.",
+                heroQuoteSub: "We erase scratches and oxidation without repainting. Protect your car's original clear coat and market value in minutes.",
+                heroBtnScratch: "Fix a Scratch",
+                heroBtnWash: "Weekend Dry Wash",
+                stat1: "Original Paint",
+                stat2: "Italy & USA Tech",
+                stat3Title: "At Your Door",
+                stat3: "Mobile Atelier",
+                sliderHeader: "Real Transformation — Drag to Compare",
+                sliderSubBadge: "Zero Filters",
+                afterTag: "AFTER: MIRROR FINISH",
+                beforeTag: "BEFORE",
+                tabScratchTitle: "Fix a Scratch",
+                tabBookingTitle: "Weekend Care",
+                scratchFormHeader: "Instant Paint Diagnosis",
+                consoleSub: "4 simple steps — get your custom restoration quote on WhatsApp.",
+                sloganMiniBottom: "Save Your Investment",
+                step1Title: "1. Your Car",
+                lblBrandHint: "Swipe to pick or type below",
+                step2Title: "2. The Issue & Location",
+                sev1: "Swirls / Dull",
+                sev1Sub: "Surface haze",
+                sev2: "Light Scratch",
+                sev2Sub: "Clear coat",
+                sev3: "Deep Scuff",
+                sev3Sub: "Key / bumper",
+                zoneHood: "Hood",
                 zoneLeft: "Left Side",
                 zoneRight: "Right Side",
-                zoneRoof: "Roof Panel",
-                zoneRear: "Rear / Trunk",
-                zoneFull: "Full Body",
-                lblMediaSection: "6. Upload Scratch / Paint Defect Media (Up to 5 Photos OR 60s Video) *",
-                lblMediaSub: "Smart Cloud Optimization • Supports 140p up to 1080p HD",
-                lblResolution: "Resolution:",
-                dropzoneTitle: "Tap to Capture or Upload Up to 5 Photos (or 1 Video up to 60s)",
-                dropzoneActiveRes: "Active Optical Resolution:",
-                btnClearAll: "Clear All",
-                lblClientNoteBox: "7. Client Notes & Special Instructions (Write Anything You Want)",
-                exClientNoteBox: "e.g. Deep scratch on right door / Call after 4 PM",
-                submitScratchBtnText: "Transmit High-Res Diagnosis to Dr. Care Masters",
-                successHeader: "Diagnosis Received Live! Welcome to the Dr. Care Atelier.",
-                successBody: "Your vehicle telemetry, custom notes, and high-res media are now synced live to our Master Specialist's console.",
-                washKicker: "THU • FRI • SAT PRIVATE MOBILE CONCIERGE",
-                washHeader: "Select Your Nano Dry Wash & Gloss Package",
-                depositNotice: "15% Refundable Deposit Locks Your VIP Slot",
+                zoneRoof: "Roof",
+                zoneRear: "Rear",
+                zoneFull: "Full Car",
+                step3Title: "3. Photos or Video *",
+                dropzoneTitle: "📸 Tap to upload up to 5 photos (or 60s video)",
+                btnClearAll: "Clear",
+                step4Title: "4. Your Contact",
+                submitScratchBtnText: "Get My Restoration Plan",
+                successHeader: "Received. Our Master Specialist is reviewing your car.",
+                successBody: "We will message you on WhatsApp shortly with your bespoke treatment plan.",
+                washHeader: "Weekend Nano Dry Wash",
+                washKicker: "Thu • Fri • Sat at your doorstep",
+                depositNotice: "15% Deposit Locks Slot",
                 pkg1Time: "45 MINS",
-                pkg1Title: "Standard Exterior",
-                pkg1Desc: "Nano waterless Polymer wash + high-gloss paint rejuvenation.",
-                pkg1Dep: "15% Deposit: 83 EGP",
+                pkg1Title: "1. Signature Gloss",
+                pkg1Desc: "Waterless nano polymer wash & deep mirror shine.",
                 pkg2Time: "60 MINS",
-                pkg2Title: "Special Exterior + Rims",
-                pkg2Desc: "Deep gloss finish + brake-dust alloy rim detailing & tire dressing.",
-                pkg2Dep: "15% Deposit: 100 EGP",
+                pkg2Title: "2. Concours + Rims",
+                pkg2Desc: "Body gloss + alloy rim detailing & tire satin finish.",
                 pkg3Time: "90 MINS • VIP",
-                pkg3Title: "Executive Premium",
-                pkg3Desc: "Full exterior + rims + hydrophobic crystal glass coating protection.",
-                pkg3Dep: "15% Deposit: 145 EGP",
-                exWashName: "Client Name (e.g. Tarek Nour)",
-                exWashCar: "Vehicle (e.g. BMW X6 • Black)",
-                exWashSlot: "Preferred Weekend Slot",
-                btnConfirmWash: "Confirm Weekend Slot Reservation",
-                washSuccessTitle: "🌟 VIP Weekend Slot Logged Live!",
-                washSuccessSub: "Our concierge specialist will contact you shortly to coordinate your 15% deposit and finalize your slot.",
-                megSub: "USA POLYMER TECHNOLOGY",
-                megTitle: "Meguiar's Professional Compounds",
-                megDesc: "Optical-grade micro-abrasives & synthetic sealant protection safe for factory clear coats.",
-                rupSub: "ITALIAN ENGINEERING",
-                rupTitle: "Rupes BigFoot Orbital Systems",
-                rupDesc: "Zero-hologram dual-action precision polishing engineered in Milan, Italy.",
-                phClientName: "e.g. Enter your full name...",
-                phCarModel: "e.g. S580 • 2026",
-                phClientNoteBox: "Write any special instructions, preferred callback time, or specific defect details here...",
-                phWashName: "e.g. Full Name *",
-                phWashCar: "e.g. Make, Model & Color *"
+                pkg3Title: "3. Royal Atelier VIP",
+                pkg3Desc: "Full exterior + rims + hydrophobic crystal seal.",
+                btnConfirmWash: "Reserve Slot →",
+                washSuccessTitle: "🌟 Weekend Slot Reserved",
+                washSuccessSub: "We will contact you shortly to confirm your 15% deposit.",
+                phCarModel: "Model & Year (e.g. S580 2026) *",
+                phClientNoteBox: "Any special notes or preferred time? (Optional)",
+                phClientName: "Your Name *",
+                phWashName: "Your Name *",
+                phWashCar: "Car Make, Model & Color *"
             },
             ar: {
-                topBarLive: "أتيليه معالجة دهان السيارات الفارهة • مصر الجديدة • مدينة نصر • مدينتي • التجمع الخامس",
-                topBarQuote: "«حافظ على استثمارك الآن — Save Your Investment Now»",
-                topBarDays: "خدمة متنقلة خاصة: الخميس • الجمعة • السبت",
-                brandSlogan: "— Reviving The Automotive Soul —",
-                navCrmBtn: "غرفة الإدارة الحية",
-                navConsultCta: "ابدأ فحص دهان سيارتك",
-                heroBadge: "الأتيليه النخبوي لاستعادة ومعالجة دهان السيارات الفارهة",
-                heroPreTitle: "DR. CARE — REVIVING THE AUTOMOTIVE SOUL",
-                heroHeadline1: "ننحت لمعة المرآة",
-                heroHeadline2: "السوداء بأعلى معايير الدقة العالمية.",
-                heroQuoteTitle: "«حافظ على استثمارك الآن — SAVE YOUR INVESTMENT NOW»",
-                heroQuoteSub: "طبقة الدهان الأصلي هي خط الدفاع الأول عن القيمة السوقية لسيارتك. حدد ماركة سيارتك بالأسفل، وارفع صور أو فيديو ليصلك تشخيص خبراء دكتور كير فوراً.",
-                heroBtnScratch: "رادار فحص الخدوش والدهان التفاعلي",
-                heroBtnWash: "حجز باقات الغسيل الجاف بالنانو",
-                stat1: "نقاء مرآة بدون دوائر",
-                stat2: "وأنظمة Rupes الإيطالية",
-                stat3: "مزامنة سحابية فورية",
-                sliderHeader: "تحول حقيقي من أعمال DR. CARE على مرسيدس — اسحب للمقارنة",
-                sliderSubBadge: "انعكاس طبيعي ١٠٠٪ بدون فلاتر",
-                afterTag: "بعد: انعكاس المرآة من دكتور كير",
-                beforeTag: "قبل: بهتان وخدوش وأتربة",
-                inspectBeforeBtn: "🔍 شاهد الخدوش والبهتان (قبل)",
-                sliderHint: "اسحب المؤشر يميناً ويساراً لرؤية انعكاس السماء والمباني على الكبوت",
-                inspectAfterBtn: "✨ شاهد لمعة المرآة (بعد)",
-                consoleKicker: "منصة التشخيص الرقمي التفاعلي",
-                consoleTitle: "صمّم برنامج العناية واستعادة دهان سيارتك",
-                consoleSub: "واجهة تفاعلية فائقة السلاسة؛ تصل جميع الصور والطلبات في غضون ثوانٍ إلى غرفة عمليات دكتور كير.",
-                tabScratchTitle: "فحص الخدوش ومشاكل الدهان",
-                tabBookingTitle: "حجز الغسيل الجاف (الويك إند)",
-                formLiveIndicator: "مزامنة سحابية ومحلية فورية",
-                scratchFormHeader: "التشخيص التفاعلي للخدوش وعيوب الدهان",
-                sloganMiniTop: "حماية الأصول",
-                sloganMiniBottom: "Save Your Investment Now",
-                lblClientName: "١. الاسم بالكامل *",
-                exClientName: "مثال: كريم سليم",
-                lblClientPhone: "٢. رقم الموبايل / واتساب *",
-                lblBrandSelect: "٣. اختر ماركة السيارة *",
-                lblBrandHint: "اضغط على شعار سيارتك أو اكتب أي ماركة بالأسفل",
-                lblSelectedMake: "ماركة السيارة المختارة *",
-                lblCarModel: "الموديل وسنة الصنع *",
-                lblClientZone: "المنطقة المفضلة *",
-                lblCarColor: "تشطيب الدهان ولوحة الألوان الحرة *",
-                exCarColor: "اضغط على عجلة الألوان أو اختر الدرجة",
-                lblDefectSeverity: "٤. درجة عمق الخدش أو حالة الدهان",
-                exDefectSeverity: "يساعد في تحديد مراحل التلميع بدقة",
-                lblBodyZoneMap: "٥. خريطة جسم السيارة التفاعلية — اضغط على مكان الخدش",
-                exBodyZone: "مثال: الكبوت الأمامي + الأبواب اليمنى",
-                zoneHood: "الكبوت الأمامي",
+                topBarLive: "مصر الجديدة • مدينة نصر • مدينتي • التجمع الخامس",
+                topBarDays: "الخميس • الجمعة • السبت خدمة متنقلة خاصة",
+                brandSlogan: "Reviving The Automotive Soul",
+                navCrmBtn: "غرفة الإدارة",
+                heroBadge: "أتيليه استعادة دهان السيارات الفارهة",
+                heroHeadline1: "لمعة الفابريكا..",
+                heroHeadline2: "من جديد.",
+                heroQuoteSub: "بنعالج الخدوش والبهتان بدون رش، عشان تحافظ على دهان الفابريكا الأصلي وقيمة عربيتك السوقية.",
+                heroBtnScratch: "عالج خدش سيارتك",
+                heroBtnWash: "غسيل ولمعة الويك إند",
+                stat1: "دهان فابريكا أصلي",
+                stat2: "تكنولوجيا إيطالية وأمريكية",
+                stat3Title: "لحد باب بيتك",
+                stat3: "خدمة متنقلة VIP",
+                sliderHeader: "نتيجة حقيقية من أعمالنا — اسحب للمقارنة",
+                sliderSubBadge: "بدون فلاتر",
+                afterTag: "بعد: لمعة المرآة",
+                beforeTag: "قبل",
+                tabScratchTitle: "عالج خدش",
+                tabBookingTitle: "عناية الويك إند",
+                scratchFormHeader: "فحص وتشخيص فوري للدهان",
+                consoleSub: "٤ خطوات بسيطة — واستلم خطة المعالجة والتكلفة على الواتساب.",
+                sloganMiniBottom: "حافظ على استثمارك",
+                step1Title: "١. سيارتك",
+                lblBrandHint: "اسحب لاختيار الماركة أو اكتبها",
+                step2Title: "٢. نوع المشكلة ومكانها",
+                sev1: "دوائر غسيل / بهتان",
+                sev1Sub: "تطفية باللمعة",
+                sev2: "خدش سطحي",
+                sev2Sub: "بطبقة الورنيش",
+                sev3: "خدش عميق / حكة",
+                sev3Sub: "مسمار أو حكة إكصدام",
+                zoneHood: "الكبوت",
                 zoneLeft: "الجانب الأيسر",
                 zoneRight: "الجانب الأيمن",
-                zoneRoof: "السقف والقوائم",
+                zoneRoof: "السقف",
                 zoneRear: "الشنطة والخلفي",
                 zoneFull: "كامل السيارة",
-                lblMediaSection: "٦. ارفع حتى ٥ صور أو فيديو ٦٠ ثانية لمكان الخدش *",
-                lblMediaSub: "ضغط ضوئي ذكي فائق السرعة • يدعم من 140p حتى 1080p HD",
-                lblResolution: "جودة الرفع:",
-                dropzoneTitle: "اضغط هنا لتصوير أو رفع حتى ٥ صور (أو فيديو حتى ٦٠ ثانية)",
-                dropzoneActiveRes: "دقة المعالجة الضوئية:",
-                btnClearAll: "مسح الكل",
-                lblClientNoteBox: "٧. ملاحظات العميل وتفاصيل المشكلة (اكتب أي تفاصيل إضافية)",
-                exClientNoteBox: "مثال: خدش بالباب الأيمن / يفضل الاتصال بعد ٤ عصراً",
-                submitScratchBtnText: "إرسال التشخيص عالي الدقة لخبراء دكتور كير",
-                successHeader: "تم استلام التشخيص والصور في التو واللحظة!",
-                successBody: "ظهرت بيانات سيارتك وملاحظاتك والصور عالية الدقة أمام كبير فنيي دكتور كير، وسيتواصل معك فريقنا قريباً.",
-                washKicker: "خدمة الويك إند المتنقلة الخاصة (الخميس • الجمعة • السبت)",
-                washHeader: "اختر باقة الغسيل الجاف واستعادة اللمعة",
-                depositNotice: "عربون ١٥٪ لتأكيد الحجز (مسترد قبل ٢٤ ساعة)",
+                step3Title: "٣. صور أو فيديو الخدش *",
+                dropzoneTitle: "📸 اضغط لرفع حتى ٥ صور (أو فيديو ٦٠ ثانية)",
+                btnClearAll: "مسح",
+                step4Title: "٤. بيانات التواصل",
+                submitScratchBtnText: "احصل على خطة المعالجة الآن",
+                successHeader: "تم الاستلام. خبير دكتور كير يراجع صور سيارتك الآن.",
+                successBody: "سنتواصل معك فوراً عبر الواتساب بخطة المعالجة والتكلفة التفصيلية.",
+                washHeader: "باقات الغسيل الجاف بالنانو (الويك إند)",
+                washKicker: "الخميس • الجمعة • السبت أمام منزلك",
+                depositNotice: "عربون ١٥٪ لتأكيد الموعد",
                 pkg1Time: "٤٥ دقيقة",
-                pkg1Title: "الباقة القياسية (Standard Exterior)",
-                pkg1Desc: "غسيل جاف ببوليمر النانو + استعادة اللمعة الخارجية.",
-                pkg1Dep: "عربون ١٥٪: ٨٣ ج.م",
+                pkg1Title: "١. لمعة السيجنتشر (Signature)",
+                pkg1Desc: "غسيل جاف ببوليمر النانو + استعادة اللمعة العميقة.",
                 pkg2Time: "٦٠ دقيقة",
-                pkg2Title: "الباقة الخاصة + الجنوط (Special + Rims)",
-                pkg2Desc: "لمعة عميقة للبودي + تنظيف وتلميع الجنوط والإطارات.",
-                pkg2Dep: "عربون ١٥٪: ١٠٠ ج.م",
+                pkg2Title: "٢. باقة الكونكور + الجنوط",
+                pkg2Desc: "لمعة البودي + تنظيف وتلميع الجنوط والإطارات.",
                 pkg3Time: "٩٠ دقيقة • VIP",
-                pkg3Title: "الباقة التنفيذية الفاخرة (Executive VIP)",
-                pkg3Desc: "العناية الكاملة للبودي والجنوط + طبقة حماية كريستالية للزجاج.",
-                pkg3Dep: "عربون ١٥٪: ١٤٥ ج.م",
-                exWashName: "الاسم (مثال: طارق نور)",
-                exWashCar: "السيارة (مثال: BMW X6 • أسود)",
-                exWashSlot: "فترة الحجز المفضلة",
-                btnConfirmWash: "تأكيد حجز موعد الويك إند الآن",
-                washSuccessTitle: "🌟 تم تسجيل حجزك في غرفة عمليات دكتور كير!",
-                washSuccessSub: "سيتواصل معك مسؤول الحجوزات قريباً لتنسيق عربون الـ ١٥٪ وتأكيد الموعد.",
-                megSub: "تكنولوجيا البوليمر الأمريكية",
-                megTitle: "مواد Meguiar's الاحترافية",
-                megDesc: "مركبات تلميع دقيقة وحماية فائقة آمنة تماماً على طبقة الورنيش الأصلي (Clear Coat).",
-                rupSub: "الهندسة الإيطالية الفائقة",
-                rupTitle: "أنظمة Rupes BigFoot الإيطالية",
-                rupDesc: "تلميع مداري متطور يمنحك لمعة المرآة بدون أي دوائر أو هولوجرام.",
-                phClientName: "مثال: اكتب اسمك الثلاثي...",
-                phCarModel: "مثال: S580 • 2026",
-                phClientNoteBox: "اكتب هنا أي تعليمات خاصة، وقت الاتصال المفضل، أو تفاصيل مكان الخدش...",
-                phWashName: "مثال: الاسم بالكامل *",
-                phWashCar: "مثال: الماركة والموديل واللون *"
+                pkg3Title: "٣. باقة الأتيليه الملكية (VIP)",
+                pkg3Desc: "عناية شاملة للبودي والجنوط + طبقة حماية كريستالية.",
+                btnConfirmWash: "تأكيد حجز الموعد ←",
+                washSuccessTitle: "🌟 تم حجز موعدك بنجاح",
+                washSuccessSub: "سيتواصل معك فريقنا قريباً لتنسيق عربون الـ ١٥٪ وتأكيد الموعد.",
+                phCarModel: "الموديل والسنة (مثال: S580 2026) *",
+                phClientNoteBox: "أي ملاحظات إضافية أو وقت مفضل للاتصال؟ (اختياري)",
+                phClientName: "الاسم بالكامل *",
+                phWashName: "الاسم بالكامل *",
+                phWashCar: "ماركة وموديل ولون السيارة *"
             }
         };
 
@@ -1292,9 +951,7 @@ service cloud.firestore {
             syncSliderImageWidth();
         }
 
-        // =========================================================================
-        // 3. SMOOTH BEFORE / AFTER SLIDER
-        // =========================================================================
+        // SLIDER
         let isDraggingSlider = false;
 
         function syncSliderImageWidth() {
@@ -1344,21 +1001,15 @@ service cloud.firestore {
         });
         window.addEventListener('resize', syncSliderImageWidth);
 
-        // =========================================================================
-        // 4. INTERACTIVE FORM CONTROLS
-        // =========================================================================
-        let selectedCarBodyZones = ['Front Hood (الكبوت)'];
+        // FORM CONTROLS
+        let selectedCarBodyZones = ['Front Hood'];
 
         function selectCarBrandLogo(btnEl, brandName) {
             document.getElementById('carBrand').value = brandName;
             document.querySelectorAll('.brand-logo-card').forEach(card => {
                 card.classList.remove('selected');
-                const span = card.querySelector('span');
-                if (span) span.className = "text-[11px] font-extrabold tracking-wider text-zinc-200 group-hover:text-gold-300";
             });
             btnEl.classList.add('selected');
-            const activeSpan = btnEl.querySelector('span');
-            if (activeSpan) activeSpan.className = "text-[11px] font-extrabold tracking-wider text-gold-300";
         }
 
         function selectDefectSeverity(btnEl, severityValue) {
@@ -1371,7 +1022,7 @@ service cloud.firestore {
 
         function handleColorWheelPick(hexValue) {
             document.getElementById('colorPreviewBox').style.backgroundColor = hexValue;
-            document.getElementById('carColorInput').value = `Custom Paint Shade (${hexValue.toUpperCase()})`;
+            document.getElementById('carColorInput').value = `Custom Shade (${hexValue.toUpperCase()})`;
         }
 
         function applyPresetColor(hexValue, shadeName) {
@@ -1398,28 +1049,26 @@ service cloud.firestore {
             const btnBooking = document.getElementById('tabBookingBtn');
 
             if (isScratch) {
-                btnScratch.className = "py-3.5 px-4 rounded-xl font-extrabold text-xs sm:text-sm transition flex items-center justify-center gap-2 bg-gradient-to-r from-gold-400 to-gold-500 text-black shadow-lg cursor-pointer";
-                btnBooking.className = "py-3.5 px-4 rounded-xl font-extrabold text-xs sm:text-sm transition flex items-center justify-center gap-2 text-zinc-300 hover:text-white cursor-pointer";
+                btnScratch.className = "py-3 px-4 rounded-xl font-extrabold text-xs sm:text-sm transition flex items-center justify-center gap-2 bg-gradient-to-r from-gold-300 to-gold-400 text-black shadow-md cursor-pointer";
+                btnBooking.className = "py-3 px-4 rounded-xl font-extrabold text-xs sm:text-sm transition flex items-center justify-center gap-2 text-zinc-400 hover:text-white cursor-pointer";
             } else {
-                btnBooking.className = "py-3.5 px-4 rounded-xl font-extrabold text-xs sm:text-sm transition flex items-center justify-center gap-2 bg-gradient-to-r from-gold-400 to-gold-500 text-black shadow-lg cursor-pointer";
-                btnScratch.className = "py-3.5 px-4 rounded-xl font-extrabold text-xs sm:text-sm transition flex items-center justify-center gap-2 text-zinc-300 hover:text-white cursor-pointer";
+                btnBooking.className = "py-3 px-4 rounded-xl font-extrabold text-xs sm:text-sm transition flex items-center justify-center gap-2 bg-gradient-to-r from-gold-300 to-gold-400 text-black shadow-md cursor-pointer";
+                btnScratch.className = "py-3 px-4 rounded-xl font-extrabold text-xs sm:text-sm transition flex items-center justify-center gap-2 text-zinc-400 hover:text-white cursor-pointer";
             }
         }
 
         function selectWashPackage(name, price, deposit) {
             document.getElementById('selectedPkgName').value = `${name} (${price} EGP - Deposit ${deposit} EGP)`;
             ['pkgCard1', 'pkgCard2', 'pkgCard3'].forEach(id => {
-                document.getElementById(id).className = "cursor-pointer p-5 rounded-2xl bg-black/65 border border-white/15 hover:border-gold-400/60 transition space-y-3 relative";
+                document.getElementById(id).className = "cursor-pointer p-4 rounded-2xl bg-black/60 border border-white/10 hover:border-gold-400/50 transition space-y-2";
             });
-            const map = { 'Standard Exterior': 'pkgCard1', 'Special Exterior + Rims': 'pkgCard2', 'Executive Premium': 'pkgCard3' };
+            const map = { 'Signature Gloss': 'pkgCard1', 'Concours Detail': 'pkgCard2', 'Royal Atelier VIP': 'pkgCard3' };
             if (map[name]) {
-                document.getElementById(map[name]).className = "cursor-pointer p-5 rounded-2xl bg-black/65 border-2 border-gold-400 transition space-y-3 relative";
+                document.getElementById(map[name]).className = "cursor-pointer p-4 rounded-2xl bg-black/60 border-2 border-gold-400 transition space-y-2";
             }
         }
 
-        // =========================================================================
-        // 5. MEDIA COMPRESSION & UPLOAD ENGINE
-        // =========================================================================
+        // MEDIA ENGINE
         let uploadedMediaItems = [];
 
         function updateResolutionBadge() {
@@ -1444,23 +1093,23 @@ service cloud.firestore {
             if (!files.length) return;
 
             const requestedRes = parseInt(document.getElementById('mediaResolution').value, 10) || 1080;
-            setMediaProgress(10, 'Inspecting optical media files...');
+            setMediaProgress(10, 'Inspecting media...');
 
             try {
                 for (let i = 0; i < files.length; i++) {
                     const file = files[i];
                     if (uploadedMediaItems.length >= 5) {
-                        alert(currentLang === 'ar' ? 'الحد الأقصى هو ٥ ملفات لكل سيارة.' : 'Maximum 5 media files allowed per vehicle.');
+                        alert(currentLang === 'ar' ? 'الحد الأقصى ٥ ملفات.' : 'Maximum 5 media files allowed.');
                         break;
                     }
 
                     const stepPct = Math.round(((i + 1) / files.length) * 90);
 
                     if (file.type.startsWith('video/')) {
-                        setMediaProgress(stepPct, 'Validating video duration & extracting keyframe...');
+                        setMediaProgress(stepPct, 'Validating video...');
                         const videoCheck = await inspectVideoAndExtractPoster(file);
                         if (!videoCheck.durationOk) {
-                            alert(currentLang === 'ar' ? 'يرجى اختيار فيديو لا يتجاوز ٦٠ ثانية.' : 'Please upload a video up to 60 seconds maximum.');
+                            alert(currentLang === 'ar' ? 'يرجى اختيار فيديو لا يتجاوز ٦٠ ثانية.' : 'Video must be 60 seconds or less.');
                             continue;
                         }
                         const rawVideoDataUrl = await readFileAsDataUrl(file);
@@ -1474,7 +1123,7 @@ service cloud.firestore {
                             sizeKB: Math.round(file.size / 1024)
                         });
                     } else if (file.type.startsWith('image/')) {
-                        setMediaProgress(stepPct, `Optimizing photo #${i + 1} (${requestedRes}p)...`);
+                        setMediaProgress(stepPct, `Optimizing photo #${i + 1}...`);
                         const fullResDataUrl = await resizeImageSmart(file, requestedRes, 0.82);
                         const cloudSafeDataUrl = await resizeImageSmart(file, Math.min(requestedRes, 720), 0.68, 120);
                         uploadedMediaItems.push({
@@ -1488,13 +1137,13 @@ service cloud.firestore {
                         });
                     }
                 }
-                setMediaProgress(100, 'Media ready!');
+                setMediaProgress(100, 'Ready!');
             } catch (err) {
-                console.error("Media processing error:", err);
+                console.error("Media error:", err);
             } finally {
                 setTimeout(() => {
                     document.getElementById('mediaProcessingStatus').classList.add('hidden');
-                }, 400);
+                }, 350);
                 event.target.value = '';
                 renderMediaThumbnails();
             }
@@ -1609,25 +1258,19 @@ service cloud.firestore {
 
             wrapper.classList.remove('hidden');
             counter.textContent = currentLang === 'ar'
-                ? `تم إرفاق ${uploadedMediaItems.length} من ٥ ملفات`
-                : `${uploadedMediaItems.length} / 5 Media Attached`;
+                ? `تم إرفاق ${uploadedMediaItems.length} من ٥`
+                : `${uploadedMediaItems.length} / 5 Attached`;
 
             grid.innerHTML = uploadedMediaItems.map((item, idx) => `
-                <div class="relative group rounded-2xl overflow-hidden bg-leather border border-gold-400/45 aspect-square shadow-md">
+                <div class="relative group rounded-xl overflow-hidden bg-leather border border-gold-400/40 aspect-square">
                     ${item.type === 'video'
-                        ? `<video src="${item.url}" class="w-full h-full object-cover cursor-pointer" muted playsinline onclick="openPreviewLightbox(${idx})"></video>
-                           <span class="absolute top-2 left-2 bg-black/85 text-gold-300 text-[10px] font-extrabold px-2 py-0.5 rounded-md">🎬 ${escapeHtml(item.resolution)}</span>`
-                        : `<img src="${item.url}" alt="Media ${idx + 1}" class="w-full h-full object-cover cursor-pointer" onclick="openPreviewLightbox(${idx})">
-                           <span class="absolute top-2 left-2 bg-black/85 text-gold-300 text-[10px] font-extrabold px-2 py-0.5 rounded-md">📸 ${escapeHtml(item.resolution)}</span>`
+                        ? `<video src="${item.url}" class="w-full h-full object-cover cursor-pointer" muted playsinline onclick="openPreviewLightbox(${idx})"></video>`
+                        : `<img src="${item.url}" alt="Media ${idx + 1}" class="w-full h-full object-cover cursor-pointer" onclick="openPreviewLightbox(${idx})">`
                     }
                     <button type="button" onclick="removeSingleMedia('${item.id}')"
-                            class="absolute top-2 right-2 w-6 h-6 rounded-full bg-rose-600 hover:bg-rose-500 text-white text-xs font-black flex items-center justify-center shadow cursor-pointer">
+                            class="absolute top-1.5 right-1.5 w-5 h-5 rounded-full bg-black/80 text-white text-[10px] font-bold flex items-center justify-center cursor-pointer">
                         ✕
                     </button>
-                    <div class="absolute bottom-0 inset-x-0 bg-black/85 px-2 py-1 text-[10px] text-zinc-300 flex justify-between">
-                        <span>#${idx + 1}</span>
-                        <span>${item.sizeKB} KB</span>
-                    </div>
                 </div>
             `).join('');
         }
@@ -1648,12 +1291,10 @@ service cloud.firestore {
             renderMediaThumbnails();
         }
 
-        // =========================================================================
-        // 6. HYBRID TELEMETRY ENGINE (FIREBASE + INDEXED-DB + LOCALSTORAGE)
-        // =========================================================================
-        const IDB_NAME = 'DrCareHybridVault_v18';
+        // HYBRID CLOUD + LOCAL VAULT ENGINE
+        const IDB_NAME = 'DrCareHybridVault_v19';
         const IDB_STORE = 'leads_store';
-        const LS_BACKUP_KEY = 'drcare_leads_ls_backup_v18';
+        const LS_BACKUP_KEY = 'drcare_leads_ls_backup_v19';
         let idbConn = null;
         let memoryLeadsCache = [];
         let audioRadarEnabled = true;
@@ -1661,7 +1302,6 @@ service cloud.firestore {
         let knownLeadIds = new Set();
 
         function initHybridTelemetryEngine() {
-            // Load instant LocalStorage backup first
             try {
                 const rawLs = localStorage.getItem(LS_BACKUP_KEY);
                 if (rawLs) {
@@ -1672,7 +1312,6 @@ service cloud.firestore {
                 }
             } catch (e) {}
 
-            // Open IndexedDB for large media persistence
             if (window.indexedDB) {
                 const req = indexedDB.open(IDB_NAME, 1);
                 req.onupgradeneeded = (e) => {
@@ -1687,10 +1326,8 @@ service cloud.firestore {
                 };
             }
 
-            // Connect Real-Time Firebase Firestore Listener
             startFirestoreLiveListener();
 
-            // Listen for cross-tab LocalStorage events
             window.addEventListener('storage', (e) => {
                 if (e.key === LS_BACKUP_KEY || e.key === 'drcare_live_ping_ts') {
                     playNotificationChime();
@@ -1736,15 +1373,12 @@ service cloud.firestore {
                           mergeCloudAndLocalLeads(cloudDocs);
                       }
                   }, (err) => {
-                      console.warn("Firestore live listener notice:", err.message);
                       const syncStatusEl = document.getElementById('kpiSyncStatusText');
                       if (syncStatusEl) syncStatusEl.textContent = '🛡️ Local Vault Active';
                       const diagBanner = document.getElementById('cloudDiagnosticBanner');
                       if (diagBanner) diagBanner.classList.remove('hidden');
                   });
-            } catch (e) {
-                console.warn("Cloud stream fallback:", e);
-            }
+            } catch (e) {}
         }
 
         async function forceCloudRefresh() {
@@ -1789,15 +1423,15 @@ service cloud.firestore {
                         const seed = {
                             id: 'DC-801',
                             requestType: 'SCRATCH_DIAGNOSIS',
-                            clientName: 'Example Client (Sample Entry)',
+                            clientName: 'Example Client',
                             clientPhone: '01000000000',
                             carBrand: 'Mercedes-Benz',
-                            carModel: 'S580 AMG Line • 2026',
-                            carColor: 'Obsidian Black Metallic (#08080A)',
+                            carModel: 'S580 • 2026',
+                            carColor: 'Obsidian Black (#08080A)',
                             zone: 'Heliopolis',
                             resolution: '1080p',
                             estimatedQuote: '1,850 EGP',
-                            notes: 'Severity: Swirl Marks & Oxidation\nAffected Zones: Front Hood\nClient Note: Please inspect front hood oxidation.',
+                            notes: 'Severity: Swirl Marks & Oxidation\nZones: Front Hood\nNote: Sample entry.',
                             media: [
                                 { id: 'seed_1', type: 'image', url: 'before.jpeg', resolution: '1080p' },
                                 { id: 'seed_2', type: 'image', url: 'after.jpeg', resolution: '1080p' }
@@ -1817,7 +1451,6 @@ service cloud.firestore {
         }
 
         function writeLeadToIdb(lead) {
-            // Strip non-cloneable raw File objects before saving to IndexedDB
             const cleanCopy = {
                 ...lead,
                 media: (lead.media || []).map(m => ({
@@ -1837,7 +1470,6 @@ service cloud.firestore {
                 } catch (e) {}
             }
 
-            // Also save lightweight backup in LocalStorage
             try {
                 const lsList = memoryLeadsCache.slice(0, 15).map(item => ({
                     ...item,
@@ -1936,7 +1568,6 @@ service cloud.firestore {
                     await db.collection("drcare_leads").doc(fullLocalLead.id).set(cloudPayload);
                     return 'CLOUD_SYNCED';
                 } catch (cloudErr) {
-                    console.warn("Cloud write notice (saved in Local Vault):", cloudErr.message);
                     const diagBanner = document.getElementById('cloudDiagnosticBanner');
                     if (diagBanner) diagBanner.classList.remove('hidden');
                     return 'LOCAL_VAULT_SAVED';
@@ -1949,8 +1580,8 @@ service cloud.firestore {
             event.preventDefault();
             if (uploadedMediaItems.length === 0) {
                 alert(currentLang === 'ar'
-                    ? 'يرجى إرفاق صورة واحدة على الأقل (أو فيديو) لمكان الخدش أو المشكلة بالدهان.'
-                    : 'Please attach at least 1 photo or video of the paint issue so our masters can inspect it.');
+                    ? 'يرجى إرفاق صورة واحدة على الأقل لمكان الخدش.'
+                    : 'Please attach at least 1 photo or video of the scratch.');
                 return;
             }
 
@@ -1958,19 +1589,19 @@ service cloud.firestore {
             const submitLbl = document.getElementById('submitScratchBtnLabel');
             const originalText = submitLbl.textContent;
             submitBtn.disabled = true;
-            submitLbl.textContent = currentLang === 'ar' ? 'جاري البث الفوري...' : 'Transmitting Live Telemetry...';
+            submitLbl.textContent = currentLang === 'ar' ? 'جاري الإرسال...' : 'Sending...';
 
             try {
                 const clientName = document.getElementById('clientName').value.trim();
                 const clientPhone = document.getElementById('clientPhone').value.trim();
-                const carBrand = document.getElementById('carBrand').value.trim() || 'Luxury Vehicle';
+                const carBrand = document.getElementById('carBrand').value.trim() || 'Vehicle';
                 const carModel = document.getElementById('carModel').value.trim();
                 const carColor = document.getElementById('carColorInput').value.trim();
                 const zone = document.getElementById('clientZone').value;
                 const severity = document.getElementById('defectSeverityInput').value;
                 const resolution = document.getElementById('mediaResolution').value + 'p';
-                const userNotes = document.getElementById('clientNotes').value.trim() || 'Standard optical paint inspection requested.';
-                const zonesString = selectedCarBodyZones.length ? selectedCarBodyZones.join(', ') : 'General Body';
+                const userNotes = document.getElementById('clientNotes').value.trim() || 'Standard assessment.';
+                const zonesString = selectedCarBodyZones.length ? selectedCarBodyZones.join(', ') : 'General';
 
                 const leadId = 'DC-' + Math.floor(1000 + Math.random() * 9000);
                 const newLead = {
@@ -1984,7 +1615,7 @@ service cloud.firestore {
                     zone,
                     resolution,
                     estimatedQuote: '',
-                    notes: `Severity: ${severity}\nAffected Zones: ${zonesString}\nClient Note: ${userNotes}`,
+                    notes: `Severity: ${severity}\nZones: ${zonesString}\nNote: ${userNotes}`,
                     media: uploadedMediaItems.map(m => ({
                         id: m.id,
                         type: m.type,
@@ -2003,7 +1634,7 @@ service cloud.firestore {
                 document.getElementById('generatedTicketId').textContent = leadId;
                 document.getElementById('scratchConsultForm').reset();
                 document.getElementById('carBrand').value = 'Mercedes-Benz';
-                document.getElementById('carColorInput').value = 'Obsidian Black Metallic (#08080A)';
+                document.getElementById('carColorInput').value = 'Obsidian Black (#08080A)';
                 clearAllMedia();
                 document.getElementById('scratchSuccessBanner').classList.remove('hidden');
             } catch (err) {
@@ -2036,7 +1667,7 @@ service cloud.firestore {
                     zone,
                     resolution: 'VIP Slot',
                     estimatedQuote: pkg,
-                    notes: `Dry Wash Package: ${pkg}\nPreferred Slot: ${slot}${extraNote ? '\nClient Note: ' + extraNote : ''}`,
+                    notes: `Package: ${pkg}\nSlot: ${slot}${extraNote ? '\nNote: ' + extraNote : ''}`,
                     media: [],
                     status: 'DEPOSIT PENDING',
                     createdAt: Date.now()
@@ -2050,9 +1681,7 @@ service cloud.firestore {
             }
         }
 
-        // =========================================================================
-        // 7. BULLETPROOF CRM VAULT AUTHORIZATION (2027 / 2026)
-        // =========================================================================
+        // CRM VAULT AUTHORIZATION (2027 / 2026)
         function normalizeDigits(str) {
             return String(str || '')
                 .replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d))
@@ -2063,7 +1692,6 @@ service cloud.firestore {
 
         function isAuthorizedPin(val) {
             const clean = normalizeDigits(val);
-            // Accepts 2027 or 2026
             return clean === '2027' || clean === '2026';
         }
 
@@ -2144,14 +1772,14 @@ service cloud.firestore {
         function toggleAudioRadar() {
             audioRadarEnabled = !audioRadarEnabled;
             const btn = document.getElementById('soundToggleBtn');
-            btn.textContent = audioRadarEnabled ? '🔔 Audio Radar: ON' : '🔕 Audio Radar: MUTE';
+            btn.textContent = audioRadarEnabled ? '🔔 Audio: ON' : '🔕 Audio: MUTE';
         }
 
         function formatElapsedSeconds(timestamp) {
             const now = Date.now();
             const safeTs = Math.min(Number(timestamp) || now, now);
             const diffSec = Math.max(0, Math.floor((now - safeTs) / 1000));
-            if (diffSec < 60) return `${diffSec}s ago (LIVE)`;
+            if (diffSec < 60) return `${diffSec}s ago`;
             const mins = Math.floor(diffSec / 60);
             const secs = diffSec % 60;
             if (mins < 60) return `${mins}m ${secs}s ago`;
@@ -2177,18 +1805,18 @@ service cloud.firestore {
             const intlPhone = cleanPhone.startsWith('0') ? '2' + cleanPhone : cleanPhone;
             const quoteLine = lead.estimatedQuote ? `\n• التكلفة التقديرية / الباقة: ${lead.estimatedQuote}` : '';
             const scriptText =
-`اهلا وسهلا بحضرتك ${lead.clientName} اتمني تكون بخير 🌟
-مع حضرتك خدمة عملاء دكتور كير (DR. CARE - Reviving The Automotive Soul).
+`اهلا وسهلا بحضرتك مستر ${lead.clientName}، اتمنى تكون بخير 🌟
+مع حضرتك خدمة عملاء دكتور كير (DR. CARE).
 
 تم استلام طلب فحص سيارتك رقم (${lead.id}):
 • السيارة: ${lead.carBrand} - ${lead.carModel}
 • اللون: ${lead.carColor}
 • المنطقة: ${lead.zone}${quoteLine}
 
-تفاصيل الفحص والملاحظات:
+تفاصيل الفحص:
 "${lead.notes}"
 
-فريق الخبراء راجع الصور المرفقة بدقة (${lead.resolution})، وجاهزين ننسق مع حضرتك الموعد الأنسب لمعالجة الدهان والحفاظ على استثمارك (Save Your Investment Now).`;
+فريق الخبراء راجع الصور المرفقة، وجاهزين ننسق مع حضرتك الموعد الأنسب لاستعادة لمعة الفابريكا والحفاظ على استثمارك.`;
             return `https://wa.me/${intlPhone}?text=${encodeURIComponent(scriptText)}`;
         }
 
@@ -2265,57 +1893,53 @@ service cloud.firestore {
             if (!container) return;
 
             if (filtered.length === 0) {
-                container.innerHTML = `<div class="p-8 rounded-2xl bg-black/50 border border-white/10 text-center text-zinc-400 text-sm">No requests matching current filter.</div>`;
+                container.innerHTML = `<div class="p-8 rounded-2xl bg-black/40 border border-white/10 text-center text-zinc-400 text-sm">No requests matching filter.</div>`;
                 return;
             }
 
             container.innerHTML = filtered.map(lead => `
-                <div class="p-4 sm:p-5 rounded-2xl bg-black/80 border ${lead.requestType === 'SCRATCH_DIAGNOSIS' ? 'border-gold-400/50' : 'border-emerald-400/40'} space-y-4">
+                <div class="p-4 sm:p-5 rounded-2xl bg-black/75 border ${lead.requestType === 'SCRATCH_DIAGNOSIS' ? 'border-gold-400/40' : 'border-white/15'} space-y-4">
                     <div class="flex flex-wrap items-center justify-between gap-2">
                         <div class="flex flex-wrap items-center gap-2">
-                            <span class="px-2.5 py-1 rounded-lg bg-gold-400 text-black font-black text-xs">${escapeHtml(lead.id)}</span>
-                            <span class="px-2.5 py-1 rounded-lg ${lead.requestType === 'SCRATCH_DIAGNOSIS' ? 'bg-rose-500/20 text-rose-300 border border-rose-500/40' : 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40'} text-xs font-extrabold">
-                                ${lead.requestType === 'SCRATCH_DIAGNOSIS' ? '📸 SCRATCH & PAINT INSPECTION' : '✨ WEEKEND DRY WASH'}
+                            <span class="px-2.5 py-0.5 rounded-md bg-gold-400 text-black font-black text-xs">${escapeHtml(lead.id)}</span>
+                            <span class="px-2.5 py-0.5 rounded-md bg-white/5 text-gold-200 border border-white/10 text-xs font-bold">
+                                ${lead.requestType === 'SCRATCH_DIAGNOSIS' ? '📸 Paint Diagnosis' : '✨ Weekend Wash'}
                             </span>
-                            <span class="text-xs font-bold text-gold-200">📍 ${escapeHtml(lead.zone)}</span>
-                            <span class="text-[11px] text-zinc-400 font-mono">🕒 ${formatCairoTimestamp(lead.createdAt)}</span>
+                            <span class="text-xs font-semibold text-zinc-300">📍 ${escapeHtml(lead.zone)}</span>
+                            <span class="text-[11px] text-zinc-500 font-mono">🕒 ${formatCairoTimestamp(lead.createdAt)}</span>
                         </div>
                         <div class="flex items-center gap-2">
-                            <span class="live-sla-timer font-mono text-xs font-bold text-emerald-400 bg-emerald-950/70 border border-emerald-500/30 px-2.5 py-1 rounded-lg" data-ts="${lead.createdAt}">
+                            <span class="live-sla-timer font-mono text-xs font-bold text-emerald-400 bg-emerald-950/60 border border-emerald-500/30 px-2.5 py-0.5 rounded-md" data-ts="${lead.createdAt}">
                                 ${formatElapsedSeconds(lead.createdAt)}
                             </span>
-                            <button type="button" onclick="deleteLeadItem('${escapeHtml(lead.id)}')" class="text-xs text-zinc-500 hover:text-rose-400 px-2 cursor-pointer" title="Delete Entry">🗑️</button>
+                            <button type="button" onclick="deleteLeadItem('${escapeHtml(lead.id)}')" class="text-xs text-zinc-500 hover:text-rose-400 px-2 cursor-pointer" title="Delete">🗑️</button>
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs bg-leather/95 p-3.5 rounded-xl border border-white/5">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs bg-leather p-3.5 rounded-xl border border-white/5">
                         <div>
-                            <span class="text-zinc-400 block">Client Name & Phone:</span>
+                            <span class="text-zinc-500 block">Client:</span>
                             <strong class="text-white text-sm">${escapeHtml(lead.clientName)}</strong>
                             <a href="tel:${escapeHtml(lead.clientPhone)}" class="block text-gold-300 font-mono font-bold mt-0.5">${escapeHtml(lead.clientPhone)}</a>
                         </div>
                         <div>
-                            <span class="text-zinc-400 block">Vehicle Profile:</span>
+                            <span class="text-zinc-500 block">Vehicle:</span>
                             <strong class="text-white text-sm">${escapeHtml(lead.carBrand)} • ${escapeHtml(lead.carModel)}</strong>
-                            <span class="block text-gold-200 mt-0.5">Finish: ${escapeHtml(lead.carColor)}</span>
+                            <span class="block text-zinc-300 mt-0.5">${escapeHtml(lead.carColor)}</span>
                         </div>
-                        <div class="bg-gold-400/15 border-s-4 border-gold-400 p-3 rounded-r-xl shadow-inner">
-                            <span class="text-gold-300 font-extrabold uppercase tracking-wider block text-[11px] mb-1">📝 Client Custom Notes & Zones:</span>
-                            <p class="text-gold-100 text-xs font-bold leading-relaxed whitespace-pre-wrap">${escapeHtml(lead.notes)}</p>
+                        <div class="bg-black/50 border-s-2 border-gold-400 p-2.5 rounded-r-lg">
+                            <p class="text-zinc-200 text-xs leading-relaxed whitespace-pre-wrap">${escapeHtml(lead.notes)}</p>
                         </div>
                     </div>
 
                     ${lead.media && lead.media.length > 0 ? `
-                        <div class="space-y-1.5">
-                            <span class="text-[11px] font-bold uppercase tracking-wider text-gold-300">Attached Customer Media (${lead.media.length} files — Tap to Inspect Fullscreen):</span>
-                            <div class="grid grid-cols-3 sm:grid-cols-5 gap-2.5">
-                                ${lead.media.map((m, mIdx) => m.type === 'video'
-                                    ? `<div onclick="openLeadMediaLightbox('${escapeHtml(lead.id)}', ${mIdx})" class="cursor-pointer rounded-xl overflow-hidden border border-gold-400/45 h-20 bg-black relative flex items-center justify-center hover:border-gold-300">
-                                        <span class="text-xs font-bold text-gold-300">▶ Video (${escapeHtml(m.resolution)})</span>
-                                       </div>`
-                                    : `<img src="${m.url}" onclick="openLeadMediaLightbox('${escapeHtml(lead.id)}', ${mIdx})" class="cursor-pointer rounded-xl object-cover w-full h-20 border border-gold-400/45 hover:scale-105 transition">`
-                                ).join('')}
-                            </div>
+                        <div class="grid grid-cols-3 sm:grid-cols-5 gap-2">
+                            ${lead.media.map((m, mIdx) => m.type === 'video'
+                                ? `<div onclick="openLeadMediaLightbox('${escapeHtml(lead.id)}', ${mIdx})" class="cursor-pointer rounded-xl overflow-hidden border border-gold-400/40 h-20 bg-black flex items-center justify-center">
+                                    <span class="text-xs font-bold text-gold-300">▶ Video</span>
+                                   </div>`
+                                : `<img src="${m.url}" onclick="openLeadMediaLightbox('${escapeHtml(lead.id)}', ${mIdx})" class="cursor-pointer rounded-xl object-cover w-full h-20 border border-white/15 hover:border-gold-400 transition">`
+                            ).join('')}
                         </div>
                     ` : ''}
 
@@ -2323,10 +1947,10 @@ service cloud.firestore {
                         <div class="flex flex-wrap items-center gap-2">
                             <a href="${buildCustomerCareScriptUrl(lead)}" target="_blank" rel="noopener noreferrer"
                                class="px-3.5 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black font-extrabold text-xs inline-flex items-center gap-1.5">
-                                💬 Launch Dr. Care Sales Script (WhatsApp)
+                                💬 WhatsApp Script
                             </a>
-                            <a href="tel:${escapeHtml(lead.clientPhone)}" class="px-3.5 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs inline-flex items-center gap-1.5">
-                                📞 Call Client
+                            <a href="tel:${escapeHtml(lead.clientPhone)}" class="px-3.5 py-2 rounded-xl bg-white/10 hover:bg-white/15 text-white font-bold text-xs">
+                                📞 Call
                             </a>
                         </div>
 
@@ -2334,9 +1958,9 @@ service cloud.firestore {
                             <input type="text" value="${escapeHtml(lead.estimatedQuote || '')}"
                                    placeholder="Quote (e.g. 1,500 EGP)"
                                    onchange="saveManagerQuote('${escapeHtml(lead.id)}', this.value)"
-                                   class="px-2.5 py-1 rounded-lg bg-black border border-gold-400/40 text-gold-200 text-xs font-bold w-40 focus:outline-none">
-                            <select onchange="updateLeadStatus('${escapeHtml(lead.id)}', this.value)" class="px-2.5 py-1 rounded-lg bg-leather border border-gold-400/40 text-gold-300 text-xs font-bold">
-                                <option value="NEW LIVE" ${lead.status === 'NEW LIVE' ? 'selected' : ''}>🟢 NEW LIVE</option>
+                                   class="px-2.5 py-1.5 rounded-lg bg-black border border-white/15 text-gold-200 text-xs font-bold w-36 focus:border-gold-400 focus:outline-none">
+                            <select onchange="updateLeadStatus('${escapeHtml(lead.id)}', this.value)" class="px-2.5 py-1.5 rounded-lg bg-leather border border-white/15 text-gold-300 text-xs font-bold">
+                                <option value="NEW LIVE" ${lead.status === 'NEW LIVE' ? 'selected' : ''}>🟢 NEW</option>
                                 <option value="CONTACTED" ${lead.status === 'CONTACTED' ? 'selected' : ''}>📞 CONTACTED</option>
                                 <option value="IN PROGRESS" ${lead.status === 'IN PROGRESS' ? 'selected' : ''}>⚙️ IN PROGRESS</option>
                                 <option value="COMPLETED" ${lead.status === 'COMPLETED' ? 'selected' : ''}>✅ COMPLETED</option>
@@ -2349,23 +1973,23 @@ service cloud.firestore {
 
         async function simulateIncomingVipLead() {
             const demoCars = [
-                { brand: 'Porsche', model: '911 GT3 • 2026', color: 'Obsidian Black Metallic (#08080A)', zone: 'Heliopolis' },
-                { brand: 'BMW', model: 'M5 Competition • 2026', color: 'Selenite Grey Metallic (#7A8088)', zone: '5th Settlement' },
-                { brand: 'Range Rover', model: 'Autobiography • 2026', color: 'Diamond Pearl White (#F4F5F7)', zone: 'Madinaty' }
+                { brand: 'Porsche', model: '911 GT3 • 2026', color: 'Obsidian Black (#08080A)', zone: 'Heliopolis' },
+                { brand: 'BMW', model: 'M5 • 2026', color: 'Selenite Grey (#7A8088)', zone: '5th Settlement' },
+                { brand: 'Range Rover', model: 'Vogue • 2026', color: 'Pearl White (#F4F5F7)', zone: 'Madinaty' }
             ];
             const pick = demoCars[Math.floor(Math.random() * demoCars.length)];
             const simLead = {
                 id: 'DC-' + Math.floor(1000 + Math.random() * 9000),
                 requestType: 'SCRATCH_DIAGNOSIS',
-                clientName: 'Sample VIP Client (' + pick.zone + ')',
+                clientName: 'VIP Client (' + pick.zone + ')',
                 clientPhone: '01000000000',
                 carBrand: pick.brand,
                 carModel: pick.model,
                 carColor: pick.color,
                 zone: pick.zone,
-                resolution: '1080p Full HD',
+                resolution: '1080p',
                 estimatedQuote: '2,200 EGP',
-                notes: 'Severity: Clear Coat Scratch\nAffected Zones: Right Doors\nClient Note: Please call after 5 PM. Scratch is near the door handle.',
+                notes: 'Severity: Light Scratch\nZones: Right Side\nNote: Call after 5 PM.',
                 media: [{ id: 'sim_1', type: 'image', url: 'before.jpeg', cloudSafeUrl: 'before.jpeg', resolution: '1080p' }],
                 status: 'NEW LIVE',
                 createdAt: Date.now()
@@ -2382,7 +2006,7 @@ service cloud.firestore {
             const csvContent = 'data:text/csv;charset=utf-8,\uFEFF' + [headers.join(','), ...rows].join('\n');
             const link = document.createElement('a');
             link.setAttribute('href', encodeURI(csvContent));
-            link.setAttribute('download', `DrCare_Executive_CRM_${new Date().toISOString().slice(0,10)}.csv`);
+            link.setAttribute('download', `DrCare_CRM_${new Date().toISOString().slice(0,10)}.csv`);
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
@@ -2398,7 +2022,7 @@ service cloud.firestore {
         function showLightboxContent(url, type, res) {
             const box = document.getElementById('mediaLightbox');
             const body = document.getElementById('lightboxBody');
-            document.getElementById('lightboxCaption').textContent = `DR. CARE MASTER INSPECTION • ${res || '1080p'}`;
+            document.getElementById('lightboxCaption').textContent = `DR. CARE INSPECTION • ${res || '1080p'}`;
             body.innerHTML = type === 'video'
                 ? `<video src="${url}" controls autoplay class="max-h-[72vh] w-auto rounded-xl"></video>`
                 : `<img src="${url}" class="max-h-[72vh] w-auto object-contain rounded-xl">`;
