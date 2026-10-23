@@ -153,6 +153,13 @@
             50% { box-shadow: 0 0 0 11px rgba(212, 175, 55, 0); }
         }
         .pulse-gold-ring { animation: pulseGold 2.3s infinite; }
+
+        @keyframes shakeError {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-6px); }
+            75% { transform: translateX(6px); }
+        }
+        .shake-error { animation: shakeError 0.3s ease-in-out; }
     </style>
 </head>
 <body class="antialiased selection:bg-gold-400 selection:text-black" onmousemove="updateAmbientSpotlight(event)">
@@ -204,12 +211,12 @@
             </a>
 
             <div class="flex items-center gap-2 sm:gap-3">
-                <button id="langSwitchBtn" type="button" onclick="toggleLanguage()" class="px-3.5 py-2 rounded-xl bg-white/5 hover:bg-gold-400/15 border border-gold-400/35 text-xs font-bold text-gold-200 transition flex items-center gap-1.5">
+                <button id="langSwitchBtn" type="button" onclick="toggleLanguage()" class="px-3.5 py-2 rounded-xl bg-white/5 hover:bg-gold-400/15 border border-gold-400/35 text-xs font-bold text-gold-200 transition flex items-center gap-1.5 cursor-pointer">
                     <span>🌐</span>
                     <span id="langSwitchLabel">العربية</span>
                 </button>
 
-                <button type="button" onclick="openBackofficeModal()" class="px-3.5 py-2 rounded-xl bg-leather hover:bg-zinc-800 border border-white/15 text-xs font-bold text-zinc-200 hover:text-gold-300 transition flex items-center gap-2" title="Executive Command Center">
+                <button type="button" onclick="openBackofficeModal()" class="px-3.5 py-2 rounded-xl bg-leather hover:bg-zinc-800 border border-gold-400/35 text-xs font-bold text-zinc-100 hover:text-gold-300 transition flex items-center gap-2 cursor-pointer shadow-lg" title="Executive Command Center">
                     <span class="relative flex h-2 w-2">
                         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-gold-400 opacity-75"></span>
                         <span class="relative inline-flex rounded-full h-2 w-2 bg-gold-400"></span>
@@ -352,11 +359,11 @@
             </div>
 
             <div class="max-w-xl mx-auto grid grid-cols-2 p-1.5 rounded-2xl bg-leather border border-gold-400/30 mb-8 shadow-2xl">
-                <button type="button" id="tabScratchBtn" onclick="switchConsoleTab('scratch')" class="py-3.5 px-4 rounded-xl font-extrabold text-xs sm:text-sm transition flex items-center justify-center gap-2 bg-gradient-to-r from-gold-400 to-gold-500 text-black shadow-lg">
+                <button type="button" id="tabScratchBtn" onclick="switchConsoleTab('scratch')" class="py-3.5 px-4 rounded-xl font-extrabold text-xs sm:text-sm transition flex items-center justify-center gap-2 bg-gradient-to-r from-gold-400 to-gold-500 text-black shadow-lg cursor-pointer">
                     <span>📸</span>
                     <span data-i18n="tabScratchTitle">Scratch & Paint Diagnosis</span>
                 </button>
-                <button type="button" id="tabBookingBtn" onclick="switchConsoleTab('booking')" class="py-3.5 px-4 rounded-xl font-extrabold text-xs sm:text-sm transition flex items-center justify-center gap-2 text-zinc-300 hover:text-white">
+                <button type="button" id="tabBookingBtn" onclick="switchConsoleTab('booking')" class="py-3.5 px-4 rounded-xl font-extrabold text-xs sm:text-sm transition flex items-center justify-center gap-2 text-zinc-300 hover:text-white cursor-pointer">
                     <span>🛡️</span>
                     <span data-i18n="tabBookingTitle">Weekend Dry Wash Slot</span>
                 </button>
@@ -418,58 +425,58 @@
                         </div>
 
                         <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-2" id="brandLogoGrid">
-                            <button type="button" onclick="selectCarBrandLogo(this, 'Mercedes-Benz')" class="brand-logo-card selected p-2.5 rounded-xl bg-leather border border-white/15 flex items-center justify-center text-center group">
+                            <button type="button" onclick="selectCarBrandLogo(this, 'Mercedes-Benz')" class="brand-logo-card selected p-2.5 rounded-xl bg-leather border border-white/15 flex items-center justify-center text-center group cursor-pointer">
                                 <span class="text-[11px] font-extrabold tracking-wider text-gold-300">MERCEDES</span>
                             </button>
-                            <button type="button" onclick="selectCarBrandLogo(this, 'BMW')" class="brand-logo-card p-2.5 rounded-xl bg-leather border border-white/15 flex items-center justify-center text-center group">
+                            <button type="button" onclick="selectCarBrandLogo(this, 'BMW')" class="brand-logo-card p-2.5 rounded-xl bg-leather border border-white/15 flex items-center justify-center text-center group cursor-pointer">
                                 <span class="text-[11px] font-extrabold tracking-wider text-zinc-200 group-hover:text-gold-300">BMW</span>
                             </button>
-                            <button type="button" onclick="selectCarBrandLogo(this, 'Porsche')" class="brand-logo-card p-2.5 rounded-xl bg-leather border border-white/15 flex items-center justify-center text-center group">
+                            <button type="button" onclick="selectCarBrandLogo(this, 'Porsche')" class="brand-logo-card p-2.5 rounded-xl bg-leather border border-white/15 flex items-center justify-center text-center group cursor-pointer">
                                 <span class="text-[11px] font-extrabold tracking-wider text-zinc-200 group-hover:text-gold-300">PORSCHE</span>
                             </button>
-                            <button type="button" onclick="selectCarBrandLogo(this, 'Range Rover')" class="brand-logo-card p-2.5 rounded-xl bg-leather border border-white/15 flex items-center justify-center text-center group">
+                            <button type="button" onclick="selectCarBrandLogo(this, 'Range Rover')" class="brand-logo-card p-2.5 rounded-xl bg-leather border border-white/15 flex items-center justify-center text-center group cursor-pointer">
                                 <span class="text-[11px] font-extrabold tracking-wider text-zinc-200 group-hover:text-gold-300">RANGE ROVER</span>
                             </button>
-                            <button type="button" onclick="selectCarBrandLogo(this, 'Audi')" class="brand-logo-card p-2.5 rounded-xl bg-leather border border-white/15 flex items-center justify-center text-center group">
+                            <button type="button" onclick="selectCarBrandLogo(this, 'Audi')" class="brand-logo-card p-2.5 rounded-xl bg-leather border border-white/15 flex items-center justify-center text-center group cursor-pointer">
                                 <span class="text-[11px] font-extrabold tracking-wider text-zinc-200 group-hover:text-gold-300">AUDI</span>
                             </button>
-                            <button type="button" onclick="selectCarBrandLogo(this, 'Toyota')" class="brand-logo-card p-2.5 rounded-xl bg-leather border border-white/15 flex items-center justify-center text-center group">
+                            <button type="button" onclick="selectCarBrandLogo(this, 'Toyota')" class="brand-logo-card p-2.5 rounded-xl bg-leather border border-white/15 flex items-center justify-center text-center group cursor-pointer">
                                 <span class="text-[11px] font-extrabold tracking-wider text-zinc-200 group-hover:text-gold-300">TOYOTA</span>
                             </button>
-                            <button type="button" onclick="selectCarBrandLogo(this, 'Lexus')" class="brand-logo-card p-2.5 rounded-xl bg-leather border border-white/15 flex items-center justify-center text-center group">
+                            <button type="button" onclick="selectCarBrandLogo(this, 'Lexus')" class="brand-logo-card p-2.5 rounded-xl bg-leather border border-white/15 flex items-center justify-center text-center group cursor-pointer">
                                 <span class="text-[11px] font-extrabold tracking-wider text-zinc-200 group-hover:text-gold-300">LEXUS</span>
                             </button>
-                            <button type="button" onclick="selectCarBrandLogo(this, 'Hyundai')" class="brand-logo-card p-2.5 rounded-xl bg-leather border border-white/15 flex items-center justify-center text-center group">
+                            <button type="button" onclick="selectCarBrandLogo(this, 'Hyundai')" class="brand-logo-card p-2.5 rounded-xl bg-leather border border-white/15 flex items-center justify-center text-center group cursor-pointer">
                                 <span class="text-[11px] font-extrabold tracking-wider text-zinc-200 group-hover:text-gold-300">HYUNDAI</span>
                             </button>
-                            <button type="button" onclick="selectCarBrandLogo(this, 'Kia')" class="brand-logo-card p-2.5 rounded-xl bg-leather border border-white/15 flex items-center justify-center text-center group">
+                            <button type="button" onclick="selectCarBrandLogo(this, 'Kia')" class="brand-logo-card p-2.5 rounded-xl bg-leather border border-white/15 flex items-center justify-center text-center group cursor-pointer">
                                 <span class="text-[11px] font-extrabold tracking-wider text-zinc-200 group-hover:text-gold-300">KIA</span>
                             </button>
-                            <button type="button" onclick="selectCarBrandLogo(this, 'Volkswagen')" class="brand-logo-card p-2.5 rounded-xl bg-leather border border-white/15 flex items-center justify-center text-center group">
+                            <button type="button" onclick="selectCarBrandLogo(this, 'Volkswagen')" class="brand-logo-card p-2.5 rounded-xl bg-leather border border-white/15 flex items-center justify-center text-center group cursor-pointer">
                                 <span class="text-[11px] font-extrabold tracking-wider text-zinc-200 group-hover:text-gold-300">VOLKSWAGEN</span>
                             </button>
-                            <button type="button" onclick="selectCarBrandLogo(this, 'Skoda / Seat')" class="brand-logo-card p-2.5 rounded-xl bg-leather border border-white/15 flex items-center justify-center text-center group">
+                            <button type="button" onclick="selectCarBrandLogo(this, 'Skoda / Seat')" class="brand-logo-card p-2.5 rounded-xl bg-leather border border-white/15 flex items-center justify-center text-center group cursor-pointer">
                                 <span class="text-[11px] font-extrabold tracking-wider text-zinc-200 group-hover:text-gold-300">SKODA / SEAT</span>
                             </button>
-                            <button type="button" onclick="selectCarBrandLogo(this, 'Nissan / Infiniti')" class="brand-logo-card p-2.5 rounded-xl bg-leather border border-white/15 flex items-center justify-center text-center group">
+                            <button type="button" onclick="selectCarBrandLogo(this, 'Nissan / Infiniti')" class="brand-logo-card p-2.5 rounded-xl bg-leather border border-white/15 flex items-center justify-center text-center group cursor-pointer">
                                 <span class="text-[11px] font-extrabold tracking-wider text-zinc-200 group-hover:text-gold-300">NISSAN</span>
                             </button>
-                            <button type="button" onclick="selectCarBrandLogo(this, 'Peugeot / Opel')" class="brand-logo-card p-2.5 rounded-xl bg-leather border border-white/15 flex items-center justify-center text-center group">
+                            <button type="button" onclick="selectCarBrandLogo(this, 'Peugeot / Opel')" class="brand-logo-card p-2.5 rounded-xl bg-leather border border-white/15 flex items-center justify-center text-center group cursor-pointer">
                                 <span class="text-[11px] font-extrabold tracking-wider text-zinc-200 group-hover:text-gold-300">PEUGEOT / OPEL</span>
                             </button>
-                            <button type="button" onclick="selectCarBrandLogo(this, 'MG / Chery / Haval')" class="brand-logo-card p-2.5 rounded-xl bg-leather border border-white/15 flex items-center justify-center text-center group">
+                            <button type="button" onclick="selectCarBrandLogo(this, 'MG / Chery / Haval')" class="brand-logo-card p-2.5 rounded-xl bg-leather border border-white/15 flex items-center justify-center text-center group cursor-pointer">
                                 <span class="text-[11px] font-extrabold tracking-wider text-zinc-200 group-hover:text-gold-300">MG / CHERY</span>
                             </button>
-                            <button type="button" onclick="selectCarBrandLogo(this, 'Chevrolet / Ford')" class="brand-logo-card p-2.5 rounded-xl bg-leather border border-white/15 flex items-center justify-center text-center group">
+                            <button type="button" onclick="selectCarBrandLogo(this, 'Chevrolet / Ford')" class="brand-logo-card p-2.5 rounded-xl bg-leather border border-white/15 flex items-center justify-center text-center group cursor-pointer">
                                 <span class="text-[11px] font-extrabold tracking-wider text-zinc-200 group-hover:text-gold-300">CHEVROLET / FORD</span>
                             </button>
-                            <button type="button" onclick="selectCarBrandLogo(this, 'Jeep / Dodge')" class="brand-logo-card p-2.5 rounded-xl bg-leather border border-white/15 flex items-center justify-center text-center group">
+                            <button type="button" onclick="selectCarBrandLogo(this, 'Jeep / Dodge')" class="brand-logo-card p-2.5 rounded-xl bg-leather border border-white/15 flex items-center justify-center text-center group cursor-pointer">
                                 <span class="text-[11px] font-extrabold tracking-wider text-zinc-200 group-hover:text-gold-300">JEEP / DODGE</span>
                             </button>
-                            <button type="button" onclick="selectCarBrandLogo(this, 'Maserati / Ferrari')" class="brand-logo-card p-2.5 rounded-xl bg-leather border border-white/15 flex items-center justify-center text-center group">
+                            <button type="button" onclick="selectCarBrandLogo(this, 'Maserati / Ferrari')" class="brand-logo-card p-2.5 rounded-xl bg-leather border border-white/15 flex items-center justify-center text-center group cursor-pointer">
                                 <span class="text-[11px] font-extrabold tracking-wider text-zinc-200 group-hover:text-gold-300">SUPERSPORT</span>
                             </button>
-                            <button type="button" onclick="selectCarBrandLogo(this, 'Xiaomi / Tesla / BYD')" class="brand-logo-card p-2.5 rounded-xl bg-leather border border-white/15 flex items-center justify-center text-center group">
+                            <button type="button" onclick="selectCarBrandLogo(this, 'Xiaomi / Tesla / BYD')" class="brand-logo-card p-2.5 rounded-xl bg-leather border border-white/15 flex items-center justify-center text-center group cursor-pointer">
                                 <span class="text-[11px] font-extrabold tracking-wider text-zinc-200 group-hover:text-gold-300">XIAOMI / EV</span>
                             </button>
                         </div>
@@ -526,14 +533,14 @@
                                 </label>
 
                                 <div class="flex flex-wrap items-center gap-1.5">
-                                    <button type="button" onclick="applyPresetColor('#08080A', 'Obsidian Black Metallic')" class="w-7 h-7 rounded-lg bg-[#08080A] border border-white/40 hover:scale-110 transition" title="Obsidian Black"></button>
-                                    <button type="button" onclick="applyPresetColor('#F4F5F7', 'Diamond Pearl White')" class="w-7 h-7 rounded-lg bg-[#F4F5F7] border border-white/40 hover:scale-110 transition" title="Pearl White"></button>
-                                    <button type="button" onclick="applyPresetColor('#7A8088', 'Selenite Grey Metallic')" class="w-7 h-7 rounded-lg bg-[#7A8088] border border-white/30 hover:scale-110 transition" title="Selenite Grey"></button>
-                                    <button type="button" onclick="applyPresetColor('#C0C5CE', 'Iridium Silver Metallic')" class="w-7 h-7 rounded-lg bg-[#C0C5CE] border border-white/30 hover:scale-110 transition" title="Iridium Silver"></button>
-                                    <button type="button" onclick="applyPresetColor('#10284E', 'Tanzanite Sapphire Blue')" class="w-7 h-7 rounded-lg bg-[#10284E] border border-white/30 hover:scale-110 transition" title="Sapphire Blue"></button>
-                                    <button type="button" onclick="applyPresetColor('#8F141B', 'Patagonia Crimson Red')" class="w-7 h-7 rounded-lg bg-[#8F141B] border border-white/30 hover:scale-110 transition" title="Crimson Red"></button>
-                                    <button type="button" onclick="applyPresetColor('#113826', 'British Emerald Green')" class="w-7 h-7 rounded-lg bg-[#113826] border border-white/30 hover:scale-110 transition" title="Emerald Green"></button>
-                                    <button type="button" onclick="applyPresetColor('#C2A878', 'Champagne Quartz Gold')" class="w-7 h-7 rounded-lg bg-[#C2A878] border border-white/30 hover:scale-110 transition" title="Champagne Gold"></button>
+                                    <button type="button" onclick="applyPresetColor('#08080A', 'Obsidian Black Metallic')" class="w-7 h-7 rounded-lg bg-[#08080A] border border-white/40 hover:scale-110 transition cursor-pointer" title="Obsidian Black"></button>
+                                    <button type="button" onclick="applyPresetColor('#F4F5F7', 'Diamond Pearl White')" class="w-7 h-7 rounded-lg bg-[#F4F5F7] border border-white/40 hover:scale-110 transition cursor-pointer" title="Pearl White"></button>
+                                    <button type="button" onclick="applyPresetColor('#7A8088', 'Selenite Grey Metallic')" class="w-7 h-7 rounded-lg bg-[#7A8088] border border-white/30 hover:scale-110 transition cursor-pointer" title="Selenite Grey"></button>
+                                    <button type="button" onclick="applyPresetColor('#C0C5CE', 'Iridium Silver Metallic')" class="w-7 h-7 rounded-lg bg-[#C0C5CE] border border-white/30 hover:scale-110 transition cursor-pointer" title="Iridium Silver"></button>
+                                    <button type="button" onclick="applyPresetColor('#10284E', 'Tanzanite Sapphire Blue')" class="w-7 h-7 rounded-lg bg-[#10284E] border border-white/30 hover:scale-110 transition cursor-pointer" title="Sapphire Blue"></button>
+                                    <button type="button" onclick="applyPresetColor('#8F141B', 'Patagonia Crimson Red')" class="w-7 h-7 rounded-lg bg-[#8F141B] border border-white/30 hover:scale-110 transition cursor-pointer" title="Crimson Red"></button>
+                                    <button type="button" onclick="applyPresetColor('#113826', 'British Emerald Green')" class="w-7 h-7 rounded-lg bg-[#113826] border border-white/30 hover:scale-110 transition cursor-pointer" title="Emerald Green"></button>
+                                    <button type="button" onclick="applyPresetColor('#C2A878', 'Champagne Quartz Gold')" class="w-7 h-7 rounded-lg bg-[#C2A878] border border-white/30 hover:scale-110 transition cursor-pointer" title="Champagne Gold"></button>
                                 </div>
 
                                 <input type="text" id="carColorInput" required value="Obsidian Black Metallic (#08080A)"
@@ -551,15 +558,15 @@
                                 <span class="text-[11px] text-zinc-400 italic" data-i18n="exDefectSeverity">Helps calculate exact polishing stages</span>
                             </div>
                             <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
-                                <button type="button" onclick="selectDefectSeverity(this, 'Swirl Marks & Oxidation (دوائر غسيل وبهتان)')" class="severity-card selected p-3 rounded-xl bg-black/70 border border-white/15 text-left">
+                                <button type="button" onclick="selectDefectSeverity(this, 'Swirl Marks & Oxidation (دوائر غسيل وبهتان)')" class="severity-card selected p-3 rounded-xl bg-black/70 border border-white/15 text-left cursor-pointer">
                                     <span class="block text-xs font-extrabold text-gold-300">Level 1: Swirls & Oxidation</span>
                                     <span class="block text-[11px] text-zinc-400 mt-0.5">Spiderweb wash marks & dull gloss</span>
                                 </button>
-                                <button type="button" onclick="selectDefectSeverity(this, 'Clear Coat Scratch (خدش سطحي بالورنيش)')" class="severity-card p-3 rounded-xl bg-black/70 border border-white/15 text-left">
+                                <button type="button" onclick="selectDefectSeverity(this, 'Clear Coat Scratch (خدش سطحي بالورنيش)')" class="severity-card p-3 rounded-xl bg-black/70 border border-white/15 text-left cursor-pointer">
                                     <span class="block text-xs font-extrabold text-zinc-200">Level 2: Clear Coat Scratch</span>
                                     <span class="block text-[11px] text-zinc-400 mt-0.5">Visible scratch, nail barely catches</span>
                                 </button>
-                                <button type="button" onclick="selectDefectSeverity(this, 'Deep Paint Scratch / Scuff (خدش عميق أو حكة)')" class="severity-card p-3 rounded-xl bg-black/70 border border-white/15 text-left">
+                                <button type="button" onclick="selectDefectSeverity(this, 'Deep Paint Scratch / Scuff (خدش عميق أو حكة)')" class="severity-card p-3 rounded-xl bg-black/70 border border-white/15 text-left cursor-pointer">
                                     <span class="block text-xs font-extrabold text-zinc-200">Level 3: Deep Key / Bumper Scuff</span>
                                     <span class="block text-[11px] text-zinc-400 mt-0.5">Deep impact requiring touchup</span>
                                 </button>
@@ -576,22 +583,22 @@
                                 <span class="text-[11px] text-zinc-400 italic" data-i18n="exBodyZone">e.g. Front Hood + Right Doors</span>
                             </div>
                             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2">
-                                <button type="button" onclick="toggleCarBodyZone(this, 'Front Hood (الكبوت)')" class="car-zone-btn active px-3 py-2.5 rounded-xl bg-black/70 border border-white/15 text-xs font-bold text-zinc-300 flex items-center justify-center">
+                                <button type="button" onclick="toggleCarBodyZone(this, 'Front Hood (الكبوت)')" class="car-zone-btn active px-3 py-2.5 rounded-xl bg-black/70 border border-white/15 text-xs font-bold text-zinc-300 flex items-center justify-center cursor-pointer">
                                     <span data-i18n="zoneHood">Front Hood</span>
                                 </button>
-                                <button type="button" onclick="toggleCarBodyZone(this, 'Left Doors/Fender (الجانب الأيسر)')" class="car-zone-btn px-3 py-2.5 rounded-xl bg-black/70 border border-white/15 text-xs font-bold text-zinc-300 flex items-center justify-center">
+                                <button type="button" onclick="toggleCarBodyZone(this, 'Left Doors/Fender (الجانب الأيسر)')" class="car-zone-btn px-3 py-2.5 rounded-xl bg-black/70 border border-white/15 text-xs font-bold text-zinc-300 flex items-center justify-center cursor-pointer">
                                     <span data-i18n="zoneLeft">Left Side</span>
                                 </button>
-                                <button type="button" onclick="toggleCarBodyZone(this, 'Right Doors/Fender (الجانب الأيمن)')" class="car-zone-btn px-3 py-2.5 rounded-xl bg-black/70 border border-white/15 text-xs font-bold text-zinc-300 flex items-center justify-center">
+                                <button type="button" onclick="toggleCarBodyZone(this, 'Right Doors/Fender (الجانب الأيمن)')" class="car-zone-btn px-3 py-2.5 rounded-xl bg-black/70 border border-white/15 text-xs font-bold text-zinc-300 flex items-center justify-center cursor-pointer">
                                     <span data-i18n="zoneRight">Right Side</span>
                                 </button>
-                                <button type="button" onclick="toggleCarBodyZone(this, 'Roof & Pillars (السقف والقوائم)')" class="car-zone-btn px-3 py-2.5 rounded-xl bg-black/70 border border-white/15 text-xs font-bold text-zinc-300 flex items-center justify-center">
+                                <button type="button" onclick="toggleCarBodyZone(this, 'Roof & Pillars (السقف والقوائم)')" class="car-zone-btn px-3 py-2.5 rounded-xl bg-black/70 border border-white/15 text-xs font-bold text-zinc-300 flex items-center justify-center cursor-pointer">
                                     <span data-i18n="zoneRoof">Roof Panel</span>
                                 </button>
-                                <button type="button" onclick="toggleCarBodyZone(this, 'Rear Trunk/Bumper (الشنطة والخلفي)')" class="car-zone-btn px-3 py-2.5 rounded-xl bg-black/70 border border-white/15 text-xs font-bold text-zinc-300 flex items-center justify-center">
+                                <button type="button" onclick="toggleCarBodyZone(this, 'Rear Trunk/Bumper (الشنطة والخلفي)')" class="car-zone-btn px-3 py-2.5 rounded-xl bg-black/70 border border-white/15 text-xs font-bold text-zinc-300 flex items-center justify-center cursor-pointer">
                                     <span data-i18n="zoneRear">Rear / Trunk</span>
                                 </button>
-                                <button type="button" onclick="toggleCarBodyZone(this, 'Full Body Correction (كامل السيارة)')" class="car-zone-btn px-3 py-2.5 rounded-xl bg-black/70 border border-white/15 text-xs font-bold text-zinc-300 flex items-center justify-center">
+                                <button type="button" onclick="toggleCarBodyZone(this, 'Full Body Correction (كامل السيارة)')" class="car-zone-btn px-3 py-2.5 rounded-xl bg-black/70 border border-white/15 text-xs font-bold text-zinc-300 flex items-center justify-center cursor-pointer">
                                     <span data-i18n="zoneFull">Full Body</span>
                                 </button>
                             </div>
@@ -658,7 +665,7 @@
                         <div id="mediaGridWrapper" class="hidden space-y-2.5">
                             <div class="flex items-center justify-between text-xs">
                                 <span id="mediaCounterText" class="font-extrabold text-gold-300">0 / 5 Media Files Attached</span>
-                                <button type="button" onclick="clearAllMedia()" class="text-rose-400 hover:text-rose-300 font-bold" data-i18n="btnClearAll">
+                                <button type="button" onclick="clearAllMedia()" class="text-rose-400 hover:text-rose-300 font-bold cursor-pointer" data-i18n="btnClearAll">
                                     Clear All
                                 </button>
                             </div>
@@ -680,7 +687,7 @@
                         </div>
                     </div>
 
-                    <button type="submit" id="submitScratchBtn" class="w-full btn-gold-elite py-4 px-6 rounded-2xl font-extrabold text-base tracking-wide flex items-center justify-center gap-3">
+                    <button type="submit" id="submitScratchBtn" class="w-full btn-gold-elite py-4 px-6 rounded-2xl font-extrabold text-base tracking-wide flex items-center justify-center gap-3 cursor-pointer">
                         <span>🚀</span>
                         <span id="submitScratchBtnLabel" data-i18n="submitScratchBtnText">Transmit High-Res Diagnosis to Dr. Care Masters</span>
                     </button>
@@ -695,7 +702,7 @@
                         <span class="text-xs text-zinc-400">VIP Reference Ticket:</span>
                         <strong id="generatedTicketId" class="font-mono text-sm text-gold-300 tracking-wider">DC-0000</strong>
                     </div>
-                    <p class="text-xs sm:text-sm text-zinc-300 max-w-xl mx-auto" data-i18n="successBody">
+                    <p id="syncConfirmSubText" class="text-xs sm:text-sm text-zinc-300 max-w-xl mx-auto" data-i18n="successBody">
                         Your vehicle telemetry, custom notes, and high-res media are now synced live to our Master Specialist's console.
                     </p>
                 </div>
@@ -802,7 +809,7 @@
                         </select>
                         <input type="text" id="washClientNotes" placeholder="Optional Note (e.g. Gate 4 / Villa 12)..."
                                class="px-4 py-3.5 rounded-xl bg-black/75 border border-white/15 text-white text-xs focus:border-gold-400 focus:outline-none">
-                        <button type="submit" class="btn-gold-elite py-3.5 px-6 rounded-xl font-extrabold text-sm" data-i18n="btnConfirmWash">
+                        <button type="submit" class="btn-gold-elite py-3.5 px-6 rounded-xl font-extrabold text-sm cursor-pointer" data-i18n="btnConfirmWash">
                             Confirm Weekend Slot Reservation
                         </button>
                     </div>
@@ -866,7 +873,7 @@
                 <a href="#clinic-console" class="px-4 py-2.5 rounded-xl bg-gold-400/15 border border-gold-400/40 text-gold-200 text-xs font-extrabold hover:bg-gold-400/25 transition">
                     ✨ Start Online Inspection
                 </a>
-                <button type="button" onclick="openBackofficeModal()" class="px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-zinc-400 hover:text-gold-300 text-xs font-bold">
+                <button type="button" onclick="openBackofficeModal()" class="px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-zinc-400 hover:text-gold-300 text-xs font-bold cursor-pointer">
                     🔒 Executive Live CRM
                 </button>
             </div>
@@ -886,7 +893,7 @@
                         <div class="flex items-center gap-2">
                             <h3 class="font-serif text-lg sm:text-xl font-black text-white">DR. CARE EXECUTIVE COMMAND</h3>
                             <span id="crmSyncBadge" class="px-2 py-0.5 rounded-md bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 text-[10px] font-extrabold">
-                                CLOUD + VAULT SYNC
+                                REALTIME SYNC
                             </span>
                         </div>
                         <p class="text-xs text-zinc-400">
@@ -897,42 +904,60 @@
                 </div>
 
                 <div class="flex flex-wrap items-center gap-2">
-                    <button type="button" id="soundToggleBtn" onclick="toggleAudioRadar()" class="px-3 py-2 rounded-xl bg-emerald-500/15 border border-emerald-400/40 text-emerald-300 text-xs font-bold">
+                    <button type="button" id="soundToggleBtn" onclick="toggleAudioRadar()" class="px-3 py-2 rounded-xl bg-emerald-500/15 border border-emerald-400/40 text-emerald-300 text-xs font-bold cursor-pointer">
                         🔔 Audio Radar: ON
                     </button>
-                    <button type="button" onclick="exportLeadsToCsv()" class="px-3 py-2 rounded-xl bg-white/5 hover:bg-white/15 border border-white/15 text-gold-200 text-xs font-bold">
+                    <button type="button" onclick="exportLeadsToCsv()" class="px-3 py-2 rounded-xl bg-white/5 hover:bg-white/15 border border-white/15 text-gold-200 text-xs font-bold cursor-pointer">
                         📥 Export CSV
                     </button>
-                    <button type="button" onclick="lockCrmVault()" class="px-3 py-2 rounded-xl bg-white/5 hover:bg-amber-500/20 border border-white/10 text-zinc-300 hover:text-amber-300 text-xs font-bold">
+                    <button type="button" onclick="lockCrmVault()" class="px-3 py-2 rounded-xl bg-white/5 hover:bg-amber-500/20 border border-white/10 text-zinc-300 hover:text-amber-300 text-xs font-bold cursor-pointer">
                         🔒 Lock
                     </button>
-                    <button type="button" onclick="closeBackofficeModal()" class="px-3.5 py-2 rounded-xl bg-white/10 hover:bg-rose-500/20 text-zinc-300 hover:text-rose-300 text-xs font-extrabold">
+                    <button type="button" onclick="closeBackofficeModal()" class="px-3.5 py-2 rounded-xl bg-white/10 hover:bg-rose-500/20 text-zinc-300 hover:text-rose-300 text-xs font-extrabold cursor-pointer">
                         ✕ Close
                     </button>
                 </div>
             </div>
 
-            <!-- PIN GATE (AUTO-UNLOCK ON 2027) -->
+            <!-- PIN GATE (ZERO PUBLIC PASSWORD HINTS - ACCEPTS 2027 OR 2026) -->
             <div id="crmPinGate" class="max-w-md mx-auto py-10 text-center space-y-4">
                 <div class="w-14 h-14 rounded-2xl bg-gold-400/10 border border-gold-400/40 flex items-center justify-center mx-auto text-gold-300 text-2xl">
                     🔐
                 </div>
-                <p class="text-base font-extrabold text-gold-200">Executive Access Vault (PIN: 2027)</p>
-                <p class="text-xs text-zinc-400">Enter your authorized staff security key (2027) to unlock live customer telemetry.</p>
-                <div class="flex gap-2 justify-center pt-1">
+                <p class="text-base font-extrabold text-gold-200">Executive Access Vault</p>
+                <p class="text-xs text-zinc-400">Enter your 4-digit staff security key to unlock live customer telemetry.</p>
+                <div id="pinInputBoxWrapper" class="flex gap-2 justify-center pt-1">
                     <input type="password" id="managerPinInput" inputmode="numeric" placeholder="••••" maxlength="8" autocomplete="off"
                            oninput="checkAutoUnlock(this.value)"
                            onkeydown="if(event.key==='Enter'){ event.preventDefault(); unlockCrmDashboard(); }"
                            class="w-44 text-center text-lg tracking-widest font-black px-4 py-2.5 rounded-xl bg-black border border-gold-400/50 text-white focus:border-gold-400 focus:outline-none">
-                    <button type="button" onclick="unlockCrmDashboard()" class="btn-gold-elite px-6 py-2.5 rounded-xl font-extrabold text-xs uppercase">
+                    <button type="button" onclick="unlockCrmDashboard()" class="btn-gold-elite px-6 py-2.5 rounded-xl font-extrabold text-xs uppercase cursor-pointer">
                         Authorize
                     </button>
                 </div>
-                <p id="pinErrorMsg" class="hidden text-xs font-bold text-rose-400">Unauthorized access key. Please enter 2027.</p>
+                <p id="pinErrorMsg" class="hidden text-xs font-bold text-rose-400">Unauthorized access key. Please verify your 4-digit key.</p>
             </div>
 
             <!-- UNLOCKED CRM CONTENT -->
             <div id="crmDashboardContent" class="hidden space-y-6">
+                
+                <!-- Cloud Firestore Permission Diagnostic Banner (Hidden unless Firebase blocks access) -->
+                <div id="cloudDiagnosticBanner" class="hidden p-4 rounded-2xl bg-amber-950/70 border border-amber-400/50 text-xs text-amber-200 space-y-2">
+                    <div class="flex items-center justify-between">
+                        <strong class="text-sm text-amber-300">⚠️ Firebase Cloud Rules Notice (Local Vault Active)</strong>
+                        <button type="button" onclick="this.parentElement.parentElement.classList.add('hidden')" class="text-amber-400 font-bold">✕</button>
+                    </div>
+                    <p>To receive bookings across different phones/laptops, open <strong>Firebase Console ➔ Firestore Database ➔ Rules</strong> and publish:</p>
+                    <pre class="p-2.5 rounded-xl bg-black/80 text-emerald-300 font-mono text-[11px] overflow-x-auto">rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if true;
+    }
+  }
+}</pre>
+                </div>
+
                 <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
                     <div class="p-4 rounded-2xl bg-black/65 border border-white/10">
                         <span class="text-[11px] text-zinc-400 uppercase font-bold">Total Active Queue</span>
@@ -947,8 +972,8 @@
                         <p id="kpiWashLeads" class="text-2xl font-black text-emerald-300 mt-1">0</p>
                     </div>
                     <div class="p-4 rounded-2xl bg-black/65 border border-white/10">
-                        <span class="text-[11px] text-zinc-400 uppercase font-bold">Sync Status</span>
-                        <p id="kpiSyncStatusText" class="text-xs font-mono font-bold text-emerald-400 mt-2">Cloud + IndexedDB</p>
+                        <span class="text-[11px] text-zinc-400 uppercase font-bold">Sync Engine Status</span>
+                        <p id="kpiSyncStatusText" class="text-xs font-mono font-bold text-emerald-400 mt-2">Connecting...</p>
                     </div>
                 </div>
 
@@ -970,9 +995,14 @@
                             <option value="DRY_WASH">Dry Wash</option>
                         </select>
                     </div>
-                    <button type="button" onclick="simulateIncomingVipLead()" class="px-3.5 py-2 rounded-xl bg-gold-400/15 hover:bg-gold-400/25 border border-gold-400/40 text-gold-200 text-xs font-extrabold">
-                        ⚡ Simulate Instant Live Request
-                    </button>
+                    <div class="flex flex-wrap gap-2">
+                        <button type="button" onclick="forceCloudRefresh()" class="px-3 py-2 rounded-xl bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-400/40 text-emerald-300 text-xs font-extrabold cursor-pointer">
+                            🔄 Sync Cloud Now
+                        </button>
+                        <button type="button" onclick="simulateIncomingVipLead()" class="px-3.5 py-2 rounded-xl bg-gold-400/15 hover:bg-gold-400/25 border border-gold-400/40 text-gold-200 text-xs font-extrabold cursor-pointer">
+                            ⚡ Simulate Live Request
+                        </button>
+                    </div>
                 </div>
 
                 <div id="crmLiveStreamList" class="space-y-4"></div>
@@ -985,14 +1015,17 @@
         <div class="max-w-4xl w-full bg-leather border border-gold-400/40 rounded-3xl p-4 space-y-3" onclick="event.stopPropagation()">
             <div class="flex items-center justify-between">
                 <span id="lightboxCaption" class="text-xs font-extrabold text-gold-300 uppercase tracking-wider">High-Resolution Paint Inspection</span>
-                <button type="button" onclick="closeMediaLightbox()" class="px-3 py-1 rounded-lg bg-white/10 text-white text-xs font-bold">✕ Close</button>
+                <button type="button" onclick="closeMediaLightbox()" class="px-3 py-1 rounded-lg bg-white/10 text-white text-xs font-bold cursor-pointer">✕ Close</button>
             </div>
             <div id="lightboxBody" class="flex items-center justify-center max-h-[75vh] overflow-hidden rounded-2xl bg-black"></div>
         </div>
     </div>
 
-    <!-- SCRIPT WITH 2027 CRM ACCESS & DUAL SYNC ENGINE -->
+    <!-- COMPLETE VERIFIED APPLICATION SCRIPT -->
     <script>
+        // =========================================================================
+        // 1. FIREBASE INITIALIZATION WITH LONG-POLLING FOR MOBILE NETWORKS
+        // =========================================================================
         const firebaseConfig = {
             apiKey: "AIzaSyAmLj9vj6jn9ASbWcUL2CjtJX0n_tG8W18",
             authDomain: "drcare-centre.firebaseapp.com",
@@ -1011,6 +1044,8 @@
                 firebase.initializeApp(firebaseConfig);
             }
             db = firebase.firestore();
+            // Force long polling to prevent mobile ISP/firewall WebSocket drops
+            db.settings({ experimentalForceLongPolling: true, merge: true });
             storage = firebase.storage();
         } catch (err) {
             console.warn("Firebase init fallback to Local Vault:", err);
@@ -1030,6 +1065,9 @@
                 .replace(/'/g, '&#039;');
         }
 
+        // =========================================================================
+        // 2. COMPLETE BILINGUAL DICTIONARY
+        // =========================================================================
         let currentLang = 'en';
         const i18nDict = {
             en: {
@@ -1160,7 +1198,7 @@
                 consoleSub: "واجهة تفاعلية فائقة السلاسة؛ تصل جميع الصور والطلبات في غضون ثوانٍ إلى غرفة عمليات دكتور كير.",
                 tabScratchTitle: "فحص الخدوش ومشاكل الدهان",
                 tabBookingTitle: "حجز الغسيل الجاف (الويك إند)",
-                formLiveIndicator: "مزامنة سحابية عالمية فورية",
+                formLiveIndicator: "مزامنة سحابية ومحلية فورية",
                 scratchFormHeader: "التشخيص التفاعلي للخدوش وعيوب الدهان",
                 sloganMiniTop: "حماية الأصول",
                 sloganMiniBottom: "Save Your Investment Now",
@@ -1254,6 +1292,9 @@
             syncSliderImageWidth();
         }
 
+        // =========================================================================
+        // 3. SMOOTH BEFORE / AFTER SLIDER
+        // =========================================================================
         let isDraggingSlider = false;
 
         function syncSliderImageWidth() {
@@ -1303,6 +1344,9 @@
         });
         window.addEventListener('resize', syncSliderImageWidth);
 
+        // =========================================================================
+        // 4. INTERACTIVE FORM CONTROLS
+        // =========================================================================
         let selectedCarBodyZones = ['Front Hood (الكبوت)'];
 
         function selectCarBrandLogo(btnEl, brandName) {
@@ -1354,11 +1398,11 @@
             const btnBooking = document.getElementById('tabBookingBtn');
 
             if (isScratch) {
-                btnScratch.className = "py-3.5 px-4 rounded-xl font-extrabold text-xs sm:text-sm transition flex items-center justify-center gap-2 bg-gradient-to-r from-gold-400 to-gold-500 text-black shadow-lg";
-                btnBooking.className = "py-3.5 px-4 rounded-xl font-extrabold text-xs sm:text-sm transition flex items-center justify-center gap-2 text-zinc-300 hover:text-white";
+                btnScratch.className = "py-3.5 px-4 rounded-xl font-extrabold text-xs sm:text-sm transition flex items-center justify-center gap-2 bg-gradient-to-r from-gold-400 to-gold-500 text-black shadow-lg cursor-pointer";
+                btnBooking.className = "py-3.5 px-4 rounded-xl font-extrabold text-xs sm:text-sm transition flex items-center justify-center gap-2 text-zinc-300 hover:text-white cursor-pointer";
             } else {
-                btnBooking.className = "py-3.5 px-4 rounded-xl font-extrabold text-xs sm:text-sm transition flex items-center justify-center gap-2 bg-gradient-to-r from-gold-400 to-gold-500 text-black shadow-lg";
-                btnScratch.className = "py-3.5 px-4 rounded-xl font-extrabold text-xs sm:text-sm transition flex items-center justify-center gap-2 text-zinc-300 hover:text-white";
+                btnBooking.className = "py-3.5 px-4 rounded-xl font-extrabold text-xs sm:text-sm transition flex items-center justify-center gap-2 bg-gradient-to-r from-gold-400 to-gold-500 text-black shadow-lg cursor-pointer";
+                btnScratch.className = "py-3.5 px-4 rounded-xl font-extrabold text-xs sm:text-sm transition flex items-center justify-center gap-2 text-zinc-300 hover:text-white cursor-pointer";
             }
         }
 
@@ -1373,6 +1417,9 @@
             }
         }
 
+        // =========================================================================
+        // 5. MEDIA COMPRESSION & UPLOAD ENGINE
+        // =========================================================================
         let uploadedMediaItems = [];
 
         function updateResolutionBadge() {
@@ -1429,7 +1476,7 @@
                     } else if (file.type.startsWith('image/')) {
                         setMediaProgress(stepPct, `Optimizing photo #${i + 1} (${requestedRes}p)...`);
                         const fullResDataUrl = await resizeImageSmart(file, requestedRes, 0.82);
-                        const cloudSafeDataUrl = await resizeImageSmart(file, Math.min(requestedRes, 720), 0.68, 125);
+                        const cloudSafeDataUrl = await resizeImageSmart(file, Math.min(requestedRes, 720), 0.68, 120);
                         uploadedMediaItems.push({
                             id: 'med_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6),
                             type: 'image',
@@ -1574,7 +1621,7 @@
                            <span class="absolute top-2 left-2 bg-black/85 text-gold-300 text-[10px] font-extrabold px-2 py-0.5 rounded-md">📸 ${escapeHtml(item.resolution)}</span>`
                     }
                     <button type="button" onclick="removeSingleMedia('${item.id}')"
-                            class="absolute top-2 right-2 w-6 h-6 rounded-full bg-rose-600 hover:bg-rose-500 text-white text-xs font-black flex items-center justify-center shadow">
+                            class="absolute top-2 right-2 w-6 h-6 rounded-full bg-rose-600 hover:bg-rose-500 text-white text-xs font-black flex items-center justify-center shadow cursor-pointer">
                         ✕
                     </button>
                     <div class="absolute bottom-0 inset-x-0 bg-black/85 px-2 py-1 text-[10px] text-zinc-300 flex justify-between">
@@ -1601,8 +1648,12 @@
             renderMediaThumbnails();
         }
 
-        const IDB_NAME = 'DrCareHybridVault_v15';
+        // =========================================================================
+        // 6. HYBRID TELEMETRY ENGINE (FIREBASE + INDEXED-DB + LOCALSTORAGE)
+        // =========================================================================
+        const IDB_NAME = 'DrCareHybridVault_v18';
         const IDB_STORE = 'leads_store';
+        const LS_BACKUP_KEY = 'drcare_leads_ls_backup_v18';
         let idbConn = null;
         let memoryLeadsCache = [];
         let audioRadarEnabled = true;
@@ -1610,6 +1661,18 @@
         let knownLeadIds = new Set();
 
         function initHybridTelemetryEngine() {
+            // Load instant LocalStorage backup first
+            try {
+                const rawLs = localStorage.getItem(LS_BACKUP_KEY);
+                if (rawLs) {
+                    const parsed = JSON.parse(rawLs);
+                    if (Array.isArray(parsed) && parsed.length) {
+                        mergeCloudAndLocalLeads(parsed);
+                    }
+                }
+            } catch (e) {}
+
+            // Open IndexedDB for large media persistence
             if (window.indexedDB) {
                 const req = indexedDB.open(IDB_NAME, 1);
                 req.onupgradeneeded = (e) => {
@@ -1624,45 +1687,82 @@
                 };
             }
 
-            if (db) {
-                try {
-                    db.collection("drcare_leads")
-                      .onSnapshot((snapshot) => {
-                          const syncStatusEl = document.getElementById('kpiSyncStatusText');
-                          if (syncStatusEl) syncStatusEl.textContent = '🟢 Firebase Cloud Live';
+            // Connect Real-Time Firebase Firestore Listener
+            startFirestoreLiveListener();
 
-                          const cloudDocs = [];
-                          let hasNewIncoming = false;
-
-                          snapshot.forEach((doc) => {
-                              const data = doc.data();
-                              const normalizedTs = resolveAccurateTimestamp(data);
-                              const leadObj = {
-                                  ...data,
-                                  id: doc.id,
-                                  createdAt: normalizedTs
-                              };
-                              cloudDocs.push(leadObj);
-
-                              if (knownLeadIds.size > 0 && !knownLeadIds.has(doc.id)) {
-                                  hasNewIncoming = true;
-                              }
-                              knownLeadIds.add(doc.id);
-                          });
-
-                          if (hasNewIncoming) {
-                              playNotificationChime();
-                          }
-
-                          mergeCloudAndLocalLeads(cloudDocs);
-                      }, (err) => {
-                          console.warn("Firestore live listener restricted, using Local Vault:", err.message);
-                          const syncStatusEl = document.getElementById('kpiSyncStatusText');
-                          if (syncStatusEl) syncStatusEl.textContent = '🛡️ Local Vault Active';
-                      });
-                } catch (e) {
-                    console.warn("Cloud stream fallback:", e);
+            // Listen for cross-tab LocalStorage events
+            window.addEventListener('storage', (e) => {
+                if (e.key === LS_BACKUP_KEY || e.key === 'drcare_live_ping_ts') {
+                    playNotificationChime();
+                    readLeadsFromIdb();
                 }
+            });
+        }
+
+        function startFirestoreLiveListener() {
+            if (!db) return;
+            try {
+                db.collection("drcare_leads")
+                  .onSnapshot((snapshot) => {
+                      const syncStatusEl = document.getElementById('kpiSyncStatusText');
+                      if (syncStatusEl) syncStatusEl.textContent = '🟢 Firebase Cloud Live';
+                      const diagBanner = document.getElementById('cloudDiagnosticBanner');
+                      if (diagBanner) diagBanner.classList.add('hidden');
+
+                      const cloudDocs = [];
+                      let hasNewIncoming = false;
+
+                      snapshot.forEach((doc) => {
+                          const data = doc.data();
+                          const normalizedTs = resolveAccurateTimestamp(data);
+                          const leadObj = {
+                              ...data,
+                              id: doc.id,
+                              createdAt: normalizedTs
+                          };
+                          cloudDocs.push(leadObj);
+
+                          if (knownLeadIds.size > 0 && !knownLeadIds.has(doc.id)) {
+                              hasNewIncoming = true;
+                          }
+                          knownLeadIds.add(doc.id);
+                      });
+
+                      if (hasNewIncoming) {
+                          playNotificationChime();
+                      }
+
+                      if (cloudDocs.length > 0) {
+                          mergeCloudAndLocalLeads(cloudDocs);
+                      }
+                  }, (err) => {
+                      console.warn("Firestore live listener notice:", err.message);
+                      const syncStatusEl = document.getElementById('kpiSyncStatusText');
+                      if (syncStatusEl) syncStatusEl.textContent = '🛡️ Local Vault Active';
+                      const diagBanner = document.getElementById('cloudDiagnosticBanner');
+                      if (diagBanner) diagBanner.classList.remove('hidden');
+                  });
+            } catch (e) {
+                console.warn("Cloud stream fallback:", e);
+            }
+        }
+
+        async function forceCloudRefresh() {
+            if (!db) return;
+            try {
+                const snap = await db.collection("drcare_leads").get();
+                const list = [];
+                snap.forEach(doc => {
+                    const data = doc.data();
+                    list.push({ ...data, id: doc.id, createdAt: resolveAccurateTimestamp(data) });
+                });
+                if (list.length > 0) {
+                    mergeCloudAndLocalLeads(list);
+                }
+                playNotificationChime();
+            } catch (err) {
+                const diagBanner = document.getElementById('cloudDiagnosticBanner');
+                if (diagBanner) diagBanner.classList.remove('hidden');
             }
         }
 
@@ -1717,10 +1817,39 @@
         }
 
         function writeLeadToIdb(lead) {
-            if (!idbConn) return;
+            // Strip non-cloneable raw File objects before saving to IndexedDB
+            const cleanCopy = {
+                ...lead,
+                media: (lead.media || []).map(m => ({
+                    id: m.id,
+                    type: m.type,
+                    url: m.url,
+                    cloudSafeUrl: m.cloudSafeUrl || '',
+                    cloudSafePoster: m.cloudSafePoster || '',
+                    resolution: m.resolution
+                }))
+            };
+
+            if (idbConn) {
+                try {
+                    const tx = idbConn.transaction(IDB_STORE, 'readwrite');
+                    tx.objectStore(IDB_STORE).put(cleanCopy);
+                } catch (e) {}
+            }
+
+            // Also save lightweight backup in LocalStorage
             try {
-                const tx = idbConn.transaction(IDB_STORE, 'readwrite');
-                tx.objectStore(IDB_STORE).put(lead);
+                const lsList = memoryLeadsCache.slice(0, 15).map(item => ({
+                    ...item,
+                    media: (item.media || []).map(m => ({
+                        id: m.id,
+                        type: m.type === 'video' ? 'image' : m.type,
+                        url: m.cloudSafeUrl || m.cloudSafePoster || m.url,
+                        resolution: m.resolution
+                    }))
+                }));
+                localStorage.setItem(LS_BACKUP_KEY, JSON.stringify(lsList));
+                localStorage.setItem('drcare_live_ping_ts', String(Date.now()));
             } catch (e) {}
         }
 
@@ -1754,7 +1883,7 @@
                                     await ref.put(m.rawFile);
                                     return await ref.getDownloadURL();
                                 })(),
-                                new Promise((_, rej) => setTimeout(() => rej(new Error('Storage timeout')), 4500))
+                                new Promise((_, rej) => setTimeout(() => rej(new Error('Storage timeout')), 4000))
                             ]);
                         } catch (e) {
                             uploadedVideoUrl = null;
@@ -1780,8 +1909,8 @@
 
         async function transmitLeadEverywhere(fullLocalLead) {
             knownLeadIds.add(fullLocalLead.id);
-            writeLeadToIdb(fullLocalLead);
             mergeCloudAndLocalLeads([fullLocalLead]);
+            writeLeadToIdb(fullLocalLead);
             playNotificationChime();
 
             if (db) {
@@ -1807,7 +1936,9 @@
                     await db.collection("drcare_leads").doc(fullLocalLead.id).set(cloudPayload);
                     return 'CLOUD_SYNCED';
                 } catch (cloudErr) {
-                    console.warn("Cloud sync restricted (saved in Local Vault):", cloudErr.message);
+                    console.warn("Cloud write notice (saved in Local Vault):", cloudErr.message);
+                    const diagBanner = document.getElementById('cloudDiagnosticBanner');
+                    if (diagBanner) diagBanner.classList.remove('hidden');
                     return 'LOCAL_VAULT_SAVED';
                 }
             }
@@ -1919,6 +2050,79 @@
             }
         }
 
+        // =========================================================================
+        // 7. BULLETPROOF CRM VAULT AUTHORIZATION (2027 / 2026)
+        // =========================================================================
+        function normalizeDigits(str) {
+            return String(str || '')
+                .replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d))
+                .replace(/[۰-۹]/g, d => '۰۱۲۳۴۵۶۷۸۹'.indexOf(d))
+                .replace(/[^0-9]/g, '')
+                .trim();
+        }
+
+        function isAuthorizedPin(val) {
+            const clean = normalizeDigits(val);
+            // Accepts 2027 or 2026
+            return clean === '2027' || clean === '2026';
+        }
+
+        function checkAutoUnlock(val) {
+            if (isAuthorizedPin(val)) {
+                unlockCrmDashboard();
+            }
+        }
+
+        function openBackofficeModal() {
+            const modal = document.getElementById('backofficeModal');
+            modal.classList.remove('hidden');
+            if (sessionStorage.getItem('drcare_crm_unlocked') === 'true') {
+                document.getElementById('crmPinGate').classList.add('hidden');
+                document.getElementById('crmDashboardContent').classList.remove('hidden');
+            } else {
+                document.getElementById('crmPinGate').classList.remove('hidden');
+                document.getElementById('crmDashboardContent').classList.add('hidden');
+                setTimeout(() => {
+                    const inp = document.getElementById('managerPinInput');
+                    if (inp) inp.focus();
+                }, 120);
+            }
+            renderBackofficeFeed();
+        }
+
+        function closeBackofficeModal() {
+            document.getElementById('backofficeModal').classList.add('hidden');
+        }
+
+        function lockCrmVault() {
+            sessionStorage.removeItem('drcare_crm_unlocked');
+            document.getElementById('crmDashboardContent').classList.add('hidden');
+            document.getElementById('crmPinGate').classList.remove('hidden');
+        }
+
+        function unlockCrmDashboard() {
+            const pinInput = document.getElementById('managerPinInput');
+            const errEl = document.getElementById('pinErrorMsg');
+            const wrapper = document.getElementById('pinInputBoxWrapper');
+
+            if (isAuthorizedPin(pinInput ? pinInput.value : '')) {
+                errEl.classList.add('hidden');
+                if (pinInput) pinInput.value = '';
+                sessionStorage.setItem('drcare_crm_unlocked', 'true');
+                document.getElementById('crmPinGate').classList.add('hidden');
+                document.getElementById('crmDashboardContent').classList.remove('hidden');
+                playNotificationChime();
+                renderBackofficeFeed();
+            } else {
+                errEl.classList.remove('hidden');
+                if (wrapper) {
+                    wrapper.classList.remove('shake-error');
+                    void wrapper.offsetWidth;
+                    wrapper.classList.add('shake-error');
+                }
+            }
+        }
+
         function playNotificationChime() {
             if (!audioRadarEnabled) return;
             try {
@@ -1941,68 +2145,6 @@
             audioRadarEnabled = !audioRadarEnabled;
             const btn = document.getElementById('soundToggleBtn');
             btn.textContent = audioRadarEnabled ? '🔔 Audio Radar: ON' : '🔕 Audio Radar: MUTE';
-        }
-
-        // =========================================================================
-        // 8. BULLETPROOF 2027 CRM ACCESS + AUTO-UNLOCK + SESSION PERSISTENCE
-        // =========================================================================
-        function normalizeDigits(str) {
-            return String(str || '')
-                .replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d))
-                .replace(/[۰-۹]/g, d => '۰۱۲۳۴۵۶۷۸۹'.indexOf(d))
-                .replace(/\s+/g, '')
-                .trim();
-        }
-
-        function isAuthorizedPin(val) {
-            const clean = normalizeDigits(val);
-            return clean === '2027' || clean === '2026';
-        }
-
-        function checkAutoUnlock(val) {
-            if (isAuthorizedPin(val)) {
-                unlockCrmDashboard();
-            }
-        }
-
-        function openBackofficeModal() {
-            document.getElementById('backofficeModal').classList.remove('hidden');
-            if (sessionStorage.getItem('drcare_crm_unlocked') === 'true') {
-                document.getElementById('crmPinGate').classList.add('hidden');
-                document.getElementById('crmDashboardContent').classList.remove('hidden');
-            } else {
-                setTimeout(() => {
-                    const inp = document.getElementById('managerPinInput');
-                    if (inp) inp.focus();
-                }, 100);
-            }
-            renderBackofficeFeed();
-        }
-
-        function closeBackofficeModal() {
-            document.getElementById('backofficeModal').classList.add('hidden');
-        }
-
-        function lockCrmVault() {
-            sessionStorage.removeItem('drcare_crm_unlocked');
-            document.getElementById('crmDashboardContent').classList.add('hidden');
-            document.getElementById('crmPinGate').classList.remove('hidden');
-        }
-
-        function unlockCrmDashboard() {
-            const pinInput = document.getElementById('managerPinInput');
-            const errEl = document.getElementById('pinErrorMsg');
-            if (isAuthorizedPin(pinInput.value)) {
-                errEl.classList.add('hidden');
-                pinInput.value = '';
-                sessionStorage.setItem('drcare_crm_unlocked', 'true');
-                document.getElementById('crmPinGate').classList.add('hidden');
-                document.getElementById('crmDashboardContent').classList.remove('hidden');
-                playNotificationChime();
-                renderBackofficeFeed();
-            } else {
-                errEl.classList.remove('hidden');
-            }
         }
 
         function formatElapsedSeconds(timestamp) {
@@ -2086,6 +2228,9 @@
                     tx.objectStore(IDB_STORE).delete(leadId);
                 } catch (e) {}
             }
+            try {
+                localStorage.setItem(LS_BACKUP_KEY, JSON.stringify(memoryLeadsCache.slice(0, 15)));
+            } catch (e) {}
             updateNavLiveCounter();
             renderBackofficeFeed();
             if (db) {
@@ -2139,7 +2284,7 @@
                             <span class="live-sla-timer font-mono text-xs font-bold text-emerald-400 bg-emerald-950/70 border border-emerald-500/30 px-2.5 py-1 rounded-lg" data-ts="${lead.createdAt}">
                                 ${formatElapsedSeconds(lead.createdAt)}
                             </span>
-                            <button type="button" onclick="deleteLeadItem('${escapeHtml(lead.id)}')" class="text-xs text-zinc-500 hover:text-rose-400 px-2" title="Delete Entry">🗑️</button>
+                            <button type="button" onclick="deleteLeadItem('${escapeHtml(lead.id)}')" class="text-xs text-zinc-500 hover:text-rose-400 px-2 cursor-pointer" title="Delete Entry">🗑️</button>
                         </div>
                     </div>
 
@@ -2185,7 +2330,6 @@
                             </a>
                         </div>
 
-                        <!-- Manager Price Quote Input + Status Workflow -->
                         <div class="flex flex-wrap items-center gap-2">
                             <input type="text" value="${escapeHtml(lead.estimatedQuote || '')}"
                                    placeholder="Quote (e.g. 1,500 EGP)"
@@ -2247,4 +2391,49 @@
         function openLeadMediaLightbox(leadId, mediaIndex) {
             const lead = memoryLeadsCache.find(l => l.id === leadId);
             if (!lead || !lead.media || !lead.media[mediaIndex]) return;
-            const
+            const item = lead.media[mediaIndex];
+            showLightboxContent(item.url, item.type, item.resolution);
+        }
+
+        function showLightboxContent(url, type, res) {
+            const box = document.getElementById('mediaLightbox');
+            const body = document.getElementById('lightboxBody');
+            document.getElementById('lightboxCaption').textContent = `DR. CARE MASTER INSPECTION • ${res || '1080p'}`;
+            body.innerHTML = type === 'video'
+                ? `<video src="${url}" controls autoplay class="max-h-[72vh] w-auto rounded-xl"></video>`
+                : `<img src="${url}" class="max-h-[72vh] w-auto object-contain rounded-xl">`;
+            box.classList.remove('hidden');
+        }
+
+        function closeMediaLightbox() {
+            document.getElementById('mediaLightbox').classList.add('hidden');
+            document.getElementById('lightboxBody').innerHTML = '';
+        }
+
+        function updateNavLiveCounter() {
+            const badge = document.getElementById('navLiveBadge');
+            if (badge) badge.textContent = `${memoryLeadsCache.length} LIVE`;
+        }
+
+        setInterval(() => {
+            streamSecondsUptime++;
+            const clockEl = document.getElementById('liveSecondClock');
+            if (clockEl) {
+                clockEl.textContent = formatCairoTimestamp(Date.now());
+            }
+
+            const upEl = document.getElementById('streamUptimeCounter');
+            if (upEl) {
+                const m = String(Math.floor(streamSecondsUptime / 60)).padStart(2, '0');
+                const s = String(streamSecondsUptime % 60).padStart(2, '0');
+                upEl.textContent = `${m}:${s}s`;
+            }
+
+            document.querySelectorAll('.live-sla-timer').forEach(el => {
+                const ts = parseInt(el.getAttribute('data-ts'), 10);
+                if (ts) el.textContent = formatElapsedSeconds(ts);
+            });
+        }, 1000);
+    </script>
+</body>
+</html>
