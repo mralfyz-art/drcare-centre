@@ -123,9 +123,37 @@
             box-shadow: inset -3px -3px 6px rgba(0,0,0,0.65), inset 2px 2px 5px rgba(255,255,255,0.65), 0 0 14px rgba(197, 165, 90, 0.55);
         }
 
-        /* Hide Scrollbar for Swipeable Brand Strip */
+        /* Hide Scrollbar */
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* GPU-Accelerated 60fps Studio Light Tunnel */
+        .studio-light-tunnel {
+            position: relative;
+            overflow: hidden;
+        }
+        .studio-light-tunnel::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                115deg,
+                transparent 20%,
+                rgba(255, 255, 255, 0.07) 45%,
+                rgba(197, 165, 90, 0.16) 50%,
+                rgba(255, 255, 255, 0.07) 55%,
+                transparent 80%
+            );
+            transform: translateX(-100%);
+            will-change: transform;
+            pointer-events: none;
+            z-index: 15;
+            animation: lightSweep 6s ease-in-out infinite;
+        }
+        @keyframes lightSweep {
+            0% { transform: translateX(-100%); }
+            60%, 100% { transform: translateX(100%); }
+        }
 
         /* Before / After Slider */
         .comparison-slider {
@@ -139,7 +167,7 @@
             border-radius: 1.25rem;
             direction: ltr !important;
         }
-        @media (min-width: 768px) { .comparison-slider { height: 430px; } }
+        @media (min-width: 768px) { .comparison-slider { height: 420px; } }
         .comparison-after { position: absolute; inset: 0; width: 100%; height: 100%; }
         .comparison-before { position: absolute; top: 0; left: 0; bottom: 0; width: 50%; overflow: hidden; z-index: 10; }
         .comparison-handle {
@@ -210,8 +238,11 @@
                     <span id="langSwitchLabel">العربية</span>
                 </button>
 
-                <button type="button" onclick="openBackofficeModal()" class="px-3 py-2 rounded-xl bg-leather hover:bg-zinc-800 border border-white/10 text-xs font-bold text-zinc-200 hover:text-gold-300 transition flex items-center gap-2 cursor-pointer" title="Executive Command">
-                    <span class="w-1.5 h-1.5 rounded-full bg-gold-400"></span>
+                <button type="button" onclick="openBackofficeModal()" class="px-3 py-2 rounded-xl bg-leather hover:bg-zinc-800 border border-gold-400/35 text-xs font-bold text-zinc-100 hover:text-gold-300 transition flex items-center gap-2 cursor-pointer shadow-lg" title="Executive Command">
+                    <span class="relative flex h-2 w-2">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-gold-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-gold-400"></span>
+                    </span>
                     <span class="hidden md:inline" data-i18n="navCrmBtn">Backoffice</span>
                     <span id="navLiveBadge" class="bg-gold-400/20 text-gold-200 border border-gold-400/40 text-[10px] font-extrabold px-1.5 py-0.5 rounded-md">LIVE</span>
                 </button>
@@ -220,9 +251,9 @@
     </header>
 
     <!-- MAIN CONTENT -->
-    <main class="max-w-6xl mx-auto px-4 sm:px-6 pt-8 pb-24 space-y-14">
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 pt-8 pb-24 space-y-16">
 
-        <!-- CLEAN, PUNCHY HERO -->
+        <!-- CLEAN, PUNCHY HERO + STUDIO LIGHT TUNNEL -->
         <section class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             <div class="lg:col-span-5 space-y-5">
                 <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold-400/10 border border-gold-400/30 text-gold-200 text-[11px] font-semibold tracking-wider uppercase">
@@ -248,7 +279,6 @@
                     </a>
                 </div>
 
-                <!-- Minimalist 3-Pillar Strip -->
                 <div class="grid grid-cols-3 gap-2 pt-4 border-t border-white/10 text-center">
                     <div>
                         <span class="block text-sm font-black text-white">100%</span>
@@ -265,12 +295,12 @@
                 </div>
             </div>
 
-            <!-- Interactive Before / After Proof -->
+            <!-- STUDIO LIGHT TUNNEL COMPARISON SLIDER -->
             <div class="lg:col-span-7">
-                <div class="piano-card p-3 rounded-3xl">
+                <div class="piano-card p-3 rounded-3xl studio-light-tunnel">
                     <div class="flex items-center justify-between mb-2.5 px-1 text-xs">
                         <span class="font-bold text-zinc-200" data-i18n="sliderHeader">Real Transformation — Drag to Compare</span>
-                        <span class="text-[11px] text-gold-300 font-medium" data-i18n="sliderSubBadge">Zero Filters</span>
+                        <span class="text-[11px] text-gold-300 font-medium" data-i18n="sliderSubBadge">Studio LED Tunnel</span>
                     </div>
 
                     <div id="mercedesSlider" class="comparison-slider cursor-ew-resize">
@@ -304,10 +334,36 @@
             </div>
         </section>
 
+        <!-- PAINT DEPTH X-RAY EXPLAINER -->
+        <section class="piano-card rounded-3xl p-6 sm:p-8 space-y-6">
+            <div class="text-center max-w-2xl mx-auto space-y-2">
+                <span class="text-[10px] font-extrabold uppercase tracking-[0.25em] text-gold-400" data-i18n="xrayBadge">Atelier Science</span>
+                <h3 class="font-serif text-2xl font-black text-white" data-i18n="xrayTitle">Why We Never Cut Your Factory Paint</h3>
+                <p class="text-xs text-zinc-400" data-i18n="xraySub">Understanding clear coat preservation is the secret to maintaining your car's valuation.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="p-5 rounded-2xl bg-black/50 border border-gold-400/30 space-y-2 relative overflow-hidden">
+                    <span class="absolute top-3 right-3 text-lg font-mono font-black text-gold-400/40">01</span>
+                    <h4 class="text-sm font-extrabold text-gold-300" data-i18n="layer1Title">1. Clear Coat (الورنيش الشفاف)</h4>
+                    <p class="text-xs text-zinc-300 leading-relaxed" data-i18n="layer1Desc">The sacrificial top layer where 95% of swirl marks &amp; minor scratches live. We polish only micro-microns here.</p>
+                </div>
+                <div class="p-5 rounded-2xl bg-black/50 border border-white/10 space-y-2 relative overflow-hidden">
+                    <span class="absolute top-3 right-3 text-lg font-mono font-black text-white/20">02</span>
+                    <h4 class="text-sm font-extrabold text-white" data-i18n="layer2Title">2. Base Coat (طبقة اللون الأساسية)</h4>
+                    <p class="text-xs text-zinc-400 leading-relaxed" data-i18n="layer2Desc">Carries the authentic metallic or pearl pigment. Completely untouched by Dr. Care precision compounds.</p>
+                </div>
+                <div class="p-5 rounded-2xl bg-black/50 border border-white/10 space-y-2 relative overflow-hidden">
+                    <span class="absolute top-3 right-3 text-lg font-mono font-black text-white/20">03</span>
+                    <h4 class="text-sm font-extrabold text-white" data-i18n="layer3Title">3. Primer &amp; Body (الأساس والصاج)</h4>
+                    <p class="text-xs text-zinc-400 leading-relaxed" data-i18n="layer3Desc">Factory anti-corrosion layer. Preserving this means your car stays 100% original value (بدون رش).</p>
+                </div>
+            </div>
+        </section>
+
         <!-- STREAMLINED 4-STEP CONSOLE -->
         <section id="clinic-console" class="scroll-mt-20 max-w-3xl mx-auto">
             
-            <!-- Clean 2-Tab Switcher -->
             <div class="grid grid-cols-2 p-1.5 rounded-2xl bg-leather border border-white/10 mb-6">
                 <button type="button" id="tabScratchBtn" onclick="switchConsoleTab('scratch')" class="py-3 px-4 rounded-xl font-extrabold text-xs sm:text-sm transition flex items-center justify-center gap-2 bg-gradient-to-r from-gold-300 to-gold-400 text-black shadow-md cursor-pointer">
                     <span data-i18n="tabScratchTitle">Fix a Scratch</span>
@@ -335,7 +391,7 @@
 
                 <form id="scratchConsultForm" onsubmit="submitScratchConsultation(event)" class="space-y-6">
 
-                    <!-- STEP 1: YOUR CAR (SWIPEABLE BRANDS + MODEL + 3D COLOR DROPS) -->
+                    <!-- STEP 1: YOUR CAR -->
                     <div class="p-4 sm:p-5 rounded-2xl bg-black/40 border border-white/10 space-y-4">
                         <div class="flex items-center justify-between">
                             <span class="text-xs font-extrabold uppercase tracking-wider text-gold-300" data-i18n="step1Title">
@@ -344,9 +400,8 @@
                             <span class="text-[11px] text-zinc-400" data-i18n="lblBrandHint">Swipe to pick or type below</span>
                         </div>
 
-                        <!-- Swipeable Brand Pills -->
                         <div class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1" id="brandLogoGrid">
-                            <button type="button" onclick="selectCarBrandLogo(this, 'Mercedes-Benz')" class="brand-logo-card selected shrink-0 px-3.5 py-2 rounded-xl bg-leather border border-white/10 text-xs font-bold cursor-pointer">Mercedes</button>
+                            <button type="button" id="defaultBrandBtn" onclick="selectCarBrandLogo(this, 'Mercedes-Benz')" class="brand-logo-card selected shrink-0 px-3.5 py-2 rounded-xl bg-leather border border-white/10 text-xs font-bold cursor-pointer">Mercedes</button>
                             <button type="button" onclick="selectCarBrandLogo(this, 'BMW')" class="brand-logo-card shrink-0 px-3.5 py-2 rounded-xl bg-leather border border-white/10 text-xs font-bold text-zinc-300 cursor-pointer">BMW</button>
                             <button type="button" onclick="selectCarBrandLogo(this, 'Porsche')" class="brand-logo-card shrink-0 px-3.5 py-2 rounded-xl bg-leather border border-white/10 text-xs font-bold text-zinc-300 cursor-pointer">Porsche</button>
                             <button type="button" onclick="selectCarBrandLogo(this, 'Range Rover')" class="brand-logo-card shrink-0 px-3.5 py-2 rounded-xl bg-leather border border-white/10 text-xs font-bold text-zinc-300 cursor-pointer">Range Rover</button>
@@ -378,7 +433,7 @@
                             </select>
                         </div>
 
-                        <!-- 3D Paint Drops + Custom Color Input -->
+                        <!-- 3D Paint Spheres -->
                         <div class="flex flex-wrap items-center gap-2.5 pt-1">
                             <label class="relative w-8 h-8 rounded-full overflow-hidden border border-gold-400 shrink-0 cursor-pointer flex items-center justify-center shadow" title="Custom Color Wheel">
                                 <input type="color" id="nativeColorPicker" value="#08080A" oninput="handleColorWheelPick(this.value)" class="absolute -inset-2 w-12 h-12 cursor-pointer opacity-0">
@@ -400,14 +455,14 @@
                         </div>
                     </div>
 
-                    <!-- STEP 2: THE ISSUE (SEVERITY + ZONE IN ONE COMPACT BLOCK) -->
+                    <!-- STEP 2: THE ISSUE -->
                     <div class="p-4 sm:p-5 rounded-2xl bg-black/40 border border-white/10 space-y-4">
                         <span class="text-xs font-extrabold uppercase tracking-wider text-gold-300 block" data-i18n="step2Title">
                             2. The Issue &amp; Location
                         </span>
 
                         <div class="grid grid-cols-3 gap-2">
-                            <button type="button" onclick="selectDefectSeverity(this, 'Swirl Marks & Oxidation')" class="severity-card selected p-2.5 rounded-xl bg-leather border border-white/10 text-center cursor-pointer">
+                            <button type="button" id="defaultSeverityBtn" onclick="selectDefectSeverity(this, 'Swirl Marks & Oxidation')" class="severity-card selected p-2.5 rounded-xl bg-leather border border-white/10 text-center cursor-pointer">
                                 <span class="block text-xs font-bold" data-i18n="sev1">Swirls / Dull</span>
                                 <span class="block text-[10px] text-zinc-400 mt-0.5" data-i18n="sev1Sub">Surface haze</span>
                             </button>
@@ -422,8 +477,8 @@
                         </div>
                         <input type="hidden" id="defectSeverityInput" value="Swirl Marks & Oxidation">
 
-                        <div class="grid grid-cols-3 sm:grid-cols-6 gap-2 pt-1">
-                            <button type="button" onclick="toggleCarBodyZone(this, 'Front Hood')" class="car-zone-btn active py-2 px-2 rounded-xl bg-leather border border-white/10 text-[11px] font-semibold text-zinc-300 cursor-pointer" data-i18n="zoneHood">Hood</button>
+                        <div class="grid grid-cols-3 sm:grid-cols-6 gap-2 pt-1" id="bodyZoneButtonsGrid">
+                            <button type="button" id="defaultHoodZoneBtn" onclick="toggleCarBodyZone(this, 'Front Hood')" class="car-zone-btn active py-2 px-2 rounded-xl bg-leather border border-white/10 text-[11px] font-semibold text-zinc-300 cursor-pointer" data-i18n="zoneHood">Hood</button>
                             <button type="button" onclick="toggleCarBodyZone(this, 'Left Side')" class="car-zone-btn py-2 px-2 rounded-xl bg-leather border border-white/10 text-[11px] font-semibold text-zinc-300 cursor-pointer" data-i18n="zoneLeft">Left Side</button>
                             <button type="button" onclick="toggleCarBodyZone(this, 'Right Side')" class="car-zone-btn py-2 px-2 rounded-xl bg-leather border border-white/10 text-[11px] font-semibold text-zinc-300 cursor-pointer" data-i18n="zoneRight">Right Side</button>
                             <button type="button" onclick="toggleCarBodyZone(this, 'Roof')" class="car-zone-btn py-2 px-2 rounded-xl bg-leather border border-white/10 text-[11px] font-semibold text-zinc-300 cursor-pointer" data-i18n="zoneRoof">Roof</button>
@@ -432,7 +487,7 @@
                         </div>
                     </div>
 
-                    <!-- STEP 3: PHOTOS / VIDEO + OPTIONAL NOTE -->
+                    <!-- STEP 3: PHOTOS OR VIDEO -->
                     <div class="p-4 sm:p-5 rounded-2xl bg-black/40 border border-white/10 space-y-4">
                         <div class="flex items-center justify-between">
                             <span class="text-xs font-extrabold uppercase tracking-wider text-gold-300" data-i18n="step3Title">
@@ -478,7 +533,7 @@
                                   class="w-full px-3.5 py-2.5 rounded-xl bg-leather border border-white/10 focus:border-gold-400 text-xs text-white focus:outline-none"></textarea>
                     </div>
 
-                    <!-- STEP 4: YOUR INFO & SUBMIT -->
+                    <!-- STEP 4: CONTACT & SUBMIT -->
                     <div class="p-4 sm:p-5 rounded-2xl bg-black/40 border border-white/10 space-y-4">
                         <span class="text-xs font-extrabold uppercase tracking-wider text-gold-300 block" data-i18n="step4Title">
                             4. Your Contact
@@ -500,7 +555,7 @@
                     </div>
                 </form>
 
-                <!-- BLACK CARD VIP PASS CONFIRMATION -->
+                <!-- GOLDEN ATELIER PASS CONFIRMATION -->
                 <div id="scratchSuccessBanner" class="hidden mt-6 p-6 rounded-2xl bg-gradient-to-br from-[#161512] via-[#090A0D] to-black border border-gold-400/50 text-center space-y-3 shadow-2xl">
                     <span class="text-[10px] font-extrabold uppercase tracking-[0.25em] text-gold-400 block">DR. CARE PRIVATE ATELIER PASS</span>
                     <h4 class="text-lg font-black text-white" data-i18n="successHeader">
@@ -595,8 +650,14 @@
                     </div>
                 </form>
 
-                <div id="washSuccessBanner" class="hidden p-5 rounded-2xl bg-leather border border-gold-400/50 text-center space-y-1.5">
+                <!-- GOLDEN ATELIER PASS FOR WEEKEND WASH -->
+                <div id="washSuccessBanner" class="hidden p-6 rounded-2xl bg-gradient-to-br from-[#161512] via-[#090A0D] to-black border border-gold-400/50 text-center space-y-3 shadow-2xl">
+                    <span class="text-[10px] font-extrabold uppercase tracking-[0.25em] text-gold-400 block">DR. CARE WEEKEND CONCIERGE PASS</span>
                     <h4 class="text-base font-black text-white" data-i18n="washSuccessTitle">🌟 Weekend Slot Reserved</h4>
+                    <div class="inline-flex items-center gap-3 px-4 py-1.5 rounded-xl bg-white/5 border border-gold-400/30">
+                        <span class="text-xs text-zinc-400">Pass ID:</span>
+                        <strong id="generatedWashTicketId" class="font-mono text-sm text-gold-300">DC-0000</strong>
+                    </div>
                     <p class="text-xs text-zinc-400" data-i18n="washSuccessSub">We will contact you shortly to confirm your 15% deposit.</p>
                 </div>
             </div>
@@ -648,7 +709,7 @@
                 </div>
             </div>
 
-            <!-- PIN GATE -->
+            <!-- PIN GATE (ACCEPTS 2027 OR 2026) -->
             <div id="crmPinGate" class="max-w-sm mx-auto py-10 text-center space-y-4">
                 <div class="w-12 h-12 rounded-2xl bg-gold-400/10 border border-gold-400/30 flex items-center justify-center mx-auto text-gold-300 text-xl">
                     🔐
@@ -737,19 +798,27 @@ service cloud.firestore {
         </div>
     </div>
 
-    <!-- LIGHTBOX -->
+    <!-- HIGH-RESOLUTION IMAGE & VIDEO STREAMING LIGHTBOX -->
     <div id="mediaLightbox" class="fixed inset-0 z-50 hidden bg-black/95 backdrop-blur-xl flex items-center justify-center p-4" onclick="closeMediaLightbox()">
         <div class="max-w-4xl w-full bg-leather border border-gold-400/40 rounded-3xl p-4 space-y-3" onclick="event.stopPropagation()">
-            <div class="flex items-center justify-between">
+            <div class="flex items-center justify-between gap-2">
                 <span id="lightboxCaption" class="text-xs font-extrabold text-gold-300 uppercase tracking-wider">Optical Paint Inspection</span>
-                <button type="button" onclick="closeMediaLightbox()" class="px-3 py-1 rounded-lg bg-white/10 text-white text-xs font-bold cursor-pointer">✕ Close</button>
+                <div class="flex items-center gap-2">
+                    <a id="lightboxDownloadBtn" href="#" download="DrCare_Media" class="hidden px-3 py-1 rounded-lg bg-gold-400/20 border border-gold-400/40 text-gold-200 text-xs font-bold hover:bg-gold-400/30">
+                        ⬇ Download Media
+                    </a>
+                    <button type="button" onclick="closeMediaLightbox()" class="px-3 py-1 rounded-lg bg-white/10 text-white text-xs font-bold cursor-pointer">✕ Close</button>
+                </div>
             </div>
-            <div id="lightboxBody" class="flex items-center justify-center max-h-[75vh] overflow-hidden rounded-2xl bg-black"></div>
+            <div id="lightboxBody" class="flex flex-col items-center justify-center max-h-[75vh] overflow-hidden rounded-2xl bg-black p-2"></div>
         </div>
     </div>
 
-    <!-- APPLICATION SCRIPT -->
+    <!-- COMPLETE VERIFIED APP SCRIPT -->
     <script>
+        // =========================================================================
+        // 1. FIREBASE INITIALIZATION (FIXED SETTINGS WITHOUT UNSUPPORTED MERGE FLAG)
+        // =========================================================================
         const firebaseConfig = {
             apiKey: "AIzaSyAmLj9vj6jn9ASbWcUL2CjtJX0n_tG8W18",
             authDomain: "drcare-centre.firebaseapp.com",
@@ -768,7 +837,7 @@ service cloud.firestore {
                 firebase.initializeApp(firebaseConfig);
             }
             db = firebase.firestore();
-            db.settings({ experimentalForceLongPolling: true, merge: true });
+            db.settings({ experimentalForceLongPolling: true });
             storage = firebase.storage();
         } catch (err) {
             console.warn("Firebase fallback:", err);
@@ -788,7 +857,9 @@ service cloud.firestore {
                 .replace(/'/g, '&#039;');
         }
 
-        // BILINGUAL CREATIVE & SIMPLE DICTIONARY
+        // =========================================================================
+        // 2. RESTORED COMPLETE BILINGUAL DICTIONARY (INCLUDING X-RAY SECTION)
+        // =========================================================================
         let currentLang = 'en';
         const i18nDict = {
             en: {
@@ -807,9 +878,18 @@ service cloud.firestore {
                 stat3Title: "At Your Door",
                 stat3: "Mobile Atelier",
                 sliderHeader: "Real Transformation — Drag to Compare",
-                sliderSubBadge: "Zero Filters",
+                sliderSubBadge: "Studio LED Tunnel",
                 afterTag: "AFTER: MIRROR FINISH",
                 beforeTag: "BEFORE",
+                xrayBadge: "Atelier Science",
+                xrayTitle: "Why We Never Cut Your Factory Paint",
+                xraySub: "Understanding clear coat preservation is the secret to maintaining your car's valuation.",
+                layer1Title: "1. Clear Coat (الورنيش الشفاف)",
+                layer1Desc: "The sacrificial top layer where 95% of swirl marks & minor scratches live. We polish only micro-microns here.",
+                layer2Title: "2. Base Coat (طبقة اللون الأساسية)",
+                layer2Desc: "Carries the authentic metallic or pearl pigment. Completely untouched by Dr. Care precision compounds.",
+                layer3Title: "3. Primer & Body (الأساس والصاج)",
+                layer3Desc: "Factory anti-corrosion layer. Preserving this means your car stays 100% original value (بدون رش).",
                 tabScratchTitle: "Fix a Scratch",
                 tabBookingTitle: "Weekend Care",
                 scratchFormHeader: "Instant Paint Diagnosis",
@@ -874,9 +954,18 @@ service cloud.firestore {
                 stat3Title: "لحد باب بيتك",
                 stat3: "خدمة متنقلة VIP",
                 sliderHeader: "نتيجة حقيقية من أعمالنا — اسحب للمقارنة",
-                sliderSubBadge: "بدون فلاتر",
+                sliderSubBadge: "إضاءة استوديو LED",
                 afterTag: "بعد: لمعة المرآة",
                 beforeTag: "قبل",
+                xrayBadge: "هندسة طبقات الدهان",
+                xrayTitle: "لماذا لا نمس طبقة دهان الفابريكا أبداً؟",
+                xraySub: "الحفاظ على طبقة الورنيش الأصلي هو السر وراء حماية السعر السوقي لسيارتك.",
+                layer1Title: "١. طبقة الورنيش الشفاف (Clear Coat)",
+                layer1Desc: "الطبقة الشفافة العليا التي تتواجد بها ٩٥٪ من دوائر الغسيل والخدوش السطحية، ونقوم بتسويتها بالميكرون دون برد.",
+                layer2Title: "٢. طبقة اللون الأساسية (Base Coat)",
+                layer2Desc: "تحمل حبيبات اللون الميتاليك أو اللؤلؤي الأصلي، ولا نقترب منها نهائياً أثناء المعالجة.",
+                layer3Title: "٣. طبقة الأساس والصاج (Primer & Body)",
+                layer3Desc: "درع الحماية الأصلي للمصنع؛ الحفاظ عليها يعني بقاء سيارتك فابريكا بالكامل ١٠٠٪ بدون رش.",
                 tabScratchTitle: "عالج خدش",
                 tabBookingTitle: "عناية الويك إند",
                 scratchFormHeader: "فحص وتشخيص فوري للدهان",
@@ -936,14 +1025,14 @@ service cloud.firestore {
 
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
-                if (i18nDict[currentLang][key]) {
+                if (i18nDict[currentLang] && i18nDict[currentLang][key]) {
                     el.textContent = i18nDict[currentLang][key];
                 }
             });
 
             document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
                 const key = el.getAttribute('data-i18n-placeholder');
-                if (i18nDict[currentLang][key]) {
+                if (i18nDict[currentLang] && i18nDict[currentLang][key]) {
                     el.setAttribute('placeholder', i18nDict[currentLang][key]);
                 }
             });
@@ -951,7 +1040,9 @@ service cloud.firestore {
             syncSliderImageWidth();
         }
 
-        // SLIDER
+        // =========================================================================
+        // 3. BEFORE / AFTER SLIDER
+        // =========================================================================
         let isDraggingSlider = false;
 
         function syncSliderImageWidth() {
@@ -1001,7 +1092,9 @@ service cloud.firestore {
         });
         window.addEventListener('resize', syncSliderImageWidth);
 
-        // FORM CONTROLS
+        // =========================================================================
+        // 4. FORM CONTROLS & FULL VISUAL RESET
+        // =========================================================================
         let selectedCarBodyZones = ['Front Hood'];
 
         function selectCarBrandLogo(btnEl, brandName) {
@@ -1009,7 +1102,7 @@ service cloud.firestore {
             document.querySelectorAll('.brand-logo-card').forEach(card => {
                 card.classList.remove('selected');
             });
-            btnEl.classList.add('selected');
+            if (btnEl) btnEl.classList.add('selected');
         }
 
         function selectDefectSeverity(btnEl, severityValue) {
@@ -1017,7 +1110,7 @@ service cloud.firestore {
             document.querySelectorAll('.severity-card').forEach(card => {
                 card.classList.remove('selected');
             });
-            btnEl.classList.add('selected');
+            if (btnEl) btnEl.classList.add('selected');
         }
 
         function handleColorWheelPick(hexValue) {
@@ -1038,6 +1131,17 @@ service cloud.firestore {
             } else {
                 selectedCarBodyZones.push(zoneLabel);
             }
+        }
+
+        function resetScratchVisualSelections() {
+            selectedCarBodyZones = ['Front Hood'];
+            document.querySelectorAll('.car-zone-btn').forEach(btn => btn.classList.remove('active'));
+            const hoodBtn = document.getElementById('defaultHoodZoneBtn');
+            if (hoodBtn) hoodBtn.classList.add('active');
+
+            selectCarBrandLogo(document.getElementById('defaultBrandBtn'), 'Mercedes-Benz');
+            selectDefectSeverity(document.getElementById('defaultSeverityBtn'), 'Swirl Marks & Oxidation');
+            applyPresetColor('#08080A', 'Obsidian Black');
         }
 
         function switchConsoleTab(tab) {
@@ -1068,7 +1172,9 @@ service cloud.firestore {
             }
         }
 
-        // MEDIA ENGINE
+        // =========================================================================
+        // 5. NATIVE BLOB VIDEO & PHOTO PROCESSOR (FIXES BACKOFFICE VIDEO PLAYBACK)
+        // =========================================================================
         let uploadedMediaItems = [];
 
         function updateResolutionBadge() {
@@ -1106,30 +1212,31 @@ service cloud.firestore {
                     const stepPct = Math.round(((i + 1) / files.length) * 90);
 
                     if (file.type.startsWith('video/')) {
-                        setMediaProgress(stepPct, 'Validating video...');
+                        setMediaProgress(stepPct, 'Validating video & creating stream...');
                         const videoCheck = await inspectVideoAndExtractPoster(file);
                         if (!videoCheck.durationOk) {
                             alert(currentLang === 'ar' ? 'يرجى اختيار فيديو لا يتجاوز ٦٠ ثانية.' : 'Video must be 60 seconds or less.');
                             continue;
                         }
-                        const rawVideoDataUrl = await readFileAsDataUrl(file);
+                        // Use native Blob URL instead of huge Base64 string so video player never crashes
+                        const blobStreamUrl = URL.createObjectURL(file);
                         uploadedMediaItems.push({
                             id: 'med_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6),
                             type: 'video',
-                            rawFile: file,
-                            url: rawVideoDataUrl,
-                            cloudSafePoster: videoCheck.posterDataUrl,
+                            mimeType: file.type || 'video/mp4',
+                            rawBlob: file,
+                            url: blobStreamUrl,
+                            posterUrl: videoCheck.posterDataUrl || 'before.jpeg',
                             resolution: requestedRes + 'p Video',
                             sizeKB: Math.round(file.size / 1024)
                         });
                     } else if (file.type.startsWith('image/')) {
                         setMediaProgress(stepPct, `Optimizing photo #${i + 1}...`);
-                        const fullResDataUrl = await resizeImageSmart(file, requestedRes, 0.82);
+                        const fullResDataUrl = await resizeImageSmart(file, requestedRes, 0.84);
                         const cloudSafeDataUrl = await resizeImageSmart(file, Math.min(requestedRes, 720), 0.68, 120);
                         uploadedMediaItems.push({
                             id: 'med_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6),
                             type: 'image',
-                            rawFile: file,
                             url: fullResDataUrl,
                             cloudSafeUrl: cloudSafeDataUrl,
                             resolution: requestedRes + 'p',
@@ -1147,15 +1254,6 @@ service cloud.firestore {
                 event.target.value = '';
                 renderMediaThumbnails();
             }
-        }
-
-        function readFileAsDataUrl(file) {
-            return new Promise((resolve, reject) => {
-                const reader = new FileReader();
-                reader.onload = (e) => resolve(e.target.result);
-                reader.onerror = () => reject(new Error('File read error'));
-                reader.readAsDataURL(file);
-            });
         }
 
         function inspectVideoAndExtractPoster(file) {
@@ -1184,7 +1282,7 @@ service cloud.firestore {
                         canvas.height = targetH;
                         const ctx = canvas.getContext('2d');
                         ctx.drawImage(video, 0, 0, targetW, targetH);
-                        const poster = canvas.toDataURL('image/jpeg', 0.65);
+                        const poster = canvas.toDataURL('image/jpeg', 0.68);
                         URL.revokeObjectURL(objUrl);
                         resolve({ durationOk: true, posterDataUrl: poster });
                     } catch (e) {
@@ -1264,7 +1362,10 @@ service cloud.firestore {
             grid.innerHTML = uploadedMediaItems.map((item, idx) => `
                 <div class="relative group rounded-xl overflow-hidden bg-leather border border-gold-400/40 aspect-square">
                     ${item.type === 'video'
-                        ? `<video src="${item.url}" class="w-full h-full object-cover cursor-pointer" muted playsinline onclick="openPreviewLightbox(${idx})"></video>`
+                        ? `<div onclick="openPreviewLightbox(${idx})" class="w-full h-full cursor-pointer relative">
+                               <img src="${item.posterUrl || 'before.jpeg'}" class="w-full h-full object-cover opacity-80">
+                               <span class="absolute inset-0 flex items-center justify-center bg-black/40 text-gold-300 font-bold text-xs">▶ Video</span>
+                           </div>`
                         : `<img src="${item.url}" alt="Media ${idx + 1}" class="w-full h-full object-cover cursor-pointer" onclick="openPreviewLightbox(${idx})">`
                     }
                     <button type="button" onclick="removeSingleMedia('${item.id}')"
@@ -1278,7 +1379,7 @@ service cloud.firestore {
         function openPreviewLightbox(idx) {
             const item = uploadedMediaItems[idx];
             if (!item) return;
-            showLightboxContent(item.url, item.type, item.resolution);
+            showLightboxContent(item);
         }
 
         function removeSingleMedia(id) {
@@ -1291,10 +1392,12 @@ service cloud.firestore {
             renderMediaThumbnails();
         }
 
-        // HYBRID CLOUD + LOCAL VAULT ENGINE
-        const IDB_NAME = 'DrCareHybridVault_v19';
+        // =========================================================================
+        // 6. HYBRID TELEMETRY ENGINE (PRESERVES VIDEO BLOBS & HIGH-RES MEDIA)
+        // =========================================================================
+        const IDB_NAME = 'DrCareHybridVault_v20';
         const IDB_STORE = 'leads_store';
-        const LS_BACKUP_KEY = 'drcare_leads_ls_backup_v19';
+        const LS_BACKUP_KEY = 'drcare_leads_ls_backup_v20';
         let idbConn = null;
         let memoryLeadsCache = [];
         let audioRadarEnabled = true;
@@ -1302,16 +1405,6 @@ service cloud.firestore {
         let knownLeadIds = new Set();
 
         function initHybridTelemetryEngine() {
-            try {
-                const rawLs = localStorage.getItem(LS_BACKUP_KEY);
-                if (rawLs) {
-                    const parsed = JSON.parse(rawLs);
-                    if (Array.isArray(parsed) && parsed.length) {
-                        mergeCloudAndLocalLeads(parsed);
-                    }
-                }
-            } catch (e) {}
-
             if (window.indexedDB) {
                 const req = indexedDB.open(IDB_NAME, 1);
                 req.onupgradeneeded = (e) => {
@@ -1325,6 +1418,16 @@ service cloud.firestore {
                     readLeadsFromIdb();
                 };
             }
+
+            try {
+                const rawLs = localStorage.getItem(LS_BACKUP_KEY);
+                if (rawLs) {
+                    const parsed = JSON.parse(rawLs);
+                    if (Array.isArray(parsed) && parsed.length) {
+                        mergeCloudAndLocalLeads(parsed);
+                    }
+                }
+            } catch (e) {}
 
             startFirestoreLiveListener();
 
@@ -1418,7 +1521,17 @@ service cloud.firestore {
                 const store = tx.objectStore(IDB_STORE);
                 const req = store.getAll();
                 req.onsuccess = () => {
-                    const localItems = req.result || [];
+                    const localItems = (req.result || []).map(lead => ({
+                        ...lead,
+                        media: (lead.media || []).map(m => {
+                            // Reconstruct live playable ObjectURL if rawBlob is stored in IndexedDB
+                            if (m.type === 'video' && m.rawBlob instanceof Blob) {
+                                return { ...m, url: URL.createObjectURL(m.rawBlob) };
+                            }
+                            return m;
+                        })
+                    }));
+
                     if (localItems.length === 0 && memoryLeadsCache.length === 0) {
                         const seed = {
                             id: 'DC-801',
@@ -1441,8 +1554,8 @@ service cloud.firestore {
                         };
                         writeLeadToIdb(seed);
                         memoryLeadsCache = [seed];
-                    } else {
-                        mergeCloudAndLocalLeads(localItems);
+                    } else if (localItems.length > 0) {
+                        mergeCloudAndLocalLeads(localItems, true);
                     }
                     updateNavLiveCounter();
                     renderBackofficeFeed();
@@ -1451,14 +1564,17 @@ service cloud.firestore {
         }
 
         function writeLeadToIdb(lead) {
-            const cleanCopy = {
+            // IndexedDB natively supports storing Blob/File objects for full video playback!
+            const idbRecord = {
                 ...lead,
                 media: (lead.media || []).map(m => ({
                     id: m.id,
                     type: m.type,
-                    url: m.url,
+                    mimeType: m.mimeType || '',
+                    rawBlob: m.rawBlob || null,
+                    url: m.type === 'video' && m.cloudVideoUrl ? m.cloudVideoUrl : m.url,
+                    posterUrl: m.posterUrl || '',
                     cloudSafeUrl: m.cloudSafeUrl || '',
-                    cloudSafePoster: m.cloudSafePoster || '',
                     resolution: m.resolution
                 }))
             };
@@ -1466,17 +1582,19 @@ service cloud.firestore {
             if (idbConn) {
                 try {
                     const tx = idbConn.transaction(IDB_STORE, 'readwrite');
-                    tx.objectStore(IDB_STORE).put(cleanCopy);
+                    tx.objectStore(IDB_STORE).put(idbRecord);
                 } catch (e) {}
             }
 
+            // Save lightweight metadata in LocalStorage WITHOUT overwriting 'video' type
             try {
-                const lsList = memoryLeadsCache.slice(0, 15).map(item => ({
+                const lsList = memoryLeadsCache.slice(0, 12).map(item => ({
                     ...item,
                     media: (item.media || []).map(m => ({
                         id: m.id,
-                        type: m.type === 'video' ? 'image' : m.type,
-                        url: m.cloudSafeUrl || m.cloudSafePoster || m.url,
+                        type: m.type, // Keep 'video' type intact!
+                        url: m.type === 'video' ? (m.cloudVideoUrl || '') : (m.cloudSafeUrl || m.url),
+                        posterUrl: m.posterUrl || '',
                         resolution: m.resolution
                     }))
                 }));
@@ -1485,46 +1603,80 @@ service cloud.firestore {
             } catch (e) {}
         }
 
-        function mergeCloudAndLocalLeads(incomingList) {
+        function mergeCloudAndLocalLeads(incomingList, isFromRichIdb = false) {
             const map = new Map();
             memoryLeadsCache.forEach(item => map.set(item.id, item));
-            incomingList.forEach(item => {
-                const existing = map.get(item.id);
-                if (existing && existing.media && existing.media.length > 0) {
-                    map.set(item.id, { ...item, media: existing.media });
-                } else {
-                    map.set(item.id, item);
+
+            incomingList.forEach(incoming => {
+                const existing = map.get(incoming.id);
+                if (!existing) {
+                    map.set(incoming.id, incoming);
+                    return;
                 }
+
+                // Merge media smartly: never let a stripped LS/Cloud record overwrite a local Blob video or 1080p photo
+                const mergedMedia = (incoming.media || []).map((incM, idx) => {
+                    const exM = (existing.media || [])[idx];
+                    if (!exM) return incM;
+                    if (isFromRichIdb && incM.rawBlob) return incM;
+                    if (exM.rawBlob) {
+                        return { ...incM, rawBlob: exM.rawBlob, url: exM.url, posterUrl: exM.posterUrl || incM.posterUrl };
+                    }
+                    if (exM.url && exM.url.length > (incM.url || '').length) {
+                        return { ...incM, url: exM.url };
+                    }
+                    return incM;
+                });
+
+                map.set(incoming.id, {
+                    ...existing,
+                    ...incoming,
+                    media: mergedMedia.length ? mergedMedia : (existing.media || [])
+                });
             });
+
             memoryLeadsCache = Array.from(map.values()).sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
             updateNavLiveCounter();
             renderBackofficeFeed();
         }
 
+        // Keeps 'video' type intact and uploads to Firebase Storage with 12s timeout
         async function prepareCloudSafeMediaArray(leadId, mediaList) {
             const prepared = [];
             for (let i = 0; i < mediaList.length; i++) {
                 const m = mediaList[i];
                 if (m.type === 'video') {
                     let uploadedVideoUrl = null;
-                    if (storage && m.rawFile) {
+                    if (storage && m.rawBlob) {
                         try {
                             uploadedVideoUrl = await Promise.race([
                                 (async () => {
                                     const ref = storage.ref(`drcare_media/${leadId}_${i}.mp4`);
-                                    await ref.put(m.rawFile);
+                                    await ref.put(m.rawBlob);
                                     return await ref.getDownloadURL();
                                 })(),
-                                new Promise((_, rej) => setTimeout(() => rej(new Error('Storage timeout')), 4000))
+                                new Promise((_, rej) => setTimeout(() => rej(new Error('Storage timeout')), 12000))
                             ]);
                         } catch (e) {
                             uploadedVideoUrl = null;
                         }
                     }
+                    // If video is small enough (<650KB) and Storage wasn't enabled, encode as data URL for Firestore
+                    if (!uploadedVideoUrl && m.rawBlob && m.rawBlob.size < 650 * 1024) {
+                        try {
+                            uploadedVideoUrl = await new Promise((res) => {
+                                const r = new FileReader();
+                                r.onload = (ev) => res(ev.target.result);
+                                r.onerror = () => res(null);
+                                r.readAsDataURL(m.rawBlob);
+                            });
+                        } catch (e) {}
+                    }
                     prepared.push({
                         id: m.id,
-                        type: uploadedVideoUrl ? 'video' : 'image',
-                        url: uploadedVideoUrl || m.cloudSafePoster || 'before.jpeg',
+                        type: 'video', // NEVER overwrite to 'image'
+                        url: uploadedVideoUrl || '',
+                        posterUrl: m.posterUrl || 'before.jpeg',
                         resolution: m.resolution
                     });
                 } else {
@@ -1541,7 +1693,7 @@ service cloud.firestore {
 
         async function transmitLeadEverywhere(fullLocalLead) {
             knownLeadIds.add(fullLocalLead.id);
-            mergeCloudAndLocalLeads([fullLocalLead]);
+            mergeCloudAndLocalLeads([fullLocalLead], true);
             writeLeadToIdb(fullLocalLead);
             playNotificationChime();
 
@@ -1580,8 +1732,8 @@ service cloud.firestore {
             event.preventDefault();
             if (uploadedMediaItems.length === 0) {
                 alert(currentLang === 'ar'
-                    ? 'يرجى إرفاق صورة واحدة على الأقل لمكان الخدش.'
-                    : 'Please attach at least 1 photo or video of the scratch.');
+                    ? 'يرجى إرفاق صورة واحدة على الأقل أو فيديو لمكان الخدش.'
+                    : 'Please attach at least 1 photo or video.');
                 return;
             }
 
@@ -1619,10 +1771,11 @@ service cloud.firestore {
                     media: uploadedMediaItems.map(m => ({
                         id: m.id,
                         type: m.type,
-                        rawFile: m.rawFile,
+                        mimeType: m.mimeType || '',
+                        rawBlob: m.rawBlob || null,
                         url: m.url,
-                        cloudSafeUrl: m.cloudSafeUrl,
-                        cloudSafePoster: m.cloudSafePoster,
+                        posterUrl: m.posterUrl || '',
+                        cloudSafeUrl: m.cloudSafeUrl || '',
                         resolution: m.resolution
                     })),
                     status: 'NEW LIVE',
@@ -1633,8 +1786,7 @@ service cloud.firestore {
 
                 document.getElementById('generatedTicketId').textContent = leadId;
                 document.getElementById('scratchConsultForm').reset();
-                document.getElementById('carBrand').value = 'Mercedes-Benz';
-                document.getElementById('carColorInput').value = 'Obsidian Black (#08080A)';
+                resetScratchVisualSelections();
                 clearAllMedia();
                 document.getElementById('scratchSuccessBanner').classList.remove('hidden');
             } catch (err) {
@@ -1656,8 +1808,9 @@ service cloud.firestore {
                 const zone = document.getElementById('washZone').value;
                 const extraNote = document.getElementById('washClientNotes').value.trim();
 
+                const leadId = 'DC-' + Math.floor(1000 + Math.random() * 9000);
                 const newLead = {
-                    id: 'DC-' + Math.floor(1000 + Math.random() * 9000),
+                    id: leadId,
                     requestType: 'DRY_WASH',
                     clientName,
                     clientPhone,
@@ -1674,6 +1827,7 @@ service cloud.firestore {
                 };
 
                 await transmitLeadEverywhere(newLead);
+                document.getElementById('generatedWashTicketId').textContent = leadId;
                 document.getElementById('washBookingForm').reset();
                 document.getElementById('washSuccessBanner').classList.remove('hidden');
             } catch (err) {
@@ -1681,7 +1835,9 @@ service cloud.firestore {
             }
         }
 
-        // CRM VAULT AUTHORIZATION (2027 / 2026)
+        // =========================================================================
+        // 7. CRM VAULT AUTHORIZATION & VIDEO PLAYBACK LIGHTBOX
+        // =========================================================================
         function normalizeDigits(str) {
             return String(str || '')
                 .replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d))
@@ -1857,7 +2013,7 @@ service cloud.firestore {
                 } catch (e) {}
             }
             try {
-                localStorage.setItem(LS_BACKUP_KEY, JSON.stringify(memoryLeadsCache.slice(0, 15)));
+                localStorage.setItem(LS_BACKUP_KEY, JSON.stringify(memoryLeadsCache.slice(0, 12)));
             } catch (e) {}
             updateNavLiveCounter();
             renderBackofficeFeed();
@@ -1935,8 +2091,9 @@ service cloud.firestore {
                     ${lead.media && lead.media.length > 0 ? `
                         <div class="grid grid-cols-3 sm:grid-cols-5 gap-2">
                             ${lead.media.map((m, mIdx) => m.type === 'video'
-                                ? `<div onclick="openLeadMediaLightbox('${escapeHtml(lead.id)}', ${mIdx})" class="cursor-pointer rounded-xl overflow-hidden border border-gold-400/40 h-20 bg-black flex items-center justify-center">
-                                    <span class="text-xs font-bold text-gold-300">▶ Video</span>
+                                ? `<div onclick="openLeadMediaLightbox('${escapeHtml(lead.id)}', ${mIdx})" class="cursor-pointer rounded-xl overflow-hidden border border-gold-400/50 h-20 bg-black relative flex items-center justify-center group">
+                                    <img src="${m.posterUrl || 'before.jpeg'}" class="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition">
+                                    <span class="absolute inset-0 flex items-center justify-center text-xs font-extrabold text-gold-200 bg-black/40">▶ Play Video</span>
                                    </div>`
                                 : `<img src="${m.url}" onclick="openLeadMediaLightbox('${escapeHtml(lead.id)}', ${mIdx})" class="cursor-pointer rounded-xl object-cover w-full h-20 border border-white/15 hover:border-gold-400 transition">`
                             ).join('')}
@@ -2015,23 +2172,61 @@ service cloud.firestore {
         function openLeadMediaLightbox(leadId, mediaIndex) {
             const lead = memoryLeadsCache.find(l => l.id === leadId);
             if (!lead || !lead.media || !lead.media[mediaIndex]) return;
-            const item = lead.media[mediaIndex];
-            showLightboxContent(item.url, item.type, item.resolution);
+            showLightboxContent(lead.media[mediaIndex]);
         }
 
-        function showLightboxContent(url, type, res) {
+        // Fixed Video & Image Lightbox Player with Blob Regeneration & Download Support
+        function showLightboxContent(item) {
             const box = document.getElementById('mediaLightbox');
             const body = document.getElementById('lightboxBody');
-            document.getElementById('lightboxCaption').textContent = `DR. CARE INSPECTION • ${res || '1080p'}`;
-            body.innerHTML = type === 'video'
-                ? `<video src="${url}" controls autoplay class="max-h-[72vh] w-auto rounded-xl"></video>`
-                : `<img src="${url}" class="max-h-[72vh] w-auto object-contain rounded-xl">`;
+            const dlBtn = document.getElementById('lightboxDownloadBtn');
+            document.getElementById('lightboxCaption').textContent = `DR. CARE INSPECTION • ${item.resolution || '1080p'}`;
+
+            let playableUrl = item.url || '';
+            if (item.type === 'video' && item.rawBlob instanceof Blob) {
+                playableUrl = URL.createObjectURL(item.rawBlob);
+            }
+
+            if (playableUrl && dlBtn) {
+                dlBtn.href = playableUrl;
+                dlBtn.download = item.type === 'video' ? 'DrCare_Inspection_Video.mp4' : 'DrCare_Inspection_Photo.jpg';
+                dlBtn.classList.remove('hidden');
+            } else if (dlBtn) {
+                dlBtn.classList.add('hidden');
+            }
+
+            if (item.type === 'video') {
+                if (playableUrl) {
+                    body.innerHTML = '';
+                    const vid = document.createElement('video');
+                    vid.src = playableUrl;
+                    if (item.posterUrl) vid.poster = item.posterUrl;
+                    vid.controls = true;
+                    vid.autoplay = true;
+                    vid.playsInline = true;
+                    vid.preload = 'metadata';
+                    vid.className = 'max-h-[70vh] w-auto max-w-full rounded-xl bg-black';
+                    body.appendChild(vid);
+                    vid.play().catch(() => {});
+                } else {
+                    body.innerHTML = `
+                        <img src="${item.posterUrl || 'before.jpeg'}" class="max-h-[58vh] w-auto object-contain rounded-xl mb-3">
+                        <p class="text-xs text-amber-300 text-center px-4">Cloud video keyframe preview shown. Enable Firebase Storage Rules to stream full-length videos across remote devices.</p>
+                    `;
+                }
+            } else {
+                body.innerHTML = `<img src="${playableUrl || item.posterUrl || 'before.jpeg'}" class="max-h-[72vh] w-auto object-contain rounded-xl">`;
+            }
+
             box.classList.remove('hidden');
         }
 
         function closeMediaLightbox() {
+            const body = document.getElementById('lightboxBody');
+            const vid = body ? body.querySelector('video') : null;
+            if (vid) vid.pause();
             document.getElementById('mediaLightbox').classList.add('hidden');
-            document.getElementById('lightboxBody').innerHTML = '';
+            if (body) body.innerHTML = '';
         }
 
         function updateNavLiveCounter() {
