@@ -5,6 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta name="referrer" content="strict-origin-when-cross-origin">
+    
+    <!-- PWA Mobile App Meta Tags -->
+    <meta name="theme-color" content="#050507">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="DR. CARE">
+    <link rel="apple-touch-icon" href="logo.jpg">
+    <link id="pwaManifestLink" rel="manifest" href="">
+
     <title>DR. CARE | Factory Paint. Reborn. — Bespoke Automotive Atelier</title>
     <link rel="icon" href="logo.jpg" type="image/jpeg">
 
@@ -122,10 +131,15 @@
         .btn-gold-elite:disabled { opacity: 0.5; cursor: not-allowed; }
 
         /* Interactive Selection States */
-        .car-type-pill, .brand-pill, .severity-card, .car-zone-btn, .service-pillar-btn, .pkg-tier-card {
-            transition: all 0.18s ease;
+        .submenu-trigger, .submenu-option, .severity-card, .service-pillar-btn, .pkg-tier-card, .angle-tab-btn {
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .car-type-pill.selected, .brand-pill.selected, .severity-card.selected, .car-zone-btn.active, .service-pillar-btn.active {
+        .submenu-trigger.open {
+            border-color: #F5C518;
+            background: linear-gradient(90deg, rgba(245, 197, 24, 0.16) 0%, rgba(18, 20, 28, 0.95) 100%);
+            box-shadow: 0 0 20px rgba(245, 197, 24, 0.18);
+        }
+        .submenu-option.selected, .severity-card.selected, .service-pillar-btn.active, .angle-tab-btn.active {
             border-color: #F5C518;
             background: rgba(245, 197, 24, 0.22);
             color: #FFFDF5;
@@ -135,6 +149,62 @@
             border-color: #F5C518;
             background: linear-gradient(165deg, rgba(34, 29, 15, 0.95) 0%, rgba(12, 13, 18, 0.98) 100%);
             box-shadow: 0 0 28px rgba(245, 197, 24, 0.25);
+        }
+
+        /* 360° 3D Interactive Car SVG Simulator Styling */
+        .car-3d-stage {
+            background:
+                radial-gradient(ellipse at 50% 55%, rgba(245, 197, 24, 0.14) 0%, rgba(18, 20, 28, 0.4) 55%, #06070A 100%),
+                linear-gradient(180deg, #08090E 0%, #0D0F17 100%);
+            border: 1px solid rgba(245, 197, 24, 0.3);
+            box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.9), 0 20px 45px -15px rgba(0,0,0,0.85);
+            position: relative;
+            overflow: hidden;
+        }
+        .car-3d-grid-floor {
+            background-image: 
+                linear-gradient(to right, rgba(245, 197, 24, 0.06) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(245, 197, 24, 0.06) 1px, transparent 1px);
+            background-size: 28px 28px;
+        }
+        .svg-car-part {
+            fill: url(#carbonMetallicGrad);
+            stroke: rgba(255, 255, 255, 0.28);
+            stroke-width: 1.6;
+            cursor: pointer;
+            transition: all 0.22s ease;
+        }
+        .svg-car-part:hover {
+            fill: rgba(245, 197, 24, 0.32);
+            stroke: #FFF1B8;
+            stroke-width: 2.2;
+            filter: drop-shadow(0 0 8px rgba(245, 197, 24, 0.55));
+        }
+        .svg-car-part.infected {
+            fill: url(#goldInfectedGrad) !important;
+            stroke: #FFFDF5 !important;
+            stroke-width: 2.5 !important;
+            filter: drop-shadow(0 0 14px rgba(245, 197, 24, 0.85));
+        }
+        .svg-car-glass {
+            fill: rgba(10, 14, 22, 0.92);
+            stroke: rgba(255, 255, 255, 0.15);
+            stroke-width: 1.2;
+            pointer-events: none;
+        }
+        .svg-part-label {
+            font-size: 9px;
+            font-weight: 800;
+            fill: rgba(255, 255, 255, 0.78);
+            pointer-events: none;
+            text-anchor: middle;
+            dominant-baseline: middle;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+        .svg-car-part.infected + .svg-part-label {
+            fill: #050507;
+            font-weight: 900;
         }
 
         /* 3D Glossy Paint Spheres */
@@ -150,10 +220,7 @@
         }
 
         /* Studio Light Tunnel */
-        .studio-light-tunnel {
-            position: relative;
-            overflow: hidden;
-        }
+        .studio-light-tunnel { position: relative; overflow: hidden; }
         .studio-light-tunnel::after {
             content: '';
             position: absolute;
@@ -239,6 +306,9 @@
                 </span>
             </div>
             <div class="flex items-center gap-3">
+                <button id="pwaInstallBtn" type="button" onclick="triggerPwaInstall()" class="hidden px-2.5 py-0.5 rounded-md bg-gold-400/20 border border-gold-400/50 text-gold-200 text-[10px] font-extrabold cursor-pointer hover:bg-gold-400/30">
+                    📲 Install DR. CARE App
+                </button>
                 <span class="hidden sm:inline text-gold-300 font-bold tracking-wider uppercase" data-i18n="topBarDays">
                     Thu • Fri • Sat At Your Doorstep
                 </span>
@@ -246,7 +316,7 @@
         </div>
     </div>
 
-    <!-- STICKY HEADER (BRIGHT LUMINOUS DR. CARE TITLE) -->
+    <!-- STICKY HEADER -->
     <header class="sticky top-0 z-40 bg-obsidian/90 backdrop-blur-xl border-b border-white/10">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between">
             <a href="#" class="flex items-center gap-3.5 group">
@@ -327,7 +397,7 @@
 
                 <div class="flex flex-col sm:flex-row gap-3 pt-1">
                     <a href="#clinic-console" onclick="switchConsoleTab('scratch')" class="btn-gold-elite px-6 py-3.5 rounded-2xl font-extrabold text-sm flex items-center justify-center gap-2">
-                        <span data-i18n="heroBtnScratch">Fix a Scratch (Up to 10 Photos)</span>
+                        <span data-i18n="heroBtnScratch">360° Scratch Diagnosis</span>
                         <span>→</span>
                     </a>
                     <a href="#clinic-console" onclick="switchConsoleTab('booking')" class="px-6 py-3.5 rounded-2xl bg-white/5 hover:bg-white/10 border border-gold-400/35 text-gold-200 font-bold text-sm flex items-center justify-center transition">
@@ -395,7 +465,6 @@
 
         <!-- PROMINENT RUPES & MEGUIAR'S SHOWCASE + SERVICE EXPLAINER -->
         <section id="interactive-atelier" class="scroll-mt-20 space-y-6">
-            
             <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div class="piano-card-gold p-6 rounded-3xl flex flex-col justify-between gap-4 relative overflow-hidden">
                     <div class="flex items-center justify-between border-b border-white/10 pb-3">
@@ -500,7 +569,7 @@
             <div class="grid grid-cols-2 p-1.5 rounded-2xl bg-leather border border-white/15 mb-6 shadow-xl">
                 <button type="button" id="tabScratchBtn" onclick="switchConsoleTab('scratch')" class="py-3.5 px-4 rounded-xl font-extrabold text-xs sm:text-sm transition flex items-center justify-center gap-2 bg-gradient-to-r from-gold-300 to-gold-400 text-black shadow-md cursor-pointer">
                     <span>📸</span>
-                    <span data-i18n="tabScratchTitle">Scratch &amp; Paint Diagnosis</span>
+                    <span data-i18n="tabScratchTitle">360° Scratch &amp; Paint Diagnosis</span>
                 </button>
                 <button type="button" id="tabBookingBtn" onclick="switchConsoleTab('booking')" class="py-3.5 px-4 rounded-xl font-extrabold text-xs sm:text-sm transition flex items-center justify-center gap-2 text-zinc-300 hover:text-white cursor-pointer">
                     <span>✨</span>
@@ -513,10 +582,10 @@
                 <div class="flex flex-wrap items-center justify-between gap-2 pb-4 mb-5 border-b border-white/10">
                     <div>
                         <h2 class="text-lg sm:text-xl font-black text-white" data-i18n="scratchFormHeader">
-                            Instant Optical Paint Diagnosis
+                            Interactive 3D Vehicle Telemetry
                         </h2>
                         <p class="text-xs text-zinc-300 mt-0.5" data-i18n="consoleSub">
-                            Select your vehicle profile &amp; upload up to 10 photos for a custom restoration plan.
+                            Configure your car via side-labels, touch affected panels on the 360° 3D simulator &amp; attach photos.
                         </p>
                     </div>
                     <span class="text-[11px] text-gold-200 font-bold border border-gold-400/40 bg-gold-400/15 px-3 py-1 rounded-full" data-i18n="sloganMiniBottom">
@@ -526,87 +595,123 @@
 
                 <form id="scratchConsultForm" onsubmit="submitScratchConsultation(event)" class="space-y-6">
 
-                    <!-- STEP 1: CAR TYPE (SUV/SEDAN) + CLICKABLE MANUFACTURER GRID (GLOBAL & CHINESE) + MODEL + YEAR -->
-                    <div class="p-4 sm:p-5 rounded-2xl bg-black/50 border border-white/10 space-y-5">
+                    <!-- STEP 1: SIDE-LABEL SUB-MENU OPENING SELECTOR -->
+                    <div class="p-4 sm:p-6 rounded-2xl bg-black/55 border border-white/10 space-y-4">
                         <div class="flex flex-wrap items-center justify-between gap-2">
                             <span class="text-xs font-extrabold uppercase tracking-wider text-gold-300" data-i18n="step1Title">
-                                1. Vehicle Profile (فئة وماركة وموديل السيارة)
+                                1. Vehicle Configuration (اضغط على كل بطاقة جانبية لفتح القائمة الفرعية)
                             </span>
-                            <span id="selectedCarSummaryBadge" class="text-[11px] font-bold text-gold-200 bg-gold-400/15 border border-gold-400/30 px-2.5 py-0.5 rounded-full">
-                                SUV • Mercedes-Benz
+                            <span id="selectedCarSummaryBadge" class="text-[11px] font-bold text-gold-200 bg-gold-400/15 border border-gold-400/30 px-3 py-1 rounded-full">
+                                SUV / 4x4 • Germany • Mercedes-Benz
                             </span>
                         </div>
 
-                        <!-- A) Car Body Type Selector (SUV / Sedan / Coupe / Hatchback / Pickup) -->
-                        <div class="space-y-2">
-                            <label class="block text-[11px] text-zinc-300 font-bold" data-i18n="lblCarBodyType">Select Vehicle Body Type (اختر فئة السيارة — SUV أو سيدان) *</label>
-                            <div class="grid grid-cols-2 sm:grid-cols-5 gap-2" id="scratchCarTypeGrid">
-                                <button type="button" onclick="selectCarType('scratch', this, 'SUV / 4x4')" class="car-type-pill selected py-2.5 px-3 rounded-xl bg-leather border border-white/15 text-xs font-extrabold cursor-pointer flex items-center justify-center gap-1.5">
-                                    <span>🚙</span> <span data-i18n="typeSuv">SUV / 4x4</span>
+                        <div class="space-y-2.5">
+                            <!-- SUB-MENU 1: CAR BODY TYPE -->
+                            <div class="rounded-2xl bg-leather border border-white/15 overflow-hidden">
+                                <button type="button" id="trig_scratch_type" onclick="toggleSubMenu('scratch', 'type')"
+                                        class="submenu-trigger w-full px-4 py-3.5 flex items-center justify-between text-start cursor-pointer">
+                                    <div class="flex items-center gap-3">
+                                        <span class="w-7 h-7 rounded-lg bg-gold-400/15 border border-gold-400/40 flex items-center justify-center text-xs font-black text-gold-300">01</span>
+                                        <div>
+                                            <span class="text-[10px] uppercase tracking-wider text-zinc-400 block font-bold" data-i18n="sideLblType">Car Body Type (فئة الهيكل)</span>
+                                            <strong id="val_scratch_type" class="text-xs sm:text-sm font-black text-white">SUV / 4x4</strong>
+                                        </div>
+                                    </div>
+                                    <span class="text-xs font-bold text-gold-300 flex items-center gap-1">
+                                        <span data-i18n="btnChange">Select</span>
+                                        <span id="icon_scratch_type" class="transition-transform duration-200">▾</span>
+                                    </span>
                                 </button>
-                                <button type="button" onclick="selectCarType('scratch', this, 'Sedan (سيدان)')" class="car-type-pill py-2.5 px-3 rounded-xl bg-leather border border-white/15 text-xs font-extrabold text-zinc-300 cursor-pointer flex items-center justify-center gap-1.5">
-                                    <span>🚗</span> <span data-i18n="typeSedan">Sedan (سيدان)</span>
-                                </button>
-                                <button type="button" onclick="selectCarType('scratch', this, 'Coupe / Sport')" class="car-type-pill py-2.5 px-3 rounded-xl bg-leather border border-white/15 text-xs font-extrabold text-zinc-300 cursor-pointer flex items-center justify-center gap-1.5">
-                                    <span>🏎️</span> <span data-i18n="typeCoupe">Coupe / Sport</span>
-                                </button>
-                                <button type="button" onclick="selectCarType('scratch', this, 'Hatchback')" class="car-type-pill py-2.5 px-3 rounded-xl bg-leather border border-white/15 text-xs font-extrabold text-zinc-300 cursor-pointer flex items-center justify-center gap-1.5">
-                                    <span>🚘</span> <span data-i18n="typeHatch">Hatchback</span>
-                                </button>
-                                <button type="button" onclick="selectCarType('scratch', this, 'Pickup / Van')" class="car-type-pill py-2.5 px-3 rounded-xl bg-leather border border-white/15 text-xs font-extrabold text-zinc-300 cursor-pointer flex items-center justify-center gap-1.5 col-span-2 sm:col-span-1">
-                                    <span>🛻</span> <span data-i18n="typePickup">Pickup / Van</span>
-                                </button>
+                                <div id="sub_scratch_type" class="hidden p-3.5 bg-black/70 border-t border-white/10 grid grid-cols-2 sm:grid-cols-5 gap-2">
+                                    <button type="button" onclick="pickCarType('scratch', 'SUV / 4x4', this)" class="submenu-option selected py-2.5 px-3 rounded-xl bg-leather border border-white/10 text-xs font-bold cursor-pointer">🚙 SUV / 4x4</button>
+                                    <button type="button" onclick="pickCarType('scratch', 'Sedan (سيدان)', this)" class="submenu-option py-2.5 px-3 rounded-xl bg-leather border border-white/10 text-xs font-bold text-zinc-300 cursor-pointer">🚗 Sedan (سيدان)</button>
+                                    <button type="button" onclick="pickCarType('scratch', 'Coupe / Sport', this)" class="submenu-option py-2.5 px-3 rounded-xl bg-leather border border-white/10 text-xs font-bold text-zinc-300 cursor-pointer">🏎️ Coupe / Sport</button>
+                                    <button type="button" onclick="pickCarType('scratch', 'Hatchback', this)" class="submenu-option py-2.5 px-3 rounded-xl bg-leather border border-white/10 text-xs font-bold text-zinc-300 cursor-pointer">🚘 Hatchback</button>
+                                    <button type="button" onclick="pickCarType('scratch', 'Pickup / Van', this)" class="submenu-option py-2.5 px-3 rounded-xl bg-leather border border-white/10 text-xs font-bold text-zinc-300 cursor-pointer col-span-2 sm:col-span-1">🛻 Pickup / Van</button>
+                                </div>
+                                <input type="hidden" id="scratchCarTypeInput" value="SUV / 4x4">
                             </div>
-                            <input type="hidden" id="scratchCarTypeInput" value="SUV / 4x4">
+
+                            <!-- SUB-MENU 2: COUNTRY OF MANUFACTURE & BRAND -->
+                            <div class="rounded-2xl bg-leather border border-white/15 overflow-hidden">
+                                <button type="button" id="trig_scratch_origin" onclick="toggleSubMenu('scratch', 'origin')"
+                                        class="submenu-trigger open w-full px-4 py-3.5 flex items-center justify-between text-start cursor-pointer">
+                                    <div class="flex items-center gap-3">
+                                        <span class="w-7 h-7 rounded-lg bg-gold-400/15 border border-gold-400/40 flex items-center justify-center text-xs font-black text-gold-300">02</span>
+                                        <div>
+                                            <span class="text-[10px] uppercase tracking-wider text-zinc-400 block font-bold" data-i18n="sideLblOrigin">Country of Manufacture &amp; Make (بلد المنشأ والماركة)</span>
+                                            <strong id="val_scratch_origin" class="text-xs sm:text-sm font-black text-gold-300">🇩🇪 Germany &amp; Europe • Mercedes-Benz</strong>
+                                        </div>
+                                    </div>
+                                    <span class="text-xs font-bold text-gold-300 flex items-center gap-1">
+                                        <span data-i18n="btnChange">Select</span>
+                                        <span id="icon_scratch_origin" class="transition-transform duration-200 rotate-180">▾</span>
+                                    </span>
+                                </button>
+                                <div id="sub_scratch_origin" class="p-4 bg-black/75 border-t border-white/10 space-y-3">
+                                    <span class="text-[11px] font-bold text-zinc-300 block" data-i18n="lblStep2A">A. Tap Country of Manufacture (اختر بلد الصنع لفتح ماركاتها):</span>
+                                    <div id="countries_scratch" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2"></div>
+
+                                    <div class="pt-2 border-t border-white/10 space-y-2">
+                                        <span class="text-[11px] font-bold text-gold-300 block" data-i18n="lblStep2B">B. Select Manufacturer from Sub-Menu (اختر الماركة):</span>
+                                        <div id="brands_scratch" class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-1.5"></div>
+                                    </div>
+                                </div>
+                                <input type="hidden" id="scratchCountryInput" value="Germany & Europe">
+                                <input type="hidden" id="carBrand" value="Mercedes-Benz">
+                            </div>
+
+                            <!-- SUB-MENU 3: MODEL & YEAR SELECTION -->
+                            <div class="rounded-2xl bg-leather border border-white/15 overflow-hidden">
+                                <button type="button" id="trig_scratch_model" onclick="toggleSubMenu('scratch', 'model')"
+                                        class="submenu-trigger w-full px-4 py-3.5 flex items-center justify-between text-start cursor-pointer">
+                                    <div class="flex items-center gap-3">
+                                        <span class="w-7 h-7 rounded-lg bg-gold-400/15 border border-gold-400/40 flex items-center justify-center text-xs font-black text-gold-300">03</span>
+                                        <div>
+                                            <span class="text-[10px] uppercase tracking-wider text-zinc-400 block font-bold" data-i18n="sideLblModelYear">Vehicle Model &amp; Year (الموديل وسنة الصنع)</span>
+                                            <strong id="val_scratch_model" class="text-xs sm:text-sm font-black text-white">Tap to select Model • 2026</strong>
+                                        </div>
+                                    </div>
+                                    <span class="text-xs font-bold text-gold-300 flex items-center gap-1">
+                                        <span data-i18n="btnChange">Select</span>
+                                        <span id="icon_scratch_model" class="transition-transform duration-200">▾</span>
+                                    </span>
+                                </button>
+                                <div id="sub_scratch_model" class="hidden p-4 bg-black/75 border-t border-white/10 space-y-3">
+                                    <div>
+                                        <span class="text-[11px] font-bold text-gold-300 block mb-2" data-i18n="lblQuickModels">Popular Models for Selected Brand (اختر الموديل بالضغط أو اكتبه):</span>
+                                        <div id="models_scratch" class="flex flex-wrap gap-1.5 mb-3"></div>
+                                    </div>
+                                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                                        <div>
+                                            <label class="block text-[11px] text-zinc-300 font-bold mb-1" data-i18n="lblModel">Model Name (الموديل) *</label>
+                                            <input type="text" id="carModel" required maxlength="40"
+                                                   oninput="refreshConfigSummary('scratch')"
+                                                   data-i18n-placeholder="phModel"
+                                                   placeholder="e.g. S580 / X6 / Tiggo 8"
+                                                   class="w-full px-3.5 py-2.5 rounded-xl bg-leather border border-gold-400/40 text-white text-xs font-bold focus:outline-none">
+                                        </div>
+                                        <div>
+                                            <label class="block text-[11px] text-zinc-300 font-bold mb-1" data-i18n="lblYear">Manufacture Year (سنة الصنع) *</label>
+                                            <select id="carYear" required onchange="refreshConfigSummary('scratch')"
+                                                    class="w-full px-3.5 py-2.5 rounded-xl bg-leather border border-white/15 text-gold-200 text-xs font-extrabold focus:outline-none"></select>
+                                        </div>
+                                        <div>
+                                            <label class="block text-[11px] text-zinc-300 font-bold mb-1" data-i18n="lblZoneSelect">Service Zone (نطاق الخدمة) *</label>
+                                            <select id="clientZone" required class="w-full px-3.5 py-2.5 rounded-xl bg-leather border border-white/15 text-white text-xs font-bold focus:outline-none">
+                                                <option value="Heliopolis (مصر الجديدة)">Heliopolis — مصر الجديدة</option>
+                                                <option value="Nasr City (مدينة نصر)">Nasr City — مدينة نصر</option>
+                                                <option value="5th Settlement (التجمع الخامس)">5th Settlement — التجمع الخامس</option>
+                                                <option value="Madinaty (مدينتي)">Madinaty — مدينتي</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
-                        <!-- B) Clickable Car Manufacturer Selector (All Global + Famous Chinese Brands Separated) -->
-                        <div class="space-y-2 pt-2 border-t border-white/10">
-                            <div class="flex flex-wrap items-center justify-between gap-2">
-                                <label class="text-[11px] text-zinc-300 font-bold" data-i18n="lblSelectMakeByClick">Select Car Manufacturer by Click (اختر ماركة السيارة بالضغط — تشمل كافة الماركات والسيارات الصينية) *</label>
-                                <input type="text" id="brandQuickFilter" oninput="filterBrandGrid('scratch', this.value)" placeholder="🔍 Quick filter brand..."
-                                       class="px-2.5 py-1 rounded-lg bg-leather border border-white/15 text-[11px] text-white focus:border-gold-400 focus:outline-none w-44">
-                            </div>
-
-                            <div id="scratchBrandGrid" class="grid grid-cols-3 sm:grid-cols-5 md:grid-cols-7 gap-1.5 max-h-48 overflow-y-auto p-2 rounded-xl bg-black/60 border border-white/10">
-                                <!-- Populated dynamically via JS with all separated Global & Chinese brands -->
-                            </div>
-
-                            <!-- Custom Make Input (Shown if user clicks 'Other' or wants to edit) -->
-                            <div class="flex items-center gap-2 pt-1">
-                                <span class="text-[11px] text-zinc-400 whitespace-nowrap" data-i18n="lblSelectedMake">Selected Make:</span>
-                                <input type="text" id="carBrand" required value="Mercedes-Benz" maxlength="40"
-                                       class="w-full sm:w-64 px-3 py-1.5 rounded-lg bg-leather border border-gold-400/40 text-gold-200 text-xs font-extrabold focus:outline-none">
-                            </div>
-                        </div>
-
-                        <!-- C) Model Label + Year Selection Dropdown + Zone Selection -->
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 border-t border-white/10">
-                            <div>
-                                <label for="carModel" class="block text-[11px] text-zinc-300 font-bold mb-1" data-i18n="lblModel">Car Model (موديل السيارة) *</label>
-                                <input type="text" id="carModel" required maxlength="40"
-                                       data-i18n-placeholder="phModel"
-                                       placeholder="e.g. S580 / X6 / Tiggo 8 / Coolray"
-                                       class="w-full px-3.5 py-2.5 rounded-xl bg-leather border border-white/15 focus:border-gold-400 text-white text-xs font-bold focus:outline-none">
-                            </div>
-                            <div>
-                                <label for="carYear" class="block text-[11px] text-zinc-300 font-bold mb-1" data-i18n="lblYear">Manufacture Year (اختر سنة الصنع) *</label>
-                                <select id="carYear" required class="w-full px-3.5 py-2.5 rounded-xl bg-leather border border-white/15 focus:border-gold-400 text-gold-200 text-xs font-extrabold focus:outline-none">
-                                    <!-- Populated 2027 down to 2000 -->
-                                </select>
-                            </div>
-                            <div>
-                                <label for="clientZone" class="block text-[11px] text-zinc-300 font-bold mb-1" data-i18n="lblZoneSelect">On-Site Service Zone (نطاق الخدمة) *</label>
-                                <select id="clientZone" required class="w-full px-3.5 py-2.5 rounded-xl bg-leather border border-white/15 focus:border-gold-400 text-white text-xs font-bold focus:outline-none">
-                                    <option value="Heliopolis (مصر الجديدة)">Heliopolis — مصر الجديدة</option>
-                                    <option value="Nasr City (مدينة نصر)">Nasr City — مدينة نصر</option>
-                                    <option value="5th Settlement (التجمع الخامس)">5th Settlement — التجمع الخامس</option>
-                                    <option value="Madinaty (مدينتي)">Madinaty — مدينتي</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <!-- D) 3D Paint Spheres + Color Input -->
+                        <!-- Paint Spheres + Color Input -->
                         <div class="pt-2 border-t border-white/10">
                             <label class="block text-[11px] text-zinc-300 font-bold mb-2" data-i18n="lblColorPick">Car Color (لون السيارة — اختر الدرجة أو اكتبها) *</label>
                             <div class="flex flex-wrap items-center gap-2.5">
@@ -631,14 +736,19 @@
                         </div>
                     </div>
 
-                    <!-- STEP 2: DETAILED 14-PART BODY MAP (MULTI-SELECT) + SEVERITY -->
-                    <div class="p-4 sm:p-5 rounded-2xl bg-black/50 border border-white/10 space-y-4">
+                    <!-- STEP 2: INTERACTIVE 360° 3D CAR SIMULATOR -->
+                    <div class="p-4 sm:p-6 rounded-2xl bg-black/55 border border-white/10 space-y-4">
                         <div class="flex flex-wrap items-center justify-between gap-2">
-                            <span class="text-xs font-extrabold uppercase tracking-wider text-gold-300" data-i18n="step2Title">
-                                2. Scratch Condition &amp; Exact Body Panels (حدد الأجزاء المصابة — يمكنك اختيار أكثر من جزء)
-                            </span>
-                            <span id="selectedZonesCounter" class="text-[11px] font-bold text-gold-200 bg-gold-400/15 border border-gold-400/30 px-2.5 py-0.5 rounded-full">
-                                1 Panel Selected
+                            <div>
+                                <span class="text-xs font-extrabold uppercase tracking-wider text-gold-300 block" data-i18n="step2Title">
+                                    2. Interactive 360° 3D Car Simulator — Touch Infected Part(s)
+                                </span>
+                                <span class="text-[11px] text-zinc-300" data-i18n="sim360Sub">
+                                    Rotate 360° around the vehicle or tap any panel directly on the 3D model to mark scratches.
+                                </span>
+                            </div>
+                            <span id="selectedZonesCounter" class="text-[11px] font-extrabold text-black bg-gold-400 px-3 py-1 rounded-full shadow">
+                                1 Part Marked
                             </span>
                         </div>
 
@@ -658,27 +768,185 @@
                         </div>
                         <input type="hidden" id="defectSeverityInput" value="Swirl Marks & Oxidation (دوائر غسيل وبهتان)">
 
-                        <div class="space-y-2 pt-2 border-t border-white/10">
-                            <span class="text-[11px] text-zinc-300 font-bold block" data-i18n="lblTapPanels">Tap all affected panels below (اضغط على كل الأجزاء التي تحتاج معالجة):</span>
-                            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2" id="bodyZoneButtonsGrid">
-                                <button type="button" id="defaultHoodZoneBtn" onclick="toggleCarBodyZone(this, 'الكبوت (Front Hood)')" class="car-zone-btn active py-2.5 px-2.5 rounded-xl bg-leather border border-white/15 text-[11px] font-bold text-zinc-200 cursor-pointer" data-i18n="zHood">الكبوت (Front Hood)</button>
-                                <button type="button" onclick="toggleCarBodyZone(this, 'السقف (Roof)')" class="car-zone-btn py-2.5 px-2.5 rounded-xl bg-leather border border-white/15 text-[11px] font-bold text-zinc-200 cursor-pointer" data-i18n="zRoof">السقف (Roof)</button>
-                                <button type="button" onclick="toggleCarBodyZone(this, 'الشنطة (Rear Trunk)')" class="car-zone-btn py-2.5 px-2.5 rounded-xl bg-leather border border-white/15 text-[11px] font-bold text-zinc-200 cursor-pointer" data-i18n="zTrunk">الشنطة (Rear Trunk)</button>
-                                <button type="button" onclick="toggleCarBodyZone(this, 'إكصدام أمامي (Front Bumper)')" class="car-zone-btn py-2.5 px-2.5 rounded-xl bg-leather border border-white/15 text-[11px] font-bold text-zinc-200 cursor-pointer" data-i18n="zFBumper">إكصدام أمامي (Front Bumper)</button>
-                                
-                                <button type="button" onclick="toggleCarBodyZone(this, 'رفرف أمامي يمين (Front Right Fender)')" class="car-zone-btn py-2.5 px-2.5 rounded-xl bg-leather border border-white/15 text-[11px] font-bold text-zinc-200 cursor-pointer" data-i18n="zFRFender">رفرف أمامي يمين (FR Fender)</button>
-                                <button type="button" onclick="toggleCarBodyZone(this, 'باب أمامي يمين (Front Right Door)')" class="car-zone-btn py-2.5 px-2.5 rounded-xl bg-leather border border-white/15 text-[11px] font-bold text-zinc-200 cursor-pointer" data-i18n="zFRDoor">باب أمامي يمين (FR Door)</button>
-                                <button type="button" onclick="toggleCarBodyZone(this, 'باب خلفي يمين (Rear Right Door)')" class="car-zone-btn py-2.5 px-2.5 rounded-xl bg-leather border border-white/15 text-[11px] font-bold text-zinc-200 cursor-pointer" data-i18n="zRRDoor">باب خلفي يمين (RR Door)</button>
-                                <button type="button" onclick="toggleCarBodyZone(this, 'رفرف خلفي يمين (Rear Right Quarter)')" class="car-zone-btn py-2.5 px-2.5 rounded-xl bg-leather border border-white/15 text-[11px] font-bold text-zinc-200 cursor-pointer" data-i18n="zRRFender">رفرف خلفي يمين (RR Fender)</button>
+                        <!-- 360° 3D INTERACTIVE SIMULATOR STAGE -->
+                        <div class="car-3d-stage car-3d-grid-floor rounded-3xl p-4 sm:p-6 space-y-4">
+                            <div class="flex flex-wrap items-center justify-between gap-2">
+                                <div class="flex flex-wrap items-center gap-1.5">
+                                    <button type="button" onclick="set360CameraAngle(0)" id="camBtn_0" class="angle-tab-btn active px-3 py-1.5 rounded-xl bg-leather border border-white/15 text-[11px] font-extrabold cursor-pointer">
+                                        🌐 360° Top Orbit
+                                    </button>
+                                    <button type="button" onclick="set360CameraAngle(1)" id="camBtn_1" class="angle-tab-btn px-3 py-1.5 rounded-xl bg-leather border border-white/15 text-[11px] font-bold text-zinc-300 cursor-pointer">
+                                        ➡️ Right Side (90°)
+                                    </button>
+                                    <button type="button" onclick="set360CameraAngle(2)" id="camBtn_2" class="angle-tab-btn px-3 py-1.5 rounded-xl bg-leather border border-white/15 text-[11px] font-bold text-zinc-300 cursor-pointer">
+                                        ⬅️ Left Side (270°)
+                                    </button>
+                                    <button type="button" onclick="set360CameraAngle(3)" id="camBtn_3" class="angle-tab-btn px-3 py-1.5 rounded-xl bg-leather border border-white/15 text-[11px] font-bold text-zinc-300 cursor-pointer">
+                                        ⬆️ Front &amp; Rear (0°/180°)
+                                    </button>
+                                </div>
 
-                                <button type="button" onclick="toggleCarBodyZone(this, 'رفرف أمامي يسار (Front Left Fender)')" class="car-zone-btn py-2.5 px-2.5 rounded-xl bg-leather border border-white/15 text-[11px] font-bold text-zinc-200 cursor-pointer" data-i18n="zFLFender">رفرف أمامي يسار (FL Fender)</button>
-                                <button type="button" onclick="toggleCarBodyZone(this, 'باب أمامي يسار (Front Left Door)')" class="car-zone-btn py-2.5 px-2.5 rounded-xl bg-leather border border-white/15 text-[11px] font-bold text-zinc-200 cursor-pointer" data-i18n="zFLDoor">باب أمامي يسار (FL Door)</button>
-                                <button type="button" onclick="toggleCarBodyZone(this, 'باب خلفي يسار (Rear Left Door)')" class="car-zone-btn py-2.5 px-2.5 rounded-xl bg-leather border border-white/15 text-[11px] font-bold text-zinc-200 cursor-pointer" data-i18n="zRLDoor">باب خلفي يسار (RL Door)</button>
-                                <button type="button" onclick="toggleCarBodyZone(this, 'رفرف خلفي يسار (Rear Left Quarter)')" class="car-zone-btn py-2.5 px-2.5 rounded-xl bg-leather border border-white/15 text-[11px] font-bold text-zinc-200 cursor-pointer" data-i18n="zRLFender">رفرف خلفي يسار (RL Fender)</button>
-
-                                <button type="button" onclick="toggleCarBodyZone(this, 'إكصدام خلفي (Rear Bumper)')" class="car-zone-btn py-2.5 px-2.5 rounded-xl bg-leather border border-white/15 text-[11px] font-bold text-zinc-200 cursor-pointer" data-i18n="zRBumper">إكصدام خلفي (Rear Bumper)</button>
-                                <button type="button" onclick="toggleCarBodyZone(this, 'كامل السيارة (Full Body Correction)')" class="car-zone-btn py-2.5 px-2.5 rounded-xl bg-leather border border-gold-400/40 text-[11px] font-extrabold text-gold-300 cursor-pointer col-span-1 sm:col-span-2 md:col-span-3" data-i18n="zFullCar">✨ كامل السيارة (Full Body Restoration)</button>
+                                <button type="button" onclick="toggleZoneById('FULL_BODY')" id="btnFullBody3D"
+                                        class="px-3 py-1.5 rounded-xl bg-gold-400/15 hover:bg-gold-400/30 border border-gold-400/50 text-gold-200 text-[11px] font-extrabold cursor-pointer transition">
+                                    ✨ Select Full Car Body
+                                </button>
                             </div>
+
+                            <svg width="0" height="0" class="absolute">
+                                <defs>
+                                    <linearGradient id="carbonMetallicGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" stop-color="#232734"/>
+                                        <stop offset="50%" stop-color="#141720"/>
+                                        <stop offset="100%" stop-color="#0B0D13"/>
+                                    </linearGradient>
+                                    <linearGradient id="goldInfectedGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" stop-color="#FFF1B8"/>
+                                        <stop offset="50%" stop-color="#F5C518"/>
+                                        <stop offset="100%" stop-color="#B88A00"/>
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+
+                            <!-- VIEW 0: 3D TOP-DOWN ORBIT -->
+                            <div id="simView_0" class="flex flex-col items-center justify-center py-2">
+                                <svg viewBox="0 0 520 250" class="w-full max-w-[540px] h-auto select-none drop-shadow-[0_18px_28px_rgba(0,0,0,0.95)]">
+                                    <rect x="95" y="18" width="58" height="16" rx="6" fill="#07080B" stroke="#333" stroke-width="1.5"/>
+                                    <rect x="367" y="18" width="58" height="16" rx="6" fill="#07080B" stroke="#333" stroke-width="1.5"/>
+                                    <rect x="95" y="216" width="58" height="16" rx="6" fill="#07080B" stroke="#333" stroke-width="1.5"/>
+                                    <rect x="367" y="216" width="58" height="16" rx="6" fill="#07080B" stroke="#333" stroke-width="1.5"/>
+
+                                    <path data-zone="FBUMPER" onclick="toggleZoneById('FBUMPER')" class="svg-car-part" d="M 28,70 Q 12,125 28,180 L 58,192 L 58,58 Z"/>
+                                    <text x="41" y="125" class="svg-part-label" transform="rotate(-90 41 125)">F.Bumper</text>
+
+                                    <path data-zone="HOOD" onclick="toggleZoneById('HOOD')" class="svg-car-part infected" d="M 62,62 L 168,68 L 168,182 L 62,188 Z"/>
+                                    <text x="115" y="125" class="svg-part-label">Front Hood (الكبوت)</text>
+
+                                    <polygon points="172,70 212,78 212,172 172,180" class="svg-car-glass"/>
+                                    <polygon points="348,78 382,70 382,180 348,172" class="svg-car-glass"/>
+
+                                    <rect data-zone="ROOF" onclick="toggleZoneById('ROOF')" class="svg-car-part" x="215" y="78" width="130" height="94" rx="8"/>
+                                    <text x="280" y="125" class="svg-part-label">Roof (السقف)</text>
+
+                                    <path data-zone="TRUNK" onclick="toggleZoneById('TRUNK')" class="svg-car-part" d="M 386,68 L 456,64 L 456,186 L 386,182 Z"/>
+                                    <text x="421" y="125" class="svg-part-label">Trunk (الشنطة)</text>
+
+                                    <path data-zone="RBUMPER" onclick="toggleZoneById('RBUMPER')" class="svg-car-part" d="M 460,60 L 490,72 Q 505,125 490,178 L 460,190 Z"/>
+                                    <text x="478" y="125" class="svg-part-label" transform="rotate(90 478 125)">R.Bumper</text>
+
+                                    <path data-zone="FL_FENDER" onclick="toggleZoneById('FL_FENDER')" class="svg-car-part" d="M 62,56 L 172,62 L 172,34 L 78,34 Q 65,40 62,56 Z"/>
+                                    <text x="118" y="48" class="svg-part-label">FL Fender</text>
+
+                                    <rect data-zone="FL_DOOR" onclick="toggleZoneById('FL_DOOR')" class="svg-car-part" x="175" y="34" width="88" height="32" rx="4"/>
+                                    <text x="219" y="50" class="svg-part-label">FL Door (باب أيسر)</text>
+
+                                    <rect data-zone="RL_DOOR" onclick="toggleZoneById('RL_DOOR')" class="svg-car-part" x="266" y="34" width="88" height="32" rx="4"/>
+                                    <text x="310" y="50" class="svg-part-label">RL Door</text>
+
+                                    <path data-zone="RL_FENDER" onclick="toggleZoneById('RL_FENDER')" class="svg-car-part" d="M 357,34 L 444,34 Q 456,42 456,58 L 357,62 Z"/>
+                                    <text x="406" y="48" class="svg-part-label">RL Fender</text>
+
+                                    <path data-zone="FR_FENDER" onclick="toggleZoneById('FR_FENDER')" class="svg-car-part" d="M 62,194 L 172,188 L 172,216 L 78,216 Q 65,210 62,194 Z"/>
+                                    <text x="118" y="202" class="svg-part-label">FR Fender</text>
+
+                                    <rect data-zone="FR_DOOR" onclick="toggleZoneById('FR_DOOR')" class="svg-car-part" x="175" y="184" width="88" height="32" rx="4"/>
+                                    <text x="219" y="200" class="svg-part-label">FR Door (باب أيمن)</text>
+
+                                    <rect data-zone="RR_DOOR" onclick="toggleZoneById('RR_DOOR')" class="svg-car-part" x="266" y="184" width="88" height="32" rx="4"/>
+                                    <text x="310" y="200" class="svg-part-label">RR Door</text>
+
+                                    <path data-zone="RR_FENDER" onclick="toggleZoneById('RR_FENDER')" class="svg-car-part" d="M 357,188 L 456,192 Q 456,208 444,216 L 357,216 Z"/>
+                                    <text x="406" y="202" class="svg-part-label">RR Fender</text>
+                                </svg>
+                            </div>
+
+                            <!-- VIEW 1: RIGHT SIDE PROFILE -->
+                            <div id="simView_1" class="hidden flex flex-col items-center justify-center py-2">
+                                <svg viewBox="0 0 540 210" class="w-full max-w-[540px] h-auto select-none drop-shadow-[0_18px_28px_rgba(0,0,0,0.95)]">
+                                    <path data-zone="ROOF" onclick="toggleZoneById('ROOF')" class="svg-car-part" d="M 155,78 Q 220,34 345,38 L 415,82 L 385,84 L 335,48 L 215,48 L 175,82 Z"/>
+                                    <text x="285" y="43" class="svg-part-label">Roof &amp; Pillars (السقف)</text>
+                                    <polygon points="182,82 218,52 278,52 278,82" class="svg-car-glass"/>
+                                    <polygon points="284,52 334,52 380,82 284,82" class="svg-car-glass"/>
+                                    <path data-zone="FBUMPER" onclick="toggleZoneById('FBUMPER')" class="svg-car-part" d="M 28,118 L 62,96 L 62,155 L 28,150 Z"/>
+                                    <text x="45" y="128" class="svg-part-label">F.BMP</text>
+                                    <path data-zone="FR_FENDER" onclick="toggleZoneById('FR_FENDER')" class="svg-car-part" d="M 65,94 L 172,82 L 172,155 L 148,155 A 38,38 0 0 0 74,155 L 65,155 Z"/>
+                                    <text x="118" y="105" class="svg-part-label">FR Fender (رفرف يمين)</text>
+                                    <rect data-zone="FR_DOOR" onclick="toggleZoneById('FR_DOOR')" class="svg-car-part" x="175" y="84" width="104" height="70" rx="4"/>
+                                    <text x="227" y="119" class="svg-part-label">Front Right Door (باب أمامي يمين)</text>
+                                    <rect data-zone="RR_DOOR" onclick="toggleZoneById('RR_DOOR')" class="svg-car-part" x="282" y="84" width="98" height="70" rx="4"/>
+                                    <text x="331" y="119" class="svg-part-label">Rear Right Door (باب خلفي يمين)</text>
+                                    <path data-zone="RR_FENDER" onclick="toggleZoneById('RR_FENDER')" class="svg-car-part" d="M 383,84 L 472,88 L 472,155 L 456,155 A 38,38 0 0 0 386,155 Z"/>
+                                    <text x="428" y="105" class="svg-part-label">RR Fender (رفرف خلفي)</text>
+                                    <path data-zone="RBUMPER" onclick="toggleZoneById('RBUMPER')" class="svg-car-part" d="M 475,92 L 510,105 L 510,152 L 475,155 Z"/>
+                                    <text x="492" y="126" class="svg-part-label">R.BMP</text>
+                                    <circle cx="111" cy="155" r="32" fill="#08090C" stroke="#F5C518" stroke-width="2"/>
+                                    <circle cx="111" cy="155" r="16" fill="#181B24" stroke="#666" stroke-width="1.5"/>
+                                    <circle cx="421" cy="155" r="32" fill="#08090C" stroke="#F5C518" stroke-width="2"/>
+                                    <circle cx="421" cy="155" r="16" fill="#181B24" stroke="#666" stroke-width="1.5"/>
+                                </svg>
+                            </div>
+
+                            <!-- VIEW 2: LEFT SIDE PROFILE -->
+                            <div id="simView_2" class="hidden flex flex-col items-center justify-center py-2">
+                                <svg viewBox="0 0 540 210" class="w-full max-w-[540px] h-auto select-none drop-shadow-[0_18px_28px_rgba(0,0,0,0.95)]">
+                                    <path data-zone="ROOF" onclick="toggleZoneById('ROOF')" class="svg-car-part" d="M 125,82 L 195,38 Q 320,34 385,78 L 365,82 L 325,48 L 205,48 L 155,84 Z"/>
+                                    <text x="255" y="43" class="svg-part-label">Roof &amp; Pillars (السقف)</text>
+                                    <polygon points="160,82 206,52 256,52 256,82" class="svg-car-glass"/>
+                                    <polygon points="262,52 322,52 358,82 262,82" class="svg-car-glass"/>
+                                    <path data-zone="RBUMPER" onclick="toggleZoneById('RBUMPER')" class="svg-car-part" d="M 30,105 L 65,92 L 65,155 L 30,152 Z"/>
+                                    <text x="48" y="126" class="svg-part-label">R.BMP</text>
+                                    <path data-zone="RL_FENDER" onclick="toggleZoneById('RL_FENDER')" class="svg-car-part" d="M 68,88 L 157,84 L 157,155 A 38,38 0 0 0 84,155 L 68,155 Z"/>
+                                    <text x="112" y="105" class="svg-part-label">RL Fender (رفرف خلفي يسار)</text>
+                                    <rect data-zone="RL_DOOR" onclick="toggleZoneById('RL_DOOR')" class="svg-car-part" x="160" y="84" width="98" height="70" rx="4"/>
+                                    <text x="209" y="119" class="svg-part-label">Rear Left Door (باب خلفي يسار)</text>
+                                    <rect data-zone="FL_DOOR" onclick="toggleZoneById('FL_DOOR')" class="svg-car-part" x="261" y="84" width="104" height="70" rx="4"/>
+                                    <text x="313" y="119" class="svg-part-label">Front Left Door (باب أمامي يسار)</text>
+                                    <path data-zone="FL_FENDER" onclick="toggleZoneById('FL_FENDER')" class="svg-car-part" d="M 368,82 L 475,94 L 475,155 L 466,155 A 38,38 0 0 0 392,155 L 368,155 Z"/>
+                                    <text x="422" y="105" class="svg-part-label">FL Fender (رفرف أمامي يسار)</text>
+                                    <path data-zone="FBUMPER" onclick="toggleZoneById('FBUMPER')" class="svg-car-part" d="M 478,96 L 512,118 L 512,150 L 478,155 Z"/>
+                                    <text x="495" y="128" class="svg-part-label">F.BMP</text>
+                                    <circle cx="119" cy="155" r="32" fill="#08090C" stroke="#F5C518" stroke-width="2"/>
+                                    <circle cx="119" cy="155" r="16" fill="#181B24" stroke="#666" stroke-width="1.5"/>
+                                    <circle cx="429" cy="155" r="32" fill="#08090C" stroke="#F5C518" stroke-width="2"/>
+                                    <circle cx="429" cy="155" r="16" fill="#181B24" stroke="#666" stroke-width="1.5"/>
+                                </svg>
+                            </div>
+
+                            <!-- VIEW 3: FRONT & REAR -->
+                            <div id="simView_3" class="hidden grid grid-cols-1 sm:grid-cols-2 gap-4 py-2">
+                                <div class="text-center">
+                                    <span class="text-[10px] font-extrabold text-gold-300 uppercase tracking-widest block mb-1">Front Fascia (0°)</span>
+                                    <svg viewBox="0 0 260 180" class="w-full max-w-[250px] mx-auto h-auto select-none">
+                                        <path data-zone="ROOF" onclick="toggleZoneById('ROOF')" class="svg-car-part" d="M 65,25 L 195,25 L 205,40 L 55,40 Z"/>
+                                        <text x="130" y="33" class="svg-part-label">Roof</text>
+                                        <polygon points="58,42 202,42 215,75 45,75" class="svg-car-glass"/>
+                                        <path data-zone="HOOD" onclick="toggleZoneById('HOOD')" class="svg-car-part infected" d="M 45,77 L 215,77 L 222,115 L 38,115 Z"/>
+                                        <text x="130" y="96" class="svg-part-label">Front Hood (الكبوت)</text>
+                                        <rect data-zone="FBUMPER" onclick="toggleZoneById('FBUMPER')" class="svg-car-part" x="32" y="118" width="196" height="36" rx="8"/>
+                                        <text x="130" y="136" class="svg-part-label">Front Bumper (إكصدام أمامي)</text>
+                                    </svg>
+                                </div>
+                                <div class="text-center">
+                                    <span class="text-[10px] font-extrabold text-gold-300 uppercase tracking-widest block mb-1">Rear Fascia (180°)</span>
+                                    <svg viewBox="0 0 260 180" class="w-full max-w-[250px] mx-auto h-auto select-none">
+                                        <path data-zone="ROOF" onclick="toggleZoneById('ROOF')" class="svg-car-part" d="M 65,25 L 195,25 L 205,40 L 55,40 Z"/>
+                                        <text x="130" y="33" class="svg-part-label">Roof</text>
+                                        <polygon points="58,42 202,42 212,72 48,72" class="svg-car-glass"/>
+                                        <path data-zone="TRUNK" onclick="toggleZoneById('TRUNK')" class="svg-car-part" d="M 46,75 L 214,75 L 220,115 L 40,115 Z"/>
+                                        <text x="130" y="95" class="svg-part-label">Rear Trunk (الشنطة)</text>
+                                        <rect data-zone="RBUMPER" onclick="toggleZoneById('RBUMPER')" class="svg-car-part" x="32" y="118" width="196" height="36" rx="8"/>
+                                        <text x="130" y="136" class="svg-part-label">Rear Bumper (إكصدام خلفي)</text>
+                                    </svg>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center gap-3 pt-2 border-t border-white/10">
+                                <span class="text-[10px] font-extrabold uppercase tracking-wider text-gold-300 whitespace-nowrap">🔄 360° Orbit Slider:</span>
+                                <input type="range" id="orbit360Range" min="0" max="3" step="1" value="0"
+                                       oninput="set360CameraAngle(parseInt(this.value, 10))"
+                                       class="w-full accent-gold-400 cursor-pointer h-1.5 bg-white/15 rounded-lg">
+                            </div>
+
+                            <div id="activeSelectedPartsList" class="flex flex-wrap gap-1.5 pt-1"></div>
                         </div>
                     </div>
 
@@ -735,11 +1003,20 @@
                                   class="w-full px-3.5 py-2.5 rounded-xl bg-leather border border-white/15 focus:border-gold-400 text-xs text-white focus:outline-none"></textarea>
                     </div>
 
-                    <!-- STEP 4: CONTACT & SUBMIT -->
+                    <!-- STEP 4: CONTACT + 1-TAP GPS PIN + SUBMIT -->
                     <div class="p-4 sm:p-5 rounded-2xl bg-black/50 border border-white/10 space-y-4">
-                        <span class="text-xs font-extrabold uppercase tracking-wider text-gold-300 block" data-i18n="step4Title">
-                            4. Your Contact Details
-                        </span>
+                        <div class="flex flex-wrap items-center justify-between gap-2">
+                            <span class="text-xs font-extrabold uppercase tracking-wider text-gold-300" data-i18n="step4Title">
+                                4. Your Contact &amp; Optional GPS Parking Pin
+                            </span>
+                            <button type="button" id="gpsBtn_scratch" onclick="captureCustomerGpsPin('scratch')"
+                                    class="px-3 py-1.5 rounded-xl bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-400/40 text-emerald-300 text-xs font-extrabold cursor-pointer flex items-center gap-1.5 transition">
+                                <span>📍</span>
+                                <span id="gpsBtnLbl_scratch" data-i18n="btnShareGps">Share Car's Exact GPS Parking Pin</span>
+                            </button>
+                        </div>
+                        <input type="hidden" id="gpsLink_scratch" value="">
+
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                             <input type="text" id="clientName" required maxlength="60"
                                    data-i18n-placeholder="phClientName"
@@ -773,7 +1050,7 @@
                 </div>
             </div>
 
-            <!-- TAB 2: ON-SITE DRY WASH (ZERO PRICES + CAR TYPE + CLICKABLE BRANDS + MODEL + YEAR + HOURLY SLOTS) -->
+            <!-- TAB 2: ON-SITE DRY WASH -->
             <div id="panelBooking" class="hidden piano-card-gold rounded-3xl p-5 sm:p-8 space-y-6">
                 <div class="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 pb-5">
                     <div>
@@ -857,93 +1134,82 @@
                     </div>
                 </div>
 
-                <!-- ON-SITE MOBILE SERVICE COVERAGE ZONES (ZERO PRICES) -->
-                <div class="p-4 sm:p-5 rounded-2xl bg-black/60 border border-gold-400/35 space-y-3">
-                    <div class="flex flex-wrap items-center justify-between gap-2">
-                        <h4 class="text-xs sm:text-sm font-extrabold text-gold-300 flex items-center gap-2" data-i18n="onSiteFeeTitle">
-                            📍 100% On-Site Mobile Service Coverage (تنفيذ الخدمة في مكان العميل)
-                        </h4>
-                        <span class="text-[11px] text-zinc-300" data-i18n="onSiteFeeSub">Our mobile atelier unit arrives directly at your home or villa parking across our 4 dedicated zones:</span>
-                    </div>
-                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-center">
-                        <div class="p-3 rounded-xl bg-leather border border-white/10">
-                            <span class="block text-xs font-bold text-white" data-i18n="zoneFee1Name">Heliopolis (مصر الجديدة)</span>
-                            <span class="block text-[10px] font-semibold text-gold-300 mt-1" data-i18n="onSiteZoneTag">On-Site Mobile Unit</span>
-                        </div>
-                        <div class="p-3 rounded-xl bg-leather border border-white/10">
-                            <span class="block text-xs font-bold text-white" data-i18n="zoneFee2Name">Nasr City (مدينة نصر)</span>
-                            <span class="block text-[10px] font-semibold text-gold-300 mt-1" data-i18n="onSiteZoneTag">On-Site Mobile Unit</span>
-                        </div>
-                        <div class="p-3 rounded-xl bg-leather border border-white/10">
-                            <span class="block text-xs font-bold text-white" data-i18n="zoneFee3Name">5th Settlement (التجمع الخامس)</span>
-                            <span class="block text-[10px] font-semibold text-gold-300 mt-1" data-i18n="onSiteZoneTag">On-Site Mobile Unit</span>
-                        </div>
-                        <div class="p-3 rounded-xl bg-leather border border-white/10">
-                            <span class="block text-xs font-bold text-white" data-i18n="zoneFee4Name">Madinaty (مدينتي)</span>
-                            <span class="block text-[10px] font-semibold text-gold-300 mt-1" data-i18n="onSiteZoneTag">On-Site Mobile Unit</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Wash Booking Form with Car Type (SUV/Sedan) + Clickable Brand Grid + Model + Year + Hourly Slots -->
+                <!-- Wash Booking Form with Side-Label Sub-Menu + GPS Pin -->
                 <form id="washBookingForm" onsubmit="submitWashBooking(event)" class="space-y-5 pt-1">
                     <input type="hidden" id="selectedPkgName" value="1. Signature Exterior Care">
 
-                    <div class="p-4 sm:p-5 rounded-2xl bg-black/50 border border-white/10 space-y-4">
-                        <label class="block text-[11px] text-zinc-300 font-bold" data-i18n="lblCarBodyType">Select Vehicle Body Type (اختر فئة السيارة — SUV أو سيدان) *</label>
-                        <div class="grid grid-cols-2 sm:grid-cols-5 gap-2" id="washCarTypeGrid">
-                            <button type="button" onclick="selectCarType('wash', this, 'SUV / 4x4')" class="car-type-pill selected py-2.5 px-3 rounded-xl bg-leather border border-white/15 text-xs font-extrabold cursor-pointer flex items-center justify-center gap-1.5">
-                                <span>🚙</span> <span data-i18n="typeSuv">SUV / 4x4</span>
-                            </button>
-                            <button type="button" onclick="selectCarType('wash', this, 'Sedan (سيدان)')" class="car-type-pill py-2.5 px-3 rounded-xl bg-leather border border-white/15 text-xs font-extrabold text-zinc-300 cursor-pointer flex items-center justify-center gap-1.5">
-                                <span>🚗</span> <span data-i18n="typeSedan">Sedan (سيدان)</span>
-                            </button>
-                            <button type="button" onclick="selectCarType('wash', this, 'Coupe / Sport')" class="car-type-pill py-2.5 px-3 rounded-xl bg-leather border border-white/15 text-xs font-extrabold text-zinc-300 cursor-pointer flex items-center justify-center gap-1.5">
-                                <span>🏎️</span> <span data-i18n="typeCoupe">Coupe / Sport</span>
-                            </button>
-                            <button type="button" onclick="selectCarType('wash', this, 'Hatchback')" class="car-type-pill py-2.5 px-3 rounded-xl bg-leather border border-white/15 text-xs font-extrabold text-zinc-300 cursor-pointer flex items-center justify-center gap-1.5">
-                                <span>🚘</span> <span data-i18n="typeHatch">Hatchback</span>
-                            </button>
-                            <button type="button" onclick="selectCarType('wash', this, 'Pickup / Van')" class="car-type-pill py-2.5 px-3 rounded-xl bg-leather border border-white/15 text-xs font-extrabold text-zinc-300 cursor-pointer flex items-center justify-center gap-1.5 col-span-2 sm:col-span-1">
-                                <span>🛻</span> <span data-i18n="typePickup">Pickup / Van</span>
-                            </button>
-                        </div>
-                        <input type="hidden" id="washCarTypeInput" value="SUV / 4x4">
+                    <div class="p-4 sm:p-5 rounded-2xl bg-black/55 border border-white/10 space-y-2.5">
+                        <span class="text-xs font-extrabold uppercase tracking-wider text-gold-300 block mb-1" data-i18n="step1Title">
+                            1. Vehicle Configuration (اضغط لفتح القوائم الفرعية للسيارة)
+                        </span>
 
-                        <!-- Clickable Brand Selector for Wash -->
-                        <div class="space-y-2 pt-2 border-t border-white/10">
-                            <div class="flex flex-wrap items-center justify-between gap-2">
-                                <label class="text-[11px] text-zinc-300 font-bold" data-i18n="lblSelectMakeByClick">Select Car Manufacturer by Click (اختر ماركة السيارة بالضغط) *</label>
-                                <input type="text" oninput="filterBrandGrid('wash', this.value)" placeholder="🔍 Quick filter brand..."
-                                       class="px-2.5 py-1 rounded-lg bg-leather border border-white/15 text-[11px] text-white focus:border-gold-400 focus:outline-none w-44">
+                        <!-- Wash Sub-Menu 1: Body Type -->
+                        <div class="rounded-2xl bg-leather border border-white/15 overflow-hidden">
+                            <button type="button" id="trig_wash_type" onclick="toggleSubMenu('wash', 'type')"
+                                    class="submenu-trigger w-full px-4 py-3 flex items-center justify-between text-start cursor-pointer">
+                                <div class="flex items-center gap-3">
+                                    <span class="w-6 h-6 rounded-lg bg-gold-400/15 border border-gold-400/40 flex items-center justify-center text-[11px] font-black text-gold-300">01</span>
+                                    <div>
+                                        <span class="text-[10px] uppercase tracking-wider text-zinc-400 block font-bold" data-i18n="sideLblType">Car Body Type (فئة الهيكل)</span>
+                                        <strong id="val_wash_type" class="text-xs font-black text-white">SUV / 4x4</strong>
+                                    </div>
+                                </div>
+                                <span id="icon_wash_type" class="text-gold-300 text-xs">▾</span>
+                            </button>
+                            <div id="sub_wash_type" class="hidden p-3 bg-black/70 border-t border-white/10 grid grid-cols-2 sm:grid-cols-5 gap-2">
+                                <button type="button" onclick="pickCarType('wash', 'SUV / 4x4', this)" class="submenu-option selected py-2 px-2.5 rounded-xl bg-leather border border-white/10 text-xs font-bold cursor-pointer">🚙 SUV / 4x4</button>
+                                <button type="button" onclick="pickCarType('wash', 'Sedan (سيدان)', this)" class="submenu-option py-2 px-2.5 rounded-xl bg-leather border border-white/10 text-xs font-bold text-zinc-300 cursor-pointer">🚗 Sedan (سيدان)</button>
+                                <button type="button" onclick="pickCarType('wash', 'Coupe / Sport', this)" class="submenu-option py-2 px-2.5 rounded-xl bg-leather border border-white/10 text-xs font-bold text-zinc-300 cursor-pointer">🏎️ Coupe</button>
+                                <button type="button" onclick="pickCarType('wash', 'Hatchback', this)" class="submenu-option py-2 px-2.5 rounded-xl bg-leather border border-white/10 text-xs font-bold text-zinc-300 cursor-pointer">🚘 Hatchback</button>
+                                <button type="button" onclick="pickCarType('wash', 'Pickup / Van', this)" class="submenu-option py-2 px-2.5 rounded-xl bg-leather border border-white/10 text-xs font-bold text-zinc-300 cursor-pointer">🛻 Pickup</button>
                             </div>
-                            <div id="washBrandGrid" class="grid grid-cols-3 sm:grid-cols-5 md:grid-cols-7 gap-1.5 max-h-44 overflow-y-auto p-2 rounded-xl bg-black/60 border border-white/10">
-                                <!-- Populated via JS -->
-                            </div>
-                            <div class="flex items-center gap-2 pt-1">
-                                <span class="text-[11px] text-zinc-400 whitespace-nowrap" data-i18n="lblSelectedMake">Selected Make:</span>
-                                <input type="text" id="washCarMake" required value="Mercedes-Benz" maxlength="40"
-                                       class="w-full sm:w-64 px-3 py-1.5 rounded-lg bg-leather border border-gold-400/40 text-gold-200 text-xs font-extrabold focus:outline-none">
-                            </div>
+                            <input type="hidden" id="washCarTypeInput" value="SUV / 4x4">
                         </div>
 
-                        <!-- Model + Year Selection + Color -->
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 border-t border-white/10">
-                            <div>
-                                <label class="block text-[11px] text-zinc-300 font-bold mb-1" data-i18n="lblModel">Car Model (موديل السيارة) *</label>
-                                <input type="text" id="washCarModel" required maxlength="40" data-i18n-placeholder="phModel" placeholder="e.g. S580 / X6 / Tiggo 8"
-                                       class="w-full px-3.5 py-2.5 rounded-xl bg-leather border border-white/15 text-white text-xs font-bold focus:border-gold-400 focus:outline-none">
+                        <!-- Wash Sub-Menu 2: Country & Make -->
+                        <div class="rounded-2xl bg-leather border border-white/15 overflow-hidden">
+                            <button type="button" id="trig_wash_origin" onclick="toggleSubMenu('wash', 'origin')"
+                                    class="submenu-trigger w-full px-4 py-3 flex items-center justify-between text-start cursor-pointer">
+                                <div class="flex items-center gap-3">
+                                    <span class="w-6 h-6 rounded-lg bg-gold-400/15 border border-gold-400/40 flex items-center justify-center text-[11px] font-black text-gold-300">02</span>
+                                    <div>
+                                        <span class="text-[10px] uppercase tracking-wider text-zinc-400 block font-bold" data-i18n="sideLblOrigin">Country of Manufacture &amp; Make (بلد المنشأ والماركة)</span>
+                                        <strong id="val_wash_origin" class="text-xs font-black text-gold-300">🇩🇪 Germany &amp; Europe • Mercedes-Benz</strong>
+                                    </div>
+                                </div>
+                                <span id="icon_wash_origin" class="text-gold-300 text-xs">▾</span>
+                            </button>
+                            <div id="sub_wash_origin" class="hidden p-3.5 bg-black/75 border-t border-white/10 space-y-3">
+                                <div id="countries_wash" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2"></div>
+                                <div id="brands_wash" class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-1.5 pt-2 border-t border-white/10"></div>
                             </div>
-                            <div>
-                                <label class="block text-[11px] text-zinc-300 font-bold mb-1" data-i18n="lblYear">Manufacture Year (اختر سنة الصنع) *</label>
-                                <select id="washCarYear" required class="w-full px-3.5 py-2.5 rounded-xl bg-leather border border-white/15 text-gold-200 text-xs font-extrabold focus:border-gold-400 focus:outline-none">
-                                    <!-- Populated 2027 down to 2000 -->
-                                </select>
-                            </div>
-                            <div>
-                                <label class="block text-[11px] text-zinc-300 font-bold mb-1" data-i18n="lblColorSimple">Car Color (اللون) *</label>
-                                <input type="text" id="washCarColor" required maxlength="30" placeholder="e.g. Black / White / Grey"
-                                       class="w-full px-3.5 py-2.5 rounded-xl bg-leather border border-white/15 text-white text-xs font-bold focus:border-gold-400 focus:outline-none">
+                            <input type="hidden" id="washCountryInput" value="Germany & Europe">
+                            <input type="hidden" id="washCarMake" value="Mercedes-Benz">
+                        </div>
+
+                        <!-- Wash Sub-Menu 3: Model, Year & Color -->
+                        <div class="rounded-2xl bg-leather border border-white/15 overflow-hidden">
+                            <button type="button" id="trig_wash_model" onclick="toggleSubMenu('wash', 'model')"
+                                    class="submenu-trigger open w-full px-4 py-3 flex items-center justify-between text-start cursor-pointer">
+                                <div class="flex items-center gap-3">
+                                    <span class="w-6 h-6 rounded-lg bg-gold-400/15 border border-gold-400/40 flex items-center justify-center text-[11px] font-black text-gold-300">03</span>
+                                    <div>
+                                        <span class="text-[10px] uppercase tracking-wider text-zinc-400 block font-bold" data-i18n="sideLblModelYear">Vehicle Model, Year &amp; Color (الموديل والسنة واللون)</span>
+                                        <strong id="val_wash_model" class="text-xs font-black text-white">Select Model &amp; Year</strong>
+                                    </div>
+                                </div>
+                                <span id="icon_wash_model" class="text-gold-300 text-xs rotate-180">▾</span>
+                            </button>
+                            <div id="sub_wash_model" class="p-3.5 bg-black/75 border-t border-white/10 space-y-3">
+                                <div id="models_wash" class="flex flex-wrap gap-1.5"></div>
+                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                                    <input type="text" id="washCarModel" required maxlength="40" oninput="refreshConfigSummary('wash')" placeholder="Car Model (الموديل) *"
+                                           class="px-3.5 py-2.5 rounded-xl bg-leather border border-gold-400/40 text-white text-xs font-bold focus:outline-none">
+                                    <select id="washCarYear" required onchange="refreshConfigSummary('wash')"
+                                            class="px-3.5 py-2.5 rounded-xl bg-leather border border-white/15 text-gold-200 text-xs font-extrabold focus:outline-none"></select>
+                                    <input type="text" id="washCarColor" required maxlength="30" placeholder="Car Color (اللون) *"
+                                           class="px-3.5 py-2.5 rounded-xl bg-leather border border-white/15 text-white text-xs font-bold focus:outline-none">
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -984,6 +1250,17 @@
                         </div>
                     </div>
 
+                    <!-- GPS Pin Button for Wash Form -->
+                    <div class="flex flex-wrap items-center justify-between gap-2 pt-1">
+                        <span class="text-xs font-extrabold uppercase tracking-wider text-gold-300" data-i18n="step4Title">Contact &amp; Exact Parking Pin</span>
+                        <button type="button" id="gpsBtn_wash" onclick="captureCustomerGpsPin('wash')"
+                                class="px-3 py-1.5 rounded-xl bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-400/40 text-emerald-300 text-xs font-extrabold cursor-pointer flex items-center gap-1.5 transition">
+                            <span>📍</span>
+                            <span id="gpsBtnLbl_wash" data-i18n="btnShareGps">Share Car's Exact GPS Parking Pin</span>
+                        </button>
+                    </div>
+                    <input type="hidden" id="gpsLink_wash" value="">
+
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
                         <input type="text" id="washClientName" required maxlength="60" data-i18n-placeholder="phWashName" placeholder="Your Full Name *"
                                class="px-4 py-3 rounded-xl bg-leather border border-white/15 text-white text-xs font-bold focus:border-gold-400 focus:outline-none">
@@ -1013,7 +1290,7 @@
 
     </main>
 
-    <!-- BRIGHT, CLEAN CUSTOMER FOOTER (NO CRM BUTTON IN FOOTER) -->
+    <!-- BRIGHT, CLEAN CUSTOMER FOOTER -->
     <footer class="border-t border-gold-400/30 bg-obsidian py-10 px-4">
         <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-start">
             <div>
@@ -1118,9 +1395,9 @@ service cloud.firestore {
                         <span class="text-[10px] text-zinc-300 uppercase font-bold">On-Site Wash</span>
                         <p id="kpiWashLeads" class="text-2xl font-black text-white mt-1">0</p>
                     </div>
-                    <div class="p-3.5 rounded-2xl bg-black/60 border border-white/10">
-                        <span class="text-[10px] text-zinc-400 uppercase font-bold">Sync Engine</span>
-                        <p id="kpiSyncStatusText" class="text-xs font-mono font-bold text-emerald-400 mt-2">Connecting...</p>
+                    <div class="p-3.5 rounded-2xl bg-black/60 border border-emerald-500/30">
+                        <span class="text-[10px] text-emerald-300 uppercase font-bold">Sync &amp; Telegram Bot</span>
+                        <p id="kpiSyncStatusText" class="text-xs font-mono font-bold text-emerald-400 mt-2">🟢 Cloud + Bot Active</p>
                     </div>
                 </div>
 
@@ -1141,12 +1418,15 @@ service cloud.firestore {
                             <option value="DRY_WASH">Dry Wash</option>
                         </select>
                     </div>
-                    <div class="flex gap-2">
+                    <div class="flex flex-wrap gap-2">
                         <button type="button" onclick="forceCloudRefresh()" class="px-3 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 text-gold-200 text-xs font-bold cursor-pointer">
                             🔄 Sync
                         </button>
+                        <button type="button" id="testTgBtn" onclick="testTelegramPushAlert()" class="px-3 py-2 rounded-xl bg-sky-500/20 hover:bg-sky-500/30 border border-sky-400/40 text-sky-200 text-xs font-extrabold cursor-pointer">
+                            📲 Test Telegram Alert
+                        </button>
                         <button type="button" onclick="simulateIncomingVipLead()" class="px-3 py-2 rounded-xl bg-gold-400/15 hover:bg-gold-400/25 border border-gold-400/30 text-gold-200 text-xs font-bold cursor-pointer">
-                            ⚡ Test Lead
+                            ⚡ Simulate Lead
                         </button>
                     </div>
                 </div>
@@ -1156,7 +1436,7 @@ service cloud.firestore {
         </div>
     </div>
 
-    <!-- OPTICAL LOUPE LIGHTBOX WITH 1X / 2X / 3X ZOOM -->
+    <!-- OPTICAL LOUPE LIGHTBOX & VIP CERTIFICATE PREVIEW MODAL -->
     <div id="mediaLightbox" class="fixed inset-0 z-50 hidden bg-black/95 backdrop-blur-xl flex items-center justify-center p-4" onclick="closeMediaLightbox()">
         <div class="max-w-4xl w-full bg-leather border border-gold-400/40 rounded-3xl p-4 space-y-3" onclick="event.stopPropagation()">
             <div class="flex flex-wrap items-center justify-between gap-2">
@@ -1165,8 +1445,8 @@ service cloud.firestore {
                     <button type="button" onclick="setLightboxZoom(1)" class="px-2.5 py-1 rounded-lg bg-white/10 hover:bg-gold-400/20 text-white text-xs font-bold cursor-pointer">1x</button>
                     <button type="button" onclick="setLightboxZoom(2)" class="px-2.5 py-1 rounded-lg bg-white/10 hover:bg-gold-400/20 text-gold-200 text-xs font-bold cursor-pointer">🔍 2x</button>
                     <button type="button" onclick="setLightboxZoom(3)" class="px-2.5 py-1 rounded-lg bg-white/10 hover:bg-gold-400/20 text-gold-300 text-xs font-bold cursor-pointer">🔬 3x</button>
-                    <a id="lightboxDownloadBtn" href="#" download="DrCare_Inspection_Photo.jpg" class="px-3 py-1 rounded-lg bg-gold-400/20 border border-gold-400/40 text-gold-200 text-xs font-bold hover:bg-gold-400/30">
-                        ⬇ Save
+                    <a id="lightboxDownloadBtn" href="#" download="DrCare_Report.png" class="px-3 py-1 rounded-lg bg-gold-400 text-black text-xs font-extrabold hover:bg-gold-300">
+                        ⬇ Download Image
                     </a>
                     <button type="button" onclick="closeMediaLightbox()" class="px-3 py-1 rounded-lg bg-rose-500/20 text-rose-200 text-xs font-bold cursor-pointer">✕</button>
                 </div>
@@ -1178,7 +1458,7 @@ service cloud.firestore {
     <!-- APPLICATION SCRIPT -->
     <script>
         // =========================================================================
-        // 1. FIREBASE INITIALIZATION
+        // 1. FIREBASE & TELEGRAM BOT CONFIGURATION
         // =========================================================================
         const firebaseConfig = {
             apiKey: "AIzaSyAmLj9vj6jn9ASbWcUL2CjtJX0n_tG8W18",
@@ -1190,6 +1470,10 @@ service cloud.firestore {
             measurementId: "G-K6MEN28BJ0"
         };
 
+        // LIVE TELEGRAM BOT CREDENTIALS
+        const TELEGRAM_BOT_TOKEN = "8260311589:AAFcCkg34sDF4iPW2dJ7YfzDyORR6LEiKcs";
+        const TELEGRAM_CHAT_ID = "811622618";
+
         let db = null;
 
         try {
@@ -1200,6 +1484,40 @@ service cloud.firestore {
             db.settings({ experimentalForceLongPolling: true });
         } catch (err) {
             console.warn("Firebase fallback:", err);
+        }
+
+        // Dynamic PWA Manifest Injection
+        let deferredPwaPrompt = null;
+        try {
+            const manifestObj = {
+                name: "DR. CARE — Bespoke Paint Atelier",
+                short_name: "DR. CARE",
+                start_url: window.location.href,
+                display: "standalone",
+                background_color: "#050507",
+                theme_color: "#F5C518",
+                icons: [
+                    { src: new URL('logo.jpg', window.location.href).href, sizes: "192x192", type: "image/jpeg" },
+                    { src: new URL('logo.jpg', window.location.href).href, sizes: "512x512", type: "image/jpeg" }
+                ]
+            };
+            const blob = new Blob([JSON.stringify(manifestObj)], { type: 'application/json' });
+            document.getElementById('pwaManifestLink').href = URL.createObjectURL(blob);
+        } catch (e) {}
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPwaPrompt = e;
+            const btn = document.getElementById('pwaInstallBtn');
+            if (btn) btn.classList.remove('hidden');
+        });
+
+        async function triggerPwaInstall() {
+            if (!deferredPwaPrompt) return;
+            deferredPwaPrompt.prompt();
+            await deferredPwaPrompt.userChoice;
+            deferredPwaPrompt = null;
+            document.getElementById('pwaInstallBtn').classList.add('hidden');
         }
 
         function updateAmbientSpotlight(e) {
@@ -1221,113 +1539,619 @@ service cloud.firestore {
         }
 
         // =========================================================================
-        // 2. ALL SEPARATED CAR BRANDS (GLOBAL + FAMOUS CHINESE MAKES) & YEARS
+        // 2. INSTANT TELEGRAM PUSH NOTIFICATION ENGINE (PHASE 2 ACTIVE)
         // =========================================================================
-        const ALL_CAR_BRANDS = [
-            // European & Luxury
-            "Mercedes-Benz", "BMW", "Porsche", "Range Rover", "Audi", "Volkswagen",
-            "Skoda", "Seat", "Cupra", "Peugeot", "Opel", "Renault", "Citroen",
-            "Fiat", "Alfa Romeo", "Volvo", "Mini", "Jaguar", "Maserati",
-            // Japanese & Korean
-            "Toyota", "Lexus", "Hyundai", "Kia", "Nissan", "Honda", "Mitsubishi",
-            "Mazda", "Suzuki", "Subaru", "Infiniti", "Genesis",
-            // American
-            "Jeep", "Chevrolet", "Ford", "Dodge", "Cadillac", "GMC", "Tesla",
-            // Famous Chinese Brands (Each Individual Brand Separated)
-            "MG", "Chery", "Jetour", "Haval", "Geely", "BYD", "Changan",
-            "GAC", "BAIC", "ZEEKR", "Xiaomi", "Exeed", "Jaecoo", "Omoda",
-            "Hongqi", "JAC", "DFSK", "Bestune", "Soueast", "Forthing", "Tank",
-            // Custom
-            "Other (أخرى)"
-        ];
+        async function dispatchTelegramInstantAlert(lead) {
+            if (!TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID) return;
 
-        function populateBrandsAndYears() {
-            // Render Brand Buttons for Scratch & Wash Tabs
-            ['scratch', 'wash'].forEach(prefix => {
-                const grid = document.getElementById(prefix + 'BrandGrid');
-                if (!grid) return;
-                grid.innerHTML = ALL_CAR_BRANDS.map((brand, idx) => `
-                    <button type="button"
-                            data-brand="${escapeHtml(brand)}"
-                            onclick="selectBrandPill('${prefix}', this, '${escapeHtml(brand)}')"
-                            class="brand-pill ${idx === 0 ? 'selected' : 'text-zinc-300'} py-2 px-2 rounded-lg bg-leather border border-white/10 text-[11px] font-bold truncate text-center cursor-pointer hover:border-gold-400/50"
-                            title="${escapeHtml(brand)}">
-                        ${escapeHtml(brand)}
-                    </button>
-                `).join('');
+            const isScratch = lead.requestType === 'SCRATCH_DIAGNOSIS';
+            const headerEmoji = isScratch ? '📸 *NEW 360° SCRATCH DIAGNOSIS*' : '✨ *NEW ON-SITE DRY WASH BOOKING*';
+            const cleanPhone = String(lead.clientPhone || '').replace(/[^0-9]/g, '');
+            const intlPhone = cleanPhone.startsWith('0') ? '2' + cleanPhone : cleanPhone;
+            const waDirectLink = `https://wa.me/${intlPhone}`;
+            const photoCount = (lead.media || []).length;
+
+            const msgLines = [
+                `🚨 *DR. CARE ATELIER LIVE ALERT* 🚨`,
+                `${headerEmoji}`,
+                `━━━━━━━━━━━━━━━━━━━━`,
+                `🎫 *Pass ID:* \`${lead.id}\``,
+                `👤 *Client:* ${lead.clientName}`,
+                `📞 *Phone:* \`${lead.clientPhone}\``,
+                `🚗 *Vehicle:* ${lead.carBrand}`,
+                `📅 *Model & Year:* ${lead.carModel}`,
+                `🎨 *Finish / Tier:* ${lead.carColor}`,
+                `📍 *Zone:* ${lead.zone}`,
+                lead.gpsLink ? `🗺️ *GPS Pin:* [Open Google Maps](${lead.gpsLink})` : `🗺️ *GPS Pin:* Not attached`,
+                isScratch ? `🖼️ *Attached Photos:* ${photoCount} High-Res Photo(s)` : ``,
+                `━━━━━━━━━━━━━━━━━━━━`,
+                `📝 *Details & 3D Panels:*`,
+                `${lead.notes}`,
+                `━━━━━━━━━━━━━━━━━━━━`,
+                `💬 [Tap to Message Client on WhatsApp](${waDirectLink})`
+            ].filter(Boolean).join('\n');
+
+            try {
+                await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        chat_id: TELEGRAM_CHAT_ID,
+                        text: msgLines,
+                        parse_mode: 'Markdown',
+                        disable_web_page_preview: true
+                    })
+                });
+            } catch (err) {
+                console.warn("Telegram alert fallback:", err);
+            }
+        }
+
+        async function testTelegramPushAlert() {
+            const btn = document.getElementById('testTgBtn');
+            const orig = btn.textContent;
+            btn.textContent = '⏳ Sending to Phone...';
+            await dispatchTelegramInstantAlert({
+                id: 'DC-TEST',
+                requestType: 'SCRATCH_DIAGNOSIS',
+                clientName: 'Mr. Alfy (Executive Test)',
+                clientPhone: '01003300600',
+                carBrand: 'SUV / 4x4 • Germany & Europe • Porsche',
+                carModel: 'Cayenne Turbo GT • 2026',
+                carColor: 'Obsidian Black (أسود)',
+                zone: 'Heliopolis (مصر الجديدة)',
+                gpsLink: 'https://www.google.com/maps?q=30.0876,31.3282',
+                media: [{}, {}],
+                notes: '✅ Your Telegram Bot is connected & firing live notifications to your phone!'
+            });
+            btn.textContent = '✓ Sent to Telegram!';
+            setTimeout(() => { btn.textContent = orig; }, 2500);
+        }
+
+        // =========================================================================
+        // 3. 1-TAP GPS PARKING PIN CAPTURE
+        // =========================================================================
+        function captureCustomerGpsPin(formPrefix) {
+            const btn = document.getElementById(`gpsBtn_${formPrefix}`);
+            const lbl = document.getElementById(`gpsBtnLbl_${formPrefix}`);
+            const hiddenInp = document.getElementById(`gpsLink_${formPrefix}`);
+
+            if (!navigator.geolocation) {
+                alert(currentLang === 'ar' ? 'المتصفح لا يدعم تحديد الموقع.' : 'Geolocation is not supported by your browser.');
+                return;
+            }
+
+            lbl.textContent = currentLang === 'ar' ? 'جاري تحديد موقع السيارة...' : 'Locating car pin...';
+
+            navigator.geolocation.getCurrentPosition(
+                (pos) => {
+                    const lat = pos.coords.latitude.toFixed(6);
+                    const lng = pos.coords.longitude.toFixed(6);
+                    const mapsUrl = `https://www.google.com/maps?q=${lat},${lng}`;
+                    hiddenInp.value = mapsUrl;
+                    btn.className = "px-3 py-1.5 rounded-xl bg-emerald-500 text-black text-xs font-extrabold cursor-pointer flex items-center gap-1.5 shadow-lg";
+                    lbl.textContent = currentLang === 'ar' ? '✓ تم حفظ موقع ركن السيارة بدقة' : '✓ Exact GPS Pin Locked';
+                },
+                () => {
+                    lbl.textContent = currentLang === 'ar' ? 'تعذر التقاط الـ GPS (يرجى تفعيل الموقع)' : 'GPS permission denied — tap to retry';
+                },
+                { enableHighAccuracy: true, timeout: 10000 }
+            );
+        }
+
+        // =========================================================================
+        // 4. VIP DIAGNOSTIC CERTIFICATE GENERATOR (HTML5 CANVAS -> PNG)
+        // =========================================================================
+        function generateVipCertificateCard(leadId) {
+            const lead = memoryLeadsCache.find(l => l.id === leadId);
+            if (!lead) return;
+
+            const canvas = document.createElement('canvas');
+            canvas.width = 1080;
+            canvas.height = 1350;
+            const ctx = canvas.getContext('2d');
+
+            const bgGrad = ctx.createLinearGradient(0, 0, 1080, 1350);
+            bgGrad.addColorStop(0, '#07080C');
+            bgGrad.addColorStop(0.5, '#10121A');
+            bgGrad.addColorStop(1, '#050507');
+            ctx.fillStyle = bgGrad;
+            ctx.fillRect(0, 0, 1080, 1350);
+
+            ctx.strokeStyle = '#F5C518';
+            ctx.lineWidth = 5;
+            ctx.strokeRect(36, 36, 1008, 1278);
+            ctx.strokeStyle = 'rgba(245, 197, 24, 0.35)';
+            ctx.lineWidth = 2;
+            ctx.strokeRect(52, 52, 976, 1246);
+
+            ctx.fillStyle = '#F5C518';
+            ctx.font = '900 54px Cinzel, serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('DR. CARE ATELIER', 540, 145);
+
+            ctx.fillStyle = '#E5E7EB';
+            ctx.font = '700 20px "Plus Jakarta Sans", sans-serif';
+            ctx.fillText('OFFICIAL OPTICAL PAINT TELEMETRY & RESTORATION PASS', 540, 188);
+
+            ctx.strokeStyle = 'rgba(245, 197, 24, 0.45)';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(120, 225);
+            ctx.lineTo(960, 225);
+            ctx.stroke();
+
+            ctx.fillStyle = 'rgba(245, 197, 24, 0.15)';
+            ctx.fillRect(340, 250, 400, 56);
+            ctx.strokeStyle = '#F5C518';
+            ctx.strokeRect(340, 250, 400, 56);
+            ctx.fillStyle = '#FFF1B8';
+            ctx.font = '800 26px monospace';
+            ctx.fillText(`PASS ID: ${lead.id}`, 540, 287);
+
+            ctx.textAlign = 'left';
+            const startX = 100;
+            let curY = 375;
+
+            const drawField = (label, value, highlight = false) => {
+                ctx.fillStyle = '#9CA3AF';
+                ctx.font = '700 20px "Plus Jakarta Sans", Cairo, sans-serif';
+                ctx.fillText(label, startX, curY);
+                ctx.fillStyle = highlight ? '#F5C518' : '#FFFFFF';
+                ctx.font = '800 28px "Plus Jakarta Sans", Cairo, sans-serif';
+                ctx.fillText(String(value || '-').slice(0, 52), startX, curY + 38);
+                curY += 105;
+            };
+
+            drawField('VEHICLE OWNER (مالك السيارة):', lead.clientName);
+            drawField('VEHICLE PROFILE (السيارة والموديل):', `${lead.carBrand} — ${lead.carModel}`, true);
+            drawField('PAINT FINISH / PACKAGE (اللون أو الباقة):', lead.carColor);
+            drawField('SERVICE ZONE (نطاق الخدمة المتنقلة):', lead.zone);
+
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.04)';
+            ctx.fillRect(90, curY - 10, 900, 250);
+            ctx.strokeStyle = 'rgba(245, 197, 24, 0.35)';
+            ctx.strokeRect(90, curY - 10, 900, 250);
+
+            ctx.fillStyle = '#F5C518';
+            ctx.font = '800 22px "Plus Jakarta Sans", Cairo, sans-serif';
+            ctx.fillText('360° 3D INSPECTION & TREATMENT NOTES:', 120, curY + 35);
+
+            ctx.fillStyle = '#F3F4F6';
+            ctx.font = '600 21px "Plus Jakarta Sans", Cairo, sans-serif';
+            const noteLines = String(lead.notes || '').split('\n');
+            let lineY = curY + 80;
+            noteLines.forEach(line => {
+                ctx.fillText(line.slice(0, 68), 120, lineY);
+                lineY += 42;
             });
 
-            // Populate Year Dropdowns (2027 down to 2000)
+            curY += 300;
+
+            ctx.fillStyle = 'rgba(16, 185, 129, 0.14)';
+            ctx.fillRect(90, curY, 900, 95);
+            ctx.strokeStyle = '#10B981';
+            ctx.strokeRect(90, curY, 900, 95);
+
+            ctx.textAlign = 'center';
+            ctx.fillStyle = '#6EE7B7';
+            ctx.font = '800 20px "Plus Jakarta Sans", sans-serif';
+            ctx.fillText('AUTHORIZED ATELIER RESTORATION ESTIMATE / STATUS', 540, curY + 35);
+            ctx.fillStyle = '#FFFFFF';
+            ctx.font = '900 32px "Plus Jakarta Sans", Cairo, sans-serif';
+            ctx.fillText(lead.estimatedQuote || 'BESPOKE ASSESSMENT IN PROGRESS', 540, curY + 76);
+
+            ctx.fillStyle = '#F5C518';
+            ctx.font = 'italic 900 28px Montserrat, sans-serif';
+            ctx.fillText('CERTIFIED SYSTEMS:   RUPES (ITALY)   •   MEGUIAR\'S (USA)', 540, 1220);
+
+            ctx.fillStyle = '#9CA3AF';
+            ctx.font = '600 18px "Plus Jakarta Sans", sans-serif';
+            ctx.fillText('Save Your Investment Now — 100% Original Factory Paint Preservation', 540, 1265);
+
+            const certDataUrl = canvas.toDataURL('image/png');
+            showLightboxContent({
+                url: certDataUrl,
+                resolution: `VIP CERTIFICATE (${lead.id})`
+            });
+        }
+
+        // =========================================================================
+        // 5. CASCADING SIDE-LABEL SUB-MENU DATA (COUNTRY -> BRAND -> MODELS)
+        // =========================================================================
+        const CAR_CATALOG_BY_COUNTRY = {
+            "Germany & Europe": {
+                flag: "🇩🇪",
+                labelEn: "Germany & Europe",
+                labelAr: "ألمانيا وأوروبا",
+                brands: {
+                    "Mercedes-Benz": ["S-Class", "E-Class", "C-Class", "CLA", "GLA", "GLC", "GLE", "GLS", "G-Class", "EQS / EQE"],
+                    "BMW": ["7 Series", "5 Series", "3 Series", "X1", "X3", "X4", "X5", "X6", "X7", "iX / i7"],
+                    "Porsche": ["911", "Cayenne", "Macan", "Panamera", "Taycan"],
+                    "Range Rover": ["Vogue", "Sport", "Velar", "Evoque", "Defender"],
+                    "Audi": ["A3", "A4", "A6", "A8", "Q3", "Q5", "Q7", "Q8", "e-tron"],
+                    "Volkswagen": ["Tiguan", "Passat", "Golf", "T-Roc", "Touareg", "ID.4", "ID.6"],
+                    "Skoda": ["Octavia", "Kodiaq", "Superb", "Kamiq", "Karoq"],
+                    "Seat": ["Ateca", "Leon", "Arona", "Ibiza", "Tarraco"],
+                    "Cupra": ["Formentor", "Leon", "Terramar"],
+                    "Peugeot": ["3008", "5008", "2008", "408", "508", "301"],
+                    "Opel": ["Grandland", "Mokka", "Crossland", "Astra", "Corsa"],
+                    "Renault": ["Austral", "Megane", "Duster", "Kardian", "Taliant"],
+                    "Citroen": ["C5 Aircross", "C4X", "C4", "C3 Aircross", "C-Elysee"],
+                    "Fiat": ["Tipo", "500X", "500"],
+                    "Volvo": ["XC90", "XC60", "XC40", "EX30"],
+                    "Alfa Romeo": ["Tonale", "Stelvio", "Giulia"],
+                    "Mini": ["Cooper", "Countryman"]
+                }
+            },
+            "China & EV": {
+                flag: "🇨🇳",
+                labelEn: "China & EV",
+                labelAr: "الصين والكهربائية",
+                brands: {
+                    "MG": ["ZS", "RX5 Plus", "MG 5", "MG 6", "MG 7", "MG One", "HS", "MG 4 EV"],
+                    "Chery": ["Tiggo 8 Pro", "Tiggo 7 Pro", "Tiggo 4 Pro", "Tiggo 3", "Arrizo 5"],
+                    "Jetour": ["T2", "Dashing", "X70 Plus", "X90 Plus", "T1"],
+                    "Haval": ["Jolion", "Jolion Pro", "H6", "H6 GT", "Dargo"],
+                    "Geely": ["Coolray", "Starray", "Okavango", "Gx3 Pro", "Emgrand"],
+                    "BYD": ["Song Plus", "Yuan Plus", "Seal", "Han", "Dolphin", "F3"],
+                    "Changan": ["UNI-T", "UNI-K", "UNI-V", "CS55 Plus", "CS35 Plus"],
+                    "GAC": ["Empow", "Emzoom", "Emkoo", "GS4"],
+                    "BAIC": ["BJ30", "X7", "X55", "U5 Plus"],
+                    "ZEEKR": ["001", "X", "007"],
+                    "Xiaomi": ["SU7", "SU7 Max", "SU7 Ultra"],
+                    "Exeed": ["RX", "VX", "TXL", "LX"],
+                    "Jaecoo": ["J7", "J8"],
+                    "Omoda": ["C5", "E5"],
+                    "Hongqi": ["H9", "E-HS9", "HS5", "H5"],
+                    "Tank": ["Tank 300", "Tank 500"],
+                    "JAC": ["JS4", "JS3", "J7"],
+                    "DFSK": ["Eagle Pro", "Glory 330S"],
+                    "Bestune": ["T77 Pro", "B70"],
+                    "Soueast": ["S09", "S07"],
+                    "Forthing": ["T5 Evo"]
+                }
+            },
+            "Japan": {
+                flag: "🇯🇵",
+                labelEn: "Japan",
+                labelAr: "اليابان",
+                brands: {
+                    "Toyota": ["Corolla", "Land Cruiser", "Prado", "RAV4", "Fortuner", "Camry", "Yaris", "Belta"],
+                    "Lexus": ["LX600", "RX", "NX", "ES", "LS"],
+                    "Nissan": ["Qashqai", "X-Trail", "Juke", "Sunny", "Sentra", "Patrol"],
+                    "Honda": ["Civic", "CR-V", "ZR-V", "Accord", "City"],
+                    "Mitsubishi": ["Eclipse Cross", "Xpander", "Atrage", "Montero Sport"],
+                    "Mazda": ["Mazda 3", "CX-3", "CX-5", "CX-9"],
+                    "Suzuki": ["Fronx", "Grand Vitara", "Jimny", "Swift", "Dzire", "Ciaz"],
+                    "Subaru": ["XV", "Crosstrek", "Forester", "Impreza"]
+                }
+            },
+            "Korea": {
+                flag: "🇰🇷",
+                labelEn: "Korea",
+                labelAr: "كوريا",
+                brands: {
+                    "Hyundai": ["Tucson", "Elantra CN7", "Elantra AD", "Santa Fe", "Kona", "Accent RB", "Bayon", "Ioniq 5"],
+                    "Kia": ["Sportage", "XCeed", "Cerato", "Sorento", "Seltos", "K5", "EV6"],
+                    "Genesis": ["GV80", "GV70", "G80", "G90"],
+                    "KGM / SsangYong": ["Torres", "Tivoli"]
+                }
+            },
+            "USA": {
+                flag: "🇺🇸",
+                labelEn: "USA",
+                labelAr: "أمريكا",
+                brands: {
+                    "Jeep": ["Grand Cherokee", "Wrangler", "Renegade", "Compass"],
+                    "Chevrolet": ["Captiva", "Optra", "Tahoe", "Malibu"],
+                    "Ford": ["Kuga", "Focus", "Territory", "Mustang", "Bronco", "Explorer"],
+                    "Tesla": ["Model Y", "Model 3", "Model S", "Model X", "Cybertruck"],
+                    "Cadillac": ["Escalade", "CT5", "XT6"],
+                    "Dodge": ["Challenger", "Charger", "Durango"],
+                    "GMC": ["Yukon", "Sierra"]
+                }
+            },
+            "Other": {
+                flag: "🌍",
+                labelEn: "Other Make",
+                labelAr: "ماركة أخرى",
+                brands: {
+                    "Custom Make": ["Custom Model"]
+                }
+            }
+        };
+
+        let activeState = {
+            scratch: { country: "Germany & Europe", brand: "Mercedes-Benz" },
+            wash: { country: "Germany & Europe", brand: "Mercedes-Benz" }
+        };
+
+        function initCascadingVehicleMenus() {
+            ['scratch', 'wash'].forEach(prefix => {
+                renderCountryPills(prefix);
+                renderBrandPillsForCountry(prefix, activeState[prefix].country);
+                renderModelPillsForBrand(prefix, activeState[prefix].country, activeState[prefix].brand);
+            });
+
             const yearOptions = [];
             for (let y = 2027; y >= 2000; y--) {
                 yearOptions.push(`<option value="${y}" ${y === 2026 ? 'selected' : ''}>${y}</option>`);
             }
             yearOptions.push(`<option value="Before 2000">Before 2000</option>`);
+            document.getElementById('carYear').innerHTML = yearOptions.join('');
+            document.getElementById('washCarYear').innerHTML = yearOptions.join('');
 
-            const scratchYear = document.getElementById('carYear');
-            const washYear = document.getElementById('washCarYear');
-            if (scratchYear) scratchYear.innerHTML = yearOptions.join('');
-            if (washYear) washYear.innerHTML = yearOptions.join('');
+            refreshConfigSummary('scratch');
+            refreshConfigSummary('wash');
         }
 
-        function selectCarType(prefix, btnEl, typeVal) {
-            const grid = document.getElementById(prefix + 'CarTypeGrid');
-            if (grid) {
-                grid.querySelectorAll('.car-type-pill').forEach(b => {
-                    b.classList.remove('selected');
-                    b.classList.add('text-zinc-300');
-                });
-            }
-            btnEl.classList.add('selected');
-            btnEl.classList.remove('text-zinc-300');
-            const inp = document.getElementById(prefix + 'CarTypeInput');
-            if (inp) inp.value = typeVal;
-            updateScratchCarBadge();
-        }
+        function toggleSubMenu(prefix, section) {
+            const sections = ['type', 'origin', 'model'];
+            sections.forEach(sec => {
+                const subEl = document.getElementById(`sub_${prefix}_${sec}`);
+                const trigEl = document.getElementById(`trig_${prefix}_${sec}`);
+                const iconEl = document.getElementById(`icon_${prefix}_${sec}`);
+                if (!subEl || !trigEl) return;
 
-        function selectBrandPill(prefix, btnEl, brandName) {
-            const grid = document.getElementById(prefix + 'BrandGrid');
-            if (grid) {
-                grid.querySelectorAll('.brand-pill').forEach(b => {
-                    b.classList.remove('selected');
-                    b.classList.add('text-zinc-300');
-                });
-            }
-            btnEl.classList.add('selected');
-            btnEl.classList.remove('text-zinc-300');
-
-            const targetInput = document.getElementById(prefix === 'scratch' ? 'carBrand' : 'washCarMake');
-            if (targetInput) {
-                if (brandName.startsWith('Other')) {
-                    targetInput.value = '';
-                    targetInput.focus();
+                if (sec === section) {
+                    const isHidden = subEl.classList.contains('hidden');
+                    subEl.classList.toggle('hidden', !isHidden);
+                    trigEl.classList.toggle('open', isHidden);
+                    if (iconEl) iconEl.classList.toggle('rotate-180', isHidden);
                 } else {
-                    targetInput.value = brandName;
+                    subEl.classList.add('hidden');
+                    trigEl.classList.remove('open');
+                    if (iconEl) iconEl.classList.remove('rotate-180');
                 }
-            }
-            updateScratchCarBadge();
-        }
-
-        function filterBrandGrid(prefix, query) {
-            const q = String(query || '').toLowerCase().trim();
-            const grid = document.getElementById(prefix + 'BrandGrid');
-            if (!grid) return;
-            grid.querySelectorAll('.brand-pill').forEach(btn => {
-                const name = (btn.getAttribute('data-brand') || '').toLowerCase();
-                btn.style.display = (!q || name.includes(q)) ? '' : 'none';
             });
         }
 
-        function updateScratchCarBadge() {
-            const badge = document.getElementById('selectedCarSummaryBadge');
-            if (!badge) return;
-            const cType = document.getElementById('scratchCarTypeInput')?.value || 'SUV';
-            const cMake = document.getElementById('carBrand')?.value || 'Vehicle';
-            badge.textContent = `${cType} • ${cMake}`;
+        function pickCarType(prefix, typeVal, btnEl) {
+            const container = document.getElementById(`sub_${prefix}_type`);
+            if (container) {
+                container.querySelectorAll('.submenu-option').forEach(b => {
+                    b.classList.remove('selected');
+                    b.classList.add('text-zinc-300');
+                });
+            }
+            btnEl.classList.add('selected');
+            btnEl.classList.remove('text-zinc-300');
+
+            document.getElementById(`${prefix}CarTypeInput`).value = typeVal;
+            document.getElementById(`val_${prefix}_type`).textContent = typeVal;
+            refreshConfigSummary(prefix);
+            toggleSubMenu(prefix, 'origin');
+        }
+
+        function renderCountryPills(prefix) {
+            const container = document.getElementById(`countries_${prefix}`);
+            if (!container) return;
+            const currentCountry = activeState[prefix].country;
+
+            container.innerHTML = Object.keys(CAR_CATALOG_BY_COUNTRY).map(cKey => {
+                const cObj = CAR_CATALOG_BY_COUNTRY[cKey];
+                const isSel = cKey === currentCountry;
+                const displayLabel = currentLang === 'ar' ? cObj.labelAr : cObj.labelEn;
+                return `
+                    <button type="button" onclick="pickCountry('${prefix}', '${escapeHtml(cKey)}')"
+                            class="submenu-option ${isSel ? 'selected' : 'text-zinc-300'} py-2 px-2.5 rounded-xl bg-leather border border-white/10 text-[11px] font-extrabold flex items-center justify-center gap-1.5 cursor-pointer">
+                        <span>${cObj.flag}</span>
+                        <span class="truncate">${escapeHtml(displayLabel)}</span>
+                    </button>
+                `;
+            }).join('');
+        }
+
+        function pickCountry(prefix, countryKey) {
+            activeState[prefix].country = countryKey;
+            const brandsObj = CAR_CATALOG_BY_COUNTRY[countryKey].brands;
+            const firstBrand = Object.keys(brandsObj)[0];
+            activeState[prefix].brand = firstBrand;
+
+            renderCountryPills(prefix);
+            renderBrandPillsForCountry(prefix, countryKey);
+            renderModelPillsForBrand(prefix, countryKey, firstBrand);
+            refreshConfigSummary(prefix);
+        }
+
+        function renderBrandPillsForCountry(prefix, countryKey) {
+            const container = document.getElementById(`brands_${prefix}`);
+            if (!container) return;
+            const brandsObj = CAR_CATALOG_BY_COUNTRY[countryKey].brands;
+            const currentBrand = activeState[prefix].brand;
+
+            container.innerHTML = Object.keys(brandsObj).map(bName => {
+                const isSel = bName === currentBrand;
+                return `
+                    <button type="button" onclick="pickBrand('${prefix}', '${escapeHtml(bName)}')"
+                            class="submenu-option ${isSel ? 'selected' : 'text-zinc-300'} py-2 px-2 rounded-lg bg-leather border border-white/10 text-[11px] font-bold truncate text-center cursor-pointer">
+                        ${escapeHtml(bName)}
+                    </button>
+                `;
+            }).join('');
+
+            const brandInput = document.getElementById(prefix === 'scratch' ? 'carBrand' : 'washCarMake');
+            if (brandInput) brandInput.value = currentBrand;
+        }
+
+        function pickBrand(prefix, brandName) {
+            activeState[prefix].brand = brandName;
+            renderBrandPillsForCountry(prefix, activeState[prefix].country);
+            renderModelPillsForBrand(prefix, activeState[prefix].country, brandName);
+            refreshConfigSummary(prefix);
+            toggleSubMenu(prefix, 'model');
+        }
+
+        function renderModelPillsForBrand(prefix, countryKey, brandName) {
+            const container = document.getElementById(`models_${prefix}`);
+            if (!container) return;
+            const modelsList = (CAR_CATALOG_BY_COUNTRY[countryKey]?.brands[brandName]) || [];
+
+            container.innerHTML = modelsList.map(mName => `
+                <button type="button" onclick="pickModelQuick('${prefix}', '${escapeHtml(mName)}', this)"
+                        class="submenu-option py-1.5 px-3 rounded-lg bg-leather border border-white/15 text-[11px] font-bold text-zinc-200 hover:border-gold-400 cursor-pointer">
+                    ${escapeHtml(mName)}
+                </button>
+            `).join('');
+        }
+
+        function pickModelQuick(prefix, modelName, btnEl) {
+            const container = document.getElementById(`models_${prefix}`);
+            if (container) {
+                container.querySelectorAll('.submenu-option').forEach(b => b.classList.remove('selected'));
+            }
+            btnEl.classList.add('selected');
+            const modelInp = document.getElementById(prefix === 'scratch' ? 'carModel' : 'washCarModel');
+            if (modelInp) {
+                modelInp.value = modelName === 'Custom Model' ? '' : modelName;
+                if (modelName === 'Custom Model') modelInp.focus();
+            }
+            refreshConfigSummary(prefix);
+        }
+
+        function refreshConfigSummary(prefix) {
+            const cKey = activeState[prefix].country;
+            const cObj = CAR_CATALOG_BY_COUNTRY[cKey];
+            const brand = activeState[prefix].brand;
+            const bodyType = document.getElementById(`${prefix}CarTypeInput`)?.value || 'SUV / 4x4';
+            const modelVal = document.getElementById(prefix === 'scratch' ? 'carModel' : 'washCarModel')?.value || '';
+            const yearVal = document.getElementById(prefix === 'scratch' ? 'carYear' : 'washCarYear')?.value || '2026';
+
+            const originEl = document.getElementById(`val_${prefix}_origin`);
+            if (originEl) {
+                const cLabel = currentLang === 'ar' ? cObj.labelAr : cObj.labelEn;
+                originEl.textContent = `${cObj.flag} ${cLabel} • ${brand}`;
+            }
+
+            const modelEl = document.getElementById(`val_${prefix}_model`);
+            if (modelEl) {
+                modelEl.textContent = modelVal ? `${modelVal} • ${yearVal}` : `Select Model • ${yearVal}`;
+            }
+
+            if (prefix === 'scratch') {
+                const badge = document.getElementById('selectedCarSummaryBadge');
+                if (badge) {
+                    badge.textContent = `${bodyType} • ${brand} ${modelVal ? '(' + modelVal + ' ' + yearVal + ')' : ''}`;
+                }
+            }
         }
 
         // =========================================================================
-        // 3. COMPLETE BILINGUAL DICTIONARY
+        // 6. INTERACTIVE 360° 3D CAR BODY SIMULATOR LOGIC
+        // =========================================================================
+        const ZONE_DICTIONARY = {
+            'HOOD': { en: 'Front Hood', ar: 'الكبوت الأمامي' },
+            'ROOF': { en: 'Roof Panel', ar: 'السقف' },
+            'TRUNK': { en: 'Rear Trunk', ar: 'الشنطة الخلفية' },
+            'FBUMPER': { en: 'Front Bumper', ar: 'إكصدام أمامي' },
+            'RBUMPER': { en: 'Rear Bumper', ar: 'إكصدام خلفي' },
+            'FR_FENDER': { en: 'Front Right Fender', ar: 'رفرف أمامي يمين' },
+            'FR_DOOR': { en: 'Front Right Door', ar: 'باب أمامي يمين' },
+            'RR_DOOR': { en: 'Rear Right Door', ar: 'باب خلفي يمين' },
+            'RR_FENDER': { en: 'Rear Right Quarter', ar: 'رفرف خلفي يمين' },
+            'FL_FENDER': { en: 'Front Left Fender', ar: 'رفرف أمامي يسار' },
+            'FL_DOOR': { en: 'Front Left Door', ar: 'باب أمامي يسار' },
+            'RL_DOOR': { en: 'Rear Left Door', ar: 'باب خلفي يسار' },
+            'RL_FENDER': { en: 'Rear Left Quarter', ar: 'رفرف خلفي يسار' },
+            'FULL_BODY': { en: 'Full Car Body (360°)', ar: 'كامل السيارة (360°)' }
+        };
+
+        let selectedZoneIds = ['HOOD'];
+
+        function set360CameraAngle(angleIndex) {
+            [0, 1, 2, 3].forEach(idx => {
+                const viewEl = document.getElementById(`simView_${idx}`);
+                const btnEl = document.getElementById(`camBtn_${idx}`);
+                if (viewEl) viewEl.classList.toggle('hidden', idx !== angleIndex);
+                if (btnEl) {
+                    if (idx === angleIndex) {
+                        btnEl.classList.add('active');
+                        btnEl.classList.remove('text-zinc-300');
+                    } else {
+                        btnEl.classList.remove('active');
+                        btnEl.classList.add('text-zinc-300');
+                    }
+                }
+            });
+            const slider = document.getElementById('orbit360Range');
+            if (slider) slider.value = angleIndex;
+        }
+
+        function toggleZoneById(zoneId) {
+            if (zoneId === 'FULL_BODY') {
+                if (selectedZoneIds.includes('FULL_BODY')) {
+                    selectedZoneIds = ['HOOD'];
+                } else {
+                    selectedZoneIds = Object.keys(ZONE_DICTIONARY);
+                }
+            } else {
+                selectedZoneIds = selectedZoneIds.filter(z => z !== 'FULL_BODY');
+                if (selectedZoneIds.includes(zoneId)) {
+                    selectedZoneIds = selectedZoneIds.filter(z => z !== zoneId);
+                } else {
+                    selectedZoneIds.push(zoneId);
+                }
+            }
+            sync3DCarSimulatorVisuals();
+        }
+
+        function sync3DCarSimulatorVisuals() {
+            document.querySelectorAll('.svg-car-part').forEach(part => {
+                const zId = part.getAttribute('data-zone');
+                const isSelected = selectedZoneIds.includes('FULL_BODY') || selectedZoneIds.includes(zId);
+                part.classList.toggle('infected', isSelected);
+            });
+
+            const fullBtn = document.getElementById('btnFullBody3D');
+            if (fullBtn) {
+                const isFull = selectedZoneIds.includes('FULL_BODY');
+                fullBtn.className = isFull
+                    ? "px-3 py-1.5 rounded-xl bg-gold-400 text-black text-[11px] font-black cursor-pointer transition shadow-lg"
+                    : "px-3 py-1.5 rounded-xl bg-gold-400/15 hover:bg-gold-400/30 border border-gold-400/50 text-gold-200 text-[11px] font-extrabold cursor-pointer transition";
+            }
+
+            const count = selectedZoneIds.includes('FULL_BODY') ? 14 : selectedZoneIds.length;
+            const badge = document.getElementById('selectedZonesCounter');
+            if (badge) {
+                badge.textContent = currentLang === 'ar'
+                    ? `تم تحديد ${count} جزء على المجسم`
+                    : `${count} Part(s) Marked on 3D Model`;
+            }
+
+            const tagsContainer = document.getElementById('activeSelectedPartsList');
+            if (tagsContainer) {
+                if (selectedZoneIds.includes('FULL_BODY')) {
+                    const lbl = currentLang === 'ar' ? ZONE_DICTIONARY.FULL_BODY.ar : ZONE_DICTIONARY.FULL_BODY.en;
+                    tagsContainer.innerHTML = `<span class="px-3 py-1 rounded-lg bg-gold-400 text-black text-xs font-black">✨ ${escapeHtml(lbl)}</span>`;
+                } else {
+                    tagsContainer.innerHTML = selectedZoneIds.map(zId => {
+                        const zObj = ZONE_DICTIONARY[zId];
+                        if (!zObj) return '';
+                        const lbl = currentLang === 'ar' ? zObj.ar : zObj.en;
+                        return `
+                            <span onclick="toggleZoneById('${zId}')" class="cursor-pointer px-2.5 py-1 rounded-lg bg-gold-400/20 border border-gold-400/50 text-gold-200 text-[11px] font-bold flex items-center gap-1.5 hover:bg-rose-500/20 hover:border-rose-400">
+                                <span>${escapeHtml(lbl)}</span>
+                                <span class="text-[10px] text-gold-300">✕</span>
+                            </span>
+                        `;
+                    }).join('');
+                }
+            }
+        }
+
+        function getFormattedSelectedZonesString() {
+            if (selectedZoneIds.includes('FULL_BODY')) {
+                return `${ZONE_DICTIONARY.FULL_BODY.ar} (${ZONE_DICTIONARY.FULL_BODY.en})`;
+            }
+            return selectedZoneIds.map(id => {
+                const z = ZONE_DICTIONARY[id];
+                return z ? `${z.ar} (${z.en})` : id;
+            }).join(' + ');
+        }
+
+        // =========================================================================
+        // 7. BILINGUAL DICTIONARY
         // =========================================================================
         let currentLang = 'en';
         const i18nDict = {
@@ -1343,7 +2167,7 @@ service cloud.firestore {
                 heroHeadline1: "Factory Paint.",
                 heroHeadline2: "Reborn At Your Door.",
                 heroQuoteSub: "We erase scratches, oxidation, and swirl marks right at your home parking without repainting. Preserve 100% of your car's factory clear coat and resale value.",
-                heroBtnScratch: "Fix a Scratch (Up to 10 Photos)",
+                heroBtnScratch: "360° Scratch Diagnosis",
                 heroBtnWash: "On-Site Nano Dry Wash",
                 stat1: "Original Factory Paint",
                 stat2: "Official Compounds",
@@ -1381,52 +2205,37 @@ service cloud.firestore {
                 how2Desc: "Clean, eco-luxury dry wash & polishing approved for private compound garages and underground parkings.",
                 how3Title: "4 Exclusive Cairo Zones",
                 how3Desc: "Dedicated mobile concierge coverage across Heliopolis, Nasr City, 5th Settlement, and Madinaty.",
-                tabScratchTitle: "Scratch & Paint Diagnosis",
+                tabScratchTitle: "360° Scratch & Paint Diagnosis",
                 tabBookingTitle: "On-Site Dry Wash & Care",
-                scratchFormHeader: "Instant Optical Paint Diagnosis",
-                consoleSub: "Select your vehicle profile & upload up to 10 photos for a custom restoration plan.",
+                scratchFormHeader: "Interactive 3D Vehicle Telemetry",
+                consoleSub: "Configure your car via side-labels, touch affected panels on the 360° 3D simulator & attach photos.",
                 sloganMiniBottom: "Save Your Investment Now",
-                step1Title: "1. Vehicle Profile (فئة وماركة وموديل السيارة)",
-                lblCarBodyType: "Select Vehicle Body Type (اختر فئة السيارة — SUV أو سيدان) *",
-                typeSuv: "SUV / 4x4",
-                typeSedan: "Sedan (سيدان)",
-                typeCoupe: "Coupe / Sport",
-                typeHatch: "Hatchback",
-                typePickup: "Pickup / Van",
-                lblSelectMakeByClick: "Select Car Manufacturer by Click (اختر ماركة السيارة بالضغط — تشمل كافة الماركات والسيارات الصينية) *",
-                lblSelectedMake: "Selected Make:",
-                lblModel: "Car Model (موديل السيارة) *",
-                lblYear: "Manufacture Year (اختر سنة الصنع) *",
-                lblZoneSelect: "On-Site Service Zone (نطاق الخدمة) *",
+                step1Title: "1. Vehicle Configuration (اضغط على كل بطاقة جانبية لفتح القائمة الفرعية)",
+                sideLblType: "Car Body Type (فئة الهيكل)",
+                sideLblOrigin: "Country of Manufacture & Make (بلد المنشأ والماركة)",
+                sideLblModelYear: "Vehicle Model & Year (الموديل وسنة الصنع)",
+                btnChange: "Select",
+                lblStep2A: "A. Tap Country of Manufacture (اختر بلد الصنع لفتح ماركاتها):",
+                lblStep2B: "B. Select Manufacturer from Sub-Menu (اختر الماركة):",
+                lblQuickModels: "Popular Models for Selected Brand (اختر الموديل بالضغط أو اكتبه):",
+                lblModel: "Model Name (الموديل) *",
+                lblYear: "Manufacture Year (سنة الصنع) *",
+                lblZoneSelect: "Service Zone (نطاق الخدمة) *",
                 lblColorPick: "Car Color (لون السيارة — اختر الدرجة أو اكتبها) *",
-                lblColorSimple: "Car Color (اللون) *",
-                step2Title: "2. Scratch Condition & Exact Body Panels (حدد الأجزاء المصابة — يمكنك اختيار أكثر من جزء)",
+                step2Title: "2. Interactive 360° 3D Car Simulator — Touch Infected Part(s)",
+                sim360Sub: "Rotate 360° around the vehicle or tap any panel directly on the 3D model to mark scratches.",
                 sev1: "Swirls / Dullness (دوائر غسيل وبهتان)",
                 sev1Sub: "Surface haze & spiderwebs",
                 sev2: "Surface Scratch (خدش سطحي بالورنيش)",
                 sev2Sub: "Clear-coat level defect",
                 sev3: "Deep Scuff (خدش عميق أو حكة)",
                 sev3Sub: "Key scratch or panel rub",
-                lblTapPanels: "Tap all affected panels below (اضغط على كل الأجزاء التي تحتاج معالجة):",
-                zHood: "الكبوت (Front Hood)",
-                zRoof: "السقف (Roof)",
-                zTrunk: "الشنطة (Rear Trunk)",
-                zFBumper: "إكصدام أمامي (Front Bumper)",
-                zFRFender: "رفرف أمامي يمين (FR Fender)",
-                zFRDoor: "باب أمامي يمين (FR Door)",
-                zRRDoor: "باب خلفي يمين (RR Door)",
-                zRRFender: "رفرف خلفي يمين (RR Fender)",
-                zFLFender: "رفرف أمامي يسار (FL Fender)",
-                zFLDoor: "باب أمامي يسار (FL Door)",
-                zRLDoor: "باب خلفي يسار (RL Door)",
-                zRLFender: "رفرف خلفي يسار (RL Fender)",
-                zRBumper: "إكصدام خلفي (Rear Bumper)",
-                zFullCar: "✨ كامل السيارة (Full Body Restoration)",
                 step3Title: "3. Upload Scratch Photos (Up to 10 Photos — Multi-Select Supported) *",
                 photoTipText: "Select up to 10 photos at once from your gallery or camera.",
                 dropzoneTitle: "Tap to Select or Capture Up to 10 Photos",
                 btnClearAll: "Clear All",
-                step4Title: "4. Your Contact Details",
+                step4Title: "4. Your Contact & Optional GPS Parking Pin",
+                btnShareGps: "Share Car's Exact GPS Parking Pin",
                 submitScratchBtnText: "Get My Custom Restoration Plan",
                 successHeader: "Received. Our Master Specialist is reviewing your photos.",
                 successBody: "We will message you on WhatsApp shortly with your bespoke treatment plan.",
@@ -1460,13 +2269,6 @@ service cloud.firestore {
                 p3Bullet4: "✓ Exterior black trim & rubber UV restoration",
                 p3Bullet5: "✓ Chrome exhaust tips & emblems hand polishing",
                 tier3Footer: "Tap to Select Tier 3",
-                onSiteFeeTitle: "📍 100% On-Site Mobile Service Coverage (تنفيذ الخدمة في مكان العميل)",
-                onSiteFeeSub: "Our mobile atelier unit arrives directly at your home or villa parking across our 4 dedicated zones:",
-                zoneFee1Name: "Heliopolis (مصر الجديدة)",
-                zoneFee2Name: "Nasr City (مدينة نصر)",
-                zoneFee3Name: "5th Settlement (التجمع الخامس)",
-                zoneFee4Name: "Madinaty (مدينتي)",
-                onSiteZoneTag: "On-Site Mobile Unit",
                 lblSelectHourSlot: "Preferred Day & Exact Hourly Slot (اختر اليوم والساعة المحددة) *",
                 lblSelectWashZone: "On-Site Service Zone (نطاق الخدمة في مكانك) *",
                 btnConfirmWash: "Request On-Site Appointment →",
@@ -1474,7 +2276,7 @@ service cloud.firestore {
                 washSuccessSub: "Our concierge team will contact you via WhatsApp to confirm your exact arrival time.",
                 footerBrightSub: "Bespoke Mobile Paint Restoration & Nano Care • Powered by RUPES & Meguiar's",
                 footerZonesTag: "Heliopolis • Nasr City • 5th Settlement • Madinaty",
-                phModel: "e.g. S580 / X6 / Tiggo 8 / Coolray",
+                phModel: "e.g. S580 / X6 / Tiggo 8",
                 phClientNoteBox: "Any special notes or preferred callback time? (Optional)",
                 phClientName: "Your Full Name *",
                 phWashName: "Your Full Name *",
@@ -1492,7 +2294,7 @@ service cloud.firestore {
                 heroHeadline1: "لمعة الفابريكا..",
                 heroHeadline2: "تعود من جديد في مكانك.",
                 heroQuoteSub: "نعالج الخدوش والبهتان ودوائر الغسيل في جراج منزلك بدون رش، للحفاظ على ١٠٠٪ من طبقة الورنيش الأصلي والقيمة السوقية لسيارتك.",
-                heroBtnScratch: "فحص وعلاج خدش (حتى ١٠ صور)",
+                heroBtnScratch: "محاكي فحص الخدوش 360°",
                 heroBtnWash: "خدمة الغسيل الجاف بالنانو (في مكانك)",
                 stat1: "دهان فابريكا أصلي",
                 stat2: "مواد أصلية معتمدة",
@@ -1530,52 +2332,37 @@ service cloud.firestore {
                 how2Desc: "تقنية الغسيل الجاف والتلميع معتمدة ومثالية لجراجات الكمبوندات الخاصة والجراجات المغلقة.",
                 how3Title: "تغطية ٤ نطاقات رئيسية",
                 how3Desc: "تغطية متنقلة مخصصة في مصر الجديدة، مدينة نصر، التجمع الخامس، ومدينتي.",
-                tabScratchTitle: "فحص وعلاج الخدوش",
+                tabScratchTitle: "محاكي فحص الخدوش 360°",
                 tabBookingTitle: "حجز الغسيل الجاف (في مكانك)",
-                scratchFormHeader: "التشخيص الضوئي الفوري للدهان",
-                consoleSub: "اختر فئة وماركة سيارتك وارفع حتى ١٠ صور واضحة للخدوش للحصول على خطة المعالجة.",
+                scratchFormHeader: "التشخيص التفاعلي ثلاثي الأبعاد 360°",
+                consoleSub: "اختر سيارتك من القوائم الفرعية الجانبية، والمس الأجزاء المصابة مباشرة على المجسم ثلاثي الأبعاد.",
                 sloganMiniBottom: "حافظ على استثمارك الآن",
-                step1Title: "١. فئة وماركة وموديل السيارة (Vehicle Profile)",
-                lblCarBodyType: "اختر فئة السيارة بالضغط (SUV أو سيدان) *",
-                typeSuv: "SUV / 4x4",
-                typeSedan: "Sedan (سيدان)",
-                typeCoupe: "Coupe / سبور",
-                typeHatch: "هاتشباك",
-                typePickup: "بيك أب / فان",
-                lblSelectMakeByClick: "اختر ماركة السيارة بالضغط (تشمل كافة الماركات العالمية والسيارات الصينية الشهيرة) *",
-                lblSelectedMake: "الماركة المختارة:",
-                lblModel: "موديل السيارة (Model) *",
-                lblYear: "اختر سنة الصنع (Year) *",
+                step1Title: "١. إعداد بيانات السيارة (اضغط على كل بطاقة جانبية لفتح قائمتها الفرعية)",
+                sideLblType: "فئة هيكل السيارة (Car Body Type)",
+                sideLblOrigin: "بلد الصنع وماركة السيارة (Country & Make)",
+                sideLblModelYear: "موديل السيارة وسنة الصنع (Model & Year)",
+                btnChange: "اختر",
+                lblStep2A: "أ. اختر بلد المنشأ لفتح قائمة ماركاتها:",
+                lblStep2B: "ب. اختر ماركة السيارة من القائمة الفرعية:",
+                lblQuickModels: "أشهر موديلات الماركة المختارة (اضغط على الموديل أو اكتبه بالأسفل):",
+                lblModel: "اسم الموديل (Model) *",
+                lblYear: "سنة الصنع (Year) *",
                 lblZoneSelect: "نطاق الخدمة (Zone) *",
                 lblColorPick: "لون السيارة (اختر الدرجة أو اكتبها) *",
-                lblColorSimple: "لون السيارة *",
-                step2Title: "٢. حالة الدهان وتحديد الأجزاء المصابة (يمكنك اختيار أكثر من جزء)",
+                step2Title: "٢. محاكي السيارة ثلاثي الأبعاد 360° — المس الأجزاء المصابة مباشرة على المجسم",
+                sim360Sub: "قم بتدوير زاوية الرؤية 360° حول السيارة أو المس أي جزء مباشرة لتحديده باللون الذهبي.",
                 sev1: "دوائر غسيل وبهتان (Swirls / Dull)",
                 sev1Sub: "تطفية باللمعة وخربشة غسيل",
                 sev2: "خدش سطحي بالورنيش (Surface Scratch)",
                 sev2Sub: "خدش بطبقة الكلير كوت",
                 sev3: "خدش عميق أو حكة (Deep Scuff)",
                 sev3Sub: "خدش مفتاح أو حكة إكصدام",
-                lblTapPanels: "اضغط على جميع الأجزاء التي تحتاج إلى معالجة في سيارتك:",
-                zHood: "الكبوت (Front Hood)",
-                zRoof: "السقف (Roof)",
-                zTrunk: "الشنطة (Rear Trunk)",
-                zFBumper: "إكصدام أمامي (Front Bumper)",
-                zFRFender: "رفرف أمامي يمين (FR Fender)",
-                zFRDoor: "باب أمامي يمين (FR Door)",
-                zRRDoor: "باب خلفي يمين (RR Door)",
-                zRRFender: "رفرف خلفي يمين (RR Fender)",
-                zFLFender: "رفرف أمامي يسار (FL Fender)",
-                zFLDoor: "باب أمامي يسار (FL Door)",
-                zRLDoor: "باب خلفي يسار (RL Door)",
-                zRLFender: "رفرف خلفي يسار (RL Fender)",
-                zRBumper: "إكصدام خلفي (Rear Bumper)",
-                zFullCar: "✨ كامل السيارة (Full Body Restoration)",
                 step3Title: "٣. ارفع صور الخدوش (حتى ١٠ صور — يدعم الاختيار المتعدد) *",
                 photoTipText: "يمكنك تحديد حتى ١٠ صور دفعة واحدة من معرض الصور أو الكاميرا.",
                 dropzoneTitle: "اضغط هنا لاختيار أو تصوير حتى ١٠ صور واضحة للخدوش",
                 btnClearAll: "مسح الكل",
-                step4Title: "٤. بيانات التواصل",
+                step4Title: "٤. بيانات التواصل وموقع السيارة بالـ GPS",
+                btnShareGps: "مشاركة موقع ركن السيارة بالـ GPS بلمسة واحدة",
                 submitScratchBtnText: "احصل على خطة المعالجة الآن",
                 successHeader: "تم الاستلام بنجاح. خبير دكتور كير يراجع صور سيارتك الآن.",
                 successBody: "سنتواصل معك فوراً عبر الواتساب بخطة المعالجة التفصيلية.",
@@ -1609,13 +2396,6 @@ service cloud.firestore {
                 p3Bullet4: "✓ إحياء وتغذية الفيبر الأسود والكاوتش الخارجي ضد الشمس",
                 p3Bullet5: "✓ تلميع مخارج الشكمان الكروم والعلامات المعدنية يدوياً",
                 tier3Footer: "اضغط لاختيار الباقة الملكية VIP",
-                onSiteFeeTitle: "📍 نطاقات تنفيذ الخدمة المتنقلة في مكان العميل (On-Site Coverage Zones)",
-                onSiteFeeSub: "ينتقل فريقنا المجهز بالكامل لتنفيذ الخدمة في مكان سيارتك في النطاقات الأربعة التالية:",
-                zoneFee1Name: "مصر الجديدة (Heliopolis)",
-                zoneFee2Name: "مدينة نصر (Nasr City)",
-                zoneFee3Name: "التجمع الخامس (5th Settlement)",
-                zoneFee4Name: "مدينتي (Madinaty)",
-                onSiteZoneTag: "خدمة متنقلة في مكانك",
                 lblSelectHourSlot: "اليوم والساعة المحددة للحجز (الخميس • الجمعة • السبت) *",
                 lblSelectWashZone: "نطاق الخدمة في مكانك *",
                 btnConfirmWash: "تأكيد طلب الموعد ←",
@@ -1623,7 +2403,7 @@ service cloud.firestore {
                 washSuccessSub: "سيتواصل معك فريقنا عبر الواتساب لتأكيد موعد وصول الفني لمكانك.",
                 footerBrightSub: "الأتيليه المتنقل لاستعادة دهان الفابريكا والعناية بالنانو • بأنظمة RUPES و Meguiar's",
                 footerZonesTag: "مصر الجديدة • مدينة نصر • التجمع الخامس • مدينتي",
-                phModel: "مثال: S580 / X6 / تيجو 8 / كول راي",
+                phModel: "مثال: S580 / X6 / تيجو 8",
                 phClientNoteBox: "أي ملاحظات إضافية أو وقت مفضل للاتصال؟ (اختياري)",
                 phClientName: "الاسم بالكامل *",
                 phWashName: "الاسم بالكامل *",
@@ -1652,7 +2432,11 @@ service cloud.firestore {
                 }
             });
 
-            updateSelectedZonesCounter();
+            renderCountryPills('scratch');
+            renderCountryPills('wash');
+            refreshConfigSummary('scratch');
+            refreshConfigSummary('wash');
+            sync3DCarSimulatorVisuals();
             syncSliderImageWidth();
         }
 
@@ -1673,7 +2457,7 @@ service cloud.firestore {
         }
 
         // =========================================================================
-        // 4. BEFORE / AFTER SLIDER
+        // 8. BEFORE / AFTER SLIDER
         // =========================================================================
         let isDraggingSlider = false;
 
@@ -1705,7 +2489,8 @@ service cloud.firestore {
         }
 
         window.addEventListener('DOMContentLoaded', () => {
-            populateBrandsAndYears();
+            initCascadingVehicleMenus();
+            sync3DCarSimulatorVisuals();
             const slider = document.getElementById('mercedesSlider');
             if (slider) {
                 slider.addEventListener('pointerdown', (e) => {
@@ -1726,10 +2511,8 @@ service cloud.firestore {
         window.addEventListener('resize', syncSliderImageWidth);
 
         // =========================================================================
-        // 5. FORM CONTROLS & 14-PANEL MULTI-SELECT BODY MAP
+        // 9. FORM CONTROLS
         // =========================================================================
-        let selectedCarBodyZones = ['الكبوت (Front Hood)'];
-
         function selectDefectSeverity(btnEl, severityValue) {
             document.getElementById('defectSeverityInput').value = severityValue;
             document.querySelectorAll('.severity-card').forEach(card => {
@@ -1749,38 +2532,15 @@ service cloud.firestore {
             document.getElementById('carColorInput').value = shadeName;
         }
 
-        function updateSelectedZonesCounter() {
-            const badge = document.getElementById('selectedZonesCounter');
-            if (!badge) return;
-            const count = selectedCarBodyZones.length;
-            badge.textContent = currentLang === 'ar'
-                ? `تم تحديد ${count} جزء`
-                : `${count} Panel(s) Selected`;
-        }
-
-        function toggleCarBodyZone(btnEl, zoneLabel) {
-            btnEl.classList.toggle('active');
-            if (selectedCarBodyZones.includes(zoneLabel)) {
-                selectedCarBodyZones = selectedCarBodyZones.filter(z => z !== zoneLabel);
-            } else {
-                selectedCarBodyZones.push(zoneLabel);
-            }
-            updateSelectedZonesCounter();
-        }
-
         function resetScratchVisualSelections() {
-            selectedCarBodyZones = ['الكبوت (Front Hood)'];
-            document.querySelectorAll('.car-zone-btn').forEach(btn => btn.classList.remove('active'));
-            const hoodBtn = document.getElementById('defaultHoodZoneBtn');
-            if (hoodBtn) hoodBtn.classList.add('active');
-            updateSelectedZonesCounter();
-
+            selectedZoneIds = ['HOOD'];
+            sync3DCarSimulatorVisuals();
+            set360CameraAngle(0);
             selectDefectSeverity(document.getElementById('defaultSeverityBtn'), 'Swirl Marks & Oxidation (دوائر غسيل وبهتان)');
             applyPresetColor('#08080A', 'Obsidian Black (أسود)');
-            populateBrandsAndYears();
-            document.getElementById('carBrand').value = 'Mercedes-Benz';
-            document.getElementById('scratchCarTypeInput').value = 'SUV / 4x4';
-            updateScratchCarBadge();
+            document.getElementById('gpsLink_scratch').value = '';
+            activeState.scratch = { country: "Germany & Europe", brand: "Mercedes-Benz" };
+            initCascadingVehicleMenus();
         }
 
         function switchConsoleTab(tab) {
@@ -1820,7 +2580,7 @@ service cloud.firestore {
         }
 
         // =========================================================================
-        // 6. UP TO 10 PHOTOS MULTI-SELECT OPTICAL COMPRESSOR
+        // 10. UP TO 10 PHOTOS MULTI-SELECT OPTICAL COMPRESSOR
         // =========================================================================
         let uploadedMediaItems = [];
         const MAX_PHOTOS_ALLOWED = 10;
@@ -1979,11 +2739,11 @@ service cloud.firestore {
         }
 
         // =========================================================================
-        // 7. HYBRID TELEMETRY ENGINE (FIRESTORE + INDEXED-DB)
+        // 11. HYBRID TELEMETRY ENGINE (FIRESTORE + TELEGRAM + INDEXED-DB)
         // =========================================================================
-        const IDB_NAME = 'DrCarePhotoVault_v24';
+        const IDB_NAME = 'DrCarePhotoVault_v27';
         const IDB_STORE = 'leads_store';
-        const LS_BACKUP_KEY = 'drcare_leads_ls_backup_v24';
+        const LS_BACKUP_KEY = 'drcare_leads_ls_backup_v27';
         let idbConn = null;
         let memoryLeadsCache = [];
         let deletedLeadIds = new Set();
@@ -2033,7 +2793,7 @@ service cloud.firestore {
                 db.collection("drcare_leads")
                   .onSnapshot((snapshot) => {
                       const syncStatusEl = document.getElementById('kpiSyncStatusText');
-                      if (syncStatusEl) syncStatusEl.textContent = '🟢 Firebase Cloud Live';
+                      if (syncStatusEl) syncStatusEl.textContent = '🟢 Cloud + Bot Active';
                       const diagBanner = document.getElementById('cloudDiagnosticBanner');
                       if (diagBanner) diagBanner.classList.add('hidden');
 
@@ -2066,7 +2826,7 @@ service cloud.firestore {
                       }
                   }, (err) => {
                       const syncStatusEl = document.getElementById('kpiSyncStatusText');
-                      if (syncStatusEl) syncStatusEl.textContent = '🛡️ Local Vault Active';
+                      if (syncStatusEl) syncStatusEl.textContent = '🛡️ Local + Bot Active';
                       const diagBanner = document.getElementById('cloudDiagnosticBanner');
                       if (diagBanner) diagBanner.classList.remove('hidden');
                   });
@@ -2118,13 +2878,14 @@ service cloud.firestore {
                             requestType: 'SCRATCH_DIAGNOSIS',
                             clientName: 'Example Client',
                             clientPhone: '01000000000',
-                            carBrand: 'SUV / 4x4 • Mercedes-Benz',
+                            carBrand: 'SUV / 4x4 • Germany & Europe • Mercedes-Benz',
                             carModel: 'S580 • 2026',
                             carColor: 'Obsidian Black (أسود)',
                             zone: 'Heliopolis (مصر الجديدة)',
+                            gpsLink: 'https://www.google.com/maps?q=30.0876,31.3282',
                             resolution: '1080p',
                             estimatedQuote: '',
-                            notes: 'Severity: Swirl Marks & Oxidation\nPanels: الكبوت (Front Hood)\nNote: Sample entry.',
+                            notes: 'Severity: Swirl Marks & Oxidation\n3D Panels: الكبوت الأمامي (Front Hood)\nNote: Sample entry.',
                             media: [
                                 { id: 'seed_1', type: 'image', url: 'before.jpeg', resolution: '1080p' },
                                 { id: 'seed_2', type: 'image', url: 'after.jpeg', resolution: '1080p' }
@@ -2206,6 +2967,9 @@ service cloud.firestore {
             writeLeadToIdb(fullLocalLead);
             playNotificationChime();
 
+            // Fire Instant Telegram Bot Alert to Phone in parallel
+            dispatchTelegramInstantAlert(fullLocalLead);
+
             if (db) {
                 try {
                     const cloudSafeMedia = (fullLocalLead.media || []).map(m => ({
@@ -2224,6 +2988,7 @@ service cloud.firestore {
                         carModel: fullLocalLead.carModel,
                         carColor: fullLocalLead.carColor,
                         zone: fullLocalLead.zone,
+                        gpsLink: fullLocalLead.gpsLink || '',
                         resolution: fullLocalLead.resolution,
                         estimatedQuote: fullLocalLead.estimatedQuote || '',
                         notes: fullLocalLead.notes,
@@ -2247,6 +3012,14 @@ service cloud.firestore {
             event.preventDefault();
             if (Date.now() - lastSubmissionTimestamp < 3500) return;
 
+            const rawModelCheck = sanitizeCleanInput(document.getElementById('carModel').value, 40);
+            if (!rawModelCheck) {
+                toggleSubMenu('scratch', 'model');
+                document.getElementById('carModel').focus();
+                alert(currentLang === 'ar' ? 'يرجى اختيار أو كتابة موديل السيارة في القائمة الفرعية رقم ٣.' : 'Please select or enter your car model in Sub-Menu #3.');
+                return;
+            }
+
             if (uploadedMediaItems.length === 0) {
                 alert(currentLang === 'ar'
                     ? 'يرجى إرفاق صورة واحدة على الأقل لمكان الخدش (يمكنك رفع حتى ١٠ صور).'
@@ -2254,10 +3027,10 @@ service cloud.firestore {
                 return;
             }
 
-            if (selectedCarBodyZones.length === 0) {
+            if (selectedZoneIds.length === 0) {
                 alert(currentLang === 'ar'
-                    ? 'يرجى اختيار جزء واحد على الأقل من أجزاء السيارة المصابة.'
-                    : 'Please select at least 1 affected body panel.');
+                    ? 'يرجى لمس جزء واحد على الأقل على مجسم السيارة ثلاثي الأبعاد.'
+                    : 'Please touch at least 1 affected body panel on the 3D simulator.');
                 return;
             }
 
@@ -2272,17 +3045,18 @@ service cloud.firestore {
                 const clientName = sanitizeCleanInput(document.getElementById('clientName').value, 60);
                 const clientPhone = sanitizeCleanInput(document.getElementById('clientPhone').value, 20);
                 const bodyType = sanitizeCleanInput(document.getElementById('scratchCarTypeInput').value, 30);
-                const make = sanitizeCleanInput(document.getElementById('carBrand').value, 40);
-                const carBrand = `${bodyType} • ${make}`;
-                const rawModel = sanitizeCleanInput(document.getElementById('carModel').value, 40);
+                const country = activeState.scratch.country;
+                const make = activeState.scratch.brand;
+                const carBrand = `${bodyType} • ${country} • ${make}`;
                 const rawYear = sanitizeCleanInput(document.getElementById('carYear').value, 15);
-                const carModel = `${rawModel} • ${rawYear}`;
+                const carModel = `${rawModelCheck} • ${rawYear}`;
                 const carColor = sanitizeCleanInput(document.getElementById('carColorInput').value, 60);
                 const zone = sanitizeCleanInput(document.getElementById('clientZone').value, 60);
+                const gpsLink = document.getElementById('gpsLink_scratch').value || '';
                 const severity = sanitizeCleanInput(document.getElementById('defectSeverityInput').value, 80);
                 const resolution = document.getElementById('mediaResolution').value + 'p';
                 const userNotes = sanitizeCleanInput(document.getElementById('clientNotes').value, 400) || 'Standard optical assessment.';
-                const zonesString = selectedCarBodyZones.join(' + ');
+                const zonesString = getFormattedSelectedZonesString();
 
                 const leadId = 'DC-' + Math.floor(1000 + Math.random() * 9000);
                 const newLead = {
@@ -2294,9 +3068,10 @@ service cloud.firestore {
                     carModel,
                     carColor,
                     zone,
+                    gpsLink,
                     resolution,
                     estimatedQuote: '',
-                    notes: `Vehicle Type: ${bodyType}\nSeverity: ${severity}\nAffected Panels (${selectedCarBodyZones.length}): ${zonesString}\nClient Note: ${userNotes}`,
+                    notes: `Origin & Type: ${country} (${bodyType})\nSeverity: ${severity}\n360° 3D Marked Panels: ${zonesString}${gpsLink ? '\nGPS Pin: ' + gpsLink : ''}\nClient Note: ${userNotes}`,
                     media: uploadedMediaItems.map(m => ({
                         id: m.id,
                         type: 'image',
@@ -2333,12 +3108,14 @@ service cloud.firestore {
                 const clientName = sanitizeCleanInput(document.getElementById('washClientName').value, 60);
                 const clientPhone = sanitizeCleanInput(document.getElementById('washClientPhone').value, 20);
                 const bodyType = sanitizeCleanInput(document.getElementById('washCarTypeInput').value, 30);
-                const make = sanitizeCleanInput(document.getElementById('washCarMake').value, 40);
+                const country = activeState.wash.country;
+                const make = activeState.wash.brand;
                 const model = sanitizeCleanInput(document.getElementById('washCarModel').value, 40);
                 const year = sanitizeCleanInput(document.getElementById('washCarYear').value, 15);
                 const color = sanitizeCleanInput(document.getElementById('washCarColor').value, 30);
                 const slot = sanitizeCleanInput(document.getElementById('washDaySlot').value, 60);
                 const zone = sanitizeCleanInput(document.getElementById('washZone').value, 60);
+                const gpsLink = document.getElementById('gpsLink_wash').value || '';
                 const addressNote = sanitizeCleanInput(document.getElementById('washClientNotes').value, 200);
 
                 const leadId = 'DC-' + Math.floor(1000 + Math.random() * 9000);
@@ -2347,13 +3124,14 @@ service cloud.firestore {
                     requestType: 'DRY_WASH',
                     clientName,
                     clientPhone,
-                    carBrand: `${bodyType} • ${make}`,
+                    carBrand: `${bodyType} • ${country} • ${make}`,
                     carModel: `${model} (${year} - ${color})`,
                     carColor: pkg,
                     zone,
+                    gpsLink,
                     resolution: 'On-Site Mobile',
                     estimatedQuote: '',
-                    notes: `Vehicle Type: ${bodyType}\nSelected Tier: ${pkg}\nExact Hourly Slot: ${slot}\nOn-Site Address: ${addressNote}`,
+                    notes: `Origin & Type: ${country} (${bodyType})\nSelected Tier: ${pkg}\nExact Hourly Slot: ${slot}${gpsLink ? '\nGPS Pin: ' + gpsLink : ''}\nOn-Site Address: ${addressNote}`,
                     media: [],
                     status: 'NEW LIVE',
                     createdAt: Date.now()
@@ -2362,8 +3140,9 @@ service cloud.firestore {
                 await transmitLeadEverywhere(newLead);
                 document.getElementById('generatedWashTicketId').textContent = leadId;
                 document.getElementById('washBookingForm').reset();
-                populateBrandsAndYears();
-                document.getElementById('washCarMake').value = 'Mercedes-Benz';
+                document.getElementById('gpsLink_wash').value = '';
+                activeState.wash = { country: "Germany & Europe", brand: "Mercedes-Benz" };
+                initCascadingVehicleMenus();
                 document.getElementById('washSuccessBanner').classList.remove('hidden');
             } catch (err) {
                 console.error("Wash booking error:", err);
@@ -2371,7 +3150,7 @@ service cloud.firestore {
         }
 
         // =========================================================================
-        // 8. BULLETPROOF CRM ACCESS (ACCEPTS 2027 OR 2026 INSTANTLY)
+        // 12. BULLETPROOF CRM ACCESS (ACCEPTS 2027 OR 2026 INSTANTLY)
         // =========================================================================
         let failedPinAttempts = 0;
         let pinLockoutUntil = 0;
@@ -2636,7 +3415,7 @@ service cloud.firestore {
                         <div class="flex flex-wrap items-center gap-2">
                             <span class="px-2.5 py-0.5 rounded-md bg-gold-400 text-black font-black text-xs">${escapeHtml(lead.id)}</span>
                             <span class="px-2.5 py-0.5 rounded-md bg-white/5 text-gold-200 border border-white/10 text-xs font-bold">
-                                ${lead.requestType === 'SCRATCH_DIAGNOSIS' ? '📸 Optical Diagnosis' : '✨ On-Site Dry Wash'}
+                                ${lead.requestType === 'SCRATCH_DIAGNOSIS' ? '📸 360° 3D Diagnosis' : '✨ On-Site Dry Wash'}
                             </span>
                             <span class="text-xs font-semibold text-gold-200">📍 ${escapeHtml(lead.zone)}</span>
                             <span class="text-[11px] text-zinc-400 font-mono">🕒 ${formatCairoTimestamp(lead.createdAt)}</span>
@@ -2685,7 +3464,17 @@ service cloud.firestore {
                                class="px-3.5 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black font-extrabold text-xs inline-flex items-center gap-1.5">
                                 💬 WhatsApp Script
                             </a>
-                            <a href="tel:${escapeHtml(lead.clientPhone)}" class="px-3.5 py-2 rounded-xl bg-white/10 hover:bg-white/15 text-white font-bold text-xs">
+                            <button type="button" onclick="generateVipCertificateCard('${escapeHtml(lead.id)}')"
+                                    class="px-3.5 py-2 rounded-xl bg-gold-400/20 hover:bg-gold-400/35 border border-gold-400/50 text-gold-200 font-extrabold text-xs inline-flex items-center gap-1.5 cursor-pointer">
+                                📜 VIP Certificate
+                            </button>
+                            ${lead.gpsLink ? `
+                                <a href="${escapeHtml(lead.gpsLink)}" target="_blank" rel="noopener noreferrer"
+                                   class="px-3 py-2 rounded-xl bg-sky-500/20 hover:bg-sky-500/30 border border-sky-400/40 text-sky-200 font-extrabold text-xs inline-flex items-center gap-1">
+                                    🗺️ Open GPS Map
+                                </a>
+                            ` : ''}
+                            <a href="tel:${escapeHtml(lead.clientPhone)}" class="px-3 py-2 rounded-xl bg-white/10 hover:bg-white/15 text-white font-bold text-xs">
                                 📞 Call
                             </a>
                         </div>
@@ -2713,9 +3502,9 @@ service cloud.firestore {
 
         async function simulateIncomingVipLead() {
             const demoCars = [
-                { brand: 'SUV / 4x4 • Jetour', model: 'T2 • 2026', color: 'Obsidian Black (أسود)', zone: 'Heliopolis (مصر الجديدة)' },
-                { brand: 'Sedan (سيدان) • Xiaomi', model: 'SU7 Max • 2026', color: 'Sapphire Blue (أزرق)', zone: '5th Settlement (التجمع الخامس)' },
-                { brand: 'SUV / 4x4 • Range Rover', model: 'Vogue • 2026', color: 'Pearl White (أبيض لؤلؤي)', zone: 'Madinaty (مدينتي)' }
+                { brand: 'SUV / 4x4 • China & EV • Jetour', model: 'T2 • 2026', color: 'Obsidian Black (أسود)', zone: 'Heliopolis (مصر الجديدة)' },
+                { brand: 'Sedan (سيدان) • China & EV • Xiaomi', model: 'SU7 Max • 2026', color: 'Sapphire Blue (أزرق)', zone: '5th Settlement (التجمع الخامس)' },
+                { brand: 'SUV / 4x4 • Germany & Europe • Range Rover', model: 'Vogue • 2026', color: 'Pearl White (أبيض لؤلؤي)', zone: 'Madinaty (مدينتي)' }
             ];
             const pick = demoCars[Math.floor(Math.random() * demoCars.length)];
             const simLead = {
@@ -2727,9 +3516,10 @@ service cloud.firestore {
                 carModel: pick.model,
                 carColor: pick.color,
                 zone: pick.zone,
+                gpsLink: 'https://www.google.com/maps?q=30.0876,31.3282',
                 resolution: '1080p',
                 estimatedQuote: '',
-                notes: 'Severity: Surface Scratch\nAffected Panels (2): باب أمامي يمين (FR Door) + رفرف أمامي يمين (FR Fender)\nClient Note: Call after 5 PM.',
+                notes: 'Severity: Surface Scratch\n360° 3D Marked Panels: باب أمامي يمين (Front Right Door) + رفرف أمامي يمين (Front Right Fender)\nClient Note: Call after 5 PM.',
                 media: [{ id: 'sim_1', type: 'image', url: 'before.jpeg', cloudSafeUrl: 'before.jpeg', resolution: '1080p' }],
                 status: 'NEW LIVE',
                 createdAt: Date.now()
@@ -2739,9 +3529,9 @@ service cloud.firestore {
 
         function exportLeadsToCsv() {
             if (!memoryLeadsCache.length) return;
-            const headers = ['ID', 'Type', 'Client Name', 'Phone', 'Brand & Body', 'Model & Year', 'Color/Tier', 'Zone', 'Resolution', 'Quote', 'Status', 'Notes'];
+            const headers = ['ID', 'Type', 'Client Name', 'Phone', 'Origin & Brand', 'Model & Year', 'Color/Tier', 'Zone', 'GPS Pin', 'Resolution', 'Quote', 'Status', 'Notes'];
             const rows = memoryLeadsCache.map(l => [
-                l.id, l.requestType, l.clientName, l.clientPhone, l.carBrand, l.carModel, l.carColor, l.zone, l.resolution, l.estimatedQuote || '', l.status, l.notes
+                l.id, l.requestType, l.clientName, l.clientPhone, l.carBrand, l.carModel, l.carColor, l.zone, l.gpsLink || '', l.resolution, l.estimatedQuote || '', l.status, l.notes
             ].map(v => `"${String(v || '').replace(/"/g, '""')}"`).join(','));
             const csvContent = 'data:text/csv;charset=utf-8,\uFEFF' + [headers.join(','), ...rows].join('\n');
             const link = document.createElement('a');
@@ -2774,7 +3564,7 @@ service cloud.firestore {
             const imgSrc = item.url || 'before.jpeg';
             if (dlBtn) {
                 dlBtn.href = imgSrc;
-                dlBtn.download = `DrCare_Photo_${Date.now()}.jpg`;
+                dlBtn.download = `DrCare_${Date.now()}.png`;
             }
 
             body.innerHTML = `<img id="lightboxImgEl" src="${imgSrc}" class="max-h-[70vh] w-auto object-contain rounded-xl shadow-2xl cursor-zoom-in" onclick="setLightboxZoom(this.style.transform === 'scale(2)' ? 1 : 2)">`;
