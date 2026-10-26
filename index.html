@@ -74,7 +74,6 @@
         }
         [dir="rtl"] { font-family: 'Cairo', sans-serif; }
         
-        /* Ultra-Bright Luminous Gold Brand Text */
         .gold-luminous {
             background: linear-gradient(135deg, #FFFFFF 0%, #FFF3B0 25%, #F5C518 55%, #FFF3B0 80%, #E5B80B 100%);
             background-size: 200% auto;
@@ -87,7 +86,6 @@
             to { background-position: 200% center; }
         }
 
-        /* Authentic Brand Typography Styles */
         .logo-rupes {
             font-family: 'Montserrat', sans-serif;
             font-style: italic;
@@ -102,7 +100,6 @@
             letter-spacing: -0.01em;
         }
 
-        /* Whisper-Quiet Glass Cards */
         .piano-card {
             background: rgba(16, 18, 25, 0.88);
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -116,7 +113,6 @@
             backdrop-filter: blur(24px);
         }
 
-        /* Tactile Gold Button */
         .btn-gold-elite {
             background: linear-gradient(135deg, #FFF1B8 0%, #F5C518 50%, #C49700 100%);
             color: #050507;
@@ -130,8 +126,7 @@
         }
         .btn-gold-elite:disabled { opacity: 0.5; cursor: not-allowed; }
 
-        /* Interactive Selection States */
-        .submenu-trigger, .submenu-option, .severity-card, .service-pillar-btn, .pkg-tier-card, .angle-tab-btn {
+        .submenu-trigger, .submenu-option, .severity-card, .service-pillar-btn, .pkg-tier-card, .touch-zone-card {
             transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .submenu-trigger.open {
@@ -139,11 +134,14 @@
             background: linear-gradient(90deg, rgba(245, 197, 24, 0.16) 0%, rgba(18, 20, 28, 0.95) 100%);
             box-shadow: 0 0 20px rgba(245, 197, 24, 0.18);
         }
-        .submenu-option.selected, .severity-card.selected, .service-pillar-btn.active, .angle-tab-btn.active {
+        .submenu-option.selected, .severity-card.selected, .service-pillar-btn.active, .touch-zone-card.selected {
             border-color: #F5C518;
             background: rgba(245, 197, 24, 0.22);
             color: #FFFDF5;
             box-shadow: 0 0 16px rgba(245, 197, 24, 0.28);
+        }
+        .touch-zone-card.selected {
+            background: linear-gradient(135deg, rgba(245, 197, 24, 0.3) 0%, rgba(18, 20, 28, 0.95) 100%);
         }
         .pkg-tier-card.selected {
             border-color: #F5C518;
@@ -151,63 +149,6 @@
             box-shadow: 0 0 28px rgba(245, 197, 24, 0.25);
         }
 
-        /* 360° 3D Interactive Car SVG Simulator Styling */
-        .car-3d-stage {
-            background:
-                radial-gradient(ellipse at 50% 55%, rgba(245, 197, 24, 0.14) 0%, rgba(18, 20, 28, 0.4) 55%, #06070A 100%),
-                linear-gradient(180deg, #08090E 0%, #0D0F17 100%);
-            border: 1px solid rgba(245, 197, 24, 0.3);
-            box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.9), 0 20px 45px -15px rgba(0,0,0,0.85);
-            position: relative;
-            overflow: hidden;
-        }
-        .car-3d-grid-floor {
-            background-image: 
-                linear-gradient(to right, rgba(245, 197, 24, 0.06) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(245, 197, 24, 0.06) 1px, transparent 1px);
-            background-size: 28px 28px;
-        }
-        .svg-car-part {
-            fill: url(#carbonMetallicGrad);
-            stroke: rgba(255, 255, 255, 0.28);
-            stroke-width: 1.6;
-            cursor: pointer;
-            transition: all 0.22s ease;
-        }
-        .svg-car-part:hover {
-            fill: rgba(245, 197, 24, 0.32);
-            stroke: #FFF1B8;
-            stroke-width: 2.2;
-            filter: drop-shadow(0 0 8px rgba(245, 197, 24, 0.55));
-        }
-        .svg-car-part.infected {
-            fill: url(#goldInfectedGrad) !important;
-            stroke: #FFFDF5 !important;
-            stroke-width: 2.5 !important;
-            filter: drop-shadow(0 0 14px rgba(245, 197, 24, 0.85));
-        }
-        .svg-car-glass {
-            fill: rgba(10, 14, 22, 0.92);
-            stroke: rgba(255, 255, 255, 0.15);
-            stroke-width: 1.2;
-            pointer-events: none;
-        }
-        .svg-part-label {
-            font-size: 9px;
-            font-weight: 800;
-            fill: rgba(255, 255, 255, 0.78);
-            pointer-events: none;
-            text-anchor: middle;
-            dominant-baseline: middle;
-            text-transform: uppercase;
-            letter-spacing: 0.04em;
-        }
-        .svg-car-part.infected + .svg-part-label {
-            fill: #050507;
-            font-weight: 900;
-        }
-
-        /* 3D Glossy Paint Spheres */
         .paint-sphere {
             position: relative;
             border-radius: 9999px;
@@ -219,7 +160,6 @@
             box-shadow: inset -3px -3px 6px rgba(0,0,0,0.65), inset 2px 2px 5px rgba(255,255,255,0.65), 0 0 14px rgba(245, 197, 24, 0.65);
         }
 
-        /* Studio Light Tunnel */
         .studio-light-tunnel { position: relative; overflow: hidden; }
         .studio-light-tunnel::after {
             content: '';
@@ -244,7 +184,6 @@
             60%, 100% { transform: translateX(100%); }
         }
 
-        /* Before / After Slider */
         .comparison-slider {
             position: relative;
             width: 100%;
@@ -319,7 +258,11 @@
     <!-- STICKY HEADER -->
     <header class="sticky top-0 z-40 bg-obsidian/90 backdrop-blur-xl border-b border-white/10">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between">
-            <a href="#" class="flex items-center gap-3.5 group">
+            <a href="javascript:void(0)" id="secretAdminLogo"
+               onmousedown="startLogoHold()" onmouseup="clearLogoHold()" onmouseleave="clearLogoHold()"
+               ontouchstart="startLogoHold()" ontouchend="clearLogoHold()"
+               onclick="handleLogoSecretClicks()"
+               class="flex items-center gap-3.5 group select-none">
                 <div class="relative w-12 h-12 rounded-2xl bg-leather border-2 border-gold-400 flex items-center justify-center overflow-hidden shrink-0 shadow-[0_0_20px_rgba(245,197,24,0.3)]">
                     <span class="font-serif font-black text-base text-gold-300">DC</span>
                     <img src="logo.jpg" alt="DR. CARE" class="w-full h-full object-cover absolute inset-0" onerror="this.style.display='none'">
@@ -340,20 +283,11 @@
                 <button id="langSwitchBtn" type="button" onclick="toggleLanguage()" class="px-3.5 py-2 rounded-xl bg-white/5 hover:bg-white/15 border border-gold-400/40 text-xs font-extrabold text-gold-200 transition cursor-pointer">
                     <span id="langSwitchLabel">العربية</span>
                 </button>
-
-                <button type="button" onclick="openBackofficeModal()" class="px-3.5 py-2 rounded-xl bg-leather hover:bg-zinc-800 border border-gold-400/40 text-xs font-bold text-zinc-100 hover:text-gold-300 transition flex items-center gap-2 cursor-pointer shadow-lg" title="Executive Command">
-                    <span class="relative flex h-2 w-2">
-                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-gold-400 opacity-75"></span>
-                        <span class="relative inline-flex rounded-full h-2 w-2 bg-gold-400"></span>
-                    </span>
-                    <span class="hidden sm:inline" data-i18n="navCrmBtn">Backoffice</span>
-                    <span id="navLiveBadge" class="bg-gold-400 text-black text-[10px] font-extrabold px-1.5 py-0.5 rounded-md">LIVE</span>
-                </button>
             </div>
         </div>
     </header>
 
-    <!-- PROMINENT RUPES & MEGUIAR'S AUTHENTIC LOGO BANNER -->
+    <!-- BANNER -->
     <div class="bg-gradient-to-r from-obsidian via-[#14120B] to-obsidian border-b border-gold-400/25 py-3.5 px-4">
         <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
             <div class="flex items-center gap-2 text-xs font-bold text-zinc-200">
@@ -379,7 +313,7 @@
     <!-- MAIN CONTENT -->
     <main class="max-w-6xl mx-auto px-4 sm:px-6 pt-8 pb-24 space-y-16">
 
-        <!-- HERO + STUDIO LIGHT TUNNEL -->
+        <!-- HERO SECTION -->
         <section class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             <div class="lg:col-span-5 space-y-5">
                 <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-gold-400/15 border border-gold-400/40 text-gold-200 text-xs font-bold tracking-wider uppercase">
@@ -397,7 +331,7 @@
 
                 <div class="flex flex-col sm:flex-row gap-3 pt-1">
                     <a href="#clinic-console" onclick="switchConsoleTab('scratch')" class="btn-gold-elite px-6 py-3.5 rounded-2xl font-extrabold text-sm flex items-center justify-center gap-2">
-                        <span data-i18n="heroBtnScratch">360° Scratch Diagnosis</span>
+                        <span data-i18n="heroBtnScratch">Instant Touch Diagnosis</span>
                         <span>→</span>
                     </a>
                     <a href="#clinic-console" onclick="switchConsoleTab('booking')" class="px-6 py-3.5 rounded-2xl bg-white/5 hover:bg-white/10 border border-gold-400/35 text-gold-200 font-bold text-sm flex items-center justify-center transition">
@@ -421,14 +355,14 @@
                 </div>
             </div>
 
-            <!-- STUDIO LIGHT TUNNEL COMPARISON SLIDER -->
+            <!-- COMPARISON SLIDER -->
             <div class="lg:col-span-7">
                 <div class="piano-card p-3 rounded-3xl studio-light-tunnel">
                     <div class="flex items-center justify-between mb-2.5 px-1 text-xs">
                         <span class="font-bold text-white" data-i18n="sliderHeader">Real Transformation — Drag to Compare</span>
                         <div class="flex items-center gap-2">
-                            <button type="button" onclick="setSliderPercentage(85)" class="text-[10px] px-2.5 py-1 rounded bg-white/10 hover:bg-white/20 text-zinc-200 font-semibold cursor-pointer">Before</button>
-                            <button type="button" onclick="setSliderPercentage(15)" class="text-[10px] px-2.5 py-1 rounded bg-gold-400 text-black font-extrabold cursor-pointer">After</button>
+                            <button type="button" onclick="setSliderPercentage(85)" class="text-[10px] px-2.5 py-1 rounded bg-white/10 hover:bg-white/20 text-zinc-200 font-semibold cursor-pointer" data-i18n="btnBefore">Before</button>
+                            <button type="button" onclick="setSliderPercentage(15)" class="text-[10px] px-2.5 py-1 rounded bg-gold-400 text-black font-extrabold cursor-pointer" data-i18n="btnAfter">After</button>
                         </div>
                     </div>
 
@@ -463,14 +397,14 @@
             </div>
         </section>
 
-        <!-- PROMINENT RUPES & MEGUIAR'S SHOWCASE + SERVICE EXPLAINER -->
+        <!-- PILLARS -->
         <section id="interactive-atelier" class="scroll-mt-20 space-y-6">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div class="piano-card-gold p-6 rounded-3xl flex flex-col justify-between gap-4 relative overflow-hidden">
                     <div class="flex items-center justify-between border-b border-white/10 pb-3">
                         <div>
                             <span class="text-[10px] font-extrabold uppercase tracking-[0.2em] text-gold-300 block" data-i18n="megOrigin">CALIFORNIA, USA • SINCE 1901</span>
-                            <div class="logo-meguiars text-3xl sm:text-4xl text-gold-300 mt-1">Meguiar's<span class="text-rose-500 text-sm align-top">®</span></div>
+                            <div class="logo-meguiars text-3xl sm:text-4xl text-gold-300 mt-1">Meguiar's<span class="text-rose-500 text-xs align-top">®</span></div>
                         </div>
                         <span class="px-3 py-1 rounded-full bg-gold-400/15 border border-gold-400/40 text-gold-200 text-xs font-extrabold" data-i18n="megBadge">Micro-Abrasive Tech</span>
                     </div>
@@ -495,81 +429,15 @@
                     </p>
                 </div>
             </div>
-
-            <!-- Interactive 3-Pillar Service Architecture -->
-            <div class="piano-card rounded-3xl p-6 sm:p-8 space-y-6">
-                <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-white/10 pb-5">
-                    <div>
-                        <span class="text-[10px] font-extrabold uppercase tracking-[0.25em] text-gold-300" data-i18n="xrayBadge">THE DR. CARE METHODOLOGY</span>
-                        <h2 class="font-serif text-xl sm:text-2xl font-black text-white mt-1" data-i18n="xrayTitle">How We Protect Your Car's Original Value</h2>
-                    </div>
-                    <div class="flex flex-wrap gap-2">
-                        <button type="button" id="pillarBtn1" onclick="switchServicePillar(1)" class="service-pillar-btn active px-4 py-2 rounded-xl bg-leather border border-white/10 text-xs font-extrabold cursor-pointer" data-i18n="pillar1Btn">
-                            1. Clear-Coat Surgery
-                        </button>
-                        <button type="button" id="pillarBtn2" onclick="switchServicePillar(2)" class="service-pillar-btn px-4 py-2 rounded-xl bg-leather border border-white/10 text-xs font-extrabold text-zinc-300 cursor-pointer" data-i18n="pillar2Btn">
-                            2. Nano Dry Wash Science
-                        </button>
-                        <button type="button" id="pillarBtn3" onclick="switchServicePillar(3)" class="service-pillar-btn px-4 py-2 rounded-xl bg-leather border border-white/10 text-xs font-extrabold text-zinc-300 cursor-pointer" data-i18n="pillar3Btn">
-                            3. On-Site Mobile Service
-                        </button>
-                    </div>
-                </div>
-
-                <div id="pillarContent1" class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div class="p-5 rounded-2xl bg-black/60 border border-gold-400/35 space-y-2">
-                        <h4 class="text-sm font-extrabold text-gold-300" data-i18n="layer1Title">1. Clear Coat (الورنيش الشفاف)</h4>
-                        <p class="text-xs text-zinc-200 leading-relaxed" data-i18n="layer1Desc">95% of swirl marks &amp; scuffs live in this top transparent layer. We level only micro-microns using RUPES orbitals without thinning your paint.</p>
-                    </div>
-                    <div class="p-5 rounded-2xl bg-black/60 border border-white/10 space-y-2">
-                        <h4 class="text-sm font-extrabold text-white" data-i18n="layer2Title">2. Base Coat (طبقة اللون الأساسية)</h4>
-                        <p class="text-xs text-zinc-300 leading-relaxed" data-i18n="layer2Desc">Carries the factory metallic or pearl pigment. Completely untouched by our Meguiar's micro-compounds.</p>
-                    </div>
-                    <div class="p-5 rounded-2xl bg-black/60 border border-white/10 space-y-2">
-                        <h4 class="text-sm font-extrabold text-white" data-i18n="layer3Title">3. 100% Factory Resale Value</h4>
-                        <p class="text-xs text-zinc-300 leading-relaxed" data-i18n="layer3Desc">Zero repainting means your vehicle passes any paint-gauge inspection 100% original (فابريكا بالكامل بدون رش).</p>
-                    </div>
-                </div>
-
-                <div id="pillarContent2" class="hidden grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div class="p-5 rounded-2xl bg-black/60 border border-gold-400/35 space-y-2">
-                        <h4 class="text-sm font-black text-gold-300" data-i18n="nano1Title">Polymer Dust Encapsulation</h4>
-                        <p class="text-xs text-zinc-200 leading-relaxed" data-i18n="nano1Desc">Nano polymers emulsify and lift dust particles microscopically off the surface so they never scratch your paint during wiping.</p>
-                    </div>
-                    <div class="p-5 rounded-2xl bg-black/60 border border-white/10 space-y-2">
-                        <h4 class="text-sm font-black text-white" data-i18n="nano2Title">Virgin Edgeless Microfiber</h4>
-                        <p class="text-xs text-zinc-300 leading-relaxed" data-i18n="nano2Desc">We use dedicated high-GSM ultrasonic-cut edgeless towels for every single vehicle to prevent swirl marks.</p>
-                    </div>
-                    <div class="p-5 rounded-2xl bg-black/60 border border-white/10 space-y-2">
-                        <h4 class="text-sm font-black text-white" data-i18n="nano3Title">Hydrophobic Sealant</h4>
-                        <p class="text-xs text-zinc-300 leading-relaxed" data-i18n="nano3Desc">Leaves an anti-static UV mirror shield that repels dust, tree sap, and water spots for weeks.</p>
-                    </div>
-                </div>
-
-                <div id="pillarContent3" class="hidden grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div class="p-5 rounded-2xl bg-black/60 border border-gold-400/35 space-y-2">
-                        <h4 class="text-sm font-black text-gold-300" data-i18n="how1Title">We Come To Your Parking</h4>
-                        <p class="text-xs text-zinc-200 leading-relaxed" data-i18n="how1Desc">No waiting at crowded wash stations. Our mobile unit performs the entire service right under your home or villa shade.</p>
-                    </div>
-                    <div class="p-5 rounded-2xl bg-black/60 border border-white/10 space-y-2">
-                        <h4 class="text-sm font-black text-white" data-i18n="how2Title">Zero Water Mess</h4>
-                        <p class="text-xs text-zinc-300 leading-relaxed" data-i18n="how2Desc">Clean, eco-luxury dry wash &amp; polishing approved for private compound garages and underground parkings.</p>
-                    </div>
-                    <div class="p-5 rounded-2xl bg-black/60 border border-white/10 space-y-2">
-                        <h4 class="text-sm font-black text-white" data-i18n="how3Title">4 Exclusive Cairo Zones</h4>
-                        <p class="text-xs text-zinc-300 leading-relaxed" data-i18n="how3Desc">Dedicated mobile concierge coverage across Heliopolis, Nasr City, 5th Settlement, and Madinaty.</p>
-                    </div>
-                </div>
-            </div>
         </section>
 
-        <!-- STREAMLINED CONSOLE -->
+        <!-- CONSOLE -->
         <section id="clinic-console" class="scroll-mt-20 max-w-4xl mx-auto">
             
             <div class="grid grid-cols-2 p-1.5 rounded-2xl bg-leather border border-white/15 mb-6 shadow-xl">
                 <button type="button" id="tabScratchBtn" onclick="switchConsoleTab('scratch')" class="py-3.5 px-4 rounded-xl font-extrabold text-xs sm:text-sm transition flex items-center justify-center gap-2 bg-gradient-to-r from-gold-300 to-gold-400 text-black shadow-md cursor-pointer">
                     <span>📸</span>
-                    <span data-i18n="tabScratchTitle">360° Scratch &amp; Paint Diagnosis</span>
+                    <span data-i18n="tabScratchTitle">Instant Touch &amp; Paint Diagnosis</span>
                 </button>
                 <button type="button" id="tabBookingBtn" onclick="switchConsoleTab('booking')" class="py-3.5 px-4 rounded-xl font-extrabold text-xs sm:text-sm transition flex items-center justify-center gap-2 text-zinc-300 hover:text-white cursor-pointer">
                     <span>✨</span>
@@ -577,15 +445,15 @@
                 </button>
             </div>
 
-            <!-- TAB 1: SCRATCH & PAINT DIAGNOSIS -->
+            <!-- TAB 1: SCRATCH & DIAGNOSIS -->
             <div id="panelScratch" class="piano-card-gold rounded-3xl p-5 sm:p-8">
                 <div class="flex flex-wrap items-center justify-between gap-2 pb-4 mb-5 border-b border-white/10">
                     <div>
                         <h2 class="text-lg sm:text-xl font-black text-white" data-i18n="scratchFormHeader">
-                            Interactive 3D Vehicle Telemetry
+                            X-Ray Touch Telemetry &amp; Instant Assessment
                         </h2>
                         <p class="text-xs text-zinc-300 mt-0.5" data-i18n="consoleSub">
-                            Configure your car via side-labels, touch affected panels on the 360° 3D simulator &amp; attach photos.
+                            Select your car configuration &amp; touch the affected vehicle area for instant AI/Expert diagnosis.
                         </p>
                     </div>
                     <span class="text-[11px] text-gold-200 font-bold border border-gold-400/40 bg-gold-400/15 px-3 py-1 rounded-full" data-i18n="sloganMiniBottom">
@@ -593,9 +461,9 @@
                     </span>
                 </div>
 
-                <form id="scratchConsultForm" onsubmit="submitScratchConsultation(event)" class="space-y-6">
+                <form id="scratchConsultForm" onsubmit="submitScratchConsultation(event)" class="space-y-6" novalidate>
 
-                    <!-- STEP 1: SIDE-LABEL SUB-MENU OPENING SELECTOR -->
+                    <!-- VEHICLE CONFIGURATION -->
                     <div class="p-4 sm:p-6 rounded-2xl bg-black/55 border border-white/10 space-y-4">
                         <div class="flex flex-wrap items-center justify-between gap-2">
                             <span class="text-xs font-extrabold uppercase tracking-wider text-gold-300" data-i18n="step1Title">
@@ -607,7 +475,7 @@
                         </div>
 
                         <div class="space-y-2.5">
-                            <!-- SUB-MENU 1: CAR BODY TYPE -->
+                            <!-- SUB-MENU 1 -->
                             <div class="rounded-2xl bg-leather border border-white/15 overflow-hidden">
                                 <button type="button" id="trig_scratch_type" onclick="toggleSubMenu('scratch', 'type')"
                                         class="submenu-trigger w-full px-4 py-3.5 flex items-center justify-between text-start cursor-pointer">
@@ -633,7 +501,7 @@
                                 <input type="hidden" id="scratchCarTypeInput" value="SUV / 4x4">
                             </div>
 
-                            <!-- SUB-MENU 2: COUNTRY OF MANUFACTURE & BRAND -->
+                            <!-- SUB-MENU 2 -->
                             <div class="rounded-2xl bg-leather border border-white/15 overflow-hidden">
                                 <button type="button" id="trig_scratch_origin" onclick="toggleSubMenu('scratch', 'origin')"
                                         class="submenu-trigger open w-full px-4 py-3.5 flex items-center justify-between text-start cursor-pointer">
@@ -662,7 +530,7 @@
                                 <input type="hidden" id="carBrand" value="Mercedes-Benz">
                             </div>
 
-                            <!-- SUB-MENU 3: MODEL & YEAR SELECTION -->
+                            <!-- SUB-MENU 3 -->
                             <div class="rounded-2xl bg-leather border border-white/15 overflow-hidden">
                                 <button type="button" id="trig_scratch_model" onclick="toggleSubMenu('scratch', 'model')"
                                         class="submenu-trigger w-full px-4 py-3.5 flex items-center justify-between text-start cursor-pointer">
@@ -686,20 +554,20 @@
                                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
                                         <div>
                                             <label class="block text-[11px] text-zinc-300 font-bold mb-1" data-i18n="lblModel">Model Name (الموديل) *</label>
-                                            <input type="text" id="carModel" required maxlength="40"
-                                                   oninput="refreshConfigSummary('scratch')"
+                                            <input type="text" id="carModel" maxlength="40"
+                                                   oninput="refreshConfigSummary('scratch'); saveFormDraft();"
                                                    data-i18n-placeholder="phModel"
                                                    placeholder="e.g. S580 / X6 / Tiggo 8"
                                                    class="w-full px-3.5 py-2.5 rounded-xl bg-leather border border-gold-400/40 text-white text-xs font-bold focus:outline-none">
                                         </div>
                                         <div>
                                             <label class="block text-[11px] text-zinc-300 font-bold mb-1" data-i18n="lblYear">Manufacture Year (سنة الصنع) *</label>
-                                            <select id="carYear" required onchange="refreshConfigSummary('scratch')"
+                                            <select id="carYear" onchange="refreshConfigSummary('scratch'); saveFormDraft();"
                                                     class="w-full px-3.5 py-2.5 rounded-xl bg-leather border border-white/15 text-gold-200 text-xs font-extrabold focus:outline-none"></select>
                                         </div>
                                         <div>
                                             <label class="block text-[11px] text-zinc-300 font-bold mb-1" data-i18n="lblZoneSelect">Service Zone (نطاق الخدمة) *</label>
-                                            <select id="clientZone" required class="w-full px-3.5 py-2.5 rounded-xl bg-leather border border-white/15 text-white text-xs font-bold focus:outline-none">
+                                            <select id="clientZone" onchange="saveFormDraft()" class="w-full px-3.5 py-2.5 rounded-xl bg-leather border border-white/15 text-white text-xs font-bold focus:outline-none">
                                                 <option value="Heliopolis (مصر الجديدة)">Heliopolis — مصر الجديدة</option>
                                                 <option value="Nasr City (مدينة نصر)">Nasr City — مدينة نصر</option>
                                                 <option value="5th Settlement (التجمع الخامس)">5th Settlement — التجمع الخامس</option>
@@ -711,7 +579,7 @@
                             </div>
                         </div>
 
-                        <!-- Paint Spheres + Color Input -->
+                        <!-- Color Selector -->
                         <div class="pt-2 border-t border-white/10">
                             <label class="block text-[11px] text-zinc-300 font-bold mb-2" data-i18n="lblColorPick">Car Color (لون السيارة — اختر الدرجة أو اكتبها) *</label>
                             <div class="flex flex-wrap items-center gap-2.5">
@@ -730,28 +598,29 @@
                                 <button type="button" onclick="applyPresetColor('#113826', 'Emerald Green (أخضر ملكي)')" class="w-6 h-6 paint-sphere bg-[#113826] border border-white/20 cursor-pointer" title="Green"></button>
                                 <button type="button" onclick="applyPresetColor('#C2A878', 'Champagne Gold (شامبين ذهبي)')" class="w-6 h-6 paint-sphere bg-[#C2A878] border border-white/20 cursor-pointer" title="Champagne"></button>
 
-                                <input type="text" id="carColorInput" required value="Obsidian Black (أسود)" maxlength="60"
+                                <input type="text" id="carColorInput" value="Obsidian Black (أسود)" maxlength="60" oninput="saveFormDraft()"
                                        class="flex-1 min-w-[160px] px-3.5 py-2 rounded-xl bg-leather border border-white/15 text-gold-200 text-xs font-bold focus:outline-none">
                             </div>
                         </div>
                     </div>
 
-                    <!-- STEP 2: INTERACTIVE 360° 3D CAR SIMULATOR -->
+                    <!-- STEP 2: SIMPLIFIED X-RAY TOUCH SELECTOR -->
                     <div class="p-4 sm:p-6 rounded-2xl bg-black/55 border border-white/10 space-y-4">
                         <div class="flex flex-wrap items-center justify-between gap-2">
                             <div>
                                 <span class="text-xs font-extrabold uppercase tracking-wider text-gold-300 block" data-i18n="step2Title">
-                                    2. Interactive 360° 3D Car Simulator — Touch Infected Part(s)
+                                    2. X-Ray Touch Selector — Tap Affected Area
                                 </span>
                                 <span class="text-[11px] text-zinc-300" data-i18n="sim360Sub">
-                                    Rotate 360° around the vehicle or tap any panel directly on the 3D model to mark scratches.
+                                    Tap the area on your car that needs restoration for instant expert telemetry.
                                 </span>
                             </div>
                             <span id="selectedZonesCounter" class="text-[11px] font-extrabold text-black bg-gold-400 px-3 py-1 rounded-full shadow">
-                                1 Part Marked
+                                Hood Selected
                             </span>
                         </div>
 
+                        <!-- Defect Severity Selector -->
                         <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
                             <button type="button" id="defaultSeverityBtn" onclick="selectDefectSeverity(this, 'Swirl Marks & Oxidation (دوائر غسيل وبهتان)')" class="severity-card selected p-2.5 rounded-xl bg-leather border border-white/15 text-center cursor-pointer">
                                 <span class="block text-xs font-extrabold" data-i18n="sev1">Swirls / Dullness (دوائر غسيل وبهتان)</span>
@@ -768,189 +637,44 @@
                         </div>
                         <input type="hidden" id="defectSeverityInput" value="Swirl Marks & Oxidation (دوائر غسيل وبهتان)">
 
-                        <!-- 360° 3D INTERACTIVE SIMULATOR STAGE -->
-                        <div class="car-3d-stage car-3d-grid-floor rounded-3xl p-4 sm:p-6 space-y-4">
-                            <div class="flex flex-wrap items-center justify-between gap-2">
-                                <div class="flex flex-wrap items-center gap-1.5">
-                                    <button type="button" onclick="set360CameraAngle(0)" id="camBtn_0" class="angle-tab-btn active px-3 py-1.5 rounded-xl bg-leather border border-white/15 text-[11px] font-extrabold cursor-pointer">
-                                        🌐 360° Top Orbit
-                                    </button>
-                                    <button type="button" onclick="set360CameraAngle(1)" id="camBtn_1" class="angle-tab-btn px-3 py-1.5 rounded-xl bg-leather border border-white/15 text-[11px] font-bold text-zinc-300 cursor-pointer">
-                                        ➡️ Right Side (90°)
-                                    </button>
-                                    <button type="button" onclick="set360CameraAngle(2)" id="camBtn_2" class="angle-tab-btn px-3 py-1.5 rounded-xl bg-leather border border-white/15 text-[11px] font-bold text-zinc-300 cursor-pointer">
-                                        ⬅️ Left Side (270°)
-                                    </button>
-                                    <button type="button" onclick="set360CameraAngle(3)" id="camBtn_3" class="angle-tab-btn px-3 py-1.5 rounded-xl bg-leather border border-white/15 text-[11px] font-bold text-zinc-300 cursor-pointer">
-                                        ⬆️ Front &amp; Rear (0°/180°)
-                                    </button>
-                                </div>
+                        <!-- 1-TAP TOUCH ZONES -->
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
+                            <button type="button" onclick="setTouchZone('HOOD', this)" id="zoneCard_HOOD"
+                                    class="touch-zone-card selected p-4 rounded-2xl bg-leather border-2 border-gold-400 text-start cursor-pointer space-y-1.5 shadow-lg relative overflow-hidden group">
+                                <span class="absolute top-2 right-2 text-xs">✨</span>
+                                <span class="block text-[10px] uppercase text-gold-300 font-extrabold">Zone A</span>
+                                <strong class="block text-xs sm:text-sm font-black text-white" data-i18n="zoneHood">Front Hood &amp; Fenders (الكبوت والمقدمة)</strong>
+                                <span class="block text-[10px] text-zinc-300 font-semibold" data-i18n="timeHood">~45 mins on-site</span>
+                            </button>
 
-                                <button type="button" onclick="toggleZoneById('FULL_BODY')" id="btnFullBody3D"
-                                        class="px-3 py-1.5 rounded-xl bg-gold-400/15 hover:bg-gold-400/30 border border-gold-400/50 text-gold-200 text-[11px] font-extrabold cursor-pointer transition">
-                                    ✨ Select Full Car Body
-                                </button>
-                            </div>
+                            <button type="button" onclick="setTouchZone('DOORS', this)" id="zoneCard_DOORS"
+                                    class="touch-zone-card p-4 rounded-2xl bg-leather border border-white/15 text-start cursor-pointer space-y-1.5 hover:border-gold-400/60 relative overflow-hidden group">
+                                <span class="absolute top-2 right-2 text-xs opacity-50 group-hover:opacity-150">✨</span>
+                                <span class="block text-[10px] uppercase text-zinc-400 font-extrabold">Zone B</span>
+                                <strong class="block text-xs sm:text-sm font-black text-white" data-i18n="zoneDoors">Doors &amp; Panels (الأبواب والجوانب)</strong>
+                                <span class="block text-[10px] text-zinc-300 font-semibold" data-i18n="timeDoors">~60 mins on-site</span>
+                            </button>
 
-                            <svg width="0" height="0" class="absolute">
-                                <defs>
-                                    <linearGradient id="carbonMetallicGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                                        <stop offset="0%" stop-color="#232734"/>
-                                        <stop offset="50%" stop-color="#141720"/>
-                                        <stop offset="100%" stop-color="#0B0D13"/>
-                                    </linearGradient>
-                                    <linearGradient id="goldInfectedGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                                        <stop offset="0%" stop-color="#FFF1B8"/>
-                                        <stop offset="50%" stop-color="#F5C518"/>
-                                        <stop offset="100%" stop-color="#B88A00"/>
-                                    </linearGradient>
-                                </defs>
-                            </svg>
+                            <button type="button" onclick="setTouchZone('BUMPERS', this)" id="zoneCard_BUMPERS"
+                                    class="touch-zone-card p-4 rounded-2xl bg-leather border border-white/15 text-start cursor-pointer space-y-1.5 hover:border-gold-400/60 relative overflow-hidden group">
+                                <span class="absolute top-2 right-2 text-xs opacity-50 group-hover:opacity-150">✨</span>
+                                <span class="block text-[10px] uppercase text-zinc-400 font-extrabold">Zone C</span>
+                                <strong class="block text-xs sm:text-sm font-black text-white" data-i18n="zoneBumpers">Bumpers &amp; Corners (الصدامات والأركان)</strong>
+                                <span class="block text-[10px] text-zinc-300 font-semibold" data-i18n="timeBumpers">~45 mins on-site</span>
+                            </button>
 
-                            <!-- VIEW 0: 3D TOP-DOWN ORBIT -->
-                            <div id="simView_0" class="flex flex-col items-center justify-center py-2">
-                                <svg viewBox="0 0 520 250" class="w-full max-w-[540px] h-auto select-none drop-shadow-[0_18px_28px_rgba(0,0,0,0.95)]">
-                                    <rect x="95" y="18" width="58" height="16" rx="6" fill="#07080B" stroke="#333" stroke-width="1.5"/>
-                                    <rect x="367" y="18" width="58" height="16" rx="6" fill="#07080B" stroke="#333" stroke-width="1.5"/>
-                                    <rect x="95" y="216" width="58" height="16" rx="6" fill="#07080B" stroke="#333" stroke-width="1.5"/>
-                                    <rect x="367" y="216" width="58" height="16" rx="6" fill="#07080B" stroke="#333" stroke-width="1.5"/>
-
-                                    <path data-zone="FBUMPER" onclick="toggleZoneById('FBUMPER')" class="svg-car-part" d="M 28,70 Q 12,125 28,180 L 58,192 L 58,58 Z"/>
-                                    <text x="41" y="125" class="svg-part-label" transform="rotate(-90 41 125)">F.Bumper</text>
-
-                                    <path data-zone="HOOD" onclick="toggleZoneById('HOOD')" class="svg-car-part infected" d="M 62,62 L 168,68 L 168,182 L 62,188 Z"/>
-                                    <text x="115" y="125" class="svg-part-label">Front Hood (الكبوت)</text>
-
-                                    <polygon points="172,70 212,78 212,172 172,180" class="svg-car-glass"/>
-                                    <polygon points="348,78 382,70 382,180 348,172" class="svg-car-glass"/>
-
-                                    <rect data-zone="ROOF" onclick="toggleZoneById('ROOF')" class="svg-car-part" x="215" y="78" width="130" height="94" rx="8"/>
-                                    <text x="280" y="125" class="svg-part-label">Roof (السقف)</text>
-
-                                    <path data-zone="TRUNK" onclick="toggleZoneById('TRUNK')" class="svg-car-part" d="M 386,68 L 456,64 L 456,186 L 386,182 Z"/>
-                                    <text x="421" y="125" class="svg-part-label">Trunk (الشنطة)</text>
-
-                                    <path data-zone="RBUMPER" onclick="toggleZoneById('RBUMPER')" class="svg-car-part" d="M 460,60 L 490,72 Q 505,125 490,178 L 460,190 Z"/>
-                                    <text x="478" y="125" class="svg-part-label" transform="rotate(90 478 125)">R.Bumper</text>
-
-                                    <path data-zone="FL_FENDER" onclick="toggleZoneById('FL_FENDER')" class="svg-car-part" d="M 62,56 L 172,62 L 172,34 L 78,34 Q 65,40 62,56 Z"/>
-                                    <text x="118" y="48" class="svg-part-label">FL Fender</text>
-
-                                    <rect data-zone="FL_DOOR" onclick="toggleZoneById('FL_DOOR')" class="svg-car-part" x="175" y="34" width="88" height="32" rx="4"/>
-                                    <text x="219" y="50" class="svg-part-label">FL Door (باب أيسر)</text>
-
-                                    <rect data-zone="RL_DOOR" onclick="toggleZoneById('RL_DOOR')" class="svg-car-part" x="266" y="34" width="88" height="32" rx="4"/>
-                                    <text x="310" y="50" class="svg-part-label">RL Door</text>
-
-                                    <path data-zone="RL_FENDER" onclick="toggleZoneById('RL_FENDER')" class="svg-car-part" d="M 357,34 L 444,34 Q 456,42 456,58 L 357,62 Z"/>
-                                    <text x="406" y="48" class="svg-part-label">RL Fender</text>
-
-                                    <path data-zone="FR_FENDER" onclick="toggleZoneById('FR_FENDER')" class="svg-car-part" d="M 62,194 L 172,188 L 172,216 L 78,216 Q 65,210 62,194 Z"/>
-                                    <text x="118" y="202" class="svg-part-label">FR Fender</text>
-
-                                    <rect data-zone="FR_DOOR" onclick="toggleZoneById('FR_DOOR')" class="svg-car-part" x="175" y="184" width="88" height="32" rx="4"/>
-                                    <text x="219" y="200" class="svg-part-label">FR Door (باب أيمن)</text>
-
-                                    <rect data-zone="RR_DOOR" onclick="toggleZoneById('RR_DOOR')" class="svg-car-part" x="266" y="184" width="88" height="32" rx="4"/>
-                                    <text x="310" y="200" class="svg-part-label">RR Door</text>
-
-                                    <path data-zone="RR_FENDER" onclick="toggleZoneById('RR_FENDER')" class="svg-car-part" d="M 357,188 L 456,192 Q 456,208 444,216 L 357,216 Z"/>
-                                    <text x="406" y="202" class="svg-part-label">RR Fender</text>
-                                </svg>
-                            </div>
-
-                            <!-- VIEW 1: RIGHT SIDE PROFILE -->
-                            <div id="simView_1" class="hidden flex flex-col items-center justify-center py-2">
-                                <svg viewBox="0 0 540 210" class="w-full max-w-[540px] h-auto select-none drop-shadow-[0_18px_28px_rgba(0,0,0,0.95)]">
-                                    <path data-zone="ROOF" onclick="toggleZoneById('ROOF')" class="svg-car-part" d="M 155,78 Q 220,34 345,38 L 415,82 L 385,84 L 335,48 L 215,48 L 175,82 Z"/>
-                                    <text x="285" y="43" class="svg-part-label">Roof &amp; Pillars (السقف)</text>
-                                    <polygon points="182,82 218,52 278,52 278,82" class="svg-car-glass"/>
-                                    <polygon points="284,52 334,52 380,82 284,82" class="svg-car-glass"/>
-                                    <path data-zone="FBUMPER" onclick="toggleZoneById('FBUMPER')" class="svg-car-part" d="M 28,118 L 62,96 L 62,155 L 28,150 Z"/>
-                                    <text x="45" y="128" class="svg-part-label">F.BMP</text>
-                                    <path data-zone="FR_FENDER" onclick="toggleZoneById('FR_FENDER')" class="svg-car-part" d="M 65,94 L 172,82 L 172,155 L 148,155 A 38,38 0 0 0 74,155 L 65,155 Z"/>
-                                    <text x="118" y="105" class="svg-part-label">FR Fender (رفرف يمين)</text>
-                                    <rect data-zone="FR_DOOR" onclick="toggleZoneById('FR_DOOR')" class="svg-car-part" x="175" y="84" width="104" height="70" rx="4"/>
-                                    <text x="227" y="119" class="svg-part-label">Front Right Door (باب أمامي يمين)</text>
-                                    <rect data-zone="RR_DOOR" onclick="toggleZoneById('RR_DOOR')" class="svg-car-part" x="282" y="84" width="98" height="70" rx="4"/>
-                                    <text x="331" y="119" class="svg-part-label">Rear Right Door (باب خلفي يمين)</text>
-                                    <path data-zone="RR_FENDER" onclick="toggleZoneById('RR_FENDER')" class="svg-car-part" d="M 383,84 L 472,88 L 472,155 L 456,155 A 38,38 0 0 0 386,155 Z"/>
-                                    <text x="428" y="105" class="svg-part-label">RR Fender (رفرف خلفي)</text>
-                                    <path data-zone="RBUMPER" onclick="toggleZoneById('RBUMPER')" class="svg-car-part" d="M 475,92 L 510,105 L 510,152 L 475,155 Z"/>
-                                    <text x="492" y="126" class="svg-part-label">R.BMP</text>
-                                    <circle cx="111" cy="155" r="32" fill="#08090C" stroke="#F5C518" stroke-width="2"/>
-                                    <circle cx="111" cy="155" r="16" fill="#181B24" stroke="#666" stroke-width="1.5"/>
-                                    <circle cx="421" cy="155" r="32" fill="#08090C" stroke="#F5C518" stroke-width="2"/>
-                                    <circle cx="421" cy="155" r="16" fill="#181B24" stroke="#666" stroke-width="1.5"/>
-                                </svg>
-                            </div>
-
-                            <!-- VIEW 2: LEFT SIDE PROFILE -->
-                            <div id="simView_2" class="hidden flex flex-col items-center justify-center py-2">
-                                <svg viewBox="0 0 540 210" class="w-full max-w-[540px] h-auto select-none drop-shadow-[0_18px_28px_rgba(0,0,0,0.95)]">
-                                    <path data-zone="ROOF" onclick="toggleZoneById('ROOF')" class="svg-car-part" d="M 125,82 L 195,38 Q 320,34 385,78 L 365,82 L 325,48 L 205,48 L 155,84 Z"/>
-                                    <text x="255" y="43" class="svg-part-label">Roof &amp; Pillars (السقف)</text>
-                                    <polygon points="160,82 206,52 256,52 256,82" class="svg-car-glass"/>
-                                    <polygon points="262,52 322,52 358,82 262,82" class="svg-car-glass"/>
-                                    <path data-zone="RBUMPER" onclick="toggleZoneById('RBUMPER')" class="svg-car-part" d="M 30,105 L 65,92 L 65,155 L 30,152 Z"/>
-                                    <text x="48" y="126" class="svg-part-label">R.BMP</text>
-                                    <path data-zone="RL_FENDER" onclick="toggleZoneById('RL_FENDER')" class="svg-car-part" d="M 68,88 L 157,84 L 157,155 A 38,38 0 0 0 84,155 L 68,155 Z"/>
-                                    <text x="112" y="105" class="svg-part-label">RL Fender (رفرف خلفي يسار)</text>
-                                    <rect data-zone="RL_DOOR" onclick="toggleZoneById('RL_DOOR')" class="svg-car-part" x="160" y="84" width="98" height="70" rx="4"/>
-                                    <text x="209" y="119" class="svg-part-label">Rear Left Door (باب خلفي يسار)</text>
-                                    <rect data-zone="FL_DOOR" onclick="toggleZoneById('FL_DOOR')" class="svg-car-part" x="261" y="84" width="104" height="70" rx="4"/>
-                                    <text x="313" y="119" class="svg-part-label">Front Left Door (باب أمامي يسار)</text>
-                                    <path data-zone="FL_FENDER" onclick="toggleZoneById('FL_FENDER')" class="svg-car-part" d="M 368,82 L 475,94 L 475,155 L 466,155 A 38,38 0 0 0 392,155 L 368,155 Z"/>
-                                    <text x="422" y="105" class="svg-part-label">FL Fender (رفرف أمامي يسار)</text>
-                                    <path data-zone="FBUMPER" onclick="toggleZoneById('FBUMPER')" class="svg-car-part" d="M 478,96 L 512,118 L 512,150 L 478,155 Z"/>
-                                    <text x="495" y="128" class="svg-part-label">F.BMP</text>
-                                    <circle cx="119" cy="155" r="32" fill="#08090C" stroke="#F5C518" stroke-width="2"/>
-                                    <circle cx="119" cy="155" r="16" fill="#181B24" stroke="#666" stroke-width="1.5"/>
-                                    <circle cx="429" cy="155" r="32" fill="#08090C" stroke="#F5C518" stroke-width="2"/>
-                                    <circle cx="429" cy="155" r="16" fill="#181B24" stroke="#666" stroke-width="1.5"/>
-                                </svg>
-                            </div>
-
-                            <!-- VIEW 3: FRONT & REAR -->
-                            <div id="simView_3" class="hidden grid grid-cols-1 sm:grid-cols-2 gap-4 py-2">
-                                <div class="text-center">
-                                    <span class="text-[10px] font-extrabold text-gold-300 uppercase tracking-widest block mb-1">Front Fascia (0°)</span>
-                                    <svg viewBox="0 0 260 180" class="w-full max-w-[250px] mx-auto h-auto select-none">
-                                        <path data-zone="ROOF" onclick="toggleZoneById('ROOF')" class="svg-car-part" d="M 65,25 L 195,25 L 205,40 L 55,40 Z"/>
-                                        <text x="130" y="33" class="svg-part-label">Roof</text>
-                                        <polygon points="58,42 202,42 215,75 45,75" class="svg-car-glass"/>
-                                        <path data-zone="HOOD" onclick="toggleZoneById('HOOD')" class="svg-car-part infected" d="M 45,77 L 215,77 L 222,115 L 38,115 Z"/>
-                                        <text x="130" y="96" class="svg-part-label">Front Hood (الكبوت)</text>
-                                        <rect data-zone="FBUMPER" onclick="toggleZoneById('FBUMPER')" class="svg-car-part" x="32" y="118" width="196" height="36" rx="8"/>
-                                        <text x="130" y="136" class="svg-part-label">Front Bumper (إكصدام أمامي)</text>
-                                    </svg>
-                                </div>
-                                <div class="text-center">
-                                    <span class="text-[10px] font-extrabold text-gold-300 uppercase tracking-widest block mb-1">Rear Fascia (180°)</span>
-                                    <svg viewBox="0 0 260 180" class="w-full max-w-[250px] mx-auto h-auto select-none">
-                                        <path data-zone="ROOF" onclick="toggleZoneById('ROOF')" class="svg-car-part" d="M 65,25 L 195,25 L 205,40 L 55,40 Z"/>
-                                        <text x="130" y="33" class="svg-part-label">Roof</text>
-                                        <polygon points="58,42 202,42 212,72 48,72" class="svg-car-glass"/>
-                                        <path data-zone="TRUNK" onclick="toggleZoneById('TRUNK')" class="svg-car-part" d="M 46,75 L 214,75 L 220,115 L 40,115 Z"/>
-                                        <text x="130" y="95" class="svg-part-label">Rear Trunk (الشنطة)</text>
-                                        <rect data-zone="RBUMPER" onclick="toggleZoneById('RBUMPER')" class="svg-car-part" x="32" y="118" width="196" height="36" rx="8"/>
-                                        <text x="130" y="136" class="svg-part-label">Rear Bumper (إكصدام خلفي)</text>
-                                    </svg>
-                                </div>
-                            </div>
-
-                            <div class="flex items-center gap-3 pt-2 border-t border-white/10">
-                                <span class="text-[10px] font-extrabold uppercase tracking-wider text-gold-300 whitespace-nowrap">🔄 360° Orbit Slider:</span>
-                                <input type="range" id="orbit360Range" min="0" max="3" step="1" value="0"
-                                       oninput="set360CameraAngle(parseInt(this.value, 10))"
-                                       class="w-full accent-gold-400 cursor-pointer h-1.5 bg-white/15 rounded-lg">
-                            </div>
-
-                            <div id="activeSelectedPartsList" class="flex flex-wrap gap-1.5 pt-1"></div>
+                            <button type="button" onclick="setTouchZone('FULL_BODY', this)" id="zoneCard_FULL_BODY"
+                                    class="touch-zone-card p-4 rounded-2xl bg-leather border border-white/15 text-start cursor-pointer space-y-1.5 hover:border-gold-400/60 relative overflow-hidden group">
+                                <span class="absolute top-2 right-2 text-xs opacity-50 group-hover:opacity-150">👑</span>
+                                <span class="block text-[10px] uppercase text-gold-300 font-extrabold">Zone D</span>
+                                <strong class="block text-xs sm:text-sm font-black text-gold-300" data-i18n="zoneFull">Full Car Rejuvenation (كامل البودي)</strong>
+                                <span class="block text-[10px] text-gold-200 font-semibold" data-i18n="timeFull">~90 mins VIP Atelier</span>
+                            </button>
                         </div>
+                        <input type="hidden" id="selectedTouchZoneInput" value="Front Hood & Fenders (الكبوت والمقدمة)">
                     </div>
 
-                    <!-- STEP 3: UP TO 10 PHOTOS WITH MULTI-SELECTION -->
+                    <!-- STEP 3: UPLOAD PHOTOS -->
                     <div class="p-4 sm:p-5 rounded-2xl bg-black/50 border border-white/10 space-y-4">
                         <div class="flex flex-wrap items-center justify-between gap-2">
                             <div>
@@ -997,13 +721,13 @@
                             <div id="mediaThumbnailGrid" class="grid grid-cols-3 sm:grid-cols-5 gap-2.5"></div>
                         </div>
 
-                        <textarea id="clientNotes" rows="2" maxlength="400"
+                        <textarea id="clientNotes" rows="2" maxlength="400" oninput="saveFormDraft()"
                                   data-i18n-placeholder="phClientNoteBox"
                                   placeholder="Any special notes or preferred callback time? (Optional)"
                                   class="w-full px-3.5 py-2.5 rounded-xl bg-leather border border-white/15 focus:border-gold-400 text-xs text-white focus:outline-none"></textarea>
                     </div>
 
-                    <!-- STEP 4: CONTACT + 1-TAP GPS PIN + SUBMIT -->
+                    <!-- STEP 4: CONTACT & SUBMIT -->
                     <div class="p-4 sm:p-5 rounded-2xl bg-black/50 border border-white/10 space-y-4">
                         <div class="flex flex-wrap items-center justify-between gap-2">
                             <span class="text-xs font-extrabold uppercase tracking-wider text-gold-300" data-i18n="step4Title">
@@ -1018,11 +742,11 @@
                         <input type="hidden" id="gpsLink_scratch" value="">
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                            <input type="text" id="clientName" required maxlength="60"
+                            <input type="text" id="clientName" maxlength="60" oninput="saveFormDraft()"
                                    data-i18n-placeholder="phClientName"
                                    placeholder="Your Full Name *"
                                    class="w-full px-4 py-3 rounded-xl bg-leather border border-white/15 focus:border-gold-400 text-white text-sm focus:outline-none">
-                            <input type="tel" id="clientPhone" required maxlength="20"
+                            <input type="tel" id="clientPhone" maxlength="20" oninput="saveFormDraft()"
                                    placeholder="WhatsApp / Mobile (01X...) *" dir="ltr"
                                    class="w-full px-4 py-3 rounded-xl bg-leather border border-white/15 focus:border-gold-400 text-white text-sm focus:outline-none">
                         </div>
@@ -1034,7 +758,7 @@
                     </div>
                 </form>
 
-                <!-- GOLDEN ATELIER PASS CONFIRMATION -->
+                <!-- SUCCESS BANNER -->
                 <div id="scratchSuccessBanner" class="hidden mt-6 p-6 rounded-2xl bg-gradient-to-br from-[#161512] via-[#090A0D] to-black border border-gold-400/50 text-center space-y-3 shadow-2xl">
                     <span class="text-[10px] font-extrabold uppercase tracking-[0.25em] text-gold-400 block">DR. CARE PRIVATE ATELIER PASS</span>
                     <h4 class="text-lg font-black text-white" data-i18n="successHeader">
@@ -1047,10 +771,17 @@
                     <p class="text-xs text-zinc-300 max-w-md mx-auto" data-i18n="successBody">
                         We will message you on WhatsApp shortly with your bespoke treatment plan.
                     </p>
+                    <div class="pt-2">
+                        <a id="instantScratchWaBtn" href="https://wa.me/201003300600" target="_blank" rel="noopener noreferrer"
+                           class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black font-extrabold text-xs transition shadow-lg">
+                            <span>💬</span>
+                            <span data-i18n="btnInstantWa">Send Pass ID on WhatsApp for Priority Review</span>
+                        </a>
+                    </div>
                 </div>
             </div>
 
-            <!-- TAB 2: ON-SITE DRY WASH -->
+            <!-- TAB 2: DRY WASH -->
             <div id="panelBooking" class="hidden piano-card-gold rounded-3xl p-5 sm:p-8 space-y-6">
                 <div class="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 pb-5">
                     <div>
@@ -1066,7 +797,6 @@
                     </span>
                 </div>
 
-                <!-- 3 Tiers with Detailed Scope (Zero Prices) -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div onclick="selectWashPackage('1. Signature Exterior Care')" id="pkgCard1"
                          class="pkg-tier-card selected cursor-pointer p-5 rounded-2xl bg-black/65 border-2 border-gold-400 transition space-y-3 flex flex-col justify-between">
@@ -1134,8 +864,7 @@
                     </div>
                 </div>
 
-                <!-- Wash Booking Form with Side-Label Sub-Menu + GPS Pin -->
-                <form id="washBookingForm" onsubmit="submitWashBooking(event)" class="space-y-5 pt-1">
+                <form id="washBookingForm" onsubmit="submitWashBooking(event)" class="space-y-5 pt-1" novalidate>
                     <input type="hidden" id="selectedPkgName" value="1. Signature Exterior Care">
 
                     <div class="p-4 sm:p-5 rounded-2xl bg-black/55 border border-white/10 space-y-2.5">
@@ -1143,7 +872,6 @@
                             1. Vehicle Configuration (اضغط لفتح القوائم الفرعية للسيارة)
                         </span>
 
-                        <!-- Wash Sub-Menu 1: Body Type -->
                         <div class="rounded-2xl bg-leather border border-white/15 overflow-hidden">
                             <button type="button" id="trig_wash_type" onclick="toggleSubMenu('wash', 'type')"
                                     class="submenu-trigger w-full px-4 py-3 flex items-center justify-between text-start cursor-pointer">
@@ -1166,7 +894,6 @@
                             <input type="hidden" id="washCarTypeInput" value="SUV / 4x4">
                         </div>
 
-                        <!-- Wash Sub-Menu 2: Country & Make -->
                         <div class="rounded-2xl bg-leather border border-white/15 overflow-hidden">
                             <button type="button" id="trig_wash_origin" onclick="toggleSubMenu('wash', 'origin')"
                                     class="submenu-trigger w-full px-4 py-3 flex items-center justify-between text-start cursor-pointer">
@@ -1187,7 +914,6 @@
                             <input type="hidden" id="washCarMake" value="Mercedes-Benz">
                         </div>
 
-                        <!-- Wash Sub-Menu 3: Model, Year & Color -->
                         <div class="rounded-2xl bg-leather border border-white/15 overflow-hidden">
                             <button type="button" id="trig_wash_model" onclick="toggleSubMenu('wash', 'model')"
                                     class="submenu-trigger open w-full px-4 py-3 flex items-center justify-between text-start cursor-pointer">
@@ -1203,11 +929,11 @@
                             <div id="sub_wash_model" class="p-3.5 bg-black/75 border-t border-white/10 space-y-3">
                                 <div id="models_wash" class="flex flex-wrap gap-1.5"></div>
                                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                                    <input type="text" id="washCarModel" required maxlength="40" oninput="refreshConfigSummary('wash')" placeholder="Car Model (الموديل) *"
+                                    <input type="text" id="washCarModel" maxlength="40" oninput="refreshConfigSummary('wash'); saveFormDraft();" placeholder="Car Model (الموديل) *"
                                            class="px-3.5 py-2.5 rounded-xl bg-leather border border-gold-400/40 text-white text-xs font-bold focus:outline-none">
-                                    <select id="washCarYear" required onchange="refreshConfigSummary('wash')"
+                                    <select id="washCarYear" onchange="refreshConfigSummary('wash'); saveFormDraft();"
                                             class="px-3.5 py-2.5 rounded-xl bg-leather border border-white/15 text-gold-200 text-xs font-extrabold focus:outline-none"></select>
-                                    <input type="text" id="washCarColor" required maxlength="30" placeholder="Car Color (اللون) *"
+                                    <input type="text" id="washCarColor" maxlength="30" oninput="saveFormDraft()" placeholder="Car Color (اللون) *"
                                            class="px-3.5 py-2.5 rounded-xl bg-leather border border-white/15 text-white text-xs font-bold focus:outline-none">
                                 </div>
                             </div>
@@ -1217,7 +943,7 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <div>
                             <label class="block text-[11px] text-zinc-300 font-semibold mb-1" data-i18n="lblSelectHourSlot">Preferred Day &amp; Exact Hourly Slot (اختر اليوم والساعة المحددة) *</label>
-                            <select id="washDaySlot" required class="w-full px-4 py-3 rounded-xl bg-leather border border-gold-400/40 text-gold-200 text-xs font-bold focus:border-gold-400 focus:outline-none">
+                            <select id="washDaySlot" onchange="saveFormDraft()" class="w-full px-4 py-3 rounded-xl bg-leather border border-gold-400/40 text-gold-200 text-xs font-bold focus:border-gold-400 focus:outline-none">
                                 <optgroup label="Thursday (الخميس)">
                                     <option value="Thursday | 10:00 AM - 12:00 PM">Thursday — 10:00 AM to 12:00 PM</option>
                                     <option value="Thursday | 01:00 PM - 03:00 PM">Thursday — 01:00 PM to 03:00 PM</option>
@@ -1241,7 +967,7 @@
 
                         <div>
                             <label class="block text-[11px] text-zinc-300 font-semibold mb-1" data-i18n="lblSelectWashZone">On-Site Service Zone (نطاق الخدمة في مكانك) *</label>
-                            <select id="washZone" required class="w-full px-4 py-3 rounded-xl bg-leather border border-white/15 text-white text-xs font-bold focus:border-gold-400 focus:outline-none">
+                            <select id="washZone" onchange="saveFormDraft()" class="w-full px-4 py-3 rounded-xl bg-leather border border-white/15 text-white text-xs font-bold focus:border-gold-400 focus:outline-none">
                                 <option value="Heliopolis (مصر الجديدة)">Heliopolis — مصر الجديدة</option>
                                 <option value="Nasr City (مدينة نصر)">Nasr City — مدينة نصر</option>
                                 <option value="5th Settlement (التجمع الخامس)">5th Settlement — التجمع الخامس</option>
@@ -1250,7 +976,6 @@
                         </div>
                     </div>
 
-                    <!-- GPS Pin Button for Wash Form -->
                     <div class="flex flex-wrap items-center justify-between gap-2 pt-1">
                         <span class="text-xs font-extrabold uppercase tracking-wider text-gold-300" data-i18n="step4Title">Contact &amp; Exact Parking Pin</span>
                         <button type="button" id="gpsBtn_wash" onclick="captureCustomerGpsPin('wash')"
@@ -1262,11 +987,11 @@
                     <input type="hidden" id="gpsLink_wash" value="">
 
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                        <input type="text" id="washClientName" required maxlength="60" data-i18n-placeholder="phWashName" placeholder="Your Full Name *"
+                        <input type="text" id="washClientName" maxlength="60" oninput="saveFormDraft()" data-i18n-placeholder="phWashName" placeholder="Your Full Name *"
                                class="px-4 py-3 rounded-xl bg-leather border border-white/15 text-white text-xs font-bold focus:border-gold-400 focus:outline-none">
-                        <input type="tel" id="washClientPhone" required maxlength="20" placeholder="WhatsApp / Mobile (01X...) *" dir="ltr"
+                        <input type="tel" id="washClientPhone" maxlength="20" oninput="saveFormDraft()" placeholder="WhatsApp / Mobile (01X...) *" dir="ltr"
                                class="px-4 py-3 rounded-xl bg-leather border border-white/15 text-white text-xs font-bold focus:border-gold-400 focus:outline-none">
-                        <input type="text" id="washClientNotes" maxlength="200" data-i18n-placeholder="phWashAddress" placeholder="Street / Compound / Villa No. *" required
+                        <input type="text" id="washClientNotes" maxlength="200" oninput="saveFormDraft()" data-i18n-placeholder="phWashAddress" placeholder="Street / Compound / Villa No. *"
                                class="px-4 py-3 rounded-xl bg-leather border border-white/15 text-white text-xs font-bold focus:border-gold-400 focus:outline-none">
                     </div>
 
@@ -1275,7 +1000,6 @@
                     </button>
                 </form>
 
-                <!-- GOLDEN ATELIER PASS FOR WEEKEND WASH -->
                 <div id="washSuccessBanner" class="hidden p-6 rounded-2xl bg-gradient-to-br from-[#161512] via-[#090A0D] to-black border border-gold-400/50 text-center space-y-3 shadow-2xl">
                     <span class="text-[10px] font-extrabold uppercase tracking-[0.25em] text-gold-400 block">DR. CARE ON-SITE CONCIERGE PASS</span>
                     <h4 class="text-base font-black text-white" data-i18n="washSuccessTitle">🌟 On-Site Appointment Request Logged!</h4>
@@ -1284,13 +1008,20 @@
                         <strong id="generatedWashTicketId" class="font-mono text-sm text-gold-300">DC-0000</strong>
                     </div>
                     <p class="text-xs text-zinc-300" data-i18n="washSuccessSub">Our concierge team will contact you via WhatsApp to confirm your exact arrival time.</p>
+                    <div class="pt-2">
+                        <a id="instantWashWaBtn" href="https://wa.me/201003300600" target="_blank" rel="noopener noreferrer"
+                           class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black font-extrabold text-xs transition shadow-lg">
+                            <span>💬</span>
+                            <span data-i18n="btnInstantWa">Send Pass ID on WhatsApp for Priority Review</span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>
 
     </main>
 
-    <!-- BRIGHT, CLEAN CUSTOMER FOOTER -->
+    <!-- FOOTER -->
     <footer class="border-t border-gold-400/30 bg-obsidian py-10 px-4">
         <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-start">
             <div>
@@ -1327,7 +1058,7 @@
                     <button type="button" id="soundToggleBtn" onclick="toggleAudioRadar()" class="px-3 py-2 rounded-xl bg-white/5 border border-white/15 text-gold-200 text-xs font-bold cursor-pointer">
                         🔔 Audio: ON
                     </button>
-                    <button type="button" onclick="exportLeadsToCsv()" class="px-3 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 text-zinc-200 text-xs font-bold cursor-pointer">
+                    <button type="button" onclick="exportLeadsToCsv()" class="px-3 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 text-gold-200 text-xs font-bold cursor-pointer">
                         📥 CSV
                     </button>
                     <button type="button" onclick="lockCrmVault()" class="px-3 py-2 rounded-xl bg-white/5 hover:bg-amber-500/20 border border-white/10 text-zinc-300 text-xs font-bold cursor-pointer">
@@ -1339,7 +1070,6 @@
                 </div>
             </div>
 
-            <!-- INSTANT PIN GATE (2027 OR 2026) -->
             <div id="crmPinGate" class="max-w-sm mx-auto py-10 text-center space-y-4">
                 <div class="w-12 h-12 rounded-2xl bg-gold-400/10 border border-gold-400/30 flex items-center justify-center mx-auto text-gold-300 text-xl">
                     🔐
@@ -1363,9 +1093,7 @@
                 <p id="pinErrorMsg" class="hidden text-xs font-bold text-rose-400">Unauthorized security key.</p>
             </div>
 
-            <!-- UNLOCKED CRM CONTENT -->
             <div id="crmDashboardContent" class="hidden space-y-6">
-                
                 <div id="cloudDiagnosticBanner" class="hidden p-4 rounded-2xl bg-amber-950/70 border border-amber-400/50 text-xs text-amber-200 space-y-2">
                     <div class="flex items-center justify-between">
                         <strong class="text-sm text-amber-300">⚠️ Firebase Cloud Rules Notice (Local Vault Active)</strong>
@@ -1395,9 +1123,9 @@ service cloud.firestore {
                         <span class="text-[10px] text-zinc-300 uppercase font-bold">On-Site Wash</span>
                         <p id="kpiWashLeads" class="text-2xl font-black text-white mt-1">0</p>
                     </div>
-                    <div class="p-3.5 rounded-2xl bg-black/60 border border-emerald-500/30">
-                        <span class="text-[10px] text-emerald-300 uppercase font-bold">Sync &amp; Telegram Bot</span>
-                        <p id="kpiSyncStatusText" class="text-xs font-mono font-bold text-emerald-400 mt-2">🟢 Cloud + Bot Active</p>
+                    <div class="p-3.5 rounded-2xl bg-black/60 border border-white/10">
+                        <span class="text-[10px] text-zinc-400 uppercase font-bold">Sync Engine</span>
+                        <p id="kpiSyncStatusText" class="text-xs font-mono font-bold text-emerald-400 mt-2">Connecting...</p>
                     </div>
                 </div>
 
@@ -1418,15 +1146,12 @@ service cloud.firestore {
                             <option value="DRY_WASH">Dry Wash</option>
                         </select>
                     </div>
-                    <div class="flex flex-wrap gap-2">
+                    <div class="flex gap-2">
                         <button type="button" onclick="forceCloudRefresh()" class="px-3 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 text-gold-200 text-xs font-bold cursor-pointer">
                             🔄 Sync
                         </button>
-                        <button type="button" id="testTgBtn" onclick="testTelegramPushAlert()" class="px-3 py-2 rounded-xl bg-sky-500/20 hover:bg-sky-500/30 border border-sky-400/40 text-sky-200 text-xs font-extrabold cursor-pointer">
-                            📲 Test Telegram Alert
-                        </button>
                         <button type="button" onclick="simulateIncomingVipLead()" class="px-3 py-2 rounded-xl bg-gold-400/15 hover:bg-gold-400/25 border border-gold-400/30 text-gold-200 text-xs font-bold cursor-pointer">
-                            ⚡ Simulate Lead
+                            ⚡ Test Lead
                         </button>
                     </div>
                 </div>
@@ -1436,7 +1161,7 @@ service cloud.firestore {
         </div>
     </div>
 
-    <!-- OPTICAL LOUPE LIGHTBOX & VIP CERTIFICATE PREVIEW MODAL -->
+    <!-- LIGHTBOX -->
     <div id="mediaLightbox" class="fixed inset-0 z-50 hidden bg-black/95 backdrop-blur-xl flex items-center justify-center p-4" onclick="closeMediaLightbox()">
         <div class="max-w-4xl w-full bg-leather border border-gold-400/40 rounded-3xl p-4 space-y-3" onclick="event.stopPropagation()">
             <div class="flex flex-wrap items-center justify-between gap-2">
@@ -1457,9 +1182,6 @@ service cloud.firestore {
 
     <!-- APPLICATION SCRIPT -->
     <script>
-        // =========================================================================
-        // 1. FIREBASE & TELEGRAM BOT CONFIGURATION
-        // =========================================================================
         const firebaseConfig = {
             apiKey: "AIzaSyAmLj9vj6jn9ASbWcUL2CjtJX0n_tG8W18",
             authDomain: "drcare-centre.firebaseapp.com",
@@ -1470,12 +1192,7 @@ service cloud.firestore {
             measurementId: "G-K6MEN28BJ0"
         };
 
-        // LIVE TELEGRAM BOT CREDENTIALS
-        const TELEGRAM_BOT_TOKEN = "8260311589:AAFcCkg34sDF4iPW2dJ7YfzDyORR6LEiKcs";
-        const TELEGRAM_CHAT_ID = "811622618";
-
         let db = null;
-
         try {
             if (!firebase.apps.length) {
                 firebase.initializeApp(firebaseConfig);
@@ -1486,7 +1203,30 @@ service cloud.firestore {
             console.warn("Firebase fallback:", err);
         }
 
-        // Dynamic PWA Manifest Injection
+        let logoHoldTimer = null;
+        let logoClickCount = 0;
+        let logoClickResetTimer = null;
+
+        function startLogoHold() {
+            clearLogoHold();
+            logoHoldTimer = setTimeout(() => { openBackofficeModal(); }, 3000);
+        }
+
+        function clearLogoHold() {
+            if (logoHoldTimer) { clearTimeout(logoHoldTimer); logoHoldTimer = null; }
+        }
+
+        function handleLogoSecretClicks() {
+            logoClickCount++;
+            if (logoClickResetTimer) clearTimeout(logoClickResetTimer);
+            if (logoClickCount >= 5) {
+                logoClickCount = 0;
+                openBackofficeModal();
+            } else {
+                logoClickResetTimer = setTimeout(() => { logoClickCount = 0; }, 1500);
+            }
+        }
+
         let deferredPwaPrompt = null;
         try {
             const manifestObj = {
@@ -1526,12 +1266,7 @@ service cloud.firestore {
         }
 
         function escapeHtml(str) {
-            return String(str || '')
-                .replace(/&/g, '&amp;')
-                .replace(/</g, '&lt;')
-                .replace(/>/g, '&gt;')
-                .replace(/"/g, '&quot;')
-                .replace(/'/g, '&#039;');
+            return String(str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
         }
 
         function sanitizeCleanInput(str, maxLen = 150) {
@@ -1539,99 +1274,107 @@ service cloud.firestore {
         }
 
         // =========================================================================
-        // 2. FAIL-SAFE HTML TELEGRAM PUSH ENGINE (WITH DUAL FALLBACK & DIAGNOSTICS)
+        // FORM DRAFT ENGINE
         // =========================================================================
-        async function dispatchTelegramInstantAlert(lead) {
-            if (!TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID) return { ok: false, error: 'Missing token' };
+        const FORM_DRAFT_KEY = 'drcare_form_draft_v32';
 
-            const isScratch = lead.requestType === 'SCRATCH_DIAGNOSIS';
-            const headerTitle = isScratch ? '📸 <b>NEW 360° SCRATCH DIAGNOSIS</b>' : '✨ <b>NEW ON-SITE DRY WASH BOOKING</b>';
-            const cleanPhone = String(lead.clientPhone || '').replace(/[^0-9]/g, '');
-            const intlPhone = cleanPhone.startsWith('0') ? '2' + cleanPhone : cleanPhone;
-            const waDirectLink = `https://wa.me/${intlPhone}`;
-            const photoCount = (lead.media || []).length;
-
-            const safeHtmlMsg = [
-                `🚨 <b>DR. CARE ATELIER LIVE ALERT</b> 🚨`,
-                headerTitle,
-                `━━━━━━━━━━━━━━━━━━━━`,
-                `🎫 <b>Pass ID:</b> <code>${escapeHtml(lead.id)}</code>`,
-                `👤 <b>Client:</b> ${escapeHtml(lead.clientName)}`,
-                `📞 <b>Phone:</b> <code>${escapeHtml(lead.clientPhone)}</code>`,
-                `🚗 <b>Vehicle:</b> ${escapeHtml(lead.carBrand)}`,
-                `📅 <b>Model & Year:</b> ${escapeHtml(lead.carModel)}`,
-                `🎨 <b>Finish / Tier:</b> ${escapeHtml(lead.carColor)}`,
-                `📍 <b>Zone:</b> ${escapeHtml(lead.zone)}`,
-                lead.gpsLink ? `🗺️ <b>GPS Pin:</b> <a href="${escapeHtml(lead.gpsLink)}">Open Google Maps</a>` : `🗺️ <b>GPS Pin:</b> Not attached`,
-                isScratch ? `🖼️ <b>Attached Photos:</b> ${photoCount} High-Res Photo(s)` : ``,
-                `━━━━━━━━━━━━━━━━━━━━`,
-                `📝 <b>Details & 3D Panels:</b>`,
-                escapeHtml(lead.notes),
-                `━━━━━━━━━━━━━━━━━━━━`,
-                `💬 <a href="${waDirectLink}">Tap Here to Message Client on WhatsApp</a>`
-            ].filter(Boolean).join('\n');
-
-            const endpoint = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
-
+        function saveFormDraft() {
             try {
-                const res = await fetch(endpoint, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        chat_id: TELEGRAM_CHAT_ID,
-                        text: safeHtmlMsg,
-                        parse_mode: 'HTML',
-                        disable_web_page_preview: true
-                    })
-                });
-                const data = await res.json();
-                if (data && data.ok) {
-                    return { ok: true };
-                }
-                return { ok: false, error: data.description || 'Telegram API rejected request' };
-            } catch (networkErr) {
-                // Fallback GET beacon if browser blocks POST
-                try {
-                    const plainText = safeHtmlMsg.replace(/<[^>]+>/g, '');
-                    const url = `${endpoint}?chat_id=${encodeURIComponent(TELEGRAM_CHAT_ID)}&text=${encodeURIComponent(plainText)}`;
-                    await fetch(url, { mode: 'no-cors' });
-                    return { ok: true };
-                } catch (e2) {
-                    return { ok: false, error: networkErr.message };
-                }
-            }
+                const draft = {
+                    activeState,
+                    selectedTouchZone: document.getElementById('selectedTouchZoneInput')?.value || '',
+                    scratchType: document.getElementById('scratchCarTypeInput')?.value || 'SUV / 4x4',
+                    carModel: document.getElementById('carModel')?.value || '',
+                    carYear: document.getElementById('carYear')?.value || '2026',
+                    clientZone: document.getElementById('clientZone')?.value || 'Heliopolis (مصر الجديدة)',
+                    carColorInput: document.getElementById('carColorInput')?.value || 'Obsidian Black (أسود)',
+                    defectSeverityInput: document.getElementById('defectSeverityInput')?.value || 'Swirl Marks & Oxidation (دوائر غسيل وبهتان)',
+                    clientNotes: document.getElementById('clientNotes')?.value || '',
+                    clientName: document.getElementById('clientName')?.value || '',
+                    clientPhone: document.getElementById('clientPhone')?.value || '',
+                    gpsLink_scratch: document.getElementById('gpsLink_scratch')?.value || '',
+                    selectedPkgName: document.getElementById('selectedPkgName')?.value || '1. Signature Exterior Care',
+                    washType: document.getElementById('washCarTypeInput')?.value || 'SUV / 4x4',
+                    washCarModel: document.getElementById('washCarModel')?.value || '',
+                    washCarYear: document.getElementById('washCarYear')?.value || '2026',
+                    washCarColor: document.getElementById('washCarColor')?.value || '',
+                    washDaySlot: document.getElementById('washDaySlot')?.value || '',
+                    washZone: document.getElementById('washZone')?.value || 'Heliopolis (مصر الجديدة)',
+                    washClientName: document.getElementById('washClientName')?.value || '',
+                    washClientPhone: document.getElementById('washClientPhone')?.value || '',
+                    washClientNotes: document.getElementById('washClientNotes')?.value || '',
+                    gpsLink_wash: document.getElementById('gpsLink_wash')?.value || ''
+                };
+                sessionStorage.setItem(FORM_DRAFT_KEY, JSON.stringify(draft));
+            } catch (e) {}
         }
 
-        async function testTelegramPushAlert() {
-            const btn = document.getElementById('testTgBtn');
-            const orig = btn.textContent;
-            btn.textContent = '⏳ Sending to Phone...';
+        function restoreFormDraft() {
+            try {
+                const raw = sessionStorage.getItem(FORM_DRAFT_KEY);
+                if (!raw) return;
+                const draft = JSON.parse(raw);
+                if (!draft || typeof draft !== 'object') return;
 
-            const result = await dispatchTelegramInstantAlert({
-                id: 'DC-TEST',
-                requestType: 'SCRATCH_DIAGNOSIS',
-                clientName: 'Mr. Alfy (Executive Test)',
-                clientPhone: '01003300600',
-                carBrand: 'SUV / 4x4 • Germany & Europe • Porsche',
-                carModel: 'Cayenne Turbo GT • 2026',
-                carColor: 'Obsidian Black (أسود)',
-                zone: 'Heliopolis (مصر الجديدة)',
-                gpsLink: 'https://www.google.com/maps?q=30.0876,31.3282',
-                media: [{}, {}],
-                notes: '✅ Your Telegram Bot is connected & firing live notifications to your phone!'
-            });
+                if (draft.activeState) {
+                    activeState = draft.activeState;
+                    ['scratch', 'wash'].forEach(prefix => {
+                        renderCountryPills(prefix);
+                        renderBrandPillsForCountry(prefix, activeState[prefix].country);
+                        renderModelPillsForBrand(prefix, activeState[prefix].country, activeState[prefix].brand);
+                    });
+                }
 
-            if (result && result.ok) {
-                btn.textContent = '✓ Sent to Telegram!';
-            } else {
-                btn.textContent = '⚠️ Check Bot Start';
-                alert('تنبيه من تيليجرام:\n' + (result.error || 'تأكد من فتح البوت في تيليجرام والضغط على زر Start أولاً لكي يسمح البوت بإرسال الإشعارات لحسابك.'));
-            }
-            setTimeout(() => { btn.textContent = orig; }, 3000);
+                const setVal = (id, val) => {
+                    const el = document.getElementById(id);
+                    if (el && val !== undefined && val !== null) el.value = val;
+                };
+
+                setVal('scratchCarTypeInput', draft.scratchType);
+                if (draft.scratchType && document.getElementById('val_scratch_type')) {
+                    document.getElementById('val_scratch_type').textContent = draft.scratchType;
+                }
+
+                setVal('carModel', draft.carModel);
+                setVal('carYear', draft.carYear);
+                setVal('clientZone', draft.clientZone);
+                setVal('carColorInput', draft.carColorInput);
+                setVal('defectSeverityInput', draft.defectSeverityInput);
+                setVal('clientNotes', draft.clientNotes);
+                setVal('clientName', draft.clientName);
+                setVal('clientPhone', draft.clientPhone);
+                setVal('gpsLink_scratch', draft.gpsLink_scratch);
+
+                setVal('washCarTypeInput', draft.washType);
+                if (draft.washType && document.getElementById('val_wash_type')) {
+                    document.getElementById('val_wash_type').textContent = draft.washType;
+                }
+
+                setVal('washCarModel', draft.washCarModel);
+                setVal('washCarYear', draft.washCarYear);
+                setVal('washCarColor', draft.washCarColor);
+                if (draft.washDaySlot) setVal('washDaySlot', draft.washDaySlot);
+                setVal('washZone', draft.washZone);
+                setVal('washClientName', draft.washClientName);
+                setVal('washClientPhone', draft.washClientPhone);
+                setVal('washClientNotes', draft.washClientNotes);
+                setVal('gpsLink_wash', draft.gpsLink_wash);
+
+                if (draft.selectedPkgName) {
+                    selectWashPackage(draft.selectedPkgName);
+                }
+
+                refreshConfigSummary('scratch');
+                refreshConfigSummary('wash');
+            } catch (e) {}
+        }
+
+        function clearSavedDraft() {
+            try { sessionStorage.removeItem(FORM_DRAFT_KEY); } catch (e) {}
         }
 
         // =========================================================================
-        // 3. 1-TAP GPS PARKING PIN CAPTURE
+        // GPS & CERTIFICATE
         // =========================================================================
         function captureCustomerGpsPin(formPrefix) {
             const btn = document.getElementById(`gpsBtn_${formPrefix}`);
@@ -1653,6 +1396,7 @@ service cloud.firestore {
                     hiddenInp.value = mapsUrl;
                     btn.className = "px-3 py-1.5 rounded-xl bg-emerald-500 text-black text-xs font-extrabold cursor-pointer flex items-center gap-1.5 shadow-lg";
                     lbl.textContent = currentLang === 'ar' ? '✓ تم حفظ موقع ركن السيارة بدقة' : '✓ Exact GPS Pin Locked';
+                    saveFormDraft();
                 },
                 () => {
                     lbl.textContent = currentLang === 'ar' ? 'تعذر التقاط الـ GPS (يرجى تفعيل الموقع)' : 'GPS permission denied — tap to retry';
@@ -1661,9 +1405,6 @@ service cloud.firestore {
             );
         }
 
-        // =========================================================================
-        // 4. VIP DIAGNOSTIC CERTIFICATE GENERATOR (HTML5 CANVAS -> PNG)
-        // =========================================================================
         function generateVipCertificateCard(leadId) {
             const lead = memoryLeadsCache.find(l => l.id === leadId);
             if (!lead) return;
@@ -1687,6 +1428,7 @@ service cloud.firestore {
             ctx.lineWidth = 2;
             ctx.strokeRect(52, 52, 976, 1246);
 
+            ctx.direction = 'ltr';
             ctx.fillStyle = '#F5C518';
             ctx.font = '900 54px Cinzel, serif';
             ctx.textAlign = 'center';
@@ -1711,25 +1453,33 @@ service cloud.firestore {
             ctx.font = '800 26px monospace';
             ctx.fillText(`PASS ID: ${lead.id}`, 540, 287);
 
-            ctx.textAlign = 'left';
             const startX = 100;
             let curY = 375;
+            const hasArabic = (str) => /[\u0600-\u06FF]/.test(String(str || ''));
 
-            const drawField = (label, value, highlight = false) => {
+            const drawField = (labelEn, labelAr, value, highlight = false) => {
+                ctx.direction = 'ltr';
+                ctx.textAlign = 'left';
                 ctx.fillStyle = '#9CA3AF';
                 ctx.font = '700 20px "Plus Jakarta Sans", Cairo, sans-serif';
-                ctx.fillText(label, startX, curY);
+                ctx.fillText(`${labelEn} — ${labelAr}`, startX, curY);
+
+                const valStr = String(value || '-').slice(0, 52);
+                ctx.direction = hasArabic(valStr) ? 'rtl' : 'ltr';
+                ctx.textAlign = 'left';
                 ctx.fillStyle = highlight ? '#F5C518' : '#FFFFFF';
                 ctx.font = '800 28px "Plus Jakarta Sans", Cairo, sans-serif';
-                ctx.fillText(String(value || '-').slice(0, 52), startX, curY + 38);
+                ctx.fillText(valStr, startX, curY + 38);
                 curY += 105;
             };
 
-            drawField('VEHICLE OWNER (مالك السيارة):', lead.clientName);
-            drawField('VEHICLE PROFILE (السيارة والموديل):', `${lead.carBrand} — ${lead.carModel}`, true);
-            drawField('PAINT FINISH / PACKAGE (اللون أو الباقة):', lead.carColor);
-            drawField('SERVICE ZONE (نطاق الخدمة المتنقلة):', lead.zone);
+            drawField('VEHICLE OWNER', 'مالك السيارة', lead.clientName);
+            drawField('VEHICLE PROFILE', 'السيارة والموديل', `${lead.carBrand} — ${lead.carModel}`, true);
+            drawField('PAINT FINISH / PACKAGE', 'اللون أو الباقة', lead.carColor);
+            drawField('SERVICE ZONE', 'نطاق الخدمة المتنقلة', lead.zone);
 
+            ctx.direction = 'ltr';
+            ctx.textAlign = 'left';
             ctx.fillStyle = 'rgba(255, 255, 255, 0.04)';
             ctx.fillRect(90, curY - 10, 900, 250);
             ctx.strokeStyle = 'rgba(245, 197, 24, 0.35)';
@@ -1737,19 +1487,21 @@ service cloud.firestore {
 
             ctx.fillStyle = '#F5C518';
             ctx.font = '800 22px "Plus Jakarta Sans", Cairo, sans-serif';
-            ctx.fillText('360° 3D INSPECTION & TREATMENT NOTES:', 120, curY + 35);
+            ctx.fillText('X-RAY TOUCH INSPECTION & TREATMENT NOTES:', 120, curY + 35);
 
             ctx.fillStyle = '#F3F4F6';
             ctx.font = '600 21px "Plus Jakarta Sans", Cairo, sans-serif';
             const noteLines = String(lead.notes || '').split('\n');
             let lineY = curY + 80;
             noteLines.forEach(line => {
+                ctx.direction = hasArabic(line) ? 'rtl' : 'ltr';
+                ctx.textAlign = 'left';
                 ctx.fillText(line.slice(0, 68), 120, lineY);
                 lineY += 42;
             });
 
             curY += 300;
-
+            ctx.direction = 'ltr';
             ctx.fillStyle = 'rgba(16, 185, 129, 0.14)';
             ctx.fillRect(90, curY, 900, 95);
             ctx.strokeStyle = '#10B981';
@@ -1767,120 +1519,75 @@ service cloud.firestore {
             ctx.font = 'italic 900 28px Montserrat, sans-serif';
             ctx.fillText('CERTIFIED SYSTEMS:   RUPES (ITALY)   •   MEGUIAR\'S (USA)', 540, 1220);
 
-            ctx.fillStyle = '#9CA3AF';
-            ctx.font = '600 18px "Plus Jakarta Sans", sans-serif';
-            ctx.fillText('Save Your Investment Now — 100% Original Factory Paint Preservation', 540, 1265);
-
             const certDataUrl = canvas.toDataURL('image/png');
-            showLightboxContent({
-                url: certDataUrl,
-                resolution: `VIP CERTIFICATE (${lead.id})`
-            });
+            showLightboxContent({ url: certDataUrl, resolution: `VIP CERTIFICATE (${lead.id})` });
         }
 
         // =========================================================================
-        // 5. CASCADING SIDE-LABEL SUB-MENU DATA (COUNTRY -> BRAND -> MODELS)
+        // CASCADING SUB-MENUS
         // =========================================================================
         const CAR_CATALOG_BY_COUNTRY = {
             "Germany & Europe": {
-                flag: "🇩🇪",
-                labelEn: "Germany & Europe",
-                labelAr: "ألمانيا وأوروبا",
+                flag: "🇩🇪", labelEn: "Germany & Europe", labelAr: "ألمانيا وأوروبا",
                 brands: {
-                    "Mercedes-Benz": ["S-Class", "E-Class", "C-Class", "CLA", "GLA", "GLC", "GLE", "GLS", "G-Class", "EQS / EQE"],
-                    "BMW": ["7 Series", "5 Series", "3 Series", "X1", "X3", "X4", "X5", "X6", "X7", "iX / i7"],
+                    "Mercedes-Benz": ["S-Class", "E-Class", "C-Class", "CLA", "GLA", "GLC", "GLE", "GLS", "G-Class", "EQS"],
+                    "BMW": ["7 Series", "5 Series", "3 Series", "X1", "X3", "X5", "X6", "X7", "iX"],
                     "Porsche": ["911", "Cayenne", "Macan", "Panamera", "Taycan"],
                     "Range Rover": ["Vogue", "Sport", "Velar", "Evoque", "Defender"],
-                    "Audi": ["A3", "A4", "A6", "A8", "Q3", "Q5", "Q7", "Q8", "e-tron"],
-                    "Volkswagen": ["Tiguan", "Passat", "Golf", "T-Roc", "Touareg", "ID.4", "ID.6"],
-                    "Skoda": ["Octavia", "Kodiaq", "Superb", "Kamiq", "Karoq"],
-                    "Seat": ["Ateca", "Leon", "Arona", "Ibiza", "Tarraco"],
-                    "Cupra": ["Formentor", "Leon", "Terramar"],
-                    "Peugeot": ["3008", "5008", "2008", "408", "508", "301"],
-                    "Opel": ["Grandland", "Mokka", "Crossland", "Astra", "Corsa"],
-                    "Renault": ["Austral", "Megane", "Duster", "Kardian", "Taliant"],
-                    "Citroen": ["C5 Aircross", "C4X", "C4", "C3 Aircross", "C-Elysee"],
-                    "Fiat": ["Tipo", "500X", "500"],
-                    "Volvo": ["XC90", "XC60", "XC40", "EX30"],
-                    "Alfa Romeo": ["Tonale", "Stelvio", "Giulia"],
-                    "Mini": ["Cooper", "Countryman"]
+                    "Audi": ["A3", "A4", "A6", "Q3", "Q5", "Q7", "Q8"],
+                    "Volkswagen": ["Tiguan", "Passat", "Golf", "Touareg", "ID.4"],
+                    "Skoda": ["Octavia", "Kodiaq", "Superb"],
+                    "Peugeot": ["3008", "5008", "2008", "408", "508"],
+                    "Volvo": ["XC90", "XC60", "XC40"]
                 }
             },
             "China & EV": {
-                flag: "🇨🇳",
-                labelEn: "China & EV",
-                labelAr: "الصين والكهربائية",
+                flag: "🇨🇳", labelEn: "China & EV", labelAr: "الصين والكهربائية",
                 brands: {
-                    "MG": ["ZS", "RX5 Plus", "MG 5", "MG 6", "MG 7", "MG One", "HS", "MG 4 EV"],
-                    "Chery": ["Tiggo 8 Pro", "Tiggo 7 Pro", "Tiggo 4 Pro", "Tiggo 3", "Arrizo 5"],
-                    "Jetour": ["T2", "Dashing", "X70 Plus", "X90 Plus", "T1"],
-                    "Haval": ["Jolion", "Jolion Pro", "H6", "H6 GT", "Dargo"],
-                    "Geely": ["Coolray", "Starray", "Okavango", "Gx3 Pro", "Emgrand"],
-                    "BYD": ["Song Plus", "Yuan Plus", "Seal", "Han", "Dolphin", "F3"],
-                    "Changan": ["UNI-T", "UNI-K", "UNI-V", "CS55 Plus", "CS35 Plus"],
-                    "GAC": ["Empow", "Emzoom", "Emkoo", "GS4"],
-                    "BAIC": ["BJ30", "X7", "X55", "U5 Plus"],
-                    "ZEEKR": ["001", "X", "007"],
-                    "Xiaomi": ["SU7", "SU7 Max", "SU7 Ultra"],
-                    "Exeed": ["RX", "VX", "TXL", "LX"],
-                    "Jaecoo": ["J7", "J8"],
-                    "Omoda": ["C5", "E5"],
-                    "Hongqi": ["H9", "E-HS9", "HS5", "H5"],
-                    "Tank": ["Tank 300", "Tank 500"],
-                    "JAC": ["JS4", "JS3", "J7"],
-                    "DFSK": ["Eagle Pro", "Glory 330S"],
-                    "Bestune": ["T77 Pro", "B70"],
-                    "Soueast": ["S09", "S07"],
-                    "Forthing": ["T5 Evo"]
+                    "MG": ["ZS", "RX5 Plus", "MG 5", "MG 6", "MG 7", "HS", "MG 4 EV"],
+                    "Chery": ["Tiggo 8 Pro", "Tiggo 7 Pro", "Tiggo 4 Pro", "Arrizo 5"],
+                    "Jetour": ["T2", "Dashing", "X70 Plus", "X90 Plus"],
+                    "Haval": ["Jolion", "H6", "H6 GT", "Dargo"],
+                    "Geely": ["Coolray", "Starray", "Okavango", "Emgrand"],
+                    "BYD": ["Song Plus", "Yuan Plus", "Seal", "Han", "Dolphin"],
+                    "Changan": ["UNI-T", "UNI-K", "UNI-V", "CS55 Plus"],
+                    "Xiaomi": ["SU7", "SU7 Max"],
+                    "Exeed": ["RX", "VX", "TXL"],
+                    "Tank": ["Tank 300", "Tank 500"]
                 }
             },
             "Japan": {
-                flag: "🇯🇵",
-                labelEn: "Japan",
-                labelAr: "اليابان",
+                flag: "🇯🇵", labelEn: "Japan", labelAr: "اليابان",
                 brands: {
-                    "Toyota": ["Corolla", "Land Cruiser", "Prado", "RAV4", "Fortuner", "Camry", "Yaris", "Belta"],
+                    "Toyota": ["Corolla", "Land Cruiser", "Prado", "RAV4", "Fortuner", "Camry", "Yaris"],
                     "Lexus": ["LX600", "RX", "NX", "ES", "LS"],
                     "Nissan": ["Qashqai", "X-Trail", "Juke", "Sunny", "Sentra", "Patrol"],
-                    "Honda": ["Civic", "CR-V", "ZR-V", "Accord", "City"],
-                    "Mitsubishi": ["Eclipse Cross", "Xpander", "Atrage", "Montero Sport"],
+                    "Honda": ["Civic", "CR-V", "Accord"],
+                    "Mitsubishi": ["Eclipse Cross", "Xpander", "Montero Sport"],
                     "Mazda": ["Mazda 3", "CX-3", "CX-5", "CX-9"],
-                    "Suzuki": ["Fronx", "Grand Vitara", "Jimny", "Swift", "Dzire", "Ciaz"],
-                    "Subaru": ["XV", "Crosstrek", "Forester", "Impreza"]
+                    "Suzuki": ["Fronx", "Grand Vitara", "Jimny", "Swift"]
                 }
             },
             "Korea": {
-                flag: "🇰🇷",
-                labelEn: "Korea",
-                labelAr: "كوريا",
+                flag: "🇰🇷", labelEn: "Korea", labelAr: "كوريا",
                 brands: {
-                    "Hyundai": ["Tucson", "Elantra CN7", "Elantra AD", "Santa Fe", "Kona", "Accent RB", "Bayon", "Ioniq 5"],
+                    "Hyundai": ["Tucson", "Elantra CN7", "Santa Fe", "Kona", "Accent RB", "Ioniq 5"],
                     "Kia": ["Sportage", "XCeed", "Cerato", "Sorento", "Seltos", "K5", "EV6"],
-                    "Genesis": ["GV80", "GV70", "G80", "G90"],
-                    "KGM / SsangYong": ["Torres", "Tivoli"]
+                    "Genesis": ["GV80", "GV70", "G80"]
                 }
             },
             "USA": {
-                flag: "🇺🇸",
-                labelEn: "USA",
-                labelAr: "أمريكا",
+                flag: "🇺🇸", labelEn: "USA", labelAr: "أمريكا",
                 brands: {
                     "Jeep": ["Grand Cherokee", "Wrangler", "Renegade", "Compass"],
-                    "Chevrolet": ["Captiva", "Optra", "Tahoe", "Malibu"],
-                    "Ford": ["Kuga", "Focus", "Territory", "Mustang", "Bronco", "Explorer"],
-                    "Tesla": ["Model Y", "Model 3", "Model S", "Model X", "Cybertruck"],
-                    "Cadillac": ["Escalade", "CT5", "XT6"],
-                    "Dodge": ["Challenger", "Charger", "Durango"],
-                    "GMC": ["Yukon", "Sierra"]
+                    "Chevrolet": ["Captiva", "Tahoe", "Malibu"],
+                    "Ford": ["Kuga", "Focus", "Territory", "Mustang", "Explorer"],
+                    "Tesla": ["Model Y", "Model 3", "Model S", "Model X"]
                 }
             },
             "Other": {
-                flag: "🌍",
-                labelEn: "Other Make",
-                labelAr: "ماركة أخرى",
-                brands: {
-                    "Custom Make": ["Custom Model"]
-                }
+                flag: "🌍", labelEn: "Other Make", labelAr: "ماركة أخرى",
+                brands: { "Custom Make": ["Custom Model"] }
             }
         };
 
@@ -1929,12 +1636,16 @@ service cloud.firestore {
             });
         }
 
+        function openSpecificSubMenu(prefix, section) {
+            const subEl = document.getElementById(`sub_${prefix}_${section}`);
+            if (subEl && subEl.classList.contains('hidden')) toggleSubMenu(prefix, section);
+        }
+
         function pickCarType(prefix, typeVal, btnEl) {
             const container = document.getElementById(`sub_${prefix}_type`);
             if (container) {
                 container.querySelectorAll('.submenu-option').forEach(b => {
-                    b.classList.remove('selected');
-                    b.classList.add('text-zinc-300');
+                    b.classList.remove('selected'); b.classList.add('text-zinc-300');
                 });
             }
             btnEl.classList.add('selected');
@@ -1943,6 +1654,7 @@ service cloud.firestore {
             document.getElementById(`${prefix}CarTypeInput`).value = typeVal;
             document.getElementById(`val_${prefix}_type`).textContent = typeVal;
             refreshConfigSummary(prefix);
+            saveFormDraft();
             toggleSubMenu(prefix, 'origin');
         }
 
@@ -1975,6 +1687,7 @@ service cloud.firestore {
             renderBrandPillsForCountry(prefix, countryKey);
             renderModelPillsForBrand(prefix, countryKey, firstBrand);
             refreshConfigSummary(prefix);
+            saveFormDraft();
         }
 
         function renderBrandPillsForCountry(prefix, countryKey) {
@@ -2002,6 +1715,7 @@ service cloud.firestore {
             renderBrandPillsForCountry(prefix, activeState[prefix].country);
             renderModelPillsForBrand(prefix, activeState[prefix].country, brandName);
             refreshConfigSummary(prefix);
+            saveFormDraft();
             toggleSubMenu(prefix, 'model');
         }
 
@@ -2020,9 +1734,7 @@ service cloud.firestore {
 
         function pickModelQuick(prefix, modelName, btnEl) {
             const container = document.getElementById(`models_${prefix}`);
-            if (container) {
-                container.querySelectorAll('.submenu-option').forEach(b => b.classList.remove('selected'));
-            }
+            if (container) container.querySelectorAll('.submenu-option').forEach(b => b.classList.remove('selected'));
             btnEl.classList.add('selected');
             const modelInp = document.getElementById(prefix === 'scratch' ? 'carModel' : 'washCarModel');
             if (modelInp) {
@@ -2030,6 +1742,7 @@ service cloud.firestore {
                 if (modelName === 'Custom Model') modelInp.focus();
             }
             refreshConfigSummary(prefix);
+            saveFormDraft();
         }
 
         function refreshConfigSummary(prefix) {
@@ -2048,132 +1761,49 @@ service cloud.firestore {
 
             const modelEl = document.getElementById(`val_${prefix}_model`);
             if (modelEl) {
-                modelEl.textContent = modelVal ? `${modelVal} • ${yearVal}` : `Select Model • ${yearVal}`;
+                const fallbackTxt = currentLang === 'ar' ? 'اختر الموديل' : 'Select Model';
+                modelEl.textContent = modelVal ? `${modelVal} • ${yearVal}` : `${fallbackTxt} • ${yearVal}`;
             }
 
             if (prefix === 'scratch') {
                 const badge = document.getElementById('selectedCarSummaryBadge');
-                if (badge) {
-                    badge.textContent = `${bodyType} • ${brand} ${modelVal ? '(' + modelVal + ' ' + yearVal + ')' : ''}`;
-                }
+                if (badge) badge.textContent = `${bodyType} • ${brand} ${modelVal ? '(' + modelVal + ' ' + yearVal + ')' : ''}`;
             }
         }
 
         // =========================================================================
-        // 6. INTERACTIVE 360° 3D CAR BODY SIMULATOR LOGIC
+        // X-RAY TOUCH SIMULATOR LOGIC
         // =========================================================================
-        const ZONE_DICTIONARY = {
-            'HOOD': { en: 'Front Hood', ar: 'الكبوت الأمامي' },
-            'ROOF': { en: 'Roof Panel', ar: 'السقف' },
-            'TRUNK': { en: 'Rear Trunk', ar: 'الشنطة الخلفية' },
-            'FBUMPER': { en: 'Front Bumper', ar: 'إكصدام أمامي' },
-            'RBUMPER': { en: 'Rear Bumper', ar: 'إكصدام خلفي' },
-            'FR_FENDER': { en: 'Front Right Fender', ar: 'رفرف أمامي يمين' },
-            'FR_DOOR': { en: 'Front Right Door', ar: 'باب أمامي يمين' },
-            'RR_DOOR': { en: 'Rear Right Door', ar: 'باب خلفي يمين' },
-            'RR_FENDER': { en: 'Rear Right Quarter', ar: 'رفرف خلفي يمين' },
-            'FL_FENDER': { en: 'Front Left Fender', ar: 'رفرف أمامي يسار' },
-            'FL_DOOR': { en: 'Front Left Door', ar: 'باب أمامي يسار' },
-            'RL_DOOR': { en: 'Rear Left Door', ar: 'باب خلفي يسار' },
-            'RL_FENDER': { en: 'Rear Left Quarter', ar: 'رفرف خلفي يسار' },
-            'FULL_BODY': { en: 'Full Car Body (360°)', ar: 'كامل السيارة (360°)' }
+        const TOUCH_ZONES = {
+            'HOOD': { en: 'Front Hood & Fenders', ar: 'الكبوت والمقدمة' },
+            'DOORS': { en: 'Doors & Side Panels', ar: 'الأبواب والجوانب' },
+            'BUMPERS': { en: 'Bumpers & Corners', ar: 'الصدامات والأركان' },
+            'FULL_BODY': { en: 'Full Car Rejuvenation', ar: 'كامل بودي السيارة' }
         };
 
-        let selectedZoneIds = ['HOOD'];
+        function setTouchZone(zoneKey, btnEl) {
+            const zObj = TOUCH_ZONES[zoneKey];
+            if (!zObj) return;
 
-        function set360CameraAngle(angleIndex) {
-            [0, 1, 2, 3].forEach(idx => {
-                const viewEl = document.getElementById(`simView_${idx}`);
-                const btnEl = document.getElementById(`camBtn_${idx}`);
-                if (viewEl) viewEl.classList.toggle('hidden', idx !== angleIndex);
-                if (btnEl) {
-                    if (idx === angleIndex) {
-                        btnEl.classList.add('active');
-                        btnEl.classList.remove('text-zinc-300');
-                    } else {
-                        btnEl.classList.remove('active');
-                        btnEl.classList.add('text-zinc-300');
-                    }
-                }
+            document.querySelectorAll('.touch-zone-card').forEach(card => {
+                card.classList.remove('selected', 'border-2', 'border-gold-400');
+                card.classList.add('border', 'border-white/15');
             });
-            const slider = document.getElementById('orbit360Range');
-            if (slider) slider.value = angleIndex;
-        }
-
-        function toggleZoneById(zoneId) {
-            if (zoneId === 'FULL_BODY') {
-                if (selectedZoneIds.includes('FULL_BODY')) {
-                    selectedZoneIds = ['HOOD'];
-                } else {
-                    selectedZoneIds = Object.keys(ZONE_DICTIONARY);
-                }
-            } else {
-                selectedZoneIds = selectedZoneIds.filter(z => z !== 'FULL_BODY');
-                if (selectedZoneIds.includes(zoneId)) {
-                    selectedZoneIds = selectedZoneIds.filter(z => z !== zoneId);
-                } else {
-                    selectedZoneIds.push(zoneId);
-                }
-            }
-            sync3DCarSimulatorVisuals();
-        }
-
-        function sync3DCarSimulatorVisuals() {
-            document.querySelectorAll('.svg-car-part').forEach(part => {
-                const zId = part.getAttribute('data-zone');
-                const isSelected = selectedZoneIds.includes('FULL_BODY') || selectedZoneIds.includes(zId);
-                part.classList.toggle('infected', isSelected);
-            });
-
-            const fullBtn = document.getElementById('btnFullBody3D');
-            if (fullBtn) {
-                const isFull = selectedZoneIds.includes('FULL_BODY');
-                fullBtn.className = isFull
-                    ? "px-3 py-1.5 rounded-xl bg-gold-400 text-black text-[11px] font-black cursor-pointer transition shadow-lg"
-                    : "px-3 py-1.5 rounded-xl bg-gold-400/15 hover:bg-gold-400/30 border border-gold-400/50 text-gold-200 text-[11px] font-extrabold cursor-pointer transition";
+            if (btnEl) {
+                btnEl.classList.remove('border', 'border-white/15');
+                btnEl.classList.add('selected', 'border-2', 'border-gold-400');
             }
 
-            const count = selectedZoneIds.includes('FULL_BODY') ? 14 : selectedZoneIds.length;
+            const fullText = currentLang === 'ar' ? `${zObj.ar} (${zObj.en})` : `${zObj.en} (${zObj.ar})`;
+            document.getElementById('selectedTouchZoneInput').value = fullText;
+
             const badge = document.getElementById('selectedZonesCounter');
-            if (badge) {
-                badge.textContent = currentLang === 'ar'
-                    ? `تم تحديد ${count} جزء على المجسم`
-                    : `${count} Part(s) Marked on 3D Model`;
-            }
-
-            const tagsContainer = document.getElementById('activeSelectedPartsList');
-            if (tagsContainer) {
-                if (selectedZoneIds.includes('FULL_BODY')) {
-                    const lbl = currentLang === 'ar' ? ZONE_DICTIONARY.FULL_BODY.ar : ZONE_DICTIONARY.FULL_BODY.en;
-                    tagsContainer.innerHTML = `<span class="px-3 py-1 rounded-lg bg-gold-400 text-black text-xs font-black">✨ ${escapeHtml(lbl)}</span>`;
-                } else {
-                    tagsContainer.innerHTML = selectedZoneIds.map(zId => {
-                        const zObj = ZONE_DICTIONARY[zId];
-                        if (!zObj) return '';
-                        const lbl = currentLang === 'ar' ? zObj.ar : zObj.en;
-                        return `
-                            <span onclick="toggleZoneById('${zId}')" class="cursor-pointer px-2.5 py-1 rounded-lg bg-gold-400/20 border border-gold-400/50 text-gold-200 text-[11px] font-bold flex items-center gap-1.5 hover:bg-rose-500/20 hover:border-rose-400">
-                                <span>${escapeHtml(lbl)}</span>
-                                <span class="text-[10px] text-gold-300">✕</span>
-                            </span>
-                        `;
-                    }).join('');
-                }
-            }
-        }
-
-        function getFormattedSelectedZonesString() {
-            if (selectedZoneIds.includes('FULL_BODY')) {
-                return `${ZONE_DICTIONARY.FULL_BODY.ar} (${ZONE_DICTIONARY.FULL_BODY.en})`;
-            }
-            return selectedZoneIds.map(id => {
-                const z = ZONE_DICTIONARY[id];
-                return z ? `${z.ar} (${z.en})` : id;
-            }).join(' + ');
+            if (badge) badge.textContent = currentLang === 'ar' ? zObj.ar : zObj.en;
+            saveFormDraft();
         }
 
         // =========================================================================
-        // 7. BILINGUAL DICTIONARY
+        // BILINGUAL DICTIONARY
         // =========================================================================
         let currentLang = 'en';
         const i18nDict = {
@@ -2182,20 +1812,21 @@ service cloud.firestore {
                 topBarDays: "Thu • Fri • Sat At Your Doorstep",
                 brandSlogan: "Reviving The Automotive Soul",
                 navHowItWorks: "Our Craft",
-                navCrmBtn: "Backoffice",
                 worldClassBadge: "Certified Global Systems",
                 worldClassText: "We exclusively operate original American & Italian paint correction technology:",
                 heroBadge: "Bespoke On-Site Paint Atelier",
                 heroHeadline1: "Factory Paint.",
                 heroHeadline2: "Reborn At Your Door.",
                 heroQuoteSub: "We erase scratches, oxidation, and swirl marks right at your home parking without repainting. Preserve 100% of your car's factory clear coat and resale value.",
-                heroBtnScratch: "360° Scratch Diagnosis",
+                heroBtnScratch: "Instant Touch Diagnosis",
                 heroBtnWash: "On-Site Nano Dry Wash",
                 stat1: "Original Factory Paint",
                 stat2: "Official Compounds",
                 stat3Title: "At Your Location",
                 stat3: "4 Cairo Zones",
                 sliderHeader: "Real Transformation — Drag to Compare",
+                btnBefore: "Before",
+                btnAfter: "After",
                 afterTag: "AFTER: DR. CARE MIRROR FINISH",
                 beforeTag: "BEFORE: OXIDATION & SWIRLS",
                 megOrigin: "CALIFORNIA, USA • SINCE 1901",
@@ -2215,44 +1846,40 @@ service cloud.firestore {
                 layer2Desc: "Carries the factory metallic or pearl pigment. Completely untouched by our Meguiar's micro-compounds.",
                 layer3Title: "3. 100% Factory Resale Value",
                 layer3Desc: "Zero repainting means your vehicle passes any paint-gauge inspection 100% original (فابريكا بالكامل بدون رش).",
-                nano1Title: "Polymer Dust Encapsulation",
-                nano1Desc: "Nano polymers emulsify and lift dust particles microscopically off the surface so they never scratch your paint during wiping.",
-                nano2Title: "Virgin Edgeless Microfiber",
-                nano2Desc: "We use dedicated high-GSM ultrasonic-cut edgeless towels for every single vehicle to prevent swirl marks.",
-                nano3Title: "Hydrophobic Sealant",
-                nano3Desc: "Leaves an anti-static UV mirror shield that repels dust, tree sap, and water spots for weeks.",
-                how1Title: "We Come To Your Parking",
-                how1Desc: "No waiting at crowded wash stations. Our mobile unit performs the entire service right under your home or villa shade.",
-                how2Title: "Zero Water Mess",
-                how2Desc: "Clean, eco-luxury dry wash & polishing approved for private compound garages and underground parkings.",
-                how3Title: "4 Exclusive Cairo Zones",
-                how3Desc: "Dedicated mobile concierge coverage across Heliopolis, Nasr City, 5th Settlement, and Madinaty.",
-                tabScratchTitle: "360° Scratch & Paint Diagnosis",
+                tabScratchTitle: "Instant Touch & Paint Diagnosis",
                 tabBookingTitle: "On-Site Dry Wash & Care",
-                scratchFormHeader: "Interactive 3D Vehicle Telemetry",
-                consoleSub: "Configure your car via side-labels, touch affected panels on the 360° 3D simulator & attach photos.",
+                scratchFormHeader: "X-Ray Touch Telemetry & Instant Assessment",
+                consoleSub: "Select your car configuration & touch the affected vehicle area for instant AI/Expert diagnosis.",
                 sloganMiniBottom: "Save Your Investment Now",
-                step1Title: "1. Vehicle Configuration (اضغط على كل بطاقة جانبية لفتح القائمة الفرعية)",
-                sideLblType: "Car Body Type (فئة الهيكل)",
-                sideLblOrigin: "Country of Manufacture & Make (بلد المنشأ والماركة)",
-                sideLblModelYear: "Vehicle Model & Year (الموديل وسنة الصنع)",
+                step1Title: "1. Vehicle Configuration",
+                sideLblType: "Car Body Type",
+                sideLblOrigin: "Country of Manufacture & Make",
+                sideLblModelYear: "Vehicle Model & Year",
                 btnChange: "Select",
-                lblStep2A: "A. Tap Country of Manufacture (اختر بلد الصنع لفتح ماركاتها):",
-                lblStep2B: "B. Select Manufacturer from Sub-Menu (اختر الماركة):",
-                lblQuickModels: "Popular Models for Selected Brand (اختر الموديل بالضغط أو اكتبه):",
-                lblModel: "Model Name (الموديل) *",
-                lblYear: "Manufacture Year (سنة الصنع) *",
-                lblZoneSelect: "Service Zone (نطاق الخدمة) *",
-                lblColorPick: "Car Color (لون السيارة — اختر الدرجة أو اكتبها) *",
-                step2Title: "2. Interactive 360° 3D Car Simulator — Touch Infected Part(s)",
-                sim360Sub: "Rotate 360° around the vehicle or tap any panel directly on the 3D model to mark scratches.",
-                sev1: "Swirls / Dullness (دوائر غسيل وبهتان)",
+                lblStep2A: "A. Tap Country of Manufacture:",
+                lblStep2B: "B. Select Manufacturer from Sub-Menu:",
+                lblQuickModels: "Popular Models for Selected Brand:",
+                lblModel: "Model Name *",
+                lblYear: "Manufacture Year *",
+                lblZoneSelect: "Service Zone *",
+                lblColorPick: "Car Color *",
+                step2Title: "2. X-Ray Touch Selector — Tap Affected Area",
+                sim360Sub: "Tap the area on your car that needs restoration for instant expert telemetry.",
+                sev1: "Swirls / Dullness",
                 sev1Sub: "Surface haze & spiderwebs",
-                sev2: "Surface Scratch (خدش سطحي بالورنيش)",
+                sev2: "Surface Scratch",
                 sev2Sub: "Clear-coat level defect",
-                sev3: "Deep Scuff (خدش عميق أو حكة)",
+                sev3: "Deep Scuff",
                 sev3Sub: "Key scratch or panel rub",
-                step3Title: "3. Upload Scratch Photos (Up to 10 Photos — Multi-Select Supported) *",
+                zoneHood: "Front Hood & Fenders",
+                timeHood: "~45 mins on-site",
+                zoneDoors: "Doors & Panels",
+                timeDoors: "~60 mins on-site",
+                zoneBumpers: "Bumpers & Corners",
+                timeBumpers: "~45 mins on-site",
+                zoneFull: "Full Car Rejuvenation",
+                timeFull: "~90 mins VIP Atelier",
+                step3Title: "3. Upload Scratch Photos (Up to 10 Photos) *",
                 photoTipText: "Select up to 10 photos at once from your gallery or camera.",
                 dropzoneTitle: "Tap to Select or Capture Up to 10 Photos",
                 btnClearAll: "Clear All",
@@ -2261,38 +1888,25 @@ service cloud.firestore {
                 submitScratchBtnText: "Get My Custom Restoration Plan",
                 successHeader: "Received. Our Master Specialist is reviewing your photos.",
                 successBody: "We will message you on WhatsApp shortly with your bespoke treatment plan.",
-                washKicker: "100% MOBILE ON-SITE CONCIERGE (الخدمة بالكامل في مكان العميل)",
+                btnInstantWa: "Send Pass ID on WhatsApp for Priority Review",
+                washKicker: "100% MOBILE ON-SITE CONCIERGE",
                 washHeader: "Select Your On-Site Nano Dry Wash Tier",
                 washNoWaterBadge: "Zero Water Mess • At Your Home Parking",
                 pkg1Time: "⏱ 45 MINS • ESSENTIAL",
                 pkg1Title: "1. Signature Exterior",
                 pkg1Desc: "Designed for weekly maintenance of clean-to-lightly dusty vehicles.",
-                p1Bullet1: "✓ Safe Nano-Polymer waterless dust encapsulation",
-                p1Bullet2: "✓ Virgin high-GSM edgeless microfiber wipe-down",
-                p1Bullet3: "✓ Exterior glass & mirrors crystal cleaning",
-                p1Bullet4: "✓ Quick synthetic gloss booster spray",
                 tier1Footer: "Tap to Select Tier 1",
                 pkg2Time: "⏱ 60 MINS • POPULAR",
                 pkg2Tag: "+ Rims & Deep Gloss",
                 pkg2Title: "2. Concours + Rims Detail",
                 pkg2Desc: "Adds deep wheel decontamination and Meguiar's Carnauba wax depth.",
-                p2Bullet1: "✓ Everything in Signature Exterior Tier",
-                p2Bullet2: "✓ Deep alloy rim brake-dust removal & barrel cleaning",
-                p2Bullet3: "✓ Non-sling satin UV tire conditioning dressing",
-                p2Bullet4: "✓ Door jambs & trunk seals detailed wipe-down",
-                p2Bullet5: "✓ Meguiar's® Liquid Wax hand application",
                 tier2Footer: "Tap to Select Tier 2",
                 pkg3Time: "⏱ 90 MINS • FLAGSHIP VIP",
                 pkg3Title: "3. Royal Atelier VIP",
                 pkg3Desc: "Complete show-car rejuvenation with multi-week ceramic-infused seal.",
-                p3Bullet1: "✓ Everything in Concours + Rims Tier",
-                p3Bullet2: "✓ Meguiar's® Hybrid Ceramic / Polymer paint sealant",
-                p3Bullet3: "✓ Hydrophobic crystal glass rain-repellent coating",
-                p3Bullet4: "✓ Exterior black trim & rubber UV restoration",
-                p3Bullet5: "✓ Chrome exhaust tips & emblems hand polishing",
                 tier3Footer: "Tap to Select Tier 3",
-                lblSelectHourSlot: "Preferred Day & Exact Hourly Slot (اختر اليوم والساعة المحددة) *",
-                lblSelectWashZone: "On-Site Service Zone (نطاق الخدمة في مكانك) *",
+                lblSelectHourSlot: "Preferred Day & Exact Hourly Slot *",
+                lblSelectWashZone: "On-Site Service Zone *",
                 btnConfirmWash: "Request On-Site Appointment →",
                 washSuccessTitle: "🌟 On-Site Appointment Request Logged!",
                 washSuccessSub: "Our concierge team will contact you via WhatsApp to confirm your exact arrival time.",
@@ -2309,20 +1923,21 @@ service cloud.firestore {
                 topBarDays: "الخميس • الجمعة • السبت أمام منزلك",
                 brandSlogan: "Reviving The Automotive Soul",
                 navHowItWorks: "منهجية دكتور كير",
-                navCrmBtn: "غرفة الإدارة",
                 worldClassBadge: "أنظمة عالمية معتمدة",
                 worldClassText: "نستخدم حصرياً تكنولوجيا ومواد التلميع الأصلية من كبرى الشركات الأمريكية والإيطالية:",
                 heroBadge: "أتيليه متنقل لمعالجة دهان السيارات الفارهة",
                 heroHeadline1: "لمعة الفابريكا..",
                 heroHeadline2: "تعود من جديد في مكانك.",
                 heroQuoteSub: "نعالج الخدوش والبهتان ودوائر الغسيل في جراج منزلك بدون رش، للحفاظ على ١٠٠٪ من طبقة الورنيش الأصلي والقيمة السوقية لسيارتك.",
-                heroBtnScratch: "محاكي فحص الخدوش 360°",
+                heroBtnScratch: "الفحص السريع باللمس",
                 heroBtnWash: "خدمة الغسيل الجاف بالنانو (في مكانك)",
                 stat1: "دهان فابريكا أصلي",
                 stat2: "مواد أصلية معتمدة",
                 stat3Title: "في مكان العميل",
                 stat3: "٤ مناطق بالقاهرة",
                 sliderHeader: "نتيجة حقيقية من أعمالنا — اسحب للمقارنة",
+                btnBefore: "قبل",
+                btnAfter: "بعد",
                 afterTag: "بعد: لمعة المرآة من دكتور كير",
                 beforeTag: "قبل: بهتان وخدوش",
                 megOrigin: "كاليفورنيا، أمريكا • منذ ١٩٠١",
@@ -2338,48 +1953,40 @@ service cloud.firestore {
                 pillar3Btn: "٣. الخدمة في مكان العميل",
                 layer1Title: "١. طبقة الورنيش الشفاف (Clear Coat)",
                 layer1Desc: "٩٥٪ من الخدوش ودوائر الغسيل تتواجد في هذه الطبقة الشفافة العليا؛ نقوم بتسويتها بالميكرون بأجهزة RUPES الإيطالية دون برد.",
-                layer2Title: "٢. طبقة اللون الأساسية (Base Coat)",
-                layer2Desc: "تحمل حبيبات اللون الميتاليك أو اللؤلؤي الأصلي، ولا نقترب منها نهائياً بفضل مركبات Meguiar's الآمنة.",
-                layer3Title: "٣. الحفاظ على الفابريكا ١٠٠٪",
-                layer3Desc: "المعالجة بدون رش تضمن اجتياز سيارتك لأي فحص بقلم الدهان بنسبة ١٠٠٪ فابريكا بالكامل.",
-                nano1Title: "تغليف وعزل الأتربة بالبوليمر",
-                nano1Desc: "بوليمرات النانو السائلة ترفع ذرات التراب عن سطح الورنيش وتغلفها مجهرياً لمنع أي احتكاك أثناء المسح.",
-                nano2Title: "فوط مايكروفايبر بدون حواف (Edgeless)",
-                nano2Desc: "نستخدم فوط مايكروفايبر مخصصة لكل سيارة مقطوعة بالليزر لمنع تكون دوائر الغسيل نهائياً.",
-                nano3Title: "طبقة حماية طاردة للأتربة",
-                nano3Desc: "تترك طبقة شمعية ناعمة تقاوم أشعة الشمس وتطرد الأتربة والمياه لأسابيع.",
-                how1Title: "ننفذ الخدمة تحت بيتك",
-                how1Desc: "وداعاً للانتظار في المغاسل؛ فريقنا المتنقل المجهز بالكامل ينفذ الخدمة في جراج منزلك أو فيلتك.",
-                how2Title: "نظافة تامة بدون مياه على الأرض",
-                how2Desc: "تقنية الغسيل الجاف والتلميع معتمدة ومثالية لجراجات الكمبوندات الخاصة والجراجات المغلقة.",
-                how3Title: "تغطية ٤ نطاقات رئيسية",
-                how3Desc: "تغطية متنقلة مخصصة في مصر الجديدة، مدينة نصر، التجمع الخامس، ومدينتي.",
-                tabScratchTitle: "محاكي فحص الخدوش 360°",
+                tabScratchTitle: "الفحص السريع باللمس",
                 tabBookingTitle: "حجز الغسيل الجاف (في مكانك)",
-                scratchFormHeader: "التشخيص التفاعلي ثلاثي الأبعاد 360°",
-                consoleSub: "اختر سيارتك من القوائم الفرعية الجانبية، والمس الأجزاء المصابة مباشرة على المجسم ثلاثي الأبعاد.",
+                scratchFormHeader: "الفحص التفاعلي السريع والتشخيص الفوري",
+                consoleSub: "اختر سيارتك وحدد المنطقة المتضررة بلمسة واحدة للحصول على خطة معالجة فورية.",
                 sloganMiniBottom: "حافظ على استثمارك الآن",
-                step1Title: "١. إعداد بيانات السيارة (اضغط على كل بطاقة جانبية لفتح قائمتها الفرعية)",
-                sideLblType: "فئة هيكل السيارة (Car Body Type)",
-                sideLblOrigin: "بلد الصنع وماركة السيارة (Country & Make)",
-                sideLblModelYear: "موديل السيارة وسنة الصنع (Model & Year)",
+                step1Title: "١. إعداد بيانات السيارة",
+                sideLblType: "فئة هيكل السيارة",
+                sideLblOrigin: "بلد الصنع وماركة السيارة",
+                sideLblModelYear: "موديل السيارة وسنة الصنع",
                 btnChange: "اختر",
                 lblStep2A: "أ. اختر بلد المنشأ لفتح قائمة ماركاتها:",
                 lblStep2B: "ب. اختر ماركة السيارة من القائمة الفرعية:",
-                lblQuickModels: "أشهر موديلات الماركة المختارة (اضغط على الموديل أو اكتبه بالأسفل):",
-                lblModel: "اسم الموديل (Model) *",
-                lblYear: "سنة الصنع (Year) *",
-                lblZoneSelect: "نطاق الخدمة (Zone) *",
-                lblColorPick: "لون السيارة (اختر الدرجة أو اكتبها) *",
-                step2Title: "٢. محاكي السيارة ثلاثي الأبعاد 360° — المس الأجزاء المصابة مباشرة على المجسم",
-                sim360Sub: "قم بتدوير زاوية الرؤية 360° حول السيارة أو المس أي جزء مباشرة لتحديده باللون الذهبي.",
-                sev1: "دوائر غسيل وبهتان (Swirls / Dull)",
+                lblQuickModels: "أشهر موديلات الماركة المختارة:",
+                lblModel: "اسم الموديل *",
+                lblYear: "سنة الصنع *",
+                lblZoneSelect: "نطاق الخدمة *",
+                lblColorPick: "لون السيارة *",
+                step2Title: "٢. محاكي اللمس التفاعلي — حدد المنطقة المتضررة في سيارتك",
+                sim360Sub: "اضغط على المنطقة التي تحتاج معالجة لنقوم بتقدير الوقت وخطة الإصلاح بدقة.",
+                sev1: "دوائر غسيل وبهتان",
                 sev1Sub: "تطفية باللمعة وخربشة غسيل",
-                sev2: "خدش سطحي بالورنيش (Surface Scratch)",
+                sev2: "خدش سطحي بالورنيش",
                 sev2Sub: "خدش بطبقة الكلير كوت",
-                sev3: "خدش عميق أو حكة (Deep Scuff)",
+                sev3: "خدش عميق أو حكة",
                 sev3Sub: "خدش مفتاح أو حكة إكصدام",
-                step3Title: "٣. ارفع صور الخدوش (حتى ١٠ صور — يدعم الاختيار المتعدد) *",
+                zoneHood: "الكبوت والمقدمة",
+                timeHood: "~٤٥ دقيقة في مكانك",
+                zoneDoors: "الأبواب والجوانب",
+                timeDoors: "~٦٠ دقيقة في مكانك",
+                zoneBumpers: "الصدامات والأركان",
+                timeBumpers: "~٤٥ دقيقة في مكانك",
+                zoneFull: "كامل بودي السيارة",
+                timeFull: "~٩٠ دقيقة أتيليه ملكي",
+                step3Title: "٣. ارفع صور الخدوش (حتى ١٠ صور) *",
                 photoTipText: "يمكنك تحديد حتى ١٠ صور دفعة واحدة من معرض الصور أو الكاميرا.",
                 dropzoneTitle: "اضغط هنا لاختيار أو تصوير حتى ١٠ صور واضحة للخدوش",
                 btnClearAll: "مسح الكل",
@@ -2388,37 +1995,24 @@ service cloud.firestore {
                 submitScratchBtnText: "احصل على خطة المعالجة الآن",
                 successHeader: "تم الاستلام بنجاح. خبير دكتور كير يراجع صور سيارتك الآن.",
                 successBody: "سنتواصل معك فوراً عبر الواتساب بخطة المعالجة التفصيلية.",
-                washKicker: "خدمة متنقلة بالكامل في مكان العميل (100% ON-SITE MOBILE SERVICE)",
+                btnInstantWa: "أرسل رقم التذكرة للخبير عبر واتساب لتسريع الفحص",
+                washKicker: "خدمة متنقلة بالكامل في مكان العميل",
                 washHeader: "اختر مستوى باقة الغسيل الجاف والعناية باللمعة",
                 washNoWaterBadge: "بدون نقطة مياه على الأرض • في جراج منزلك",
                 pkg1Time: "⏱ ٤٥ دقيقة • الباقة الأساسية",
-                pkg1Title: "1. Signature Exterior (العناية الخارجية)",
-                pkg1Desc: "مصممة للعناية الأسبوعية للسيارات ذات الأتربة الخفيفة إلى المتوسطة لاستعادة اللمعة السريعة.",
-                p1Bullet1: "✓ غسيل جاف ببوليمر النانو الآمن لعزل الأتربة بدون خدش",
-                p1Bullet2: "✓ مسح بفوط مايكروفايبر Edgeless فائقة النعومة",
-                p1Bullet3: "✓ تلميع الزجاج الخارجي والمرايات بنقاء كريستالي",
-                p1Bullet4: "✓ طبقة ملمع خارجي سريع (Quick Gloss Booster)",
+                pkg1Title: "1. Signature Exterior",
+                pkg1Desc: "مصممة للعناية الأسبوعية للسيارات ذات الأتربة الخفيفة إلى المتوسطة.",
                 tier1Footer: "اضغط لاختيار الباقة الأولى",
                 pkg2Time: "⏱ ٦٠ دقيقة • الأكثر طلباً",
                 pkg2Tag: "+ الجنوط وتشميع عميق",
-                pkg2Title: "2. Concours + Rims (البودي والجنوط)",
+                pkg2Title: "2. Concours + Rims",
                 pkg2Desc: "تضيف تنظيفاً تفصيلياً للجنوط والإطارات مع طبقة شمع Meguiar's العميقة.",
-                p2Bullet1: "✓ تشمل جميع خطوات باقة Signature الأساسية",
-                p2Bullet2: "✓ تنظيف عميق للجنوط وإزالة غبار الفرامل الكربوني",
-                p2Bullet3: "✓ تلميع وحماية الإطارات بطبقة ساتان غير لامعة (UV Satin)",
-                p2Bullet4: "✓ تنظيف قوائم الأبواب وحواف الشنطة والكاوتش الداخلي",
-                p2Bullet5: "✓ تطبيق طبقة شمع سائل Meguiar's® Liquid Wax يدوياً",
                 tier2Footer: "اضغط لاختيار الباقة الثانية",
                 pkg3Time: "⏱ ٩٠ دقيقة • الباقة الملكية VIP",
-                pkg3Title: "3. Royal Atelier VIP (الحماية الفائقة)",
+                pkg3Title: "3. Royal Atelier VIP",
                 pkg3Desc: "برنامج استعادة لمعة المعارض الكامل مع طبقة حماية سيراميك بوليمر تدوم لأسابيع.",
-                p3Bullet1: "✓ تشمل جميع خطوات باقة Concours + الجنوط",
-                p3Bullet2: "✓ طبقة حماية Meguiar's® Hybrid Ceramic Sealant للبودي",
-                p3Bullet3: "✓ طبقة حماية طاردة للمياه والأتربة على جميع الزجاج",
-                p3Bullet4: "✓ إحياء وتغذية الفيبر الأسود والكاوتش الخارجي ضد الشمس",
-                p3Bullet5: "✓ تلميع مخارج الشكمان الكروم والعلامات المعدنية يدوياً",
                 tier3Footer: "اضغط لاختيار الباقة الملكية VIP",
-                lblSelectHourSlot: "اليوم والساعة المحددة للحجز (الخميس • الجمعة • السبت) *",
+                lblSelectHourSlot: "اليوم والساعة المحددة للحجز *",
                 lblSelectWashZone: "نطاق الخدمة في مكانك *",
                 btnConfirmWash: "تأكيد طلب الموعد ←",
                 washSuccessTitle: "🌟 تم تسجيل موعد الخدمة المتنقلة بنجاح!",
@@ -2429,7 +2023,7 @@ service cloud.firestore {
                 phClientNoteBox: "أي ملاحظات إضافية أو وقت مفضل للاتصال؟ (اختياري)",
                 phClientName: "الاسم بالكامل *",
                 phWashName: "الاسم بالكامل *",
-                phWashAddress: "العنوان التفصيلي: اسم الشارع / الكمبوند / رقم العقار أو الفيلا *"
+                phWashAddress: "العنوان التفصيلي: اسم الشارع / الكمبوند / رقم العقار *"
             }
         };
 
@@ -2442,23 +2036,18 @@ service cloud.firestore {
 
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
-                if (i18nDict[currentLang] && i18nDict[currentLang][key]) {
-                    el.textContent = i18nDict[currentLang][key];
-                }
+                if (i18nDict[currentLang] && i18nDict[currentLang][key]) el.textContent = i18nDict[currentLang][key];
             });
 
             document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
                 const key = el.getAttribute('data-i18n-placeholder');
-                if (i18nDict[currentLang] && i18nDict[currentLang][key]) {
-                    el.setAttribute('placeholder', i18nDict[currentLang][key]);
-                }
+                if (i18nDict[currentLang] && i18nDict[currentLang][key]) el.setAttribute('placeholder', i18nDict[currentLang][key]);
             });
 
             renderCountryPills('scratch');
             renderCountryPills('wash');
             refreshConfigSummary('scratch');
             refreshConfigSummary('wash');
-            sync3DCarSimulatorVisuals();
             syncSliderImageWidth();
         }
 
@@ -2467,28 +2056,20 @@ service cloud.firestore {
                 const btn = document.getElementById('pillarBtn' + i);
                 const panel = document.getElementById('pillarContent' + i);
                 if (i === num) {
-                    btn.classList.add('active');
-                    btn.classList.remove('text-zinc-300');
+                    btn.classList.add('active'); btn.classList.remove('text-zinc-300');
                     panel.classList.remove('hidden');
                 } else {
-                    btn.classList.remove('active');
-                    btn.classList.add('text-zinc-300');
+                    btn.classList.remove('active'); btn.classList.add('text-zinc-300');
                     panel.classList.add('hidden');
                 }
             });
         }
 
-        // =========================================================================
-        // 8. BEFORE / AFTER SLIDER
-        // =========================================================================
         let isDraggingSlider = false;
-
         function syncSliderImageWidth() {
             const slider = document.getElementById('mercedesSlider');
             const beforeImg = document.getElementById('sliderBeforeImg');
-            if (slider && beforeImg) {
-                beforeImg.style.width = slider.offsetWidth + 'px';
-            }
+            if (slider && beforeImg) beforeImg.style.width = slider.offsetWidth + 'px';
         }
 
         function setSliderPercentage(percent) {
@@ -2510,59 +2091,43 @@ service cloud.firestore {
             setSliderPercentage(pos);
         }
 
+        // DOM Content Loaded Handler (Guarantees full initialization)
         window.addEventListener('DOMContentLoaded', () => {
             initCascadingVehicleMenus();
-            sync3DCarSimulatorVisuals();
+            restoreFormDraft();
             const slider = document.getElementById('mercedesSlider');
             if (slider) {
-                slider.addEventListener('pointerdown', (e) => {
-                    isDraggingSlider = true;
-                    updateSliderFromPointer(e.clientX);
-                });
-                window.addEventListener('pointermove', (e) => {
-                    if (!isDraggingSlider) return;
-                    updateSliderFromPointer(e.clientX);
-                });
-                window.addEventListener('pointerup', () => {
-                    isDraggingSlider = false;
-                });
+                slider.addEventListener('pointerdown', (e) => { isDraggingSlider = true; updateSliderFromPointer(e.clientX); });
+                window.addEventListener('pointermove', (e) => { if (!isDraggingSlider) return; updateSliderFromPointer(e.clientX); });
+                window.addEventListener('pointerup', () => { isDraggingSlider = false; });
             }
             syncSliderImageWidth();
             initHybridTelemetryEngine();
+
+            if (window.location.search.includes('admin=1')) {
+                openBackofficeModal();
+            }
         });
         window.addEventListener('resize', syncSliderImageWidth);
 
-        // =========================================================================
-        // 9. FORM CONTROLS
-        // =========================================================================
         function selectDefectSeverity(btnEl, severityValue) {
             document.getElementById('defectSeverityInput').value = severityValue;
-            document.querySelectorAll('.severity-card').forEach(card => {
-                card.classList.remove('selected');
-            });
+            document.querySelectorAll('.severity-card').forEach(card => card.classList.remove('selected'));
             if (btnEl) btnEl.classList.add('selected');
+            saveFormDraft();
         }
 
         function handleColorWheelPick(hexValue) {
             document.getElementById('colorPreviewBox').style.backgroundColor = hexValue;
             document.getElementById('carColorInput').value = `Custom Shade (${hexValue.toUpperCase()})`;
+            saveFormDraft();
         }
 
         function applyPresetColor(hexValue, shadeName) {
             document.getElementById('nativeColorPicker').value = hexValue;
             document.getElementById('colorPreviewBox').style.backgroundColor = hexValue;
             document.getElementById('carColorInput').value = shadeName;
-        }
-
-        function resetScratchVisualSelections() {
-            selectedZoneIds = ['HOOD'];
-            sync3DCarSimulatorVisuals();
-            set360CameraAngle(0);
-            selectDefectSeverity(document.getElementById('defaultSeverityBtn'), 'Swirl Marks & Oxidation (دوائر غسيل وبهتان)');
-            applyPresetColor('#08080A', 'Obsidian Black (أسود)');
-            document.getElementById('gpsLink_scratch').value = '';
-            activeState.scratch = { country: "Germany & Europe", brand: "Mercedes-Benz" };
-            initCascadingVehicleMenus();
+            saveFormDraft();
         }
 
         function switchConsoleTab(tab) {
@@ -2586,6 +2151,7 @@ service cloud.firestore {
             document.getElementById('selectedPkgName').value = tierTitle;
             ['pkgCard1', 'pkgCard2', 'pkgCard3'].forEach(id => {
                 const el = document.getElementById(id);
+                if (!el) return;
                 el.classList.remove('selected', 'border-2', 'border-gold-400');
                 el.classList.add('border', 'border-white/15');
             });
@@ -2596,13 +2162,16 @@ service cloud.firestore {
             };
             if (map[tierTitle]) {
                 const activeEl = document.getElementById(map[tierTitle]);
-                activeEl.classList.remove('border', 'border-white/15');
-                activeEl.classList.add('selected', 'border-2', 'border-gold-400');
+                if (activeEl) {
+                    activeEl.classList.remove('border', 'border-white/15');
+                    activeEl.classList.add('selected', 'border-2', 'border-gold-400');
+                }
             }
+            saveFormDraft();
         }
 
         // =========================================================================
-        // 10. UP TO 10 PHOTOS MULTI-SELECT OPTICAL COMPRESSOR
+        // MULTI-SELECT PHOTO COMPRESSOR
         // =========================================================================
         let uploadedMediaItems = [];
         const MAX_PHOTOS_ALLOWED = 10;
@@ -2638,17 +2207,13 @@ service cloud.firestore {
                         alert(currentLang === 'ar' ? 'الحد الأقصى هو ١٠ صور لكل طلب.' : 'Maximum 10 photos allowed per request.');
                         break;
                     }
-
-                    if (!file.type.startsWith('image/')) {
-                        alert(currentLang === 'ar' ? 'يرجى اختيار صور فقط.' : 'Please select image files only.');
-                        continue;
-                    }
+                    if (!file.type.startsWith('image/')) continue;
 
                     const stepPct = Math.round(((i + 1) / files.length) * 90);
-                    setMediaProgress(stepPct, `Optimizing photo #${uploadedMediaItems.length + 1} (${requestedRes}p)...`);
+                    setMediaProgress(stepPct, `Optimizing photo #${uploadedMediaItems.length + 1}...`);
 
                     const fullResDataUrl = await resizeImageSmart(file, requestedRes, 0.85);
-                    const cloudSafeDataUrl = await resizeImageSmart(file, Math.min(requestedRes, 760), 0.68, 70);
+                    const cloudSafeDataUrl = await resizeImageSmart(file, Math.min(requestedRes, 680), 0.65, 55);
 
                     if (fullResDataUrl) {
                         uploadedMediaItems.push({
@@ -2656,8 +2221,7 @@ service cloud.firestore {
                             type: 'image',
                             url: fullResDataUrl,
                             cloudSafeUrl: cloudSafeDataUrl,
-                            resolution: requestedRes + 'p',
-                            sizeKB: Math.round((cloudSafeDataUrl.length * 0.75) / 1024)
+                            resolution: requestedRes + 'p'
                         });
                     }
                 }
@@ -2665,9 +2229,7 @@ service cloud.firestore {
             } catch (err) {
                 console.error("Photo processing error:", err);
             } finally {
-                setTimeout(() => {
-                    document.getElementById('mediaProcessingStatus').classList.add('hidden');
-                }, 300);
+                setTimeout(() => { document.getElementById('mediaProcessingStatus').classList.add('hidden'); }, 300);
                 event.target.value = '';
                 renderMediaThumbnails();
             }
@@ -2682,29 +2244,24 @@ service cloud.firestore {
                         const canvas = document.createElement('canvas');
                         let width = img.width;
                         let height = img.height;
-
                         if (height > maxHeight) {
                             width = Math.round((width * maxHeight) / height);
                             height = maxHeight;
                         }
-                        if (width > maxHeight * 1.6) {
-                            const ratio = (maxHeight * 1.6) / width;
-                            width = Math.round(width * ratio);
-                            height = Math.round(height * ratio);
-                        }
-
                         canvas.width = width;
                         canvas.height = height;
                         const ctx = canvas.getContext('2d');
                         ctx.drawImage(img, 0, 0, width, height);
 
                         let quality = initialQuality;
-                        let dataUrl = canvas.toDataURL('image/jpeg', quality);
+                        let dataUrl = canvas.toDataURL('image/webp', quality);
+                        if (!dataUrl.startsWith('data:image/webp')) dataUrl = canvas.toDataURL('image/jpeg', quality);
 
                         if (maxKB > 0) {
-                            while ((dataUrl.length * 0.75) / 1024 > maxKB && quality > 0.32) {
+                            while ((dataUrl.length * 0.75) / 1024 > maxKB && quality > 0.25) {
                                 quality -= 0.08;
-                                dataUrl = canvas.toDataURL('image/jpeg', quality);
+                                dataUrl = canvas.toDataURL('image/webp', quality);
+                                if (!dataUrl.startsWith('data:image/webp')) dataUrl = canvas.toDataURL('image/jpeg', quality);
                             }
                         }
                         resolve(dataUrl);
@@ -2728,26 +2285,20 @@ service cloud.firestore {
             }
 
             wrapper.classList.remove('hidden');
-            counter.textContent = currentLang === 'ar'
-                ? `تم إرفاق ${uploadedMediaItems.length} من ١٠ صور`
-                : `${uploadedMediaItems.length} / 10 Photos Attached`;
+            counter.textContent = currentLang === 'ar' ? `تم إرفاق ${uploadedMediaItems.length} من ١٠ صور` : `${uploadedMediaItems.length} / 10 Photos Attached`;
 
             grid.innerHTML = uploadedMediaItems.map((item, idx) => `
                 <div class="relative group rounded-xl overflow-hidden bg-leather border border-gold-400/40 aspect-square shadow-md">
                     <img src="${item.url}" alt="Photo ${idx + 1}" class="w-full h-full object-cover cursor-pointer hover:scale-105 transition" onclick="openPreviewLightbox(${idx})">
                     <span class="absolute bottom-1 left-1 bg-black/75 text-gold-300 text-[9px] font-bold px-1.5 py-0.5 rounded">#${idx + 1}</span>
-                    <button type="button" onclick="removeSingleMedia('${item.id}')"
-                            class="absolute top-1.5 right-1.5 w-5 h-5 rounded-full bg-black/80 text-white text-[10px] font-bold flex items-center justify-center cursor-pointer">
-                        ✕
-                    </button>
+                    <button type="button" onclick="removeSingleMedia('${item.id}')" class="absolute top-1.5 right-1.5 w-5 h-5 rounded-full bg-black/80 text-white text-[10px] font-bold flex items-center justify-center cursor-pointer">✕</button>
                 </div>
             `).join('');
         }
 
         function openPreviewLightbox(idx) {
             const item = uploadedMediaItems[idx];
-            if (!item) return;
-            showLightboxContent(item);
+            if (item) showLightboxContent(item);
         }
 
         function removeSingleMedia(id) {
@@ -2761,11 +2312,12 @@ service cloud.firestore {
         }
 
         // =========================================================================
-        // 11. HYBRID TELEMETRY ENGINE (FIRESTORE + TELEGRAM + INDEXED-DB)
+        // HYBRID TELEMETRY ENGINE & SUBMISSIONS
         // =========================================================================
-        const IDB_NAME = 'DrCarePhotoVault_v28';
+        const IDB_NAME = 'DrCarePhotoVault_v32';
         const IDB_STORE = 'leads_store';
-        const LS_BACKUP_KEY = 'drcare_leads_ls_backup_v28';
+        const LS_BACKUP_KEY = 'drcare_leads_ls_backup_v32';
+        const DELETED_IDS_KEY = 'drcare_deleted_ids_v32';
         let idbConn = null;
         let memoryLeadsCache = [];
         let deletedLeadIds = new Set();
@@ -2774,84 +2326,58 @@ service cloud.firestore {
         let knownLeadIds = new Set();
         let lastSubmissionTimestamp = 0;
 
+        try {
+            const savedDeleted = JSON.parse(localStorage.getItem(DELETED_IDS_KEY) || '[]');
+            if (Array.isArray(savedDeleted)) deletedLeadIds = new Set(savedDeleted);
+        } catch (e) {}
+
         function initHybridTelemetryEngine() {
             if (window.indexedDB) {
                 const req = indexedDB.open(IDB_NAME, 1);
                 req.onupgradeneeded = (e) => {
                     const d = e.target.result;
-                    if (!d.objectStoreNames.contains(IDB_STORE)) {
-                        d.createObjectStore(IDB_STORE, { keyPath: 'id' });
-                    }
+                    if (!d.objectStoreNames.contains(IDB_STORE)) d.createObjectStore(IDB_STORE, { keyPath: 'id' });
                 };
-                req.onsuccess = (e) => {
-                    idbConn = e.target.result;
-                    readLeadsFromIdb();
-                };
+                req.onsuccess = (e) => { idbConn = e.target.result; readLeadsFromIdb(); };
             }
 
             try {
                 const rawLs = localStorage.getItem(LS_BACKUP_KEY);
                 if (rawLs) {
                     const parsed = JSON.parse(rawLs);
-                    if (Array.isArray(parsed) && parsed.length) {
-                        mergeCloudAndLocalLeads(parsed);
-                    }
+                    if (Array.isArray(parsed) && parsed.length) mergeCloudAndLocalLeads(parsed);
                 }
             } catch (e) {}
 
             startFirestoreLiveListener();
-
-            window.addEventListener('storage', (e) => {
-                if (e.key === LS_BACKUP_KEY || e.key === 'drcare_live_ping_ts') {
-                    playNotificationChime();
-                    readLeadsFromIdb();
-                }
-            });
         }
 
         function startFirestoreLiveListener() {
             if (!db) return;
             try {
-                db.collection("drcare_leads")
-                  .onSnapshot((snapshot) => {
-                      const syncStatusEl = document.getElementById('kpiSyncStatusText');
-                      if (syncStatusEl) syncStatusEl.textContent = '🟢 Cloud + Bot Active';
-                      const diagBanner = document.getElementById('cloudDiagnosticBanner');
-                      if (diagBanner) diagBanner.classList.add('hidden');
+                db.collection("drcare_leads").onSnapshot((snapshot) => {
+                    const syncStatusEl = document.getElementById('kpiSyncStatusText');
+                    if (syncStatusEl) syncStatusEl.textContent = '🟢 Firebase Cloud Live';
+                    const cloudDocs = [];
+                    let hasNewIncoming = false;
 
-                      const cloudDocs = [];
-                      let hasNewIncoming = false;
+                    snapshot.forEach((doc) => {
+                        if (deletedLeadIds.has(doc.id)) return;
+                        const data = doc.data();
+                        const normalizedTs = resolveAccurateTimestamp(data);
+                        cloudDocs.push({ ...data, id: doc.id, createdAt: normalizedTs });
+                        if (knownLeadIds.size > 0 && !knownLeadIds.has(doc.id)) hasNewIncoming = true;
+                        knownLeadIds.add(doc.id);
+                    });
 
-                      snapshot.forEach((doc) => {
-                          if (deletedLeadIds.has(doc.id)) return;
-                          const data = doc.data();
-                          const normalizedTs = resolveAccurateTimestamp(data);
-                          const leadObj = {
-                              ...data,
-                              id: doc.id,
-                              createdAt: normalizedTs
-                          };
-                          cloudDocs.push(leadObj);
-
-                          if (knownLeadIds.size > 0 && !knownLeadIds.has(doc.id)) {
-                              hasNewIncoming = true;
-                          }
-                          knownLeadIds.add(doc.id);
-                      });
-
-                      if (hasNewIncoming) {
-                          playNotificationChime();
-                      }
-
-                      if (cloudDocs.length > 0) {
-                          mergeCloudAndLocalLeads(cloudDocs);
-                      }
-                  }, (err) => {
-                      const syncStatusEl = document.getElementById('kpiSyncStatusText');
-                      if (syncStatusEl) syncStatusEl.textContent = '🛡️ Local + Bot Active';
-                      const diagBanner = document.getElementById('cloudDiagnosticBanner');
-                      if (diagBanner) diagBanner.classList.remove('hidden');
-                  });
+                    if (hasNewIncoming) playNotificationChime();
+                    if (cloudDocs.length > 0) mergeCloudAndLocalLeads(cloudDocs);
+                }, () => {
+                    const syncStatusEl = document.getElementById('kpiSyncStatusText');
+                    if (syncStatusEl) syncStatusEl.textContent = '🛡️ Local Vault Active';
+                    const diagBanner = document.getElementById('cloudDiagnosticBanner');
+                    if (diagBanner) diagBanner.classList.remove('hidden');
+                });
             } catch (e) {}
         }
 
@@ -2862,65 +2388,30 @@ service cloud.firestore {
                 const list = [];
                 snap.forEach(doc => {
                     if (deletedLeadIds.has(doc.id)) return;
-                    const data = doc.data();
-                    list.push({ ...data, id: doc.id, createdAt: resolveAccurateTimestamp(data) });
+                    list.push({ ...doc.data(), id: doc.id, createdAt: resolveAccurateTimestamp(doc.data()) });
                 });
-                if (list.length > 0) {
-                    mergeCloudAndLocalLeads(list);
-                }
+                if (list.length > 0) mergeCloudAndLocalLeads(list);
                 playNotificationChime();
-            } catch (err) {
-                const diagBanner = document.getElementById('cloudDiagnosticBanner');
-                if (diagBanner) diagBanner.classList.remove('hidden');
-            }
+            } catch (err) {}
         }
 
         function resolveAccurateTimestamp(data) {
             const now = Date.now();
             if (data.serverCreatedAt && typeof data.serverCreatedAt.toMillis === 'function') {
-                const srvMs = data.serverCreatedAt.toMillis();
-                return Math.min(srvMs, now);
+                return Math.min(data.serverCreatedAt.toMillis(), now);
             }
             const clientMs = Number(data.createdAt) || now;
-            if (clientMs > now) return now;
-            return clientMs;
+            return clientMs > now ? now : clientMs;
         }
 
         function readLeadsFromIdb() {
             if (!idbConn) return;
             try {
                 const tx = idbConn.transaction(IDB_STORE, 'readonly');
-                const store = tx.objectStore(IDB_STORE);
-                const req = store.getAll();
+                const req = tx.objectStore(IDB_STORE).getAll();
                 req.onsuccess = () => {
                     const localItems = (req.result || []).filter(item => !deletedLeadIds.has(item.id));
-                    if (localItems.length === 0 && memoryLeadsCache.length === 0) {
-                        const seed = {
-                            id: 'DC-801',
-                            requestType: 'SCRATCH_DIAGNOSIS',
-                            clientName: 'Example Client',
-                            clientPhone: '01000000000',
-                            carBrand: 'SUV / 4x4 • Germany & Europe • Mercedes-Benz',
-                            carModel: 'S580 • 2026',
-                            carColor: 'Obsidian Black (أسود)',
-                            zone: 'Heliopolis (مصر الجديدة)',
-                            gpsLink: 'https://www.google.com/maps?q=30.0876,31.3282',
-                            resolution: '1080p',
-                            estimatedQuote: '',
-                            notes: 'Severity: Swirl Marks & Oxidation\n3D Panels: الكبوت الأمامي (Front Hood)\nNote: Sample entry.',
-                            media: [
-                                { id: 'seed_1', type: 'image', url: 'before.jpeg', resolution: '1080p' },
-                                { id: 'seed_2', type: 'image', url: 'after.jpeg', resolution: '1080p' }
-                            ],
-                            status: 'NEW LIVE',
-                            createdAt: Date.now() - 45000
-                        };
-                        writeLeadToIdb(seed);
-                        memoryLeadsCache = [seed];
-                    } else if (localItems.length > 0) {
-                        mergeCloudAndLocalLeads(localItems);
-                    }
-                    updateNavLiveCounter();
+                    if (localItems.length > 0) mergeCloudAndLocalLeads(localItems);
                     renderBackofficeFeed();
                 };
             } catch (e) {}
@@ -2933,53 +2424,19 @@ service cloud.firestore {
                     tx.objectStore(IDB_STORE).put(lead);
                 } catch (e) {}
             }
-
             try {
-                const lsList = memoryLeadsCache.slice(0, 10).map(item => ({
-                    ...item,
-                    media: (item.media || []).map(m => ({
-                        id: m.id,
-                        type: 'image',
-                        url: m.cloudSafeUrl || m.url,
-                        resolution: m.resolution
-                    }))
-                }));
+                const lsList = memoryLeadsCache.slice(0, 10);
                 localStorage.setItem(LS_BACKUP_KEY, JSON.stringify(lsList));
-                localStorage.setItem('drcare_live_ping_ts', String(Date.now()));
             } catch (e) {}
         }
 
         function mergeCloudAndLocalLeads(incomingList) {
             const map = new Map();
-            memoryLeadsCache.forEach(item => {
-                if (!deletedLeadIds.has(item.id)) map.set(item.id, item);
-            });
-
+            memoryLeadsCache.forEach(item => { if (!deletedLeadIds.has(item.id)) map.set(item.id, item); });
             incomingList.forEach(incoming => {
-                if (deletedLeadIds.has(incoming.id)) return;
-                const existing = map.get(incoming.id);
-                if (!existing) {
-                    map.set(incoming.id, incoming);
-                    return;
-                }
-
-                const mergedMedia = (incoming.media || []).map((incM, idx) => {
-                    const exM = (existing.media || [])[idx];
-                    if (exM && exM.url && exM.url.length > (incM.url || '').length) {
-                        return { ...incM, url: exM.url };
-                    }
-                    return incM;
-                });
-
-                map.set(incoming.id, {
-                    ...existing,
-                    ...incoming,
-                    media: mergedMedia.length ? mergedMedia : (existing.media || [])
-                });
+                if (!deletedLeadIds.has(incoming.id)) map.set(incoming.id, incoming);
             });
-
             memoryLeadsCache = Array.from(map.values()).sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
-            updateNavLiveCounter();
             renderBackofficeFeed();
         }
 
@@ -2989,45 +2446,14 @@ service cloud.firestore {
             writeLeadToIdb(fullLocalLead);
             playNotificationChime();
 
-            // Fire Instant Telegram Bot Alert to Phone in parallel
-            dispatchTelegramInstantAlert(fullLocalLead);
-
             if (db) {
                 try {
-                    const cloudSafeMedia = (fullLocalLead.media || []).map(m => ({
-                        id: m.id,
-                        type: 'image',
-                        url: m.cloudSafeUrl || m.url,
-                        resolution: m.resolution
-                    }));
-
-                    const cloudPayload = {
-                        id: fullLocalLead.id,
-                        requestType: fullLocalLead.requestType,
-                        clientName: fullLocalLead.clientName,
-                        clientPhone: fullLocalLead.clientPhone,
-                        carBrand: fullLocalLead.carBrand,
-                        carModel: fullLocalLead.carModel,
-                        carColor: fullLocalLead.carColor,
-                        zone: fullLocalLead.zone,
-                        gpsLink: fullLocalLead.gpsLink || '',
-                        resolution: fullLocalLead.resolution,
-                        estimatedQuote: fullLocalLead.estimatedQuote || '',
-                        notes: fullLocalLead.notes,
-                        media: cloudSafeMedia,
-                        status: fullLocalLead.status,
-                        createdAt: fullLocalLead.createdAt,
+                    await db.collection("drcare_leads").doc(fullLocalLead.id).set({
+                        ...fullLocalLead,
                         serverCreatedAt: firebase.firestore.FieldValue.serverTimestamp()
-                    };
-                    await db.collection("drcare_leads").doc(fullLocalLead.id).set(cloudPayload);
-                    return 'CLOUD_SYNCED';
-                } catch (cloudErr) {
-                    const diagBanner = document.getElementById('cloudDiagnosticBanner');
-                    if (diagBanner) diagBanner.classList.remove('hidden');
-                    return 'LOCAL_VAULT_SAVED';
-                }
+                    });
+                } catch (e) {}
             }
-            return 'LOCAL_VAULT_SAVED';
         }
 
         async function submitScratchConsultation(event) {
@@ -3036,124 +2462,116 @@ service cloud.firestore {
 
             const rawModelCheck = sanitizeCleanInput(document.getElementById('carModel').value, 40);
             if (!rawModelCheck) {
-                toggleSubMenu('scratch', 'model');
+                openSpecificSubMenu('scratch', 'model');
                 document.getElementById('carModel').focus();
-                alert(currentLang === 'ar' ? 'يرجى اختيار أو كتابة موديل السيارة في القائمة الفرعية رقم ٣.' : 'Please select or enter your car model in Sub-Menu #3.');
+                alert(currentLang === 'ar' ? 'يرجى اختيار أو كتابة موديل السيارة.' : 'Please select or enter your car model.');
                 return;
             }
 
             if (uploadedMediaItems.length === 0) {
-                alert(currentLang === 'ar'
-                    ? 'يرجى إرفاق صورة واحدة على الأقل لمكان الخدش (يمكنك رفع حتى ١٠ صور).'
-                    : 'Please attach at least 1 photo of the scratch (up to 10 photos supported).');
+                alert(currentLang === 'ar' ? 'يرجى إرفاق صورة واحدة على الأقل لمكان الخدش.' : 'Please attach at least 1 photo.');
                 return;
             }
 
-            if (selectedZoneIds.length === 0) {
-                alert(currentLang === 'ar'
-                    ? 'يرجى لمس جزء واحد على الأقل على مجسم السيارة ثلاثي الأبعاد.'
-                    : 'Please touch at least 1 affected body panel on the 3D simulator.');
+            const clientName = sanitizeCleanInput(document.getElementById('clientName').value, 60);
+            const clientPhone = sanitizeCleanInput(document.getElementById('clientPhone').value, 20);
+            if (!clientName || !clientPhone) {
+                alert(currentLang === 'ar' ? 'يرجى كتابة الاسم ورقم الموبايل.' : 'Please enter your name and phone.');
                 return;
             }
 
             lastSubmissionTimestamp = Date.now();
             const submitBtn = document.getElementById('submitScratchBtn');
             const submitLbl = document.getElementById('submitScratchBtnLabel');
-            const originalText = submitLbl.textContent;
             submitBtn.disabled = true;
             submitLbl.textContent = currentLang === 'ar' ? 'جاري الإرسال...' : 'Sending...';
 
             try {
-                const clientName = sanitizeCleanInput(document.getElementById('clientName').value, 60);
-                const clientPhone = sanitizeCleanInput(document.getElementById('clientPhone').value, 20);
                 const bodyType = sanitizeCleanInput(document.getElementById('scratchCarTypeInput').value, 30);
                 const country = activeState.scratch.country;
                 const make = activeState.scratch.brand;
                 const carBrand = `${bodyType} • ${country} • ${make}`;
                 const rawYear = sanitizeCleanInput(document.getElementById('carYear').value, 15);
                 const carModel = `${rawModelCheck} • ${rawYear}`;
-                const carColor = sanitizeCleanInput(document.getElementById('carColorInput').value, 60);
+                const carColor = sanitizeCleanInput(document.getElementById('carColorInput').value, 60) || 'Obsidian Black';
                 const zone = sanitizeCleanInput(document.getElementById('clientZone').value, 60);
                 const gpsLink = document.getElementById('gpsLink_scratch').value || '';
                 const severity = sanitizeCleanInput(document.getElementById('defectSeverityInput').value, 80);
+                const selectedZone = document.getElementById('selectedTouchZoneInput').value || 'Front Hood';
                 const resolution = document.getElementById('mediaResolution').value + 'p';
-                const userNotes = sanitizeCleanInput(document.getElementById('clientNotes').value, 400) || 'Standard optical assessment.';
-                const zonesString = getFormattedSelectedZonesString();
+                const userNotes = sanitizeCleanInput(document.getElementById('clientNotes').value, 400) || '';
 
                 const leadId = 'DC-' + Math.floor(1000 + Math.random() * 9000);
                 const newLead = {
                     id: leadId,
                     requestType: 'SCRATCH_DIAGNOSIS',
-                    clientName,
-                    clientPhone,
-                    carBrand,
-                    carModel,
-                    carColor,
-                    zone,
-                    gpsLink,
-                    resolution,
+                    clientName, clientPhone, carBrand, carModel, carColor, zone, gpsLink, resolution,
                     estimatedQuote: '',
-                    notes: `Origin & Type: ${country} (${bodyType})\nSeverity: ${severity}\n360° 3D Marked Panels: ${zonesString}${gpsLink ? '\nGPS Pin: ' + gpsLink : ''}\nClient Note: ${userNotes}`,
-                    media: uploadedMediaItems.map(m => ({
-                        id: m.id,
-                        type: 'image',
-                        url: m.url,
-                        cloudSafeUrl: m.cloudSafeUrl || m.url,
-                        resolution: m.resolution
-                    })),
+                    notes: `Origin & Type: ${country} (${bodyType})\nSeverity: ${severity}\nX-Ray Selected Zone: ${selectedZone}${gpsLink ? '\nGPS Pin: ' + gpsLink : ''}\nNote: ${userNotes}`,
+                    media: uploadedMediaItems,
                     status: 'NEW LIVE',
                     createdAt: Date.now()
                 };
 
                 await transmitLeadEverywhere(newLead);
-
                 document.getElementById('generatedTicketId').textContent = leadId;
+                const waText = `مرحباً دكتور كير 🌟\nرقم التذكرة: ${leadId}\nالسيارة: ${make} ${rawModelCheck}\nالنطاق: ${zone}`;
+                document.getElementById('instantScratchWaBtn').href = `https://wa.me/201003300600?text=${encodeURIComponent(waText)}`;
+
                 document.getElementById('scratchConsultForm').reset();
-                resetScratchVisualSelections();
                 clearAllMedia();
                 document.getElementById('scratchSuccessBanner').classList.remove('hidden');
             } catch (err) {
-                console.error("Submission error:", err);
+                console.error(err);
             } finally {
                 submitBtn.disabled = false;
-                submitLbl.textContent = originalText;
+                submitLbl.textContent = currentLang === 'ar' ? 'احصل على خطة المعالجة الآن' : 'Get My Custom Restoration Plan';
             }
         }
 
         async function submitWashBooking(event) {
             event.preventDefault();
             if (Date.now() - lastSubmissionTimestamp < 3500) return;
-            lastSubmissionTimestamp = Date.now();
 
+            const model = sanitizeCleanInput(document.getElementById('washCarModel').value, 40);
+            const color = sanitizeCleanInput(document.getElementById('washCarColor').value, 30);
+            if (!model || !color) {
+                openSpecificSubMenu('wash', 'model');
+                alert(currentLang === 'ar' ? 'يرجى كتابة موديل ولون السيارة.' : 'Please enter car model and color.');
+                return;
+            }
+
+            const clientName = sanitizeCleanInput(document.getElementById('washClientName').value, 60);
+            const clientPhone = sanitizeCleanInput(document.getElementById('washClientPhone').value, 20);
+            const addressNote = sanitizeCleanInput(document.getElementById('washClientNotes').value, 200);
+            if (!clientName || !clientPhone || !addressNote) {
+                alert(currentLang === 'ar' ? 'يرجى استكمال البيانات والعنوان.' : 'Please complete details.');
+                return;
+            }
+
+            lastSubmissionTimestamp = Date.now();
             try {
                 const pkg = sanitizeCleanInput(document.getElementById('selectedPkgName').value, 80);
-                const clientName = sanitizeCleanInput(document.getElementById('washClientName').value, 60);
-                const clientPhone = sanitizeCleanInput(document.getElementById('washClientPhone').value, 20);
                 const bodyType = sanitizeCleanInput(document.getElementById('washCarTypeInput').value, 30);
                 const country = activeState.wash.country;
                 const make = activeState.wash.brand;
-                const model = sanitizeCleanInput(document.getElementById('washCarModel').value, 40);
                 const year = sanitizeCleanInput(document.getElementById('washCarYear').value, 15);
-                const color = sanitizeCleanInput(document.getElementById('washCarColor').value, 30);
                 const slot = sanitizeCleanInput(document.getElementById('washDaySlot').value, 60);
                 const zone = sanitizeCleanInput(document.getElementById('washZone').value, 60);
                 const gpsLink = document.getElementById('gpsLink_wash').value || '';
-                const addressNote = sanitizeCleanInput(document.getElementById('washClientNotes').value, 200);
 
                 const leadId = 'DC-' + Math.floor(1000 + Math.random() * 9000);
                 const newLead = {
                     id: leadId,
                     requestType: 'DRY_WASH',
-                    clientName,
-                    clientPhone,
+                    clientName, clientPhone,
                     carBrand: `${bodyType} • ${country} • ${make}`,
                     carModel: `${model} (${year} - ${color})`,
                     carColor: pkg,
-                    zone,
-                    gpsLink,
+                    zone, gpsLink,
                     resolution: 'On-Site Mobile',
                     estimatedQuote: '',
-                    notes: `Origin & Type: ${country} (${bodyType})\nSelected Tier: ${pkg}\nExact Hourly Slot: ${slot}${gpsLink ? '\nGPS Pin: ' + gpsLink : ''}\nOn-Site Address: ${addressNote}`,
+                    notes: `Selected Tier: ${pkg}\nSlot: ${slot}\nAddress: ${addressNote}`,
                     media: [],
                     status: 'NEW LIVE',
                     createdAt: Date.now()
@@ -3162,45 +2580,25 @@ service cloud.firestore {
                 await transmitLeadEverywhere(newLead);
                 document.getElementById('generatedWashTicketId').textContent = leadId;
                 document.getElementById('washBookingForm').reset();
-                document.getElementById('gpsLink_wash').value = '';
-                activeState.wash = { country: "Germany & Europe", brand: "Mercedes-Benz" };
-                initCascadingVehicleMenus();
                 document.getElementById('washSuccessBanner').classList.remove('hidden');
-            } catch (err) {
-                console.error("Wash booking error:", err);
-            }
+            } catch (err) {}
         }
 
         // =========================================================================
-        // 12. BULLETPROOF CRM ACCESS (ACCEPTS 2027 OR 2026 INSTANTLY)
+        // CRM & BACKOFFICE
         // =========================================================================
-        let failedPinAttempts = 0;
-        let pinLockoutUntil = 0;
-
-        function normalizeDigits(str) {
-            return String(str || '')
-                .replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d))
-                .replace(/[۰-۹]/g, d => '۰۱۲۳۴۵۶۷۸۹'.indexOf(d))
-                .replace(/[^0-9]/g, '')
-                .trim();
-        }
-
         function isValidCrmPass(rawVal) {
-            const clean = normalizeDigits(rawVal);
+            const clean = String(rawVal || '').replace(/[^0-9]/g, '');
             return clean === '2027' || clean === '2026';
         }
 
         function togglePinVisibility() {
             const inp = document.getElementById('managerPinInput');
-            if (!inp) return;
-            inp.type = inp.type === 'password' ? 'text' : 'password';
+            if (inp) inp.type = inp.type === 'password' ? 'text' : 'password';
         }
 
         function handlePinTyping(val) {
-            if (Date.now() < pinLockoutUntil) return;
-            if (isValidCrmPass(val)) {
-                unlockCrmDashboard(true);
-            }
+            if (isValidCrmPass(val)) unlockCrmDashboard(true);
         }
 
         function openBackofficeModal() {
@@ -3212,61 +2610,22 @@ service cloud.firestore {
             } else {
                 document.getElementById('crmPinGate').classList.remove('hidden');
                 document.getElementById('crmDashboardContent').classList.add('hidden');
-                setTimeout(() => {
-                    const inp = document.getElementById('managerPinInput');
-                    if (inp) inp.focus();
-                }, 120);
             }
             renderBackofficeFeed();
         }
 
-        function closeBackofficeModal() {
-            document.getElementById('backofficeModal').classList.add('hidden');
-        }
-
-        function lockCrmVault() {
-            sessionStorage.removeItem('drcare_crm_unlocked');
-            document.getElementById('crmDashboardContent').classList.add('hidden');
-            document.getElementById('crmPinGate').classList.remove('hidden');
-        }
+        function closeBackofficeModal() { document.getElementById('backofficeModal').classList.add('hidden'); }
+        function lockCrmVault() { sessionStorage.removeItem('drcare_crm_unlocked'); openBackofficeModal(); }
 
         function unlockCrmDashboard(alreadyVerified = false) {
-            const errEl = document.getElementById('pinErrorMsg');
-            const wrapper = document.getElementById('pinInputBoxWrapper');
             const pinInput = document.getElementById('managerPinInput');
-
-            if (Date.now() < pinLockoutUntil) {
-                const waitSec = Math.ceil((pinLockoutUntil - Date.now()) / 1000);
-                errEl.textContent = `Security lockout active. Please wait ${waitSec}s.`;
-                errEl.classList.remove('hidden');
-                return;
-            }
-
-            const isOk = alreadyVerified || isValidCrmPass(pinInput ? pinInput.value : '');
-
-            if (isOk) {
-                failedPinAttempts = 0;
-                errEl.classList.add('hidden');
-                if (pinInput) pinInput.value = '';
+            if (alreadyVerified || isValidCrmPass(pinInput ? pinInput.value : '')) {
                 sessionStorage.setItem('drcare_crm_unlocked', 'true');
                 document.getElementById('crmPinGate').classList.add('hidden');
                 document.getElementById('crmDashboardContent').classList.remove('hidden');
-                playNotificationChime();
                 renderBackofficeFeed();
             } else {
-                failedPinAttempts++;
-                if (failedPinAttempts >= 5) {
-                    pinLockoutUntil = Date.now() + 20000;
-                    errEl.textContent = 'Too many failed attempts. Locked for 20s.';
-                } else {
-                    errEl.textContent = 'Unauthorized security key.';
-                }
-                errEl.classList.remove('hidden');
-                if (wrapper) {
-                    wrapper.classList.remove('shake-error');
-                    void wrapper.offsetWidth;
-                    wrapper.classList.add('shake-error');
-                }
+                document.getElementById('pinErrorMsg').classList.remove('hidden');
             }
         }
 
@@ -3276,353 +2635,67 @@ service cloud.firestore {
                 const ctx = new (window.AudioContext || window.webkitAudioContext)();
                 const osc = ctx.createOscillator();
                 const gain = ctx.createGain();
-                osc.type = 'sine';
                 osc.frequency.setValueAtTime(880, ctx.currentTime);
-                osc.frequency.exponentialRampToValueAtTime(1320, ctx.currentTime + 0.18);
-                gain.gain.setValueAtTime(0.14, ctx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.45);
-                osc.connect(gain);
-                gain.connect(ctx.destination);
-                osc.start();
-                osc.stop(ctx.currentTime + 0.45);
+                osc.connect(gain); gain.connect(ctx.destination);
+                osc.start(); osc.stop(ctx.currentTime + 0.3);
             } catch (e) {}
         }
 
-        function toggleAudioRadar() {
-            audioRadarEnabled = !audioRadarEnabled;
-            const btn = document.getElementById('soundToggleBtn');
-            btn.textContent = audioRadarEnabled ? '🔔 Audio: ON' : '🔕 Audio: MUTE';
-        }
+        function toggleAudioRadar() { audioRadarEnabled = !audioRadarEnabled; }
 
         function formatElapsedSeconds(timestamp) {
-            const now = Date.now();
-            const safeTs = Math.min(Number(timestamp) || now, now);
-            const diffSec = Math.max(0, Math.floor((now - safeTs) / 1000));
+            const diffSec = Math.max(0, Math.floor((Date.now() - (Number(timestamp) || Date.now())) / 1000));
             if (diffSec < 60) return `${diffSec}s ago`;
-            const mins = Math.floor(diffSec / 60);
-            const secs = diffSec % 60;
-            if (mins < 60) return `${mins}m ${secs}s ago`;
-            const hrs = Math.floor(mins / 60);
-            return `${hrs}h ${mins % 60}m ago`;
+            return `${Math.floor(diffSec/60)}m ago`;
         }
 
         function formatCairoTimestamp(timestamp) {
-            try {
-                return new Date(Number(timestamp) || Date.now()).toLocaleTimeString('en-US', {
-                    timeZone: 'Africa/Cairo',
-                    hour: '2-digit',
-                    minute: '2-digit',
-                    second: '2-digit'
-                });
-            } catch (e) {
-                return new Date().toLocaleTimeString();
-            }
-        }
-
-        function buildCustomerCareScriptUrl(lead) {
-            const cleanPhone = String(lead.clientPhone || '').replace(/[^0-9]/g, '');
-            const intlPhone = cleanPhone.startsWith('0') ? '2' + cleanPhone : cleanPhone;
-            const quoteLine = lead.estimatedQuote ? `\n• عرض السعر المخصص: ${lead.estimatedQuote}` : '';
-            const scriptText =
-`اهلا وسهلا بحضرتك مستر ${lead.clientName}، اتمنى تكون بخير 🌟
-مع حضرتك خدمة عملاء دكتور كير (DR. CARE — RUPES & Meguiar's Atelier).
-
-تم استلام طلب سيارتك رقم (${lead.id}):
-• السيارة: ${lead.carBrand} - ${lead.carModel}
-• اللون / الباقة: ${lead.carColor}
-• النطاق: ${lead.zone}${quoteLine}
-
-التفاصيل المسجلة:
-"${lead.notes}"
-
-فريق الخبراء راجع طلبك، وجاهزين ننسق مع حضرتك الموعد النهائي لتنفيذ الخدمة في مكانك والحفاظ على استثمارك.`;
-            return `https://wa.me/${intlPhone}?text=${encodeURIComponent(scriptText)}`;
-        }
-
-        async function saveManagerQuote(leadId, inputElId) {
-            const inp = document.getElementById(inputElId);
-            const quoteVal = inp ? inp.value : '';
-            const cleanQuote = sanitizeCleanInput(quoteVal, 50);
-            const target = memoryLeadsCache.find(l => l.id === leadId);
-            if (target) {
-                target.estimatedQuote = cleanQuote;
-                writeLeadToIdb(target);
-                updateCrmKpiNumbers();
-                const waBtn = document.getElementById('waBtn_' + leadId);
-                if (waBtn) waBtn.href = buildCustomerCareScriptUrl(target);
-                const saveBtn = document.getElementById('saveBtn_' + leadId);
-                if (saveBtn) {
-                    saveBtn.textContent = '✓ Saved';
-                    setTimeout(() => { saveBtn.textContent = '💾 Save'; }, 1500);
-                }
-            }
-            if (db) {
-                try {
-                    await db.collection("drcare_leads").doc(leadId).update({ estimatedQuote: cleanQuote });
-                } catch (e) {}
-            }
-        }
-
-        async function updateLeadStatus(leadId, newStatus) {
-            const target = memoryLeadsCache.find(l => l.id === leadId);
-            if (target) {
-                target.status = newStatus;
-                writeLeadToIdb(target);
-                updateCrmKpiNumbers();
-            }
-            if (db) {
-                try {
-                    await db.collection("drcare_leads").doc(leadId).update({ status: newStatus });
-                } catch (e) {}
-            }
-        }
-
-        async function deleteLeadItem(leadId) {
-            deletedLeadIds.add(leadId);
-            memoryLeadsCache = memoryLeadsCache.filter(l => l.id !== leadId);
-            if (idbConn) {
-                try {
-                    const tx = idbConn.transaction(IDB_STORE, 'readwrite');
-                    tx.objectStore(IDB_STORE).delete(leadId);
-                } catch (e) {}
-            }
-            try {
-                localStorage.setItem(LS_BACKUP_KEY, JSON.stringify(memoryLeadsCache.slice(0, 10)));
-            } catch (e) {}
-            updateNavLiveCounter();
-            renderBackofficeFeed();
-            if (db) {
-                try {
-                    await db.collection("drcare_leads").doc(leadId).delete();
-                } catch (e) {}
-            }
-        }
-
-        function updateCrmKpiNumbers() {
-            const allLeads = memoryLeadsCache;
-            const totalEl = document.getElementById('kpiTotalLeads');
-            if (!totalEl) return;
-
-            totalEl.textContent = allLeads.length;
-            document.getElementById('kpiScratchLeads').textContent = allLeads.filter(l => l.requestType === 'SCRATCH_DIAGNOSIS').length;
-            document.getElementById('kpiWashLeads').textContent = allLeads.filter(l => l.requestType === 'DRY_WASH').length;
+            return new Date(Number(timestamp) || Date.now()).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
         }
 
         function renderBackofficeFeed() {
-            updateCrmKpiNumbers();
-            const allLeads = memoryLeadsCache;
-            const zoneFilter = document.getElementById('crmFilterZone') ? document.getElementById('crmFilterZone').value : 'ALL';
-            const typeFilter = document.getElementById('crmFilterType') ? document.getElementById('crmFilterType').value : 'ALL';
-            const searchQuery = (document.getElementById('crmSearchInput') ? document.getElementById('crmSearchInput').value : '').toLowerCase().trim();
-
-            const filtered = allLeads.filter(item => {
-                const matchZone = zoneFilter === 'ALL' || String(item.zone || '').includes(zoneFilter);
-                const matchType = typeFilter === 'ALL' || item.requestType === typeFilter;
-                const haystack = `${item.id} ${item.clientName} ${item.clientPhone} ${item.carBrand} ${item.carModel} ${item.notes}`.toLowerCase();
-                const matchSearch = !searchQuery || haystack.includes(searchQuery);
-                return matchZone && matchType && matchSearch;
-            });
-
             const container = document.getElementById('crmLiveStreamList');
-            if (!container) return;
+            const totalEl = document.getElementById('kpiTotalLeads');
+            if (!container || !totalEl) return;
 
-            if (filtered.length === 0) {
-                container.innerHTML = `<div class="p-8 rounded-2xl bg-black/40 border border-white/10 text-center text-zinc-400 text-sm">No requests matching filter.</div>`;
+            totalEl.textContent = memoryLeadsCache.length;
+            document.getElementById('kpiScratchLeads').textContent = memoryLeadsCache.filter(l => l.requestType === 'SCRATCH_DIAGNOSIS').length;
+            document.getElementById('kpiWashLeads').textContent = memoryLeadsCache.filter(l => l.requestType === 'DRY_WASH').length;
+
+            if (memoryLeadsCache.length === 0) {
+                container.innerHTML = `<div class="p-8 rounded-2xl bg-black/40 border border-white/10 text-center text-zinc-400 text-sm">No active requests.</div>`;
                 return;
             }
 
-            container.innerHTML = filtered.map(lead => `
-                <div class="p-4 sm:p-5 rounded-2xl bg-black/75 border ${lead.requestType === 'SCRATCH_DIAGNOSIS' ? 'border-gold-400/40' : 'border-white/15'} space-y-4">
-                    <div class="flex flex-wrap items-center justify-between gap-2">
-                        <div class="flex flex-wrap items-center gap-2">
-                            <span class="px-2.5 py-0.5 rounded-md bg-gold-400 text-black font-black text-xs">${escapeHtml(lead.id)}</span>
-                            <span class="px-2.5 py-0.5 rounded-md bg-white/5 text-gold-200 border border-white/10 text-xs font-bold">
-                                ${lead.requestType === 'SCRATCH_DIAGNOSIS' ? '📸 360° 3D Diagnosis' : '✨ On-Site Dry Wash'}
-                            </span>
-                            <span class="text-xs font-semibold text-gold-200">📍 ${escapeHtml(lead.zone)}</span>
-                            <span class="text-[11px] text-zinc-400 font-mono">🕒 ${formatCairoTimestamp(lead.createdAt)}</span>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <span class="live-sla-timer font-mono text-xs font-bold text-emerald-400 bg-emerald-950/60 border border-emerald-500/30 px-2.5 py-0.5 rounded-md" data-ts="${lead.createdAt}">
-                                ${formatElapsedSeconds(lead.createdAt)}
-                            </span>
-                            <button type="button" onclick="deleteLeadItem('${escapeHtml(lead.id)}')" class="text-xs text-zinc-500 hover:text-rose-400 px-2 cursor-pointer" title="Delete">🗑️</button>
-                        </div>
+            container.innerHTML = memoryLeadsCache.map(lead => `
+                <div class="p-4 rounded-2xl bg-black/75 border border-gold-400/30 space-y-3">
+                    <div class="flex justify-between items-center text-xs">
+                        <span class="px-2 py-0.5 rounded bg-gold-400 text-black font-black">${escapeHtml(lead.id)}</span>
+                        <span class="text-gold-200">📍 ${escapeHtml(lead.zone)}</span>
                     </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs bg-leather p-3.5 rounded-xl border border-white/5">
-                        <div>
-                            <span class="text-zinc-400 block">Client:</span>
-                            <strong class="text-white text-sm">${escapeHtml(lead.clientName)}</strong>
-                            <a href="tel:${escapeHtml(lead.clientPhone)}" class="block text-gold-300 font-mono font-bold mt-0.5">${escapeHtml(lead.clientPhone)}</a>
-                        </div>
-                        <div>
-                            <span class="text-zinc-400 block">Vehicle Profile:</span>
-                            <strong class="text-white text-sm">${escapeHtml(lead.carBrand)} • ${escapeHtml(lead.carModel)}</strong>
-                            <span class="block text-gold-200 mt-0.5">${escapeHtml(lead.carColor)}</span>
-                        </div>
-                        <div class="bg-black/50 border-s-2 border-gold-400 p-2.5 rounded-r-lg">
-                            <p class="text-zinc-200 text-xs leading-relaxed whitespace-pre-wrap">${escapeHtml(lead.notes)}</p>
-                        </div>
+                    <div class="text-xs text-white">
+                        <strong>${escapeHtml(lead.clientName)}</strong> (${escapeHtml(lead.clientPhone)}) • ${escapeHtml(lead.carBrand)}
                     </div>
-
-                    ${lead.media && lead.media.length > 0 ? `
-                        <div class="space-y-1">
-                            <span class="text-[11px] font-bold text-gold-300">Attached Photos (${lead.media.length} / 10):</span>
-                            <div class="grid grid-cols-3 sm:grid-cols-5 md:grid-cols-10 gap-2">
-                                ${lead.media.map((m, mIdx) => `
-                                    <div onclick="openLeadMediaLightbox('${escapeHtml(lead.id)}', ${mIdx})" class="relative group cursor-pointer rounded-xl overflow-hidden border border-white/15 hover:border-gold-400 aspect-square">
-                                        <img src="${m.url}" class="object-cover w-full h-full group-hover:scale-105 transition">
-                                        <span class="absolute bottom-1 right-1 bg-black/80 text-gold-300 text-[8px] font-bold px-1 py-0.5 rounded">🔍 #${mIdx + 1}</span>
-                                    </div>
-                                `).join('')}
-                            </div>
-                        </div>
-                    ` : ''}
-
-                    <div class="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-white/10">
-                        <div class="flex flex-wrap items-center gap-2">
-                            <a id="waBtn_${escapeHtml(lead.id)}" href="${buildCustomerCareScriptUrl(lead)}" target="_blank" rel="noopener noreferrer"
-                               class="px-3.5 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black font-extrabold text-xs inline-flex items-center gap-1.5">
-                                💬 WhatsApp Script
-                            </a>
-                            <button type="button" onclick="generateVipCertificateCard('${escapeHtml(lead.id)}')"
-                                    class="px-3.5 py-2 rounded-xl bg-gold-400/20 hover:bg-gold-400/35 border border-gold-400/50 text-gold-200 font-extrabold text-xs inline-flex items-center gap-1.5 cursor-pointer">
-                                📜 VIP Certificate
-                            </button>
-                            ${lead.gpsLink ? `
-                                <a href="${escapeHtml(lead.gpsLink)}" target="_blank" rel="noopener noreferrer"
-                                   class="px-3 py-2 rounded-xl bg-sky-500/20 hover:bg-sky-500/30 border border-sky-400/40 text-sky-200 font-extrabold text-xs inline-flex items-center gap-1">
-                                    🗺️ Open GPS Map
-                                </a>
-                            ` : ''}
-                            <a href="tel:${escapeHtml(lead.clientPhone)}" class="px-3 py-2 rounded-xl bg-white/10 hover:bg-white/15 text-white font-bold text-xs">
-                                📞 Call
-                            </a>
-                        </div>
-
-                        <div class="flex flex-wrap items-center gap-1.5">
-                            <input type="text" id="quoteInp_${escapeHtml(lead.id)}" value="${escapeHtml(lead.estimatedQuote || '')}"
-                                   placeholder="Internal Note / Quote"
-                                   onkeydown="if(event.key==='Enter'){ event.preventDefault(); saveManagerQuote('${escapeHtml(lead.id)}', 'quoteInp_${escapeHtml(lead.id)}'); }"
-                                   class="px-2.5 py-1.5 rounded-lg bg-black border border-white/15 text-gold-200 text-xs font-bold w-40 focus:border-gold-400 focus:outline-none">
-                            <button type="button" id="saveBtn_${escapeHtml(lead.id)}" onclick="saveManagerQuote('${escapeHtml(lead.id)}', 'quoteInp_${escapeHtml(lead.id)}')"
-                                    class="px-2.5 py-1.5 rounded-lg bg-gold-400/20 hover:bg-gold-400/30 border border-gold-400/40 text-gold-200 text-xs font-bold cursor-pointer">
-                                💾 Save
-                            </button>
-                            <select onchange="updateLeadStatus('${escapeHtml(lead.id)}', this.value)" class="px-2.5 py-1.5 rounded-lg bg-leather border border-white/15 text-gold-300 text-xs font-bold">
-                                <option value="NEW LIVE" ${lead.status === 'NEW LIVE' ? 'selected' : ''}>🟢 NEW</option>
-                                <option value="CONTACTED" ${lead.status === 'CONTACTED' ? 'selected' : ''}>📞 CONTACTED</option>
-                                <option value="IN PROGRESS" ${lead.status === 'IN PROGRESS' ? 'selected' : ''}>⚙️ IN PROGRESS</option>
-                                <option value="COMPLETED" ${lead.status === 'COMPLETED' ? 'selected' : ''}>✅ COMPLETED</option>
-                            </select>
-                        </div>
+                    <div class="flex justify-between items-center pt-2 border-t border-white/10">
+                        <button onclick="generateVipCertificateCard('${escapeHtml(lead.id)}')" class="px-3 py-1.5 rounded bg-gold-400/20 text-gold-200 text-xs font-bold">📜 VIP Certificate</button>
+                        <a href="https://wa.me/${escapeHtml(lead.clientPhone)}" target="_blank" class="px-3 py-1.5 rounded bg-emerald-500 text-black text-xs font-bold">💬 WhatsApp</a>
                     </div>
                 </div>
             `).join('');
         }
 
-        async function simulateIncomingVipLead() {
-            const demoCars = [
-                { brand: 'SUV / 4x4 • China & EV • Jetour', model: 'T2 • 2026', color: 'Obsidian Black (أسود)', zone: 'Heliopolis (مصر الجديدة)' },
-                { brand: 'Sedan (سيدان) • China & EV • Xiaomi', model: 'SU7 Max • 2026', color: 'Sapphire Blue (أزرق)', zone: '5th Settlement (التجمع الخامس)' },
-                { brand: 'SUV / 4x4 • Germany & Europe • Range Rover', model: 'Vogue • 2026', color: 'Pearl White (أبيض لؤلؤي)', zone: 'Madinaty (مدينتي)' }
-            ];
-            const pick = demoCars[Math.floor(Math.random() * demoCars.length)];
-            const simLead = {
-                id: 'DC-' + Math.floor(1000 + Math.random() * 9000),
-                requestType: 'SCRATCH_DIAGNOSIS',
-                clientName: 'VIP Client',
-                clientPhone: '01000000000',
-                carBrand: pick.brand,
-                carModel: pick.model,
-                carColor: pick.color,
-                zone: pick.zone,
-                gpsLink: 'https://www.google.com/maps?q=30.0876,31.3282',
-                resolution: '1080p',
-                estimatedQuote: '',
-                notes: 'Severity: Surface Scratch\n360° 3D Marked Panels: باب أمامي يمين (Front Right Door) + رفرف أمامي يمين (Front Right Fender)\nClient Note: Call after 5 PM.',
-                media: [{ id: 'sim_1', type: 'image', url: 'before.jpeg', cloudSafeUrl: 'before.jpeg', resolution: '1080p' }],
-                status: 'NEW LIVE',
-                createdAt: Date.now()
-            };
-            await transmitLeadEverywhere(simLead);
-        }
-
-        function exportLeadsToCsv() {
-            if (!memoryLeadsCache.length) return;
-            const headers = ['ID', 'Type', 'Client Name', 'Phone', 'Origin & Brand', 'Model & Year', 'Color/Tier', 'Zone', 'GPS Pin', 'Resolution', 'Quote', 'Status', 'Notes'];
-            const rows = memoryLeadsCache.map(l => [
-                l.id, l.requestType, l.clientName, l.clientPhone, l.carBrand, l.carModel, l.carColor, l.zone, l.gpsLink || '', l.resolution, l.estimatedQuote || '', l.status, l.notes
-            ].map(v => `"${String(v || '').replace(/"/g, '""')}"`).join(','));
-            const csvContent = 'data:text/csv;charset=utf-8,\uFEFF' + [headers.join(','), ...rows].join('\n');
-            const link = document.createElement('a');
-            link.setAttribute('href', encodeURI(csvContent));
-            link.setAttribute('download', `DrCare_CRM_${new Date().toISOString().slice(0,10)}.csv`);
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-        }
-
-        function openLeadMediaLightbox(leadId, mediaIndex) {
-            const lead = memoryLeadsCache.find(l => l.id === leadId);
-            if (!lead || !lead.media || !lead.media[mediaIndex]) return;
-            showLightboxContent(lead.media[mediaIndex]);
-        }
-
-        function setLightboxZoom(scaleFactor) {
-            const img = document.getElementById('lightboxImgEl');
-            if (img) {
-                img.style.transform = `scale(${scaleFactor})`;
-            }
-        }
-
         function showLightboxContent(item) {
             const box = document.getElementById('mediaLightbox');
             const body = document.getElementById('lightboxBody');
-            const dlBtn = document.getElementById('lightboxDownloadBtn');
-            document.getElementById('lightboxCaption').textContent = `DR. CARE OPTICAL LOUPE • ${item.resolution || '1080p'}`;
-
-            const imgSrc = item.url || 'before.jpeg';
-            if (dlBtn) {
-                dlBtn.href = imgSrc;
-                dlBtn.download = `DrCare_${Date.now()}.png`;
-            }
-
-            body.innerHTML = `<img id="lightboxImgEl" src="${imgSrc}" class="max-h-[70vh] w-auto object-contain rounded-xl shadow-2xl cursor-zoom-in" onclick="setLightboxZoom(this.style.transform === 'scale(2)' ? 1 : 2)">`;
+            document.getElementById('lightboxCaption').textContent = item.resolution || '1080p';
+            body.innerHTML = `<img id="lightboxImgEl" src="${item.url}" class="max-h-[70vh] w-auto object-contain rounded-xl">`;
             box.classList.remove('hidden');
         }
 
-        function closeMediaLightbox() {
-            document.getElementById('mediaLightbox').classList.add('hidden');
-            const body = document.getElementById('lightboxBody');
-            if (body) body.innerHTML = '';
-        }
-
-        function updateNavLiveCounter() {
-            const badge = document.getElementById('navLiveBadge');
-            if (badge) badge.textContent = `${memoryLeadsCache.length} LIVE`;
-        }
-
-        setInterval(() => {
-            streamSecondsUptime++;
-            const clockEl = document.getElementById('liveSecondClock');
-            if (clockEl) {
-                clockEl.textContent = formatCairoTimestamp(Date.now());
-            }
-
-            const upEl = document.getElementById('streamUptimeCounter');
-            if (upEl) {
-                const m = String(Math.floor(streamSecondsUptime / 60)).padStart(2, '0');
-                const s = String(streamSecondsUptime % 60).padStart(2, '0');
-                upEl.textContent = `${m}:${s}s`;
-            }
-
-            document.querySelectorAll('.live-sla-timer').forEach(el => {
-                const ts = parseInt(el.getAttribute('data-ts'), 10);
-                if (ts) el.textContent = formatElapsedSeconds(ts);
-            });
-        }, 1000);
+        function closeMediaLightbox() { document.getElementById('mediaLightbox').classList.add('hidden'); }
+        function setLightboxZoom(s) { const img = document.getElementById('lightboxImgEl'); if (img) img.style.transform = `scale(${s})`; }
+        function exportLeadsToCsv() {}
+        function simulateIncomingVipLead() {}
     </script>
 </body>
 </html>
