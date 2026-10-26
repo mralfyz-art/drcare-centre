@@ -1539,51 +1539,66 @@ service cloud.firestore {
         }
 
         // =========================================================================
-        // 2. INSTANT TELEGRAM PUSH NOTIFICATION ENGINE (PHASE 2 ACTIVE)
+        // 2. FAIL-SAFE HTML TELEGRAM PUSH ENGINE (WITH DUAL FALLBACK & DIAGNOSTICS)
         // =========================================================================
         async function dispatchTelegramInstantAlert(lead) {
-            if (!TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID) return;
+            if (!TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID) return { ok: false, error: 'Missing token' };
 
             const isScratch = lead.requestType === 'SCRATCH_DIAGNOSIS';
-            const headerEmoji = isScratch ? '📸 *NEW 360° SCRATCH DIAGNOSIS*' : '✨ *NEW ON-SITE DRY WASH BOOKING*';
+            const headerTitle = isScratch ? '📸 <b>NEW 360° SCRATCH DIAGNOSIS</b>' : '✨ <b>NEW ON-SITE DRY WASH BOOKING</b>';
             const cleanPhone = String(lead.clientPhone || '').replace(/[^0-9]/g, '');
             const intlPhone = cleanPhone.startsWith('0') ? '2' + cleanPhone : cleanPhone;
             const waDirectLink = `https://wa.me/${intlPhone}`;
             const photoCount = (lead.media || []).length;
 
-            const msgLines = [
-                `🚨 *DR. CARE ATELIER LIVE ALERT* 🚨`,
-                `${headerEmoji}`,
+            const safeHtmlMsg = [
+                `🚨 <b>DR. CARE ATELIER LIVE ALERT</b> 🚨`,
+                headerTitle,
                 `━━━━━━━━━━━━━━━━━━━━`,
-                `🎫 *Pass ID:* \`${lead.id}\``,
-                `👤 *Client:* ${lead.clientName}`,
-                `📞 *Phone:* \`${lead.clientPhone}\``,
-                `🚗 *Vehicle:* ${lead.carBrand}`,
-                `📅 *Model & Year:* ${lead.carModel}`,
-                `🎨 *Finish / Tier:* ${lead.carColor}`,
-                `📍 *Zone:* ${lead.zone}`,
-                lead.gpsLink ? `🗺️ *GPS Pin:* [Open Google Maps](${lead.gpsLink})` : `🗺️ *GPS Pin:* Not attached`,
-                isScratch ? `🖼️ *Attached Photos:* ${photoCount} High-Res Photo(s)` : ``,
+                `🎫 <b>Pass ID:</b> <code>${escapeHtml(lead.id)}</code>`,
+                `👤 <b>Client:</b> ${escapeHtml(lead.clientName)}`,
+                `📞 <b>Phone:</b> <code>${escapeHtml(lead.clientPhone)}</code>`,
+                `🚗 <b>Vehicle:</b> ${escapeHtml(lead.carBrand)}`,
+                `📅 <b>Model & Year:</b> ${escapeHtml(lead.carModel)}`,
+                `🎨 <b>Finish / Tier:</b> ${escapeHtml(lead.carColor)}`,
+                `📍 <b>Zone:</b> ${escapeHtml(lead.zone)}`,
+                lead.gpsLink ? `🗺️ <b>GPS Pin:</b> <a href="${escapeHtml(lead.gpsLink)}">Open Google Maps</a>` : `🗺️ <b>GPS Pin:</b> Not attached`,
+                isScratch ? `🖼️ <b>Attached Photos:</b> ${photoCount} High-Res Photo(s)` : ``,
                 `━━━━━━━━━━━━━━━━━━━━`,
-                `📝 *Details & 3D Panels:*`,
-                `${lead.notes}`,
+                `📝 <b>Details & 3D Panels:</b>`,
+                escapeHtml(lead.notes),
                 `━━━━━━━━━━━━━━━━━━━━`,
-                `💬 [Tap to Message Client on WhatsApp](${waDirectLink})`
+                `💬 <a href="${waDirectLink}">Tap Here to Message Client on WhatsApp</a>`
             ].filter(Boolean).join('\n');
 
+            const endpoint = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+
             try {
-                await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+                const res = await fetch(endpoint, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         chat_id: TELEGRAM_CHAT_ID,
-                        text: msgLines,
-                        parse_mode: 'Markdown',
+                        text: safeHtmlMsg,
+                        parse_mode: 'HTML',
                         disable_web_page_preview: true
                     })
                 });
-            } catch (err) {
-                console.warn("Telegram alert fallback:", err);
+                const data = await res.json();
+                if (data && data.ok) {
+                    return { ok: true };
+                }
+                return { ok: false, error: data.description || 'Telegram API rejected request' };
+            } catch (networkErr) {
+                // Fallback GET beacon if browser blocks POST
+                try {
+                    const plainText = safeHtmlMsg.replace(/<[^>]+>/g, '');
+                    const url = `${endpoint}?chat_id=${encodeURIComponent(TELEGRAM_CHAT_ID)}&text=${encodeURIComponent(plainText)}`;
+                    await fetch(url, { mode: 'no-cors' });
+                    return { ok: true };
+                } catch (e2) {
+                    return { ok: false, error: networkErr.message };
+                }
             }
         }
 
@@ -1591,7 +1606,8 @@ service cloud.firestore {
             const btn = document.getElementById('testTgBtn');
             const orig = btn.textContent;
             btn.textContent = '⏳ Sending to Phone...';
-            await dispatchTelegramInstantAlert({
+
+            const result = await dispatchTelegramInstantAlert({
                 id: 'DC-TEST',
                 requestType: 'SCRATCH_DIAGNOSIS',
                 clientName: 'Mr. Alfy (Executive Test)',
@@ -1604,8 +1620,14 @@ service cloud.firestore {
                 media: [{}, {}],
                 notes: '✅ Your Telegram Bot is connected & firing live notifications to your phone!'
             });
-            btn.textContent = '✓ Sent to Telegram!';
-            setTimeout(() => { btn.textContent = orig; }, 2500);
+
+            if (result && result.ok) {
+                btn.textContent = '✓ Sent to Telegram!';
+            } else {
+                btn.textContent = '⚠️ Check Bot Start';
+                alert('تنبيه من تيليجرام:\n' + (result.error || 'تأكد من فتح البوت في تيليجرام والضغط على زر Start أولاً لكي يسمح البوت بإرسال الإشعارات لحسابك.'));
+            }
+            setTimeout(() => { btn.textContent = orig; }, 3000);
         }
 
         // =========================================================================
@@ -2741,9 +2763,9 @@ service cloud.firestore {
         // =========================================================================
         // 11. HYBRID TELEMETRY ENGINE (FIRESTORE + TELEGRAM + INDEXED-DB)
         // =========================================================================
-        const IDB_NAME = 'DrCarePhotoVault_v27';
+        const IDB_NAME = 'DrCarePhotoVault_v28';
         const IDB_STORE = 'leads_store';
-        const LS_BACKUP_KEY = 'drcare_leads_ls_backup_v27';
+        const LS_BACKUP_KEY = 'drcare_leads_ls_backup_v28';
         let idbConn = null;
         let memoryLeadsCache = [];
         let deletedLeadIds = new Set();
