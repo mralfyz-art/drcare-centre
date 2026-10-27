@@ -1,5 +1,6 @@
 import express from 'express';
 import path from 'path';
+import fs from 'fs';
 import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -16,7 +17,9 @@ app.get('/api/health', (_req, res) => {
 });
 
 async function startServer() {
-  if (process.env.NODE_ENV === 'production') {
+  const isProduction = process.env.NODE_ENV === 'production' || fs.existsSync(path.join(__dirname, 'dist', 'index.html'));
+
+  if (isProduction) {
     app.use(express.static(path.join(__dirname, 'dist')));
     app.use((_req, res) => {
       res.sendFile(path.join(__dirname, 'dist', 'index.html'));
