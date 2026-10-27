@@ -1,0 +1,152 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --spotlight-x: 50%;
+    --spotlight-y: 18%;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-variant-numeric: tabular-nums;
+}
+
+body {
+    background-color: #050507;
+    color: #F8F9FA;
+    overflow-x: hidden;
+    background-image: 
+        radial-gradient(650px circle at var(--spotlight-x) var(--spotlight-y), rgba(245, 197, 24, 0.08), transparent 45%),
+        linear-gradient(180deg, #050507 0%, #090A0F 100%);
+    min-height: 100vh;
+}
+
+[dir="rtl"] {
+    font-family: 'Cairo', sans-serif;
+}
+
+.gold-luminous {
+    background: linear-gradient(135deg, #FFFFFF 0%, #FFF3B0 25%, #F5C518 55%, #FFF3B0 80%, #E5B80B 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 2px 12px rgba(245, 197, 24, 0.38));
+    animation: shineGold 6s linear infinite;
+}
+
+@keyframes shineGold {
+    to { background-position: 200% center; }
+}
+
+.logo-rupes {
+    font-family: 'Montserrat', sans-serif;
+    font-style: italic;
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+}
+
+.logo-meguiars {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-style: italic;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+}
+
+.piano-card {
+    background: rgba(16, 18, 25, 0.88);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.85), inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px);
+}
+
+.piano-card-gold {
+    background: linear-gradient(165deg, rgba(24, 22, 16, 0.95) 0%, rgba(8, 9, 13, 0.98) 100%);
+    border: 1px solid rgba(245, 197, 24, 0.42);
+    box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.94), inset 0 1px 0 0 rgba(255, 241, 184, 0.22);
+    backdrop-filter: blur(24px);
+}
+
+.btn-gold-elite {
+    background: linear-gradient(135deg, #FFF1B8 0%, #F5C518 50%, #C49700 100%);
+    color: #050507;
+    box-shadow: 0 10px 28px -6px rgba(245, 197, 24, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.8);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-gold-elite:hover:not(:disabled) {
+    transform: translateY(-1.5px);
+    box-shadow: 0 16px 36px -6px rgba(245, 197, 24, 0.65), inset 0 1px 2px rgba(255, 255, 255, 0.95);
+    filter: brightness(1.05);
+}
+
+.btn-gold-elite:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.paint-sphere {
+    position: relative;
+    border-radius: 9999px;
+    box-shadow: inset -3px -3px 6px rgba(0,0,0,0.65), inset 2px 2px 5px rgba(255,255,255,0.45), 0 4px 10px rgba(0,0,0,0.5);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.paint-sphere:hover {
+    transform: scale(1.16);
+    box-shadow: inset -3px -3px 6px rgba(0,0,0,0.65), inset 2px 2px 5px rgba(255,255,255,0.65), 0 0 14px rgba(245, 197, 24, 0.65);
+}
+
+.studio-light-tunnel {
+    position: relative;
+    overflow: hidden;
+}
+
+.studio-light-tunnel::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        115deg,
+        transparent 20%,
+        rgba(255, 255, 255, 0.08) 45%,
+        rgba(245, 197, 24, 0.18) 50%,
+        rgba(255, 255, 255, 0.08) 55%,
+        transparent 80%
+    );
+    transform: translateX(-100%);
+    will-change: transform;
+    pointer-events: none;
+    z-index: 15;
+    animation: lightSweep 6s ease-in-out infinite;
+}
+
+@keyframes lightSweep {
+    0% { transform: translateX(-100%); }
+    60%, 100% { transform: translateX(100%); }
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+::-webkit-scrollbar-track {
+    background: #050507;
+}
+::-webkit-scrollbar-thumb {
+    background: #232630;
+    border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #F5C518;
+}
+
+@keyframes shakeError {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-6px); }
+    75% { transform: translateX(6px); }
+}
+.shake-error {
+    animation: shakeError 0.3s ease-in-out;
+}

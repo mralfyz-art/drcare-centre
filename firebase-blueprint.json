@@ -1,0 +1,71 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User profile details from Google Auth or sign in",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "displayName": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["uid", "email"]
+    },
+    "Lead": {
+      "title": "Lead",
+      "description": "Customer diagnosis submission and centre appointment request",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "clientName": { "type": "string" },
+        "clientPhone": { "type": "string" },
+        "carModel": { "type": "string" },
+        "carYear": { "type": "string" },
+        "carColor": { "type": "string" },
+        "damageSeverity": { "type": "string" },
+        "selectedCarParts": { "type": "array" },
+        "estimatedCostRange": { "type": "string" },
+        "servicePillar": { "type": "string" },
+        "notes": { "type": "string" },
+        "timeSlot": { "type": "string" },
+        "status": { "type": "string" },
+        "userId": { "type": "string" },
+        "userEmail": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["clientName", "clientPhone", "carModel"]
+    },
+    "RestorationPass": {
+      "title": "RestorationPass",
+      "description": "Digital Centre entry pass and certificate record",
+      "type": "object",
+      "properties": {
+        "passId": { "type": "string" },
+        "clientName": { "type": "string" },
+        "carModel": { "type": "string" },
+        "serviceName": { "type": "string" },
+        "estimatedPrice": { "type": "string" },
+        "bookedSlot": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "userId": { "type": "string" }
+      },
+      "required": ["passId", "clientName", "carModel"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "Private user profile documents"
+    },
+    "/leads/{leadId}": {
+      "schema": "Lead",
+      "description": "Diagnosis leads and appointment requests created by customers"
+    },
+    "/restorationPasses/{passId}": {
+      "schema": "RestorationPass",
+      "description": "Saved customer passes and reservation vouchers"
+    }
+  }
+}
